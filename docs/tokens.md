@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**711 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**715 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-607 tokens.
+611 tokens.
 
 | Token | Default |
 |---|---|
@@ -35,6 +35,10 @@ rebrand workflow.
 | `--sf-animation-slide-in-left` | `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-right` | `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-up` | `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both` |
+| `--sf-animation-slide-out-down` | `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both` |
+| `--sf-animation-slide-out-left` | `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both` |
+| `--sf-animation-slide-out-right` | `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both` |
+| `--sf-animation-slide-out-up` | `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-spin` | `sf-spin var(--sf-duration-slower) linear infinite` |
 | `--sf-blur` | `12px` |
 | `--sf-body-color` | `var(--sf-color-text)` |
@@ -244,7 +248,9 @@ rebrand workflow.
 | `--sf-color-secondary-xdark` | `var(--sf-color-secondary-800)` |
 | `--sf-color-secondary-xlight` | `var(--sf-color-secondary-200)` |
 | `--sf-color-selection-bg` | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
+| `--sf-color-selection-bg--alt` | `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )` |
 | `--sf-color-selection-text` | `inherit` |
+| `--sf-color-selection-text--alt` | `inherit` |
 | `--sf-color-success` | `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-success-muted` | `oklch(from var(--sf-color-success) l c h / 0.3)` |
 | `--sf-color-success-source-dark` | `oklch(0.70 0.144 145) *(registered)*` |
@@ -326,8 +332,6 @@ rebrand workflow.
 | `--sf-drop-shadow-l` | `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))` |
 | `--sf-drop-shadow-m` | `drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))` |
 | `--sf-drop-shadow-s` | `drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))` |
-| `--sf-drop-shadow-xl` | `drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))` |
-| `--sf-drop-shadow-xs` | `drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))` |
 | `--sf-duration-fast` | `calc(150ms * var(--sf-motion-scale))` |
 | `--sf-duration-instant` | `calc(100ms * var(--sf-motion-scale))` |
 | `--sf-duration-none` | `0ms` |
@@ -434,13 +438,13 @@ rebrand workflow.
 | `--sf-leading-snug` | `1.3` |
 | `--sf-leading-taper` | `0` |
 | `--sf-leading-tight` | `1.1` |
-| `--sf-link-external-label` | `"opens in a new window or external site"` |
 | `--sf-link-external-marker` | `" \2197"` |
 | `--sf-link-underline-offset` | `0.15em` |
 | `--sf-link-underline-thickness` | `auto` |
 | `--sf-lumlocker` | `0.65` |
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
+| `--sf-media-radius` | `0` |
 | `--sf-motion-scale` | `1` |
 | `--sf-object-fit` | `cover` |
 | `--sf-object-position` | `50% 50%` |
@@ -486,6 +490,8 @@ rebrand workflow.
 | `--sf-safe-right` | `env(safe-area-inset-right, 0px)` |
 | `--sf-safe-top` | `env(safe-area-inset-top, 0px)` |
 | `--sf-scroll-timeline-range-end` | `cover 30%` |
+| `--sf-scroll-timeline-range-exit-end` | `exit 100%` |
+| `--sf-scroll-timeline-range-exit-start` | `cover 70%` |
 | `--sf-scroll-timeline-range-start` | `entry 0%` |
 | `--sf-scrollbar-thumb` | `var(--sf-color-neutral)` |
 | `--sf-scrollbar-track` | `transparent` |
@@ -585,8 +591,6 @@ rebrand workflow.
 | `--sf-text-shadow-m` | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` |
 | `--sf-text-shadow-none` | `none` |
 | `--sf-text-shadow-s` | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` |
-| `--sf-text-shadow-xl` | `0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))` |
-| `--sf-text-shadow-xs` | `0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))` |
 | `--sf-text-xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-xl-font-weight` | `var(--sf-font-weight-body)` |
 | `--sf-text-xl-letter-spacing` | `var(--sf-tracking-normal)` |

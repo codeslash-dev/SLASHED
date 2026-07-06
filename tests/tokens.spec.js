@@ -19,6 +19,7 @@ import { TOKEN_FILES } from '../scripts/registry-sources.js';
 const EXPECTED_EMPTY = new Set([
   '--sf-color-mark-text',
   '--sf-color-selection-text',
+  '--sf-color-selection-text--alt',
   '--sf-color-code-text',
 ]);
 

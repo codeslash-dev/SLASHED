@@ -86,6 +86,36 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   visually flags the element(s) causing horizontal page overflow, staged
   (commented out) in `optional/utilities.css` pending activation.
   Tracked in [#495](https://github.com/codeslash-dev/SLASHED/issues/495).
+- ~~**Divide-between-children macro**~~ ✓ **Done** — `.sf-divide` (+
+  `--vertical`) applies a border between direct children in one class,
+  reusing `.sf-divider`'s width/style/color tokens. Shipped (active) in
+  `core/layout.css`.
+  Tracked in [#537](https://github.com/codeslash-dev/SLASHED/issues/537).
+- ~~**Global media radius**~~ ✓ **Done** — `--sf-media-radius` (0 by
+  default, off) applied via `:where(img, figure)` in `core/base.css`; opt
+  in globally by setting the token, without fighting `.sf-bg` or a
+  component's own radius (layer order + zero specificity).
+  Tracked in [#529](https://github.com/codeslash-dev/SLASHED/issues/529).
+- ~~**Scroll-out (exit) effects**~~ ✓ **Done** — `.sf-exit--fade/-fade-up/
+  -fade-down/-fade-left/-fade-right/-scale-down` mirror `.sf-entrance--*`
+  using `animation-timeline: view()` with a `cover 70%` → `exit 100%`
+  range. Unlike entrance, `animation-name` is set only inside
+  `@supports (animation-timeline: view())`, so engines without scroll-driven
+  animation support leave the element visible instead of fading it out
+  unconditionally. Shipped (active) in `core/motion.css`.
+  Tracked in [#527](https://github.com/codeslash-dev/SLASHED/issues/527).
+- ~~**Small utilities: `.sf-list-none` / `.sf-selection--alt`**~~ ✓ **Done**
+  — both written and staged (commented out) in `optional/utilities.css`
+  pending activation, alongside the other opt-in utilities.
+  `.sf-selection--alt` overrides `--sf-color-selection-bg/-text` via new
+  `--sf-color-selection-*--alt` tokens.
+  Tracked in [#540](https://github.com/codeslash-dev/SLASHED/issues/540).
+- ~~**Sticky positioning utility**~~ ✓ **Done** — `.sf-sticky` plus
+  `--s/-m/-l` offset modifiers written and staged (commented out) in
+  `optional/utilities.css`, layering extra gap on top of the existing
+  `--sf-sticky-offset` fluid offset; the JS-toggled `.is-sticky` state
+  class is unchanged.
+  Tracked in [#542](https://github.com/codeslash-dev/SLASHED/issues/542).
 - **Interactive `drives N` exploration** — turn the configurator's passive
   dependency-count badge into a keyboard-accessible popover/list that navigates
   to dependent tokens.

@@ -258,6 +258,8 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 /* Text selection and highlight */
 --sf-color-selection-bg     /* Selection background — action / 0.28 (light) */
 --sf-color-selection-text   /* Selection text color — inherit */
+--sf-color-selection-bg--alt   /* Alt selection bg — opposite scheme's treatment */
+--sf-color-selection-text--alt /* Alt selection text — inherit */
 --sf-color-mark-bg          /* <mark> background — warning / 0.25 */
 --sf-color-mark-text        /* <mark> text color — inherit */
 ```
@@ -732,6 +734,10 @@ All steps multiplied by `--sf-radius-scale` (except `full` and `pill`).
 --sf-radius-pill             /* Alias for full — capsule badge/chip */
 --sf-radius-outer            /* radius-m + component-pad — concentric helper */
 --sf-radius-scale            /* Multiplier — 0 = sharp, 2 = very rounded */
+
+--sf-media-radius            /* 0 (off) — set to round every <img>/<figure> globally,
+                                 e.g. var(--sf-radius-m). Applied via :where() so
+                                 .sf-bg / component-specific radii still win. */
 ```
 
 ### 8.4 Z-index
@@ -983,6 +989,7 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 ```css
 --sf-animation-fade-in / -fade-out
 --sf-animation-slide-in-up / -down / -left / -right
+--sf-animation-slide-out-up / -down / -left / -right
 --sf-animation-scale-up / -scale-down
 --sf-animation-ping          /* Notification dot, live indicator */
 --sf-animation-blink         /* Text cursor, critical alert */
@@ -1001,6 +1008,10 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 /* Attach to animation-range on your own scroll-timeline */
 --sf-scroll-timeline-range-start: entry 0%
 --sf-scroll-timeline-range-end:   cover 30%
+
+/* Exit counterpart — consumed by .sf-exit--* (core/motion.css) */
+--sf-scroll-timeline-range-exit-start: cover 70%
+--sf-scroll-timeline-range-exit-end:   exit 100%
 ```
 
 ### 9.6 Mask scrim (edge fade)
@@ -1199,6 +1210,8 @@ Each step up the type scale subtracts `step-index × taper` from that step's def
 ```css
 --sf-scroll-timeline-range-start: entry 0%
 --sf-scroll-timeline-range-end:   cover 30%
+--sf-scroll-timeline-range-exit-start: cover 70%
+--sf-scroll-timeline-range-exit-end:   exit 100%
 --sf-mask-scrim-start: var(--sf-space-l)
 --sf-mask-scrim-end:   var(--sf-space-l)
 ```

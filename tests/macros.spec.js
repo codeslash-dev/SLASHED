@@ -407,6 +407,29 @@ test.describe('macro: .sf-entrance--fade', () => {
   });
 });
 
+test.describe('macro: .sf-exit--fade', () => {
+  test('animation-name is set when reduced motion is not preferred', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await setup(page, `<div id="t" class="sf-exit--fade">content</div>`);
+    const name = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).animationName
+    );
+    // animation-name is only set inside @supports (animation-timeline: view()) —
+    // Chromium (Playwright's default engine) supports it, so this should fire.
+    expect(name).not.toBe('none');
+    expect(name.length).toBeGreaterThan(0);
+  });
+
+  test('animation does not apply when prefers-reduced-motion: reduce', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await setup(page, `<div id="t" class="sf-exit--fade">content</div>`);
+    const name = await page.locator('#t').evaluate(el =>
+      getComputedStyle(el).animationName
+    );
+    expect(name).toBe('none');
+  });
+});
+
 test.describe('macro: .sf-corner-scoop', () => {
   test('sets a radial-gradient mask', async ({ page }) => {
     await setup(page, `<div id="t" class="sf-corner-scoop" style="width:100px;height:100px"></div>`);

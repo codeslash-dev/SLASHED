@@ -102,6 +102,26 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-animation-slide-out-down",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-out-left",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-out-right",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-out-up",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-animation-spin",
       "description": "Continuous rotation loop. Use for loading spinners and progress indicators.\n\nDefault: `sf-spin var(--sf-duration-slower) linear infinite`",
       "syntax": "*"
@@ -1357,8 +1377,18 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-color-selection-bg--alt",
+      "description": "Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css).\n\nDefault: `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-color-selection-text",
       "description": "Text color inside browser text selections.\n\nDefault: `inherit`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-selection-text--alt",
+      "description": "Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css).\n\nDefault: `inherit`",
       "syntax": "*"
     },
     {
@@ -2487,6 +2517,11 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-media-radius",
+      "description": "Opt-in global media radius — 0 by default (off). Set to a --sf-radius-* value to round <img>/<figure> globally: :root { --sf-media-radius: var(--sf-radius-m); } Applied via :where() in core/base.css so it never fights .sf-bg or a component's own radius.\n\nDefault: `0`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-motion-scale",
       "description": "Global motion multiplier. All transition and animation durations multiply by this factor. Set to 0 to disable all motion; reduce below 1 for snappier feel.\n\nDefault: `1`\n\n(advanced token)",
       "syntax": "*"
@@ -2824,6 +2859,16 @@
     {
       "name": "--sf-scroll-timeline-range-end",
       "description": "animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes.\n\nDefault: `cover 30%`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-end",
+      "description": "Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out.\n\nDefault: `exit 100%`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-start",
+      "description": "Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out.\n\nDefault: `cover 70%`",
       "syntax": "*"
     },
     {

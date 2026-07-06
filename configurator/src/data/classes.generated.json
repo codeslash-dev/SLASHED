@@ -1215,6 +1215,26 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-divide",
+      "selector": ".sf-divide",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-divide--vertical",
+      "selector": ".sf-divide--vertical",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": "Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap.",
+      "optional": false,
+      "layer": "slashed.layout"
+    },
+    {
       "name": "sf-divider",
       "selector": ".sf-divider",
       "kind": "layout",
@@ -1453,6 +1473,66 @@
       "description": "Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height.",
       "optional": false,
       "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-exit--fade",
+      "selector": ".sf-exit--fade",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "optional": false,
+      "layer": "slashed.motion"
+    },
+    {
+      "name": "sf-exit--fade-down",
+      "selector": ".sf-exit--fade-down",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "optional": false,
+      "layer": "slashed.motion"
+    },
+    {
+      "name": "sf-exit--fade-left",
+      "selector": ".sf-exit--fade-left",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "optional": false,
+      "layer": "slashed.motion"
+    },
+    {
+      "name": "sf-exit--fade-right",
+      "selector": ".sf-exit--fade-right",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "optional": false,
+      "layer": "slashed.motion"
+    },
+    {
+      "name": "sf-exit--fade-up",
+      "selector": ".sf-exit--fade-up",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "optional": false,
+      "layer": "slashed.motion"
+    },
+    {
+      "name": "sf-exit--scale-down",
+      "selector": ".sf-exit--scale-down",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "optional": false,
+      "layer": "slashed.motion"
     },
     {
       "name": "sf-fade-in",

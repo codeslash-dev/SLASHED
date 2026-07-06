@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 741
+    "nextId": 745
   },
   "tokens": [
     {
@@ -2980,23 +2980,39 @@
     },
     {
       "id": 736,
-      "name": "--sf-drop-shadow-xl"
+      "name": "--sf-animation-slide-out-down"
     },
     {
       "id": 737,
-      "name": "--sf-drop-shadow-xs"
+      "name": "--sf-animation-slide-out-left"
     },
     {
       "id": 738,
-      "name": "--sf-link-external-label"
+      "name": "--sf-animation-slide-out-right"
     },
     {
       "id": 739,
-      "name": "--sf-text-shadow-xl"
+      "name": "--sf-animation-slide-out-up"
     },
     {
       "id": 740,
-      "name": "--sf-text-shadow-xs"
+      "name": "--sf-color-selection-bg--alt"
+    },
+    {
+      "id": 741,
+      "name": "--sf-color-selection-text--alt"
+    },
+    {
+      "id": 742,
+      "name": "--sf-media-radius"
+    },
+    {
+      "id": 743,
+      "name": "--sf-scroll-timeline-range-exit-end"
+    },
+    {
+      "id": 744,
+      "name": "--sf-scroll-timeline-range-exit-start"
     }
   ]
 }

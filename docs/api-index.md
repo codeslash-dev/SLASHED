@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1020 elements** — 711 tokens, 309 classes.
+**1009 elements** — 715 tokens, 294 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 964 | Everyday surface. SemVer-stable. |
+| PUBLIC | 953 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (711)
+## Tokens (715)
 
 ### Component tokens (25)
 
@@ -50,7 +50,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
 
-### Core tokens (607)
+### Core tokens (611)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -72,6 +72,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-animation-slide-in-left` | PUBLIC | consumption | animation | `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both` | Slide-in from the left. Use for left-side drawers and navigation panels. |
 | `--sf-animation-slide-in-right` | PUBLIC | consumption | animation | `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both` | Slide-in from the right. Use for right-side drawers and detail panels. |
 | `--sf-animation-slide-in-up` | PUBLIC | consumption | animation | `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both` | Slide-in from below. Use for bottom sheets, toasts, and floating action buttons. |
+| `--sf-animation-slide-out-down` | PUBLIC | consumption | animation | `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-out-left` | PUBLIC | consumption | animation | `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-out-right` | PUBLIC | consumption | animation | `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-out-up` | PUBLIC | consumption | animation | `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
 | `--sf-animation-spin` | PUBLIC | consumption | animation | `sf-spin var(--sf-duration-slower) linear infinite` | Continuous rotation loop. Use for loading spinners and progress indicators. |
 | `--sf-blur` | PUBLIC | knob | blur | `12px` | Backdrop-filter blur amount for frosted-glass surfaces (navbars, overlays, dialogs). Default 12px. Pair with a semi-transparent background. |
 | `--sf-body-color` | PUBLIC | consumption | body | `var(--sf-color-text)` | Text color for body copy. Alias of --sf-color-text. Override here to deviate body text from the global text color. |
@@ -281,7 +285,9 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-800)` | Extra-dark secondary shade. |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | Extra-light secondary shade. |
 | `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Background color applied to browser text selections. |
+| `--sf-color-selection-bg--alt` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )` | Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css). |
 | `--sf-color-selection-text` | PUBLIC | knob | color | `inherit` | Text color inside browser text selections. |
+| `--sf-color-selection-text--alt` | PUBLIC | knob | color | `inherit` | Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css). |
 | `--sf-color-success` | PUBLIC | consumption | color | `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Positive / success color for confirmation messages and completed-state indicators. |
 | `--sf-color-success-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.3)` | Medium success fill for success icons and status chips. |
 | `--sf-color-success-source-dark` | PUBLIC | knob | color | `oklch(0.70 0.144 145)` | Registered <color> dark counterpart of --sf-color-success. |
@@ -363,8 +369,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-drop-shadow-l` | PUBLIC | consumption | drop | `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))` | Large CSS filter: drop-shadow for prominent illustrated or cut-out elements. |
 | `--sf-drop-shadow-m` | PUBLIC | consumption | drop | `drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))` | Medium CSS filter: drop-shadow for elevated icons and card thumbnails. |
 | `--sf-drop-shadow-s` | PUBLIC | consumption | drop | `drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))` | Small CSS filter: drop-shadow. Use filter (not box-shadow) for elements with transparent areas — SVGs, PNGs, cutout images. |
-| `--sf-drop-shadow-xl` | PUBLIC | consumption | drop | `drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))` | Extra-large CSS filter: drop-shadow for hero-scale illustrated or cut-out elements. |
-| `--sf-drop-shadow-xs` | PUBLIC | consumption | drop | `drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))` | Extra-small CSS filter: drop-shadow, for the subtlest depth on small icons and cutout images. |
 | `--sf-duration-fast` | PUBLIC | consumption | duration | `calc(150ms * var(--sf-motion-scale))` | Fast duration (~100ms). Hover transitions, tooltip appear. |
 | `--sf-duration-instant` | PUBLIC | consumption | duration | `calc(100ms * var(--sf-motion-scale))` | Near-instant duration (~50ms). Micro-interactions and cursor-follow effects. |
 | `--sf-duration-none` | PUBLIC | knob | duration | `0ms` | 0ms duration. Disables transitions (respects prefers-reduced-motion). |
@@ -471,13 +475,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-leading-snug` | PUBLIC | knob | leading | `1.3` | Snug line height (~1.35). Use for sub-headings. |
 | `--sf-leading-taper` | PUBLIC-ADVANCED | knob | leading | `0` | Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token. Default 0 keeps the curated defaults. |
 | `--sf-leading-tight` | PUBLIC | knob | leading | `1.1` | Tight line height (~1.2). Use for large display headings. |
-| `--sf-link-external-label` | PUBLIC | knob | link | `"opens in a new window or external site"` | Accessible name for the .sf-link-external marker glyph, read by screen readers via the CSS content alt-text syntax. Localise or clear alongside --sf-link-external-marker. |
 | `--sf-link-external-marker` | PUBLIC | knob | link | `" \\2197"` | CSS content value appended to external links (e.g. " ↗"). Used by the .external-link pseudo-element pattern. |
 | `--sf-link-underline-offset` | PUBLIC | knob | link | `0.15em` | Vertical offset of the link underline from the text baseline. |
 | `--sf-link-underline-thickness` | PUBLIC | knob | link | `auto` | Stroke width of the link underline. |
 | `--sf-lumlocker` | PUBLIC-ADVANCED | knob | lumlocker | `0.65` | OKLCH lightness lock value. When :root has [data-lumlocker], brand colors (primary, secondary, action, base) are remapped to this L so their contrast remains constant as hues shift. |
 | `--sf-mask-scrim-end` | PUBLIC-ADVANCED | consumption | mask | `var(--sf-space-l)` | End stop for edge-fade mask gradients. Mirrors --sf-mask-scrim-start for the trailing edge of a scroll container. |
 | `--sf-mask-scrim-start` | PUBLIC-ADVANCED | consumption | mask | `var(--sf-space-l)` | Start stop for edge-fade mask gradients on scroll reels / overflow containers. Use in mask-image: linear-gradient(..., transparent var(--sf-mask-scrim-start)) to fade content near the leading edge. |
+| `--sf-media-radius` | PUBLIC | knob | media | `0` | Opt-in global media radius — 0 by default (off). Set to a --sf-radius-* value to round <img>/<figure> globally: :root { --sf-media-radius: var(--sf-radius-m); } Applied via :where() in core/base.css so it never fights .sf-bg or a component's own radius. |
 | `--sf-motion-scale` | PUBLIC-ADVANCED | knob | motion | `1` | Global motion multiplier. All transition and animation durations multiply by this factor. Set to 0 to disable all motion; reduce below 1 for snappier feel. |
 | `--sf-object-fit` | PUBLIC | knob | object | `cover` | Default object-fit value for replaced elements (img, video). |
 | `--sf-object-position` | PUBLIC | knob | object | `50% 50%` | Default object-position for replaced elements. |
@@ -523,6 +527,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-safe-right` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-right, 0px)` | Device safe-area inset at the right edge (rounded corners, home indicator). Resolves to env(safe-area-inset-right, 0px). |
 | `--sf-safe-top` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-top, 0px)` | Device safe-area inset at the top edge (notch, Dynamic Island). Resolves to env(safe-area-inset-top, 0px). Use for fixed headers on notched devices. |
 | `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | knob | scroll | `cover 30%` | animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes. |
+| `--sf-scroll-timeline-range-exit-end` | PUBLIC | knob | scroll | `exit 100%` | Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out. |
+| `--sf-scroll-timeline-range-exit-start` | PUBLIC | knob | scroll | `cover 70%` | Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out. |
 | `--sf-scroll-timeline-range-start` | PUBLIC-ADVANCED | knob | scroll | `entry 0%` | animation-range start value for scroll-driven entrance effects. Default 'entry 0%'. Override on an element to control when its entrance animation begins. |
 | `--sf-scrollbar-thumb` | PUBLIC | consumption | scrollbar | `var(--sf-color-neutral)` | Color of the custom scrollbar thumb. |
 | `--sf-scrollbar-track` | PUBLIC | knob | scrollbar | `transparent` | Color of the custom scrollbar track. |
@@ -622,8 +628,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-shadow-m` | PUBLIC | consumption | text | `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))` | Medium text-shadow. Use for text overlaid on images to improve legibility. |
 | `--sf-text-shadow-none` | PUBLIC | knob | text | `none` | Removes text-shadow (use to explicitly reset inherited shadows). |
 | `--sf-text-shadow-s` | PUBLIC | consumption | text | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` | Small text-shadow for subtle depth on display headings. |
-| `--sf-text-shadow-xl` | PUBLIC | consumption | text | `0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))` | Extra-large text-shadow for maximum legibility over busy or high-contrast image backgrounds. |
-| `--sf-text-shadow-xs` | PUBLIC | consumption | text | `0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))` | Extra-small text-shadow for the subtlest depth on body text. |
 | `--sf-text-xl` | PUBLIC | consumption | text | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` | Extra-large font size (~20px). Sub-headings, callout text. |
 | `--sf-text-xl-font-weight` | PUBLIC | consumption | text | `var(--sf-font-weight-body)` | Font weight for extra-large text. |
 | `--sf-text-xl-letter-spacing` | PUBLIC | consumption | text | `var(--sf-tracking-normal)` | Letter-spacing for extra-large text. |
@@ -751,7 +755,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (309)
+## Classes (294)
 
 ### Accessibility (8)
 
@@ -797,7 +801,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-card--elevated` | PUBLIC | component | .sf-card | Floating card: hides the border, applies a larger shadow. |
 | `.sf-card--interactive` | PUBLIC | component | .sf-card | Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion. |
 
-### Layout primitives (136)
+### Layout primitives (138)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -841,6 +845,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-cover--padding-l` | PUBLIC | layout | Cover | Cover variant with large vertical padding above and below the centered content. |
 | `.sf-cover--padding-s` | PUBLIC | layout | Cover | Cover variant with small vertical padding above and below the centered content. |
 | `.sf-cq` | PUBLIC | layout | Container query context | Assigns an inline-size container context to any element. Children can then use @container rules or container-query-aware tokens. |
+| `.sf-divide` | PUBLIC | layout | — | Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap. |
+| `.sf-divide--vertical` | PUBLIC | layout | — | Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap. |
 | `.sf-divider` | PUBLIC | layout | Divider | Horizontal rule (divider line). Uses --sf-divider-* tokens for color, width, and style. Modifiers change dash style or orientation. |
 | `.sf-divider--dashed` | PUBLIC | layout | Divider | Divider variant with a dashed stroke. |
 | `.sf-divider--dotted` | PUBLIC | layout | Divider | Divider variant with a dotted stroke. |
@@ -938,7 +944,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (57)
+### Macro classes (55)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -952,8 +958,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
-| `.sf-drop-shadow-xl` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
-| `.sf-drop-shadow-xs` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
 | `.sf-equal-height` | PUBLIC | macro | Equal height | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
 | `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
 | `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
@@ -1000,7 +1004,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-text-protect` | PUBLIC | macro | Text protect | Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image. |
 | `.sf-truncate` | PUBLIC | macro | Truncate / line-clamp | Single-line text overflow with ellipsis. Equivalent to the classic text-overflow: ellipsis trio (white-space nowrap, overflow hidden, text-overflow ellipsis). |
 
-### Motion / animation (15)
+### Motion / animation (21)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1011,6 +1015,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-entrance--fade-right` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving from the left toward the right. |
 | `.sf-entrance--fade-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving upward into position. |
 | `.sf-entrance--scale-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while scaling up from a slightly smaller size. |
+| `.sf-exit--fade` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
+| `.sf-exit--fade-down` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
+| `.sf-exit--fade-left` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
+| `.sf-exit--fade-right` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
+| `.sf-exit--fade-up` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
+| `.sf-exit--scale-down` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. animation-name is set only inside @supports below — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
 | `.sf-fade-in` | PUBLIC | motion | Animation presets | One-shot fade-in animation (opacity 0 → 1). Scoped to no-preference so it stops automatically for reduced-motion users. |
 | `.sf-fade-out` | PUBLIC | motion | Animation presets | One-shot fade-out animation (opacity 1 → 0). Scoped to no-preference. |
 | `.sf-scale-down` | PUBLIC | motion | Animation presets | One-shot scale-down animation (element shrinks from full size). Scoped to no-preference. |
@@ -1085,30 +1095,4 @@ and a short description. The machine-readable companion (with all columns) is
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
-
-### Utilities (21)
-
-| Class | Tier | Kind | Group | Description |
-|---|---|---|---|---|
-| `.sf-h1` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h1-level typography (size, line-height, weight, tracking, max-width) to any element without changing its semantic level. |
-| `.sf-h2` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h2-level typography to any element without changing its semantic level. |
-| `.sf-h3` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h3-level typography to any element without changing its semantic level. |
-| `.sf-h4` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h4-level typography to any element without changing its semantic level. |
-| `.sf-h5` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h5-level typography to any element without changing its semantic level. |
-| `.sf-h6` | PUBLIC | utility | HEADING HELPER CLASSES (.sf-h1 | Applies h6-level typography to any element without changing its semantic level. |
-| `.sf-hover-float` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element up slightly on hover. |
-| `.sf-hover-grow` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: scales the element up slightly on hover. |
-| `.sf-hover-shrink` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: scales the element down slightly on hover. |
-| `.sf-hover-sink` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element down slightly on hover. |
-| `.sf-hover-slide-end` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-end on hover. |
-| `.sf-hover-slide-start` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-start on hover. |
-| `.sf-text-2xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-2xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-3xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-4xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 4xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-l` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the l text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-m` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the m (body) text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-s` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the s text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
-| `.sf-text-xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 
