@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**711 tokens** (deduplicated by name across the 4 token source files).
+**720 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 655 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 664 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 225 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 486 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 229 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 491 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -111,6 +111,10 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-animation-slide-in-left` | PUBLIC | consumption | Core | `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-right` | PUBLIC | consumption | Core | `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-slide-in-up` | PUBLIC | consumption | Core | `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both` |
+| `--sf-animation-slide-out-down` | PUBLIC | consumption | Core | `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both` |
+| `--sf-animation-slide-out-left` | PUBLIC | consumption | Core | `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both` |
+| `--sf-animation-slide-out-right` | PUBLIC | consumption | Core | `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both` |
+| `--sf-animation-slide-out-up` | PUBLIC | consumption | Core | `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-spin` | PUBLIC | consumption | Core | `sf-spin var(--sf-duration-slower) linear infinite` |
 | `--sf-aspect` | PUBLIC | knob | Macros | `16 / 9` |
 | `--sf-bento-cols-default` | PUBLIC | knob | Layout | `4` |
@@ -362,7 +366,9 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | Core | `var(--sf-color-secondary-800)` |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | Core | `var(--sf-color-secondary-200)` |
 | `--sf-color-selection-bg` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
+| `--sf-color-selection-bg--alt` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )` |
 | `--sf-color-selection-text` | PUBLIC | knob | Core | `inherit` |
+| `--sf-color-selection-text--alt` | PUBLIC | knob | Core | `inherit` |
 | `--sf-color-success` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-success-muted` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-success) l c h / 0.3)` |
 | `--sf-color-success-source-dark` | PUBLIC | knob | Core | `oklch(0.70 0.144 145) (registered)` |
@@ -589,6 +595,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-lumlocker` | PUBLIC-ADVANCED | knob | Core | `0.65` |
 | `--sf-mask-scrim-end` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
+| `--sf-media-radius` | PUBLIC | knob | Core | `0` |
 | `--sf-motion-scale` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-object-fit` | PUBLIC | knob | Core | `cover` |
 | `--sf-object-position` | PUBLIC | knob | Core | `50% 50%` |
@@ -657,6 +664,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-scrim-text-shadow` | PUBLIC | knob | Macros | `0 1px 3px oklch(0 0 0 / 0.6)` |
 | `--sf-scroll-shadow-size` | PUBLIC | knob | Macros | `2rem` |
 | `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | knob | Core | `cover 30%` |
+| `--sf-scroll-timeline-range-exit-end` | PUBLIC | knob | Core | `exit 100%` |
+| `--sf-scroll-timeline-range-exit-start` | PUBLIC | knob | Core | `cover 70%` |
 | `--sf-scroll-timeline-range-start` | PUBLIC-ADVANCED | knob | Core | `entry 0%` |
 | `--sf-scrollbar-thumb` | PUBLIC | consumption | Core | `var(--sf-color-neutral)` |
 | `--sf-scrollbar-track` | PUBLIC | knob | Core | `transparent` |

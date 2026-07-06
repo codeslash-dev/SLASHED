@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**260 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**268 .sf-classes, 40 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-136 classes.
+138 classes.
 
 | Class |
 |---|
@@ -52,6 +52,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-cover--padding-s` |
 | `.sf-cover__center` |
 | `.sf-cq` |
+| `.sf-divide` |
+| `.sf-divide--vertical` |
 | `.sf-divider` |
 | `.sf-divider--dashed` |
 | `.sf-divider--dotted` |
@@ -275,7 +277,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Motion / entrances (`core/motion.css`)
 
-15 classes.
+21 classes.
 
 | Class |
 |---|
@@ -286,6 +288,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-entrance--fade-right` |
 | `.sf-entrance--fade-up` |
 | `.sf-entrance--scale-up` |
+| `.sf-exit--fade` |
+| `.sf-exit--fade-down` |
+| `.sf-exit--fade-left` |
+| `.sf-exit--fade-right` |
+| `.sf-exit--fade-up` |
+| `.sf-exit--scale-down` |
 | `.sf-fade-in` |
 | `.sf-fade-out` |
 | `.sf-scale-down` |

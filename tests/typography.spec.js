@@ -295,6 +295,35 @@ test.describe('Border radius scale', () => {
   });
 });
 
+// ── Global media radius ──────────────────────────────────────────
+test.describe('Global media radius (--sf-media-radius)', () => {
+  test('img has no radius by default (0)', async ({ page }) => {
+    await setup(page, `<img id="t" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7">`);
+    const v = await page.locator('#t').evaluate(el => parseFloat(getComputedStyle(el).borderRadius));
+    expect(v).toBe(0);
+  });
+
+  test('setting --sf-media-radius rounds img globally', async ({ page }) => {
+    await setup(page, `
+      <style>:root { --sf-media-radius: var(--sf-radius-m); }</style>
+      <img id="t" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7">
+    `);
+    const v = await page.locator('#t').evaluate(el => parseFloat(getComputedStyle(el).borderRadius));
+    expect(v).toBeGreaterThan(0);
+  });
+
+  test('.sf-bg keeps its own radius regardless of --sf-media-radius', async ({ page }) => {
+    await setup(page, `
+      <style>:root { --sf-media-radius: var(--sf-radius-m); }</style>
+      <div style="position:relative">
+        <img id="t" class="sf-bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7">
+      </div>
+    `);
+    const v = await page.locator('#t').evaluate(el => parseFloat(getComputedStyle(el).borderRadius));
+    expect(v).toBe(0); // --sf-bg-radius default is 0, and .sf-bg (slashed.layout) wins over the base rule
+  });
+});
+
 // ── Z-index scale ────────────────────────────────────────────────
 test.describe('Z-index scale', () => {
   test('z-index tokens increase: below < base < raised < sticky < fixed < dropdown < overlay < modal < toast < tooltip', async ({ page }) => {

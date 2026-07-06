@@ -1483,6 +1483,19 @@
         <hr class="sf-divider sf-divider--dotted">
         <hr class="sf-divider sf-divider--gradient">
 
+        <h3>.sf-divide</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Places a rule between direct children in one class — no extra markup per gap. <code>.sf-divide--vertical</code> switches to an inline-start border.</p>
+        <div class="sf-divide sf-stack sf-stack--s" style="font-size: var(--sf-text-s)">
+          <p style="margin: 0">First</p>
+          <p style="margin: 0">Second</p>
+          <p style="margin: 0">Third</p>
+        </div>
+        <div class="sf-divide sf-divide--vertical sf-cluster" style="align-items: stretch; margin-block-start: var(--sf-space-s); font-size: var(--sf-text-s)">
+          <span>Left</span>
+          <span>Middle</span>
+          <span>Right</span>
+        </div>
+
         <h3>.sf-icon</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Em-based inline icon sizing. Scales with surrounding text; size modifiers <code>.sf-icon--xs</code> … <code>.sf-icon--2xl</code>.</p>
         <div class="sf-cluster" style="align-items: center; font-size: var(--sf-text-m)">
@@ -2820,6 +2833,17 @@
           <div class="sf-entrance--fade-left"   style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--fade-left</div>
           <div class="sf-entrance--fade-right"  style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--fade-right</div>
           <div class="sf-entrance--scale-up"    style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-entrance--scale-up</div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-exit--*</code> — scroll-driven exit</h3>
+        <p style="color: var(--sf-color-text--secondary); font-size: var(--sf-text-s)">Symmetric counterpart of <code>.sf-entrance--*</code>: fires as the element scrolls out of view. Requires <code>animation-timeline: view()</code> support — engines without it render these statically (no unconditional fade-to-hidden fallback).</p>
+        <div class="sf-stack sf-stack--s">
+          <div class="sf-exit--fade"        style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-exit--fade</div>
+          <div class="sf-exit--fade-up"     style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-exit--fade-up</div>
+          <div class="sf-exit--fade-down"   style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-exit--fade-down</div>
+          <div class="sf-exit--fade-left"   style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-exit--fade-left</div>
+          <div class="sf-exit--fade-right"  style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-exit--fade-right</div>
+          <div class="sf-exit--scale-down"  style="padding: var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">.sf-exit--scale-down</div>
         </div>
       </section>
 

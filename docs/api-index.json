@@ -28,35 +28,35 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1020,
+      "total": 1037,
       "by_type": {
-        "class": 309,
-        "token": 711
+        "class": 317,
+        "token": 720
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 964,
+        "PUBLIC": 981,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 486,
-        "knob": 225
+        "consumption": 491,
+        "knob": 229
       },
-      "tokens": 711,
-      "classes": 309,
-      "sf_classes": 260,
+      "tokens": 720,
+      "classes": 317,
+      "sf_classes": 268,
       "is_classes": 40,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 25,
         "Components": 26,
-        "Core tokens": 607,
-        "Layout primitives": 136,
+        "Core tokens": 616,
+        "Layout primitives": 138,
         "Layout tokens": 53,
         "Macro classes": 57,
         "Macro tokens": 26,
-        "Motion / animation": 15,
+        "Motion / animation": 21,
         "Print": 4,
         "State classes": 40,
         "Theme example": 1,
@@ -635,6 +635,118 @@
       "group": "Animation presets",
       "description": "Slide-in from below. Use for bottom sheets, toasts, and floating action buttons.",
       "value": "sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-down",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);",
+      "value": "sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-left",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);",
+      "value": "sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-right",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);",
+      "value": "sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-up",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);",
+      "value": "sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -7637,6 +7749,34 @@
       ]
     },
     {
+      "name": "--sf-color-selection-bg--alt",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Selection",
+      "description": "Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css).",
+      "value": "light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-selection-text",
       "type": "token",
       "tier": "PUBLIC",
@@ -7646,6 +7786,34 @@
       "area": "core",
       "group": "Selection & backdrop",
       "description": "Text color inside browser text selections.",
+      "value": "inherit",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-selection-text--alt",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Selection",
+      "description": "Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css).",
       "value": "inherit",
       "aliasOf": null,
       "registered": false,
@@ -13987,6 +14155,34 @@
       ]
     },
     {
+      "name": "--sf-media-radius",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "media",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Output token @property registrations",
+      "description": "Radius + space: <length> syntax enables CSS transitions on layout values — border-radius/padding/gap etc. now interpolate instead of snapping. Shadow: syntax:\"*\" (no <shadow> type in spec); inherits:true so :root values cascade normally; registers the properties formally for…",
+      "value": "0",
+      "aliasOf": null,
+      "registered": true,
+      "animatable": true,
+      "syntax": "<length>",
+      "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-motion-scale",
       "type": "token",
       "tier": "PUBLIC-ADVANCED",
@@ -15873,6 +16069,62 @@
       "group": "Scroll-driven animation range",
       "description": "animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes.",
       "value": "cover 30%",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-end",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "scroll",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Scroll-driven animation range",
+      "description": "Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out.",
+      "value": "exit 100%",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-start",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "scroll",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Scroll-driven animation range",
+      "description": "Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out.",
+      "value": "cover 70%",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -22927,6 +23179,56 @@
       ]
     },
     {
+      "name": "sf-divide",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-divide",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Divide",
+      "description": "Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-divide--vertical",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-divide--vertical",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "Divide",
+      "description": "Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap.",
+      "isVariant": true,
+      "baseClass": "sf-divide",
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-divider",
       "type": "class",
       "tier": "PUBLIC",
@@ -23518,6 +23820,156 @@
       "layer": "slashed.macros",
       "sourceFiles": [
         "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-exit--fade",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-exit--fade",
+      "prefix": "sf",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "area": "motion",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "isVariant": true,
+      "baseClass": "sf-exit",
+      "optional": false,
+      "layer": "slashed.motion",
+      "sourceFiles": [
+        "core/motion.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-exit--fade-down",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-exit--fade-down",
+      "prefix": "sf",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "area": "motion",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "isVariant": true,
+      "baseClass": "sf-exit",
+      "optional": false,
+      "layer": "slashed.motion",
+      "sourceFiles": [
+        "core/motion.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-exit--fade-left",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-exit--fade-left",
+      "prefix": "sf",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "area": "motion",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "isVariant": true,
+      "baseClass": "sf-exit",
+      "optional": false,
+      "layer": "slashed.motion",
+      "sourceFiles": [
+        "core/motion.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-exit--fade-right",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-exit--fade-right",
+      "prefix": "sf",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "area": "motion",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "isVariant": true,
+      "baseClass": "sf-exit",
+      "optional": false,
+      "layer": "slashed.motion",
+      "sourceFiles": [
+        "core/motion.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-exit--fade-up",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-exit--fade-up",
+      "prefix": "sf",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "area": "motion",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "isVariant": true,
+      "baseClass": "sf-exit",
+      "optional": false,
+      "layer": "slashed.motion",
+      "sourceFiles": [
+        "core/motion.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-exit--scale-down",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-exit--scale-down",
+      "prefix": "sf",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "area": "motion",
+      "group": "",
+      "description": "Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines…",
+      "isVariant": true,
+      "baseClass": "sf-exit",
+      "optional": false,
+      "layer": "slashed.motion",
+      "sourceFiles": [
+        "core/motion.css"
       ],
       "bundles": [
         "full",

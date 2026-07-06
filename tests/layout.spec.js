@@ -536,6 +536,42 @@ test.describe('layout: .sf-divider', () => {
   });
 });
 
+// ── .sf-divide ──────────────────────────────────────────────────
+test.describe('layout: .sf-divide', () => {
+  test('places a border only between children, not before the first', async ({ page }) => {
+    await setup(page, `
+      <div id="t" class="sf-divide">
+        <p id="first">one</p>
+        <p id="second">two</p>
+      </div>
+    `);
+    const bw = await page.evaluate(() => ({
+      first:  parseFloat(getComputedStyle(document.getElementById('first')).borderBlockStartWidth),
+      second: parseFloat(getComputedStyle(document.getElementById('second')).borderBlockStartWidth),
+    }));
+    expect(bw.first).toBe(0);
+    expect(bw.second).toBeGreaterThan(0);
+  });
+
+  test('--vertical uses an inline-start border instead', async ({ page }) => {
+    await setup(page, `
+      <div id="t" class="sf-divide sf-divide--vertical">
+        <span id="first">one</span>
+        <span id="second">two</span>
+      </div>
+    `);
+    const cs = await page.evaluate(() => {
+      const el = document.getElementById('second');
+      return {
+        block:  parseFloat(getComputedStyle(el).borderBlockStartWidth),
+        inline: parseFloat(getComputedStyle(el).borderInlineStartWidth),
+      };
+    });
+    expect(cs.inline).toBeGreaterThan(0);
+    expect(cs.block).toBe(0);
+  });
+});
+
 // ── .sf-imposter ────────────────────────────────────────────────
 test.describe('layout: .sf-imposter', () => {
   test('is position: absolute and visually centered in its parent', async ({ page }) => {

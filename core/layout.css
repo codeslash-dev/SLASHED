@@ -55,7 +55,18 @@
     background:    linear-gradient(to right, transparent, var(--sf-divider-color), transparent);
   }
 
-  
+  /* Divide — rules between direct children, reusing .sf-divider's tokens.
+     Unlike .sf-divider (a standalone separator element), .sf-divide is
+     applied to the container and needs no extra markup per gap. */
+  .sf-divide > * + * {
+    border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+  }
+  .sf-divide--vertical > * + * {
+    border-block-start:  none;
+    border-inline-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
+  }
+
+
   /* Container */
   .sf-container {
     container:      sf-layout / inline-size;

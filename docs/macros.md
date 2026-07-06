@@ -610,6 +610,39 @@ Tokens:
 All entrance classes are gated by `prefers-reduced-motion: no-preference`;
 when the user opts out of motion the animations are inert (no movement).
 
+---
+
+## `.sf-exit--*`
+
+Scroll-driven exit animations — the symmetric counterpart of
+`.sf-entrance--*`. Elements animate out as they leave the viewport.
+
+6 variants: `fade`, `fade-up`, `fade-down`, `fade-left`, `fade-right`,
+`scale-down`.
+
+```html
+<div class="sf-exit--fade-up">Fades out while sliding up as it leaves</div>
+<div class="sf-exit--scale-down">Scales from 100% to 92% on exit</div>
+```
+
+**How it works:** Uses `animation-timeline: view()` where supported
+(Chrome/Edge 115+). Unlike `.sf-entrance--*`, there is **no** time-driven
+fallback: `animation-name` only applies inside
+`@supports (animation-timeline: view())`. An unconditional one-shot exit
+animation would fade the element out on load and leave it hidden forever
+in engines without scroll-driven animation support — so those engines
+just render the element normally, visible and static.
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-scroll-timeline-range-exit-start` | `cover 70%` | when the exit animation begins |
+| `--sf-scroll-timeline-range-exit-end` | `exit 100%` | when the exit animation completes |
+
+All exit classes are gated by `prefers-reduced-motion: no-preference`;
+when the user opts out of motion the animations are inert (no movement).
+
 Lives in `core/motion.css`, layer `slashed.motion`.
 
 ---

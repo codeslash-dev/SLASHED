@@ -142,6 +142,45 @@
   .sf-hover-slide-end:hover   { translate: 0.5em 0; }
 
   /* ============================================================
+   * LIST RESET (.sf-list-none)
+   * Drops marker + inline start-padding in one class, on any
+   * <ul>/<ol> (or element with list-style applied).
+   * ============================================================ */
+  /* .sf-list-none {
+    list-style: none;
+    padding-inline-start: 0;
+  } */
+
+  /* ============================================================
+   * ALTERNATE SELECTION COLOUR (.sf-selection--alt)
+   * Overrides the ::selection custom properties (core/base.css) on
+   * the element and its descendants, for surfaces where the default
+   * selection colours land with poor contrast (e.g. a dark card on a
+   * light page). Backed by --sf-color-selection-*--alt (core/tokens.css).
+   * ============================================================ */
+  /* .sf-selection--alt {
+    --sf-color-selection-bg:   var(--sf-color-selection-bg--alt);
+    --sf-color-selection-text: var(--sf-color-selection-text--alt);
+  } */
+
+  /* ============================================================
+   * STICKY POSITIONING (.sf-sticky)
+   * Static layout-utility counterpart to the JS-toggled .is-sticky
+   * state class (core/states.css) — same --sf-sticky-offset token,
+   * for elements that are sticky unconditionally rather than by
+   * runtime toggle. Offset modifiers add extra gap on top of the
+   * existing header-aware fluid offset.
+   * ============================================================ */
+  /* .sf-sticky {
+    position: sticky;
+    inset-block-start: var(--sf-sticky-offset, 0);
+    z-index: var(--sf-z-sticky);
+  }
+  .sf-sticky--s { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-s)); }
+  .sf-sticky--m { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-m)); }
+  .sf-sticky--l { inset-block-start: calc(var(--sf-sticky-offset, 0) + var(--sf-space-l)); } */
+
+  /* ============================================================
    * OVERFLOW-DEBUG UTILITY (.sf-debug-overflow)
    * Dev-only diagnostic: apply to <body> (or any container) to outline
    * every descendant, making the element causing horizontal page

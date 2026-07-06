@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "2b4847a683ac",
+    "tokensHash": "9540473e4753",
     "bundles": [
       "full",
       "optimal",
@@ -10,15 +10,15 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 711,
+      "tokens": 720,
       "byTier": {
-        "PUBLIC": 655,
+        "PUBLIC": 664,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
-        "Core tokens": 607,
+        "Core tokens": 616,
         "Macro tokens": 26,
         "Component tokens": 25
       }
@@ -472,6 +472,98 @@
       "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
       "note": "Slide-in from below. Use for bottom sheets, toasts, and floating action buttons.",
       "value": "sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-down",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "",
+      "value": "sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-left",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "",
+      "value": "sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-right",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "",
+      "value": "sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-animation-slide-out-up",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "animation",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "",
+      "value": "sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -6215,6 +6307,29 @@
       ]
     },
     {
+      "name": "--sf-color-selection-bg--alt",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "Selection",
+      "description": "Text-selection background color.",
+      "note": "",
+      "value": "light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-selection-text",
       "tier": "PUBLIC",
       "role": "knob",
@@ -6223,6 +6338,29 @@
       "group": "Selection & backdrop",
       "description": "Absolute reference colors and overlay tints for selections, marks, and backdrops.",
       "note": "Text color inside browser text selections.",
+      "value": "inherit",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-selection-text--alt",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "Selection",
+      "description": "Text-selection background color.",
+      "note": "",
       "value": "inherit",
       "aliasOf": null,
       "registered": false,
@@ -11430,6 +11568,29 @@
       ]
     },
     {
+      "name": "--sf-media-radius",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "media",
+      "category": "Core tokens",
+      "group": "Output token @property registrations",
+      "description": "Radius + space: <length> syntax enables CSS transitions on layout values — border-radius/padding/gap etc. now interpolate instead of snapping. Shadow: syntax:\"*\" (no <shadow> type in spec); inherits:true so :root values cascade normally; registers the properties formally for…",
+      "note": "",
+      "value": "0",
+      "aliasOf": null,
+      "registered": true,
+      "syntax": "<length>",
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-motion-scale",
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
@@ -12980,6 +13141,52 @@
       "description": "animation-range start and end positions for scroll-driven entrance effects (animation-timeline: view()). Controls how far into the viewport an element must scroll before its entrance animation starts and ends.",
       "note": "animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes.",
       "value": "cover 30%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-end",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "scroll",
+      "category": "Core tokens",
+      "group": "Scroll-driven animation range",
+      "description": "animation-range start and end positions for scroll-driven entrance effects (animation-timeline: view()). Controls how far into the viewport an element must scroll before its entrance animation starts and ends.",
+      "note": "",
+      "value": "exit 100%",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-start",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "scroll",
+      "category": "Core tokens",
+      "group": "Scroll-driven animation range",
+      "description": "animation-range start and end positions for scroll-driven entrance effects (animation-timeline: view()). Controls how far into the viewport an element must scroll before its entrance animation starts and ends.",
+      "note": "",
+      "value": "cover 70%",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
