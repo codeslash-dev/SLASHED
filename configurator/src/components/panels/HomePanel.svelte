@@ -1,7 +1,7 @@
 <script lang="ts">
   import {
     Sparkles, Palette, Type, Ruler, Layout, Square, Layers, Zap,
-    Puzzle, Blocks, SwatchBook, ShieldCheck, Package, BookOpen, Save,
+    Puzzle, Blocks, Component, SwatchBook, ShieldCheck, Package, BookOpen, Save,
   } from '@lucide/svelte';
   import type { SavedSlot } from '../../types';
   import { listSavedThemes, saveTheme } from '../../lib/savedThemes';
@@ -22,8 +22,9 @@
     { id: "shadows",    icon: Layers,   label: "Shadows",    desc: "Elevation & depth control" },
     { id: "motion",     icon: Zap,      label: "Motion",     desc: "Duration & easing curves" },
     { id: "effects",    icon: Sparkles, label: "Effects",    desc: "Blur, opacity & scrollbars" },
-    { id: "macros",     icon: Blocks,   label: "Macros",     desc: "Flow, prose, aspect & scrim" },
-    { id: "misc",       icon: Puzzle,   label: "Misc",       desc: "Z-index & remaining tokens" },
+    { id: "macros",     icon: Blocks,    label: "Macros",     desc: "Flow, prose, aspect & scrim" },
+    { id: "misc",       icon: Puzzle,    label: "Misc",       desc: "Z-index & remaining tokens" },
+    { id: "components", icon: Component, label: "Components", desc: "Button & card component tokens" },
   ] as const;
 
   const TOOLS = [
@@ -39,12 +40,13 @@
     typography: ["text", "font", "leading", "tracking", "h1", "h2", "h3", "h4", "h5", "h6", "body"],
     spacing: ["space", "gap", "gutter", "section"],
     layout: ["container", "grid", "sidebar", "bento", "reel", "cluster", "stack", "frame"],
-    borders: ["radius", "border", "divider", "btn-", "field-"],
+    borders: ["radius", "border", "divider", "field-"],
     shadows: ["shadow"],
     motion: ["motion", "duration", "ease", "animation", "transition"],
     effects: ["blur", "opacity", "scrollbar", "scrim", "backdrop"],
     macros: ["flow", "prose", "aspect", "scroll-shadow", "line-clamp"],
     misc: ["z-"],
+    components: ["btn-", "card-"],
   };
 
   function domainCount(id: string): number {
