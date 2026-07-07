@@ -832,7 +832,7 @@
       "checked": false
     },
     {
-      "name": "sf-bg",
+      "name": "sf-bg-layer",
       "category": "Layout primitives",
       "kind": "layout",
       "bundles": [

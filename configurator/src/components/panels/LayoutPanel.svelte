@@ -703,15 +703,15 @@
       aria-expanded={showBgLayer}
       class="w-full flex items-center justify-between cursor-pointer py-1"
     >
-      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Background layer (.sf-bg)</span>
+      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Background layer (.sf-bg-layer)</span>
       <span class="text-[10px] text-slate-500">{showBgLayer ? "▲" : "▼"}</span>
     </button>
     {#if showBgLayer}
       <div class="mt-2 space-y-3">
-        <p class="text-[9px] text-slate-400 dark:text-slate-600">Default values for the <span class="font-mono text-slate-600 dark:text-slate-400">.sf-bg</span> full-bleed background utility.</p>
+        <p class="text-[9px] text-slate-400 dark:text-slate-600">Default values for the <span class="font-mono text-slate-600 dark:text-slate-400">.sf-bg-layer</span> full-bleed background utility.</p>
         {#each [
-          { label: "Fit",      token: "--sf-bg-fit",      placeholder: "cover",    opts: ["cover","contain","fill","none","scale-down"] },
-          { label: "Position", token: "--sf-bg-position", placeholder: "50% 50%",  opts: ["50% 50%","top","bottom","left","right","center"] },
+          { label: "Fit",      token: "--sf-bg-layer-fit",      placeholder: "cover",    opts: ["cover","contain","fill","none","scale-down"] },
+          { label: "Position", token: "--sf-bg-layer-position", placeholder: "50% 50%",  opts: ["50% 50%","top","bottom","left","right","center"] },
         ] as row (row.token)}
           <div class="flex items-center gap-2">
             <span class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-16 shrink-0">{row.label}</span>
@@ -733,25 +733,25 @@
           </div>
         {/each}
         <SliderRow
-          label="Inset" value={parseRem(overrides["--sf-bg-inset"], 0)} min={0} max={4} step={0.25} unit="rem"
-          help="--sf-bg-inset — inset the background from the container edges"
-          overridden={"--sf-bg-inset" in overrides}
-          onChange={(v) => onSet("--sf-bg-inset", `${v}rem`)}
-          onReset={() => onReset("--sf-bg-inset")}
+          label="Inset" value={parseRem(overrides["--sf-bg-layer-inset"], 0)} min={0} max={4} step={0.25} unit="rem"
+          help="--sf-bg-layer-inset — inset the background from the container edges"
+          overridden={"--sf-bg-layer-inset" in overrides}
+          onChange={(v) => onSet("--sf-bg-layer-inset", `${v}rem`)}
+          onReset={() => onReset("--sf-bg-layer-inset")}
         />
         <SliderRow
-          label="Radius" value={parseRem(overrides["--sf-bg-radius"], 0)} min={0} max={4} step={0.125} unit="rem"
-          help="--sf-bg-radius — corner radius of the background element"
-          overridden={"--sf-bg-radius" in overrides}
-          onChange={(v) => onSet("--sf-bg-radius", `${v}rem`)}
-          onReset={() => onReset("--sf-bg-radius")}
+          label="Radius" value={parseRem(overrides["--sf-bg-layer-radius"], 0)} min={0} max={4} step={0.125} unit="rem"
+          help="--sf-bg-layer-radius — corner radius of the background element"
+          overridden={"--sf-bg-layer-radius" in overrides}
+          onChange={(v) => onSet("--sf-bg-layer-radius", `${v}rem`)}
+          onReset={() => onReset("--sf-bg-layer-radius")}
         />
         <SliderRow
-          label="Z-index" value={parseRem(overrides["--sf-bg-z"], -2)} min={-10} max={0} step={1}
-          help="--sf-bg-z — stack order of the background pseudo-element (typically negative)"
-          overridden={"--sf-bg-z" in overrides}
-          onChange={(v) => onSet("--sf-bg-z", String(v))}
-          onReset={() => onReset("--sf-bg-z")}
+          label="Z-index" value={parseRem(overrides["--sf-bg-layer-z"], -2)} min={-10} max={0} step={1}
+          help="--sf-bg-layer-z — stack order of the background pseudo-element (typically negative)"
+          overridden={"--sf-bg-layer-z" in overrides}
+          onChange={(v) => onSet("--sf-bg-layer-z", String(v))}
+          onReset={() => onReset("--sf-bg-layer-z")}
         />
       </div>
     {/if}

@@ -820,11 +820,11 @@
     "--sf-theme-transition-duration": "Duration of the .sf-theme-transition animated color-scheme crossfade. Scales with --sf-motion-scale so reduced-motion preferences are respected. Default 300ms.",
     "--sf-z-modal": "Z-index for modal dialogs and their non-top-layer backdrop scrims. Sits above overlays and dropdowns. Default 1040.",
     "--sf-z-tooltip": "Z-index for tooltips and transient floating notifications. Highest named layer in the z-index stack. Default 1060.",
-    "--sf-bg-fit": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.",
-    "--sf-bg-inset": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
-    "--sf-bg-position": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
-    "--sf-bg-radius": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
-    "--sf-bg-z": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background."
+    "--sf-bg-layer-fit": "object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover.",
+    "--sf-bg-layer-inset": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
+    "--sf-bg-layer-position": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
+    "--sf-bg-layer-radius": "border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
+    "--sf-bg-layer-z": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background."
   },
   "classes": {
     "sf-btn": "Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Combine a colour family, a style treatment, and a size modifier.",
@@ -1109,6 +1109,6 @@
     "sf-is-valid": "Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context.",
     "print-only": "Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen.",
     "theme-transition": "Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches.",
-    "sf-bg": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg\"> or as a wrapper with a nested > img / > video / > picture."
+    "sf-bg-layer": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg-layer\"> or as a wrapper with a nested > img / > video / > picture."
   }
 }

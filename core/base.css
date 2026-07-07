@@ -136,7 +136,7 @@
     block-size:      auto;
   }
 
-  /* Zero-specificity so .sf-bg, .sf-frame > img, and any component's own
+  /* Zero-specificity so .sf-bg-layer, .sf-frame > img, and any component's own
      radius (later layer or higher specificity) always win. */
   :where(img, figure) {
     border-radius: var(--sf-media-radius);

@@ -22,10 +22,10 @@
   --sf-bento-row-tall: 25.6rem; /* was: 16rem */
 
   /* bg */
-  --sf-bg-fit: contain; /* was: cover */
-  --sf-bg-inset: 0.75rem; /* was: 0px */
-  --sf-bg-position: 25% 75%; /* was: 50% 50% */
-  --sf-bg-radius: 0.75rem; /* was: 0 */
+  --sf-bg-layer-fit: contain; /* was: cover */
+  --sf-bg-layer-inset: 0.75rem; /* was: 0px */
+  --sf-bg-layer-position: 25% 75%; /* was: 50% 50% */
+  --sf-bg-layer-radius: 0.75rem; /* was: 0 */
 
   /* blur */
   --sf-blur: 19.2px; /* was: 12px */
@@ -343,7 +343,7 @@
 
 /* ----------------------------------------------------------------------------
    Intentionally NOT overridden (23):
-   --sf-bg-z — stacking order — lowering it would push the background layer over content
+   --sf-bg-layer-z — stacking order — lowering it would push the background layer over content
    --sf-color-scheme — meta control — forcing a scheme would override the page light/dark behaviour rather than test a visual token
    --sf-is-active — runtime state flag — exercised via the .sf-is-active class; a global :root flip would force every element active
    --sf-is-current — runtime state flag — exercised via the .sf-is-current class

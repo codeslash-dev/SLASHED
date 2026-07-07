@@ -148,4 +148,37 @@ test.describe('section-theme aliases (#496)', () => {
     expect(res.rootCodeBgLum).toBeLessThan(0.2);
     expect(res.preContrast).toBeGreaterThanOrEqual(4.5);
   });
+
+  test('class aliases match data-theme for section-level theming', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'light' });
+    await renderWithBundle(page, `
+      <section id="darkAttr" data-theme="dark"><code>attr</code></section>
+      <section id="darkClass" class="sf-theme-dark"><code>class</code></section>
+      <section id="lightClass" class="sf-theme-light"><code>class</code></section>
+    `);
+    const res = await page.evaluate(`(() => {
+      ${PROBE_LIB}
+      const darkAttr = document.getElementById('darkAttr');
+      const darkClass = document.getElementById('darkClass');
+      const lightClass = document.getElementById('lightClass');
+      return {
+        darkAttrScheme: getComputedStyle(darkAttr).colorScheme,
+        darkClassScheme: getComputedStyle(darkClass).colorScheme,
+        lightClassScheme: getComputedStyle(lightClass).colorScheme,
+        darkAttrBg: resolveIn(darkAttr, '--sf-color-bg'),
+        darkClassBg: resolveIn(darkClass, '--sf-color-bg'),
+        lightClassBg: resolveIn(lightClass, '--sf-color-bg'),
+        darkClassPaint: getComputedStyle(darkClass).backgroundColor,
+        lightClassPaint: getComputedStyle(lightClass).backgroundColor,
+      };
+    })()`);
+    expect(res.darkAttrScheme).toBe('dark');
+    expect(res.darkClassScheme).toBe('dark');
+    expect(res.lightClassScheme).toBe('light');
+    expect(res.darkClassBg).toBe(res.darkAttrBg);
+    expect(res.lightClassBg).not.toBe(res.darkClassBg);
+    expect(res.darkClassPaint).toBe(res.darkClassBg);
+    expect(res.lightClassPaint).toBe(res.lightClassBg);
+  });
+
 });

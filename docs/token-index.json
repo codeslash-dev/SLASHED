@@ -269,7 +269,7 @@
       ],
       "value": "16rem"
     },
-    "--sf-bg-fit": {
+    "--sf-bg-layer-fit": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
@@ -277,7 +277,7 @@
       ],
       "value": "cover"
     },
-    "--sf-bg-inset": {
+    "--sf-bg-layer-inset": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
@@ -285,7 +285,7 @@
       ],
       "value": "0px"
     },
-    "--sf-bg-position": {
+    "--sf-bg-layer-position": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
@@ -293,7 +293,7 @@
       ],
       "value": "50% 50%"
     },
-    "--sf-bg-radius": {
+    "--sf-bg-layer-radius": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [
@@ -301,7 +301,7 @@
       ],
       "value": "0"
     },
-    "--sf-bg-z": {
+    "--sf-bg-layer-z": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [

@@ -526,7 +526,7 @@ are lifted above the scrim. Position your content over the image with
 wrapper instead of an `<img>` child.
 
 **Media background + overlay + stacked content, with no manual
-`z-index`:** compose with the [`.sf-bg`](layout.md) layout primitive
+`z-index`:** compose with the [`.sf-bg-layer`](layout.md) layout primitive
 instead of a plain `<img>` — it auto-fills the parent (`position:
 absolute; inset: 0`) and already composes under `.sf-scrim` by design,
 so `img`/`video` background, gradient, and content stack correctly with
@@ -534,7 +534,7 @@ zero extra positioning:
 
 ```html
 <div class="sf-scrim sf-scrim--bottom">
-  <img class="sf-bg" src="hero.jpg" alt="">
+  <img class="sf-bg-layer" src="hero.jpg" alt="">
   <div class="sf-scrim__content">
     <h2>Media background, scrim, and content — no z-index to manage</h2>
   </div>
@@ -542,7 +542,7 @@ zero extra positioning:
 ```
 
 This is the framework's answer to "background media + overlay + stacked
-content" — no dedicated macro needed on top of `.sf-bg` + `.sf-scrim`.
+content" — no dedicated macro needed on top of `.sf-bg-layer` + `.sf-scrim`.
 
 Variants:
 

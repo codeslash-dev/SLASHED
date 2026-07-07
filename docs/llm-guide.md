@@ -134,14 +134,18 @@ Slashed requires modern CSS features. Effective minimum:
 <!-- Whole page dark -->
 <html data-theme="dark">
 
-<!-- Only this section dark (section-level theming) -->
+<!-- Only this section dark (section-level theming; canonical) -->
 <section data-theme="dark">
+
+<!-- Equivalent class alias when an attribute is inconvenient -->
+<section class="sf-theme-dark">
 
 <!-- Force light for a sub-section inside a dark root -->
 <article data-theme="light">
+<article class="sf-theme-light">
 ```
 
-Without `data-theme` the framework auto-detects `prefers-color-scheme: dark`. The `--sf-is-dark` token (INTERNAL — do not set directly) is managed automatically.
+`data-theme="light|dark"` is the canonical API; `.sf-theme-light` and `.sf-theme-dark` are class aliases with the same scoped token re-declarations and automatic section background/text paint. Without `data-theme` the framework auto-detects `prefers-color-scheme: dark`. The `--sf-is-dark` token (INTERNAL — do not set directly) is managed automatically.
 
 **Smooth mode transition:**
 ```html
@@ -739,7 +743,7 @@ All steps multiplied by `--sf-radius-scale` (except `full` and `pill`).
 
 --sf-media-radius            /* 0 (off) — set to round every <img>/<figure> globally,
                                  e.g. var(--sf-radius-m). Applied via :where() so
-                                 .sf-bg / component-specific radii still win. */
+                                 .sf-bg-layer / component-specific radii still win. */
 ```
 
 ### 8.4 Z-index
@@ -814,12 +818,12 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 /* Frame (ratio box) */
 --sf-frame-ratio: 16 / 9
 
-/* Background layer (.sf-bg) — cover media behind sibling content */
---sf-bg-inset:    0          /* single length, applied to every edge */
---sf-bg-fit:      cover
---sf-bg-position: 50% 50%
---sf-bg-radius:   0
---sf-bg-z:        -2         /* behind content, above the parent background */
+/* Background layer (.sf-bg-layer) — cover media behind sibling content */
+--sf-bg-layer-inset:    0px        /* single length, applied to every edge (0px, not bare 0 — see calc() note in tokens.layout.css) */
+--sf-bg-layer-fit:      cover
+--sf-bg-layer-position: 50% 50%
+--sf-bg-layer-radius:   0
+--sf-bg-layer-z:        -2         /* behind content, above the parent background */
 
 /* Reel (horizontal scroll) */
 --sf-reel-item-width: max-content
@@ -1464,7 +1468,7 @@ a:visited { color: var(--sf-color-link--visited); }
 
 **10. `--sf-color-text--on-*` tokens give WCAG AA Large for free.** Always use them on colored backgrounds instead of manually choosing white or black. For body text on color, tune `--sf-contrast-threshold` or override the token directly.
 
-**11. Section-level theming works via `data-theme`.** Don't toggle modes by manually manipulating CSS variables in JavaScript — change `data-theme` instead.
+**11. Section-level theming works via `data-theme` or its class aliases.** Prefer `data-theme="light|dark"` when you can; use `.sf-theme-light` / `.sf-theme-dark` when an attribute is inconvenient. Don't toggle modes by manually manipulating CSS variables in JavaScript — change the theme attribute/class instead.
 
 **12. Don't edit the generative scale directly.** `--sf-text-*` and `--sf-space-*` tokens are computed from a modular scale. Change the inputs (`--sf-text-ratio-max`, etc.) or override a specific step only if you need to pin one value.
 
@@ -1479,7 +1483,7 @@ a:visited { color: var(--sf-color-link--visited); }
 | Sharp corners globally | `--sf-radius-scale: 0` |
 | Disable animations | `--sf-motion-scale: 0` |
 | Dark mode (whole page) | `<html data-theme="dark">` |
-| Dark mode (section) | `<section data-theme="dark">` |
+| Dark mode (section) | `<section data-theme="dark">` (canonical) or `<section class="sf-theme-dark">` |
 | Smooth theme transition | `<html class="sf-theme-transition">` |
 | Align brand luminance | `<html data-lumlocker>` + `--sf-lumlocker: 0.65` |
 | Text on colored background | `--sf-color-text--on-{color}` |

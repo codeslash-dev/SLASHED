@@ -418,7 +418,7 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-bg-fit",
+      "name": "--sf-bg-layer-fit",
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Layout tokens",
@@ -431,7 +431,7 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-bg-inset",
+      "name": "--sf-bg-layer-inset",
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Layout tokens",
@@ -444,7 +444,7 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-bg-position",
+      "name": "--sf-bg-layer-position",
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Layout tokens",
@@ -457,7 +457,7 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-bg-radius",
+      "name": "--sf-bg-layer-radius",
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Layout tokens",
@@ -470,7 +470,7 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-bg-z",
+      "name": "--sf-bg-layer-z",
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Layout tokens",

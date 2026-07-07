@@ -1254,7 +1254,7 @@
        --sf-radius-* value to round <img>/<figure> globally:
          :root { --sf-media-radius: var(--sf-radius-m); }
        Applied via :where() in core/base.css so it never fights
-       .sf-bg or a component's own radius. */
+       .sf-bg-layer or a component's own radius. */
     --sf-media-radius: 0;
 
     /* ----------------------------------------------------------

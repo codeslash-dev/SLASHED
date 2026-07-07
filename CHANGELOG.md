@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **utilities:** activate staged `.sf-hover-grow` / `-shrink` / `-float` / `-sink` / `-slide-start` / `-slide-end` in `optional/utilities.css`.
 - **macros:** `.sf-link-external` now includes a localisable, screen-reader-only accessible name (`--sf-link-external-label`) for its marker glyph via the CSS `content` alt-text syntax.
 - **layout:** `.sf-divide` (+ `--vertical`) — places a border between direct children in one class, reusing `.sf-divider`'s width/style/color tokens. (#537)
-- **base:** `--sf-media-radius` — opt-in global media radius (0 by default) applied via `:where(img, figure)`; set the token to round media globally without fighting `.sf-bg` or a component's own radius. (#529)
+- **base:** `--sf-media-radius` — opt-in global media radius (0 by default) applied via `:where(img, figure)`; set the token to round media globally without fighting `.sf-bg-layer` or a component's own radius. (#529)
 - **motion:** `.sf-exit--fade` / `-fade-up` / `-fade-down` / `-fade-left` / `-fade-right` / `-scale-down` — scroll-driven exit effects mirroring `.sf-entrance--*`, using `animation-timeline: view()` with a new `--sf-scroll-timeline-range-exit-start`/`-end` range. Engines without `view()` support render the element statically rather than fading it out unconditionally. (#527)
 - **utilities:** `.sf-list-none` and `.sf-selection--alt` (backed by new `--sf-color-selection-*--alt` tokens) — written and staged (commented out) in `optional/utilities.css`, pending activation. (#540)
 - **utilities:** `.sf-sticky` + `--s`/`-m`/`-l` offset modifiers — written and staged (commented out) in `optional/utilities.css`, layering extra gap on top of the existing `--sf-sticky-offset` fluid offset. (#542)
@@ -151,7 +151,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [0.6.21] - 2026-06-28
 
 ### Added
-- **layout:** `.sf-bg` background-layer primitive — absolutely-positioned cover media that sits behind a parent's content (parent auto-positions and isolates via `:has()`), composing under `.sf-scrim`. New knobs: `--sf-bg-inset`, `--sf-bg-fit`, `--sf-bg-position`, `--sf-bg-radius`, `--sf-bg-z`.
+- **layout:** `.sf-bg-layer` background-layer primitive — absolutely-positioned cover media that sits behind a parent's content (parent auto-positions and isolates via `:has()`), composing under `.sf-scrim`. New knobs: `--sf-bg-layer-inset`, `--sf-bg-layer-fit`, `--sf-bg-layer-position`, `--sf-bg-layer-radius`, `--sf-bg-layer-z`.
 
 ### ⚠️ Breaking Changes
 - **tokens:** `--sf-button-radius`, `--sf-button-padding-block`, and `--sf-button-padding-inline` renamed to `--sf-btn-radius`, `--sf-btn-padding-block`, and `--sf-btn-padding-inline`. The button component class is also renamed from `.sf-button` to `.sf-btn`. Both were staged/commented-out and never shipped in a release.
