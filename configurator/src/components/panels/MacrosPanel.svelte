@@ -93,7 +93,9 @@
   let surfaceBgColor    = $derived(overrides["--sf-surface-bg-color"] ?? "transparent");
   let surfaceBgSize     = $derived(overrides["--sf-surface-bg-size"] ?? "cover");
   let surfaceBgPosition = $derived(overrides["--sf-surface-bg-position"] ?? "center");
-  let surfaceBgRepeat   = $derived(overrides["--sf-surface-bg-repeat"] ?? "no-repeat");
+  let surfaceBgRepeat     = $derived(overrides["--sf-surface-bg-repeat"] ?? "no-repeat");
+  let surfaceBgAttachment = $derived(overrides["--sf-surface-bg-attachment"] ?? "scroll");
+  let surfaceBgAnimation  = $derived(overrides["--sf-surface-bg-animation"] ?? "none");
 
   function proseVal(t: typeof PROSE_SPACE[0]): number {
     const raw = overrides[t.token];
@@ -427,8 +429,8 @@
             value={overrides[t.token] ?? ""}
             placeholder={t.placeholder}
             oninput={(e) => {
-              const v = (e.target as HTMLInputElement).value.trim();
-              v ? onSet(t.token, v) : onReset(t.token);
+              const v = (e.target as HTMLInputElement).value;
+              v.trim() ? onSet(t.token, v) : onReset(t.token);
             }}
             class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
           />
@@ -458,7 +460,7 @@
 
       <div
         class="h-24 rounded-xl border border-black/8 dark:border-white/8 overflow-hidden flex items-end p-2"
-        style={`background-color:${surfaceBgColor};background-image:${surfaceBgOverlay}, ${surfaceBgImage};background-size:${surfaceBgSize};background-position:${surfaceBgPosition};background-repeat:${surfaceBgRepeat}`}
+        style={`background-color:${surfaceBgColor};background-image:${surfaceBgOverlay}, ${surfaceBgImage};background-size:${surfaceBgSize};background-position:${surfaceBgPosition};background-repeat:${surfaceBgRepeat};background-attachment:${surfaceBgAttachment};animation:${surfaceBgAnimation}`}
       >
         <span class="text-[11px] font-bold text-white mix-blend-difference">.sf-surface-bg preview</span>
       </div>
