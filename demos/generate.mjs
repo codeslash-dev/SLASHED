@@ -61,6 +61,7 @@ const CURATED = {
   // zero-valued lengths → small but visible
   '--sf-bg-inset': '0.75rem',
   '--sf-bg-radius': '0.75rem',
+  '--sf-media-radius': '0.75rem',
   '--sf-box-border-width': '3px',
   '--sf-equal-rule-width': '2px',
   '--sf-radius-none': '0.4rem',
@@ -97,10 +98,13 @@ const CURATED = {
   '--sf-field-required-marker': '" \\2737"',
   '--sf-color-mark-text': 'oklch(0.45 0.27 320)',
   '--sf-color-selection-text': 'oklch(0.98 0 0)',
+  '--sf-color-selection-text--alt': 'oklch(0.9 0.06 300)',
   '--sf-print-page-size': 'letter',
   '--sf-shadow-strength': '0.45',
   '--sf-scroll-timeline-range-start': 'entry 20%',
   '--sf-scroll-timeline-range-end': 'cover 60%',
+  '--sf-scroll-timeline-range-exit-start': 'exit 20%',
+  '--sf-scroll-timeline-range-exit-end': 'exit 80%',
   // 'none' max-widths → a concrete cap so the constraint is visible
   '--sf-h1-max-width': '40ch',
   '--sf-h2-max-width': '40ch',

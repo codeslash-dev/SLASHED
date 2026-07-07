@@ -8,7 +8,7 @@ layout: null
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLASHED — a cascade-layer CSS framework</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27 font-family=%27system-ui%27 font-weight=%27800%27%3E/%3C/text%3E%3C/svg%3E">
-  <meta name="description" content="A cascade-layer CSS framework: 685 design tokens, automatic dark mode, fluid type & spacing — zero JavaScript, zero build step.">
+  <meta name="description" content="A cascade-layer CSS framework: 720 design tokens, automatic dark mode, fluid type & spacing — zero JavaScript, zero build step.">
 
   <!-- The page is styled by the framework it advertises — served from the
        jsDelivr CDN off the dist branch (updated on every release). -->
@@ -417,7 +417,7 @@ layout: null
           </span>
         </h1>
         <p class="tagline">The name is the manifesto. Seven promises, one stylesheet.</p>
-        <p class="lede">A cascade-layer CSS framework: 685 design tokens, automatic dark mode, fluid type &amp; spacing — zero JavaScript, zero build step. Override six tokens and the whole site rebrands.</p>
+        <p class="lede">A cascade-layer CSS framework: 720 design tokens, automatic dark mode, fluid type &amp; spacing — zero JavaScript, zero build step. Override six tokens and the whole site rebrands.</p>
         <div class="sf-cluster sf-cluster--center sf-cluster--s">
           <a class="btn btn--primary" href="/configurator/">Open Configurator →</a>
           <a class="btn btn--quiet" href="/docs/demo.html">View Demo</a>
@@ -431,7 +431,7 @@ layout: null
     <!-- Stats strip -->
     <section class="sf-section sf-section--s sf-section--guttered">
       <dl class="stats sf-container sf-container--wide sf-grid sf-grid--fit sf-grid--s sf-gap--m" style="text-align: center; margin: 0;">
-        <div class="stat sf-tabular-nums"><dt>685</dt><dd>design tokens</dd></div>
+        <div class="stat sf-tabular-nums"><dt>720</dt><dd>design tokens</dd></div>
         <div class="stat sf-tabular-nums"><dt>15</dt><dd>cascade layers</dd></div>
         <div class="stat sf-tabular-nums"><dt>0</dt><dd>lines of frontend JS</dd></div>
         <div class="stat sf-tabular-nums"><dt>0</dt><dd>build steps</dd></div>
@@ -572,12 +572,12 @@ layout: null
           <p class="footer-meta">By the way: this band is just <code>&lt;section data-theme="dark"&gt;</code> — mixing light and dark sections is one attribute.</p>
         </div>
 
-<pre><code>/* jsDelivr CDN — drop into your CSS */
-@import "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css";</code></pre>
-
-<pre><code>&lt;!-- or a &lt;link&gt; tag --&gt;
+<pre><code>&lt;!-- jsDelivr CDN — recommended --&gt;
 &lt;link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css"&gt;</code></pre>
+
+<pre><code>/* or @import — render-blocking &amp; serialized, prefer &lt;link&gt; */
+@import "https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.min.css";</code></pre>
 
         <div class="sf-prose">
           <table>
@@ -586,9 +586,9 @@ layout: null
             </thead>
             <tbody>
               <tr><td><code>slashed.optimal.css</code></td><td>Everything live today: core + classless forms — <strong>recommended</strong></td></tr>
-              <tr><td><code>slashed.optimal-components.css</code></td><td>Optimal + the staged component layer <em>(inert until v0.8)</em></td></tr>
-              <tr><td><code>slashed.optimal-utilities.css</code></td><td>Optimal + the staged utility layer <em>(inert in 0.x)</em></td></tr>
-              <tr><td><code>slashed.full.css</code></td><td>Optimal + both staged layers</td></tr>
+              <tr><td><code>slashed.optimal-components.css</code></td><td>Optimal + the component layer — <code>.sf-btn</code> and <code>.sf-card</code> (the only two components)</td></tr>
+              <tr><td><code>slashed.optimal-utilities.css</code></td><td>Optimal + the utility layer — curated helpers active (heading, text-size, hover, list-reset, marker, selection, sticky), rest staged</td></tr>
+              <tr><td><code>slashed.full.css</code></td><td>Optimal + the component and utility layers</td></tr>
             </tbody>
           </table>
           <p>SLASHED relies on 2024 CSS — <code>light-dark()</code>, OKLCH relative colors, <code>@property</code>, <code>pow()</code> — so the browser floor is <strong>Chrome 125+, Safari 18+, Firefox 129+</strong>.</p>
