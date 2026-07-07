@@ -8,8 +8,9 @@ Two runners, split by whether a test needs a real browser:
 - **`*.test.js`** — Node's built-in test runner (`npm run test:unit`), single
   process, no browser. Use for pure fs/regex/data-shape checks that never touch
   a DOM — imports `test`/`describe` from `node:test` and `assert` from
-  `node:assert/strict`. Wire new files into `pretest`/`test:unit` in
-  `package.json`.
+  `node:assert/strict`. New files are picked up automatically: `test:unit` runs
+  the `tests/*.test.js` glob and `pretest` delegates to it, so no `package.json`
+  wiring is needed — just drop the file in `tests/`.
 
 If a test doesn't call `page.*` or read a computed style, it almost certainly
 belongs in `*.test.js`, not `*.spec.js` — see SL-027 (`coverage.test.js` used

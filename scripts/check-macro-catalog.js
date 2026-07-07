@@ -39,6 +39,9 @@ const SKIP_IN_CSS = new Set([
 // defined in the macro CSS sources (they live in layout CSS, documented elsewhere).
 const SKIP_IN_DOCS = new Set([
   '.sf-frame', '.sf-reel', '.sf-bg-layer',
+  // Defined in core/states.css (outside the macro sources above); macros.md
+  // only cross-references it from .sf-no-tap-highlight.
+  '.sf-is-active',
 ]);
 
 // ── 1. Collect classes from CSS ───────────────────────────────────────────────

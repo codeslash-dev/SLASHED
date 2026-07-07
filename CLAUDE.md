@@ -51,7 +51,7 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run version-sync` | Sync all version references to root `package.json` |
 | `npm run check:version` | Verify all version references match (CI gate — run before every commit that touches versions) |
 | `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens (CI gate) |
-| `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (not currently wired into CI — run manually before committing macro changes) |
+| `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (CI gate) |
 | `npm run check:registry` | Verify `token-registry.json` is in sync with source (CI gate) |
 | `npm run audit:check` | Verify `docs/registry.json` matches source without writing (CI gate) |
 | `npm run lint:css` | Lint all CSS source with stylelint (CI gate) |
