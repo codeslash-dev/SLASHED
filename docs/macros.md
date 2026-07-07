@@ -292,7 +292,7 @@ Universal browser support.
 
 ---
 
-## `.sf-drop-shadow-xs` / `-s` / `-m` / `-l` / `-xl`
+## `.sf-drop-shadow-xs` / `.sf-drop-shadow-s` / `.sf-drop-shadow-m` / `.sf-drop-shadow-l` / `.sf-drop-shadow-xl`
 
 Applies `filter: drop-shadow(...)` — unlike `box-shadow`, this follows the
 actual alpha shape of the element (PNG cutouts, SVG icons, transparent

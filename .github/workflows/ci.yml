@@ -93,6 +93,7 @@ jobs:
       - run: node scripts/check-version-sync.js
       - run: node scripts/check-token-registry.js
       - run: node scripts/check-llm-guide.js
+      - run: node scripts/check-macro-catalog.js
 
   dependency-audit:
     name: Dependency vulnerability audit
