@@ -4,7 +4,7 @@ SLASHED source CSS and generated bundles are implementation artifacts, not the p
 
 ## Rule
 
-Keep comments in `core/*.css`, `optional/*.css`, and generated `badges/*.css` limited to:
+Keep comments in `core/*.css`, `optional/*.css`, and generated `dist/*.css` limited to:
 
 - concise file headers with the module path, layer, purpose, prefix/API surface, and load-scope facts when useful;
 - short section/category separators that identify what the following block contains;

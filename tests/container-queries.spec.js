@@ -334,3 +334,57 @@ test.describe('CQ: .sf-cq unnamed container', () => {
     expect(color30em).toBe('rgb(255, 0, 0)');
   });
 });
+
+// ── .sf-fluid-cq — container-relative fluid scale (#497) ─────────────────
+// The fluid type/space scales interpolate against 100vw by default; .sf-fluid-cq
+// re-declares them against 100cqi so a subtree scales to its container width,
+// not the viewport. Verified via computed font-size of --sf-text-2xl.
+test.describe('CQ: .sf-fluid-cq container-relative fluid', () => {
+  async function fontSizeIn(page, widthPx, { deep = false } = {}) {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    const inner = deep
+      ? '<div><section><p id="t" style="font-size:var(--sf-text-2xl)">x</p></section></div>'
+      : '<p id="t" style="font-size:var(--sf-text-2xl)">x</p>';
+    await page.setContent(`
+      <!doctype html><html><body style="margin:0">
+        <div class="sf-fluid-cq" style="width:${widthPx}px">${inner}</div>
+      </body></html>
+    `);
+    await page.addStyleTag({ path: BUNDLE });
+    await page.addStyleTag({ content: ':root, html, body { font-size: 16px !important; }' });
+    return page.locator('#t').evaluate(el => parseFloat(getComputedStyle(el).fontSize));
+  }
+
+  test('a narrow (300px) container clamps 2xl to its floor', async ({ page }) => {
+    const size = await fontSizeIn(page, 300);
+    // 300px < 360px (min viewport) → clamp floor = 1.25^3 rem = 31.25px
+    expect(size).toBeCloseTo(31.25, 1);
+  });
+
+  test('a wider container yields a larger 2xl than a narrow one', async ({ page }) => {
+    const narrow = await fontSizeIn(page, 300);
+    const wide = await fontSizeIn(page, 1000);
+    expect(wide).toBeGreaterThan(narrow);
+  });
+
+  test('deep descendants inherit the container-relative size', async ({ page }) => {
+    const deep = await fontSizeIn(page, 300, { deep: true });
+    expect(deep).toBeCloseTo(31.25, 1);
+  });
+
+  test('outside .sf-fluid-cq the scale stays viewport-relative (larger at 1400px viewport)', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.setContent(`
+      <!doctype html><html><body style="margin:0">
+        <p id="vp" style="font-size:var(--sf-text-2xl)">x</p>
+        <div class="sf-fluid-cq" style="width:300px"><p id="cq" style="font-size:var(--sf-text-2xl)">x</p></div>
+      </body></html>
+    `);
+    await page.addStyleTag({ path: BUNDLE });
+    await page.addStyleTag({ content: ':root, html, body { font-size: 16px !important; }' });
+    const vp = await page.locator('#vp').evaluate(el => parseFloat(getComputedStyle(el).fontSize));
+    const cq = await page.locator('#cq').evaluate(el => parseFloat(getComputedStyle(el).fontSize));
+    // viewport (1400px, near max) must be larger than a 300px container (floor)
+    expect(vp).toBeGreaterThan(cq);
+  });
+});

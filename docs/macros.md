@@ -564,6 +564,49 @@ The lift selector is `.sf-scrim > :not(img, picture, video, svg, canvas) { z-ind
 
 ---
 
+## `.sf-surface-bg`
+
+A reusable, **named background surface** preset. Where `.sf-surface` sets a
+solid colour and `.sf-scrim` adds a single gradient overlay, `.sf-surface-bg`
+bundles a full background into one class you can name once and reuse: base
+colour fallback + image/gradient/pattern + sizing + an optional overlay
+layered above the image + an optional animation.
+
+The class itself is inert — it only composes the `--sf-surface-bg-*` tokens.
+Define a preset by setting those tokens on a scope, then apply the class:
+
+```css
+.hero-surface {
+  --sf-surface-bg-image:     url("/hero.avif");
+  --sf-surface-bg-overlay:   var(--sf-scrim-gradient);   /* reuse the scrim */
+  --sf-surface-bg-animation: sf-pan 40s linear infinite; /* optional */
+}
+```
+
+```html
+<section class="hero-surface sf-surface-bg">…</section>
+```
+
+The overlay is the **first** `background-image` layer, so it paints *above*
+the image (use it for a scrim/tint over a photo). Builds on the existing
+scrim + gradient tokens rather than new infrastructure; for a blurred backdrop
+compose `.sf-scrim` or a `filter` on top.
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-surface-bg-color` | `transparent` | base colour fallback (below the image) |
+| `--sf-surface-bg-image` | `none` | the image / gradient / pattern layer |
+| `--sf-surface-bg-overlay` | `none` | overlay layered above the image (e.g. a scrim) |
+| `--sf-surface-bg-size` | `cover` | `background-size` |
+| `--sf-surface-bg-position` | `center` | `background-position` |
+| `--sf-surface-bg-repeat` | `no-repeat` | `background-repeat` |
+| `--sf-surface-bg-attachment` | `scroll` | `background-attachment` |
+| `--sf-surface-bg-animation` | `none` | optional `animation` shorthand |
+
+---
+
 ## `.sf-text-protect`
 
 Lighter-weight alternative to `.sf-scrim`: protects text legibility over

@@ -18,7 +18,7 @@ import path from 'node:path';
 import fc   from 'fast-check';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const DIST = path.join(ROOT, 'badges/slashed.full.css');
+const DIST = path.join(ROOT, 'dist/slashed.full.css');
 
 /**
  * Simulate an engine with no @supports by stripping all @supports blocks.
@@ -67,7 +67,7 @@ describe('P7: @supports gating — no modern expressions in ungated bundle decla
   let oldEngineDecls;
 
   test('setup: build artifact exists and @supports stripping yields declarations', () => {
-    assert.ok(fs.existsSync(DIST), 'badges/slashed.full.css missing — run npm run build first');
+    assert.ok(fs.existsSync(DIST), 'dist/slashed.full.css missing — run npm run build first');
     const css = fs.readFileSync(DIST, 'utf8');
     const stripped = stripSupports(css);
     oldEngineDecls = extractCustomDecls(stripped);

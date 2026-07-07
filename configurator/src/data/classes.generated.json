@@ -475,6 +475,26 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-bg--dark",
+      "selector": ".sf-bg--dark",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "group": "",
+      "description": "Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme…",
+      "optional": false,
+      "layer": "slashed.themes"
+    },
+    {
+      "name": "sf-bg--light",
+      "selector": ".sf-bg--light",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "group": "",
+      "description": "Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme…",
+      "optional": false,
+      "layer": "slashed.themes"
+    },
+    {
       "name": "sf-box",
       "selector": ".sf-box",
       "kind": "layout",
@@ -1453,6 +1473,16 @@
       "description": "Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers.",
       "optional": false,
       "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-fluid-cq",
+      "selector": ".sf-fluid-cq",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": ".sf-fluid-cq: opt a subtree into a CONTAINER-relative fluid scale (issue #497). By default --sf-text-* / --sf-space-* interpolate against 100vw (the viewport); inside .sf-fluid-cq they interpolate against 100cqi (this box's inline size), so type + spacing track the container…",
+      "optional": false,
+      "layer": "slashed.layout"
     },
     {
       "name": "sf-focus-parent",
@@ -3001,6 +3031,16 @@
       "category": "Macro classes",
       "group": "Surface",
       "description": "Surface variant using the warning status palette.",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-surface-bg",
+      "selector": ".sf-surface-bg",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Named background surface preset (issue #523). Composes the --sf-surface-bg-* token set (see tokens.macros.css) into one reusable, named background: base colour + image/gradient/pattern, sizing, an optional overlay layered above the image, and an optional animation. Inert until…",
       "optional": false,
       "layer": "slashed.macros"
     },

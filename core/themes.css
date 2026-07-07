@@ -12,10 +12,21 @@
     }
   }
 
-  [data-theme="light"] { color-scheme: light; --sf-is-dark: 0; }
-  [data-theme="dark"]  { color-scheme: dark;  --sf-is-dark: 1; }
+  /* Contextual background utilities (issue #526).
+     .sf-bg--light / .sf-bg--dark are named background surfaces: they set a
+     light or dark background AND flip the whole foreground (text, links,
+     borders, focus, code) to match — with no extra classes. Rather than
+     duplicate the theme token set, they piggy-back on the exact same
+     section-theming machinery as [data-theme="light"]/[data-theme="dark"]
+     (they're folded into every selector of that block below), so a
+     .sf-bg--dark band is *always* dark regardless of the ambient scheme —
+     the "forcing the matching data-theme context" the issue asks for.
+     Note: distinct from the .sf-bg media-layer primitive in layout.css;
+     these are theme-context classes applied to a section, not a child <img>. */
+  :is([data-theme="light"], .sf-bg--light) { color-scheme: light; --sf-is-dark: 0; }
+  :is([data-theme="dark"],  .sf-bg--dark)  { color-scheme: dark;  --sf-is-dark: 1; }
 
-  :where([data-theme]:not(:root, html)) {
+  :where([data-theme]:not(:root, html), .sf-bg--light, .sf-bg--dark) {
     background-color: var(--sf-color-bg);
     color:            var(--sf-color-text);
   }
@@ -79,7 +90,7 @@
       --sf-color-danger-source-dark:    oklch(from var(--sf-color-danger-source-light)    clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h);
     }
 
-        [data-theme="dark"] {
+        :is([data-theme="dark"], .sf-bg--dark) {
 
       --sf-color-primary:   var(--sf-color-primary-source-dark);
       --sf-color-secondary: var(--sf-color-secondary-source-dark);
@@ -137,7 +148,7 @@
       --sf-color-code-text:      var(--sf-color-text);
     }
 
-        [data-theme="light"] {
+        :is([data-theme="light"], .sf-bg--light) {
 
       --sf-color-primary:   var(--sf-color-primary-source-light);
       --sf-color-secondary: var(--sf-color-secondary-source-light);
@@ -193,7 +204,7 @@
   }
 
   @supports (color: oklch(from red l c h)) and (width: calc(1px * sign(1))) {
-    [data-theme="dark"] {
+    :is([data-theme="dark"], .sf-bg--dark) {
       --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)  clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
@@ -209,7 +220,7 @@
          core/tokens.css — keep in sync. */
       --sf-color-code-text:          oklch(from var(--sf-color-code-bg)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
     }
-    [data-theme="light"] {
+    :is([data-theme="light"], .sf-bg--light) {
       --sf-color-text--on-primary:   oklch(from var(--sf-color-primary)   clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-secondary: oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);
       --sf-color-text--on-tertiary:  oklch(from var(--sf-color-tertiary)  clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0);

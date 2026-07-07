@@ -10,7 +10,7 @@
  * in the `npm run docs` pipeline) so this never hand-maintains its own token
  * list — it can only drift if api-index.json itself is stale.
  *
- * Ships in the published npm package inside badges/ (the dist output
+ * Ships in the published npm package inside dist/ (the build output
  * directory), alongside the CSS bundles — see README for the
  * .vscode/settings.json wiring snippet.
  */
@@ -20,7 +20,7 @@ import path from 'node:path';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const API_INDEX = path.join(ROOT, 'docs', 'api-index.json');
-const OUT = path.join(ROOT, 'badges', 'css-custom-data.json');
+const OUT = path.join(ROOT, 'dist', 'css-custom-data.json');
 
 // INTERNAL tokens aren't part of the supported API — don't surface them in
 // editor autocomplete. PUBLIC and PUBLIC-ADVANCED are both consumer-facing.
@@ -52,7 +52,7 @@ function main() {
 
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(customData, null, 2) + '\n', 'utf8');
-  console.log(`[vscode-data] → badges/css-custom-data.json (${properties.length} tokens)`);
+  console.log(`[vscode-data] → dist/css-custom-data.json (${properties.length} tokens)`);
 }
 
 main();

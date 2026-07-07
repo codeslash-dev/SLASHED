@@ -78,7 +78,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/sf-dist
-          cp -R badges/. /tmp/sf-dist/
+          # CSS bundles + css-custom-data.json live in dist/; the shields.io
+          # badge endpoints (badge-*.json) live in badges/. Both must coexist at
+          # the published `dist` branch root, so merge them here at publish time.
+          cp -R dist/. /tmp/sf-dist/
+          cp    badges/*.json /tmp/sf-dist/
           # Ship the machine-readable API index alongside the bundles so
           # integrations can fetch it from the same CDN path, e.g.:
           #   https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/api-index.json

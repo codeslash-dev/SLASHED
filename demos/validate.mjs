@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css';
-const LOCAL = path.join(ROOT, 'badges/slashed.optimal.css');
+const LOCAL = path.join(ROOT, 'dist/slashed.optimal.css');
 const TMP = path.join(ROOT, 'demos/.validate');
 fs.mkdirSync(TMP, { recursive: true });
 const DEMOS = path.join(ROOT, 'demos');

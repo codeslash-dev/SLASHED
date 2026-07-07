@@ -59,7 +59,7 @@ jobs:
           EXPECTED="${{ steps.version.outputs.tag }}"
           EXPECTED="${EXPECTED#v}"
           fail=0
-          for f in badges/*.css; do
+          for f in dist/*.css; do
             # Minified bundles drop the non-license comment, so only the
             # unminified bundles carry the stamped header — check those.
             case "$f" in *.min.css) continue;; esac
@@ -100,30 +100,30 @@ jobs:
           tag_name: ${{ steps.version.outputs.tag }}
           body: ${{ steps.changelog.outputs.notes }}
           files: |
-            badges/slashed.optimal.css
-            badges/slashed.optimal.min.css
-            badges/slashed.optimal.min.css.map
-            badges/slashed.optimal.flat.css
-            badges/slashed.optimal.flat.min.css
-            badges/slashed.optimal.flat.min.css.map
-            badges/slashed.optimal-components.css
-            badges/slashed.optimal-components.min.css
-            badges/slashed.optimal-components.min.css.map
-            badges/slashed.optimal-components.flat.css
-            badges/slashed.optimal-components.flat.min.css
-            badges/slashed.optimal-components.flat.min.css.map
-            badges/slashed.optimal-utilities.css
-            badges/slashed.optimal-utilities.min.css
-            badges/slashed.optimal-utilities.min.css.map
-            badges/slashed.optimal-utilities.flat.css
-            badges/slashed.optimal-utilities.flat.min.css
-            badges/slashed.optimal-utilities.flat.min.css.map
-            badges/slashed.full.css
-            badges/slashed.full.min.css
-            badges/slashed.full.min.css.map
-            badges/slashed.full.flat.css
-            badges/slashed.full.flat.min.css
-            badges/slashed.full.flat.min.css.map
+            dist/slashed.optimal.css
+            dist/slashed.optimal.min.css
+            dist/slashed.optimal.min.css.map
+            dist/slashed.optimal.flat.css
+            dist/slashed.optimal.flat.min.css
+            dist/slashed.optimal.flat.min.css.map
+            dist/slashed.optimal-components.css
+            dist/slashed.optimal-components.min.css
+            dist/slashed.optimal-components.min.css.map
+            dist/slashed.optimal-components.flat.css
+            dist/slashed.optimal-components.flat.min.css
+            dist/slashed.optimal-components.flat.min.css.map
+            dist/slashed.optimal-utilities.css
+            dist/slashed.optimal-utilities.min.css
+            dist/slashed.optimal-utilities.min.css.map
+            dist/slashed.optimal-utilities.flat.css
+            dist/slashed.optimal-utilities.flat.min.css
+            dist/slashed.optimal-utilities.flat.min.css.map
+            dist/slashed.full.css
+            dist/slashed.full.min.css
+            dist/slashed.full.min.css.map
+            dist/slashed.full.flat.css
+            dist/slashed.full.flat.min.css
+            dist/slashed.full.flat.min.css.map
           fail_on_unmatched_files: true
 
   # Aligns main's committed version artifacts (package.json, package-lock.json,

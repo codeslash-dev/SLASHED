@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 
-const DIST = path.resolve(import.meta.dirname, '..', 'badges');
+const DIST = path.resolve(import.meta.dirname, '..', 'dist');
 
 // gzip kB budgets per minified bundle.
 // Updated after adding core/tokens.color-fallbacks.css (Tier-1 sRGB fallbacks),
