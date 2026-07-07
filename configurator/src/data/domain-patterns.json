@@ -4,7 +4,7 @@
   "typography": ["font", "--sf-text", "leading", "tracking", "weight", "body-font", "heading-font",
                  "body-em", "body-text", "heading-text", "display-l-", "display-m-",
                  "-h1-", "-h2-", "-h3-", "-h4-", "-h5-", "-h6-",
-                 "link-", "optical-sizing", "fluid-min-vw", "fluid-max-vw"],
+                 "link-", "optical-sizing", "fluid-width", "fluid-min-vw", "fluid-max-vw"],
   "spacing":    ["space", "section", "gutter", "content-gap", "component-pad"],
   "layout":     ["container", "layout", "grid", "breakpoint", "measure", "column",
                  "header-height", "touch-target", "bento", "cluster",
