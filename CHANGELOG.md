@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.3] - 2026-07-07
+
+### Bug Fixes
+- **configurator:** validate host-provided share base URL
+- resolve macro catalog drift and wire check:macros into CI
+- **configurator:** fit mobile header toolbar, share correct config link
+
 ## [0.7.2] - 2026-07-07
 
 ### Bug Fixes
