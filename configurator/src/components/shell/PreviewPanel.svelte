@@ -30,8 +30,8 @@
 
   const TEMPLATES: { id: PreviewTemplate; label: string }[] = [
     { id: "marketing", label: "Marketing" },
-    { id: "components", label: "Components" },
     { id: "stylescape", label: "Stylescape" },
+    { id: "components", label: "Components" },
   ];
 
   // --- Google Fonts helpers ---
@@ -187,86 +187,139 @@
 
   const MARKETING_BODY = `
 <header class="pv-header">
-  <div class="sf-container sf-cluster sf-cluster--between">
+  <div class="sf-container sf-cluster sf-cluster--between sf-cluster--no-wrap">
     <span class="pv-brand">SlashedUI</span>
     <nav class="sf-cluster sf-cluster--m">
+      <a class="sf-link--subtle" href="#">Framework</a>
+      <a class="sf-link--subtle" href="#">Tokens</a>
       <a class="sf-link--subtle" href="#">Docs</a>
-      <a class="sf-link--subtle" href="#">Components</a>
-      <a class="sf-link--subtle" href="#">Themes</a>
     </nav>
-    <button class="sf-btn sf-btn--primary">Get Started</button>
+    <button class="sf-btn sf-btn--primary sf-btn--s">Get Started</button>
   </div>
 </header>
-<main class="sf-container sf-section">
-  <section class="sf-stack sf-stack--l sf-stack--center pv-center-text sf-section--s">
-    <span class="pv-tag pv-tag--primary">✨ Now in v2 — OKLCH color engine</span>
-    <h1 class="pv-type--display-l">Design systems,<br/><span class="pv-accent">perfected.</span></h1>
-    <p class="pv-lead pv-measure">A CSS framework built on 840 design tokens. One line to install, infinitely customisable.</p>
-    <div class="sf-cluster sf-cluster--center">
-      <button class="sf-btn sf-btn--primary">Start for free</button>
-      <button class="sf-btn sf-btn--ghost">View docs →</button>
+<main class="sf-container sf-section sf-stack sf-stack--2xl">
+  <section class="sf-card sf-card--elevated sf-section sf-stack sf-stack--xl sf-stack--center pv-center-text">
+    <div class="sf-stack sf-stack--m sf-stack--center">
+      <span class="pv-tag pv-tag--primary">Token-native CSS framework</span>
+      <h1 class="pv-type--display-l pv-heading">Build branded interfaces without leaving the system.</h1>
+      <p class="pv-lead pv-measure">Typography, colour, spacing, radius, motion, shadows, buttons and cards all respond instantly to the configurator.</p>
+      <div class="sf-cluster sf-cluster--center sf-cluster--s">
+        <button class="sf-btn sf-btn--primary sf-btn--l">Start designing</button>
+        <button class="sf-btn sf-btn--outline sf-btn--l">Explore tokens</button>
+      </div>
+    </div>
+    <div class="sf-grid sf-grid-cols-3 sf-grid--m">
+      <article class="sf-card sf-card--bordered">
+        <span class="pv-stat">840+</span>
+        <span class="pv-stat-label">Design tokens</span>
+      </article>
+      <article class="sf-card sf-card--bordered">
+        <span class="pv-stat">0 JS</span>
+        <span class="pv-stat-label">Framework runtime</span>
+      </article>
+      <article class="sf-card sf-card--bordered">
+        <span class="pv-stat">AA</span>
+        <span class="pv-stat-label">Contrast workflow</span>
+      </article>
     </div>
   </section>
-  <section class="sf-grid sf-grid-cols-3 sf-section--s">
-    <article class="sf-card">
-      <div class="sf-stack sf-stack--xs">
-        <div class="pv-emoji">🎨</div>
-        <h3>OKLCH Colors</h3>
-        <p class="pv-secondary">Perceptually uniform color ramps with auto dark-mode derivation.</p>
+
+  <section class="sf-card sf-card--bordered">
+    <div class="sf-cluster sf-cluster--between sf-cluster--no-wrap">
+      <span class="pv-stat-label">ATLAS</span>
+      <span class="pv-stat-label">NOVA</span>
+      <span class="pv-stat-label">KITE</span>
+      <span class="pv-stat-label">ORBIT</span>
+      <span class="pv-stat-label">PINNACLE</span>
+    </div>
+  </section>
+
+  <section class="sf-grid sf-grid-cols-3 sf-grid--l">
+    <article class="sf-card sf-card--elevated">
+      <div class="sf-stack sf-stack--s">
+        <div class="sf-icon sf-icon--boxed">01</div>
+        <h3 class="sf-h4">Brand-aware tokens</h3>
+        <p class="pv-secondary">Every surface, border, state and shadow follows the same configurable token graph.</p>
       </div>
     </article>
-    <article class="sf-card">
-      <div class="sf-stack sf-stack--xs">
-        <div class="pv-emoji">📐</div>
-        <h3>Fluid Scales</h3>
-        <p class="pv-secondary">Type and space that scales smoothly from mobile to 4K.</p>
+    <article class="sf-card sf-card--elevated">
+      <div class="sf-stack sf-stack--s">
+        <div class="sf-icon sf-icon--boxed">02</div>
+        <h3 class="sf-h4">Responsive by default</h3>
+        <p class="pv-secondary">Framework layouts keep spacing and alignment stable across mobile, tablet and desktop previews.</p>
       </div>
     </article>
-    <article class="sf-card">
-      <div class="sf-stack sf-stack--xs">
-        <div class="pv-emoji">⚡</div>
-        <h3>Zero JS</h3>
-        <p class="pv-secondary">Pure CSS custom properties — works with any framework.</p>
+    <article class="sf-card sf-card--elevated">
+      <div class="sf-stack sf-stack--s">
+        <div class="sf-icon sf-icon--boxed">03</div>
+        <h3 class="sf-h4">Production classes</h3>
+        <p class="pv-secondary">The preview uses the same shipped buttons, cards, grids, stacks and sections as your app.</p>
       </div>
     </article>
   </section>
-  <section class="pv-cta sf-section sf-stack sf-stack--m sf-stack--center pv-center-text pv-on-primary">
-    <h2 class="pv-type--display-s">Ready to ship faster?</h2>
-    <p>Join 12,000+ developers using SLASHED in production.</p>
-    <button class="sf-btn sf-btn--neutral">Install now — it's free</button>
+
+  <section class="sf-surface sf-surface--primary sf-section sf-stack sf-stack--m sf-stack--center pv-center-text pv-on-primary">
+    <h2 class="pv-type--display-s">Ready to ship a coherent interface?</h2>
+    <p class="pv-measure">Tune once in the configurator and export a framework-ready theme for every screen.</p>
+    <button class="sf-btn sf-btn--neutral">Install SLASHED</button>
   </section>
 </main>`;
 
   const COMPONENTS_BODY = `
-<div class="sf-container sf-section sf-stack sf-stack--xl">
-  <h2>Component showcase</h2>
-  <section class="sf-stack sf-stack--s">
+<div class="sf-container sf-section sf-stack sf-stack--2xl">
+  <header class="sf-stack sf-stack--s">
+    <div class="pv-eyebrow">Active components</div>
+    <h2 class="pv-type--display-s pv-heading">Buttons and cards</h2>
+    <p class="pv-lead pv-measure">Only currently active framework components are shown here. The page intentionally excludes draft patterns, form demos and typography-only samples.</p>
+  </header>
+
+  <section class="sf-stack sf-stack--m">
     <div class="pv-eyebrow">Buttons</div>
-    <div class="sf-cluster">
-      <button class="sf-btn sf-btn--primary">Primary</button>
-      <button class="sf-btn sf-btn--secondary">Secondary</button>
-      <button class="sf-btn sf-btn--ghost">Ghost</button>
-      <button class="sf-btn sf-btn--danger">Danger</button>
-      <button class="sf-btn sf-btn--primary" disabled>Disabled</button>
+    <div class="sf-card sf-card--bordered">
+      <div class="sf-stack sf-stack--m">
+        <div class="sf-cluster sf-cluster--s">
+          <button class="sf-btn sf-btn--primary">Primary</button>
+          <button class="sf-btn sf-btn--secondary">Secondary</button>
+          <button class="sf-btn sf-btn--outline">Outline</button>
+          <button class="sf-btn sf-btn--ghost">Ghost</button>
+          <button class="sf-btn sf-btn--neutral">Neutral</button>
+        </div>
+        <div class="sf-cluster sf-cluster--s">
+          <button class="sf-btn sf-btn--success sf-btn--s">Success</button>
+          <button class="sf-btn sf-btn--warning sf-btn--s">Warning</button>
+          <button class="sf-btn sf-btn--danger sf-btn--s">Danger</button>
+          <button class="sf-btn sf-btn--info sf-btn--s">Info</button>
+          <button class="sf-btn sf-btn--primary sf-btn--s" disabled>Disabled</button>
+        </div>
+        <div class="sf-cluster sf-cluster--s">
+          <button class="sf-btn sf-btn--primary sf-btn--xs">XS</button>
+          <button class="sf-btn sf-btn--primary sf-btn--s">Small</button>
+          <button class="sf-btn sf-btn--primary">Default</button>
+          <button class="sf-btn sf-btn--primary sf-btn--l">Large</button>
+          <button class="sf-btn sf-btn--primary sf-btn--xl">XL</button>
+        </div>
+      </div>
     </div>
   </section>
-  <section class="sf-stack sf-stack--s">
-    <div class="pv-eyebrow">Form &amp; links</div>
-    <label class="pv-field pv-measure">
-      <span class="pv-field__label">Your handle</span>
-      <input type="text" placeholder="Type here — see caret &amp; focus ring" />
-    </label>
-    <p class="pv-secondary">Read the <a href="#">documentation link</a> to learn more.</p>
-    <hr class="sf-divider" />
-  </section>
-  <section class="sf-stack sf-stack--s">
-    <div class="pv-eyebrow">Typography ramp</div>
-    <div class="sf-stack sf-stack--xs">
-      <span class="pv-type--display-m">Display M</span>
-      <span class="pv-type--2xl">Heading 2XL</span>
-      <span class="pv-type--xl">Heading XL</span>
-      <span class="pv-type--m pv-secondary">Body text. The quick brown fox jumps over the lazy dog.</span>
-      <span class="pv-type--s pv-muted">Small caption text for metadata and secondary info.</span>
+
+  <section class="sf-stack sf-stack--m">
+    <div class="pv-eyebrow">Cards</div>
+    <div class="sf-grid sf-grid-cols-3 sf-grid--m">
+      <article class="sf-card">
+        <div class="sf-card__header"><h3 class="sf-card__title">Base card</h3></div>
+        <div class="sf-card__body"><p class="pv-secondary">Default surface, radius, border and text tokens.</p></div>
+        <div class="sf-card__footer"><button class="sf-btn sf-btn--primary sf-btn--s">Open</button></div>
+      </article>
+      <article class="sf-card sf-card--bordered">
+        <div class="sf-card__header"><h3 class="sf-card__title">Bordered card</h3></div>
+        <div class="sf-card__body"><p class="pv-secondary">Uses the shipped bordered modifier for clearer structure.</p></div>
+        <div class="sf-card__footer"><button class="sf-btn sf-btn--outline sf-btn--s">Details</button></div>
+      </article>
+      <article class="sf-card sf-card--elevated sf-card--interactive">
+        <div class="sf-card__header"><h3 class="sf-card__title">Interactive card</h3></div>
+        <div class="sf-card__body"><p class="pv-secondary">Elevation and interaction states react to token changes.</p></div>
+        <div class="sf-card__footer"><button class="sf-btn sf-btn--secondary sf-btn--s">Select</button></div>
+      </article>
     </div>
   </section>
 </div>`;
