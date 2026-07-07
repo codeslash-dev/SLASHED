@@ -5,8 +5,8 @@
    Perturbs every CONFIGURABLE (role: "knob") token to a valid, visibly-distinct
    value so full-api-demo.html can prove each one is wired end to end.
 
-   Coverage: 206 of 229 knob tokens overridden.
-   23 knobs are intentionally NOT perturbed (structural /
+   Coverage: 214 of 238 knob tokens overridden.
+   24 knobs are intentionally NOT perturbed (structural /
    meta / sentinel) — listed with reasons at the bottom of this file.
    ============================================================================ */
 
@@ -128,6 +128,7 @@
   /* fluid */
   --sf-fluid-max-vw: 70; /* was: 90 */
   --sf-fluid-min-vw: 30; /* was: 22.5 */
+  --sf-fluid-width: 160vw; /* was: 100vw */
 
   /* focus */
   --sf-focus-ring-offset: 3.2px; /* was: 2px */
@@ -311,6 +312,15 @@
   /* state */
   --sf-state-pending-opacity: 0.4; /* was: 0.7 */
 
+  /* surface */
+  --sf-surface-bg-attachment: fixed; /* was: scroll */
+  --sf-surface-bg-color: oklch(0.85 0.05 300); /* was: transparent */
+  --sf-surface-bg-image: linear-gradient(135deg, oklch(0.9 0.08 300 / 0.6), oklch(0.8 0.12 200 / 0.6)); /* was: none */
+  --sf-surface-bg-overlay: linear-gradient(oklch(0 0 0 / 0.15), oklch(0 0 0 / 0.15)); /* was: none */
+  --sf-surface-bg-position: 25% 75%; /* was: center */
+  --sf-surface-bg-repeat: repeat; /* was: no-repeat */
+  --sf-surface-bg-size: contain; /* was: cover */
+
   /* switcher */
   --sf-switcher-threshold: 48rem; /* was: 30rem */
 
@@ -342,7 +352,7 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Intentionally NOT overridden (23):
+   Intentionally NOT overridden (24):
    --sf-bg-layer-z — stacking order — lowering it would push the background layer over content
    --sf-color-scheme — meta control — forcing a scheme would override the page light/dark behaviour rather than test a visual token
    --sf-is-active — runtime state flag — exercised via the .sf-is-active class; a global :root flip would force every element active
@@ -355,6 +365,7 @@
    --sf-safe-right — env() device inset — zero on desktop, no visual surface
    --sf-safe-top — env() device inset — zero on desktop, no visual surface
    --sf-shadow-none — sentinel "none" — the API guarantees no shadow; overriding would add one where none is promised
+   --sf-surface-bg-animation — background animation shorthand on .sf-surface — a global value would force motion on every surface and fight reduced-motion; no safe single-element visual perturbation
    --sf-text-shadow-none — sentinel "none" — the API guarantees no text-shadow
    --sf-z-base — stacking order — no single-element visual surface
    --sf-z-below — stacking order — no single-element visual surface; global change risks hiding content

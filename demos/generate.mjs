@@ -53,6 +53,7 @@ const SKIP = {
   '--sf-is-dark': 'runtime theme flag — driven by color-scheme; a global flip would desync from the actual scheme',
   '--sf-shadow-none': 'sentinel "none" — the API guarantees no shadow; overriding would add one where none is promised',
   '--sf-text-shadow-none': 'sentinel "none" — the API guarantees no text-shadow',
+  '--sf-surface-bg-animation': 'background animation shorthand on .sf-surface — a global value would force motion on every surface and fight reduced-motion; no safe single-element visual perturbation',
 };
 
 // Curated overrides for keyword / numeric / zero-valued knobs that no generic
@@ -73,6 +74,14 @@ const CURATED = {
   '--sf-object-fit': 'contain',
   '--sf-bg-layer-position': '25% 75%',
   '--sf-object-position': '25% 75%',
+  // .sf-surface background knobs → real background-* properties on .sf-surface
+  '--sf-surface-bg-color': 'oklch(0.85 0.05 300)',
+  '--sf-surface-bg-image': 'linear-gradient(135deg, oklch(0.9 0.08 300 / 0.6), oklch(0.8 0.12 200 / 0.6))',
+  '--sf-surface-bg-overlay': 'linear-gradient(oklch(0 0 0 / 0.15), oklch(0 0 0 / 0.15))',
+  '--sf-surface-bg-size': 'contain',
+  '--sf-surface-bg-position': '25% 75%',
+  '--sf-surface-bg-repeat': 'repeat',
+  '--sf-surface-bg-attachment': 'fixed',
   '--sf-border-style': 'dashed',
   '--sf-divider-style': 'dashed',
   '--sf-equal-rule-style': 'dashed',
