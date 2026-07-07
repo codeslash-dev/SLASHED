@@ -16,6 +16,6 @@
   "motion":     ["motion", "duration", "easing", "ease", "scroll-timeline"],
   "effects":    ["filter", "blur", "backdrop", "opacity", "effect"],
   "misc":       ["z-", "cursor", "ring", "focus", "outline", "selection", "icon",
-                 "is-active", "is-current", "is-open", "is-pressed",
+                 "sf-is-active", "sf-is-current", "sf-is-open", "sf-is-pressed",
                  "field-required", "object-fit", "object-position", "print-", "scrollbar", "size-"]
 }

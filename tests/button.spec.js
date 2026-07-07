@@ -159,8 +159,8 @@ for (const theme of ['light', 'dark']) {
       expect(cs.cursor).toBe('not-allowed');
     });
 
-    test('.is-loading hides content and sets a wait cursor', async ({ page }) => {
-      await mount(page, `<button class="sf-btn is-loading" id="t"><span id="lbl">Saving…</span></button>`);
+    test('.sf-is-loading hides content and sets a wait cursor', async ({ page }) => {
+      await mount(page, `<button class="sf-btn sf-is-loading" id="t"><span id="lbl">Saving…</span></button>`);
       const cursor = await computed(page, ['cursor']);
       const labelVis = await page.evaluate(
         () => getComputedStyle(document.getElementById('lbl')).visibility,

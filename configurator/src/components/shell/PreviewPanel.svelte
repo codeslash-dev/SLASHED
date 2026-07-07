@@ -131,7 +131,7 @@
     /* Sidebar nav */
     .pv-nav{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px;}
     .pv-nav__item{padding:var(--sf-space-2xs) var(--sf-space-xs);border-radius:var(--sf-radius-s);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);cursor:pointer;}
-    .pv-nav__item.is-active{background:var(--sf-color-primary-100);color:var(--sf-color-primary-700);font-weight:600;}
+    .pv-nav__item.sf-is-active{background:var(--sf-color-primary-100);color:var(--sf-color-primary-700);font-weight:600;}
     /* Stat blocks */
     .pv-stat{font-size:var(--sf-text-2xl);font-weight:800;line-height:var(--sf-leading-tight);color:var(--sf-color-heading);}
     .pv-stat-label{font-size:var(--sf-text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--sf-color-text--muted);}

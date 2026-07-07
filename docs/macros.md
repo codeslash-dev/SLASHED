@@ -230,7 +230,7 @@ target a specific edge or axis:
 
 Suppresses the WebKit/Android grey tap-highlight overlay on
 interactive elements where it conflicts with the framework's own
-`.is-active` / hover treatment.
+`.sf-is-active` / hover treatment.
 
 ```html
 <a class="sf-no-tap-highlight" href="…">…</a>

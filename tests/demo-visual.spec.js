@@ -262,9 +262,9 @@ test.describe('Motion & States', () => {
     }
   });
 
-  test('.is-loading spinner pseudo-element renders', async ({ page }) => {
+  test('.sf-is-loading spinner pseudo-element renders', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const loading = page.locator('#motion .is-loading').first();
+    const loading = page.locator('#motion .sf-is-loading').first();
     // Loading state makes text transparent
     const color = await getStyle(loading, 'color');
     const isTransparent =
@@ -276,16 +276,16 @@ test.describe('Motion & States', () => {
     expect(pe).toBe('none');
   });
 
-  test('.is-skeleton has shimmer animation', async ({ page }) => {
+  test('.sf-is-skeleton has shimmer animation', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const skeleton = page.locator('#motion .is-skeleton').first();
+    const skeleton = page.locator('#motion .sf-is-skeleton').first();
     const anim = await getStyle(skeleton, 'animationName');
     expect(anim).toContain('sf-shimmer');
   });
 
-  test('.is-disabled reduces opacity and disables pointer events', async ({ page }) => {
+  test('.sf-is-disabled reduces opacity and disables pointer events', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const disabled = page.locator('#states-full .is-disabled').first();
+    const disabled = page.locator('#states-full .sf-is-disabled').first();
     const opacity = parseFloat(await getStyle(disabled, 'opacity'));
     expect(opacity).toBeLessThan(1);
     const pe = await getStyle(disabled, 'pointerEvents');
@@ -293,9 +293,9 @@ test.describe('Motion & States', () => {
   });
 
 
-  test('.is-hidden removes element from layout', async ({ page }) => {
+  test('.sf-is-hidden removes element from layout', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const hidden = page.locator('#motion .is-hidden').first();
+    const hidden = page.locator('#motion .sf-is-hidden').first();
     const display = await getStyle(hidden, 'display');
     expect(display).toBe('none');
   });
@@ -823,7 +823,7 @@ test.describe('Accessibility', () => {
   test('disabled buttons have reduced opacity or cursor change', async ({ page }) => {
     await page.goto(DEMO_URL);
     const disabled = page.locator('#accessibility button[disabled]').first();
-    // [disabled] attribute triggers browser-native styles; .is-disabled class
+    // [disabled] attribute triggers browser-native styles; .sf-is-disabled class
     // applies reduced opacity. The disabled attr may or may not reduce opacity
     // depending on browser defaults, but cursor should be restricted.
     const opacity = parseFloat(await getStyle(disabled, 'opacity'));
@@ -934,16 +934,16 @@ test.describe('Layout — Additional Primitives', () => {
 // STATES — FULL COVERAGE
 // ═══════════════════════════════════════════════════════════════
 test.describe('States — Full Coverage', () => {
-  test('.is-selected has background highlight', async ({ page }) => {
+  test('.sf-is-selected has background highlight', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const selected = page.locator('#states-full .is-selected').first();
+    const selected = page.locator('#states-full .sf-is-selected').first();
     const bg = await getStyle(selected, 'backgroundColor');
     expect(bg).not.toBe('rgba(0, 0, 0, 0)');
   });
 
-  test('.is-valid sets border color to success color', async ({ page }) => {
+  test('.sf-is-valid sets border color to success color', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const valid = page.locator('#states-full .is-valid').first();
+    const valid = page.locator('#states-full .sf-is-valid').first();
     const borderColor = await valid.evaluate(el =>
       getComputedStyle(el).getPropertyValue('--sf-field-border-color').trim()
     );
@@ -952,39 +952,39 @@ test.describe('States — Full Coverage', () => {
     expect(borderColor).not.toBe('');
   });
 
-  test('.is-invalid sets border color to error color', async ({ page }) => {
+  test('.sf-is-invalid sets border color to error color', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const invalid = page.locator('#states-full .is-invalid').first();
+    const invalid = page.locator('#states-full .sf-is-invalid').first();
     const borderColor = await invalid.evaluate(el =>
       getComputedStyle(el).getPropertyValue('--sf-field-border-color').trim()
     );
     expect(borderColor.length).toBeGreaterThan(0);
     expect(borderColor).not.toBe('');
     // Valid and invalid should have DIFFERENT border colors
-    const validEl = page.locator('#states-full .is-valid').first();
+    const validEl = page.locator('#states-full .sf-is-valid').first();
     const validBorderColor = await validEl.evaluate(el =>
       getComputedStyle(el).getPropertyValue('--sf-field-border-color').trim()
     );
     expect(borderColor).not.toBe(validBorderColor);
   });
 
-  test('.is-dragging has reduced opacity', async ({ page }) => {
+  test('.sf-is-dragging has reduced opacity', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const dragging = page.locator('#states-full .is-dragging').first();
+    const dragging = page.locator('#states-full .sf-is-dragging').first();
     const opacity = parseFloat(await getStyle(dragging, 'opacity'));
     expect(opacity).toBe(0.5);
   });
 
-  test('.is-drop-target has dashed outline', async ({ page }) => {
+  test('.sf-is-drop-target has dashed outline', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const dropTarget = page.locator('#states-full .is-drop-target').first();
+    const dropTarget = page.locator('#states-full .sf-is-drop-target').first();
     const outlineStyle = await getStyle(dropTarget, 'outlineStyle');
     expect(outlineStyle).toBe('dashed');
   });
 
-  test('.is-overlay covers parent with absolute positioning', async ({ page }) => {
+  test('.sf-overlay covers parent with absolute positioning', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const overlay = page.locator('#states-full .is-overlay').first();
+    const overlay = page.locator('#states-full .sf-overlay').first();
     const position = await getStyle(overlay, 'position');
     expect(position).toBe('absolute');
   });

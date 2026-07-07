@@ -80,7 +80,7 @@ decision tree to use when adding a new class.
 | 1 | **Layout primitives** | "How are children arranged?" | `core/layout.css` | `slashed.layout` |
 | 2 | **Macro-classes** *(recipes)* | "What does this element DO / look like?" | `core/macros.css` | `slashed.macros` |
 | 3 | **Animation primitives** | "How does this element move?" | `core/motion.css` | `slashed.motion` |
-| 4 | **State utilities** *(`.is-*`)* | "What state is this element in?" | `core/states.css` | `slashed.states` |
+| 4 | **State utilities** *(`.sf-is-*`)* | "What state is this element in?" | `core/states.css` | `slashed.states` |
 | 5 | **A11y utilities & patterns** | "How does this work for AT users?" | `core/accessibility.css` | `slashed.accessibility` |
 | 6 | **Print utilities** *(`.print-*`)* | "How does this print?" | `core/print.css` | `slashed.print` |
 | 7 | **Components** *(opt-in)* | "Pre-built visual block." | `optional/components.css` | `slashed.components` |
@@ -94,7 +94,7 @@ decision tree to use when adding a new class.
 
 2. Does it modify an element's runtime state?
       (hover, active, disabled, loading…)
-   YES → core/states.css (.is-*/.has-*)  (slashed.states)
+   YES → core/states.css (.sf-is-*/.has-*)  (slashed.states)
    NO  → step 3
 
 3. Is it an a11y pattern or a11y utility?
@@ -163,7 +163,7 @@ Native form controls are out of base entirely — they live in the opt-in
 **slashed.forms** — opt-in classless styling for native form controls
 (`input`, `select`, `textarea`, `button`, checkbox/radio, `fieldset`,
 `label`) from `optional/forms.css`. Element-level only, no classes. Reads
-`--sf-field-border-color` so the `.is-*` validation states in
+`--sf-field-border-color` so the `.sf-is-*` validation states in
 `slashed.states` recolour fields. Skip the file entirely if you prefer full
 BEM control.
 
@@ -183,7 +183,7 @@ live in `core/tokens.macros.css`.
 **slashed.utilities** — single-purpose helpers. SLASHED ships no
 utility classes in 0.x; the layer slot is reserved for the future.
 
-**slashed.states** — `.is-*` markers. Exclusive prefix — utilities never use it. `.is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
+**slashed.states** — `.sf-is-*` markers. Exclusive prefix — utilities never use it. `.sf-is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
 
 **slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/theme-example.css`).
 
@@ -263,7 +263,7 @@ Print helpers use the `.print-*` prefix: `.print-only` (show only on paper),
 
 ### Naming exceptions
 
-A small number of classes are intentionally unprefixed (no `sf-` or `is-`).
+A small number of classes are intentionally unprefixed (no `sf-` or `sf-is-`).
 They are short, universally understood terms where a prefix would add noise
 without reducing collision risk in practice.
 

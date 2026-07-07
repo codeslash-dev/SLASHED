@@ -21,8 +21,8 @@
     .tile__cap { font: var(--sf-text-xs)/1.4 var(--sf-font-mono); padding: var(--sf-space-2xs) var(--sf-space-xs);
                  background: var(--sf-color-inset); border-block-end: 1px solid var(--sf-color-border); color: var(--sf-color-text--secondary); }
     .tile__warn { color: var(--sf-color-warning); }
-    /* contain traps position:fixed/absolute-fill classes (is-fullscreen,
-       is-overlay, sf-imposter--fixed) inside their own tile instead of the page. */
+    /* contain traps position:fixed/absolute-fill classes (sf-is-fullscreen,
+       sf-overlay, sf-imposter--fixed) inside their own tile instead of the page. */
     .tile__stage { padding: var(--sf-space-m); position: relative; overflow: hidden;
                    contain: layout paint; min-block-size: 4rem; }
     .dbox { padding: var(--sf-space-s); background: var(--sf-color-primary-100); border: 1px solid var(--sf-color-primary-300);
@@ -980,121 +980,121 @@
     <section id="state">
       <h2>State classes <span class="count">29</span></h2>
       <div class="tiles">
-      <figure class="tile" data-class="is-active">
-        <figcaption class="tile__cap"><code>.is-active</code></figcaption>
-        <div class="tile__stage"><div class="is-active dpad">is-active</div></div>
+      <figure class="tile" data-class="sf-is-active">
+        <figcaption class="tile__cap"><code>.sf-is-active</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-active dpad">sf-is-active</div></div>
       </figure>
-      <figure class="tile" data-class="is-busy">
-        <figcaption class="tile__cap"><code>.is-busy</code></figcaption>
-        <div class="tile__stage"><div class="is-busy dpad" aria-busy="true">is-busy</div></div>
+      <figure class="tile" data-class="sf-is-busy">
+        <figcaption class="tile__cap"><code>.sf-is-busy</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-busy dpad" aria-busy="true">sf-is-busy</div></div>
       </figure>
-      <figure class="tile" data-class="is-collapsed">
-        <figcaption class="tile__cap"><code>.is-collapsed</code></figcaption>
-        <div class="tile__stage"><div class="is-collapsed dpad">is-collapsed</div></div>
+      <figure class="tile" data-class="sf-is-collapsed">
+        <figcaption class="tile__cap"><code>.sf-is-collapsed</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-collapsed dpad">sf-is-collapsed</div></div>
       </figure>
-      <figure class="tile" data-class="is-current">
-        <figcaption class="tile__cap"><code>.is-current</code></figcaption>
-        <div class="tile__stage"><div class="is-current dpad" aria-current="page">is-current</div></div>
+      <figure class="tile" data-class="sf-is-current">
+        <figcaption class="tile__cap"><code>.sf-is-current</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-current dpad" aria-current="page">sf-is-current</div></div>
       </figure>
-      <figure class="tile" data-class="is-danger">
-        <figcaption class="tile__cap"><code>.is-danger</code></figcaption>
-        <div class="tile__stage"><div class="is-danger dpad">is-danger</div></div>
+      <figure class="tile" data-class="sf-is-danger">
+        <figcaption class="tile__cap"><code>.sf-is-danger</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-danger dpad">sf-is-danger</div></div>
       </figure>
-      <figure class="tile" data-class="is-disabled">
-        <figcaption class="tile__cap"><code>.is-disabled</code></figcaption>
-        <div class="tile__stage"><div class="is-disabled dpad" aria-disabled="true">is-disabled</div></div>
+      <figure class="tile" data-class="sf-is-disabled">
+        <figcaption class="tile__cap"><code>.sf-is-disabled</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-disabled dpad" aria-disabled="true">sf-is-disabled</div></div>
       </figure>
-      <figure class="tile" data-class="is-draggable">
-        <figcaption class="tile__cap"><code>.is-draggable</code></figcaption>
-        <div class="tile__stage"><div class="is-draggable dpad">is-draggable</div></div>
+      <figure class="tile" data-class="sf-is-draggable">
+        <figcaption class="tile__cap"><code>.sf-is-draggable</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-draggable dpad">sf-is-draggable</div></div>
       </figure>
-      <figure class="tile" data-class="is-dragging">
-        <figcaption class="tile__cap"><code>.is-dragging</code></figcaption>
-        <div class="tile__stage"><div class="is-dragging dpad">is-dragging</div></div>
+      <figure class="tile" data-class="sf-is-dragging">
+        <figcaption class="tile__cap"><code>.sf-is-dragging</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-dragging dpad">sf-is-dragging</div></div>
       </figure>
-      <figure class="tile" data-class="is-drop-target">
-        <figcaption class="tile__cap"><code>.is-drop-target</code></figcaption>
-        <div class="tile__stage"><div class="is-drop-target dpad">is-drop-target</div></div>
+      <figure class="tile" data-class="sf-is-drop-target">
+        <figcaption class="tile__cap"><code>.sf-is-drop-target</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-drop-target dpad">sf-is-drop-target</div></div>
       </figure>
-      <figure class="tile" data-class="is-empty">
-        <figcaption class="tile__cap"><code>.is-empty</code></figcaption>
-        <div class="tile__stage"><div class="is-empty dpad">is-empty</div></div>
+      <figure class="tile" data-class="sf-is-empty">
+        <figcaption class="tile__cap"><code>.sf-is-empty</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-empty dpad">sf-is-empty</div></div>
       </figure>
-      <figure class="tile" data-class="is-error">
-        <figcaption class="tile__cap"><code>.is-error</code></figcaption>
-        <div class="tile__stage"><div class="is-error dpad">is-error</div></div>
+      <figure class="tile" data-class="sf-is-error">
+        <figcaption class="tile__cap"><code>.sf-is-error</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-error dpad">sf-is-error</div></div>
       </figure>
-      <figure class="tile" data-class="is-expanded">
-        <figcaption class="tile__cap"><code>.is-expanded</code></figcaption>
-        <div class="tile__stage"><div class="is-expanded dpad" aria-expanded="true">is-expanded</div></div>
+      <figure class="tile" data-class="sf-is-expanded">
+        <figcaption class="tile__cap"><code>.sf-is-expanded</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-expanded dpad" aria-expanded="true">sf-is-expanded</div></div>
       </figure>
-      <figure class="tile" data-class="is-hidden">
-        <figcaption class="tile__cap"><code>.is-hidden</code></figcaption>
-        <div class="tile__stage"><div class="is-hidden dpad" hidden>is-hidden</div></div>
+      <figure class="tile" data-class="sf-is-hidden">
+        <figcaption class="tile__cap"><code>.sf-is-hidden</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-hidden dpad" hidden>sf-is-hidden</div></div>
       </figure>
-      <figure class="tile" data-class="is-highlighted">
-        <figcaption class="tile__cap"><code>.is-highlighted</code></figcaption>
-        <div class="tile__stage"><div class="is-highlighted dpad">is-highlighted</div></div>
+      <figure class="tile" data-class="sf-is-highlighted">
+        <figcaption class="tile__cap"><code>.sf-is-highlighted</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-highlighted dpad">sf-is-highlighted</div></div>
       </figure>
-      <figure class="tile" data-class="is-info">
-        <figcaption class="tile__cap"><code>.is-info</code></figcaption>
-        <div class="tile__stage"><div class="is-info dpad">is-info</div></div>
+      <figure class="tile" data-class="sf-is-info">
+        <figcaption class="tile__cap"><code>.sf-is-info</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-info dpad">sf-is-info</div></div>
       </figure>
-      <figure class="tile" data-class="is-invalid">
-        <figcaption class="tile__cap"><code>.is-invalid</code></figcaption>
-        <div class="tile__stage"><div class="is-invalid dpad" aria-invalid="true">is-invalid</div></div>
+      <figure class="tile" data-class="sf-is-invalid">
+        <figcaption class="tile__cap"><code>.sf-is-invalid</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-invalid dpad" aria-invalid="true">sf-is-invalid</div></div>
       </figure>
-      <figure class="tile" data-class="is-invisible">
-        <figcaption class="tile__cap"><code>.is-invisible</code></figcaption>
-        <div class="tile__stage"><div class="is-invisible dpad">is-invisible</div></div>
+      <figure class="tile" data-class="sf-is-invisible">
+        <figcaption class="tile__cap"><code>.sf-is-invisible</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-invisible dpad">sf-is-invisible</div></div>
       </figure>
-      <figure class="tile" data-class="is-loading">
-        <figcaption class="tile__cap"><code>.is-loading</code></figcaption>
-        <div class="tile__stage"><div class="is-loading dpad" aria-busy="true">is-loading</div></div>
+      <figure class="tile" data-class="sf-is-loading">
+        <figcaption class="tile__cap"><code>.sf-is-loading</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-loading dpad" aria-busy="true">sf-is-loading</div></div>
       </figure>
-      <figure class="tile" data-class="is-open">
-        <figcaption class="tile__cap"><code>.is-open</code></figcaption>
-        <div class="tile__stage"><div class="is-open dpad">is-open</div></div>
+      <figure class="tile" data-class="sf-is-open">
+        <figcaption class="tile__cap"><code>.sf-is-open</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-open dpad">sf-is-open</div></div>
       </figure>
-      <figure class="tile" data-class="is-overlay">
-        <figcaption class="tile__cap"><code>.is-overlay</code></figcaption>
-        <div class="tile__stage"><div class="is-overlay dpad">is-overlay</div></div>
+      <figure class="tile" data-class="sf-overlay">
+        <figcaption class="tile__cap"><code>.sf-overlay</code></figcaption>
+        <div class="tile__stage"><div class="sf-overlay dpad">sf-overlay</div></div>
       </figure>
-      <figure class="tile" data-class="is-pending">
-        <figcaption class="tile__cap"><code>.is-pending</code></figcaption>
-        <div class="tile__stage"><div class="is-pending dpad" aria-busy="true">is-pending</div></div>
+      <figure class="tile" data-class="sf-is-pending">
+        <figcaption class="tile__cap"><code>.sf-is-pending</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-pending dpad" aria-busy="true">sf-is-pending</div></div>
       </figure>
-      <figure class="tile" data-class="is-pressed">
-        <figcaption class="tile__cap"><code>.is-pressed</code></figcaption>
-        <div class="tile__stage"><div class="is-pressed dpad" aria-pressed="true">is-pressed</div></div>
+      <figure class="tile" data-class="sf-is-pressed">
+        <figcaption class="tile__cap"><code>.sf-is-pressed</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-pressed dpad" aria-pressed="true">sf-is-pressed</div></div>
       </figure>
-      <figure class="tile" data-class="is-readonly">
-        <figcaption class="tile__cap"><code>.is-readonly</code></figcaption>
-        <div class="tile__stage"><div class="is-readonly dpad" aria-readonly="true">is-readonly</div></div>
+      <figure class="tile" data-class="sf-is-readonly">
+        <figcaption class="tile__cap"><code>.sf-is-readonly</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-readonly dpad" aria-readonly="true">sf-is-readonly</div></div>
       </figure>
-      <figure class="tile" data-class="is-selected">
-        <figcaption class="tile__cap"><code>.is-selected</code></figcaption>
-        <div class="tile__stage"><div class="is-selected dpad" aria-selected="true">is-selected</div></div>
+      <figure class="tile" data-class="sf-is-selected">
+        <figcaption class="tile__cap"><code>.sf-is-selected</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-selected dpad" aria-selected="true">sf-is-selected</div></div>
       </figure>
-      <figure class="tile" data-class="is-skeleton">
-        <figcaption class="tile__cap"><code>.is-skeleton</code></figcaption>
-        <div class="tile__stage"><div class="is-skeleton dpad">is-skeleton</div></div>
+      <figure class="tile" data-class="sf-is-skeleton">
+        <figcaption class="tile__cap"><code>.sf-is-skeleton</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-skeleton dpad">sf-is-skeleton</div></div>
       </figure>
-      <figure class="tile" data-class="is-success">
-        <figcaption class="tile__cap"><code>.is-success</code></figcaption>
-        <div class="tile__stage"><div class="is-success dpad">is-success</div></div>
+      <figure class="tile" data-class="sf-is-success">
+        <figcaption class="tile__cap"><code>.sf-is-success</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-success dpad">sf-is-success</div></div>
       </figure>
-      <figure class="tile" data-class="is-valid">
-        <figcaption class="tile__cap"><code>.is-valid</code></figcaption>
-        <div class="tile__stage"><div class="is-valid dpad">is-valid</div></div>
+      <figure class="tile" data-class="sf-is-valid">
+        <figcaption class="tile__cap"><code>.sf-is-valid</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-valid dpad">sf-is-valid</div></div>
       </figure>
-      <figure class="tile" data-class="is-visible">
-        <figcaption class="tile__cap"><code>.is-visible</code></figcaption>
-        <div class="tile__stage"><div class="is-visible dpad">is-visible</div></div>
+      <figure class="tile" data-class="sf-is-visible">
+        <figcaption class="tile__cap"><code>.sf-is-visible</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-visible dpad">sf-is-visible</div></div>
       </figure>
-      <figure class="tile" data-class="is-warning">
-        <figcaption class="tile__cap"><code>.is-warning</code></figcaption>
-        <div class="tile__stage"><div class="is-warning dpad">is-warning</div></div>
+      <figure class="tile" data-class="sf-is-warning">
+        <figcaption class="tile__cap"><code>.sf-is-warning</code></figcaption>
+        <div class="tile__stage"><div class="sf-is-warning dpad">sf-is-warning</div></div>
       </figure>
       </div>
     </section>

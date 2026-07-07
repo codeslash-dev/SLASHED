@@ -517,7 +517,7 @@
       z-index: calc(var(--sf-z-dropdown) - 1);
     }
 
-    #nav-overlay.is-open {
+    #nav-overlay.sf-is-open {
       display: block;
     }
 
@@ -543,7 +543,7 @@
           visibility 0s var(--sf-duration-normal);
       }
 
-      #demo-nav.is-open {
+      #demo-nav.sf-is-open {
         translate: 0;
         visibility: visible;
         transition:
@@ -1318,24 +1318,24 @@
         <h3>States (states.css)</h3>
         <div class="sf-cluster sf-cluster--l" style="align-items: center; flex-wrap: wrap">
           <div>
-            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-loading</p>
-            <button class="is-loading" style="padding: var(--sf-space-s) var(--sf-space-l); background: var(--sf-color-primary); border: none; border-radius: var(--sf-radius-m); min-width: 8rem; min-height: 2.5rem">Loading</button>
+            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.sf-is-loading</p>
+            <button class="sf-is-loading" style="padding: var(--sf-space-s) var(--sf-space-l); background: var(--sf-color-primary); border: none; border-radius: var(--sf-radius-m); min-width: 8rem; min-height: 2.5rem">Loading</button>
           </div>
           <div>
-            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-skeleton</p>
+            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.sf-is-skeleton</p>
             <div class="sf-stack sf-stack--xs">
-              <div class="is-skeleton" style="width: 14rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
-              <div class="is-skeleton" style="width: 10rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
-              <div class="is-skeleton" style="width: 12rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
+              <div class="sf-is-skeleton" style="width: 14rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
+              <div class="sf-is-skeleton" style="width: 10rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
+              <div class="sf-is-skeleton" style="width: 12rem; height: 1rem; border-radius: var(--sf-radius-s)"></div>
             </div>
           </div>
           <div>
-            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.is-hidden / .is-invisible</p>
+            <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-2xs)">.sf-is-hidden / .sf-is-invisible</p>
             <div class="sf-cluster sf-cluster--s">
               <span style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">visible</span>
-              <span class="is-hidden" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">hidden (display:none)</span>
-              <span class="is-invisible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">invisible (visibility:hidden)</span>
-              <span class="is-visible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-visible (force visibility:visible)</span>
+              <span class="sf-is-hidden" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">hidden (display:none)</span>
+              <span class="sf-is-invisible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">invisible (visibility:hidden)</span>
+              <span class="sf-is-visible" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-visible (force visibility:visible)</span>
             </div>
           </div>
         </div>
@@ -1346,53 +1346,53 @@
       ══════════════════════════════════════════════════════ -->
       <section id="states-full" class="demo-section">
         <h2>States — Full Coverage</h2>
-        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">Every <code>.is-*</code> class from <code>states.css</code>. Grouped by category.</p>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">Every <code>.sf-is-*</code> class from <code>states.css</code>. Grouped by category.</p>
 
         <h3>Navigation &amp; Toggling</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-active" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-active (--sf-is-active: 1)</span>
-          <span class="is-current" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-current (bold)</span>
-          <span class="is-selected" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-selected</span>
-          <span class="is-highlighted" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-highlighted</span>
+          <span class="sf-is-active" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-active (--sf-is-active: 1)</span>
+          <span class="sf-is-current" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-current (bold)</span>
+          <span class="sf-is-selected" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-selected</span>
+          <span class="sf-is-highlighted" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-highlighted</span>
         </div>
 
         <h3>Disclosure</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-open" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-open</span>
-          <span class="is-expanded" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-expanded</span>
-          <span class="is-collapsed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-collapsed</span>
+          <span class="sf-is-open" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-open</span>
+          <span class="sf-is-expanded" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-expanded</span>
+          <span class="sf-is-collapsed" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-collapsed</span>
         </div>
 
         <h3>Validation / Feedback</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-valid" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-valid</span>
-          <span class="is-invalid" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-invalid</span>
-          <span class="is-warning" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-warning</span>
-          <span class="is-success" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-success</span>
-          <span class="is-error" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-error</span>
-          <span class="is-info" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-info</span>
-          <span class="is-danger" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-danger</span>
+          <span class="sf-is-valid" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-valid</span>
+          <span class="sf-is-invalid" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-invalid</span>
+          <span class="sf-is-warning" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-warning</span>
+          <span class="sf-is-success" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-success</span>
+          <span class="sf-is-error" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-error</span>
+          <span class="sf-is-info" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-info</span>
+          <span class="sf-is-danger" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 2px solid var(--sf-field-border-color, var(--sf-color-border)); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-danger</span>
         </div>
 
         <h3>Drag &amp; Drop</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-dragging" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-dragging</span>
-          <span class="is-drop-target" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-drop-target</span>
-          <span class="is-draggable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-draggable</span>
+          <span class="sf-is-dragging" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-dragging</span>
+          <span class="sf-is-drop-target" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-drop-target</span>
+          <span class="sf-is-draggable" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-draggable</span>
         </div>
 
         <h3>Overlay</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <div style="position: relative; width: 8rem; height: 4rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s)"><div class="is-overlay" style="background: var(--sf-color-primary); opacity: 0.2; border-radius: var(--sf-radius-s)"></div><span style="position: relative; font-size: var(--sf-text-xs); padding: var(--sf-space-xs)">.is-overlay</span></div>
+          <div style="position: relative; width: 8rem; height: 4rem; background: var(--sf-color-inset); border-radius: var(--sf-radius-s)"><div class="sf-overlay" style="background: var(--sf-color-primary); opacity: 0.2; border-radius: var(--sf-radius-s)"></div><span style="position: relative; font-size: var(--sf-text-xs); padding: var(--sf-space-xs)">.sf-overlay</span></div>
         </div>
 
         <h3>Interactivity</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <span class="is-busy" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-busy</span>
-          <span class="is-readonly" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-readonly</span>
-          <span class="is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-disabled</span>
-          <span class="is-pending" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pending</span>
-          <span class="is-pressed" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.is-pressed</span>
+          <span class="sf-is-busy" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-busy</span>
+          <span class="sf-is-readonly" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-readonly</span>
+          <span class="sf-is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-disabled</span>
+          <span class="sf-is-pending" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-pending</span>
+          <span class="sf-is-pressed" style="padding: var(--sf-space-xs) var(--sf-space-s); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)">.sf-is-pressed</span>
         </div>
         <div class="sf-focus-parent sf-cluster sf-cluster--m" style="align-items: center; margin-top: var(--sf-space-s); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
           <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.sf-focus-parent (focus the input → parent rings)</code>
@@ -1401,8 +1401,8 @@
 
         <h3>Empty State</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
-          <div class="is-empty" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)"></div>
-          <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.is-empty:empty → display:none (the empty div above is gone)</code>
+          <div class="sf-is-empty" style="padding: var(--sf-space-xs) var(--sf-space-s); background: var(--sf-color-inset); border-radius: var(--sf-radius-s); font-size: var(--sf-text-s)"></div>
+          <code style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">.sf-is-empty:empty → display:none (the empty div above is gone)</code>
         </div>
       </section>
 
@@ -2002,7 +2002,7 @@
         <h3>Disabled States</h3>
         <div class="sf-cluster sf-cluster--m" style="align-items: center">
           <button type="button" disabled style="padding: var(--sf-space-xs) var(--sf-space-m); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m)">[disabled] attr</button>
-          <button type="button" class="is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-m); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m)">.is-disabled class</button>
+          <button type="button" class="sf-is-disabled" style="padding: var(--sf-space-xs) var(--sf-space-m); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m)">.sf-is-disabled class</button>
           <button type="button" aria-disabled="true" style="padding: var(--sf-space-xs) var(--sf-space-m); background: var(--sf-color-primary); color: var(--sf-color-text--on-primary); border: none; border-radius: var(--sf-radius-m)">[aria-disabled]</button>
           <input type="text" disabled value="Disabled input" style="padding: var(--sf-space-xs) var(--sf-space-s); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); background: var(--sf-color-surface); color: var(--sf-color-text)">
         </div>
@@ -3057,8 +3057,8 @@
     }
 
     function openNav() {
-      nav.classList.add('is-open');
-      overlay.classList.add('is-open');
+      nav.classList.add('sf-is-open');
+      overlay.classList.add('sf-is-open');
       navToggle.setAttribute('aria-expanded', 'true');
       navToggle.setAttribute('aria-label', 'Close navigation');
       document.body.style.overflow = 'hidden';
@@ -3083,8 +3083,8 @@
     }
 
     function closeNav() {
-      nav.classList.remove('is-open');
-      overlay.classList.remove('is-open');
+      nav.classList.remove('sf-is-open');
+      overlay.classList.remove('sf-is-open');
       navToggle.setAttribute('aria-expanded', 'false');
       navToggle.setAttribute('aria-label', 'Open navigation');
       document.body.style.overflow = '';
@@ -3097,7 +3097,7 @@
     }
 
     navToggle.addEventListener('click', () => {
-      nav.classList.contains('is-open') ? closeNav() : openNav();
+      nav.classList.contains('sf-is-open') ? closeNav() : openNav();
     });
 
     overlay.addEventListener('click', closeNav);
@@ -3109,7 +3109,7 @@
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+      if (e.key === 'Escape' && nav.classList.contains('sf-is-open')) closeNav();
     });
 
     // Replay an animation preset on click by re-triggering its animation.

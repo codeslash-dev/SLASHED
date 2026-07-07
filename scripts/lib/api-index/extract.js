@@ -408,7 +408,7 @@ export function extractTokensFromFile(rel, root) {
 // ── Class extraction ──────────────────────────────────────────────────────────
 
 /**
- * Extract prefixed (.sf-/.is-) and unprefixed framework classes from one file,
+ * Extract prefixed (.sf-/.sf-is-) and unprefixed framework classes from one file,
  * with selector, kind, BEM-variant info and derived group/description.
  * @param {string} rel source file path
  * @param {string} root absolute repo root
@@ -431,7 +431,7 @@ export function extractClassesFromFile(rel, root, bundlesFor) {
    */
   function addClass(map, name, idx) {
     if (map.has(name)) return; // first occurrence defines its context
-    const prefix = name.startsWith('sf-') ? 'sf' : name.startsWith('is-') ? 'is' : '';
+    const prefix = name.startsWith('sf-is-') ? 'sf-is' : name.startsWith('sf-') ? 'sf' : '';
     const variantSplit = name.indexOf('--');
     const ctx = describe(comments, idx);
     map.set(name, {
@@ -454,8 +454,8 @@ export function extractClassesFromFile(rel, root, bundlesFor) {
     });
   }
 
-  // Prefixed classes: .sf-* and .is-*
-  for (const m of masked.matchAll(/\.((?:sf|is)-[\w-]+)/g)) {
+  // Prefixed classes: .sf-* (including state classes under .sf-is-*)
+  for (const m of masked.matchAll(/\.(sf-[\w-]+)/g)) {
     addClass(rows, m[1], m.index);
   }
   // Unprefixed framework classes (a11y helpers, print utilities, theme helper).
@@ -463,7 +463,7 @@ export function extractClassesFromFile(rel, root, bundlesFor) {
   const noLayer = masked.replace(/@layer\s+[^{;]+[{;]/g, mm => mm.replace(/[^\n]/g, ' '));
   for (const m of noLayer.matchAll(/\.([a-z][\w-]*)/g)) {
     const name = m[1];
-    if (name.startsWith('sf-') || name.startsWith('is-')) continue;
+    if (name.startsWith('sf-') || name.startsWith('sf-is-')) continue;
     addClass(rows, name, m.index);
   }
 

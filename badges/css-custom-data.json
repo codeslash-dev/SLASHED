@@ -2433,22 +2433,22 @@
     },
     {
       "name": "--sf-is-active",
-      "description": "Integer state flag for the active state. Set to 1 (via JS or .is-active) to drive branching calc() expressions. 0 = default (inactive).\n\nDefault: `0`\n\n(advanced token)",
+      "description": "Integer state flag for the active state. Set to 1 (via JS or .sf-is-active) to drive branching calc() expressions. 0 = default (inactive).\n\nDefault: `0`\n\n(advanced token)",
       "syntax": "<integer>"
     },
     {
       "name": "--sf-is-current",
-      "description": "Integer state flag for the current/selected state. Set to 1 (via .is-current) to drive branching calc() expressions. 0 = default.\n\nDefault: `0`\n\n(advanced token)",
+      "description": "Integer state flag for the current/selected state. Set to 1 (via .sf-is-current) to drive branching calc() expressions. 0 = default.\n\nDefault: `0`\n\n(advanced token)",
       "syntax": "<integer>"
     },
     {
       "name": "--sf-is-open",
-      "description": "Integer state flag for the open/expanded state. Set to 1 (via .is-open) to drive branching calc() expressions. 0 = default (closed).\n\nDefault: `0`\n\n(advanced token)",
+      "description": "Integer state flag for the open/expanded state. Set to 1 (via .sf-is-open) to drive branching calc() expressions. 0 = default (closed).\n\nDefault: `0`\n\n(advanced token)",
       "syntax": "<integer>"
     },
     {
       "name": "--sf-is-pressed",
-      "description": "Integer state flag for the pressed state. Set to 1 (via .is-pressed) to drive branching calc() expressions. 0 = default.\n\nDefault: `0`\n\n(advanced token)",
+      "description": "Integer state flag for the pressed state. Set to 1 (via .sf-is-pressed) to drive branching calc() expressions. 0 = default.\n\nDefault: `0`\n\n(advanced token)",
       "syntax": "<integer>"
     },
     {

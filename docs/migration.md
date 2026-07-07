@@ -264,7 +264,7 @@ The underlying space tokens (`--sf-space-2xs`, `--sf-space-3xl`,
 
 | Old name | New name | Rationale |
 |---|---|---|
-| `.sf-button--destructive` | `.sf-button--danger` | Aligns with the `--danger` intent used by `.is-danger`, `.sf-surface--danger`, and the `--sf-color-danger-*` tokens. |
+| `.sf-button--destructive` | `.sf-button--danger` | Aligns with the `--danger` intent used by `.sf-is-danger`, `.sf-surface--danger`, and the `--sf-color-danger-*` tokens. |
 
 The component CSS isn't active yet (commented out), so no runtime breakage.
 
@@ -378,7 +378,7 @@ the migration is mostly about *where* styling lives.
 | Theming | CSS vars (some) | config file + build | override 6 source tokens, no build |
 | Layout | utility/grid classes | flex/grid utilities | container-query primitives (`.sf-*`) |
 | Recipes | bespoke per project | utility chains | macros (`.sf-prose`, `.sf-flow`, …) |
-| States | `:disabled` etc. | variant modifiers | `.is-*` state classes |
+| States | `:disabled` etc. | variant modifiers | `.sf-is-*` state classes |
 
 ### From a classless / element-styled framework
 
@@ -394,8 +394,8 @@ These frameworks style bare HTML globally; SLASHED keeps `base` minimal and expe
 
 ### From a component / modifier framework
 
-- **Helpers/modifiers** (`.is-primary`, `.is-active`): SLASHED reserves `.is-*`
-  exclusively for runtime **states** (`.is-active`, `.is-disabled`, …). Visual
+- **Helpers/modifiers** (`.sf-is-primary`, `.sf-is-active`): SLASHED reserves `.sf-is-*`
+  exclusively for runtime **states** (`.sf-is-active`, `.sf-is-disabled`, …). Visual
   variants belong in your component CSS using brand tokens
   (`background: var(--sf-color-primary)`).
 - **Columns**: use `.sf-grid`, `.sf-grid-N`, or `.sf-switcher`.
@@ -423,4 +423,4 @@ These frameworks style bare HTML globally; SLASHED keeps `base` minimal and expe
 4. Replace recurring patterns with macros (prose, flow, truncate, …).
 5. Move element-level overrides into BEM components that consume tokens.
 6. Wrap long-form content in `.sf-prose`.
-7. Map interactive state toggles to `.is-*` classes (+ matching ARIA).
+7. Map interactive state toggles to `.sf-is-*` classes (+ matching ARIA).

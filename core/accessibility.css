@@ -231,7 +231,7 @@
       color:                    CanvasText !important;
     }
 
-    .is-loading::after {
+    .sf-is-loading::after {
       border-color:             ButtonText !important;
       border-block-start-color: Highlight !important;
     }
