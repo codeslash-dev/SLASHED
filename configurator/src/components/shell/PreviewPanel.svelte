@@ -114,7 +114,6 @@
     .pv-emoji{font-size:2rem;line-height:1;}
     .pv-brand{font-weight:700;font-size:var(--sf-text-l);color:var(--sf-color-primary-600);}
     .pv-measure{max-inline-size:34rem;}
-    .pv-measure--wide{max-inline-size:46rem;}
     /* BEM components — .sf-btn / .sf-card shipped in v0.7.0 and are used
        directly (the real framework bundle above already defines them, in
        @layer slashed.components). Only .sf-tag / .sf-field are still staged
@@ -129,12 +128,6 @@
     .pv-panel{background:var(--sf-color-surface);border-inline-end:var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border);}
     .pv-cta{background:var(--sf-gradient-primary);border-radius:var(--sf-radius-xl);}
     .pv-code-block{font-family:var(--sf-font-mono);font-size:var(--sf-text-s);background:var(--sf-color-inset);border:var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border);border-radius:var(--sf-radius-m);padding:var(--sf-space-m) var(--sf-space-l);color:var(--sf-color-text);}
-    .pv-hero{position:relative;overflow:hidden;background:linear-gradient(135deg,color-mix(in oklab,var(--sf-color-primary) 18%,transparent),color-mix(in oklab,var(--sf-color-tertiary,var(--sf-color-primary)) 10%,transparent)),var(--sf-color-surface);border:var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border);border-radius:var(--sf-radius-2xl);box-shadow:var(--sf-shadow-xl);}
-    .pv-hero::after{content:"";position:absolute;inset:auto -12% -30% 42%;block-size:55%;background:var(--sf-gradient-primary);opacity:.18;filter:blur(42px);border-radius:var(--sf-radius-full);pointer-events:none;}
-    .pv-hero__content{position:relative;z-index:1;padding:var(--sf-space-2xl);}
-    .pv-kpi{padding:var(--sf-space-m);background:color-mix(in oklab,var(--sf-color-surface) 84%,transparent);border:var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border);border-radius:var(--sf-radius-l);box-shadow:var(--sf-shadow-xs);}
-    .pv-logo-strip{padding-block:var(--sf-space-m);border-block:var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border);}
-    .pv-logo{font-size:var(--sf-text-s);font-weight:var(--sf-font-weight-heading);color:var(--sf-color-text--muted);letter-spacing:.04em;}
     /* Sidebar nav */
     .pv-nav{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px;}
     .pv-nav__item{padding:var(--sf-space-2xs) var(--sf-space-xs);border-radius:var(--sf-radius-s);font-size:var(--sf-text-s);color:var(--sf-color-text--secondary);cursor:pointer;}
@@ -205,41 +198,39 @@
   </div>
 </header>
 <main class="sf-container sf-section sf-stack sf-stack--2xl">
-  <section class="pv-hero">
-    <div class="pv-hero__content sf-stack sf-stack--xl">
-      <div class="sf-stack sf-stack--m pv-center-text sf-stack--center">
-        <span class="pv-tag pv-tag--primary">Token-native CSS framework</span>
-        <h1 class="pv-type--display-l pv-heading">Build branded interfaces without leaving the system.</h1>
-        <p class="pv-lead pv-measure--wide">SLASHED turns typography, colour, spacing, radius, motion, shadows, buttons and cards into one live design language that responds instantly to the configurator.</p>
-        <div class="sf-cluster sf-cluster--center sf-cluster--s">
-          <button class="sf-btn sf-btn--primary sf-btn--l">Start designing</button>
-          <button class="sf-btn sf-btn--outline sf-btn--l">Explore tokens</button>
-        </div>
+  <section class="sf-card sf-card--elevated sf-section sf-stack sf-stack--xl sf-stack--center pv-center-text">
+    <div class="sf-stack sf-stack--m sf-stack--center">
+      <span class="pv-tag pv-tag--primary">Token-native CSS framework</span>
+      <h1 class="pv-type--display-l pv-heading">Build branded interfaces without leaving the system.</h1>
+      <p class="pv-lead pv-measure">Typography, colour, spacing, radius, motion, shadows, buttons and cards all respond instantly to the configurator.</p>
+      <div class="sf-cluster sf-cluster--center sf-cluster--s">
+        <button class="sf-btn sf-btn--primary sf-btn--l">Start designing</button>
+        <button class="sf-btn sf-btn--outline sf-btn--l">Explore tokens</button>
       </div>
-      <div class="sf-grid sf-grid-cols-3 sf-grid--m">
-        <div class="pv-kpi sf-stack sf-stack--xs pv-center-text">
-          <span class="pv-stat">840+</span>
-          <span class="pv-stat-label">Design tokens</span>
-        </div>
-        <div class="pv-kpi sf-stack sf-stack--xs pv-center-text">
-          <span class="pv-stat">0 JS</span>
-          <span class="pv-stat-label">Framework runtime</span>
-        </div>
-        <div class="pv-kpi sf-stack sf-stack--xs pv-center-text">
-          <span class="pv-stat">AA</span>
-          <span class="pv-stat-label">Contrast workflow</span>
-        </div>
-      </div>
+    </div>
+    <div class="sf-grid sf-grid-cols-3 sf-grid--m">
+      <article class="sf-card sf-card--bordered">
+        <span class="pv-stat">840+</span>
+        <span class="pv-stat-label">Design tokens</span>
+      </article>
+      <article class="sf-card sf-card--bordered">
+        <span class="pv-stat">0 JS</span>
+        <span class="pv-stat-label">Framework runtime</span>
+      </article>
+      <article class="sf-card sf-card--bordered">
+        <span class="pv-stat">AA</span>
+        <span class="pv-stat-label">Contrast workflow</span>
+      </article>
     </div>
   </section>
 
-  <section class="sf-stack sf-stack--m">
-    <div class="pv-logo-strip sf-cluster sf-cluster--between sf-cluster--no-wrap">
-      <span class="pv-logo">ATLAS</span>
-      <span class="pv-logo">NOVA</span>
-      <span class="pv-logo">KITE</span>
-      <span class="pv-logo">ORBIT</span>
-      <span class="pv-logo">PINNACLE</span>
+  <section class="sf-card sf-card--bordered">
+    <div class="sf-cluster sf-cluster--between sf-cluster--no-wrap">
+      <span class="pv-stat-label">ATLAS</span>
+      <span class="pv-stat-label">NOVA</span>
+      <span class="pv-stat-label">KITE</span>
+      <span class="pv-stat-label">ORBIT</span>
+      <span class="pv-stat-label">PINNACLE</span>
     </div>
   </section>
 
@@ -267,7 +258,7 @@
     </article>
   </section>
 
-  <section class="pv-cta sf-section sf-stack sf-stack--m sf-stack--center pv-center-text pv-on-primary">
+  <section class="sf-surface sf-surface--primary sf-section sf-stack sf-stack--m sf-stack--center pv-center-text pv-on-primary">
     <h2 class="pv-type--display-s">Ready to ship a coherent interface?</h2>
     <p class="pv-measure">Tune once in the configurator and export a framework-ready theme for every screen.</p>
     <button class="sf-btn sf-btn--neutral">Install SLASHED</button>
