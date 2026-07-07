@@ -4,7 +4,7 @@
 
 <p align="center">
   A cascade-layer CSS framework you never compile.<br>
-  720 design tokens, automatic dark mode, fluid type &amp; spacing — no build step, no Node, no JavaScript.
+  729 design tokens, automatic dark mode, fluid type &amp; spacing — no build step, no Node, no JavaScript.
 </p>
 
 <p align="center">
@@ -67,7 +67,7 @@ Every letter of SLASHED is a design commitment, and each one is checkable agains
 
 ## What's inside
 
-- **720 design tokens** (`--sf-*`) covering color, typography, spacing, layout, borders, shadows, motion, and z-index — catalogued in a machine-readable [API index](docs/api-index.json).
+- **729 design tokens** (`--sf-*`) covering color, typography, spacing, layout, borders, shadows, motion, and z-index — catalogued in a machine-readable [API index](docs/api-index.json).
 - **Layout primitives** — `.sf-container`, `.sf-stack`, `.sf-grid`, `.sf-cluster`, `.sf-sidebar`, `.sf-switcher`, `.sf-cover`, `.sf-center`, `.sf-frame`, `.sf-reel`, `.sf-bento`, and more ([docs/layout.md](docs/layout.md)).
 - **Macros** — recipes like `.sf-prose`, `.sf-flow`, `.sf-truncate`, `.sf-aspect`, `.sf-scroll-shadow`, `.sf-surface` ([docs/macros.md](docs/macros.md)).
 - **State classes** — `.sf-is-*` classes mapped to ARIA semantics ([docs/states.md](docs/states.md)).
