@@ -8,7 +8,7 @@ import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { renderWithBundle, NO_TRANSITIONS_STYLE } from './render-helpers.js';
 
-const COMPONENTS_BUNDLE = path.join(process.cwd(), 'badges', 'slashed.optimal-components.css');
+const COMPONENTS_BUNDLE = path.join(process.cwd(), 'dist', 'slashed.optimal-components.css');
 
 for (const theme of ['light', 'dark']) {
   test.describe(`.sf-card — ${theme} theme`, () => {

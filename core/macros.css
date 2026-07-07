@@ -310,6 +310,22 @@
   .sf-scrim--bottom { --sf-scrim-direction: to top; }
   .sf-scrim--full   { --sf-scrim-gradient: var(--sf-scrim-color); }
 
+  /* Named background surface preset (issue #523). Composes the
+     --sf-surface-bg-* token set (see tokens.macros.css) into one reusable,
+     named background: base colour + image/gradient/pattern, sizing, an
+     optional overlay layered above the image, and an optional animation.
+     Inert until a preset feeds the tokens. The overlay is the first
+     background-image layer so it paints ABOVE the image. */
+  .sf-surface-bg {
+    background-color:      var(--sf-surface-bg-color);
+    background-image:      var(--sf-surface-bg-overlay), var(--sf-surface-bg-image);
+    background-size:       var(--sf-surface-bg-size);
+    background-position:   var(--sf-surface-bg-position);
+    background-repeat:     var(--sf-surface-bg-repeat);
+    background-attachment: var(--sf-surface-bg-attachment);
+    animation:             var(--sf-surface-bg-animation);
+  }
+
   .sf-text-protect {
     text-shadow: var(--sf-scrim-text-shadow);
   }

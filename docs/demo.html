@@ -8,7 +8,7 @@
        and a local dev server. For a standalone shareable demo, swap these for
        the jsDelivr CDN links:
          https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css -->
-  <link rel="stylesheet" href="../badges/slashed.optimal.css">
+  <link rel="stylesheet" href="../dist/slashed.optimal.css">
   <style>
     /* ── demo-only overrides ──────────────────────────────── */
     :root {
@@ -943,6 +943,34 @@
           <strong style="color: var(--sf-color-heading)">Smooth theme transition</strong>
           <p style="color: var(--sf-color-text--secondary); font-size: var(--sf-text-s); margin-block-start: var(--sf-space-2xs)">This card fades its background, text and border colours when the mode changes.</p>
         </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)">Contextual backgrounds <code style="font-size: var(--sf-text-xs)">.sf-bg--light</code> / <code style="font-size: var(--sf-text-xs)">.sf-bg--dark</code></h3>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">
+          Named background surfaces: one class sets the background <em>and</em> flips the
+          whole foreground (text, links, borders) to match — always light or always dark,
+          regardless of the ambient scheme.
+        </p>
+        <div class="sf-cluster sf-cluster--m">
+          <div class="sf-bg--dark" style="padding: var(--sf-space-l); border-radius: var(--sf-radius-m); flex: 1 1 14rem">
+            <strong>.sf-bg--dark</strong>
+            <p style="font-size: var(--sf-text-s); margin-block-start: var(--sf-space-2xs)">Auto-light text, and a <a href="#scoped-themes">themed link</a>.</p>
+          </div>
+          <div class="sf-bg--light" style="padding: var(--sf-space-l); border-radius: var(--sf-radius-m); flex: 1 1 14rem">
+            <strong>.sf-bg--light</strong>
+            <p style="font-size: var(--sf-text-s); margin-block-start: var(--sf-space-2xs)">Auto-dark text, and a <a href="#scoped-themes">themed link</a>.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)">Named background surface <code style="font-size: var(--sf-text-xs)">.sf-surface-bg</code></h3>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">
+          A reusable, named background bundling a base colour + image/gradient + an optional
+          overlay layered above it. Define the <code>--sf-surface-bg-*</code> tokens on a scope,
+          then apply the class. Here the overlay is a scrim over a gradient "image".
+        </p>
+        <div class="sf-surface-bg sf-text-protect"
+             style="--sf-surface-bg-image: linear-gradient(120deg, var(--sf-color-primary), var(--sf-color-tertiary)); --sf-surface-bg-overlay: var(--sf-scrim-gradient); min-height: 8rem; padding: var(--sf-space-l); border-radius: var(--sf-radius-m); display: flex; align-items: flex-end; color: var(--sf-color-white)">
+          <strong>Composed background preset</strong>
+        </div>
       </section>
 
       <!-- ══════════════════════════════════════════════════════
@@ -1593,6 +1621,16 @@
         </p>
         <div class="sf-cq" style="border: 1px dashed var(--sf-color-border); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
           <span style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">container-type: inline-size</span>
+        </div>
+
+        <h3>.sf-fluid-cq — container-relative fluid scale</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
+          Makes the fluid type + space scales interpolate against this box's width
+          (<code>100cqi</code>) instead of the viewport — so text in a narrow column
+          scales with the column, not the page. Resize the box to see it.
+        </p>
+        <div class="sf-fluid-cq" style="max-width: 22rem; border: 1px dashed var(--sf-color-border); padding: var(--sf-space-m); border-radius: var(--sf-radius-s); resize: horizontal; overflow: auto">
+          <p style="font-size: var(--sf-text-xl); margin: 0">Fluid text tied to this container's width.</p>
         </div>
 
         <h3>.sf-equal — fixed N-column grid</h3>

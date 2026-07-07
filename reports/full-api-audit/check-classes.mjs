@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const { classes } = oracle();
-const bundleCss = fs.readFileSync(path.join(ROOT, 'badges/slashed.optimal.css'), 'utf8');
+const bundleCss = fs.readFileSync(path.join(ROOT, 'dist/slashed.optimal.css'), 'utf8');
 // word-boundary check so e.g. `sf-grid` isn't matched by `sf-grid--dense` alone
 const escapeCls = (c) => c.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
 const inBundle = (c) => new RegExp(`\\.${escapeCls(c)}(?![A-Za-z0-9_-])`).test(bundleCss);

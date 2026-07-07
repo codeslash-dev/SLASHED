@@ -16,7 +16,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(import.meta.dirname, '.'),
       // Framework CSS lives at the repo root (core/ source layers + built
-      // badges/ bundles). The WP plugin remaps this alias to its own vendored
+      // dist/ bundles). The WP plugin remaps this alias to its own vendored
       // copy, so main.ts / PreviewPanel.svelte stay identical in both builds.
       '@framework-css': path.resolve(import.meta.dirname, '..'),
     },
