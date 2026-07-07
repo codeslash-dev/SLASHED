@@ -8,7 +8,7 @@
        and a local dev server. For a standalone shareable demo, swap these for
        the jsDelivr CDN links:
          https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css -->
-  <link rel="stylesheet" href="../badges/slashed.optimal.css">
+  <link rel="stylesheet" href="../dist/slashed.optimal.css">
   <style>
     /* ── demo-only overrides ──────────────────────────────── */
     :root {
@@ -878,7 +878,7 @@
       <section id="scoped-themes" class="demo-section">
         <h2>Scoped Themes</h2>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-m)">
-          Use <code>data-theme="dark"</code> or <code>data-theme="light"</code> on any element to scope a theme. Tokens resolve correctly per-section, enabling nested light-inside-dark (or vice-versa) without extra overrides.
+          Use <code>data-theme="dark"</code> or <code>data-theme="light"</code> on any element to scope a theme. When attributes are inconvenient, <code>.sf-theme-dark</code> and <code>.sf-theme-light</code> are equivalent class aliases. Tokens resolve correctly per-section, enabling nested light-inside-dark (or vice-versa) without extra overrides.
         </p>
 
         <!-- Dark section nested inside the default light page -->
@@ -942,6 +942,34 @@
         <div class="sf-theme-transition" style="background: var(--sf-color-raised); color: var(--sf-color-text); padding: var(--sf-space-l); border-radius: var(--sf-radius-m); border: 1px solid var(--sf-color-border)">
           <strong style="color: var(--sf-color-heading)">Smooth theme transition</strong>
           <p style="color: var(--sf-color-text--secondary); font-size: var(--sf-text-s); margin-block-start: var(--sf-space-2xs)">This card fades its background, text and border colours when the mode changes.</p>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)">Section theme aliases <code style="font-size: var(--sf-text-xs)">.sf-theme-light</code> / <code style="font-size: var(--sf-text-xs)">.sf-theme-dark</code></h3>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">
+          Class aliases for <code>data-theme</code>: one class scopes the theme, setting the background <em>and</em> flipping the
+          whole foreground (text, links, borders) to match — always light or always dark,
+          regardless of the ambient scheme.
+        </p>
+        <div class="sf-cluster sf-cluster--m">
+          <div class="sf-theme-dark" style="padding: var(--sf-space-l); border-radius: var(--sf-radius-m); flex: 1 1 14rem">
+            <strong>.sf-theme-dark</strong>
+            <p style="font-size: var(--sf-text-s); margin-block-start: var(--sf-space-2xs)">Auto-light text, and a <a href="#scoped-themes">themed link</a>.</p>
+          </div>
+          <div class="sf-theme-light" style="padding: var(--sf-space-l); border-radius: var(--sf-radius-m); flex: 1 1 14rem">
+            <strong>.sf-theme-light</strong>
+            <p style="font-size: var(--sf-text-s); margin-block-start: var(--sf-space-2xs)">Auto-dark text, and a <a href="#scoped-themes">themed link</a>.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-block-start: var(--sf-space-l)">Named background surface <code style="font-size: var(--sf-text-xs)">.sf-surface-bg</code></h3>
+        <p style="color: var(--sf-color-text--muted); font-size: var(--sf-text-s)">
+          A reusable, named background bundling a base colour + image/gradient + an optional
+          overlay layered above it. Define the <code>--sf-surface-bg-*</code> tokens on a scope,
+          then apply the class. Here the overlay is a scrim over a gradient "image".
+        </p>
+        <div class="sf-surface-bg sf-text-protect"
+             style="--sf-surface-bg-image: linear-gradient(120deg, var(--sf-color-primary), var(--sf-color-tertiary)); --sf-surface-bg-overlay: var(--sf-scrim-gradient); min-height: 8rem; padding: var(--sf-space-l); border-radius: var(--sf-radius-m); display: flex; align-items: flex-end; color: var(--sf-color-white)">
+          <strong>Composed background preset</strong>
         </div>
       </section>
 
@@ -1593,6 +1621,16 @@
         </p>
         <div class="sf-cq" style="border: 1px dashed var(--sf-color-border); padding: var(--sf-space-s); border-radius: var(--sf-radius-s)">
           <span style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted)">container-type: inline-size</span>
+        </div>
+
+        <h3>.sf-fluid-cq — container-relative fluid scale</h3>
+        <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">
+          Makes the fluid type + space scales interpolate against this box's width
+          (<code>100cqi</code>) instead of the viewport — so text in a narrow column
+          scales with the column, not the page. Resize the box to see it.
+        </p>
+        <div class="sf-fluid-cq" style="max-width: 22rem; border: 1px dashed var(--sf-color-border); padding: var(--sf-space-m); border-radius: var(--sf-radius-s); resize: horizontal; overflow: auto">
+          <p style="font-size: var(--sf-text-xl); margin: 0">Fluid text tied to this container's width.</p>
         </div>
 
         <h3>.sf-equal — fixed N-column grid</h3>
@@ -2741,17 +2779,17 @@
           </div>
         </div>
 
-        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-bg</code> — background-layer primitive</h3>
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-bg-layer</code> — background-layer primitive</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">Absolutely-positioned cover layer that sits behind a parent's content. The parent auto-promotes to a positioned stacking context via <code>:has()</code>. Compose under <code>.sf-scrim</code> for background → gradient → content layering.</p>
         <div class="sf-cluster sf-cluster--m">
           <div style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden; display: grid; place-items: center">
-            <div class="sf-bg" style="background: linear-gradient(135deg, #4f7, #07c)"></div>
-            <span style="position: relative; font-size: var(--sf-text-s); font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.5)">bare .sf-bg div</span>
+            <div class="sf-bg-layer" style="background: linear-gradient(135deg, #4f7, #07c)"></div>
+            <span style="position: relative; font-size: var(--sf-text-s); font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.5)">bare .sf-bg-layer div</span>
           </div>
           <div class="sf-scrim sf-scrim--bottom" style="inline-size: 16rem; aspect-ratio: 16/9; border-radius: var(--sf-radius-m); overflow: hidden">
-            <div class="sf-bg" style="background: linear-gradient(135deg, #f70, #c07)"></div>
+            <div class="sf-bg-layer" style="background: linear-gradient(135deg, #f70, #c07)"></div>
             <div style="position: absolute; inset-block-end: 0; padding: var(--sf-space-s); color: #fff">
-              <strong>.sf-bg + .sf-scrim</strong>
+              <strong>.sf-bg-layer + .sf-scrim</strong>
             </div>
           </div>
         </div>

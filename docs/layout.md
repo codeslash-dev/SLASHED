@@ -30,7 +30,7 @@ All primitives are demoed in [`demo.html`](demo.html).
 | `.sf-grid-flex` | flex-based grid alternative for uneven item counts; last-row leftovers stretch to fill (default) or stay fixed and centered (`--center`); `--xs … --2xl` | `--sf-grid-min`, `--sf-grid-gap` |
 | `.sf-cover` | full-height region with a centered `.sf-cover__center`; `--min/--max/--padding-*` | `--sf-cover-*` |
 | `.sf-frame` | aspect-ratio media box | `--sf-frame-ratio` |
-| `.sf-bg` | cover media layer behind the parent's content (parent auto-positions + isolates); composes under `.sf-scrim` | `--sf-bg-inset/-fit/-position/-radius/-z` |
+| `.sf-bg-layer` | cover media layer behind the parent's content (parent auto-positions + isolates); composes under `.sf-scrim` | `--sf-bg-layer-inset/-fit/-position/-radius/-z` |
 | `.sf-reel` | horizontal scroll strip | `--sf-reel-*`, `--sf-mask-scrim-*` |
 | `.sf-imposter` | absolutely-centered overlay; `--fixed`, `--contain` | `--sf-imposter-margin` |
 | `.sf-subgrid` / `.sf-subgrid-rows` | inherit parent grid tracks | — |

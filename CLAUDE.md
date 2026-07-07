@@ -13,7 +13,7 @@ of these in sync:
 | `docs/roadmap.md` | `Current version: **X.Y.Z**` line |
 | `configurator/package.json` | `.version` |
 | `configurator/package-lock.json` | `.version` + `.packages[""].version` |
-| `badges/*.css` (unminified) | `/*! SLASHED vX.Y.Z */` comment header |
+| `dist/*.css` (unminified) | `/*! SLASHED vX.Y.Z */` comment header |
 | Configurator UI version pill | baked in via Vite `__SLASHED_VERSION__` at build time |
 
 **Never edit version numbers by hand.** Use `npm version` then the sync script:
@@ -22,7 +22,7 @@ of these in sync:
 npm version <new-version> --no-git-tag-version   # bump the source of truth
 npm run version-sync                              # propagates to all files above
 npm run check:version                             # must pass — CI fails if it doesn't
-npm run build                                     # rebuilds badges/ with stamped headers
+npm run build                                     # rebuilds dist/ with stamped headers
 ```
 
 If you are not bumping the version but you touch any of the files in the table
@@ -65,7 +65,7 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run configurator:sync` | Push `docs/api-index.json` → `configurator/src/data/api-index.generated.json` |
 | `npm run audit` | Audit CSS tokens for consistency, writing `docs/registry.json` |
 | `npm run watch` | Rebuild CSS bundles on file change (dev watch mode) |
-| `npm run test:unit` | Run the Node `--test` unit suite only, without the Playwright e2e build. Some tests read from `badges/` — run `npm run build` first on a clean checkout (CI instead downloads the `badges` artifact from the `build` job before this step) |
+| `npm run test:unit` | Run the Node `--test` unit suite only, without the Playwright e2e build. Some tests read from `dist/` — run `npm run build` first on a clean checkout (CI instead downloads the `dist` artifact from the `build` job before this step) |
 | `npm test` | Full suite: build → unit → Playwright e2e |
 
 ## Release process
@@ -91,7 +91,7 @@ After the tag is pushed, GitHub Actions (`release.yml`) does the rest:
 ## CSS architecture
 
 - Source lives in `core/` (required) and `optional/` (opt-in).
-- `scripts/bundle.js` concatenates and builds `badges/`.
+- `scripts/bundle.js` concatenates and builds `dist/`.
 - Every unminified dist bundle is stamped with a minifier-safe `/*! SLASHED vX.Y.Z ... */` header (bang-comment, per MIT's copyright-notice requirement — see LICENSE).
 - The stamp version must match `package.json` — `release.yml` verifies this
   before publishing the GitHub Release.
@@ -129,5 +129,5 @@ npm test              # full suite (requires built dist — runs build automatic
 npm run test:install  # install Playwright browsers (first time only)
 ```
 
-Do not skip the pretest build step. Tests import from `badges/` and will fail
+Do not skip the pretest build step. Tests import from `dist/` and will fail
 with stale bundles.

@@ -516,11 +516,11 @@ test.describe('macro: .sf-overlap / .sf-overlap-host', () => {
   });
 });
 
-test.describe('macro: .sf-scrim composed with .sf-bg (media background + overlay)', () => {
-  test('img.sf-bg auto-fills the parent behind the scrim gradient and content', async ({ page }) => {
+test.describe('macro: .sf-scrim composed with .sf-bg-layer (media background + overlay)', () => {
+  test('img.sf-bg-layer auto-fills the parent behind the scrim gradient and content', async ({ page }) => {
     await setup(page, `
       <div id="host" class="sf-scrim sf-scrim--bottom" style="position:relative; width:200px; height:120px">
-        <img id="media" class="sf-bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7">
+        <img id="media" class="sf-bg-layer" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7">
         <h2 id="content">Headline</h2>
       </div>
     `);

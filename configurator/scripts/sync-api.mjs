@@ -156,14 +156,14 @@ function buildBundleManifest() {
     // Skip the flattened (no-@layer) variants — same modules, output detail only.
     .filter((b) => !b.flat && typeof b.output === 'string')
     .map((b) => {
-      const id = b.output.replace(/^badges\//, '').replace(/^slashed\./, '').replace(/\.css$/, '');
+      const id = b.output.replace(/^dist\//, '').replace(/^slashed\./, '').replace(/\.css$/, '');
       const files = Array.isArray(b.files) ? b.files : [];
       const optionalModules = files.filter((f) => f.startsWith('optional/'));
       return {
         id,
-        output: b.output.replace(/^badges\//, ''),
-        min: b.output.replace(/^badges\//, '').replace(/\.css$/, '.min.css'),
-        cdn: `${CDN_BASE}/${b.output.replace(/^badges\//, '').replace(/\.css$/, '.min.css')}`,
+        output: b.output.replace(/^dist\//, ''),
+        min: b.output.replace(/^dist\//, '').replace(/\.css$/, '.min.css'),
+        cdn: `${CDN_BASE}/${b.output.replace(/^dist\//, '').replace(/\.css$/, '.min.css')}`,
         fileCount: files.length,
         optionalModules,
       };

@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**720 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**729 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-616 tokens.
+617 tokens.
 
 | Token | Default |
 |---|---|
@@ -352,6 +352,7 @@ rebrand workflow.
 | `--sf-field-required-marker` | `" *"` |
 | `--sf-fluid-max-vw` | `90` |
 | `--sf-fluid-min-vw` | `22.5` |
+| `--sf-fluid-width` | `100vw` |
 | `--sf-focus-ring-color` | `var(--sf-color-action)` |
 | `--sf-focus-ring-offset` | `2px` |
 | `--sf-focus-ring-shadow` | `0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-source-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)` |
@@ -524,42 +525,42 @@ rebrand workflow.
 | `--sf-size-s` | `2rem` |
 | `--sf-size-xl` | `3.5rem` |
 | `--sf-size-xs` | `1.5rem` |
-| `--sf-space-2xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` |
-| `--sf-space-2xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` |
-| `--sf-space-3xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` |
-| `--sf-space-4xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-2xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-2xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-3xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-4xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-base-max` | `2` |
 | `--sf-space-base-min` | `1` |
-| `--sf-space-l` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))` |
-| `--sf-space-m` | `calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-l` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-m` | `calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-none` | `0` |
 | `--sf-space-px` | `1px` |
 | `--sf-space-ratio-max` | `1.333` |
 | `--sf-space-ratio-min` | `1.25` |
-| `--sf-space-s` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-s` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-scale` | `1` |
-| `--sf-space-xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` |
-| `--sf-space-xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-space-xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-state-pending-opacity` | `0.7` |
 | `--sf-sticky-offset` | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | `var(--sf-header-height-desktop)` |
 | `--sf-sticky-offset-mobile` | `var(--sf-header-height-mobile)` |
-| `--sf-text-2xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-2xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-2xl-font-weight` | `var(--sf-font-weight-heading)` |
 | `--sf-text-2xl-letter-spacing` | `var(--sf-tracking-normal)` |
 | `--sf-text-2xl-line-height` | `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))` |
 | `--sf-text-2xl-max-width` | `none` |
-| `--sf-text-2xs` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-2xs` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-2xs-font-weight` | `var(--sf-font-weight-body)` |
 | `--sf-text-2xs-letter-spacing` | `var(--sf-tracking-normal)` |
 | `--sf-text-2xs-line-height` | `var(--sf-leading-relaxed)` |
 | `--sf-text-2xs-max-width` | `55ch` |
-| `--sf-text-3xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-3xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-3xl-font-weight` | `var(--sf-font-weight-heading)` |
 | `--sf-text-3xl-letter-spacing` | `var(--sf-tracking-tight)` |
 | `--sf-text-3xl-line-height` | `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))` |
 | `--sf-text-3xl-max-width` | `none` |
-| `--sf-text-4xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-4xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-4xl-font-weight` | `var(--sf-font-weight-heading)` |
 | `--sf-text-4xl-letter-spacing` | `var(--sf-tracking-tight)` |
 | `--sf-text-4xl-line-height` | `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))` |
@@ -568,23 +569,23 @@ rebrand workflow.
 | `--sf-text-base-min` | `1` |
 | `--sf-text-display-base-max` | `3` |
 | `--sf-text-display-base-min` | `2.4` |
-| `--sf-text-display-l` | `calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-display-scale))` |
-| `--sf-text-display-m` | `calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-display-scale))` |
-| `--sf-text-display-s` | `calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale))` |
+| `--sf-text-display-l` | `calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-display-scale))` |
+| `--sf-text-display-m` | `calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-display-scale))` |
+| `--sf-text-display-s` | `calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale))` |
 | `--sf-text-display-scale` | `1` |
-| `--sf-text-l` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-l` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-l-font-weight` | `var(--sf-font-weight-body)` |
 | `--sf-text-l-letter-spacing` | `var(--sf-tracking-normal)` |
 | `--sf-text-l-line-height` | `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))` |
 | `--sf-text-l-max-width` | `none` |
-| `--sf-text-m` | `calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-m` | `calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-m-font-weight` | `var(--sf-font-weight-body)` |
 | `--sf-text-m-letter-spacing` | `var(--sf-tracking-normal)` |
 | `--sf-text-m-line-height` | `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))` |
 | `--sf-text-m-max-width` | `65ch` |
 | `--sf-text-ratio-max` | `1.333` |
 | `--sf-text-ratio-min` | `1.25` |
-| `--sf-text-s` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-s` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-s-font-weight` | `var(--sf-font-weight-body)` |
 | `--sf-text-s-letter-spacing` | `var(--sf-tracking-normal)` |
 | `--sf-text-s-line-height` | `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))` |
@@ -596,12 +597,12 @@ rebrand workflow.
 | `--sf-text-shadow-s` | `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))` |
 | `--sf-text-shadow-xl` | `0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))` |
 | `--sf-text-shadow-xs` | `0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))` |
-| `--sf-text-xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-xl` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-xl-font-weight` | `var(--sf-font-weight-body)` |
 | `--sf-text-xl-letter-spacing` | `var(--sf-tracking-normal)` |
 | `--sf-text-xl-line-height` | `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))` |
 | `--sf-text-xl-max-width` | `none` |
-| `--sf-text-xs` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale))` |
+| `--sf-text-xs` | `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale))` |
 | `--sf-text-xs-font-weight` | `var(--sf-font-weight-body)` |
 | `--sf-text-xs-letter-spacing` | `var(--sf-tracking-normal)` |
 | `--sf-text-xs-line-height` | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
@@ -647,11 +648,11 @@ rebrand workflow.
 | `--sf-bento-row-compact` | `6rem` |
 | `--sf-bento-row-default` | `10rem` |
 | `--sf-bento-row-tall` | `16rem` |
-| `--sf-bg-fit` | `cover` |
-| `--sf-bg-inset` | `0px` |
-| `--sf-bg-position` | `50% 50%` |
-| `--sf-bg-radius` | `0` |
-| `--sf-bg-z` | `-2` |
+| `--sf-bg-layer-fit` | `cover` |
+| `--sf-bg-layer-inset` | `0px` |
+| `--sf-bg-layer-position` | `50% 50%` |
+| `--sf-bg-layer-radius` | `0` |
+| `--sf-bg-layer-z` | `-2` |
 | `--sf-box-border-color` | `var(--sf-color-border)` |
 | `--sf-box-border-width` | `0` |
 | `--sf-box-padding` | `var(--sf-space-m)` |
@@ -696,7 +697,7 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-26 tokens.
+34 tokens.
 
 | Token | Default |
 |---|---|
@@ -725,6 +726,14 @@ rebrand workflow.
 | `--sf-scrim-gradient` | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` |
 | `--sf-scrim-text-shadow` | `0 1px 3px oklch(0 0 0 / 0.6)` |
 | `--sf-scroll-shadow-size` | `2rem` |
+| `--sf-surface-bg-animation` | `none` |
+| `--sf-surface-bg-attachment` | `scroll` |
+| `--sf-surface-bg-color` | `transparent` |
+| `--sf-surface-bg-image` | `none` |
+| `--sf-surface-bg-overlay` | `none` |
+| `--sf-surface-bg-position` | `center` |
+| `--sf-surface-bg-repeat` | `no-repeat` |
+| `--sf-surface-bg-size` | `cover` |
 | `--sf-surface-color` | `var(--sf-color-base)` |
 
 ## Component tokens (`optional/tokens.components.css`)

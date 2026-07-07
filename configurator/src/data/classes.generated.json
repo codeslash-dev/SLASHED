@@ -175,12 +175,12 @@
       "layer": "slashed.layout"
     },
     {
-      "name": "sf-bg",
-      "selector": ".sf-bg",
+      "name": "sf-bg-layer",
+      "selector": ".sf-bg-layer",
       "kind": "layout",
       "category": "Layout primitives",
-      "group": "Background",
-      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg\"> or as a wrapper with a nested > img / > video / > picture.",
+      "group": "",
+      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg-layer\"> or as a wrapper with a nested > img / > video / > picture.",
       "optional": false,
       "layer": "slashed.layout"
     },
@@ -1163,6 +1163,16 @@
       "description": "Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers.",
       "optional": false,
       "layer": "slashed.macros"
+    },
+    {
+      "name": "sf-fluid-cq",
+      "selector": ".sf-fluid-cq",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "group": "",
+      "description": ".sf-fluid-cq: opt a subtree into a CONTAINER-relative fluid scale (issue #497). By default --sf-text-* / --sf-space-* interpolate against 100vw (the viewport); inside .sf-fluid-cq they interpolate against 100cqi (this box's inline size), so type + spacing track the container…",
+      "optional": false,
+      "layer": "slashed.layout"
     },
     {
       "name": "sf-focus-parent",
@@ -2419,7 +2429,7 @@
       "selector": ".sf-overlay",
       "kind": "layout",
       "category": "Layout primitives",
-      "group": "OVERLAY / BACKDROP",
+      "group": "",
       "description": "Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims.",
       "optional": false,
       "layer": "slashed.layout"
@@ -3005,6 +3015,16 @@
       "layer": "slashed.macros"
     },
     {
+      "name": "sf-surface-bg",
+      "selector": ".sf-surface-bg",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Named background surface preset (issue #523). Composes the --sf-surface-bg-* token set (see tokens.macros.css) into one reusable, named background: base colour + image/gradient/pattern, sizing, an optional overlay layered above the image, and an optional animation. Inert until…",
+      "optional": false,
+      "layer": "slashed.macros"
+    },
+    {
       "name": "sf-switcher",
       "selector": ".sf-switcher",
       "kind": "layout",
@@ -3153,6 +3173,26 @@
       "description": "Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
       "optional": true,
       "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-theme-dark",
+      "selector": ".sf-theme-dark",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "group": "",
+      "description": "",
+      "optional": false,
+      "layer": "slashed.themes"
+    },
+    {
+      "name": "sf-theme-light",
+      "selector": ".sf-theme-light",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "group": "",
+      "description": "",
+      "optional": false,
+      "layer": "slashed.themes"
     },
     {
       "name": "sf-theme-transition",

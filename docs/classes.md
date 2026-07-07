@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**284 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
+**288 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-144 classes.
+145 classes.
 
 | Class |
 |---|
@@ -23,7 +23,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-bento-full` |
 | `.sf-bento-tall` |
 | `.sf-bento-wide` |
-| `.sf-bg` |
+| `.sf-bg-layer` |
 | `.sf-box` |
 | `.sf-breakout` |
 | `.sf-center` |
@@ -66,6 +66,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-equal--3` |
 | `.sf-equal--4` |
 | `.sf-equal--6` |
+| `.sf-fluid-cq` |
 | `.sf-frame` |
 | `.sf-frame--3-2` |
 | `.sf-frame--4-3` |
@@ -159,7 +160,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-57 classes.
+58 classes.
 
 | Class |
 |---|
@@ -216,6 +217,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-surface--success` |
 | `.sf-surface--tertiary` |
 | `.sf-surface--warning` |
+| `.sf-surface-bg` |
 | `.sf-tabular-nums` |
 | `.sf-text-gradient` |
 | `.sf-text-protect` |
@@ -307,10 +309,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Theme utilities (`core/themes.css`)
 
-1 classes.
+3 classes.
 
 | Class |
 |---|
+| `.sf-theme-dark` |
+| `.sf-theme-light` |
 | `.sf-theme-transition` |
 
 ## Components (`optional/components.css`)

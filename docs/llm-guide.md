@@ -134,14 +134,18 @@ Slashed requires modern CSS features. Effective minimum:
 <!-- Whole page dark -->
 <html data-theme="dark">
 
-<!-- Only this section dark (section-level theming) -->
+<!-- Only this section dark (section-level theming; canonical) -->
 <section data-theme="dark">
+
+<!-- Equivalent class alias when an attribute is inconvenient -->
+<section class="sf-theme-dark">
 
 <!-- Force light for a sub-section inside a dark root -->
 <article data-theme="light">
+<article class="sf-theme-light">
 ```
 
-Without `data-theme` the framework auto-detects `prefers-color-scheme: dark`. The `--sf-is-dark` token (INTERNAL — do not set directly) is managed automatically.
+`data-theme="light|dark"` is the canonical API; `.sf-theme-light` and `.sf-theme-dark` are class aliases with the same scoped token re-declarations and automatic section background/text paint. A `.sf-theme-dark` band is *always* dark regardless of the ambient scheme (the class-based equivalent of `data-theme="dark"` on that element), and flips the whole foreground — text, links, borders, focus, code — to match. Without `data-theme` the framework auto-detects `prefers-color-scheme: dark`. The `--sf-is-dark` token (INTERNAL — do not set directly) is managed automatically.
 
 **Smooth mode transition:**
 ```html
@@ -739,7 +743,7 @@ All steps multiplied by `--sf-radius-scale` (except `full` and `pill`).
 
 --sf-media-radius            /* 0 (off) — set to round every <img>/<figure> globally,
                                  e.g. var(--sf-radius-m). Applied via :where() so
-                                 .sf-bg / component-specific radii still win. */
+                                 .sf-bg-layer / component-specific radii still win. */
 ```
 
 ### 8.4 Z-index
@@ -814,12 +818,12 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 /* Frame (ratio box) */
 --sf-frame-ratio: 16 / 9
 
-/* Background layer (.sf-bg) — cover media behind sibling content */
---sf-bg-inset:    0          /* single length, applied to every edge */
---sf-bg-fit:      cover
---sf-bg-position: 50% 50%
---sf-bg-radius:   0
---sf-bg-z:        -2         /* behind content, above the parent background */
+/* Background layer (.sf-bg-layer) — cover media behind sibling content */
+--sf-bg-layer-inset:    0px        /* single length, applied to every edge (0px, not bare 0 — see calc() note in tokens.layout.css) */
+--sf-bg-layer-fit:      cover
+--sf-bg-layer-position: 50% 50%
+--sf-bg-layer-radius:   0
+--sf-bg-layer-z:        -2         /* behind content, above the parent background */
 
 /* Reel (horizontal scroll) */
 --sf-reel-item-width: max-content
@@ -882,6 +886,18 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-scrim-direction:  to top
 --sf-scrim-gradient:   linear-gradient(…)   /* composed — override for multi-stop */
 --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6)  /* .sf-text-protect */
+
+/* Named background surface preset (.sf-surface-bg) — set on a scope, then
+   apply the class to compose a reusable image/gradient background. -overlay
+   layers above -image. Inert by default (image/overlay/animation = none). */
+--sf-surface-bg-color:      transparent  /* base colour fallback */
+--sf-surface-bg-image:      none         /* image / gradient / pattern */
+--sf-surface-bg-overlay:    none         /* overlay above the image (e.g. a scrim) */
+--sf-surface-bg-size:       cover
+--sf-surface-bg-position:   center
+--sf-surface-bg-repeat:     no-repeat
+--sf-surface-bg-attachment: scroll
+--sf-surface-bg-animation:  none         /* optional animation shorthand */
 
 /* Concave corner (.sf-corner-scoop) */
 --sf-corner-scoop-size: var(--sf-radius-2xl)
@@ -1148,6 +1164,11 @@ Overriding any of these reshapes the entire fluid scale. No need to edit individ
 --sf-fluid-min-vw: 22.5    /* in rem (360px) */
 --sf-fluid-max-vw: 90      /* in rem (1440px) */
 
+/* Length every fluid clamp() interpolates against. Default 100vw
+   (viewport-relative). Set to 100cqi on a container scope to make the whole
+   type + space + display scale container-relative instead — see below. */
+--sf-fluid-width: 100vw
+
 /* Body type scale */
 --sf-text-ratio-min:   1.25    /* modular ratio at min viewport */
 --sf-text-ratio-max:   1.333   /* modular ratio at max viewport */
@@ -1163,6 +1184,26 @@ Overriding any of these reshapes the entire fluid scale. No need to edit individ
 --sf-space-ratio-max:  1.333
 --sf-space-base-min:   1   /* --sf-space-m on mobile */
 --sf-space-base-max:   2   /* --sf-space-m on desktop */
+```
+
+**Container-relative fluid scale.** By default the fluid scales interpolate
+against the viewport (`--sf-fluid-width: 100vw`), while the layout primitives
+(`.sf-grid-cols-*`, `.sf-content-grid`, `.sf-bento`) respond to `@container`.
+In a nested/narrow context (sidebar, card, 1/3 column) the two disagree: the
+layout adapts to the narrow container but the type/spacing keeps scaling to the
+full viewport. Opt a subtree into container-relative fluid with `.sf-fluid-cq`
+— it establishes an inline-size container and re-declares the `--sf-text-*` /
+`--sf-space-*` scale against `100cqi`, so type + spacing inside scale to that
+box's width instead of the viewport. The page-level default is unchanged
+(opt-in per scope). Apply it to a wrapper; its contents scale to its width.
+Composes with `.sf-container` / `.sf-cq` (put `.sf-fluid-cq` inside one to
+scale against that ancestor). Requires container-query support (the framework
+floor); without it, contents fall back to the viewport-based scale.
+
+```html
+<aside class="sf-fluid-cq">
+  <p>Type + spacing here scale to this wrapper's width, not the viewport.</p>
+</aside>
 ```
 
 ### 11.2 LumLocker
@@ -1464,7 +1505,7 @@ a:visited { color: var(--sf-color-link--visited); }
 
 **10. `--sf-color-text--on-*` tokens give WCAG AA Large for free.** Always use them on colored backgrounds instead of manually choosing white or black. For body text on color, tune `--sf-contrast-threshold` or override the token directly.
 
-**11. Section-level theming works via `data-theme`.** Don't toggle modes by manually manipulating CSS variables in JavaScript — change `data-theme` instead.
+**11. Section-level theming works via `data-theme` or its class aliases.** Prefer `data-theme="light|dark"` when you can; use `.sf-theme-light` / `.sf-theme-dark` when an attribute is inconvenient. Don't toggle modes by manually manipulating CSS variables in JavaScript — change the theme attribute/class instead.
 
 **12. Don't edit the generative scale directly.** `--sf-text-*` and `--sf-space-*` tokens are computed from a modular scale. Change the inputs (`--sf-text-ratio-max`, etc.) or override a specific step only if you need to pin one value.
 
@@ -1479,7 +1520,7 @@ a:visited { color: var(--sf-color-link--visited); }
 | Sharp corners globally | `--sf-radius-scale: 0` |
 | Disable animations | `--sf-motion-scale: 0` |
 | Dark mode (whole page) | `<html data-theme="dark">` |
-| Dark mode (section) | `<section data-theme="dark">` |
+| Dark mode (section) | `<section data-theme="dark">` (canonical) or `<section class="sf-theme-dark">` |
 | Smooth theme transition | `<html class="sf-theme-transition">` |
 | Align brand luminance | `<html data-lumlocker>` + `--sf-lumlocker: 0.65` |
 | Text on colored background | `--sf-color-text--on-{color}` |

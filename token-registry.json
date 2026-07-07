@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 750
+    "nextId": 759
   },
   "tokens": [
     {
@@ -2798,23 +2798,23 @@
     },
     {
       "id": 693,
-      "name": "--sf-bg-fit"
+      "name": "--sf-bg-layer-fit"
     },
     {
       "id": 694,
-      "name": "--sf-bg-inset"
+      "name": "--sf-bg-layer-inset"
     },
     {
       "id": 695,
-      "name": "--sf-bg-position"
+      "name": "--sf-bg-layer-position"
     },
     {
       "id": 696,
-      "name": "--sf-bg-radius"
+      "name": "--sf-bg-layer-radius"
     },
     {
       "id": 697,
-      "name": "--sf-bg-z"
+      "name": "--sf-bg-layer-z"
     },
     {
       "id": 698,
@@ -3033,6 +3033,42 @@
     {
       "id": 749,
       "name": "--sf-text-shadow-xs"
+    },
+    {
+      "id": 750,
+      "name": "--sf-fluid-width"
+    },
+    {
+      "id": 751,
+      "name": "--sf-surface-bg-animation"
+    },
+    {
+      "id": 752,
+      "name": "--sf-surface-bg-attachment"
+    },
+    {
+      "id": 753,
+      "name": "--sf-surface-bg-color"
+    },
+    {
+      "id": 754,
+      "name": "--sf-surface-bg-image"
+    },
+    {
+      "id": 755,
+      "name": "--sf-surface-bg-overlay"
+    },
+    {
+      "id": 756,
+      "name": "--sf-surface-bg-position"
+    },
+    {
+      "id": 757,
+      "name": "--sf-surface-bg-repeat"
+    },
+    {
+      "id": 758,
+      "name": "--sf-surface-bg-size"
     }
   ]
 }

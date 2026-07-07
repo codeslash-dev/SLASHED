@@ -217,11 +217,11 @@ function buildOne({ files, output, flat = false }) {
 // Published to the `dist` branch by publish-dist.yml, so README badges always
 // reflect the freshly built size — no hand-edited number to go stale.
 function writeSizeBadge(label) {
-  const minPath = resolveInsideRoot(`badges/slashed.${label}.min.css`);
+  const minPath = resolveInsideRoot(`dist/slashed.${label}.min.css`);
   // Prefer the minified bundle; fall back to unminified if lightningcss was unavailable.
   const target = fs.existsSync(minPath)
     ? minPath
-    : resolveInsideRoot(`badges/slashed.${label}.css`);
+    : resolveInsideRoot(`dist/slashed.${label}.css`);
   if (!fs.existsSync(target)) {
     console.warn(`[bundle] Badge skipped for "${label}" — bundle not found`);
     return;

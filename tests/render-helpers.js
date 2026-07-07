@@ -16,7 +16,7 @@
 // their repeated BUNDLE path.join() is shared here.
 import path from 'node:path';
 
-export const BUNDLE = path.join(process.cwd(), 'badges', 'slashed.optimal.css');
+export const BUNDLE = path.join(process.cwd(), 'dist', 'slashed.optimal.css');
 
 export const NO_TRANSITIONS_STYLE =
   '*, *::before, *::after { transition: none !important; animation-duration: 0s !important; }';
