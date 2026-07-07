@@ -179,7 +179,7 @@ its description and default value in any editor that supports the format:
 ```json
 // .vscode/settings.json
 {
-  "css.customData": ["./node_modules/slashed/badges/css-custom-data.json"]
+  "css.customData": ["./node_modules/slashed/dist/css-custom-data.json"]
 }
 ```
 
@@ -190,7 +190,7 @@ The WordPress plugin — Bricks Builder and Gutenberg integrations plus a visual
 ## Development
 
 ```sh
-npm run build        # build all badges/ bundles + docs
+npm run build        # build all dist/ bundles + docs
 npm run watch        # rebuild on change
 npm run lint:css     # stylelint all CSS
 npm test             # full suite (unit + Playwright, light + dark)

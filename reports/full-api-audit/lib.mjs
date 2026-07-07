@@ -17,7 +17,7 @@ export const DEMOS = path.join(ROOT, 'demos');
 export const RESULTS = path.join(ROOT, 'reports/full-api-audit/results');
 export const SHOTS = path.join(ROOT, 'reports/full-api-audit/screenshots');
 const CDN = 'https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal-components.css';
-const LOCAL = path.join(ROOT, 'badges/slashed.optimal-components.css');
+const LOCAL = path.join(ROOT, 'dist/slashed.optimal-components.css');
 const TMP = path.join(DEMOS, '.audit');
 
 fs.mkdirSync(RESULTS, { recursive: true });

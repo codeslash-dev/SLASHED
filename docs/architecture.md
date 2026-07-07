@@ -343,7 +343,7 @@ If precision is needed in a consumer layout — e.g. a `.sf-grid-cols-3` that mu
 
 ## Bundle configuration
 
-The optimal bundle (`badges/slashed.optimal.css`) — the recommended default —
+The optimal bundle (`dist/slashed.optimal.css`) — the recommended default —
 includes core files plus classless form styling in order:
 
 ```text

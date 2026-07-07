@@ -68,8 +68,8 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
-          name: badges
-          path: badges/
+          name: dist
+          path: dist/
 
   artifacts-freshness:
     name: Verify all generated artifacts
@@ -149,11 +149,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Reuse the badges/ artifact from the build job — no need to rebuild.
+      # Reuse the dist/ artifact from the build job — no need to rebuild.
       - uses: actions/download-artifact@v8
         with:
-          name: badges
-          path: badges/
+          name: dist
+          path: dist/
       # Run unit tests directly (skipping the pretest build hook).
       - run: npm run test:unit
       - run: npx playwright install --with-deps chromium firefox webkit
@@ -176,13 +176,13 @@ jobs:
       - run: npm ci
       - run: npm ci
         working-directory: configurator
-      # Reuse the badges/ artifact from the build job so the configurator Vite
+      # Reuse the dist/ artifact from the build job so the configurator Vite
       # build can resolve PreviewPanel.svelte's ?raw CSS import without a
       # redundant root rebuild.
       - uses: actions/download-artifact@v8
         with:
-          name: badges
-          path: badges/
+          name: dist
+          path: dist/
       # Unit suite — the sync tripwire: curated Basic controls, presets, fluid
       # engine scalars and knob defaults all pinned to the live catalogue —
       # plus the Vitest component suite (test runs both via test:unit/components).

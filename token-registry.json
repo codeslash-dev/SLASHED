@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 750
+    "nextId": 759
   },
   "tokens": [
     {
@@ -3033,6 +3033,42 @@
     {
       "id": 749,
       "name": "--sf-text-shadow-xs"
+    },
+    {
+      "id": 750,
+      "name": "--sf-fluid-width"
+    },
+    {
+      "id": 751,
+      "name": "--sf-surface-bg-animation"
+    },
+    {
+      "id": 752,
+      "name": "--sf-surface-bg-attachment"
+    },
+    {
+      "id": 753,
+      "name": "--sf-surface-bg-color"
+    },
+    {
+      "id": 754,
+      "name": "--sf-surface-bg-image"
+    },
+    {
+      "id": 755,
+      "name": "--sf-surface-bg-overlay"
+    },
+    {
+      "id": 756,
+      "name": "--sf-surface-bg-position"
+    },
+    {
+      "id": 757,
+      "name": "--sf-surface-bg-repeat"
+    },
+    {
+      "id": 758,
+      "name": "--sf-surface-bg-size"
     }
   ]
 }

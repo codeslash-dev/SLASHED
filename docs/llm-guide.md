@@ -143,6 +143,19 @@ Slashed requires modern CSS features. Effective minimum:
 
 Without `data-theme` the framework auto-detects `prefers-color-scheme: dark`. The `--sf-is-dark` token (INTERNAL — do not set directly) is managed automatically.
 
+**Contextual background classes.** `.sf-bg--light` / `.sf-bg--dark` are named
+background surfaces: they set a light or dark background **and** flip the whole
+foreground (text, links, borders, focus, code) to match — no extra classes.
+They ride the same section-theming machinery as `data-theme`, so a
+`.sf-bg--dark` band is *always* dark regardless of the ambient scheme (the
+class-based equivalent of `data-theme="dark"` on that element). Distinct from
+the `.sf-bg` media-layer primitive — these apply to a section, not a child image.
+
+```html
+<section class="sf-bg--dark">Always-dark band with auto-light text</section>
+<section class="sf-bg--light">Always-light band with auto-dark text</section>
+```
+
 **Smooth mode transition:**
 ```html
 <html class="sf-theme-transition">
@@ -883,6 +896,18 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-scrim-gradient:   linear-gradient(…)   /* composed — override for multi-stop */
 --sf-scrim-text-shadow: 0 1px 3px oklch(0 0 0 / 0.6)  /* .sf-text-protect */
 
+/* Named background surface preset (.sf-surface-bg) — set on a scope, then
+   apply the class to compose a reusable image/gradient background. -overlay
+   layers above -image. Inert by default (image/overlay/animation = none). */
+--sf-surface-bg-color:      transparent  /* base colour fallback */
+--sf-surface-bg-image:      none         /* image / gradient / pattern */
+--sf-surface-bg-overlay:    none         /* overlay above the image (e.g. a scrim) */
+--sf-surface-bg-size:       cover
+--sf-surface-bg-position:   center
+--sf-surface-bg-repeat:     no-repeat
+--sf-surface-bg-attachment: scroll
+--sf-surface-bg-animation:  none         /* optional animation shorthand */
+
 /* Concave corner (.sf-corner-scoop) */
 --sf-corner-scoop-size: var(--sf-radius-2xl)
 --sf-corner-scoop-at:   100% 0
@@ -1148,6 +1173,11 @@ Overriding any of these reshapes the entire fluid scale. No need to edit individ
 --sf-fluid-min-vw: 22.5    /* in rem (360px) */
 --sf-fluid-max-vw: 90      /* in rem (1440px) */
 
+/* Length every fluid clamp() interpolates against. Default 100vw
+   (viewport-relative). Set to 100cqi on a container scope to make the whole
+   type + space + display scale container-relative instead — see below. */
+--sf-fluid-width: 100vw
+
 /* Body type scale */
 --sf-text-ratio-min:   1.25    /* modular ratio at min viewport */
 --sf-text-ratio-max:   1.333   /* modular ratio at max viewport */
@@ -1163,6 +1193,26 @@ Overriding any of these reshapes the entire fluid scale. No need to edit individ
 --sf-space-ratio-max:  1.333
 --sf-space-base-min:   1   /* --sf-space-m on mobile */
 --sf-space-base-max:   2   /* --sf-space-m on desktop */
+```
+
+**Container-relative fluid scale.** By default the fluid scales interpolate
+against the viewport (`--sf-fluid-width: 100vw`), while the layout primitives
+(`.sf-grid-cols-*`, `.sf-content-grid`, `.sf-bento`) respond to `@container`.
+In a nested/narrow context (sidebar, card, 1/3 column) the two disagree: the
+layout adapts to the narrow container but the type/spacing keeps scaling to the
+full viewport. Opt a subtree into container-relative fluid with `.sf-fluid-cq`
+— it establishes an inline-size container and re-declares the `--sf-text-*` /
+`--sf-space-*` scale against `100cqi`, so type + spacing inside scale to that
+box's width instead of the viewport. The page-level default is unchanged
+(opt-in per scope). Apply it to a wrapper; its contents scale to its width.
+Composes with `.sf-container` / `.sf-cq` (put `.sf-fluid-cq` inside one to
+scale against that ancestor). Requires container-query support (the framework
+floor); without it, contents fall back to the viewport-based scale.
+
+```html
+<aside class="sf-fluid-cq">
+  <p>Type + spacing here scale to this wrapper's width, not the viewport.</p>
+</aside>
 ```
 
 ### 11.2 LumLocker
