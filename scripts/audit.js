@@ -78,8 +78,9 @@ function extractClasses(prefix, { excludePrefix = '' } = {}) {
 }
 
 // ── Unprefixed class extraction ──────────────────────────────────────────────
-// Finds class selectors that are NOT .sf-* or .sf-is-* (accessibility helpers,
-// print utilities, theme utilities, etc.)
+// Finds class selectors that are NOT .sf-* (accessibility helpers, print
+// utilities, theme utilities, etc.). Legacy .is-* selectors are rejected so the
+// old state namespace cannot silently re-enter the generated API.
 
 function extractUnprefixedClasses() {
   const names = new Set();
@@ -90,8 +91,12 @@ function extractUnprefixedClasses() {
     css = css.replace(/@layer\s+[^{;]+[{;]/g, '');
     for (const m of css.matchAll(re)) {
       const name = m[1];
-      // Skip sf- and sf-is- prefixed (already tracked separately)
-      if (name.startsWith('sf-') || name.startsWith('sf-is-')) continue;
+      if (name.startsWith('sf-')) continue;
+      if (name.startsWith('is-')) {
+        throw new Error(
+          `[audit] Legacy state selector .${name} found in ${rel}; use .sf-${name} instead.`
+        );
+      }
       names.add(name);
     }
   }

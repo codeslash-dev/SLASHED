@@ -463,7 +463,12 @@ export function extractClassesFromFile(rel, root, bundlesFor) {
   const noLayer = masked.replace(/@layer\s+[^{;]+[{;]/g, mm => mm.replace(/[^\n]/g, ' '));
   for (const m of noLayer.matchAll(/\.([a-z][\w-]*)/g)) {
     const name = m[1];
-    if (name.startsWith('sf-') || name.startsWith('sf-is-')) continue;
+    if (name.startsWith('sf-')) continue;
+    if (name.startsWith('is-')) {
+      throw new Error(
+        `[api-index] Legacy state selector .${name} found in ${rel}; use .sf-${name} instead.`
+      );
+    }
     addClass(rows, name, m.index);
   }
 

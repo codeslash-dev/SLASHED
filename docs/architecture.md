@@ -94,7 +94,7 @@ decision tree to use when adding a new class.
 
 2. Does it modify an element's runtime state?
       (hover, active, disabled, loading…)
-   YES → core/states.css (.sf-is-*/.has-*)  (slashed.states)
+   YES → core/states.css (.sf-is-*/.sf-has-*)  (slashed.states)
    NO  → step 3
 
 3. Is it an a11y pattern or a11y utility?
