@@ -1,5 +1,5 @@
 {
-  "macros":     ["prose", "flow-space", "line-clamp", "aspect", "scroll-shadow", "scrim", "surface-color", "content-intrinsic", "corner-scoop", "overlap-"],
+  "macros":     ["prose", "flow-space", "line-clamp", "aspect", "scroll-shadow", "scrim", "surface-color", "surface-bg", "content-intrinsic", "corner-scoop", "overlap-"],
   "colors":     ["color", "contrast", "palette-mix", "lumlocker", "gradient"],
   "typography": ["font", "--sf-text", "leading", "tracking", "weight", "body-font", "heading-font",
                  "body-em", "body-text", "heading-text", "display-l-", "display-m-",
