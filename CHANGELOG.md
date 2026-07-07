@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.1] - 2026-07-07
+
+### Features
+- **configurator:** surface the .sf-surface-bg macro tokens in controls
+- **tokens,themes,macros,tooling:** ship #497 #526 #523 + #505 dist rename
+- **configurator:** refine live preview tabs
+- **landing:** publish the new standalone landing page
+- **layout,utilities:** ship #536, #535; activate #540, #542 into 0.7.0
+
+### Bug Fixes
+- **configurator:** address review on surface-bg controls
+- **configurator:** categorise --sf-fluid-width knob under typography domain
+- **configurator:** keep preview tabs framework-native
+- **utilities:** scope .sf-marker to brand/action families + exclude prose
+
 ## [0.7.0] - 2026-07-06
 
 ### Added
