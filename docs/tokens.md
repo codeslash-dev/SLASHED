@@ -647,11 +647,11 @@ rebrand workflow.
 | `--sf-bento-row-compact` | `6rem` |
 | `--sf-bento-row-default` | `10rem` |
 | `--sf-bento-row-tall` | `16rem` |
-| `--sf-bg-fit` | `cover` |
-| `--sf-bg-inset` | `0px` |
-| `--sf-bg-position` | `50% 50%` |
-| `--sf-bg-radius` | `0` |
-| `--sf-bg-z` | `-2` |
+| `--sf-bg-layer-fit` | `cover` |
+| `--sf-bg-layer-inset` | `0px` |
+| `--sf-bg-layer-position` | `50% 50%` |
+| `--sf-bg-layer-radius` | `0` |
+| `--sf-bg-layer-z` | `-2` |
 | `--sf-box-border-color` | `var(--sf-color-border)` |
 | `--sf-box-border-width` | `0` |
 | `--sf-box-padding` | `var(--sf-space-m)` |

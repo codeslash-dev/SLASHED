@@ -465,12 +465,12 @@
       "layer": "slashed.layout"
     },
     {
-      "name": "sf-bg",
-      "selector": ".sf-bg",
+      "name": "sf-bg-layer",
+      "selector": ".sf-bg-layer",
       "kind": "layout",
       "category": "Layout primitives",
       "group": "Background",
-      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg\"> or as a wrapper with a nested > img / > video / > picture.",
+      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg-layer\"> or as a wrapper with a nested > img / > video / > picture.",
       "optional": false,
       "layer": "slashed.layout"
     },
@@ -3153,6 +3153,26 @@
       "description": "Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.",
       "optional": true,
       "layer": "slashed.utilities"
+    },
+    {
+      "name": "sf-theme-dark",
+      "selector": ".sf-theme-dark",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "group": "",
+      "description": "",
+      "optional": false,
+      "layer": "slashed.themes"
+    },
+    {
+      "name": "sf-theme-light",
+      "selector": ".sf-theme-light",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "group": "",
+      "description": "",
+      "optional": false,
+      "layer": "slashed.themes"
     },
     {
       "name": "sf-theme-transition",

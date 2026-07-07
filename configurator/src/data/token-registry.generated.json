@@ -2798,23 +2798,23 @@
     },
     {
       "id": 693,
-      "name": "--sf-bg-fit"
+      "name": "--sf-bg-layer-fit"
     },
     {
       "id": 694,
-      "name": "--sf-bg-inset"
+      "name": "--sf-bg-layer-inset"
     },
     {
       "id": 695,
-      "name": "--sf-bg-position"
+      "name": "--sf-bg-layer-position"
     },
     {
       "id": 696,
-      "name": "--sf-bg-radius"
+      "name": "--sf-bg-layer-radius"
     },
     {
       "id": 697,
-      "name": "--sf-bg-z"
+      "name": "--sf-bg-layer-z"
     },
     {
       "id": 698,

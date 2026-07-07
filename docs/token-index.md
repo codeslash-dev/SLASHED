@@ -122,11 +122,11 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-bento-row-compact` | PUBLIC | knob | Layout | `6rem` |
 | `--sf-bento-row-default` | PUBLIC | knob | Layout | `10rem` |
 | `--sf-bento-row-tall` | PUBLIC | knob | Layout | `16rem` |
-| `--sf-bg-fit` | PUBLIC | knob | Layout | `cover` |
-| `--sf-bg-inset` | PUBLIC | knob | Layout | `0px` |
-| `--sf-bg-position` | PUBLIC | knob | Layout | `50% 50%` |
-| `--sf-bg-radius` | PUBLIC | knob | Layout | `0` |
-| `--sf-bg-z` | PUBLIC | knob | Layout | `-2` |
+| `--sf-bg-layer-fit` | PUBLIC | knob | Layout | `cover` |
+| `--sf-bg-layer-inset` | PUBLIC | knob | Layout | `0px` |
+| `--sf-bg-layer-position` | PUBLIC | knob | Layout | `50% 50%` |
+| `--sf-bg-layer-radius` | PUBLIC | knob | Layout | `0` |
+| `--sf-bg-layer-z` | PUBLIC | knob | Layout | `-2` |
 | `--sf-blur` | PUBLIC | knob | Core | `12px` |
 | `--sf-body-color` | PUBLIC | consumption | Core | `var(--sf-color-text)` |
 | `--sf-body-em-style` | PUBLIC | knob | Core | `italic` |

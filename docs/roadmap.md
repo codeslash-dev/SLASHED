@@ -93,7 +93,7 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   Tracked in [#537](https://github.com/codeslash-dev/SLASHED/issues/537).
 - ~~**Global media radius**~~ ✓ **Done** — `--sf-media-radius` (0 by
   default, off) applied via `:where(img, figure)` in `core/base.css`; opt
-  in globally by setting the token, without fighting `.sf-bg` or a
+  in globally by setting the token, without fighting `.sf-bg-layer` or a
   component's own radius (layer order + zero specificity).
   Tracked in [#529](https://github.com/codeslash-dev/SLASHED/issues/529).
 - ~~**Scroll-out (exit) effects**~~ ✓ **Done** — `.sf-exit--fade/-fade-up/
@@ -168,7 +168,7 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   Tracked in [#488](https://github.com/codeslash-dev/SLASHED/issues/488).
 - ~~**Unified background media overlay macro**~~ ✓ **Done** — resolved as
   composition guidance rather than a new macro: `.sf-scrim` composed with
-  the existing `.sf-bg` background-media primitive already layers a
+  the existing `.sf-bg-layer` background-media primitive already layers a
   color/gradient overlay with correct automatic stacking; documented in
   `docs/macros.md` instead of adding a redundant class.
   Tracked in [#489](https://github.com/codeslash-dev/SLASHED/issues/489).

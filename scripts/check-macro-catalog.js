@@ -38,7 +38,7 @@ const SKIP_IN_CSS = new Set([
 // Classes mentioned in macros.md as cross-references but NOT expected to be
 // defined in the macro CSS sources (they live in layout CSS, documented elsewhere).
 const SKIP_IN_DOCS = new Set([
-  '.sf-frame', '.sf-reel', '.sf-bg',
+  '.sf-frame', '.sf-reel', '.sf-bg-layer',
 ]);
 
 // ── 1. Collect classes from CSS ───────────────────────────────────────────────

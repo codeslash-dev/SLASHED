@@ -335,41 +335,41 @@
 
   /* Background layer — absolutely-positioned cover media that sits behind a
      parent's content. The parent is auto-promoted to a positioned, isolated
-     stacking context via :has(), so .sf-bg composes natively under .sf-scrim
-     (background → scrim gradient → content). Works as a bare <img class="sf-bg">
+     stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim
+     (background → scrim gradient → content). Works as a bare <img class="sf-bg-layer">
      or as a wrapper with a nested > img / > video. */
-  :where(:has(> .sf-bg)) {
+  :where(:has(> .sf-bg-layer)) {
     position:  relative;
     isolation: isolate;
   }
 
-  .sf-bg {
+  .sf-bg-layer {
     position:        absolute;
-    inset:           var(--sf-bg-inset);
-    inline-size:     calc(100% - 2 * var(--sf-bg-inset));
-    block-size:      calc(100% - 2 * var(--sf-bg-inset));
-    object-fit:      var(--sf-bg-fit);
-    object-position: var(--sf-bg-position);
-    border-radius:   var(--sf-bg-radius);
-    z-index:         var(--sf-bg-z);
+    inset:           var(--sf-bg-layer-inset);
+    inline-size:     calc(100% - 2 * var(--sf-bg-layer-inset));
+    block-size:      calc(100% - 2 * var(--sf-bg-layer-inset));
+    object-fit:      var(--sf-bg-layer-fit);
+    object-position: var(--sf-bg-layer-position);
+    border-radius:   var(--sf-bg-layer-radius);
+    z-index:         var(--sf-bg-layer-z);
     pointer-events:  none;
   }
 
-  .sf-bg > :is(img, video, picture) {
+  .sf-bg-layer > :is(img, video, picture) {
     inline-size:     100%;
     block-size:      100%;
-    object-fit:      var(--sf-bg-fit);
-    object-position: var(--sf-bg-position);
-    border-radius:   var(--sf-bg-radius);
+    object-fit:      var(--sf-bg-layer-fit);
+    object-position: var(--sf-bg-layer-position);
+    border-radius:   var(--sf-bg-layer-radius);
     pointer-events:  none;
   }
 
-  .sf-bg > picture > img {
+  .sf-bg-layer > picture > img {
     inline-size:     100%;
     block-size:      100%;
-    object-fit:      var(--sf-bg-fit);
-    object-position: var(--sf-bg-position);
-    border-radius:   var(--sf-bg-radius);
+    object-fit:      var(--sf-bg-layer-fit);
+    object-position: var(--sf-bg-layer-position);
+    border-radius:   var(--sf-bg-layer-radius);
     pointer-events:  none;
   }
 

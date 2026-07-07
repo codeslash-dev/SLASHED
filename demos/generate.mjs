@@ -31,7 +31,7 @@ const round = (n) => Math.round(n * 1000) / 1000;
 // Structural / meta / sentinel knobs we deliberately do NOT perturb globally.
 const SKIP = {
   '--sf-color-scheme': 'meta control — forcing a scheme would override the page light/dark behaviour rather than test a visual token',
-  '--sf-bg-z': 'stacking order — lowering it would push the background layer over content',
+  '--sf-bg-layer-z': 'stacking order — lowering it would push the background layer over content',
   '--sf-z-below': 'stacking order — no single-element visual surface; global change risks hiding content',
   '--sf-z-base': 'stacking order — no single-element visual surface',
   '--sf-z-raised': 'stacking order — no single-element visual surface',
@@ -59,8 +59,8 @@ const SKIP = {
 // numeric rule can safely transform. Each is a valid, visibly-distinct value.
 const CURATED = {
   // zero-valued lengths → small but visible
-  '--sf-bg-inset': '0.75rem',
-  '--sf-bg-radius': '0.75rem',
+  '--sf-bg-layer-inset': '0.75rem',
+  '--sf-bg-layer-radius': '0.75rem',
   '--sf-media-radius': '0.75rem',
   '--sf-box-border-width': '3px',
   '--sf-equal-rule-width': '2px',
@@ -69,9 +69,9 @@ const CURATED = {
   '--sf-space-px': '2px',
   '--sf-duration-none': '160ms',
   // keyword swaps
-  '--sf-bg-fit': 'contain',
+  '--sf-bg-layer-fit': 'contain',
   '--sf-object-fit': 'contain',
-  '--sf-bg-position': '25% 75%',
+  '--sf-bg-layer-position': '25% 75%',
   '--sf-object-position': '25% 75%',
   '--sf-border-style': 'dashed',
   '--sf-divider-style': 'dashed',
@@ -256,7 +256,7 @@ function layoutExample(n, applied) {
   if (n === 'sf-imposter' || /^sf-imposter--/.test(n)) return `<div style="position:relative;min-block-size:7rem;background:var(--sf-color-inset)">base<div class="${applied} dbox">imposter</div></div>`;
   if (n === 'sf-icon' || /^sf-icon--/.test(n)) return `<span class="${applied}" style="background:var(--sf-color-action);border-radius:var(--sf-radius-s);aspect-ratio:1"></span> <span style="font-size:var(--sf-text-m)">inline icon</span>`;
   if (n === 'sf-divider' || /^sf-divider--/.test(n)) return `<p>above</p><div class="${applied}"></div><p>below</p>`;
-  if (n === 'sf-bg') return `<div style="position:relative;min-block-size:7rem;color:#fff"><div class="sf-bg" style="background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"></div><div style="position:relative;padding:var(--sf-space-m)">content over bg</div></div>`;
+  if (n === 'sf-bg-layer') return `<div style="position:relative;min-block-size:7rem;color:#fff"><div class="sf-bg-layer" style="background:linear-gradient(135deg,var(--sf-color-primary),var(--sf-color-action))"></div><div style="position:relative;padding:var(--sf-space-m)">content over bg</div></div>`;
   if (n === 'sf-pancake') return `<div class="${applied}" style="min-block-size:8rem"><div class="dbox">header</div><div class="dbox">main</div><div class="dbox">footer</div></div>`;
   return `<div class="${applied}">${boxes(4)}</div>`;
 }

@@ -395,7 +395,7 @@
     {#if showMediaRadius}
       <p class="text-[9px] text-slate-400 dark:text-slate-600">
         --sf-media-radius — 0 by default (off). Rounds every &lt;img&gt;/&lt;figure&gt; globally via a
-        zero-specificity :where() rule; .sf-bg and component-level radii still win.
+        zero-specificity :where() rule; .sf-bg-layer and component-level radii still win.
       </p>
       <SliderRow
         label="Radius" value={mediaRadius} min={0} max={2} step={0.05} unit="rem"

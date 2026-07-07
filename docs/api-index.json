@@ -28,14 +28,14 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1041,
+      "total": 1043,
       "by_type": {
-        "class": 321,
+        "class": 323,
         "token": 720
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 985,
+        "PUBLIC": 987,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
@@ -43,8 +43,8 @@
         "knob": 229
       },
       "tokens": 720,
-      "classes": 321,
-      "sf_classes": 283,
+      "classes": 323,
+      "sf_classes": 285,
       "is_classes": 29,
       "unprefixed_classes": 9,
       "by_category": {
@@ -60,7 +60,7 @@
         "Print": 4,
         "State classes": 29,
         "Theme example": 1,
-        "Theme utilities": 1,
+        "Theme utilities": 3,
         "Utilities": 31
       }
     },
@@ -961,15 +961,15 @@
       ]
     },
     {
-      "name": "--sf-bg-fit",
+      "name": "--sf-bg-layer-fit",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
-      "description": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.",
+      "group": "Background layer (.sf-bg-layer)",
+      "description": "object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover.",
       "value": "cover",
       "aliasOf": null,
       "registered": false,
@@ -989,14 +989,14 @@
       ]
     },
     {
-      "name": "--sf-bg-inset",
+      "name": "--sf-bg-layer-inset",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
       "value": "0px",
       "aliasOf": null,
@@ -1017,14 +1017,14 @@
       ]
     },
     {
-      "name": "--sf-bg-position",
+      "name": "--sf-bg-layer-position",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
       "value": "50% 50%",
       "aliasOf": null,
@@ -1045,15 +1045,15 @@
       ]
     },
     {
-      "name": "--sf-bg-radius",
+      "name": "--sf-bg-layer-radius",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
-      "description": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
+      "group": "Background layer (.sf-bg-layer)",
+      "description": "border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
       "value": "0",
       "aliasOf": null,
       "registered": false,
@@ -1073,14 +1073,14 @@
       ]
     },
     {
-      "name": "--sf-bg-z",
+      "name": "--sf-bg-layer-z",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.",
       "value": "-2",
       "aliasOf": null,
@@ -21356,16 +21356,16 @@
       ]
     },
     {
-      "name": "sf-bg",
+      "name": "sf-bg-layer",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-bg",
+      "selector": ".sf-bg-layer",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
       "group": "Background",
-      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg\"> or as a wrapper with a nested > img / > video / > picture.",
+      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg-layer\"> or as a wrapper with a nested > img / > video / > picture.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -27966,6 +27966,56 @@
       ],
       "bundles": [
         "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-theme-dark",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-theme-dark",
+      "prefix": "sf",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "area": "theme",
+      "group": "",
+      "description": "",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.themes",
+      "sourceFiles": [
+        "core/themes.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-theme-light",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-theme-light",
+      "prefix": "sf",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "area": "theme",
+      "group": "",
+      "description": "",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.themes",
+      "sourceFiles": [
+        "core/themes.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
         "optimal-utilities"
       ]
     },

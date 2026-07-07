@@ -55,7 +55,7 @@
       "moved": true
     },
     {
-      "name": "--sf-bg-fit",
+      "name": "--sf-bg-layer-fit",
       "perturbed": true,
       "skipped": false,
       "base": "cover",
@@ -63,7 +63,7 @@
       "moved": true
     },
     {
-      "name": "--sf-bg-inset",
+      "name": "--sf-bg-layer-inset",
       "perturbed": true,
       "skipped": false,
       "base": "0",
@@ -71,7 +71,7 @@
       "moved": true
     },
     {
-      "name": "--sf-bg-position",
+      "name": "--sf-bg-layer-position",
       "perturbed": true,
       "skipped": false,
       "base": "50% 50%",
@@ -79,7 +79,7 @@
       "moved": true
     },
     {
-      "name": "--sf-bg-radius",
+      "name": "--sf-bg-layer-radius",
       "perturbed": true,
       "skipped": false,
       "base": "0",
@@ -87,7 +87,7 @@
       "moved": true
     },
     {
-      "name": "--sf-bg-z",
+      "name": "--sf-bg-layer-z",
       "perturbed": false,
       "skipped": true,
       "base": "-2",

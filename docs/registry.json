@@ -21,7 +21,7 @@
     ],
     "counts": {
       "tokens": 720,
-      "sf_classes": 283,
+      "sf_classes": 285,
       "is_classes": 29
     }
   },
@@ -57,11 +57,11 @@
     "--sf-bento-row-compact",
     "--sf-bento-row-default",
     "--sf-bento-row-tall",
-    "--sf-bg-fit",
-    "--sf-bg-inset",
-    "--sf-bg-position",
-    "--sf-bg-radius",
-    "--sf-bg-z",
+    "--sf-bg-layer-fit",
+    "--sf-bg-layer-inset",
+    "--sf-bg-layer-position",
+    "--sf-bg-layer-radius",
+    "--sf-bg-layer-z",
     "--sf-blur",
     "--sf-body-color",
     "--sf-body-em-style",
@@ -760,7 +760,7 @@
     "sf-bento-full",
     "sf-bento-tall",
     "sf-bento-wide",
-    "sf-bg",
+    "sf-bg-layer",
     "sf-box",
     "sf-breakout",
     "sf-btn",
@@ -1029,6 +1029,8 @@
     "sf-text-s",
     "sf-text-xl",
     "sf-text-xs",
+    "sf-theme-dark",
+    "sf-theme-light",
     "sf-theme-transition",
     "sf-truncate"
   ],

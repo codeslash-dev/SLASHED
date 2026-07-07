@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1041 elements** — 720 tokens, 321 classes.
+**1043 elements** — 720 tokens, 323 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 985 | Everyday surface. SemVer-stable. |
+| PUBLIC | 987 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -682,11 +682,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-bento-row-compact` | PUBLIC | knob | bento | `6rem` | Row height for compact-variant bento items. |
 | `--sf-bento-row-default` | PUBLIC | knob | bento | `10rem` | Default row height for standard bento grid cells. |
 | `--sf-bento-row-tall` | PUBLIC | knob | bento | `16rem` | Tall row height for visually prominent or hero bento cells. |
-| `--sf-bg-fit` | PUBLIC | knob | bg | `cover` | object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover. |
-| `--sf-bg-inset` | PUBLIC | knob | bg | `0px` | Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly. |
-| `--sf-bg-position` | PUBLIC | knob | bg | `50% 50%` | object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%). |
-| `--sf-bg-radius` | PUBLIC | knob | bg | `0` | border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed. |
-| `--sf-bg-z` | PUBLIC | knob | bg | `-2` | z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background. |
+| `--sf-bg-layer-fit` | PUBLIC | knob | bg | `cover` | object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover. |
+| `--sf-bg-layer-inset` | PUBLIC | knob | bg | `0px` | Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly. |
+| `--sf-bg-layer-position` | PUBLIC | knob | bg | `50% 50%` | object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%). |
+| `--sf-bg-layer-radius` | PUBLIC | knob | bg | `0` | border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed. |
+| `--sf-bg-layer-z` | PUBLIC | knob | bg | `-2` | z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background. |
 | `--sf-box-border-color` | PUBLIC | consumption | box | `var(--sf-color-border)` | Border color for the box layout primitive. |
 | `--sf-box-border-width` | PUBLIC | knob | box | `0` | Border width for the box layout primitive. |
 | `--sf-box-padding` | PUBLIC | consumption | box | `var(--sf-space-m)` | Inner padding for the box layout primitive. |
@@ -760,7 +760,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (321)
+## Classes (323)
 
 ### Accessibility (8)
 
@@ -821,7 +821,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bento-full` | PUBLIC | layout | Bento grid | Span modifier for a bento item: stretches across all columns (full-width banner). |
 | `.sf-bento-tall` | PUBLIC | layout | Bento grid | Span modifier for a bento item: doubles the row height (tall card). |
 | `.sf-bento-wide` | PUBLIC | layout | Bento grid | Span modifier for a bento item: spans 2 columns (wide card). |
-| `.sf-bg` | PUBLIC | layout | Background | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg"> or as a wrapper with a nested > img / > video / > picture. |
+| `.sf-bg-layer` | PUBLIC | layout | Background | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg-layer"> or as a wrapper with a nested > img / > video / > picture. |
 | `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
 | `.sf-center` | PUBLIC | layout | Center | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
@@ -1091,10 +1091,12 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.theme-transition` | PUBLIC | theme | 5. SMOOTH THEME-TRANSITION HELPER | Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches. |
 
-### Theme utilities (1)
+### Theme utilities (3)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
+| `.sf-theme-dark` | PUBLIC | theme | — |  |
+| `.sf-theme-light` | PUBLIC | theme | — |  |
 | `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
 ### Utilities (31)

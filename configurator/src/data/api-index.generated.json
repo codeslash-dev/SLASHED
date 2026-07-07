@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "9540473e4753",
+    "tokensHash": "98beca4a2f8e",
     "bundles": [
       "full",
       "optimal",
@@ -739,14 +739,14 @@
       ]
     },
     {
-      "name": "--sf-bg-fit",
+      "name": "--sf-bg-layer-fit",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
-      "group": "Background layer (.sf-bg)",
-      "description": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.",
-      "note": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.",
+      "group": "Background layer (.sf-bg-layer)",
+      "description": "object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover.",
+      "note": "object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover.",
       "value": "cover",
       "aliasOf": null,
       "registered": false,
@@ -762,12 +762,12 @@
       ]
     },
     {
-      "name": "--sf-bg-inset",
+      "name": "--sf-bg-layer-inset",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
       "note": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
       "value": "0px",
@@ -785,12 +785,12 @@
       ]
     },
     {
-      "name": "--sf-bg-position",
+      "name": "--sf-bg-layer-position",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
       "note": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
       "value": "50% 50%",
@@ -808,14 +808,14 @@
       ]
     },
     {
-      "name": "--sf-bg-radius",
+      "name": "--sf-bg-layer-radius",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
-      "group": "Background layer (.sf-bg)",
-      "description": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
-      "note": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
+      "group": "Background layer (.sf-bg-layer)",
+      "description": "border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
+      "note": "border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
       "value": "0",
       "aliasOf": null,
       "registered": false,
@@ -831,12 +831,12 @@
       ]
     },
     {
-      "name": "--sf-bg-z",
+      "name": "--sf-bg-layer-z",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.",
       "note": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.",
       "value": "-2",

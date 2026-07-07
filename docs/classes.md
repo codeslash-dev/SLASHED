@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**283 .sf-classes, 29 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**285 .sf-classes, 29 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -23,7 +23,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-bento-full` |
 | `.sf-bento-tall` |
 | `.sf-bento-wide` |
-| `.sf-bg` |
+| `.sf-bg-layer` |
 | `.sf-box` |
 | `.sf-breakout` |
 | `.sf-center` |
@@ -307,10 +307,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Theme utilities (`core/themes.css`)
 
-1 classes.
+3 classes.
 
 | Class |
 |---|
+| `.sf-theme-dark` |
+| `.sf-theme-light` |
 | `.sf-theme-transition` |
 
 ## Components (`optional/components.css`)

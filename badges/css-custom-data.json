@@ -157,27 +157,27 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-bg-fit",
-      "description": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.\n\nDefault: `cover`",
+      "name": "--sf-bg-layer-fit",
+      "description": "object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover.\n\nDefault: `cover`",
       "syntax": "*"
     },
     {
-      "name": "--sf-bg-inset",
+      "name": "--sf-bg-layer-inset",
       "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.\n\nDefault: `0px`",
       "syntax": "*"
     },
     {
-      "name": "--sf-bg-position",
+      "name": "--sf-bg-layer-position",
       "description": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).\n\nDefault: `50% 50%`",
       "syntax": "*"
     },
     {
-      "name": "--sf-bg-radius",
-      "description": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.\n\nDefault: `0`",
+      "name": "--sf-bg-layer-radius",
+      "description": "border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.\n\nDefault: `0`",
       "syntax": "*"
     },
     {
-      "name": "--sf-bg-z",
+      "name": "--sf-bg-layer-z",
       "description": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.\n\nDefault: `-2`",
       "syntax": "*"
     },
