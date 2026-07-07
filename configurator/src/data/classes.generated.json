@@ -179,30 +179,10 @@
       "selector": ".sf-bg-layer",
       "kind": "layout",
       "category": "Layout primitives",
-      "group": "Background",
+      "group": "",
       "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg-layer\"> or as a wrapper with a nested > img / > video / > picture.",
       "optional": false,
       "layer": "slashed.layout"
-    },
-    {
-      "name": "sf-bg--dark",
-      "selector": ".sf-bg--dark",
-      "kind": "theme",
-      "category": "Theme utilities",
-      "group": "",
-      "description": "Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme…",
-      "optional": false,
-      "layer": "slashed.themes"
-    },
-    {
-      "name": "sf-bg--light",
-      "selector": ".sf-bg--light",
-      "kind": "theme",
-      "category": "Theme utilities",
-      "group": "",
-      "description": "Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme…",
-      "optional": false,
-      "layer": "slashed.themes"
     },
     {
       "name": "sf-box",
@@ -2449,7 +2429,7 @@
       "selector": ".sf-overlay",
       "kind": "layout",
       "category": "Layout primitives",
-      "group": "OVERLAY / BACKDROP",
+      "group": "",
       "description": "Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims.",
       "optional": false,
       "layer": "slashed.layout"

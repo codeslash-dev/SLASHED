@@ -145,20 +145,7 @@ Slashed requires modern CSS features. Effective minimum:
 <article class="sf-theme-light">
 ```
 
-`data-theme="light|dark"` is the canonical API; `.sf-theme-light` and `.sf-theme-dark` are class aliases with the same scoped token re-declarations and automatic section background/text paint. Without `data-theme` the framework auto-detects `prefers-color-scheme: dark`. The `--sf-is-dark` token (INTERNAL — do not set directly) is managed automatically.
-
-**Contextual background classes.** `.sf-bg--light` / `.sf-bg--dark` are named
-background surfaces: they set a light or dark background **and** flip the whole
-foreground (text, links, borders, focus, code) to match — no extra classes.
-They ride the same section-theming machinery as `data-theme`, so a
-`.sf-bg--dark` band is *always* dark regardless of the ambient scheme (the
-class-based equivalent of `data-theme="dark"` on that element). Distinct from
-the `.sf-bg` media-layer primitive — these apply to a section, not a child image.
-
-```html
-<section class="sf-bg--dark">Always-dark band with auto-light text</section>
-<section class="sf-bg--light">Always-light band with auto-dark text</section>
-```
+`data-theme="light|dark"` is the canonical API; `.sf-theme-light` and `.sf-theme-dark` are class aliases with the same scoped token re-declarations and automatic section background/text paint. A `.sf-theme-dark` band is *always* dark regardless of the ambient scheme (the class-based equivalent of `data-theme="dark"` on that element), and flips the whole foreground — text, links, borders, focus, code — to match. Without `data-theme` the framework auto-detects `prefers-color-scheme: dark`. The `--sf-is-dark` token (INTERNAL — do not set directly) is managed automatically.
 
 **Smooth mode transition:**
 ```html

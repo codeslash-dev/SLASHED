@@ -468,11 +468,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-icon-s` | PUBLIC | knob | icon | `1em` | Small icon size (~16px). Dense UI chrome. |
 | `--sf-icon-xl` | PUBLIC | knob | icon | `3em` | Extra-large icon size (~32px). Feature icons. |
 | `--sf-icon-xs` | PUBLIC | knob | icon | `0.875em` | Extra-small icon size (~12px). Inline indicators. |
-| `--sf-is-active` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the active state. Set to 1 (via JS or .is-active) to drive branching calc() expressions. 0 = default (inactive). |
-| `--sf-is-current` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the current/selected state. Set to 1 (via .is-current) to drive branching calc() expressions. 0 = default. |
+| `--sf-is-active` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the active state. Set to 1 (via JS or .sf-is-active) to drive branching calc() expressions. 0 = default (inactive). |
+| `--sf-is-current` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the current/selected state. Set to 1 (via .sf-is-current) to drive branching calc() expressions. 0 = default. |
 | `--sf-is-dark` | INTERNAL | knob | is | `0` | Mode flag — 0 in light mode, 1 in dark mode. Set automatically by [data-theme='dark'] and prefers-color-scheme. Drives dark-mode formula branches in calc(). |
-| `--sf-is-open` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the open/expanded state. Set to 1 (via .is-open) to drive branching calc() expressions. 0 = default (closed). |
-| `--sf-is-pressed` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the pressed state. Set to 1 (via .is-pressed) to drive branching calc() expressions. 0 = default. |
+| `--sf-is-open` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the open/expanded state. Set to 1 (via .sf-is-open) to drive branching calc() expressions. 0 = default (closed). |
+| `--sf-is-pressed` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the pressed state. Set to 1 (via .sf-is-pressed) to drive branching calc() expressions. 0 = default. |
 | `--sf-leading-normal` | PUBLIC | knob | leading | `1.5` | Normal line height (~1.5). Default for body text. |
 | `--sf-leading-relaxed` | PUBLIC | knob | leading | `1.625` | Relaxed line height (~1.65). Long-form reading text. |
 | `--sf-leading-snug` | PUBLIC | knob | leading | `1.3` | Snug line height (~1.35). Use for sub-headings. |
@@ -683,11 +683,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-bento-row-compact` | PUBLIC | knob | bento | `6rem` | Row height for compact-variant bento items. |
 | `--sf-bento-row-default` | PUBLIC | knob | bento | `10rem` | Default row height for standard bento grid cells. |
 | `--sf-bento-row-tall` | PUBLIC | knob | bento | `16rem` | Tall row height for visually prominent or hero bento cells. |
-| `--sf-bg-fit` | PUBLIC | knob | bg | `cover` | object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover. |
-| `--sf-bg-inset` | PUBLIC | knob | bg | `0px` | Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly. |
-| `--sf-bg-position` | PUBLIC | knob | bg | `50% 50%` | object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%). |
-| `--sf-bg-radius` | PUBLIC | knob | bg | `0` | border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed. |
-| `--sf-bg-z` | PUBLIC | knob | bg | `-2` | z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background. |
+| `--sf-bg-layer-fit` | PUBLIC | knob | bg | `cover` | object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover. |
+| `--sf-bg-layer-inset` | PUBLIC | knob | bg | `0px` | Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly. |
+| `--sf-bg-layer-position` | PUBLIC | knob | bg | `50% 50%` | object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%). |
+| `--sf-bg-layer-radius` | PUBLIC | knob | bg | `0` | border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed. |
+| `--sf-bg-layer-z` | PUBLIC | knob | bg | `-2` | z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background. |
 | `--sf-box-border-color` | PUBLIC | consumption | box | `var(--sf-color-border)` | Border color for the box layout primitive. |
 | `--sf-box-border-width` | PUBLIC | knob | box | `0` | Border width for the box layout primitive. |
 | `--sf-box-padding` | PUBLIC | consumption | box | `var(--sf-space-m)` | Inner padding for the box layout primitive. |
@@ -815,7 +815,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-card--elevated` | PUBLIC | component | .sf-card | Floating card: hides the border, applies a larger shadow. |
 | `.sf-card--interactive` | PUBLIC | component | .sf-card | Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion. |
 
-### Layout primitives (144)
+### Layout primitives (145)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -830,7 +830,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bento-full` | PUBLIC | layout | Bento grid | Span modifier for a bento item: stretches across all columns (full-width banner). |
 | `.sf-bento-tall` | PUBLIC | layout | Bento grid | Span modifier for a bento item: doubles the row height (tall card). |
 | `.sf-bento-wide` | PUBLIC | layout | Bento grid | Span modifier for a bento item: spans 2 columns (wide card). |
-| `.sf-bg` | PUBLIC | layout | Background | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg"> or as a wrapper with a nested > img / > video / > picture. |
+| `.sf-bg-layer` | PUBLIC | layout | — | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg-layer"> or as a wrapper with a nested > img / > video / > picture. |
 | `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
 | `.sf-center` | PUBLIC | layout | Center | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
@@ -932,6 +932,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-imposter` | PUBLIC | layout | Imposter | Absolutely positions an element at the center of its nearest positioned ancestor. Use for overlays, badges, and floating labels. |
 | `.sf-imposter--contain` | PUBLIC | layout | Imposter | Imposter variant that clamps the element within the bounds of its parent using overflow:hidden on the parent. |
 | `.sf-imposter--fixed` | PUBLIC | layout | Imposter | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
+| `.sf-overlay` | PUBLIC | layout | — | Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims. |
 | `.sf-pancake` | PUBLIC | layout | Pancake (sticky footer) | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
 | `.sf-reel` | PUBLIC | layout | Reel | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
 | `.sf-section` | PUBLIC | layout | Section | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
@@ -1062,39 +1063,38 @@ and a short description. The machine-readable companion (with all columns) is
 | `.print-no-color` | PUBLIC | print | Opt-in colour treatment | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
 | `.print-only` | PUBLIC | print | Print visibility utilities | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
 
-### State classes (29)
+### State classes (28)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.is-active` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching. |
-| `.is-busy` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Busy state — shows a progress cursor to indicate background processing. Does not mask content; use is-loading when content should be hidden during loading. |
-| `.is-collapsed` | PUBLIC | state | OPEN / CLOSED | Collapsed state for disclosure widgets — hides the expandable region. Pair with is-expanded or is-open. Components add transitions. |
-| `.is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
-| `.is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
-| `.is-disabled` | PUBLIC | state | INTERACTIVITY | Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events. |
-| `.is-draggable` | PUBLIC | state | DRAG & DROP | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
-| `.is-dragging` | PUBLIC | state | DRAG & DROP | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
-| `.is-drop-target` | PUBLIC | state | DRAG & DROP | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
-| `.is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
-| `.is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — alias for is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid. |
-| `.is-expanded` | PUBLIC | state | OPEN / CLOSED | Expanded state for disclosure widgets — shows the expandable region. Inverse of is-collapsed. Components add transitions. |
-| `.is-hidden` | PUBLIC | state | VISIBILITY | Hidden state — removes the element from layout and accessibility tree (display: none !important). |
-| `.is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
-| `.is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
-| `.is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context. |
-| `.is-invisible` | PUBLIC | state | VISIBILITY | Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). |
-| `.is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
-| `.is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to is-collapsed/is-hidden. Sets --sf-is-open to 1 for calc() branching. |
-| `.is-overlay` | PUBLIC | state | OVERLAY / BACKDROP | Overlay positioning state — renders the element as a full-screen fixed overlay with a backdrop scrim. Use for modal backgrounds. |
-| `.is-pending` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from is-loading (which hides content entirely). |
-| `.is-pressed` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components. |
-| `.is-readonly` | PUBLIC | state | INTERACTIVITY | Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited. |
-| `.is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
-| `.is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
-| `.is-success` | PUBLIC | state | VALIDATION / FEEDBACK | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |
-| `.is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to is-success; the name signals form-field context. |
-| `.is-visible` | PUBLIC | state | VISIBILITY | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
-| `.is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
+| `.sf-is-active` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching. |
+| `.sf-is-busy` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Busy state — shows a progress cursor to indicate background processing. Does not mask content; use sf-is-loading when content should be hidden during loading. |
+| `.sf-is-collapsed` | PUBLIC | state | OPEN / CLOSED | Collapsed state for disclosure widgets — hides the expandable region. Pair with sf-is-expanded or sf-is-open. Components add transitions. |
+| `.sf-is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
+| `.sf-is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
+| `.sf-is-disabled` | PUBLIC | state | INTERACTIVITY | Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events. |
+| `.sf-is-draggable` | PUBLIC | state | DRAG & DROP | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
+| `.sf-is-dragging` | PUBLIC | state | DRAG & DROP | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
+| `.sf-is-drop-target` | PUBLIC | state | DRAG & DROP | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
+| `.sf-is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
+| `.sf-is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — alias for sf-is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid. |
+| `.sf-is-expanded` | PUBLIC | state | OPEN / CLOSED | Expanded state for disclosure widgets — shows the expandable region. Inverse of sf-is-collapsed. Components add transitions. |
+| `.sf-is-hidden` | PUBLIC | state | VISIBILITY | Hidden state — removes the element from layout and accessibility tree (display: none !important). |
+| `.sf-is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
+| `.sf-is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
+| `.sf-is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to sf-is-error; the name signals form-field context. |
+| `.sf-is-invisible` | PUBLIC | state | VISIBILITY | Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). |
+| `.sf-is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
+| `.sf-is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed/sf-is-hidden. Sets --sf-is-open to 1 for calc() branching. |
+| `.sf-is-pending` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from sf-is-loading (which hides content entirely). |
+| `.sf-is-pressed` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components. |
+| `.sf-is-readonly` | PUBLIC | state | INTERACTIVITY | Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited. |
+| `.sf-is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
+| `.sf-is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
+| `.sf-is-success` | PUBLIC | state | VALIDATION / FEEDBACK | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |
+| `.sf-is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context. |
+| `.sf-is-visible` | PUBLIC | state | VISIBILITY | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
+| `.sf-is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
 
 ### Theme example (1)
 
@@ -1106,8 +1106,8 @@ and a short description. The machine-readable companion (with all columns) is
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-bg--dark` | PUBLIC | theme | — | Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme… |
-| `.sf-bg--light` | PUBLIC | theme | — | Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme… |
+| `.sf-theme-dark` | PUBLIC | theme | — |  |
+| `.sf-theme-light` | PUBLIC | theme | — |  |
 | `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
 ### Utilities (31)

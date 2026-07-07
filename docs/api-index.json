@@ -44,21 +44,21 @@
       },
       "tokens": 729,
       "classes": 325,
-      "sf_classes": 287,
-      "is_classes": 29,
+      "sf_classes": 288,
+      "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 25,
         "Components": 26,
         "Core tokens": 617,
-        "Layout primitives": 144,
+        "Layout primitives": 145,
         "Layout tokens": 53,
         "Macro classes": 58,
         "Macro tokens": 34,
         "Motion / animation": 21,
         "Print": 4,
-        "State classes": 29,
+        "State classes": 28,
         "Theme example": 1,
         "Theme utilities": 3,
         "Utilities": 31
@@ -85,7 +85,7 @@
       "syntax": "TOKEN: @property syntax descriptor (e.g. <color>), else null.",
       "inherits": "TOKEN: @property inherits flag, else null.",
       "selector": "CLASS: the CSS selector form (.name).",
-      "prefix": "CLASS: 'sf' | 'is' | '' (unprefixed).",
+      "prefix": "CLASS: 'sf' | 'sf-is' | '' (unprefixed).",
       "kind": "CLASS: element family (layout, macro, state, accessibility, motion, print, form, component, theme).",
       "isVariant": "CLASS: true when it is a BEM modifier (contains --).",
       "baseClass": "CLASS: the base class name when isVariant, else null."
@@ -961,15 +961,15 @@
       ]
     },
     {
-      "name": "--sf-bg-fit",
+      "name": "--sf-bg-layer-fit",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
-      "description": "object-fit applied to .sf-bg when used as a bare media element, and to .sf-bg > img / video / picture children. Defaults to cover.",
+      "group": "Background layer (.sf-bg-layer)",
+      "description": "object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover.",
       "value": "cover",
       "aliasOf": null,
       "registered": false,
@@ -989,14 +989,14 @@
       ]
     },
     {
-      "name": "--sf-bg-inset",
+      "name": "--sf-bg-layer-inset",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.",
       "value": "0px",
       "aliasOf": null,
@@ -1017,14 +1017,14 @@
       ]
     },
     {
-      "name": "--sf-bg-position",
+      "name": "--sf-bg-layer-position",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).",
       "value": "50% 50%",
       "aliasOf": null,
@@ -1045,15 +1045,15 @@
       ]
     },
     {
-      "name": "--sf-bg-radius",
+      "name": "--sf-bg-layer-radius",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
-      "description": "border-radius applied to the .sf-bg layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
+      "group": "Background layer (.sf-bg-layer)",
+      "description": "border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.",
       "value": "0",
       "aliasOf": null,
       "registered": false,
@@ -1073,14 +1073,14 @@
       ]
     },
     {
-      "name": "--sf-bg-z",
+      "name": "--sf-bg-layer-z",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
       "namespace": "bg",
       "category": "Layout tokens",
       "area": "layout",
-      "group": "Background layer (.sf-bg)",
+      "group": "Background layer (.sf-bg-layer)",
       "description": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.",
       "value": "-2",
       "aliasOf": null,
@@ -13687,7 +13687,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the active state. Set to 1 (via JS or .is-active) to drive branching calc() expressions. 0 = default (inactive).",
+      "description": "Integer state flag for the active state. Set to 1 (via JS or .sf-is-active) to drive branching calc() expressions. 0 = default (inactive).",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -13715,7 +13715,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the current/selected state. Set to 1 (via .is-current) to drive branching calc() expressions. 0 = default.",
+      "description": "Integer state flag for the current/selected state. Set to 1 (via .sf-is-current) to drive branching calc() expressions. 0 = default.",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -13771,7 +13771,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the open/expanded state. Set to 1 (via .is-open) to drive branching calc() expressions. 0 = default (closed).",
+      "description": "Integer state flag for the open/expanded state. Set to 1 (via .sf-is-open) to drive branching calc() expressions. 0 = default (closed).",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -13799,7 +13799,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the pressed state. Set to 1 (via .is-pressed) to drive branching calc() expressions. 0 = default.",
+      "description": "Integer state flag for the pressed state. Set to 1 (via .sf-is-pressed) to drive branching calc() expressions. 0 = default.",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -20455,734 +20455,6 @@
       ]
     },
     {
-      "name": "is-active",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-active",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-busy",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-busy",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "LOADING / ASYNC FEEDBACK",
-      "description": "Busy state — shows a progress cursor to indicate background processing. Does not mask content; use is-loading when content should be hidden during loading.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-collapsed",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-collapsed",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OPEN / CLOSED",
-      "description": "Collapsed state for disclosure widgets — hides the expandable region. Pair with is-expanded or is-open. Components add transitions.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-current",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-current",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-danger",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-danger",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-disabled",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-disabled",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "INTERACTIVITY",
-      "description": "Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css",
-        "optional/components.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-draggable",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-draggable",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "DRAG & DROP",
-      "description": "Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-dragging",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-dragging",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "DRAG & DROP",
-      "description": "Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-drop-target",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-drop-target",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "DRAG & DROP",
-      "description": "Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-empty",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-empty",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "EMPTY STATE",
-      "description": "Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-error",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-error",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Error state — alias for is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to is-invalid.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-expanded",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-expanded",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OPEN / CLOSED",
-      "description": "Expanded state for disclosure widgets — shows the expandable region. Inverse of is-collapsed. Components add transitions.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-hidden",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-hidden",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VISIBILITY",
-      "description": "Hidden state — removes the element from layout and accessibility tree (display: none !important).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-highlighted",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-highlighted",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-info",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-info",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Info status state — applies info color tokens. Use for neutral informational messages and hints.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-invalid",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-invalid",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to is-error; the name signals form-field context.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-invisible",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-invisible",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VISIBILITY",
-      "description": "Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-loading",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-loading",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "LOADING / ASYNC FEEDBACK",
-      "description": "Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css",
-        "core/accessibility.css",
-        "optional/components.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-open",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-open",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OPEN / CLOSED",
-      "description": "Open/shown state for modals, dropdowns, and drawers — counterpart to is-collapsed/is-hidden. Sets --sf-is-open to 1 for calc() branching.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-overlay",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-overlay",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OVERLAY / BACKDROP",
-      "description": "Overlay positioning state — renders the element as a full-screen fixed overlay with a backdrop scrim. Use for modal backgrounds.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-pending",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-pending",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "LOADING / ASYNC FEEDBACK",
-      "description": "Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from is-loading (which hides content entirely).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-pressed",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-pressed",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-readonly",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-readonly",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "INTERACTIVITY",
-      "description": "Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-selected",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-selected",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-skeleton",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-skeleton",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "LOADING / ASYNC FEEDBACK",
-      "description": "Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-success",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-success",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-valid",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-valid",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to is-success; the name signals form-field context.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-visible",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-visible",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VISIBILITY",
-      "description": "Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "is-warning",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".is-warning",
-      "prefix": "is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "no-motion",
       "type": "class",
       "tier": "PUBLIC",
@@ -21608,72 +20880,22 @@
       ]
     },
     {
-      "name": "sf-bg",
+      "name": "sf-bg-layer",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-bg",
+      "selector": ".sf-bg-layer",
       "prefix": "sf",
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Background",
-      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg\"> or as a wrapper with a nested > img / > video / > picture.",
+      "group": "",
+      "description": "Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class=\"sf-bg-layer\"> or as a wrapper with a nested > img / > video / > picture.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
         "core/layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-bg--dark",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-bg--dark",
-      "prefix": "sf",
-      "kind": "theme",
-      "category": "Theme utilities",
-      "area": "theme",
-      "group": "",
-      "description": "Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme…",
-      "isVariant": true,
-      "baseClass": "sf-bg",
-      "optional": false,
-      "layer": "slashed.themes",
-      "sourceFiles": [
-        "core/themes.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
-      "name": "sf-bg--light",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-bg--light",
-      "prefix": "sf",
-      "kind": "theme",
-      "category": "Theme utilities",
-      "area": "theme",
-      "group": "",
-      "description": "Contextual background utilities (issue #526). .sf-bg--light / .sf-bg--dark are named background surfaces: they set a light or dark background AND flip the whole foreground (text, links, borders, focus, code) to match — with no extra classes. Rather than duplicate the theme…",
-      "isVariant": true,
-      "baseClass": "sf-bg",
-      "optional": false,
-      "layer": "slashed.themes",
-      "sourceFiles": [
-        "core/themes.css"
       ],
       "bundles": [
         "full",
@@ -25882,6 +25104,709 @@
       ]
     },
     {
+      "name": "sf-is-active",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-active",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "ACTIVE / SELECTED / CURRENT",
+      "description": "Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-busy",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-busy",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "LOADING / ASYNC FEEDBACK",
+      "description": "Busy state — shows a progress cursor to indicate background processing. Does not mask content; use sf-is-loading when content should be hidden during loading.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-collapsed",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-collapsed",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "OPEN / CLOSED",
+      "description": "Collapsed state for disclosure widgets — hides the expandable region. Pair with sf-is-expanded or sf-is-open. Components add transitions.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-current",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-current",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "ACTIVE / SELECTED / CURRENT",
+      "description": "Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-danger",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-danger",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VALIDATION / FEEDBACK",
+      "description": "Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-disabled",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-disabled",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "INTERACTIVITY",
+      "description": "Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css",
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-draggable",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-draggable",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "DRAG & DROP",
+      "description": "Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-dragging",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-dragging",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "DRAG & DROP",
+      "description": "Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-drop-target",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-drop-target",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "DRAG & DROP",
+      "description": "Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-empty",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-empty",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "EMPTY STATE",
+      "description": "Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-error",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-error",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VALIDATION / FEEDBACK",
+      "description": "Error state — alias for sf-is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-expanded",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-expanded",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "OPEN / CLOSED",
+      "description": "Expanded state for disclosure widgets — shows the expandable region. Inverse of sf-is-collapsed. Components add transitions.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-hidden",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-hidden",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VISIBILITY",
+      "description": "Hidden state — removes the element from layout and accessibility tree (display: none !important).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-highlighted",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-highlighted",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "ACTIVE / SELECTED / CURRENT",
+      "description": "Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-info",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-info",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VALIDATION / FEEDBACK",
+      "description": "Info status state — applies info color tokens. Use for neutral informational messages and hints.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-invalid",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-invalid",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VALIDATION / FEEDBACK",
+      "description": "Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to sf-is-error; the name signals form-field context.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-invisible",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-invisible",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VISIBILITY",
+      "description": "Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-loading",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-loading",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "LOADING / ASYNC FEEDBACK",
+      "description": "Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css",
+        "core/accessibility.css",
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-open",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-open",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "OPEN / CLOSED",
+      "description": "Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed/sf-is-hidden. Sets --sf-is-open to 1 for calc() branching.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-pending",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-pending",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "LOADING / ASYNC FEEDBACK",
+      "description": "Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from sf-is-loading (which hides content entirely).",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-pressed",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-pressed",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "ACTIVE / SELECTED / CURRENT",
+      "description": "Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-readonly",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-readonly",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "INTERACTIVITY",
+      "description": "Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-selected",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-selected",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "ACTIVE / SELECTED / CURRENT",
+      "description": "Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-skeleton",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-skeleton",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "LOADING / ASYNC FEEDBACK",
+      "description": "Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-success",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-success",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VALIDATION / FEEDBACK",
+      "description": "Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-valid",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-valid",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VALIDATION / FEEDBACK",
+      "description": "Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-visible",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-visible",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VISIBILITY",
+      "description": "Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-is-warning",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-is-warning",
+      "prefix": "sf-is",
+      "kind": "state",
+      "category": "State classes",
+      "area": "states",
+      "group": "VALIDATION / FEEDBACK",
+      "description": "Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.states",
+      "sourceFiles": [
+        "core/states.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "sf-line-clamp-2",
       "type": "class",
       "tier": "PUBLIC",
@@ -26489,6 +26414,31 @@
       "layer": "slashed.macros",
       "sourceFiles": [
         "core/macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-overlay",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-overlay",
+      "prefix": "sf",
+      "kind": "layout",
+      "category": "Layout primitives",
+      "area": "layout",
+      "group": "",
+      "description": "Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.layout",
+      "sourceFiles": [
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -28318,6 +28268,56 @@
       ],
       "bundles": [
         "full",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-theme-dark",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-theme-dark",
+      "prefix": "sf",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "area": "theme",
+      "group": "",
+      "description": "",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.themes",
+      "sourceFiles": [
+        "core/themes.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "sf-theme-light",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-theme-light",
+      "prefix": "sf",
+      "kind": "theme",
+      "category": "Theme utilities",
+      "area": "theme",
+      "group": "",
+      "description": "",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.themes",
+      "sourceFiles": [
+        "core/themes.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
         "optimal-utilities"
       ]
     },
