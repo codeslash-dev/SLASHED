@@ -851,7 +851,7 @@ families they do. See `docs/migration.md` for the upgrade guide.
 - **#101** — add canonical token/class counter as single source of truth
   > Introduce scripts/audit.js + docs/registry.json to eliminate count
 - **#102** — Depersonalize framework references in docs and comments
-  > Remove specific framework name references (named third-party CSS frameworks) from documentation and source code comments, replacing them with more generic
+  > Replace named third-party framework references in documentation and source comments with neutral wording.
 - **#104** — API freeze - new tokens, hardcode fixes, cleanup
   > Prepares the token layer for API freeze by:
 - **#107** — PUBLIC/ADVANCED/INTERNAL contract + docs sync
@@ -885,7 +885,7 @@ families they do. See `docs/migration.md` for the upgrade guide.
 - **#133** — remove redundant .visually-hidden alias from .sr-only rule
   > .sr-only is the canonical class name used throughout the codebase.
 - **#135** — Generalize Auto-BEM references and remove vendor-specific wording
-  > Updated documentation to use more generic language when referring to Auto-BEM tools, removing vendor-specific references and replacin
+  > Updated documentation to use neutral language for Auto-BEM tooling and remove vendor-specific references.
 - **#136** — Add CodeSlash homepage design and layout
   > Added a complete, production-ready homepage for CodeSlash — a senior WordPress developer portfolio/service site. This is a standalone HTML file with e
 - **#138** — Redesign default token palette and fix selection color
