@@ -819,7 +819,7 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-frame-ratio: 16 / 9
 
 /* Background layer (.sf-bg-layer) — cover media behind sibling content */
---sf-bg-layer-inset:    0          /* single length, applied to every edge */
+--sf-bg-layer-inset:    0px        /* single length, applied to every edge (0px, not bare 0 — see calc() note in tokens.layout.css) */
 --sf-bg-layer-fit:      cover
 --sf-bg-layer-position: 50% 50%
 --sf-bg-layer-radius:   0
