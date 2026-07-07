@@ -51,7 +51,7 @@ optional/
   theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
   components.css          slashed.components  (btn + card — the only two components)
-  utilities.css           slashed.utilities  (curated subset active — heading/text-size/hover/list-reset/marker/selection/sticky)
+  utilities.css           slashed.utilities  (curated subset active — heading/text-size/hover/list-reset/marker-colour/alternate-selection/sticky)
   legacy.css              slashed.legacy
 ```
 
