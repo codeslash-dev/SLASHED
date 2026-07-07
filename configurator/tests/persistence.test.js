@@ -10,7 +10,7 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 import registry from '../src/data/token-registry.generated.json';
 import { encodeOverrides } from '../src/lib/codec';
-import { loadInitialOverrides, saveOverrides, isEmbedded, hasWpBoot } from '../src/lib/persistence';
+import { loadInitialOverrides, saveOverrides, isEmbedded, hasWpBoot, getShareBaseUrl } from '../src/lib/persistence';
 
 const LS_KEY = 'slashed-studio/overrides/v2';
 const active = registry.tokens.filter((t) => !t.removed);
@@ -169,5 +169,33 @@ describe('isEmbedded / hasWpBoot', () => {
     window.slashedApp = { rest: { url: '/wp-json/slashed/v1' } };
     expect(hasWpBoot()).toBe(true);
     expect(isEmbedded()).toBe(true);
+  });
+});
+
+describe('getShareBaseUrl', () => {
+  test('returns undefined in standalone mode (no host boot)', () => {
+    expect(getShareBaseUrl()).toBeUndefined();
+  });
+
+  test('returns undefined when configurator_url is absent or blank', () => {
+    window.slashedApp = { pluginSettings: {} };
+    expect(getShareBaseUrl()).toBeUndefined();
+    window.slashedApp = { pluginSettings: { configurator_url: '   ' } };
+    expect(getShareBaseUrl()).toBeUndefined();
+  });
+
+  test('returns a valid absolute http(s) configurator_url', () => {
+    window.slashedApp = { pluginSettings: { configurator_url: 'https://slashed.codeslash.dev/configurator/' } };
+    expect(getShareBaseUrl()).toBe('https://slashed.codeslash.dev/configurator/');
+  });
+
+  test('rejects a relative/malformed configurator_url so buildShareUrl can fall back', () => {
+    window.slashedApp = { pluginSettings: { configurator_url: '/configurator' } };
+    expect(getShareBaseUrl()).toBeUndefined();
+  });
+
+  test('rejects a non-http(s) scheme (e.g. javascript:) that must never be copied as a link', () => {
+    window.slashedApp = { pluginSettings: { configurator_url: 'javascript:alert(1)' } };
+    expect(getShareBaseUrl()).toBeUndefined();
   });
 });
