@@ -46,10 +46,10 @@ const SKIP = {
   '--sf-safe-right': 'env() device inset — zero on desktop, no visual surface',
   '--sf-safe-bottom': 'env() device inset — zero on desktop, no visual surface',
   '--sf-safe-left': 'env() device inset — zero on desktop, no visual surface',
-  '--sf-is-active': 'runtime state flag — exercised via the .is-active class; a global :root flip would force every element active',
-  '--sf-is-current': 'runtime state flag — exercised via the .is-current class',
-  '--sf-is-open': 'runtime state flag — exercised via the .is-open class',
-  '--sf-is-pressed': 'runtime state flag — exercised via the .is-pressed class',
+  '--sf-is-active': 'runtime state flag — exercised via the .sf-is-active class; a global :root flip would force every element active',
+  '--sf-is-current': 'runtime state flag — exercised via the .sf-is-current class',
+  '--sf-is-open': 'runtime state flag — exercised via the .sf-is-open class',
+  '--sf-is-pressed': 'runtime state flag — exercised via the .sf-is-pressed class',
   '--sf-is-dark': 'runtime theme flag — driven by color-scheme; a global flip would desync from the actual scheme',
   '--sf-shadow-none': 'sentinel "none" — the API guarantees no shadow; overriding would add one where none is promised',
   '--sf-text-shadow-none': 'sentinel "none" — the API guarantees no text-shadow',
@@ -284,10 +284,10 @@ function macroExample(n, applied) {
 }
 
 const STATE_ARIA = {
-  'is-disabled': ' aria-disabled="true"', 'is-busy': ' aria-busy="true"', 'is-loading': ' aria-busy="true"',
-  'is-pending': ' aria-busy="true"', 'is-selected': ' aria-selected="true"', 'is-current': ' aria-current="page"',
-  'is-pressed': ' aria-pressed="true"', 'is-expanded': ' aria-expanded="true"', 'is-invalid': ' aria-invalid="true"',
-  'is-hidden': ' hidden', 'is-readonly': ' aria-readonly="true"',
+  'sf-is-disabled': ' aria-disabled="true"', 'sf-is-busy': ' aria-busy="true"', 'sf-is-loading': ' aria-busy="true"',
+  'sf-is-pending': ' aria-busy="true"', 'sf-is-selected': ' aria-selected="true"', 'sf-is-current': ' aria-current="page"',
+  'sf-is-pressed': ' aria-pressed="true"', 'sf-is-expanded': ' aria-expanded="true"', 'sf-is-invalid': ' aria-invalid="true"',
+  'sf-is-hidden': ' hidden', 'sf-is-readonly': ' aria-readonly="true"',
 };
 
 function stateExample(n) {
@@ -576,8 +576,8 @@ function buildDemo({ withOverride }) {
     .tile__cap { font: var(--sf-text-xs)/1.4 var(--sf-font-mono); padding: var(--sf-space-2xs) var(--sf-space-xs);
                  background: var(--sf-color-inset); border-block-end: 1px solid var(--sf-color-border); color: var(--sf-color-text--secondary); }
     .tile__warn { color: var(--sf-color-warning); }
-    /* contain traps position:fixed/absolute-fill classes (is-fullscreen,
-       is-overlay, sf-imposter--fixed) inside their own tile instead of the page. */
+    /* contain traps position:fixed/absolute-fill classes (fullscreen-style helpers,
+       sf-overlay, sf-imposter--fixed) inside their own tile instead of the page. */
     .tile__stage { padding: var(--sf-space-m); position: relative; overflow: hidden;
                    contain: layout paint; min-block-size: 4rem; }
     .dbox { padding: var(--sf-space-s); background: var(--sf-color-primary-100); border: 1px solid var(--sf-color-primary-300);

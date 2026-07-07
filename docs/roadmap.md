@@ -55,7 +55,7 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   (for example `.sf-z-modal` and `.sf-z-tooltip`) in `optional/utilities.css`.
 - **First component tranche** — `.sf-btn` and `.sf-card` shipped in v0.7.0
   (see Post-1.0 note); `.sf-badge` and `.sf-tag` are next, using
-  `optional/tokens.components.css` and existing `.is-*` states where
+  `optional/tokens.components.css` and existing `.sf-is-*` states where
   appropriate. Tracked in
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
 - **Standalone table pattern** — add `.sf-table`, `.sf-table-scroll`, and compact
@@ -113,7 +113,7 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
 - ~~**Sticky positioning utility**~~ ✓ **Done** — `.sf-sticky` plus
   `--s/-m/-l` offset modifiers, active in `optional/utilities.css`, layering
   extra gap on top of the existing `--sf-sticky-offset` fluid offset. This is
-  now the sole sticky mechanism — the redundant `.is-sticky` state class was
+  now the sole sticky mechanism — the redundant sticky state class was
   removed (`position: sticky` is conditional by nature and needs no runtime
   toggle).
   Tracked in [#542](https://github.com/codeslash-dev/SLASHED/issues/542).
@@ -138,7 +138,7 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   Tracked in [#360](https://github.com/codeslash-dev/SLASHED/issues/360).
 - **Consumer-facing Stylelint plugin/config** — a shippable, separately
   published Stylelint config that lints *consumer* projects using SLASHED
-  (`@layer` order, `sf-`/`is-` reserved-name collisions, raw values that
+  (`@layer` order, `sf-`/`sf-is-` reserved-name collisions, raw values that
   should be tokens). Tracked in
   [#363](https://github.com/codeslash-dev/SLASHED/issues/363).
 - **Distilled AI-assistant context file (`llms.txt`)** — a compact,
@@ -209,7 +209,7 @@ not backlog. They should not be re-proposed or picked up by accident:
 - **Runtime JavaScript in the framework core** — the core ships zero runtime JS and
   will keep doing so. Viewport-triggered "reveal on scroll / on-visible" behaviour
   that depends on an `IntersectionObserver` is out of scope for `core/`; the supported
-  surfaces are the CSS-only `.is-visible` state hook and scroll-timeline `view()`
+  surfaces are the CSS-only `.sf-is-visible` state hook and scroll-timeline `view()`
   entrance animations. Any observer-driven JS belongs to host/integration layers,
   never to the framework bundle.
 - **A consumer-facing preprocessor layer (mixins / functions)** — SLASHED is authored

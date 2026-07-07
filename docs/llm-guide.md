@@ -53,7 +53,7 @@ slashed/
 │   ├── base.css             # HTML typography, links, img/video
 │   ├── layout.css           # Primitive classes: stack, cluster, grid, sidebar…
 │   ├── macros.css           # Recipe classes: prose, surface, flow, scrim…
-│   ├── states.css           # State classes: .is-active, .is-current…
+│   ├── states.css           # State classes: .sf-is-active, .sf-is-current…
 │   ├── accessibility.css    # Focus, skip links, screen-reader utilities
 │   ├── motion.css           # @keyframes for animations + view-transition
 │   └── print.css            # Print styles
@@ -473,7 +473,7 @@ Status families (success/warning/info/danger) have **no numeric scale** — use 
 --sf-font-weight-strong:      var(--sf-font-weight-bold)      /* <strong> */
 
 /* State token */
---sf-current-font-weight: var(--sf-font-weight-bold)  /* .is-current in nav */
+--sf-current-font-weight: var(--sf-font-weight-bold)  /* .sf-is-current in nav */
 ```
 
 ### 6.4 Text sizes (fluid, generative)
@@ -1055,11 +1055,11 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 
 ### 9.9 State flags (PUBLIC-ADVANCED — Style Queries)
 
-Used by `.is-active`, `.is-current`, etc. in `core/states.css`. Allow components to react to ancestor states via CSS Style Queries.
+Used by `.sf-is-active`, `.sf-is-current`, etc. in `core/states.css`. Allow components to react to ancestor states via CSS Style Queries.
 
 ```css
---sf-is-active:  0   /* 1 = active element (.is-active) */
---sf-is-current: 0   /* 1 = current page (.is-current in nav) */
+--sf-is-active:  0   /* 1 = active element (.sf-is-active) */
+--sf-is-current: 0   /* 1 = current page (.sf-is-current in nav) */
 --sf-is-pressed: 0   /* 1 = pressed */
 --sf-is-open:    0   /* 1 = open (accordion, dropdown) */
 ```
@@ -1112,7 +1112,7 @@ Component tokens from `optional/tokens.components.css`:
 
 `.sf-btn` families: `--primary --neutral --success --warning --info --danger`;
 treatments `--secondary --ghost --outline`; sizes `--xs --s --l --xl` (m default);
-width `--block --block-cq`; states `:disabled`/`.is-disabled`/`.is-loading`.
+width `--block --block-cq`; states `:disabled`/`.sf-is-disabled`/`.sf-is-loading`.
 `.sf-card` slots: `__header __body __footer __media __avatar __title`; modifiers
 `--bordered --elevated --interactive`. Both ship in the `*-components` and `full`
 bundles only.

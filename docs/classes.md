@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**283 .sf-classes, 29 .is-classes.** Every `.sf-*` layout/macro class and `.is-*` state class.
+**284 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-143 classes.
+144 classes.
 
 | Class |
 |---|
@@ -124,6 +124,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-imposter` |
 | `.sf-imposter--contain` |
 | `.sf-imposter--fixed` |
+| `.sf-overlay` |
 | `.sf-pancake` |
 | `.sf-reel` |
 | `.sf-section` |
@@ -222,39 +223,38 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## State classes (`core/states.css`)
 
-29 classes.
+28 classes.
 
 | Class |
 |---|
-| `.is-active` |
-| `.is-busy` |
-| `.is-collapsed` |
-| `.is-current` |
-| `.is-danger` |
-| `.is-disabled` |
-| `.is-draggable` |
-| `.is-dragging` |
-| `.is-drop-target` |
-| `.is-empty` |
-| `.is-error` |
-| `.is-expanded` |
-| `.is-hidden` |
-| `.is-highlighted` |
-| `.is-info` |
-| `.is-invalid` |
-| `.is-invisible` |
-| `.is-loading` |
-| `.is-open` |
-| `.is-overlay` |
-| `.is-pending` |
-| `.is-pressed` |
-| `.is-readonly` |
-| `.is-selected` |
-| `.is-skeleton` |
-| `.is-success` |
-| `.is-valid` |
-| `.is-visible` |
-| `.is-warning` |
+| `.sf-is-active` |
+| `.sf-is-busy` |
+| `.sf-is-collapsed` |
+| `.sf-is-current` |
+| `.sf-is-danger` |
+| `.sf-is-disabled` |
+| `.sf-is-draggable` |
+| `.sf-is-dragging` |
+| `.sf-is-drop-target` |
+| `.sf-is-empty` |
+| `.sf-is-error` |
+| `.sf-is-expanded` |
+| `.sf-is-hidden` |
+| `.sf-is-highlighted` |
+| `.sf-is-info` |
+| `.sf-is-invalid` |
+| `.sf-is-invisible` |
+| `.sf-is-loading` |
+| `.sf-is-open` |
+| `.sf-is-pending` |
+| `.sf-is-pressed` |
+| `.sf-is-readonly` |
+| `.sf-is-selected` |
+| `.sf-is-skeleton` |
+| `.sf-is-success` |
+| `.sf-is-valid` |
+| `.sf-is-visible` |
+| `.sf-is-warning` |
 
 ## Accessibility (`core/accessibility.css`)
 
@@ -262,11 +262,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 | Class |
 |---|
-| `.is-loading` |
 | `.sf-clickable-parent` |
 | `.sf-clickable-parent__overlay` |
 | `.sf-focus-parent` |
 | `.sf-focus-shadow` |
+| `.sf-is-loading` |
 | `.sf-text-gradient` |
 
 ## Motion / entrances (`core/motion.css`)
@@ -319,8 +319,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 | Class |
 |---|
-| `.is-disabled` |
-| `.is-loading` |
 | `.sf-btn` |
 | `.sf-btn--block` |
 | `.sf-btn--block-cq` |
@@ -347,6 +345,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-card__header` |
 | `.sf-card__media` |
 | `.sf-card__title` |
+| `.sf-is-disabled` |
+| `.sf-is-loading` |
 
 ## Utilities (`optional/utilities.css`)
 

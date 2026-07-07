@@ -1,13 +1,13 @@
 /**
  * Selector inventory coverage test.
  *
- * Parses all .sf-* and .is-* selectors from core/*.css, then verifies
+ * Parses all .sf-* and .sf-is-* selectors from core/*.css, then verifies
  * each appears at least once in docs/demo.html. This eliminates future
  * regressions of the F-14 type (selectors shipped without demo coverage).
  *
  * INTENTIONALLY EXCLUDED:
- * - Internal compound selectors (e.g. .sf-modal.is-open used only as
- *   an example in comments, .sf-nav .is-current — component-layer refs)
+ * - Internal compound selectors (e.g. .sf-modal.sf-is-open used only as
+ *   an example in comments, .sf-nav .sf-is-current — component-layer refs)
  * - BEM children (.sf-cover__center) — checked by their parent
  * - Selectors that only exist in comments
  *
@@ -21,7 +21,7 @@ import path from 'node:path';
 const ROOT = path.resolve(import.meta.dirname, '..');
 
 describe('Selector coverage', () => {
-  test('every .sf-* and .is-* class from core/*.css appears in docs/demo.html', () => {
+  test('every .sf-* and .sf-is-* class from core/*.css appears in docs/demo.html', () => {
     const coreDir = path.join(ROOT, 'core');
     const demoPath = path.join(ROOT, 'docs', 'demo.html');
 
@@ -32,11 +32,11 @@ describe('Selector coverage', () => {
     // Read demo.html
     const demoContent = fs.readFileSync(demoPath, 'utf8');
 
-    // Extract all class selectors (.sf-* and .is-*) from CSS rules (not comments)
+    // Extract all class selectors (.sf-* and .sf-is-*) from CSS rules (not comments)
     // Remove CSS comments first
     const cssNoComments = allCSS.replace(/\/\*[\s\S]*?\*\//g, '');
 
-    const selectorRegex = /\.(sf-[a-z0-9_-]+|is-[a-z0-9_-]+)/g;
+    const selectorRegex = /\.(sf-[a-z0-9_-]+|sf-is-[a-z0-9_-]+)/g;
     const selectors = new Set();
     let match;
     while ((match = selectorRegex.exec(cssNoComments)) !== null) {

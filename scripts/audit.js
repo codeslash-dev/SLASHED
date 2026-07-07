@@ -5,7 +5,7 @@
  * Writes docs/registry.json with exact counts and lists of:
  *   - design tokens  (--sf-*): parsed from token source files
  *   - layout classes (.sf-*): parsed from CSS source files
- *   - state classes  (.is-*): parsed from CSS source files
+ *   - state classes  (.sf-is-*): parsed from CSS source files
  *
  * This is the one authoritative parser. All other counts must match it.
  *
@@ -61,22 +61,26 @@ function extractTokens() {
 
 // ── Class extraction ─────────────────────────────────────────────────────────
 // Counts only from CLASS_FILES.
-// Matches class selectors: .sf-name or .is-name. Strips both comments and
+// Matches class selectors: .sf-name or .sf-is-name. Strips both comments and
 // string literals first so content:"…" values don't produce false positives.
 
-function extractClasses(prefix) {
+function extractClasses(prefix, { excludePrefix = '' } = {}) {
   const names = new Set();
   const re = new RegExp(`\\.(${prefix}[\\w-]+)`, 'g');
   for (const rel of CLASS_FILES) {
     const css = stripStrings(stripComments(readFile(rel)));
-    for (const m of css.matchAll(re)) names.add(m[1]);
+    for (const m of css.matchAll(re)) {
+      if (excludePrefix && m[1].startsWith(excludePrefix)) continue;
+      names.add(m[1]);
+    }
   }
   return [...names].sort();
 }
 
 // ── Unprefixed class extraction ──────────────────────────────────────────────
-// Finds class selectors that are NOT .sf-* or .is-* (accessibility helpers,
-// print utilities, theme utilities, etc.)
+// Finds class selectors that are NOT .sf-* (accessibility helpers, print
+// utilities, theme utilities, etc.). Legacy .is-* selectors are rejected so the
+// old state namespace cannot silently re-enter the generated API.
 
 function extractUnprefixedClasses() {
   const names = new Set();
@@ -87,8 +91,12 @@ function extractUnprefixedClasses() {
     css = css.replace(/@layer\s+[^{;]+[{;]/g, '');
     for (const m of css.matchAll(re)) {
       const name = m[1];
-      // Skip sf- and is- prefixed (already tracked separately)
-      if (name.startsWith('sf-') || name.startsWith('is-')) continue;
+      if (name.startsWith('sf-')) continue;
+      if (name.startsWith('is-')) {
+        throw new Error(
+          `[audit] Legacy state selector .${name} found in ${rel}; use .sf-${name} instead.`
+        );
+      }
       names.add(name);
     }
   }
@@ -140,8 +148,8 @@ function findUnusedTokens(tokens) {
 }
 
 const tokens           = extractTokens();
-const sfClasses        = extractClasses('sf-');
-const isClasses        = extractClasses('is-');
+const sfClasses        = extractClasses('sf-', { excludePrefix: 'sf-is-' });
+const isClasses        = extractClasses('sf-is-');
 const unprefixedClasses = extractUnprefixedClasses();
 
 const registry = {
@@ -192,7 +200,7 @@ if (process.argv.includes('--check')) {
 
   diff('token',    tokens,    stored.tokens);
   diff('sf-class', sfClasses, stored.sf_classes);
-  diff('is-class', isClasses, stored.is_classes);
+  diff('sf-is-class', isClasses, stored.is_classes);
   diff('unprefixed-class', unprefixedClasses, stored.unprefixed_classes || []);
 
   if (errors.length) {
@@ -203,7 +211,7 @@ if (process.argv.includes('--check')) {
 
   console.log(
     `[audit] OK — ${tokens.length} tokens, ` +
-    `${sfClasses.length} .sf-classes, ${isClasses.length} .is-classes`
+    `${sfClasses.length} .sf-classes, ${isClasses.length} .sf-is-classes`
   );
 } else {
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
@@ -212,6 +220,6 @@ if (process.argv.includes('--check')) {
     `[audit] → docs/registry.json` +
     ` (${tokens.length} tokens,` +
     ` ${sfClasses.length} .sf-classes,` +
-    ` ${isClasses.length} .is-classes)`
+    ` ${isClasses.length} .sf-is-classes)`
   );
 }

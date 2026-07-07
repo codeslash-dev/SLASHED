@@ -51,7 +51,7 @@ classless `<button>` styling in `optional/forms.css` (via `:not([class*="sf-"])`
 
 <!-- States -->
 <button class="sf-btn" disabled>Disabled</button>
-<button class="sf-btn is-loading"><span>Saving…</span></button>
+<button class="sf-btn sf-is-loading"><span>Saving…</span></button>
 
 <!-- Full width -->
 <button class="sf-btn sf-btn--block">Block</button>
@@ -68,8 +68,8 @@ classless `<button>` styling in `optional/forms.css` (via `:not([class*="sf-"])`
 | Size | `--xs` `--s` `--l` `--xl` | Scales padding, font-size, and min-height (`m` = default). |
 | Width | `--block` | Full width everywhere. |
 | Width | `--block-cq` | Full width only inside a query container narrower than `20rem`. |
-| State | `:disabled` / `.is-disabled` | Dimmed, `pointer-events: none`. |
-| State | `.is-loading` | Hides content, shows a spinner (static under `prefers-reduced-motion: reduce`). |
+| State | `:disabled` / `.sf-is-disabled` | Dimmed, `pointer-events: none`. |
+| State | `.sf-is-loading` | Hides content, shows a spinner (static under `prefers-reduced-motion: reduce`). |
 
 Every variant sets three rule-local custom properties — `--sf-btn-color`,
 `--sf-btn-color--hover`, `--sf-btn-on-color` — which is what lets `--outline`
@@ -225,7 +225,7 @@ tokens:
 - `.sf-pagination` — needs UX research
 - `.sf-breadcrumb` — too simple to justify a class API
 - `.sf-progress` — native `<progress>` already styled in `slashed.base`
-- `.sf-spinner` — `.is-loading` covers it
+- `.sf-spinner` — `.sf-is-loading` covers it
 - `.sf-table` — `.sf-prose` styles long-form tables
 - `.sf-form-field` — forms are classless via `optional/forms.css`
 - `.sf-nav` — too site-specific

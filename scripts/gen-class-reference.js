@@ -15,7 +15,7 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const FILE_META = {
   'core/layout.css':        { title: 'Layout primitives',    prefix: 'sf-' },
   'core/macros.css':        { title: 'Macro classes',         prefix: 'sf-' },
-  'core/states.css':        { title: 'State classes',         prefix: 'is-' },
+  'core/states.css':        { title: 'State classes',         prefix: 'sf-is-' },
   'core/accessibility.css': { title: 'Accessibility',         prefix: 'sf-' },
   'core/motion.css':        { title: 'Motion / entrances',    prefix: 'sf-' },
   'core/print.css':         { title: 'Print utilities',       prefix: ''    },
@@ -41,7 +41,7 @@ function extract(file) {
     .replace(/\/\*[\s\S]*?\*\//g, '')     // strip block comments
     .replace(/"[^"]*"|'[^']*'/g, '""');   // strip string literals
   const names = new Set();
-  for (const m of css.matchAll(/\.((sf|is)-[\w-]+)/g)) names.add(m[1]);
+  for (const m of css.matchAll(/\.(sf-[\w-]+)/g)) names.add(m[1]);
   return [...names].sort();
 }
 
@@ -50,7 +50,7 @@ let out = `# Class reference
 > **Generated** from source by \`scripts/gen-class-reference.js\` —
 > run \`npm run docs:classes\` to refresh. Do not edit by hand.
 
-Every \`.sf-*\` layout/macro class and \`.is-*\` state class.
+Every \`.sf-*\` layout/macro class and \`.sf-is-*\` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 `;
@@ -62,8 +62,8 @@ const sections = [];
 for (const { file, title } of SOURCES) {
   const names = extract(file);
   if (!names.length) continue;
-  const sf = names.filter(n => n.startsWith('sf-'));
-  const is = names.filter(n => n.startsWith('is-'));
+  const sf = names.filter(n => n.startsWith('sf-') && !n.startsWith('sf-is-'));
+  const is = names.filter(n => n.startsWith('sf-is-'));
   sf.forEach(n => globalSf.add(n));
   is.forEach(n => globalIs.add(n));
   sections.push({ title, names });
@@ -72,7 +72,7 @@ for (const { file, title } of SOURCES) {
 const totalSf = globalSf.size;
 const totalIs = globalIs.size;
 
-out = out.replace('Every', `**${totalSf} .sf-classes, ${totalIs} .is-classes.** Every`);
+out = out.replace('Every', `**${totalSf} .sf-classes, ${totalIs} .sf-is-classes.** Every`);
 
 for (const { title, names } of sections) {
   out += `## ${title}\n\n`;
@@ -84,4 +84,4 @@ for (const { title, names } of sections) {
 
 const OUT = path.join(ROOT, 'docs', 'classes.md');
 fs.writeFileSync(OUT, out, 'utf8');
-console.log(`[docs] → docs/classes.md (${totalSf} .sf-classes, ${totalIs} .is-classes)`);
+console.log(`[docs] → docs/classes.md (${totalSf} .sf-classes, ${totalIs} .sf-is-classes)`);

@@ -1,7 +1,7 @@
 /* SLASHED — optional/utilities.css
    @layer slashed.utilities
    Static opt-in utility helpers.
-   Prefix: .sf-*; keep dynamic state in .is-* classes.
+   Prefix: .sf-*; keep dynamic state in .sf-is-* classes.
 
    Most definitions below are STAGED (commented out) — SLASHED is BEM-first
    by design and ships only a curated subset of utility classes; uncomment

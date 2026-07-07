@@ -76,7 +76,7 @@ function main() {
   const entries = [...tokenEntries, ...classEntries];
 
   const sfClasses = classEntries.filter(e => e.prefix === 'sf');
-  const isClasses = classEntries.filter(e => e.prefix === 'is');
+  const isClasses = classEntries.filter(e => e.prefix === 'sf-is');
   const unprefixed = classEntries.filter(e => e.prefix === '');
 
   const tierCounts = tally(entries, 'tier');
@@ -106,7 +106,7 @@ function main() {
     inherits:    'TOKEN: @property inherits flag, else null.',
     // class-only
     selector:    'CLASS: the CSS selector form (.name).',
-    prefix:      "CLASS: 'sf' | 'is' | '' (unprefixed).",
+    prefix:      "CLASS: 'sf' | 'sf-is' | '' (unprefixed).",
     kind:        'CLASS: element family (layout, macro, state, accessibility, motion, print, form, component, theme).',
     isVariant:   'CLASS: true when it is a BEM modifier (contains --).',
     baseClass:   'CLASS: the base class name when isVariant, else null.',
@@ -161,7 +161,7 @@ function main() {
   console.log(
     `[docs] → docs/api-index.json + docs/api-index.md ` +
     `(${entries.length} elements: ${tokenEntries.length} tokens, ${classEntries.length} classes; ` +
-    `${sfClasses.length} .sf-, ${isClasses.length} .is-, ${unprefixed.length} unprefixed)`
+    `${sfClasses.length} .sf-, ${isClasses.length} .sf-is-, ${unprefixed.length} unprefixed)`
   );
 }
 

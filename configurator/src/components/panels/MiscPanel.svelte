@@ -616,10 +616,10 @@
       </p>
       <div class="space-y-1.5">
         {#each [
-          { label: "is-active",  token: "--sf-is-active",  note: "Active/selected state" },
-          { label: "is-current", token: "--sf-is-current", note: "Current page/item" },
-          { label: "is-open",    token: "--sf-is-open",    note: "Open/expanded state" },
-          { label: "is-pressed", token: "--sf-is-pressed", note: "Pressed/depressed state" },
+          { label: "sf-is-active",  token: "--sf-is-active",  note: "Active/selected state" },
+          { label: "sf-is-current", token: "--sf-is-current", note: "Current page/item" },
+          { label: "sf-is-open",    token: "--sf-is-open",    note: "Open/expanded state" },
+          { label: "sf-is-pressed", token: "--sf-is-pressed", note: "Pressed/depressed state" },
         ] as f (f.token)}
           {@const cur = overrides[f.token] ?? "0"}
           <div class="flex items-center gap-2 py-0.5">

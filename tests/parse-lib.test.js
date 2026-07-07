@@ -17,7 +17,11 @@ import {
   stripComments, stripStrings, maskComments, maskStrings,
   readValue, readFile, requireFile,
 } from '../scripts/lib/parse.js';
-import { collectComments, describe as describeElement } from '../scripts/lib/api-index/extract.js';
+import {
+  collectComments,
+  describe as describeElement,
+  extractClassesFromFile,
+} from '../scripts/lib/api-index/extract.js';
 
 describe('stripComments vs maskComments', () => {
   const css = '.a { color: red; } /* comment */ .b { color: blue; }';
@@ -141,5 +145,22 @@ describe('collectComments / describe — directive comments never become descrip
     const { description } = describeElement(comments, idx);
     assert.ok(!description.includes('stylelint-disable'));
     assert.match(description, /concave corner/i);
+  });
+});
+
+describe('api-index class extraction namespace guards', () => {
+  test('legacy .is-* selectors throw instead of becoming unprefixed API classes', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'api-index-class-guard-'));
+    fs.mkdirSync(path.join(root, 'core'), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, 'core/states.css'),
+      '@layer slashed.states { .is-open { --sf-is-open: 1; } }',
+      'utf8',
+    );
+
+    assert.throws(
+      () => extractClassesFromFile('core/states.css', root, () => ['optimal']),
+      /Legacy state selector \.is-open/,
+    );
   });
 });

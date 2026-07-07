@@ -184,7 +184,7 @@
       <!-- Live preview — real .sf-btn classes, driven by the same override
            mechanism as every other panel's inline preview. -->
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center">
-        <button class={btnClass()} class:is-loading={btnLoading} disabled={btnDisabled}>
+        <button class={btnClass()} class:sf-is-loading={btnLoading} disabled={btnDisabled}>
           {btnLoading ? "Loading" : "Button label"}
         </button>
       </div>

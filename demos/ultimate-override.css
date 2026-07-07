@@ -345,11 +345,11 @@
    Intentionally NOT overridden (23):
    --sf-bg-z — stacking order — lowering it would push the background layer over content
    --sf-color-scheme — meta control — forcing a scheme would override the page light/dark behaviour rather than test a visual token
-   --sf-is-active — runtime state flag — exercised via the .is-active class; a global :root flip would force every element active
-   --sf-is-current — runtime state flag — exercised via the .is-current class
+   --sf-is-active — runtime state flag — exercised via the .sf-is-active class; a global :root flip would force every element active
+   --sf-is-current — runtime state flag — exercised via the .sf-is-current class
    --sf-is-dark — runtime theme flag — driven by color-scheme; a global flip would desync from the actual scheme
-   --sf-is-open — runtime state flag — exercised via the .is-open class
-   --sf-is-pressed — runtime state flag — exercised via the .is-pressed class
+   --sf-is-open — runtime state flag — exercised via the .sf-is-open class
+   --sf-is-pressed — runtime state flag — exercised via the .sf-is-pressed class
    --sf-safe-bottom — env() device inset — zero on desktop, no visual surface
    --sf-safe-left — env() device inset — zero on desktop, no visual surface
    --sf-safe-right — env() device inset — zero on desktop, no visual surface

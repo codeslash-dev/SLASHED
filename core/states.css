@@ -1,29 +1,29 @@
 /* SLASHED — core/states.css
    @layer slashed.states
    Generic runtime states toggled by JS or ARIA: visibility, interactivity, selection, busy/current.
-   Prefix: .is-*; not utilities or component-specific variants. */
+   Prefix: .sf-is-*; not utilities or component-specific variants. */
 
 @layer slashed.states {
 
   /* -- VISIBILITY -- */
 
-  .is-hidden {
+  .sf-is-hidden {
     display: none !important;
   }
 
-  .is-invisible {
+  .sf-is-invisible {
     visibility: hidden;
   }
 
-  .is-visible {
+  .sf-is-visible {
     visibility: visible;
   }
 
   /* -- INTERACTIVITY -- */
 
   /* cursor: not-allowed inherits to children with pointer-events: auto —
-     intentional, part of the .is-disabled API surface. */
-  .is-disabled {
+     intentional, part of the .sf-is-disabled API surface. */
+  .sf-is-disabled {
     opacity:        var(--sf-opacity-disabled);
     pointer-events: none;
 
@@ -31,24 +31,24 @@
     user-select:    none;
   }
 
-  .is-readonly {
+  .sf-is-readonly {
     pointer-events: none;
     user-select:    none;
   }
 
   /* -- LOADING / ASYNC FEEDBACK -- */
 
-  .is-loading {
+  .sf-is-loading {
     color:          transparent !important;
     pointer-events: none;
     position:       relative;
   }
 
-  .is-loading > * {
+  .sf-is-loading > * {
     opacity: 0 !important;
   }
 
-  .is-loading::after {
+  .sf-is-loading::after {
     content:             "";
     position:            absolute;
     inset-block-start:   50%;
@@ -64,22 +64,22 @@
     animation: var(--sf-animation-spin);
   }
 
-  .is-busy {
+  .sf-is-busy {
     cursor: progress;
   }
 
-  .is-pending {
+  .sf-is-pending {
 
     opacity: var(--sf-state-pending-opacity);
     cursor:  progress;
   }
 
-  img.is-skeleton,
-  .is-skeleton img {
+  img.sf-is-skeleton,
+  .sf-is-skeleton img {
     opacity: 0 !important;
   }
 
-  .is-skeleton {
+  .sf-is-skeleton {
     color:           transparent !important;
     background:      linear-gradient(
                        90deg,
@@ -96,26 +96,26 @@
 
   /* -- ACTIVE / SELECTED / CURRENT -- */
 
-  .is-active {
+  .sf-is-active {
 
     --sf-is-active: 1;
   }
 
-  .is-selected {
+  .sf-is-selected {
     background-color: var(--sf-color-bg--selected);
   }
 
-  .is-current {
+  .sf-is-current {
 
     --sf-is-current: 1;
     font-weight: var(--sf-current-font-weight, var(--sf-font-weight-bold));
   }
 
-  .is-highlighted {
+  .sf-is-highlighted {
     background-color: var(--sf-color-bg--focus);
   }
 
-  .is-pressed {
+  .sf-is-pressed {
 
     --sf-is-pressed: 1;
     background-color: var(--sf-color-bg--selected);
@@ -123,73 +123,66 @@
 
   /* -- OPEN / CLOSED -- */
 
-  .is-open {
+  .sf-is-open {
     --sf-is-open: 1;
   }
 
-  .is-collapsed {
+  .sf-is-collapsed {
     --sf-is-open: 0;
   }
 
-  .is-expanded {
+  .sf-is-expanded {
     --sf-is-open: 1;
   }
 
   /* -- VALIDATION / FEEDBACK -- */
 
-  .is-valid,
-  .is-success {
+  .sf-is-valid,
+  .sf-is-success {
     --sf-field-border-color: var(--sf-color-success);
     --sf-field-text-color:   var(--sf-color-success-strong);
   }
 
-  .is-invalid,
-  .is-error {
+  .sf-is-invalid,
+  .sf-is-error {
     --sf-field-border-color: var(--sf-color-danger);
     --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
-  .is-warning {
+  .sf-is-warning {
     --sf-field-border-color: var(--sf-color-warning);
     --sf-field-text-color:   var(--sf-color-warning-strong);
   }
 
-  .is-info {
+  .sf-is-info {
     --sf-field-border-color: var(--sf-color-info);
     --sf-field-text-color:   var(--sf-color-info-strong);
   }
 
-  .is-danger {
+  .sf-is-danger {
     --sf-field-border-color: var(--sf-color-danger);
     --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
   /* -- DRAG & DROP -- */
 
-  .is-dragging {
+  .sf-is-dragging {
     opacity: var(--sf-opacity-muted);
     cursor:  grabbing;
   }
 
-  .is-drop-target {
+  .sf-is-drop-target {
     outline:        var(--sf-focus-ring-width) dashed var(--sf-color-action);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  .is-draggable {
+  .sf-is-draggable {
     cursor: grab;
-  }
-
-  /* -- OVERLAY / BACKDROP -- */
-
-  .is-overlay {
-    position: absolute;
-    inset:    0;
   }
 
   /* -- EMPTY STATE -- */
 
-  .is-empty:empty {
+  .sf-is-empty:empty {
     display: none;
   }
 

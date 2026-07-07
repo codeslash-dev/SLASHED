@@ -114,7 +114,7 @@
   /* @property — INTERACTION STATE FLAGS */
   /* PUBLIC hooks for Style Queries — safe to set from consumer code, unlike
      --sf-is-dark above. Allow components to react to states toggled on
-     ancestors via .is-* classes. */
+     ancestors via .sf-is-* classes. */
   @property --sf-is-active  { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-current { syntax: "<integer>"; inherits: true; initial-value: 0; }
   @property --sf-is-pressed { syntax: "<integer>"; inherits: true; initial-value: 0; }
@@ -973,7 +973,7 @@
     --sf-font-weight-interactive: var(--sf-font-weight-semibold);  /* buttons, badges, nav */
     --sf-font-weight-strong:      var(--sf-font-weight-bold);      /* <strong> / emphasis  */
 
-    /* State token — consumed by .is-current in states.css.
+    /* State token — consumed by .sf-is-current in states.css.
        Override to match your nav design (e.g. semibold for thin fonts). */
     --sf-current-font-weight: var(--sf-font-weight-bold);
 

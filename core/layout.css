@@ -97,6 +97,12 @@
     container-type: inline-size;
   }
 
+  /* Overlay — absolute-fill layout helper for overlays/backdrops. */
+  .sf-overlay {
+    position: absolute;
+    inset:    0;
+  }
+
   
   /* Stack & gap */
   .sf-stack {

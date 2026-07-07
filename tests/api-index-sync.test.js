@@ -77,13 +77,13 @@ describe('api-index.json ⇄ registry.json sync', () => {
   });
 
   // ── Class parity ─────────────────────────────────────────────────────────
-  test('.sf- / .is- / unprefixed class names match registry', () => {
+  test('.sf- / .sf-is- / unprefixed class names match registry', () => {
     const sf  = classes.filter(c => c.prefix === 'sf').map(c => c.name).sort();
-    const is  = classes.filter(c => c.prefix === 'is').map(c => c.name).sort();
+    const is  = classes.filter(c => c.prefix === 'sf-is').map(c => c.name).sort();
     const un  = classes.filter(c => c.prefix === '').map(c => c.name).sort();
 
     assert.deepEqual(sf, [...registry.sf_classes].sort(), '.sf- classes diverge from registry');
-    assert.deepEqual(is, [...registry.is_classes].sort(), '.is- classes diverge from registry');
+    assert.deepEqual(is, [...registry.is_classes].sort(), '.sf-is- classes diverge from registry');
     assert.deepEqual(un, [...(registry.unprefixed_classes || [])].sort(), 'unprefixed classes diverge from registry');
   });
 
@@ -135,7 +135,7 @@ describe('api-index.json ⇄ registry.json sync', () => {
   test('class rows have class-specific columns', () => {
     for (const e of classes) {
       assert.equal(e.selector, `.${e.name}`, `${e.name} selector mismatch`);
-      assert.ok(['sf', 'is', ''].includes(e.prefix), `${e.name} bad prefix: ${e.prefix}`);
+      assert.ok(['sf', 'sf-is', ''].includes(e.prefix), `${e.name} bad prefix: ${e.prefix}`);
       assert.ok(typeof e.isVariant === 'boolean', `${e.name} bad isVariant`);
       if (e.isVariant) {
         assert.ok(e.baseClass && e.name.startsWith(e.baseClass), `${e.name} bad baseClass: ${e.baseClass}`);

@@ -23,7 +23,7 @@
    *         only inside a query container narrower than 20rem (needs a
    *         container ancestor — the layout primitives or .sf-cq provide
    *         one). No @media breakpoints.
-   * States: :disabled / .is-disabled | .is-loading
+   * States: :disabled / .sf-is-disabled | .sf-is-loading
    *
    * Colour model: every variant sets three rule-local custom properties
    * — --sf-btn-color (family base), --sf-btn-color--hover, and
@@ -67,7 +67,7 @@
     background:       var(--sf-btn-color);
     color:            var(--sf-btn-on-color);
   }
-  .sf-btn:hover:not(:disabled, .is-disabled, .is-loading) {
+  .sf-btn:hover:not(:disabled, .sf-is-disabled, .sf-is-loading) {
     background:   var(--sf-btn-color--hover);
     border-color: var(--sf-btn-color--hover);
   }
@@ -110,7 +110,7 @@
     color:        var(--sf-btn-color);
     border-color: var(--sf-btn-color);
   }
-  .sf-btn--secondary:hover:not(:disabled, .is-disabled, .is-loading) {
+  .sf-btn--secondary:hover:not(:disabled, .sf-is-disabled, .sf-is-loading) {
     background:   color-mix(in oklab, var(--sf-btn-color) 8%, transparent);
     border-color: var(--sf-btn-color);
   }
@@ -120,7 +120,7 @@
     color:        var(--sf-btn-color);
     border-color: transparent;
   }
-  .sf-btn--ghost:hover:not(:disabled, .is-disabled, .is-loading) {
+  .sf-btn--ghost:hover:not(:disabled, .sf-is-disabled, .sf-is-loading) {
     background: color-mix(in oklab, var(--sf-btn-color) 8%, transparent);
   }
 
@@ -130,7 +130,7 @@
     color:        var(--sf-btn-color);
     border-color: var(--sf-btn-color);
   }
-  .sf-btn--outline:hover:not(:disabled, .is-disabled, .is-loading) {
+  .sf-btn--outline:hover:not(:disabled, .sf-is-disabled, .sf-is-loading) {
     background:   var(--sf-btn-color);
     color:        var(--sf-btn-on-color);
     border-color: var(--sf-btn-color);
@@ -164,20 +164,20 @@
 
   /* --- States --- */
   .sf-btn:disabled,
-  .sf-btn.is-disabled {
+  .sf-btn.sf-is-disabled {
     opacity:        var(--sf-opacity-disabled);
     cursor:         not-allowed;
     pointer-events: none;
   }
 
-  .sf-btn.is-loading {
+  .sf-btn.sf-is-loading {
     cursor:   wait;
     position: relative;
   }
-  .sf-btn.is-loading > * {
+  .sf-btn.sf-is-loading > * {
     visibility: hidden;
   }
-  .sf-btn.is-loading::after {
+  .sf-btn.sf-is-loading::after {
     content:                  '';
     position:                 absolute;
     inset:                    0;
@@ -191,7 +191,7 @@
   /* Spinner only animates when motion is welcome; otherwise the ring is
      shown static so the loading state is still visible. */
   @media (prefers-reduced-motion: no-preference) {
-    .sf-btn.is-loading::after {
+    .sf-btn.sf-is-loading::after {
       animation: sf-spin var(--sf-duration-slower) linear infinite;
     }
   }

@@ -61,7 +61,7 @@ Every letter of SLASHED is a design commitment, and each one is checkable agains
 - **Lean** — a foundation, not a kit. No utility-class bloat, nothing to purge, nothing you didn't ask for.
 - **Agnostic** — no stack assumptions. Any CMS, any builder, any JS framework, plain HTML — if it renders a stylesheet, SLASHED runs on it. No vendor lock-in, ever.
 - **Structured** — fifteen named cascade layers in a fixed order, and a fully catalogued token API with stability tiers (`PUBLIC` / `PUBLIC-ADVANCED` / `INTERNAL`).
-- **Hybrid** — classless where it can be (base elements, opt-in form styling), class-based where it counts (layout primitives, macros, `.is-*` states).
+- **Hybrid** — classless where it can be (base elements, opt-in form styling), class-based where it counts (layout primitives, macros, `.sf-is-*` states).
 - **Explicit** — every visual value is a named token; hardcoded numbers are treated as bugs. Even the browser floor is stated up front instead of failing quietly.
 - **Deterministic** — same tokens in, same design out. Every rule lives in a layer, so load order never changes the cascade, and every derived color and scale is computed by formula, not hand-picked.
 
@@ -70,7 +70,7 @@ Every letter of SLASHED is a design commitment, and each one is checkable agains
 - **720 design tokens** (`--sf-*`) covering color, typography, spacing, layout, borders, shadows, motion, and z-index — catalogued in a machine-readable [API index](docs/api-index.json).
 - **Layout primitives** — `.sf-container`, `.sf-stack`, `.sf-grid`, `.sf-cluster`, `.sf-sidebar`, `.sf-switcher`, `.sf-cover`, `.sf-center`, `.sf-frame`, `.sf-reel`, `.sf-bento`, and more ([docs/layout.md](docs/layout.md)).
 - **Macros** — recipes like `.sf-prose`, `.sf-flow`, `.sf-truncate`, `.sf-aspect`, `.sf-scroll-shadow`, `.sf-surface` ([docs/macros.md](docs/macros.md)).
-- **State classes** — `.is-*` classes mapped to ARIA semantics ([docs/states.md](docs/states.md)).
+- **State classes** — `.sf-is-*` classes mapped to ARIA semantics ([docs/states.md](docs/states.md)).
 - **A fluid engine** — the type, display, and space scales are generated at runtime from 12 input scalars (viewport range, modular ratios, base sizes). Change one ratio and the whole system recalculates — no build ([docs/theming.md](docs/theming.md#fluid-engine)).
 - **Classless form styling**, motion, accessibility, and print modules.
 
@@ -163,7 +163,7 @@ Pre-built bundles ship with every [release](https://github.com/codeslash-dev/SLA
 | [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
 | [Macros / recipes](docs/macros.md) | every `.sf-*` macro class + tokens |
 | [Components](docs/components.md) | reserved component names + roadmap |
-| [State classes](docs/states.md) | every `.is-*` + ARIA mapping + overlap semantics |
+| [State classes](docs/states.md) | every `.sf-is-*` + ARIA mapping + overlap semantics |
 | [Motion](docs/motion.md) | animation classes, tokens, reduced motion |
 | [Class reference](docs/classes.md) | every shipped class (generated) |
 | [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
