@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.7] - 2026-07-08
+
 ### ⚠️ Breaking Changes
 - **components:** `.sf-btn--secondary` changed meaning: it now selects the **secondary brand colour** (`--sf-color-secondary`) as part of the completed colour axis. The soft-tonal *style* it used to name is renamed to **`.sf-btn--soft`**. Before → after: `class="sf-btn sf-btn--secondary"` (old soft style) → `class="sf-btn sf-btn--soft"`; `class="sf-btn sf-btn--secondary"` (new) = secondary-coloured solid button. (#571)
 - **components:** `.sf-btn--ghost` removed entirely — no alias. Closest replacements: `.sf-btn--soft` (tonal wash) or a plain link. (#571)
