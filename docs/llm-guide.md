@@ -309,7 +309,7 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 --sf-color-code-bg          /* Inline code background — var(--sf-color-inset) */
 --sf-color-code-text        /* Inline code text — auto-contrasts with code bg */
 
-/* Scoped override hooks for code blocks — set these on .sf-code-block or your own class */
+/* Scoped override hooks for code blocks — set these on `pre` or your own class */
 --sf-color-code-block-bg    /* falls back to --sf-color-code-bg when unset */
 --sf-color-code-block-text  /* falls back to inherit when unset */
 ```

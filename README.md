@@ -74,7 +74,7 @@ Every letter of SLASHED is a design commitment, and each one is checkable agains
 - **A fluid engine** — the type, display, and space scales are generated at runtime from 12 input scalars (viewport range, modular ratios, base sizes). Change one ratio and the whole system recalculates — no build ([docs/theming.md](docs/theming.md#fluid-engine)).
 - **Classless form styling**, motion, accessibility, and print modules.
 
-SLASHED is BEM-first: the token API is the product, and you build components on top. It ships a **curated subset of utility classes** in 0.x — heading (`.sf-h1`–`.sf-h6`), text-size (`.sf-text-*`), hover-transform (`.sf-hover-*`), list-reset, marker-colour, selection, and sticky helpers — with the rest staged. It ships exactly **two components** — `.sf-btn` and `.sf-card`, live since v0.7.0 (in the `-components` and `full` bundles); by design there is no broad component library. What you get is the foundation plus those two components, honestly labelled.
+SLASHED is BEM-first: the token API is the product, and you build components on top. It ships a **curated subset of utility classes** in 0.x — heading (`.sf-h1`–`.sf-h6`), text-size (`.sf-text-*`), hover-transform (`.sf-hover-*`), list-reset, marker-colour, selection, and sticky helpers — with the rest staged. `.sf-btn` and `.sf-card`, live since v0.7.0 (in the `-components` and `full` bundles), are the component surface shipped so far; further components (badge, tag, alert, avatar, modal, a skeleton/placeholder shape) are planned — see [docs/roadmap.md](docs/roadmap.md) and [#384](https://github.com/codeslash-dev/SLASHED/issues/384). What you get today is the foundation plus those two components, honestly labelled.
 
 ## Dark mode
 

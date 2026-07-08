@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Bug Fixes
+- **components:** `.sf-card__media` had no `margin-block-end`, so it touched whatever followed (`__header` or `__body`) directly with zero gap. Now spaces itself the same as the header/footer dividers (`--sf-card-gap`).
+- **themes:** a card (or any component whose tokens simply alias a themed core token, e.g. `--sf-card-bg: var(--sf-color-surface)`) nested inside a non-root `[data-theme]` section — `<section data-theme="dark">` on an otherwise light page — kept the *page's* background while its text correctly switched to the section's theme, since the alias froze at `:root`'s value and never re-evaluated locally. `--sf-card-bg`/`--sf-card-border-color` are now re-declared at the same nested-section scope as the rest of the section-level theming block, restoring the "`data-theme` works on any element" guarantee (`docs/theming.md`) for cards.
+- **configurator:** the Card and Button live previews in the Components control panel didn't set `data-theme`, so they only ever reflected the ambient/OS colour scheme — toggling the Studio's own dark-mode chrome desynced the preview's background from its text (the exact bug above, reproduced by the Studio's own theme toggle). Both previews now pin `data-theme` to the Studio's chrome theme.
+- **tokens:** removed a phantom `--sf-space-3xs` reference in `.sf-btn--xs` (no such token exists in the spacing scale — it always silently fell through to a hardcoded `0.125rem` fallback); replaced with the literal value it always resolved to. Mirrored the same simplification in the configurator's internal spacing-scale demo.
+
+### Documentation
+- **docs:** `docs/llm-guide.md`'s code-block override hooks referenced a nonexistent `.sf-code-block` class; the real consumer is `pre`.
+- **docs:** removed three orphaned `--sf-button-padding-block/-inline/-radius` entries from `docs/token-annotations.json` (stale pre-rename duplicates of the live `--sf-btn-*` entries).
+- **docs:** `README.md` no longer claims "by design there is no broad component library" — it now points to `docs/roadmap.md`/#384 for the planned components, matching `docs/components.md`.
+
 ## [0.7.7] - 2026-07-08
 
 ### ⚠️ Breaking Changes

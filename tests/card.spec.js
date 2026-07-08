@@ -109,5 +109,73 @@ for (const theme of ['light', 'dark']) {
       });
       expect(ratio).toBeCloseTo(16 / 9, 1);
     });
+
+    test('__media has space before the element that follows it', async ({ page }) => {
+      // Regression guard: __media previously had no margin-block-end, so it
+      // touched __header (or __body, if there's no header) directly.
+      await mount(
+        page,
+        `<article class="sf-card">
+           <div class="sf-card__media" id="media"></div>
+           <div class="sf-card__header" id="header">Title</div>
+         </article>`,
+      );
+      const gap = await page.evaluate(() => {
+        const media = document.getElementById('media').getBoundingClientRect();
+        const header = document.getElementById('header').getBoundingClientRect();
+        return header.top - media.bottom;
+      });
+      expect(gap).toBeGreaterThan(0);
+    });
   });
 }
+
+// Nested/sectional data-theme scoping — separate from the light/dark describe
+// blocks above (which set data-theme on :root, the common case). This checks
+// the "data-theme works on any element" guarantee (docs/theming.md) for a
+// card nested inside a non-root themed section, e.g. a themed <section> on an
+// otherwise light page.
+test.describe('.sf-card — nested data-theme scoping', () => {
+  test('a card inside a non-root [data-theme="dark"] section matches that section, not :root', async ({ page }) => {
+    // Root must be deterministically light — don't rely on Playwright's
+    // default colorScheme, since core/themes.css auto-flips
+    // :root:not([data-theme]) dark under prefers-color-scheme.
+    await page.emulateMedia({ colorScheme: 'light' });
+    await renderWithBundle(
+      page,
+      `<div id="scope" data-theme="dark">
+         <article class="sf-card" id="card">
+           <div class="sf-card__body"><p id="text">Body</p></div>
+         </article>
+       </div>`,
+      { bundle: COMPONENTS_BUNDLE, extraStyle: NO_TRANSITIONS_STYLE },
+    );
+    // :root stays light (no data-theme there) — only the nested section opts into dark.
+    // Canvas-luminance probe (shared technique with section-theme-aliases.spec.js)
+    // avoids relying on oklch() showing up in getComputedStyle — some engines
+    // serialize computed colors as rgb()/rgba() regardless of the authored syntax.
+    const { cardBgLum, textLum } = await page.evaluate(() => {
+      const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+      const ctx = cv.getContext('2d', { willReadFrequently: true });
+      const toLum = (color) => {
+        ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = color; ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+        const lin = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+        return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+      };
+      return {
+        cardBgLum: toLum(getComputedStyle(document.getElementById('card')).backgroundColor),
+        textLum: toLum(getComputedStyle(document.getElementById('text')).color),
+      };
+    });
+    // Regression guard: --sf-card-bg is a plain var(--sf-color-surface) alias
+    // declared once at :root in optional/tokens.components.css. Without a
+    // matching re-declaration scoped to nested [data-theme] elements, that
+    // alias freezes at :root's (light) value and ignores the section's own
+    // dark override, producing dark text on a light card. The card's own
+    // background must read as dark (not stuck at the light ~0.96 value)...
+    expect(cardBgLum).toBeLessThan(0.3);
+    // ...and text must read as light (dark-theme text), not light-theme's dark text.
+    expect(textLum).toBeGreaterThan(0.5);
+  });
+});
