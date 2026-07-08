@@ -302,6 +302,11 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-btn-font-size",
+      "description": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-btn-font-weight",
       "description": "Label font-weight for .sf-btn. Defaults to the interactive weight.\n\nDefault: `var(--sf-font-weight-interactive)`",
       "syntax": "*"
@@ -309,6 +314,21 @@
     {
       "name": "--sf-btn-gap",
       "description": "Gap between an icon and the label inside .sf-btn.\n\nDefault: `var(--sf-space-2xs)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-min-height",
+      "description": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-padding-block",
+      "description": "Vertical (block) padding inside .sf-btn.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-padding-inline",
+      "description": "Horizontal (inline) padding inside .sf-btn.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {

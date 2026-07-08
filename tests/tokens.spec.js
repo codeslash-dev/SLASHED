@@ -14,13 +14,21 @@ const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).hr
 // ---- Parse the declared token names from the source ----------------------
 import { TOKEN_FILES } from '../scripts/registry-sources.js';
 
-// Tokens whose value is the `inherit` keyword resolve to empty at :root
-// (no parent to inherit from) — by design, so they're excluded from coverage.
+// Tokens that resolve to empty at :root by design — excluded from coverage.
+//   · `inherit`-keyword tokens: empty at :root (no parent to inherit from).
+//   · `initial`-keyword button sizing knobs: declared `initial` on purpose so
+//     each property's var() chain falls through to the rule-local `*--size`
+//     tier default, while a :root override still wins on every button size
+//     (see optional/tokens.components.css). Guaranteed-invalid → empty here.
 const EXPECTED_EMPTY = new Set([
   '--sf-color-mark-text',
   '--sf-color-selection-text',
   '--sf-color-selection-text--alt',
   '--sf-color-code-text',
+  '--sf-btn-font-size',
+  '--sf-btn-padding-block',
+  '--sf-btn-padding-inline',
+  '--sf-btn-min-height',
 ]);
 
 function declaredTokens() {

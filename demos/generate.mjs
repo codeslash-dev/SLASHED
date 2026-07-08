@@ -59,6 +59,13 @@ const SKIP = {
 // Curated overrides for keyword / numeric / zero-valued knobs that no generic
 // numeric rule can safely transform. Each is a valid, visibly-distinct value.
 const CURATED = {
+  // Button sizing knobs declared `initial` (opt-in hooks with no baked value —
+  // their default lives on the rule-local --sf-btn-*--size tier). Give explicit
+  // lengths so the demo exercises them; `initial` carries no type to infer.
+  '--sf-btn-font-size': '1.5rem',
+  '--sf-btn-padding-block': '0.9rem',
+  '--sf-btn-padding-inline': '2rem',
+  '--sf-btn-min-height': '4rem',
   // zero-valued lengths → small but visible
   '--sf-bg-layer-inset': '0.75rem',
   '--sf-bg-layer-radius': '0.75rem',

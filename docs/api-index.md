@@ -10,23 +10,27 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1050 elements** — 725 tokens, 325 classes.
+**1054 elements** — 729 tokens, 325 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 994 | Everyday surface. SemVer-stable. |
+| PUBLIC | 998 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (725)
+## Tokens (729)
 
-### Component tokens (21)
+### Component tokens (25)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
 | `--sf-btn-border-width` | PUBLIC | consumption | btn | `var(--sf-border-width-1)` | Border thickness for .sf-btn (used by all fill, outline, and secondary treatments). |
+| `--sf-btn-font-size` | PUBLIC | knob | btn | `initial` | Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button. |
 | `--sf-btn-font-weight` | PUBLIC | consumption | btn | `var(--sf-font-weight-interactive)` | Label font-weight for .sf-btn. Defaults to the interactive weight. |
 | `--sf-btn-gap` | PUBLIC | consumption | btn | `var(--sf-space-2xs)` | Gap between an icon and the label inside .sf-btn. |
+| `--sf-btn-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum. |
+| `--sf-btn-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding inside .sf-btn. |
+| `--sf-btn-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding inside .sf-btn. |
 | `--sf-btn-radius` | PUBLIC | consumption | btn | `var(--sf-radius-m)` | Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens. |
 | `--sf-card-bg` | PUBLIC | consumption | card | `var(--sf-color-surface)` | Background surface for .sf-card. Defaults to --sf-color-surface. |
 | `--sf-card-border-color` | PUBLIC | consumption | card | `var(--sf-color-border)` | Border colour for .sf-card. Defaults to --sf-color-border. |

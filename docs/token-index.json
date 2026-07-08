@@ -8,14 +8,14 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 725,
+      "tokens": 729,
       "by_tier": {
-        "PUBLIC": 669,
+        "PUBLIC": 673,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 238,
+        "knob": 242,
         "consumption": 487
       }
     }
@@ -501,6 +501,14 @@
       ],
       "value": "var(--sf-border-width-1)"
     },
+    "--sf-btn-font-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
     "--sf-btn-font-weight": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -516,6 +524,30 @@
         "optional/tokens.components.css"
       ],
       "value": "var(--sf-space-2xs)"
+    },
+    "--sf-btn-min-height": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-padding-block": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-padding-inline": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
     },
     "--sf-btn-radius": {
       "tier": "PUBLIC",

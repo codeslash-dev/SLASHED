@@ -55,21 +55,28 @@
     --sf-btn-gap:            var(--sf-space-2xs);
     --sf-btn-font-weight:    var(--sf-font-weight-interactive);
     --sf-btn-border-width:   var(--sf-border-width-1);
+
     /*
-     * The four SIZE-VARYING knobs — --sf-btn-font-size, --sf-btn-padding-block,
-     * --sf-btn-padding-inline and --sf-btn-min-height — are deliberately NOT
-     * declared here at :root. Each size modifier (.sf-btn--xs/--s/--l/--xl)
-     * needs its own per-size value, and a rule-local declaration on the element
-     * always beats an inherited :root one — so a :root default would make those
-     * knobs work on the default (m) button yet silently die on every sized
-     * button. Instead the per-size defaults live on rule-local *-size tier
-     * tokens in optional/components.css (the --sf-btn-color pattern), and each
-     * public knob is read first in its property's var() chain:
+     * The four SIZE-VARYING knobs are declared `initial` on purpose — NOT with
+     * a concrete default. Each size modifier (.sf-btn--xs/--s/--l/--xl) needs
+     * its own per-size value, and a rule-local declaration on the element
+     * always beats an inherited :root one; a concrete :root default here would
+     * make these knobs work on the default (m) button yet silently die on every
+     * sized button. `initial` sets each to the guaranteed-invalid value, so the
+     * property reads FIRST in its var() chain fall through to the rule-local
+     * `*--size` tier default (set per size in optional/components.css):
      *   font-size: var(--sf-btn-font-size, var(--sf-btn-font-size--size));
-     * so overriding --sf-btn-font-size on :root wins on EVERY button, of any
-     * size, honouring the framework's "one token on :root changes everything"
-     * contract. They remain PUBLIC override hooks — just opt-in, not pre-set.
-     *
+     * Setting one of these knobs on :root replaces the `initial` and therefore
+     * wins on EVERY button of any size — honouring the framework's "one token
+     * on :root changes everything" contract — while the default size scale is
+     * untouched. They stay PUBLIC knobs (catalogued, share-encodable), just with
+     * no baked-in value: the effective m-size default lives on the tier token.
+     */
+    --sf-btn-font-size:      initial;
+    --sf-btn-padding-block:  initial;
+    --sf-btn-padding-inline: initial;
+    --sf-btn-min-height:     initial;
+    /*
      * Size modifiers (.sf-btn--xs/--s/--l/--xl) and the colour family
      * (--sf-btn-color / --sf-btn-color--hover / --sf-btn-on-color) are
      * rule-local overrides set in optional/components.css, not global knobs.
