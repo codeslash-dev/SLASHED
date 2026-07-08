@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**729 tokens** (deduplicated by name across the 4 token source files).
+**735 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 673 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 679 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 242 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 487 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 243 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 492 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -158,6 +158,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-btn-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
+| `--sf-card-avatar-size` | PUBLIC | knob | Components (optional, incomplete) | `2.5rem` |
 | `--sf-card-bg` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-surface)` |
 | `--sf-card-border-color` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-border)` |
 | `--sf-card-border-width` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-border-width-1)` |
@@ -199,7 +200,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-action-a50` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-action) l c h / 0.50)` |
 | `--sf-color-action-a80` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-action) l c h / 0.80)` |
 | `--sf-color-action-darker` | PUBLIC | consumption | Core | `var(--sf-color-action-600)` |
-| `--sf-color-action-ghost` | PUBLIC | consumption | Core | `var(--sf-color-action-a5)` |
 | `--sf-color-action-lighter` | PUBLIC | consumption | Core | `var(--sf-color-action-400)` |
 | `--sf-color-action-muted` | PUBLIC | consumption | Core | `var(--sf-color-action-a30)` |
 | `--sf-color-action-source-dark` | PUBLIC | knob | Core | `oklch(0.70 0.198 235) (registered)` |
@@ -207,6 +207,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-action-subtle` | PUBLIC | consumption | Core | `var(--sf-color-action-a10)` |
 | `--sf-color-action-superdark` | PUBLIC | consumption | Core | `var(--sf-color-action-950)` |
 | `--sf-color-action-superlight` | PUBLIC | consumption | Core | `var(--sf-color-action-50)` |
+| `--sf-color-action-tint` | PUBLIC | consumption | Core | `var(--sf-color-action-a5)` |
 | `--sf-color-action-xdark` | PUBLIC | consumption | Core | `var(--sf-color-action-800)` |
 | `--sf-color-action-xlight` | PUBLIC | consumption | Core | `var(--sf-color-action-200)` |
 | `--sf-color-base` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` |
@@ -228,11 +229,11 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-base-a5` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) l c h / 0.05)` |
 | `--sf-color-base-a50` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) l c h / 0.50)` |
 | `--sf-color-base-a80` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) l c h / 0.80)` |
-| `--sf-color-base-ghost` | PUBLIC | consumption | Core | `var(--sf-color-base-a5)` |
 | `--sf-color-base-muted` | PUBLIC | consumption | Core | `var(--sf-color-base-a30)` |
 | `--sf-color-base-source-dark` | PUBLIC | knob | Core | `oklch(0.22 0.003 250) (registered)` |
 | `--sf-color-base-source-light` | PUBLIC | knob | Core | `oklch(0.96 0.006 250)` |
 | `--sf-color-base-subtle` | PUBLIC | consumption | Core | `var(--sf-color-base-a10)` |
+| `--sf-color-base-tint` | PUBLIC | consumption | Core | `var(--sf-color-base-a5)` |
 | `--sf-color-bg` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` |
 | `--sf-color-bg--active` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-neutral) l c h / 0.12)` |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | Core | `var(--sf-color-inset)` |
@@ -254,6 +255,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-danger-source-light` | PUBLIC | knob | Core | `oklch(0.48 0.22 12)` |
 | `--sf-color-danger-strong` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-danger-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-danger) l c h / 0.1)` |
+| `--sf-color-danger-tint` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-danger) l c h / 0.05)` |
 | `--sf-color-dim` | PUBLIC | knob | Core | `oklch(0 0 0 / 0.5)` |
 | `--sf-color-heading` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
 | `--sf-color-info` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-info-source-light), var(--sf-color-info-source-dark, oklch(from var(--sf-color-info-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
@@ -262,6 +264,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-info-source-light` | PUBLIC | knob | Core | `oklch(0.48 0.18 235)` |
 | `--sf-color-info-strong` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-info-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-info) l c h / 0.1)` |
+| `--sf-color-info-tint` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-info) l c h / 0.05)` |
 | `--sf-color-inset` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` |
 | `--sf-color-inverse` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(1 - l) c h)` |
 | `--sf-color-link` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )` |
@@ -292,7 +295,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-neutral-a50` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-neutral) l c h / 0.50)` |
 | `--sf-color-neutral-a80` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-neutral) l c h / 0.80)` |
 | `--sf-color-neutral-darker` | PUBLIC | consumption | Core | `var(--sf-color-neutral-600)` |
-| `--sf-color-neutral-ghost` | PUBLIC | consumption | Core | `var(--sf-color-neutral-a5)` |
 | `--sf-color-neutral-lighter` | PUBLIC | consumption | Core | `var(--sf-color-neutral-400)` |
 | `--sf-color-neutral-muted` | PUBLIC | consumption | Core | `var(--sf-color-neutral-a30)` |
 | `--sf-color-neutral-source-dark` | PUBLIC | knob | Core | `oklch(0.69 0.0225 260) (registered)` |
@@ -300,6 +302,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-neutral-subtle` | PUBLIC | consumption | Core | `var(--sf-color-neutral-a10)` |
 | `--sf-color-neutral-superdark` | PUBLIC | consumption | Core | `var(--sf-color-neutral-950)` |
 | `--sf-color-neutral-superlight` | PUBLIC | consumption | Core | `var(--sf-color-neutral-50)` |
+| `--sf-color-neutral-tint` | PUBLIC | consumption | Core | `var(--sf-color-neutral-a5)` |
 | `--sf-color-neutral-xdark` | PUBLIC | consumption | Core | `var(--sf-color-neutral-800)` |
 | `--sf-color-neutral-xlight` | PUBLIC | consumption | Core | `var(--sf-color-neutral-200)` |
 | `--sf-color-overlay` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) l c h / 0.9)` |
@@ -323,7 +326,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-primary-a50` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-primary) l c h / 0.50)` |
 | `--sf-color-primary-a80` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-primary) l c h / 0.80)` |
 | `--sf-color-primary-darker` | PUBLIC | consumption | Core | `var(--sf-color-primary-600)` |
-| `--sf-color-primary-ghost` | PUBLIC | consumption | Core | `var(--sf-color-primary-a5)` |
 | `--sf-color-primary-lighter` | PUBLIC | consumption | Core | `var(--sf-color-primary-400)` |
 | `--sf-color-primary-muted` | PUBLIC | consumption | Core | `var(--sf-color-primary-a30)` |
 | `--sf-color-primary-source-dark` | PUBLIC | knob | Core | `oklch(0.715 0.243 264) (registered)` |
@@ -331,6 +333,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-primary-subtle` | PUBLIC | consumption | Core | `var(--sf-color-primary-a10)` |
 | `--sf-color-primary-superdark` | PUBLIC | consumption | Core | `var(--sf-color-primary-950)` |
 | `--sf-color-primary-superlight` | PUBLIC | consumption | Core | `var(--sf-color-primary-50)` |
+| `--sf-color-primary-tint` | PUBLIC | consumption | Core | `var(--sf-color-primary-a5)` |
 | `--sf-color-primary-xdark` | PUBLIC | consumption | Core | `var(--sf-color-primary-800)` |
 | `--sf-color-primary-xlight` | PUBLIC | consumption | Core | `var(--sf-color-primary-200)` |
 | `--sf-color-raised` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` |
@@ -355,7 +358,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-secondary-a50` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-secondary) l c h / 0.50)` |
 | `--sf-color-secondary-a80` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-secondary) l c h / 0.80)` |
 | `--sf-color-secondary-darker` | PUBLIC | consumption | Core | `var(--sf-color-secondary-600)` |
-| `--sf-color-secondary-ghost` | PUBLIC | consumption | Core | `var(--sf-color-secondary-a5)` |
 | `--sf-color-secondary-lighter` | PUBLIC | consumption | Core | `var(--sf-color-secondary-400)` |
 | `--sf-color-secondary-muted` | PUBLIC | consumption | Core | `var(--sf-color-secondary-a30)` |
 | `--sf-color-secondary-source-dark` | PUBLIC | knob | Core | `oklch(0.84 0.036 264) (registered)` |
@@ -363,6 +365,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-secondary-subtle` | PUBLIC | consumption | Core | `var(--sf-color-secondary-a10)` |
 | `--sf-color-secondary-superdark` | PUBLIC | consumption | Core | `var(--sf-color-secondary-950)` |
 | `--sf-color-secondary-superlight` | PUBLIC | consumption | Core | `var(--sf-color-secondary-50)` |
+| `--sf-color-secondary-tint` | PUBLIC | consumption | Core | `var(--sf-color-secondary-a5)` |
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | Core | `var(--sf-color-secondary-800)` |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | Core | `var(--sf-color-secondary-200)` |
 | `--sf-color-selection-bg` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` |
@@ -375,6 +378,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-success-source-light` | PUBLIC | knob | Core | `oklch(0.50 0.16 145)` |
 | `--sf-color-success-strong` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` |
 | `--sf-color-success-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-success) l c h / 0.12)` |
+| `--sf-color-success-tint` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-success) l c h / 0.05)` |
 | `--sf-color-surface` | PUBLIC | consumption | Core | `var(--sf-color-base)` |
 | `--sf-color-tertiary` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-tertiary--active` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-xdark)` |
@@ -396,7 +400,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-tertiary-a50` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-tertiary) l c h / 0.50)` |
 | `--sf-color-tertiary-a80` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-tertiary) l c h / 0.80)` |
 | `--sf-color-tertiary-darker` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-600)` |
-| `--sf-color-tertiary-ghost` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-a5)` |
 | `--sf-color-tertiary-lighter` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-400)` |
 | `--sf-color-tertiary-muted` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-a30)` |
 | `--sf-color-tertiary-source-dark` | PUBLIC | knob | Core | `oklch(0.74 0.198 295) (registered)` |
@@ -404,6 +407,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-tertiary-subtle` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-a10)` |
 | `--sf-color-tertiary-superdark` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-950)` |
 | `--sf-color-tertiary-superlight` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-50)` |
+| `--sf-color-tertiary-tint` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-a5)` |
 | `--sf-color-tertiary-xdark` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-800)` |
 | `--sf-color-tertiary-xlight` | PUBLIC | consumption | Core | `var(--sf-color-tertiary-200)` |
 | `--sf-color-text` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
@@ -429,6 +433,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-warning-source-light` | PUBLIC | knob | Core | `oklch(0.75 0.17 80)` |
 | `--sf-color-warning-strong` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` |
 | `--sf-color-warning-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-warning) l c h / 0.12)` |
+| `--sf-color-warning-tint` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-warning) l c h / 0.05)` |
 | `--sf-color-white` | PUBLIC | knob | Core | `oklch(100% 0 0)` |
 | `--sf-component-pad` | PUBLIC | consumption | Core | `var(--sf-space-m)` |
 | `--sf-container-default` | PUBLIC | knob | Core | `75rem` |
@@ -513,6 +518,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-font-weight-strong` | PUBLIC | consumption | Core | `var(--sf-font-weight-bold)` |
 | `--sf-frame-ratio` | PUBLIC | knob | Layout | `16 / 9` |
 | `--sf-gap` | PUBLIC | consumption | Core | `var(--sf-space-m)` |
+| `--sf-gradient-action` | PUBLIC | consumption | Core | `linear-gradient(in oklch 135deg, var(--sf-color-action), oklch(from var(--sf-color-action) calc(l - 0.08) c h))` |
 | `--sf-gradient-brand` | PUBLIC | consumption | Core | `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))` |
 | `--sf-gradient-fade--b` | PUBLIC | consumption | Core | `linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))` |
 | `--sf-gradient-fade--l` | PUBLIC | consumption | Core | `linear-gradient(in oklch to left, transparent, var(--sf-color-bg))` |

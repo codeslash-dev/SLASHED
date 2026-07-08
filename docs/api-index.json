@@ -28,30 +28,30 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1054,
+      "total": 1064,
       "by_type": {
-        "class": 325,
-        "token": 729
+        "class": 329,
+        "token": 735
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 998,
+        "PUBLIC": 1008,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 487,
-        "knob": 242
+        "consumption": 492,
+        "knob": 243
       },
-      "tokens": 729,
-      "classes": 325,
-      "sf_classes": 288,
+      "tokens": 735,
+      "classes": 329,
+      "sf_classes": 292,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
-        "Component tokens": 25,
-        "Components": 26,
-        "Core tokens": 617,
+        "Component tokens": 26,
+        "Components": 30,
+        "Core tokens": 622,
         "Layout primitives": 145,
         "Layout tokens": 53,
         "Macro classes": 58,
@@ -1953,6 +1953,32 @@
       ]
     },
     {
+      "name": "--sf-card-avatar-size",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "card",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "CARD TOKENS",
+      "description": "Diameter of .sf-card__avatar. Defaults to 2.5rem.",
+      "value": "2.5rem",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
       "name": "--sf-card-bg",
       "type": "token",
       "tier": "PUBLIC",
@@ -3073,34 +3099,6 @@
       ]
     },
     {
-      "name": "--sf-color-action-ghost",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "action",
-      "description": "Near-transparent action tint for ghost-button hover backgrounds.",
-      "value": "var(--sf-color-action-a5)",
-      "aliasOf": "--sf-color-action-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-action-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -3280,6 +3278,34 @@
       "description": "Near-white action shade for maximum contrast on dark surfaces.",
       "value": "var(--sf-color-action-50)",
       "aliasOf": "--sf-color-action-50",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-action-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "action",
+      "description": "Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "var(--sf-color-action-a5)",
+      "aliasOf": "--sf-color-action-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -3885,34 +3911,6 @@
       ]
     },
     {
-      "name": "--sf-color-base-ghost",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "base",
-      "description": "Near-transparent base-surface tint for ghost backgrounds.",
-      "value": "var(--sf-color-base-a5)",
-      "aliasOf": "--sf-color-base-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-base-muted",
       "type": "token",
       "tier": "PUBLIC",
@@ -4008,6 +4006,34 @@
       "description": "Subtle base-surface tint for low-emphasis backgrounds.",
       "value": "var(--sf-color-base-a10)",
       "aliasOf": "--sf-color-base-a10",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-base-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "base",
+      "description": "Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "var(--sf-color-base-a5)",
+      "aliasOf": "--sf-color-base-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -4613,6 +4639,34 @@
       ]
     },
     {
+      "name": "--sf-color-danger-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Status triplets",
+      "description": "Near-transparent danger tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "oklch(from var(--sf-color-danger) l c h / 0.05)",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
       "name": "--sf-color-dim",
       "type": "token",
       "tier": "PUBLIC",
@@ -4819,6 +4873,34 @@
       "group": "Status triplets",
       "description": "Light info tint for informational note backgrounds.",
       "value": "oklch(from var(--sf-color-info) l c h / 0.1)",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-info-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Status triplets",
+      "description": "Near-transparent info tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "oklch(from var(--sf-color-info) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -5677,34 +5759,6 @@
       ]
     },
     {
-      "name": "--sf-color-neutral-ghost",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "neutral",
-      "description": "Near-transparent neutral tint for ghost-button hover backgrounds.",
-      "value": "var(--sf-color-neutral-a5)",
-      "aliasOf": "--sf-color-neutral-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-neutral-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -5884,6 +5938,34 @@
       "description": "Near-white neutral shade.",
       "value": "var(--sf-color-neutral-50)",
       "aliasOf": "--sf-color-neutral-50",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-neutral-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "neutral",
+      "description": "Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "var(--sf-color-neutral-a5)",
+      "aliasOf": "--sf-color-neutral-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -6545,34 +6627,6 @@
       ]
     },
     {
-      "name": "--sf-color-primary-ghost",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "primary",
-      "description": "Near-transparent primary tint for ghost-button hover backgrounds.",
-      "value": "var(--sf-color-primary-a5)",
-      "aliasOf": "--sf-color-primary-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-primary-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -6752,6 +6806,34 @@
       "description": "Near-white primary shade.",
       "value": "var(--sf-color-primary-50)",
       "aliasOf": "--sf-color-primary-50",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-primary-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "primary",
+      "description": "Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "var(--sf-color-primary-a5)",
+      "aliasOf": "--sf-color-primary-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7441,34 +7523,6 @@
       ]
     },
     {
-      "name": "--sf-color-secondary-ghost",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "secondary",
-      "description": "Near-transparent secondary tint for ghost-button hover backgrounds.",
-      "value": "var(--sf-color-secondary-a5)",
-      "aliasOf": "--sf-color-secondary-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-secondary-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -7648,6 +7702,34 @@
       "description": "Near-white secondary shade.",
       "value": "var(--sf-color-secondary-50)",
       "aliasOf": "--sf-color-secondary-50",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-secondary-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "secondary",
+      "description": "Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "var(--sf-color-secondary-a5)",
+      "aliasOf": "--sf-color-secondary-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -7983,6 +8065,34 @@
       "group": "Status triplets",
       "description": "Light success tint for confirmation backgrounds.",
       "value": "oklch(from var(--sf-color-success) l c h / 0.12)",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-success-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Status triplets",
+      "description": "Near-transparent success tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "oklch(from var(--sf-color-success) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -8589,34 +8699,6 @@
       ]
     },
     {
-      "name": "--sf-color-tertiary-ghost",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "color",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "tertiary",
-      "description": "Near-transparent tertiary tint for ghost-button hover backgrounds.",
-      "value": "var(--sf-color-tertiary-a5)",
-      "aliasOf": "--sf-color-tertiary-a5",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal",
-        "optimal-components",
-        "optimal-utilities"
-      ]
-    },
-    {
       "name": "--sf-color-tertiary-lighter",
       "type": "token",
       "tier": "PUBLIC",
@@ -8796,6 +8878,34 @@
       "description": "Near-white tertiary shade.",
       "value": "var(--sf-color-tertiary-50)",
       "aliasOf": "--sf-color-tertiary-50",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-tertiary-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "tertiary",
+      "description": "Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "var(--sf-color-tertiary-a5)",
+      "aliasOf": "--sf-color-tertiary-a5",
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -9495,6 +9605,34 @@
       "group": "Status triplets",
       "description": "Light warning tint for warning notification backgrounds.",
       "value": "oklch(from var(--sf-color-warning) l c h / 0.12)",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-color-warning-tint",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Status triplets",
+      "description": "Near-transparent warning tint (5% alpha) for hover-state washes and the most subtle backgrounds.",
+      "value": "oklch(from var(--sf-color-warning) l c h / 0.05)",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -10893,7 +11031,7 @@
       "category": "Component tokens",
       "area": "components",
       "group": "FIELD TOKENS",
-      "description": "Vertical (block) inner padding for form field inputs.",
+      "description": "Vertical (block) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.",
       "value": "var(--sf-space-xs)",
       "aliasOf": "--sf-space-xs",
       "registered": false,
@@ -10919,7 +11057,7 @@
       "category": "Component tokens",
       "area": "components",
       "group": "FIELD TOKENS",
-      "description": "Horizontal (inline) inner padding for form field inputs.",
+      "description": "Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.",
       "value": "var(--sf-space-s)",
       "aliasOf": "--sf-space-s",
       "registered": false,
@@ -10945,7 +11083,7 @@
       "category": "Component tokens",
       "area": "components",
       "group": "FIELD TOKENS",
-      "description": "Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once.",
+      "description": "Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.",
       "value": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
       "registered": false,
@@ -11846,6 +11984,34 @@
       "animatable": true,
       "syntax": "<length>",
       "inherits": true,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal",
+        "optimal-components",
+        "optimal-utilities"
+      ]
+    },
+    {
+      "name": "--sf-gradient-action",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "gradient",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Gradients",
+      "description": "Gradient using action palette colors (light to saturated). Core-4 parity with the primary/secondary/tertiary gradients; drives the default .sf-btn--gradient fill.",
+      "value": "linear-gradient(in oklch 135deg, var(--sf-color-action), oklch(from var(--sf-color-action) calc(l - 0.08) c h))",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
       "optional": false,
       "layer": "slashed.tokens",
       "sourceFiles": [
@@ -20964,9 +21130,55 @@
       "category": "Components",
       "area": "components",
       "group": ".sf-btn",
-      "description": "Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Combine a colour family, a style treatment, and a size modifier.",
+      "description": "Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Three orthogonal axes — colour family, style treatment (fill/--soft/--outline), gradient — plus a size modifier.",
       "isVariant": false,
       "baseClass": null,
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-btn--action",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-btn--action",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-btn",
+      "description": "Button in the action colour family (same as the unmodified default, named explicitly).",
+      "isVariant": true,
+      "baseClass": "sf-btn",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-btn--base",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-btn--base",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-btn",
+      "description": "Button in the base (surface-neutral) colour family.",
+      "isVariant": true,
+      "baseClass": "sf-btn",
       "optional": true,
       "layer": "slashed.components",
       "sourceFiles": [
@@ -21047,16 +21259,16 @@
       ]
     },
     {
-      "name": "sf-btn--ghost",
+      "name": "sf-btn--gradient",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-btn--ghost",
+      "selector": ".sf-btn--gradient",
       "prefix": "sf",
       "kind": "component",
       "category": "Components",
       "area": "components",
       "group": ".sf-btn",
-      "description": "Borderless, transparent button; tints on hover. The lightest button treatment.",
+      "description": "Gradient axis: paints the fill (or, with --outline, the border ring) with the family's --sf-gradient-* token. Core-4 brand families (primary/secondary/tertiary/action); solid no-op for other families. Composes with any colour family.",
       "isVariant": true,
       "baseClass": "sf-btn",
       "optional": true,
@@ -21217,7 +21429,30 @@
       "category": "Components",
       "area": "components",
       "group": ".sf-btn",
-      "description": "Transparent-fill button with a coloured border and text; subtle tint on hover.",
+      "description": "Button in the secondary brand colour family.",
+      "isVariant": true,
+      "baseClass": "sf-btn",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-btn--soft",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-btn--soft",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-btn",
+      "description": "Soft tonal-fill button: a light wash of the family colour (subtle at rest, muted on hover), coloured text, no border. Lower-emphasis than the solid fill. Composes with any colour family.",
       "isVariant": true,
       "baseClass": "sf-btn",
       "optional": true,
@@ -21241,6 +21476,29 @@
       "area": "components",
       "group": ".sf-btn",
       "description": "Button in the success (positive) colour family.",
+      "isVariant": true,
+      "baseClass": "sf-btn",
+      "optional": true,
+      "layer": "slashed.components",
+      "sourceFiles": [
+        "optional/components.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal-components"
+      ]
+    },
+    {
+      "name": "sf-btn--tertiary",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-btn--tertiary",
+      "prefix": "sf",
+      "kind": "component",
+      "category": "Components",
+      "area": "components",
+      "group": ".sf-btn",
+      "description": "Button in the tertiary brand colour family.",
       "isVariant": true,
       "baseClass": "sf-btn",
       "optional": true,
@@ -21355,7 +21613,7 @@
       "category": "Components",
       "area": "components",
       "group": ".sf-card",
-      "description": "Circular avatar image inside a card.",
+      "description": "Circular avatar image inside a card, sized via --sf-card-avatar-size.",
       "isVariant": false,
       "baseClass": null,
       "optional": true,

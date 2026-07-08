@@ -142,7 +142,7 @@ background:
 
 | Token | Opacity | Alias |
 |---|---|---|
-| `-a5` | 5% | `-ghost` |
+| `-a5` | 5% | `-tint` |
 | `-a10` | 10% | `-subtle` |
 | `-a30` | 30% | `-muted` |
 | `-a50` | 50% | — |
@@ -220,7 +220,7 @@ or override the exact text color directly:
 | Text on a solid color | `--sf-color-text--on-*` |
 | A colored "card" where everything inside should just look right | `.sf-surface--*` macro class |
 | A tint of a brand color over a *known* background | numeric ramp (`-100`…`-400`) |
-| A tint of a brand color over an *unknown* background | alpha variant (`-subtle` / `-muted` / `-ghost`) |
+| A tint of a brand color over an *unknown* background | alpha variant (`-tint` / `-subtle` / `-muted`) |
 
 ## See also
 

@@ -327,9 +327,9 @@ For each of the 6 brand families (`primary`, `secondary`, `tertiary`, `action`, 
 --sf-color-{family}-superdark    /* Darkest variant */
 --sf-color-{family}--hover       /* Alias for -darker */
 --sf-color-{family}--active      /* Alias for -xdark */
---sf-color-{family}-subtle       /* color / 0.10 — subtle backgrounds */
---sf-color-{family}-muted        /* color / 0.30 */
---sf-color-{family}-ghost        /* color / 0.05 — most subtle backgrounds */
+--sf-color-{family}-subtle       /* color / 0.10 — subtle backgrounds (.sf-btn--soft resting fill) */
+--sf-color-{family}-muted        /* color / 0.30 — (.sf-btn--soft hover fill) */
+--sf-color-{family}-tint         /* color / 0.05 — near-transparent hover-state tint, most subtle wash */
 ```
 
 > Shade aliases use `color-mix(in oklab)` relative to `--sf-color-surface` — they are surface-aware and correct on any background.
@@ -343,8 +343,9 @@ Examples: `--sf-color-primary-superlight`, `--sf-color-action-muted`, `--sf-colo
 For each status (`success`, `warning`, `info`, `danger`):
 
 ```css
---sf-color-{status}-subtle    /* color / 0.12 — alert background */
---sf-color-{status}-muted     /* color / 0.30 — border / icon */
+--sf-color-{status}-subtle    /* color / 0.12 — alert background (.sf-btn--soft resting fill) */
+--sf-color-{status}-muted     /* color / 0.30 — border / icon (.sf-btn--soft hover fill) */
+--sf-color-{status}-tint      /* color / 0.05 — near-transparent hover-state tint */
 --sf-color-{status}-strong    /* Status text — darker in light mode, lighter in dark */
 ```
 
@@ -356,6 +357,7 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 --sf-gradient-primary:    /* 135° oklch — primary → darker primary */
 --sf-gradient-secondary
 --sf-gradient-tertiary
+--sf-gradient-action      /* core-4 parity — drives .sf-btn--gradient's default */
 --sf-gradient-brand:      /* 135° oklch — primary → primary +30° hue — multicolor */
 --sf-gradient-surface:    /* 180° oklab — surface → bg — subtle transition */
 
@@ -1122,13 +1124,21 @@ Component tokens from `optional/tokens.components.css`:
 --sf-card-shadow--hover:    var(--sf-shadow-l)
 --sf-card-media-ratio:      var(--sf-ratio-video)
 --sf-card-media-radius:     var(--sf-card-radius, var(--sf-radius-m))
+--sf-card-avatar-size:      2.5rem
 --sf-card-heading-size:     var(--sf-text-xl)
 --sf-card-btn-font-size:    var(--sf-text-s)
 ```
 
-`.sf-btn` families: `--primary --neutral --success --warning --info --danger`;
-treatments `--secondary --ghost --outline`; sizes `--xs --s --l --xl` (m default);
-width `--block --block-cq`; states `:disabled`/`.sf-is-disabled`/`.sf-is-loading`.
+`.sf-btn` colour families (all 10, 1:1 with the palette): `--primary
+--secondary --tertiary --action --base --neutral --success --warning --info
+--danger` (no modifier = action); style treatments `--soft --outline` (no
+modifier = solid fill); gradient axis `--gradient` (fill, or border ring with
+`--outline`) — real gradients for the core-4 brand families
+(primary/secondary/tertiary/action), solid no-op elsewhere; sizes `--xs --s
+--l --xl` (m default); width `--block --block-cq`; states
+`:disabled`/`.sf-is-disabled`/`.sf-is-loading`. Breaking rename in 0.7.7:
+`--secondary` is now a COLOUR (the old soft-tonal STYLE is `--soft`);
+`--ghost` was removed with no alias.
 `.sf-card` slots: `__header __body __footer __media __avatar __title`; modifiers
 `--bordered --elevated --interactive`. Both ship in the `*-components` and `full`
 bundles only.

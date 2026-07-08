@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 729,
+      "tokens": 735,
       "by_tier": {
-        "PUBLIC": 673,
+        "PUBLIC": 679,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 242,
-        "consumption": 487
+        "knob": 243,
+        "consumption": 492
       }
     }
   },
@@ -557,6 +557,14 @@
       ],
       "value": "var(--sf-radius-m)"
     },
+    "--sf-card-avatar-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "2.5rem"
+    },
     "--sf-card-bg": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -885,14 +893,6 @@
       ],
       "value": "var(--sf-color-action-600)"
     },
-    "--sf-color-action-ghost": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-action-a5)"
-    },
     "--sf-color-action-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -948,6 +948,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-action-50)"
+    },
+    "--sf-color-action-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-color-action-a5)"
     },
     "--sf-color-action-xdark": {
       "tier": "PUBLIC",
@@ -1117,14 +1125,6 @@
       ],
       "value": "oklch(from var(--sf-color-base) l c h / 0.80)"
     },
-    "--sf-color-base-ghost": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-base-a5)"
-    },
     "--sf-color-base-muted": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1156,6 +1156,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-base-a10)"
+    },
+    "--sf-color-base-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-color-base-a5)"
     },
     "--sf-color-bg": {
       "tier": "PUBLIC",
@@ -1325,6 +1333,14 @@
       ],
       "value": "oklch(from var(--sf-color-danger) l c h / 0.1)"
     },
+    "--sf-color-danger-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(from var(--sf-color-danger) l c h / 0.05)"
+    },
     "--sf-color-dim": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -1388,6 +1404,14 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-info) l c h / 0.1)"
+    },
+    "--sf-color-info-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(from var(--sf-color-info) l c h / 0.05)"
     },
     "--sf-color-inset": {
       "tier": "PUBLIC",
@@ -1629,14 +1653,6 @@
       ],
       "value": "var(--sf-color-neutral-600)"
     },
-    "--sf-color-neutral-ghost": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-neutral-a5)"
-    },
     "--sf-color-neutral-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1692,6 +1708,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-neutral-50)"
+    },
+    "--sf-color-neutral-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-color-neutral-a5)"
     },
     "--sf-color-neutral-xdark": {
       "tier": "PUBLIC",
@@ -1877,14 +1901,6 @@
       ],
       "value": "var(--sf-color-primary-600)"
     },
-    "--sf-color-primary-ghost": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-primary-a5)"
-    },
     "--sf-color-primary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1940,6 +1956,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-primary-50)"
+    },
+    "--sf-color-primary-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-color-primary-a5)"
     },
     "--sf-color-primary-xdark": {
       "tier": "PUBLIC",
@@ -2133,14 +2157,6 @@
       ],
       "value": "var(--sf-color-secondary-600)"
     },
-    "--sf-color-secondary-ghost": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-secondary-a5)"
-    },
     "--sf-color-secondary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2196,6 +2212,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-secondary-50)"
+    },
+    "--sf-color-secondary-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-color-secondary-a5)"
     },
     "--sf-color-secondary-xdark": {
       "tier": "PUBLIC",
@@ -2292,6 +2316,14 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-success) l c h / 0.12)"
+    },
+    "--sf-color-success-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(from var(--sf-color-success) l c h / 0.05)"
     },
     "--sf-color-surface": {
       "tier": "PUBLIC",
@@ -2461,14 +2493,6 @@
       ],
       "value": "var(--sf-color-tertiary-600)"
     },
-    "--sf-color-tertiary-ghost": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-tertiary-a5)"
-    },
     "--sf-color-tertiary-lighter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2524,6 +2548,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-color-tertiary-50)"
+    },
+    "--sf-color-tertiary-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-color-tertiary-a5)"
     },
     "--sf-color-tertiary-xdark": {
       "tier": "PUBLIC",
@@ -2724,6 +2756,14 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-warning) l c h / 0.12)"
+    },
+    "--sf-color-warning-tint": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "oklch(from var(--sf-color-warning) l c h / 0.05)"
     },
     "--sf-color-white": {
       "tier": "PUBLIC",
@@ -3396,6 +3436,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-space-m)"
+    },
+    "--sf-gradient-action": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "linear-gradient(in oklch 135deg, var(--sf-color-action), oklch(from var(--sf-color-action) calc(l - 0.08) c h))"
     },
     "--sf-gradient-brand": {
       "tier": "PUBLIC",

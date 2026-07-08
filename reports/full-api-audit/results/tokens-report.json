@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 729,
-    "rendered": 729,
+    "totalTokens": 735,
+    "rendered": 735,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 28,
@@ -262,16 +262,16 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-animation-slide-out-up",
+      "name": "--sf-animation-slide-in-up",
       "tier": "PUBLIC",
       "role": "consumption",
       "category": "Core tokens",
-      "declared": "sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both",
+      "declared": "sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both",
       "aliasOf": null,
       "issues": [],
-      "computed": "sf-slide-out-up    calc(250ms * 1) cubic-bezier(0.5, 0, 0.75, 0.25) both",
-      "shown": "sf-slide-out-up    calc(250ms * 1) cubic-bezier(0.5, 0, 0.75, 0.25) both",
-      "darkComputed": "sf-slide-out-up    calc(250ms * 1) cubic-bezier(0.5, 0, 0.75, 0.25) both",
+      "computed": "sf-slide-in-up    calc(250ms * 1) cubic-bezier(0.25, 0, 0.15, 1)       both",
+      "shown": "sf-slide-in-up    calc(250ms * 1) cubic-bezier(0.25, 0, 0.15, 1)       both",
+      "darkComputed": "sf-slide-in-up    calc(250ms * 1) cubic-bezier(0.25, 0, 0.15, 1)       both",
       "changedInDark": false
     },
     {
@@ -314,16 +314,16 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-animation-slide-in-up",
+      "name": "--sf-animation-slide-out-up",
       "tier": "PUBLIC",
       "role": "consumption",
       "category": "Core tokens",
-      "declared": "sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both",
+      "declared": "sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both",
       "aliasOf": null,
       "issues": [],
-      "computed": "sf-slide-in-up    calc(250ms * 1) cubic-bezier(0.25, 0, 0.15, 1)       both",
-      "shown": "sf-slide-in-up    calc(250ms * 1) cubic-bezier(0.25, 0, 0.15, 1)       both",
-      "darkComputed": "sf-slide-in-up    calc(250ms * 1) cubic-bezier(0.25, 0, 0.15, 1)       both",
+      "computed": "sf-slide-out-up    calc(250ms * 1) cubic-bezier(0.5, 0, 0.75, 0.25) both",
+      "shown": "sf-slide-out-up    calc(250ms * 1) cubic-bezier(0.5, 0, 0.75, 0.25) both",
+      "darkComputed": "sf-slide-out-up    calc(250ms * 1) cubic-bezier(0.5, 0, 0.75, 0.25) both",
       "changedInDark": false
     },
     {
@@ -902,6 +902,21 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-card-avatar-size",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Component tokens",
+      "declared": "2.5rem",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "2.5rem",
+      "shown": "2.5rem",
+      "darkComputed": "2.5rem",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-card-bg",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1463,19 +1478,6 @@
       "changedInDark": true
     },
     {
-      "name": "--sf-color-action-ghost",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Core tokens",
-      "declared": "var(--sf-color-action-a5)",
-      "aliasOf": "--sf-color-action-a5",
-      "issues": [],
-      "computed": "oklch(from oklch(0.5 0.22 235) l c h / 0.05)",
-      "shown": "oklch(from oklch(0.5 0.22 235) l c h / 0.05)",
-      "darkComputed": "oklch(from oklch(0.7 0.198 235) l c h / 0.05)",
-      "changedInDark": true
-    },
-    {
       "name": "--sf-color-action-lighter",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1564,6 +1566,19 @@
       "computed": "color-mix(in oklab, oklch(0.5 0.22 235) 4%,  oklch(0.96 0.006 250))",
       "shown": "color-mix(in oklab, oklch(0.5 0.22 235) 4%,  oklch(0.96 0.006 250))",
       "darkComputed": "color-mix(in oklab, oklch(0.7 0.198 235) 4%,  oklch(0.22 0.003 250))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-action-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "var(--sf-color-action-a5)",
+      "aliasOf": "--sf-color-action-a5",
+      "issues": [],
+      "computed": "oklch(from oklch(0.5 0.22 235) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.5 0.22 235) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.7 0.198 235) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -1840,19 +1855,6 @@
       "changedInDark": true
     },
     {
-      "name": "--sf-color-base-ghost",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Core tokens",
-      "declared": "var(--sf-color-base-a5)",
-      "aliasOf": "--sf-color-base-a5",
-      "issues": [],
-      "computed": "oklch(from oklch(0.96 0.006 250) l c h / 0.05)",
-      "shown": "oklch(from oklch(0.96 0.006 250) l c h / 0.05)",
-      "darkComputed": "oklch(from oklch(0.22 0.003 250) l c h / 0.05)",
-      "changedInDark": true
-    },
-    {
       "name": "--sf-color-base-muted",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1902,6 +1904,19 @@
       "computed": "oklch(from oklch(0.96 0.006 250) l c h / 0.10)",
       "shown": "oklch(from oklch(0.96 0.006 250) l c h / 0.10)",
       "darkComputed": "oklch(from oklch(0.22 0.003 250) l c h / 0.10)",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-base-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "var(--sf-color-base-a5)",
+      "aliasOf": "--sf-color-base-a5",
+      "issues": [],
+      "computed": "oklch(from oklch(0.96 0.006 250) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.96 0.006 250) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.22 0.003 250) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -2178,6 +2193,19 @@
       "changedInDark": true
     },
     {
+      "name": "--sf-color-danger-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "oklch(from var(--sf-color-danger) l c h / 0.05)",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "oklch(from oklch(0.48 0.22 12) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.48 0.22 12) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.71 0.198 12) l c h / 0.05)",
+      "changedInDark": true
+    },
+    {
       "name": "--sf-color-dim",
       "tier": "PUBLIC",
       "role": "knob",
@@ -2279,6 +2307,19 @@
       "computed": "oklch(from oklch(0.48 0.18 235) l c h / 0.1)",
       "shown": "oklch(from oklch(0.48 0.18 235) l c h / 0.1)",
       "darkComputed": "oklch(from oklch(0.71 0.162 235) l c h / 0.1)",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-info-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "oklch(from var(--sf-color-info) l c h / 0.05)",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "oklch(from oklch(0.48 0.18 235) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.48 0.18 235) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.71 0.162 235) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -2674,19 +2715,6 @@
       "changedInDark": true
     },
     {
-      "name": "--sf-color-neutral-ghost",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Core tokens",
-      "declared": "var(--sf-color-neutral-a5)",
-      "aliasOf": "--sf-color-neutral-a5",
-      "issues": [],
-      "computed": "oklch(from oklch(0.52 0.025 260) l c h / 0.05)",
-      "shown": "oklch(from oklch(0.52 0.025 260) l c h / 0.05)",
-      "darkComputed": "oklch(from oklch(0.69 0.0225 260) l c h / 0.05)",
-      "changedInDark": true
-    },
-    {
       "name": "--sf-color-neutral-lighter",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -2775,6 +2803,19 @@
       "computed": "color-mix(in oklab, oklch(0.52 0.025 260) 4%,  oklch(0.96 0.006 250))",
       "shown": "color-mix(in oklab, oklch(0.52 0.025 260) 4%,  oklch(0.96 0.006 250))",
       "darkComputed": "color-mix(in oklab, oklch(0.69 0.0225 260) 4%,  oklch(0.22 0.003 250))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-neutral-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "var(--sf-color-neutral-a5)",
+      "aliasOf": "--sf-color-neutral-a5",
+      "issues": [],
+      "computed": "oklch(from oklch(0.52 0.025 260) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.52 0.025 260) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.69 0.0225 260) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -3077,19 +3118,6 @@
       "changedInDark": true
     },
     {
-      "name": "--sf-color-primary-ghost",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Core tokens",
-      "declared": "var(--sf-color-primary-a5)",
-      "aliasOf": "--sf-color-primary-a5",
-      "issues": [],
-      "computed": "oklch(from oklch(0.47 0.27 264) l c h / 0.05)",
-      "shown": "oklch(from oklch(0.47 0.27 264) l c h / 0.05)",
-      "darkComputed": "oklch(from oklch(0.715 0.243 264) l c h / 0.05)",
-      "changedInDark": true
-    },
-    {
       "name": "--sf-color-primary-lighter",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3178,6 +3206,19 @@
       "computed": "color-mix(in oklab, oklch(0.47 0.27 264) 4%,  oklch(0.96 0.006 250))",
       "shown": "color-mix(in oklab, oklch(0.47 0.27 264) 4%,  oklch(0.96 0.006 250))",
       "darkComputed": "color-mix(in oklab, oklch(0.715 0.243 264) 4%,  oklch(0.22 0.003 250))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-primary-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "var(--sf-color-primary-a5)",
+      "aliasOf": "--sf-color-primary-a5",
+      "issues": [],
+      "computed": "oklch(from oklch(0.47 0.27 264) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.47 0.27 264) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.715 0.243 264) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -3493,19 +3534,6 @@
       "changedInDark": true
     },
     {
-      "name": "--sf-color-secondary-ghost",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Core tokens",
-      "declared": "var(--sf-color-secondary-a5)",
-      "aliasOf": "--sf-color-secondary-a5",
-      "issues": [],
-      "computed": "oklch(from oklch(0.22 0.04 264) l c h / 0.05)",
-      "shown": "oklch(from oklch(0.22 0.04 264) l c h / 0.05)",
-      "darkComputed": "oklch(from oklch(0.84 0.036 264) l c h / 0.05)",
-      "changedInDark": true
-    },
-    {
       "name": "--sf-color-secondary-lighter",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3594,6 +3622,19 @@
       "computed": "color-mix(in oklab, oklch(0.22 0.04 264) 4%,  oklch(0.96 0.006 250))",
       "shown": "color-mix(in oklab, oklch(0.22 0.04 264) 4%,  oklch(0.96 0.006 250))",
       "darkComputed": "color-mix(in oklab, oklch(0.84 0.036 264) 4%,  oklch(0.22 0.003 250))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-secondary-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "var(--sf-color-secondary-a5)",
+      "aliasOf": "--sf-color-secondary-a5",
+      "issues": [],
+      "computed": "oklch(from oklch(0.22 0.04 264) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.22 0.04 264) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.84 0.036 264) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -3754,6 +3795,19 @@
       "computed": "oklch(from oklch(0.5 0.16 145) l c h / 0.12)",
       "shown": "oklch(from oklch(0.5 0.16 145) l c h / 0.12)",
       "darkComputed": "oklch(from oklch(0.7 0.144 145) l c h / 0.12)",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-success-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "oklch(from var(--sf-color-success) l c h / 0.05)",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "oklch(from oklch(0.5 0.16 145) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.5 0.16 145) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.7 0.144 145) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -4030,19 +4084,6 @@
       "changedInDark": true
     },
     {
-      "name": "--sf-color-tertiary-ghost",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Core tokens",
-      "declared": "var(--sf-color-tertiary-a5)",
-      "aliasOf": "--sf-color-tertiary-a5",
-      "issues": [],
-      "computed": "oklch(from oklch(0.42 0.22 295) l c h / 0.05)",
-      "shown": "oklch(from oklch(0.42 0.22 295) l c h / 0.05)",
-      "darkComputed": "oklch(from oklch(0.74 0.198 295) l c h / 0.05)",
-      "changedInDark": true
-    },
-    {
       "name": "--sf-color-tertiary-lighter",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -4131,6 +4172,19 @@
       "computed": "color-mix(in oklab, oklch(0.42 0.22 295) 4%,  oklch(0.96 0.006 250))",
       "shown": "color-mix(in oklab, oklch(0.42 0.22 295) 4%,  oklch(0.96 0.006 250))",
       "darkComputed": "color-mix(in oklab, oklch(0.74 0.198 295) 4%,  oklch(0.22 0.003 250))",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-tertiary-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "var(--sf-color-tertiary-a5)",
+      "aliasOf": "--sf-color-tertiary-a5",
+      "issues": [],
+      "computed": "oklch(from oklch(0.42 0.22 295) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.42 0.22 295) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.74 0.198 295) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -4456,6 +4510,19 @@
       "computed": "oklch(from oklch(0.75 0.17 80) l c h / 0.12)",
       "shown": "oklch(from oklch(0.75 0.17 80) l c h / 0.12)",
       "darkComputed": "oklch(from oklch(0.65 0.153 80) l c h / 0.12)",
+      "changedInDark": true
+    },
+    {
+      "name": "--sf-color-warning-tint",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "oklch(from var(--sf-color-warning) l c h / 0.05)",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "oklch(from oklch(0.75 0.17 80) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.75 0.17 80) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.65 0.153 80) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -5193,6 +5260,19 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-fluid-width",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Core tokens",
+      "declared": "100vw",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "100vw",
+      "shown": "100vw",
+      "darkComputed": "100vw",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-focus-ring-color",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -5542,6 +5622,19 @@
       "shown": "29.6296px",
       "darkComputed": "29.6296px",
       "changedInDark": false
+    },
+    {
+      "name": "--sf-gradient-action",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "category": "Core tokens",
+      "declared": "linear-gradient(in oklch 135deg, var(--sf-color-action), oklch(from var(--sf-color-action) calc(l - 0.08) c h))",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "linear-gradient(in oklch 135deg, oklch(0.47 0.27 264), oklch(from oklch(0.47 0.27 264) calc(l - 0.08) c h))",
+      "shown": "linear-gradient(in oklch 135deg, oklch(0.47 0.27 264), oklch(from oklch(0.47 0.27 264) calc(l - 0.08) c h))",
+      "darkComputed": "linear-gradient(in oklch 135deg, oklch(0.715 0.243 264), oklch(from oklch(0.715 0.243 264) calc(l - 0.08) c h))",
+      "changedInDark": true
     },
     {
       "name": "--sf-gradient-brand",
@@ -6623,6 +6716,19 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-media-radius",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Core tokens",
+      "declared": "0",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "0",
+      "shown": "0",
+      "darkComputed": "0",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-motion-scale",
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
@@ -7184,19 +7290,6 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-media-radius",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Core tokens",
-      "declared": "0",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "0",
-      "shown": "0",
-      "darkComputed": "0",
-      "changedInDark": false
-    },
-    {
       "name": "--sf-radius-pill",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -7522,19 +7615,6 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-scroll-timeline-range-exit-start",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Core tokens",
-      "declared": "cover 70%",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "cover 70%",
-      "shown": "cover 70%",
-      "darkComputed": "cover 70%",
-      "changedInDark": false
-    },
-    {
       "name": "--sf-scroll-timeline-range-exit-end",
       "tier": "PUBLIC",
       "role": "knob",
@@ -7545,6 +7625,19 @@
       "computed": "exit 100%",
       "shown": "exit 100%",
       "darkComputed": "exit 100%",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-start",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Core tokens",
+      "declared": "cover 70%",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "cover 70%",
+      "shown": "cover 70%",
+      "darkComputed": "cover 70%",
       "changedInDark": false
     },
     {
@@ -8236,6 +8329,110 @@
       "computed": "3.5rem",
       "shown": "3.5rem",
       "darkComputed": "3.5rem",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-animation",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "none",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "none",
+      "shown": "none",
+      "darkComputed": "none",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-attachment",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "scroll",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "scroll",
+      "shown": "scroll",
+      "darkComputed": "scroll",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-color",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "transparent",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "transparent",
+      "shown": "transparent",
+      "darkComputed": "transparent",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-image",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "none",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "none",
+      "shown": "none",
+      "darkComputed": "none",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-overlay",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "none",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "none",
+      "shown": "none",
+      "darkComputed": "none",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-position",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "center",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "center",
+      "shown": "center",
+      "darkComputed": "center",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-repeat",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "no-repeat",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "no-repeat",
+      "shown": "no-repeat",
+      "darkComputed": "no-repeat",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-surface-bg-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Macro tokens",
+      "declared": "cover",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "cover",
+      "shown": "cover",
+      "darkComputed": "cover",
       "changedInDark": false
     },
     {
@@ -9432,123 +9629,6 @@
       "computed": "1060",
       "shown": "1060",
       "darkComputed": "1060",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-fluid-width",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Core tokens",
-      "declared": "100vw",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "100vw",
-      "shown": "100vw",
-      "darkComputed": "100vw",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-animation",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "none",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "none",
-      "shown": "none",
-      "darkComputed": "none",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-attachment",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "scroll",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "scroll",
-      "shown": "scroll",
-      "darkComputed": "scroll",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-color",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "transparent",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "transparent",
-      "shown": "transparent",
-      "darkComputed": "transparent",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-image",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "none",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "none",
-      "shown": "none",
-      "darkComputed": "none",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-overlay",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "none",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "none",
-      "shown": "none",
-      "darkComputed": "none",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-position",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "center",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "center",
-      "shown": "center",
-      "darkComputed": "center",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-repeat",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "no-repeat",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "no-repeat",
-      "shown": "no-repeat",
-      "darkComputed": "no-repeat",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-surface-bg-size",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "cover",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "cover",
-      "shown": "cover",
-      "darkComputed": "cover",
       "changedInDark": false
     }
   ]

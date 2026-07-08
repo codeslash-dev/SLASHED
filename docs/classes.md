@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**288 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
+**292 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -319,15 +319,17 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Components (`optional/components.css`)
 
-28 classes.
+32 classes.
 
 | Class |
 |---|
 | `.sf-btn` |
+| `.sf-btn--action` |
+| `.sf-btn--base` |
 | `.sf-btn--block` |
 | `.sf-btn--block-cq` |
 | `.sf-btn--danger` |
-| `.sf-btn--ghost` |
+| `.sf-btn--gradient` |
 | `.sf-btn--info` |
 | `.sf-btn--l` |
 | `.sf-btn--neutral` |
@@ -335,7 +337,9 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-btn--primary` |
 | `.sf-btn--s` |
 | `.sf-btn--secondary` |
+| `.sf-btn--soft` |
 | `.sf-btn--success` |
+| `.sf-btn--tertiary` |
 | `.sf-btn--warning` |
 | `.sf-btn--xl` |
 | `.sf-btn--xs` |

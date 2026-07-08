@@ -3,6 +3,42 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
+## SLASHED 0.7.6 → 0.7.7
+
+### `.sf-btn` axes reworked (breaking)
+
+The word "secondary" no longer does double duty on buttons. The colour axis
+now covers all 10 palette families, the style axis lost `ghost`, and a
+gradient axis shipped:
+
+| Before (≤ 0.7.6) | After (0.7.7) |
+|---|---|
+| `.sf-btn--secondary` (soft tonal *style*) | `.sf-btn--soft` |
+| `.sf-btn--ghost` | **removed, no alias** — closest replacements: `.sf-btn--soft` (tonal wash) or a plain link |
+| — | `.sf-btn--secondary` now selects the **secondary brand colour** (new meaning) |
+| — | new colour families: `.sf-btn--tertiary`, `.sf-btn--action`, `.sf-btn--base` |
+| — | new gradient axis: `.sf-btn--gradient` — gradient fill, or a gradient border ring when combined with `.sf-btn--outline`; covers the core-4 brand families (`primary`/`secondary`/`tertiary`/`action`), solid no-op elsewhere |
+
+### `--sf-color-*-ghost` tokens renamed to `--sf-color-*-tint` (breaking)
+
+The 5%-alpha alias tokens dropped the `-ghost` suffix (the ghost button
+style no longer exists) and gained full 10-family coverage:
+
+| Before | After |
+|---|---|
+| `--sf-color-{primary,secondary,tertiary,action,neutral,base}-ghost` | `--sf-color-{family}-tint` |
+| — | new: `--sf-color-{success,warning,info,danger}-tint` |
+
+`.sf-btn--soft` now reads the semantic alpha aliases directly
+(`--sf-color-{family}-subtle` at rest, `-muted` on hover) instead of
+computing its own inline wash.
+
+### `--sf-avatar-size` renamed to `--sf-card-avatar-size` (breaking)
+
+The card avatar's sizing token now follows the `--sf-card-*` convention,
+has a declared default (`2.5rem` in `optional/tokens.components.css`), and
+is documented/registered like every other card token.
+
 ## SLASHED 0.6.25 → 0.6.26
 
 ### `base` relative shade aliases removed

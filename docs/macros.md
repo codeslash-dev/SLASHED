@@ -344,8 +344,8 @@ color syntax; outside the `@supports` gate only the background applies.
 
 ### Named variants
 
-11 precomputed variants: `primary`, `secondary`, `tertiary`, `action`,
-`neutral`, `inverse`, `success`, `warning`, `error`, `info`, `danger`.
+10 precomputed variants: `primary`, `secondary`, `tertiary`, `action`,
+`neutral`, `inverse`, `success`, `warning`, `info`, `danger`.
 
 ```html
 <div class="sf-surface--primary">White text on primary bg</div>
