@@ -29,14 +29,14 @@
         "core/tokens.macros.css",
         "core/reset.css",
         "core/base.css",
-        "core/themes.css",
+        "optional/forms.css",
         "core/layout.css",
         "core/macros.css",
         "core/states.css",
+        "core/themes.css",
         "core/motion.css",
         "core/accessibility.css",
-        "core/print.css",
-        "optional/forms.css"
+        "core/print.css"
       ]
     },
     {
@@ -68,18 +68,18 @@
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
+        "optional/tokens.components.css",
         "core/reset.css",
         "core/base.css",
-        "core/themes.css",
+        "optional/forms.css",
         "core/layout.css",
+        "optional/components.css",
         "core/macros.css",
         "core/states.css",
+        "core/themes.css",
         "core/motion.css",
         "core/accessibility.css",
-        "core/print.css",
-        "optional/forms.css",
-        "optional/tokens.components.css",
-        "optional/components.css"
+        "core/print.css"
       ]
     },
     {
@@ -112,15 +112,15 @@
         "core/tokens.macros.css",
         "core/reset.css",
         "core/base.css",
-        "core/themes.css",
+        "optional/forms.css",
         "core/layout.css",
         "core/macros.css",
+        "optional/utilities.css",
         "core/states.css",
+        "core/themes.css",
         "core/motion.css",
         "core/accessibility.css",
-        "core/print.css",
-        "optional/forms.css",
-        "optional/utilities.css"
+        "core/print.css"
       ]
     },
     {
@@ -153,19 +153,19 @@
         "core/tokens.css",
         "core/tokens.layout.css",
         "core/tokens.macros.css",
+        "optional/tokens.components.css",
         "core/reset.css",
         "core/base.css",
-        "core/themes.css",
+        "optional/forms.css",
         "core/layout.css",
+        "optional/components.css",
         "core/macros.css",
+        "optional/utilities.css",
         "core/states.css",
+        "core/themes.css",
         "core/motion.css",
         "core/accessibility.css",
-        "core/print.css",
-        "optional/forms.css",
-        "optional/tokens.components.css",
-        "optional/components.css",
-        "optional/utilities.css"
+        "core/print.css"
       ]
     }
   ]
