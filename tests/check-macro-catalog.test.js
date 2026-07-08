@@ -61,6 +61,16 @@ describe('check-macro-catalog failure cases', () => {
     assert.match(r.stderr, /sf-phantom/);
   });
 
+  test('an empty SLASHED_ROOT is treated as unset (falls back to the real repo root)', () => {
+    // Guards the hardened root resolution: '' must not become path.join('', …)
+    // relative to CWD. Running the read-only gate against the real repo passes.
+    const r = spawnSync(process.execPath, [GATE], {
+      encoding: 'utf8',
+      env: { ...process.env, SLASHED_ROOT: '   ' },
+    });
+    assert.equal(r.status, 0, `empty SLASHED_ROOT should fall back to repo root:\n${r.stderr}`);
+  });
+
   test('fails when a required source file is missing', () => {
     const dir = buildFixture();
     fs.rmSync(path.join(dir, 'core', 'motion.css'));

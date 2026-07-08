@@ -17,7 +17,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ROOT = process.env.SLASHED_ROOT ?? path.resolve(import.meta.dirname, '..');
+// Empty/whitespace SLASHED_ROOT counts as unset; a relative override is
+// resolved to absolute (the reads below require an absolute repo root).
+const ROOT = process.env.SLASHED_ROOT?.trim()
+  ? path.resolve(process.env.SLASHED_ROOT)
+  : path.resolve(import.meta.dirname, '..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
 const errors = [];

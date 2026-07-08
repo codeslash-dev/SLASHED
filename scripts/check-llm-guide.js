@@ -26,8 +26,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-// SLASHED_ROOT lets negative tests run the gate against a fixture tree.
-const ROOT = process.env.SLASHED_ROOT ?? path.resolve(import.meta.dirname, '..');
+// SLASHED_ROOT lets negative tests run the gate against a fixture tree. An
+// empty/whitespace value counts as unset; a relative override is resolved to
+// absolute so path.join below never targets the process CWD.
+const ROOT = process.env.SLASHED_ROOT?.trim()
+  ? path.resolve(process.env.SLASHED_ROOT)
+  : path.resolve(import.meta.dirname, '..');
 const GUIDE = path.join(ROOT, 'docs', 'llm-guide.md');
 const REGISTRY = path.join(ROOT, 'token-registry.json');
 const API_INDEX = path.join(ROOT, 'docs', 'api-index.json');

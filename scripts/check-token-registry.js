@@ -25,7 +25,10 @@ import { execFileSync } from 'node:child_process';
 
 // SLASHED_ROOT lets negative tests run the gate against a fixture tree (with no
 // git baseline, invariants 1–2 are skipped; 3–4 and the id guards still run).
-const ROOT = process.env.SLASHED_ROOT ?? path.resolve(import.meta.dirname, '..');
+// Empty/whitespace counts as unset; a relative override is resolved to absolute.
+const ROOT = process.env.SLASHED_ROOT?.trim()
+  ? path.resolve(process.env.SLASHED_ROOT)
+  : path.resolve(import.meta.dirname, '..');
 const REGISTRY = path.join(ROOT, 'token-registry.json');
 const API_INDEX = path.join(ROOT, 'docs', 'api-index.json');
 
