@@ -19,8 +19,9 @@ import { readFile as readFileLib } from './lib/parse.js';
 // back to the repo root in normal use. Mirrors scripts/check-version-sync.js.
 // An empty/whitespace value counts as unset, and a relative override is
 // resolved to absolute — the parse.js helpers require an absolute root.
-const ROOT = process.env.SLASHED_ROOT?.trim()
-  ? path.resolve(process.env.SLASHED_ROOT)
+const slashedRoot = process.env.SLASHED_ROOT?.trim();
+const ROOT = slashedRoot
+  ? path.resolve(slashedRoot)
   : path.resolve(import.meta.dirname, '..');
 
 function readFile(rel) {

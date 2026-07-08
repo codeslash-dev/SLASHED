@@ -71,6 +71,17 @@ describe('check-macro-catalog failure cases', () => {
     assert.equal(r.status, 0, `empty SLASHED_ROOT should fall back to repo root:\n${r.stderr}`);
   });
 
+  test('a whitespace-padded SLASHED_ROOT is trimmed before resolving (not a wrong dir)', () => {
+    // The truthiness check and path.resolve must use the SAME trimmed value —
+    // otherwise "  <dir>  " passes the check but resolves to a padded path.
+    const dir = buildFixture();
+    const r = spawnSync(process.execPath, [GATE], {
+      encoding: 'utf8',
+      env: { ...process.env, SLASHED_ROOT: `  ${dir}  ` },
+    });
+    assert.equal(r.status, 0, `padded SLASHED_ROOT should resolve to the fixture:\n${r.stderr}`);
+  });
+
   test('fails when a required source file is missing', () => {
     const dir = buildFixture();
     fs.rmSync(path.join(dir, 'core', 'motion.css'));
