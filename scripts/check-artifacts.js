@@ -60,6 +60,19 @@ if (mode === 'fix') {
     run(cmd, artifact.cwd ? resolve(root, artifact.cwd) : root);
 
     for (const out of artifact.outputs) {
+      // A declared output that isn't tracked can never fail the diff check
+      // below (`git diff` ignores untracked/ignored paths), so it would be
+      // silently unguarded — exactly the drift class this gate exists to catch.
+      // Fail loudly instead.
+      if (!isTracked(out)) {
+        console.error(
+          `::error::${out} is a declared artifact of "${artifact.name}" but is not git-tracked ` +
+            `(untracked or .gitignore'd) — the freshness check cannot guard it. ` +
+            `Commit the file, or remove it from scripts/artifacts.json.`,
+        );
+        failed = true;
+        continue;
+      }
       try {
         gitFile('diff', '--exit-code', '--', out);
       } catch {

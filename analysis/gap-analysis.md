@@ -1,3 +1,8 @@
+<!-- STATUS: historical one-off snapshot, not a living document. Captured at
+     v0.5.28 for a competitive review; not wired into any build/CI gate and not
+     auto-updated. Keep for reference; supersede with a fresh dated analysis
+     rather than editing in place. -->
+
 # SLASHED — Competitive Gap Analysis (v0.5.28)
 
 > **Question:** what is still missing from SLASHED that holds it back versus
