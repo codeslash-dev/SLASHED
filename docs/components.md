@@ -14,8 +14,13 @@ framework's tokens.
 
 | # | Class | Status | Modifiers | Slots / children |
 |---|---|---|---|---|
-| 1 | `.sf-btn` | **live (0.7.0)** | `--primary`, `--neutral`, `--success`, `--warning`, `--info`, `--danger`, `--secondary`, `--ghost`, `--outline`, `--xs`, `--s`, `--l`, `--xl`, `--block`, `--block-cq` | — |
+| 1 | `.sf-btn` | **live (0.7.0)** | `--primary`, `--secondary`, `--tertiary`, `--action`, `--base`, `--neutral`, `--success`, `--warning`, `--info`, `--danger`, `--soft`, `--outline`, `--gradient`, `--xs`, `--s`, `--l`, `--xl`, `--block`, `--block-cq` | — |
 | 2 | `.sf-card` | **live (0.7.0)** | `--bordered`, `--elevated`, `--interactive` | `__header`, `__body`, `__footer`, `__media`, `__avatar`, `__title` |
+
+> **Breaking rename (0.7.7):** `.sf-btn--secondary` now selects the
+> **secondary brand colour** (axis: Colour). The soft tonal *style* it used
+> to name is now `.sf-btn--soft`. `.sf-btn--ghost` was removed entirely —
+> no alias. See the changelog for the before → after mapping.
 
 ---
 
@@ -27,21 +32,29 @@ classless `<button>` styling in `optional/forms.css` (via `:not([class*="sf-"])`
 `.sf-btn` fully owns its own look.
 
 ```html
-<!-- Default (action colour) -->
+<!-- Default: the button's default colour is --sf-color-action; no modifier needed -->
 <button class="sf-btn">Save</button>
 
-<!-- Colour families -->
+<!-- Colour families — all 10, 1:1 with the global palette -->
 <button class="sf-btn sf-btn--primary">Primary</button>
+<button class="sf-btn sf-btn--secondary">Secondary colour</button>
+<button class="sf-btn sf-btn--tertiary">Tertiary</button>
+<button class="sf-btn sf-btn--base">Base</button>
 <button class="sf-btn sf-btn--success">Confirm</button>
 <button class="sf-btn sf-btn--danger">Delete</button>
 
 <!-- Style treatments -->
-<button class="sf-btn sf-btn--secondary">Secondary</button>
-<button class="sf-btn sf-btn--ghost">Ghost</button>
+<button class="sf-btn sf-btn--soft">Soft</button>
 <button class="sf-btn sf-btn--outline">Outline</button>
 
-<!-- Outline composes with any colour family -->
+<!-- Styles compose with any colour family -->
 <button class="sf-btn sf-btn--danger sf-btn--outline">Delete</button>
+<button class="sf-btn sf-btn--secondary sf-btn--soft">Soft secondary</button>
+
+<!-- Gradient (core-4 brand families) -->
+<button class="sf-btn sf-btn--gradient">Gradient action</button>
+<button class="sf-btn sf-btn--primary sf-btn--gradient">Gradient fill</button>
+<button class="sf-btn sf-btn--primary sf-btn--gradient sf-btn--outline">Gradient border</button>
 
 <!-- Sizes (m is the default) -->
 <button class="sf-btn sf-btn--xs">XS</button>
@@ -57,22 +70,24 @@ classless `<button>` styling in `optional/forms.css` (via `:not([class*="sf-"])`
 <button class="sf-btn sf-btn--block">Block</button>
 ```
 
-**Modifiers**
+**Modifiers** — three orthogonal axes (Colour × Style × Gradient), freely
+composable, plus size/width/state.
 
 | Group | Modifier | Effect |
 |---|---|---|
-| Colour | `--primary` `--neutral` `--success` `--warning` `--info` `--danger` | Swaps the colour family; base (no modifier) uses `--sf-color-action`. |
-| Style | `--secondary` | Soft **tonal fill** — a light wash of the family colour, coloured text, no border; wash deepens on hover. Lower-emphasis than the solid fill but visually distinct from `--outline`. (Degrades to a bordered treatment where `color-mix()` is unsupported.) |
-| Style | `--ghost` | Transparent fill **and** border; tint on hover. |
+| Colour | `--primary` `--secondary` `--tertiary` `--action` `--base` `--neutral` `--success` `--warning` `--info` `--danger` | Swaps the colour family — 1:1 with the 10 global palette families. The default (no modifier) is `--sf-color-action`; `--action` names it explicitly. |
+| Style | `--soft` | Soft **tonal fill** — a light wash of the family colour (`--sf-color-{family}-subtle`, deepening to `-muted` on hover), coloured text, no border. Lower-emphasis than the solid fill but visually distinct from `--outline`. (Degrades to a bordered treatment where relative color syntax is unsupported.) |
 | Style | `--outline` | Coloured border/text, transparent fill; **fills** with the family colour on hover. Composes with any colour family. |
+| Gradient | `--gradient` | Paints the fill (or, with `--outline`, the border ring) with the family's `--sf-gradient-{family}` token. **Core-4 brand families only** — `primary`/`secondary`/`tertiary`/`action` (and the default). For `base`/`neutral`/status families no gradient token exists: the modifier resolves to the solid family colour (documented no-op). Ignored under `--soft`. Degrades to the solid treatment where relative color syntax is unsupported. |
 | Size | `--xs` `--s` `--l` `--xl` | Scales padding, font-size, and min-height (`m` = default). |
 | Width | `--block` | Full width everywhere. |
 | Width | `--block-cq` | Full width only inside a query container narrower than `20rem`. |
 | State | `:disabled` / `.sf-is-disabled` | Dimmed, `pointer-events: none`. |
 | State | `.sf-is-loading` | Hides content, shows a spinner (static under `prefers-reduced-motion: reduce`). |
 
-Every variant sets three rule-local custom properties — `--sf-btn-color`,
-`--sf-btn-color--hover`, `--sf-btn-on-color` — which is what lets `--outline`
+Every colour variant sets five rule-local custom properties — `--sf-btn-color`,
+`--sf-btn-color--hover`, `--sf-btn-on-color`, `--sf-btn-soft-bg`,
+`--sf-btn-soft-bg--hover` — which is what lets the style and gradient axes
 stay orthogonal to the colour families.
 
 **Tokens** (`optional/tokens.components.css`)
@@ -151,12 +166,29 @@ when the entire card should be a single link.
 | `--sf-card-bg` | `var(--sf-color-surface)` | Background |
 | `--sf-card-border-width` | `var(--sf-border-width-1)` | Border thickness |
 | `--sf-card-border-color` | `var(--sf-color-border)` | Border colour |
-| `--sf-card-shadow` | `var(--sf-shadow-s)` | Base shadow |
+| `--sf-card-shadow` | `var(--sf-shadow-s)` | Resting shadow |
 | `--sf-card-shadow--elevated` | `var(--sf-shadow-l)` | `--elevated` shadow |
 | `--sf-card-shadow--hover` | `var(--sf-shadow-l)` | `--interactive` hover shadow |
 | `--sf-card-media-ratio` | `var(--sf-ratio-video)` | `__media` aspect ratio |
+| `--sf-card-avatar-size` | `2.5rem` | `__avatar` diameter |
 | `--sf-card-heading-size` | `var(--sf-text-xl)` | `__title` size |
 | `--sf-card-btn-font-size` | `var(--sf-text-s)` | Nested `.sf-btn` size |
+
+**Coloured cards**
+
+`.sf-card` deliberately has no colour-family modifiers (its modifiers are
+elevation/behaviour steps). For a card in a palette colour, compose with a
+`.sf-surface--{family}` macro (see `macros.md`) or override the card tokens
+directly:
+
+```html
+<!-- Surface macro: bg + auto-contrast text in one class -->
+<article class="sf-card sf-surface--primary">…</article>
+
+<!-- Or token override for finer control -->
+<article class="sf-card" style="--sf-card-bg: var(--sf-color-info-subtle);
+                                --sf-card-border-color: var(--sf-color-info)">…</article>
+```
 
 **Composing card body layout**
 
@@ -180,48 +212,30 @@ existing layout primitives instead of a card-specific modifier:
 
 ---
 
-## Recipe: gradient-outline button
+## Gradient buttons
 
-A gradient border isn't a shipped `.sf-btn` variant (solid outline covers the
-common case), but it's a low-cost copy-paste recipe using the framework's gradient
-tokens. It layers a gradient behind the button and masks out the centre so only the
-border shows; `@property` makes the gradient animatable on hover.
+> **Superseded (0.7.7):** the old copy-paste `.btn-gradient-outline` recipe
+> (ad-hoc `--sf-grad-a`/`--sf-grad-b` variables) is replaced by the real
+> `.sf-btn--gradient` modifier documented above — no hand-set variables
+> needed.
 
-```css
-@property --sf-grad-a { syntax: "<color>"; inherits: false; initial-value: transparent; }
-@property --sf-grad-b { syntax: "<color>"; inherits: false; initial-value: transparent; }
+`.sf-btn--gradient` is driven by the family gradient tokens
+(`--sf-gradient-primary` / `-secondary` / `-tertiary` / `-action` in
+`core/tokens.css`), so retinting a brand colour retints its gradient buttons
+automatically:
 
-.btn-gradient-outline {
-  position: relative;
-  background: transparent;
-  color: var(--sf-color-text);
-  border-color: transparent;
-}
-.btn-gradient-outline::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: var(--sf-border-width-1);
-  background: linear-gradient(120deg, var(--sf-grad-a), var(--sf-grad-b));
-  /* Punch out the centre so only the padding (the "border") shows. */
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  --sf-grad-a: var(--sf-color-primary);
-  --sf-grad-b: var(--sf-color-action);
-  transition: --sf-grad-a var(--sf-duration-normal), --sf-grad-b var(--sf-duration-normal);
-}
-.btn-gradient-outline:hover::before {
-  --sf-grad-a: var(--sf-color-action);
-  --sf-grad-b: var(--sf-color-primary);
-}
+```html
+<!-- Gradient fill -->
+<button class="sf-btn sf-btn--primary sf-btn--gradient">Primary gradient</button>
+
+<!-- Gradient border (masked ring, filled with the gradient on hover) -->
+<button class="sf-btn sf-btn--tertiary sf-btn--gradient sf-btn--outline">Tertiary ring</button>
 ```
 
-Apply it alongside `.sf-btn` (`class="sf-btn btn-gradient-outline"`) to inherit the
-button's sizing, radius, and layout. The mask technique and animated `@property`
-are within SLASHED's supported browser floor.
+Coverage is the 4 core brand families (`primary`/`secondary`/`tertiary`/
+`action`); on the remaining families the modifier resolves to the solid
+family colour. Extending gradient tokens to `base`/`neutral`/status families
+is a possible follow-up if demand shows up.
 
 ## Out of scope for 0.x
 
@@ -242,6 +256,9 @@ tokens:
 ## Roadmap
 
 `.sf-btn` + `.sf-card` shipped in **v0.7.0** and are the component surface SLASHED
-maintains. There is no broader component library on the roadmap — the framework's
-value is its token and layout systems, and any further UI is expected to be
-authored as project-specific BEM classes reading SLASHED tokens.
+maintains today. Further components — `.sf-badge`, `.sf-tag`, `.sf-alert`,
+`.sf-avatar`, `.sf-modal`, and a skeleton/placeholder shape component — are
+planned; see `docs/roadmap.md` and
+[#384](https://github.com/codeslash-dev/SLASHED/issues/384) for the tracked
+list. Anything not on that list is expected to be authored as
+project-specific BEM classes reading SLASHED tokens.

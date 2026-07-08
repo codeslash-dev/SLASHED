@@ -1,6 +1,6 @@
 # SLASHED — Roadmap
 
-Current version: **0.7.6**
+Current version: **0.7.7**
 
 ## Before v1.0
 
@@ -25,7 +25,7 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   `--sf-drop-shadow-*`) tokens are already registered via `@property` in
   `core/tokens.css`, alongside the existing colour registrations. Transitions on
   layout values and DevTools inspection both work.
-- **Consolidate named surfaces onto `.sf-surface`** — the 11 `.sf-surface--*`
+- **Consolidate named surfaces onto `.sf-surface`** — the 10 `.sf-surface--*`
   variants could become one-line `--sf-surface-color` presets of the generic
   primitive, once a fallback story for the precomputed
   `tokens.color-fallbacks.css` path is settled.
@@ -49,8 +49,17 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   changing document semantics.
 - **Skeleton shape component** — ship `.sf-skeleton` plus shape modifiers such as
   `.sf-skeleton--text`, `.sf-skeleton--line`, `.sf-skeleton--avatar`, and
-  `.sf-skeleton--card` in the optional components layer. Item 8 of
+  `.sf-skeleton--rect` in the optional components layer. Item 8 of
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
+  **Naming decision (resolved,
+  [#575](https://github.com/codeslash-dev/SLASHED/issues/575)):** `.sf-skeleton`
+  keeps the industry-standard component name; the shipped shimmer *state*
+  `.sf-is-skeleton` will be renamed to `.sf-is-shimmer` (a breaking rename
+  landing together with the `.sf-skeleton` implementation) so "skeleton" means
+  exactly one thing — the component, which composes with `.sf-is-shimmer` for
+  the shimmer effect. Shape modifiers must not reuse component names: the
+  card-like placeholder shape is `--rect` (geometric), never `--card`, to avoid
+  implying parity with `.sf-card`'s token set.
 - **Z-index utilities** — expose the named z-index scale as `.sf-z-*` classes
   (for example `.sf-z-modal` and `.sf-z-tooltip`) in `optional/utilities.css`.
 - **First component tranche** — `.sf-btn` and `.sf-card` shipped in v0.7.0
@@ -69,10 +78,12 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   native `<dialog>` compatibility where applicable. Items 5–7 of
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
 - ~~**Outline button variant**~~ ✓ **Done (0.7.0)** — the border-only
-  `.sf-btn--outline` style shipped with the first component tranche; a
-  gradient-border version is documented as a copy-paste recipe in
-  `docs/components.md`. Tracked in
-  [#486](https://github.com/codeslash-dev/SLASHED/issues/486).
+  `.sf-btn--outline` style shipped with the first component tranche. The
+  gradient-border version shipped as the real `.sf-btn--gradient` modifier in
+  0.7.7 (fill + outline, core-4 brand families), replacing the earlier
+  copy-paste recipe in `docs/components.md`. Tracked in
+  [#486](https://github.com/codeslash-dev/SLASHED/issues/486) /
+  [#571](https://github.com/codeslash-dev/SLASHED/issues/571).
 - **Decorative animation utility classes** — the keyframes for `sf-spin`,
   `sf-shimmer`, `sf-ping`, `sf-blink`, and `sf-float` are already defined in
   `core/motion.css`; they need corresponding `.sf-spin`, `.sf-shimmer`, etc.

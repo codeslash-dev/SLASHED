@@ -10,17 +10,17 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1054 elements** — 729 tokens, 325 classes.
+**1064 elements** — 735 tokens, 329 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 998 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1008 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (729)
+## Tokens (735)
 
-### Component tokens (25)
+### Component tokens (26)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -32,6 +32,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-btn-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding inside .sf-btn. |
 | `--sf-btn-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding inside .sf-btn. |
 | `--sf-btn-radius` | PUBLIC | consumption | btn | `var(--sf-radius-m)` | Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens. |
+| `--sf-card-avatar-size` | PUBLIC | knob | card | `2.5rem` | Diameter of .sf-card__avatar. Defaults to 2.5rem. |
 | `--sf-card-bg` | PUBLIC | consumption | card | `var(--sf-color-surface)` | Background surface for .sf-card. Defaults to --sf-color-surface. |
 | `--sf-card-border-color` | PUBLIC | consumption | card | `var(--sf-color-border)` | Border colour for .sf-card. Defaults to --sf-color-border. |
 | `--sf-card-border-width` | PUBLIC | consumption | card | `var(--sf-border-width-1)` | Border thickness for .sf-card. |
@@ -46,11 +47,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-card-shadow` | PUBLIC | consumption | card | `var(--sf-shadow-s)` | Base drop shadow for .sf-card. Defaults to --sf-shadow-s. |
 | `--sf-card-shadow--elevated` | PUBLIC | consumption | card | `var(--sf-shadow-l)` | Drop shadow applied by the .sf-card--elevated modifier (border hidden, larger shadow). |
 | `--sf-card-shadow--hover` | PUBLIC | consumption | card | `var(--sf-shadow-l)` | Drop shadow applied on hover/focus by the .sf-card--interactive modifier. |
-| `--sf-field-padding-block` | PUBLIC | consumption | field | `var(--sf-space-xs)` | Vertical (block) inner padding for form field inputs. |
-| `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. |
-| `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. |
+| `--sf-field-padding-block` | PUBLIC | consumption | field | `var(--sf-space-xs)` | Vertical (block) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
+| `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
+| `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (617)
+### Core tokens (622)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -118,7 +119,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.50)` | 50% opacity action tint. Mid-transparency badge or overlay. |
 | `--sf-color-action-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.80)` | 80% opacity action tint. |
 | `--sf-color-action-darker` | PUBLIC | consumption | color | `var(--sf-color-action-600)` | Deep action shade for high-contrast contexts. |
-| `--sf-color-action-ghost` | PUBLIC | consumption | color | `var(--sf-color-action-a5)` | Near-transparent action tint for ghost-button hover backgrounds. |
 | `--sf-color-action-lighter` | PUBLIC | consumption | color | `var(--sf-color-action-400)` | Light action shade for soft accents. |
 | `--sf-color-action-muted` | PUBLIC | consumption | color | `var(--sf-color-action-a30)` | Medium action fill — outlined button hover backgrounds. |
 | `--sf-color-action-source-dark` | PUBLIC | knob | color | `oklch(0.70 0.198 235)` | Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%. |
@@ -126,6 +126,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-subtle` | PUBLIC | consumption | color | `var(--sf-color-action-a10)` | Lightest action tint — selected rows, active nav, chips. |
 | `--sf-color-action-superdark` | PUBLIC | consumption | color | `var(--sf-color-action-950)` | Near-black action shade for maximum contrast on light surfaces. |
 | `--sf-color-action-superlight` | PUBLIC | consumption | color | `var(--sf-color-action-50)` | Near-white action shade for maximum contrast on dark surfaces. |
+| `--sf-color-action-tint` | PUBLIC | consumption | color | `var(--sf-color-action-a5)` | Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade. |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade. |
 | `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Mode-adaptive base surface color. Drives the page canvas and the surface elevation family; not an interactive/brand role. |
@@ -147,11 +148,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-base-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.05)` | 5% opacity base-surface tint. |
 | `--sf-color-base-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.50)` | 50% opacity base-surface tint. |
 | `--sf-color-base-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.80)` | 80% opacity base-surface tint. |
-| `--sf-color-base-ghost` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base-surface tint for ghost backgrounds. |
 | `--sf-color-base-muted` | PUBLIC | consumption | color | `var(--sf-color-base-a30)` | Medium base-surface fill for muted containers or overlays. |
 | `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. Keep near-black for dark-mode surfaces and elevation offsets. |
 | `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH source color for the light-mode base surface. Keep near-white so --sf-color-bg, --sf-color-surface, and raised/inset levels have room to separate. |
 | `--sf-color-base-subtle` | PUBLIC | consumption | color | `var(--sf-color-base-a10)` | Subtle base-surface tint for low-emphasis backgrounds. |
+| `--sf-color-base-tint` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | Base page / component background. The canvas all other surfaces layer on top of. |
 | `--sf-color-bg--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | Background tint for pressed/active interactive elements. |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | color | `var(--sf-color-inset)` | Background for disabled interactive elements. |
@@ -173,6 +174,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-danger-source-light` | PUBLIC | knob | color | `oklch(0.48 0.22 12)` | OKLCH lightness source for the danger status color (covers destructive actions and form validation errors). |
 | `--sf-color-danger-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast danger color for alert body text and icons. |
 | `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.1)` | Light danger tint for error row backgrounds and alert container fills. |
+| `--sf-color-danger-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.05)` | Near-transparent danger tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-dim` | PUBLIC | knob | color | `oklch(0 0 0 / 0.5)` | Backdrop overlay color for modals, drawers, and lightboxes. |
 | `--sf-color-heading` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Heading text color. Slightly stronger contrast than body text for visual hierarchy. |
 | `--sf-color-info` | PUBLIC | consumption | color | `light-dark(var(--sf-color-info-source-light), var(--sf-color-info-source-dark, oklch(from var(--sf-color-info-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Informational color for neutral tips, hints, and non-urgent notices. |
@@ -181,6 +183,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-info-source-light` | PUBLIC | knob | color | `oklch(0.48 0.18 235)` | OKLCH lightness source for the info status color. |
 | `--sf-color-info-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast info color for hint body text. |
 | `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.1)` | Light info tint for informational note backgrounds. |
+| `--sf-color-info-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.05)` | Near-transparent info tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-inset` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` | Slightly inset surface for nested areas — inputs, code blocks, sidebar panels. |
 | `--sf-color-inverse` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(1 - l) c h)` | Inverted (dark-on-light / light-on-dark) surface for high-contrast banners or tooltips. |
 | `--sf-color-link` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )` | Default hyperlink color. |
@@ -211,7 +214,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.50)` | 50% opacity neutral tint. |
 | `--sf-color-neutral-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.80)` | 80% opacity neutral tint. |
 | `--sf-color-neutral-darker` | PUBLIC | consumption | color | `var(--sf-color-neutral-600)` | Deep neutral shade for high-contrast contexts. |
-| `--sf-color-neutral-ghost` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | Near-transparent neutral tint for ghost-button hover backgrounds. |
 | `--sf-color-neutral-lighter` | PUBLIC | consumption | color | `var(--sf-color-neutral-400)` | Light neutral shade. |
 | `--sf-color-neutral-muted` | PUBLIC | consumption | color | `var(--sf-color-neutral-a30)` | Muted neutral fill for low-emphasis contexts. |
 | `--sf-color-neutral-source-dark` | PUBLIC | knob | color | `oklch(0.69 0.0225 260)` | Registered <color> dark counterpart of --sf-color-neutral. |
@@ -219,6 +221,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-subtle` | PUBLIC | consumption | color | `var(--sf-color-neutral-a10)` | Lightest neutral semantic tint. |
 | `--sf-color-neutral-superdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-950)` | Near-black neutral shade. |
 | `--sf-color-neutral-superlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-50)` | Near-white neutral shade. |
+| `--sf-color-neutral-tint` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | Extra-dark neutral shade. |
 | `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | Extra-light neutral shade. |
 | `--sf-color-overlay` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | Overlay surface for floating panels, sheets, and modals. |
@@ -242,7 +245,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.50)` | 50% opacity primary tint. |
 | `--sf-color-primary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.80)` | 80% opacity primary tint. |
 | `--sf-color-primary-darker` | PUBLIC | consumption | color | `var(--sf-color-primary-600)` | Deep primary shade. |
-| `--sf-color-primary-ghost` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint for ghost-button hover backgrounds. |
 | `--sf-color-primary-lighter` | PUBLIC | consumption | color | `var(--sf-color-primary-400)` | Light primary shade. |
 | `--sf-color-primary-muted` | PUBLIC | consumption | color | `var(--sf-color-primary-a30)` | Muted primary fill. |
 | `--sf-color-primary-source-dark` | PUBLIC | knob | color | `oklch(0.715 0.243 264)` | Registered <color> dark counterpart of --sf-color-primary. |
@@ -250,6 +252,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-subtle` | PUBLIC | consumption | color | `var(--sf-color-primary-a10)` | Lightest primary semantic tint. |
 | `--sf-color-primary-superdark` | PUBLIC | consumption | color | `var(--sf-color-primary-950)` | Near-black primary shade. |
 | `--sf-color-primary-superlight` | PUBLIC | consumption | color | `var(--sf-color-primary-50)` | Near-white primary shade. |
+| `--sf-color-primary-tint` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-primary-xdark` | PUBLIC | consumption | color | `var(--sf-color-primary-800)` | Extra-dark primary shade. |
 | `--sf-color-primary-xlight` | PUBLIC | consumption | color | `var(--sf-color-primary-200)` | Extra-light primary shade. |
 | `--sf-color-raised` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | Elevated card surface that floats above the page background. |
@@ -274,7 +277,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.50)` | 50% opacity secondary tint. |
 | `--sf-color-secondary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.80)` | 80% opacity secondary tint. |
 | `--sf-color-secondary-darker` | PUBLIC | consumption | color | `var(--sf-color-secondary-600)` | Deep secondary shade. |
-| `--sf-color-secondary-ghost` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | Near-transparent secondary tint for ghost-button hover backgrounds. |
 | `--sf-color-secondary-lighter` | PUBLIC | consumption | color | `var(--sf-color-secondary-400)` | Light secondary shade. |
 | `--sf-color-secondary-muted` | PUBLIC | consumption | color | `var(--sf-color-secondary-a30)` | Muted secondary fill. |
 | `--sf-color-secondary-source-dark` | PUBLIC | knob | color | `oklch(0.84 0.036 264)` | Registered <color> dark counterpart of --sf-color-secondary. |
@@ -282,6 +284,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-subtle` | PUBLIC | consumption | color | `var(--sf-color-secondary-a10)` | Lightest secondary semantic tint. |
 | `--sf-color-secondary-superdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-950)` | Near-black secondary shade. |
 | `--sf-color-secondary-superlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-50)` | Near-white secondary shade. |
+| `--sf-color-secondary-tint` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-800)` | Extra-dark secondary shade. |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | Extra-light secondary shade. |
 | `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Background color applied to browser text selections. |
@@ -294,6 +297,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-success-source-light` | PUBLIC | knob | color | `oklch(0.50 0.16 145)` | OKLCH lightness source for the success status color. |
 | `--sf-color-success-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast success color for confirmation message text. |
 | `--sf-color-success-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.12)` | Light success tint for confirmation backgrounds. |
+| `--sf-color-success-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.05)` | Near-transparent success tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-surface` | PUBLIC | consumption | color | `var(--sf-color-base)` | Default component surface color. Alias of --sf-color-base; use --sf-color-raised for an elevated card/background level. |
 | `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw tertiary palette token for the third brand color. |
 | `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | Tertiary color at pressed/active brightness. |
@@ -315,7 +319,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.50)` | 50% opacity tertiary tint. |
 | `--sf-color-tertiary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.80)` | 80% opacity tertiary tint. |
 | `--sf-color-tertiary-darker` | PUBLIC | consumption | color | `var(--sf-color-tertiary-600)` | Deep tertiary shade. |
-| `--sf-color-tertiary-ghost` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | Near-transparent tertiary tint for ghost-button hover backgrounds. |
 | `--sf-color-tertiary-lighter` | PUBLIC | consumption | color | `var(--sf-color-tertiary-400)` | Light tertiary shade. |
 | `--sf-color-tertiary-muted` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a30)` | Muted tertiary fill. |
 | `--sf-color-tertiary-source-dark` | PUBLIC | knob | color | `oklch(0.74 0.198 295)` | Registered <color> dark counterpart of --sf-color-tertiary. |
@@ -323,6 +326,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-subtle` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a10)` | Lightest tertiary semantic tint. |
 | `--sf-color-tertiary-superdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-950)` | Near-black tertiary shade. |
 | `--sf-color-tertiary-superlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-50)` | Near-white tertiary shade. |
+| `--sf-color-tertiary-tint` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-tertiary-xdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-800)` | Extra-dark tertiary shade. |
 | `--sf-color-tertiary-xlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-200)` | Extra-light tertiary shade. |
 | `--sf-color-text` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Primary text color. Contrasts against --sf-color-bg for body copy. |
@@ -348,6 +352,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-warning-source-light` | PUBLIC | knob | color | `oklch(0.75 0.17 80)` | OKLCH lightness source for the warning status color. |
 | `--sf-color-warning-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )` | High-contrast warning color for caution text. |
 | `--sf-color-warning-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.12)` | Light warning tint for warning notification backgrounds. |
+| `--sf-color-warning-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-warning) l c h / 0.05)` | Near-transparent warning tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-white` | PUBLIC | knob | color | `oklch(100% 0 0)` | Absolute white reference value. |
 | `--sf-component-pad` | PUBLIC | consumption | component | `var(--sf-space-m)` | Standard inner padding for interactive components (buttons, form inputs, chips). |
 | `--sf-container-default` | PUBLIC | knob | container | `75rem` | Default content container max-width (~1200px). |
@@ -416,6 +421,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-font-weight-semibold` | PUBLIC | knob | font | `600` | Semibold weight (600). Common for labels and subheadings. |
 | `--sf-font-weight-strong` | PUBLIC | consumption | font | `var(--sf-font-weight-bold)` | Font weight for strong/emphasis inline role. Defaults to bold. |
 | `--sf-gap` | PUBLIC | consumption | gap | `var(--sf-space-m)` | Default gap between components (the loose rhythm). Layout primitives like cluster/grid/sidebar default to it. Override globally to retune them all at once, or set a primitive token (e.g. --sf-cluster-gap) for one element. |
+| `--sf-gradient-action` | PUBLIC | consumption | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-action), oklch(from var(--sf-color-action) calc(l - 0.08) c h))` | Gradient using action palette colors (light to saturated). Core-4 parity with the primary/secondary/tertiary gradients; drives the default .sf-btn--gradient fill. |
 | `--sf-gradient-brand` | PUBLIC | consumption | gradient | `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))` | Multi-stop brand gradient spanning primary and secondary palette colors. Use for hero backgrounds and brand accents. |
 | `--sf-gradient-fade--b` | PUBLIC | consumption | gradient | `linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))` | Fade-to-bottom gradient (transparent → surface). Use to fade content into a background below (infinite scroll fade, content cutoff). |
 | `--sf-gradient-fade--l` | PUBLIC | consumption | gradient | `linear-gradient(in oklch to left, transparent, var(--sf-color-bg))` | Fade-to-left gradient. Use to indicate left-side scrollable overflow. |
@@ -769,7 +775,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (325)
+## Classes (329)
 
 ### Accessibility (8)
 
@@ -784,28 +790,32 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
-### Components (26)
+### Components (30)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-btn` | PUBLIC | component | .sf-btn | Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Combine a colour family, a style treatment, and a size modifier. |
+| `.sf-btn` | PUBLIC | component | .sf-btn | Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Three orthogonal axes — colour family, style treatment (fill/--soft/--outline), gradient — plus a size modifier. |
+| `.sf-btn--action` | PUBLIC | component | .sf-btn | Button in the action colour family (same as the unmodified default, named explicitly). |
+| `.sf-btn--base` | PUBLIC | component | .sf-btn | Button in the base (surface-neutral) colour family. |
 | `.sf-btn--block` | PUBLIC | component | .sf-btn | Full-width button (100% inline size) everywhere. |
 | `.sf-btn--block-cq` | PUBLIC | component | .sf-btn | Full-width button only inside a query container narrower than 20rem; intrinsic otherwise. |
 | `.sf-btn--danger` | PUBLIC | component | .sf-btn | Button in the danger (destructive) colour family. |
-| `.sf-btn--ghost` | PUBLIC | component | .sf-btn | Borderless, transparent button; tints on hover. The lightest button treatment. |
+| `.sf-btn--gradient` | PUBLIC | component | .sf-btn | Gradient axis: paints the fill (or, with --outline, the border ring) with the family's --sf-gradient-* token. Core-4 brand families (primary/secondary/tertiary/action); solid no-op for other families. Composes with any colour family. |
 | `.sf-btn--info` | PUBLIC | component | .sf-btn | Button in the info colour family. |
 | `.sf-btn--l` | PUBLIC | component | .sf-btn | Large button size. |
 | `.sf-btn--neutral` | PUBLIC | component | .sf-btn | Button in the neutral colour family. |
 | `.sf-btn--outline` | PUBLIC | component | .sf-btn | Outlined button (coloured border/text, transparent fill) that fills with the family colour on hover. Composes with any colour family. |
 | `.sf-btn--primary` | PUBLIC | component | .sf-btn | Button in the primary brand colour family. |
 | `.sf-btn--s` | PUBLIC | component | .sf-btn | Small button size. |
-| `.sf-btn--secondary` | PUBLIC | component | .sf-btn | Transparent-fill button with a coloured border and text; subtle tint on hover. |
+| `.sf-btn--secondary` | PUBLIC | component | .sf-btn | Button in the secondary brand colour family. |
+| `.sf-btn--soft` | PUBLIC | component | .sf-btn | Soft tonal-fill button: a light wash of the family colour (subtle at rest, muted on hover), coloured text, no border. Lower-emphasis than the solid fill. Composes with any colour family. |
 | `.sf-btn--success` | PUBLIC | component | .sf-btn | Button in the success (positive) colour family. |
+| `.sf-btn--tertiary` | PUBLIC | component | .sf-btn | Button in the tertiary brand colour family. |
 | `.sf-btn--warning` | PUBLIC | component | .sf-btn | Button in the warning (caution) colour family. |
 | `.sf-btn--xl` | PUBLIC | component | .sf-btn | Extra-large button size. |
 | `.sf-btn--xs` | PUBLIC | component | .sf-btn | Extra-small button size. |
 | `.sf-card` | PUBLIC | component | .sf-card | Padded content container with optional __header/__body/__footer and __media/__avatar/__title subcomponents. Uses concentric radius math so inner corners stay proportional. |
-| `.sf-card__avatar` | PUBLIC | component | .sf-card | Circular avatar image inside a card. |
+| `.sf-card__avatar` | PUBLIC | component | .sf-card | Circular avatar image inside a card, sized via --sf-card-avatar-size. |
 | `.sf-card__body` | PUBLIC | component | .sf-card | Card body slot. |
 | `.sf-card__footer` | PUBLIC | component | .sf-card | Card footer slot with a top divider. |
 | `.sf-card__header` | PUBLIC | component | .sf-card | Card header slot with a bottom divider. |

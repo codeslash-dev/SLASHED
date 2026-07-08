@@ -4,6 +4,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### ⚠️ Breaking Changes
+- **components:** `.sf-btn--secondary` changed meaning: it now selects the **secondary brand colour** (`--sf-color-secondary`) as part of the completed colour axis. The soft-tonal *style* it used to name is renamed to **`.sf-btn--soft`**. Before → after: `class="sf-btn sf-btn--secondary"` (old soft style) → `class="sf-btn sf-btn--soft"`; `class="sf-btn sf-btn--secondary"` (new) = secondary-coloured solid button. (#571)
+- **components:** `.sf-btn--ghost` removed entirely — no alias. Closest replacements: `.sf-btn--soft` (tonal wash) or a plain link. (#571)
+- **tokens:** `--sf-color-{primary,secondary,tertiary,action,neutral,base}-ghost` renamed to `--sf-color-{family}-tint` (the ghost button style no longer exists; the name now describes what the token is — a 5%-alpha near-transparent tint). (#572)
+- **tokens:** `--sf-avatar-size` renamed to `--sf-card-avatar-size`, now declared with a real default (`2.5rem`) in `optional/tokens.components.css` and documented/registered like every other card token. (#577)
+
+### Added
+- **components:** `.sf-btn` colour axis completed to all 10 palette families — new `.sf-btn--secondary` (colour), `.sf-btn--tertiary`, `.sf-btn--action` (explicit name for the default), `.sf-btn--base`. (#571)
+- **components:** `.sf-btn--gradient` — new gradient axis. Composes with the colour axis (real gradients for the 4 core brand families: primary/secondary/tertiary/action; solid no-op elsewhere) and with `--outline` (masked gradient border ring, replacing the old copy-paste `.btn-gradient-outline` docs recipe — no hand-set `--sf-grad-a`/`--sf-grad-b` variables needed). (#571)
+- **tokens:** `--sf-gradient-action` — core-4 gradient parity with primary/secondary/tertiary. (#571)
+- **tokens:** `--sf-color-{success,warning,info,danger}-tint` — the 5%-alpha tint rung now covers all 10 families. (#572)
+
+### Changed
+- **components:** `.sf-btn--soft` (ex `--secondary` style) now reads the semantic alpha aliases directly — `--sf-color-{family}-subtle` at rest, `-muted` on hover — instead of computing its own inline `color-mix()` wash, giving the wash a single source of truth in `core/tokens.css`. (#572)
+
+### Documentation
+- **docs:** `docs/macros.md` no longer lists a nonexistent `.sf-surface--error` variant (10 variants, not 11 — the negative-status surface is `--danger`). (#574)
+- **docs:** removed "base" as generic prose for "default" where it collided with the `--sf-color-base` palette family; the button's default colour is described as `--sf-color-action` explicitly. (#573)
+- **docs:** `docs/components.md` now documents the composition pattern for coloured cards (`.sf-surface--{family}` or `--sf-card-bg`/`--sf-card-border-color` overrides). (#576)
+- **docs:** `docs/components.md` no longer claims "no broader component library on the roadmap" — it points to `docs/roadmap.md`/#384. Reserved-but-unconsumed `--sf-field-*` tokens are labelled as such; the typography-vs-card meaning of "interactive" is documented as deliberate. (#578)
+- **docs:** skeleton naming decision recorded in `docs/roadmap.md`: the future component keeps `.sf-skeleton`; the shimmer state `.sf-is-skeleton` will be renamed `.sf-is-shimmer` when it ships; placeholder shape modifier is `--rect`, not `--card`. (#575)
+
 ## [0.7.6] - 2026-07-08
 
 ## [0.7.5] - 2026-07-08

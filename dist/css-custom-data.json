@@ -337,6 +337,11 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-card-avatar-size",
+      "description": "Diameter of .sf-card__avatar. Defaults to 2.5rem.\n\nDefault: `2.5rem`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-card-bg",
       "description": "Background surface for .sf-card. Defaults to --sf-color-surface.\n\nDefault: `var(--sf-color-surface)`",
       "syntax": "*"
@@ -542,11 +547,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-color-action-ghost",
-      "description": "Near-transparent action tint for ghost-button hover backgrounds.\n\nDefault: `var(--sf-color-action-a5)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-color-action-lighter",
       "description": "Light action shade for soft accents.\n\nDefault: `var(--sf-color-action-400)`",
       "syntax": "*"
@@ -579,6 +579,11 @@
     {
       "name": "--sf-color-action-superlight",
       "description": "Near-white action shade for maximum contrast on dark surfaces.\n\nDefault: `var(--sf-color-action-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-tint",
+      "description": "Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-action-a5)`",
       "syntax": "*"
     },
     {
@@ -687,11 +692,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-color-base-ghost",
-      "description": "Near-transparent base-surface tint for ghost backgrounds.\n\nDefault: `var(--sf-color-base-a5)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-color-base-muted",
       "description": "Medium base-surface fill for muted containers or overlays.\n\nDefault: `var(--sf-color-base-a30)`",
       "syntax": "*"
@@ -709,6 +709,11 @@
     {
       "name": "--sf-color-base-subtle",
       "description": "Subtle base-surface tint for low-emphasis backgrounds.\n\nDefault: `var(--sf-color-base-a10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-tint",
+      "description": "Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-base-a5)`",
       "syntax": "*"
     },
     {
@@ -817,6 +822,11 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-color-danger-tint",
+      "description": "Near-transparent danger tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-color-dim",
       "description": "Backdrop overlay color for modals, drawers, and lightboxes.\n\nDefault: `oklch(0 0 0 / 0.5)`",
       "syntax": "*"
@@ -854,6 +864,11 @@
     {
       "name": "--sf-color-info-subtle",
       "description": "Light info tint for informational note backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-info-tint",
+      "description": "Near-transparent info tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.05)`",
       "syntax": "*"
     },
     {
@@ -1007,11 +1022,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-color-neutral-ghost",
-      "description": "Near-transparent neutral tint for ghost-button hover backgrounds.\n\nDefault: `var(--sf-color-neutral-a5)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-color-neutral-lighter",
       "description": "Light neutral shade.\n\nDefault: `var(--sf-color-neutral-400)`",
       "syntax": "*"
@@ -1044,6 +1054,11 @@
     {
       "name": "--sf-color-neutral-superlight",
       "description": "Near-white neutral shade.\n\nDefault: `var(--sf-color-neutral-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-tint",
+      "description": "Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-neutral-a5)`",
       "syntax": "*"
     },
     {
@@ -1162,11 +1177,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-color-primary-ghost",
-      "description": "Near-transparent primary tint for ghost-button hover backgrounds.\n\nDefault: `var(--sf-color-primary-a5)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-color-primary-lighter",
       "description": "Light primary shade.\n\nDefault: `var(--sf-color-primary-400)`",
       "syntax": "*"
@@ -1199,6 +1209,11 @@
     {
       "name": "--sf-color-primary-superlight",
       "description": "Near-white primary shade.\n\nDefault: `var(--sf-color-primary-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-tint",
+      "description": "Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-primary-a5)`",
       "syntax": "*"
     },
     {
@@ -1322,11 +1337,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-color-secondary-ghost",
-      "description": "Near-transparent secondary tint for ghost-button hover backgrounds.\n\nDefault: `var(--sf-color-secondary-a5)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-color-secondary-lighter",
       "description": "Light secondary shade.\n\nDefault: `var(--sf-color-secondary-400)`",
       "syntax": "*"
@@ -1359,6 +1369,11 @@
     {
       "name": "--sf-color-secondary-superlight",
       "description": "Near-white secondary shade.\n\nDefault: `var(--sf-color-secondary-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-tint",
+      "description": "Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-secondary-a5)`",
       "syntax": "*"
     },
     {
@@ -1419,6 +1434,11 @@
     {
       "name": "--sf-color-success-subtle",
       "description": "Light success tint for confirmation backgrounds.\n\nDefault: `oklch(from var(--sf-color-success) l c h / 0.12)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-success-tint",
+      "description": "Near-transparent success tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-success) l c h / 0.05)`",
       "syntax": "*"
     },
     {
@@ -1527,11 +1547,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-color-tertiary-ghost",
-      "description": "Near-transparent tertiary tint for ghost-button hover backgrounds.\n\nDefault: `var(--sf-color-tertiary-a5)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-color-tertiary-lighter",
       "description": "Light tertiary shade.\n\nDefault: `var(--sf-color-tertiary-400)`",
       "syntax": "*"
@@ -1564,6 +1579,11 @@
     {
       "name": "--sf-color-tertiary-superlight",
       "description": "Near-white tertiary shade.\n\nDefault: `var(--sf-color-tertiary-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-tint",
+      "description": "Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-tertiary-a5)`",
       "syntax": "*"
     },
     {
@@ -1689,6 +1709,11 @@
     {
       "name": "--sf-color-warning-subtle",
       "description": "Light warning tint for warning notification backgrounds.\n\nDefault: `oklch(from var(--sf-color-warning) l c h / 0.12)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-warning-tint",
+      "description": "Near-transparent warning tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-warning) l c h / 0.05)`",
       "syntax": "*"
     },
     {
@@ -1938,17 +1963,17 @@
     },
     {
       "name": "--sf-field-padding-block",
-      "description": "Vertical (block) inner padding for form field inputs.\n\nDefault: `var(--sf-space-xs)`",
+      "description": "Vertical (block) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.\n\nDefault: `var(--sf-space-xs)`",
       "syntax": "*"
     },
     {
       "name": "--sf-field-padding-inline",
-      "description": "Horizontal (inline) inner padding for form field inputs.\n\nDefault: `var(--sf-space-s)`",
+      "description": "Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.\n\nDefault: `var(--sf-space-s)`",
       "syntax": "*"
     },
     {
       "name": "--sf-field-radius",
-      "description": "Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once.\n\nDefault: `var(--sf-radius-m)`",
+      "description": "Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.\n\nDefault: `var(--sf-radius-m)`",
       "syntax": "*"
     },
     {
@@ -2110,6 +2135,11 @@
       "name": "--sf-gap",
       "description": "Default gap between components (the loose rhythm). Layout primitives like cluster/grid/sidebar default to it. Override globally to retune them all at once, or set a primitive token (e.g. --sf-cluster-gap) for one element.\n\nDefault: `var(--sf-space-m)`",
       "syntax": "<length>"
+    },
+    {
+      "name": "--sf-gradient-action",
+      "description": "Gradient using action palette colors (light to saturated). Core-4 parity with the primary/secondary/tertiary gradients; drives the default .sf-btn--gradient fill.\n\nDefault: `linear-gradient(in oklch 135deg, var(--sf-color-action), oklch(from var(--sf-color-action) calc(l - 0.08) c h))`",
+      "syntax": "*"
     },
     {
       "name": "--sf-gradient-brand",

@@ -51,59 +51,147 @@ for (const theme of ['light', 'dark']) {
       expect(h).toBeGreaterThanOrEqual(24);
     });
 
-    test('semantic colour families each produce a distinct fill', async ({ page }) => {
+    test('all 10 colour families each produce a distinct fill', async ({ page }) => {
+      const families = [
+        'primary', 'secondary', 'tertiary', 'action', 'base',
+        'neutral', 'success', 'warning', 'info', 'danger',
+      ];
       await mount(
         page,
-        `<button class="sf-btn" id="base">A</button>
-         <button class="sf-btn sf-btn--danger" id="danger">B</button>
-         <button class="sf-btn sf-btn--success" id="success">C</button>
-         <button class="sf-btn sf-btn--primary" id="primary">D</button>`,
+        families
+          .map((f) => `<button class="sf-btn sf-btn--${f}" id="${f}">B</button>`)
+          .join('\n'),
       );
-      const bgs = await page.evaluate(() =>
-        ['base', 'danger', 'success', 'primary'].map(
+      const bgs = await page.evaluate(
+        (fams) =>
+          fams.map((id) => getComputedStyle(document.getElementById(id)).backgroundColor),
+        families,
+      );
+      // No family may be transparent, and (except action, which is the
+      // default family with an explicit name) they must all be distinct.
+      for (const bg of bgs) expect(TRANSPARENT.has(bg)).toBe(false);
+      expect(new Set(bgs).size).toBe(10);
+    });
+
+    test('--action names the default family explicitly (same fill as bare .sf-btn)', async ({ page }) => {
+      await mount(
+        page,
+        `<button class="sf-btn" id="plain">A</button>
+         <button class="sf-btn sf-btn--action" id="action">B</button>`,
+      );
+      const [plain, action] = await page.evaluate(() =>
+        ['plain', 'action'].map(
           (id) => getComputedStyle(document.getElementById(id)).backgroundColor,
         ),
       );
-      // All four backgrounds are distinct → the family swap is working.
-      expect(new Set(bgs).size).toBe(4);
+      expect(action).toBe(plain);
     });
 
-    test('--ghost is transparent-filled and borderless', async ({ page }) => {
-      await mount(page, `<button class="sf-btn sf-btn--ghost" id="ghost">B</button>`);
-      const ghost = await page.evaluate(() => {
-        const cs = getComputedStyle(document.getElementById('ghost'));
-        return { bg: cs.backgroundColor, border: cs.borderTopColor };
-      });
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(ghost.bg);
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(ghost.border);
-    });
-
-    test('--secondary is a tonal fill, distinct from --outline', async ({ page }) => {
-      // Regression guard: secondary and outline were once pixel-identical at
-      // rest (both transparent + bordered). Secondary is now a soft tonal fill
-      // with no border, so the two treatments must read differently. Modern
-      // engines (all Playwright targets) support the color-mix() wash; the
-      // @supports fallback degrades secondary to a border, still != outline.
+    test('--secondary is now a colour family (solid secondary fill, not a style)', async ({ page }) => {
+      // Breaking rename guard (0.7.7): .sf-btn--secondary used to be the soft
+      // tonal STYLE; it now selects the secondary brand COLOUR. A secondary
+      // button must be a solid, opaque fill like every other colour family.
       await mount(
         page,
-        `<button class="sf-btn sf-btn--secondary" id="sec">A</button>
+        `<button class="sf-btn sf-btn--secondary" id="t">B</button>`,
+      );
+      const cs = await computed(page, ['background-color']);
+      expect(TRANSPARENT.has(cs['background-color'])).toBe(false);
+    });
+
+    test('--ghost no longer exists (renders as the plain default button)', async ({ page }) => {
+      await mount(
+        page,
+        `<button class="sf-btn" id="plain">A</button>
+         <button class="sf-btn sf-btn--ghost" id="ghost">B</button>`,
+      );
+      const [plain, ghost] = await page.evaluate(() =>
+        ['plain', 'ghost'].map((id) => {
+          const c = getComputedStyle(document.getElementById(id));
+          return `${c.backgroundColor}|${c.borderTopColor}`;
+        }),
+      );
+      expect(ghost).toBe(plain);
+    });
+
+    test('--soft is a tonal fill, distinct from --outline', async ({ page }) => {
+      // Regression guard: the tonal style and outline were once
+      // pixel-identical at rest (both transparent + bordered). Soft is a
+      // tonal fill (--sf-color-{family}-subtle) with no border, so the two
+      // treatments must read differently. Modern engines (all Playwright
+      // targets) support the relative-color wash; the @supports fallback
+      // degrades soft to a border, still != outline.
+      await mount(
+        page,
+        `<button class="sf-btn sf-btn--soft" id="soft">A</button>
          <button class="sf-btn sf-btn--outline" id="out">B</button>`,
       );
-      const { sec, out } = await page.evaluate(() => {
+      const { soft, out } = await page.evaluate(() => {
         const read = (id) => {
           const c = getComputedStyle(document.getElementById(id));
           return { bg: c.backgroundColor, border: c.borderTopColor };
         };
-        return { sec: read('sec'), out: read('out') };
+        return { soft: read('soft'), out: read('out') };
       });
-      // Secondary: soft tonal fill (not fully transparent), no border.
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).not.toContain(sec.bg);
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(sec.border);
+      // Soft: soft tonal fill (not fully transparent), no border.
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).not.toContain(soft.bg);
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(soft.border);
       // Outline: transparent fill with a visible border.
       expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(out.bg);
       expect(['rgba(0, 0, 0, 0)', 'transparent']).not.toContain(out.border);
       // The whole point: the two styles are no longer indistinguishable.
-      expect(sec.bg).not.toBe(out.bg);
+      expect(soft.bg).not.toBe(out.bg);
+    });
+
+    for (const family of ['primary', 'secondary', 'tertiary', 'action']) {
+      test(`--gradient fill paints a gradient background (${family})`, async ({ page }) => {
+        await mount(
+          page,
+          `<button class="sf-btn sf-btn--${family} sf-btn--gradient" id="t">B</button>`,
+        );
+        const cs = await computed(page, ['background-image', 'border-top-color']);
+        expect(cs['background-image']).toContain('linear-gradient');
+        expect(TRANSPARENT.has(cs['border-top-color'])).toBe(true);
+      });
+
+      test(`--gradient --outline paints the border ring via ::before (${family})`, async ({ page }) => {
+        await mount(
+          page,
+          `<button class="sf-btn sf-btn--${family} sf-btn--gradient sf-btn--outline" id="t">B</button>`,
+        );
+        const res = await page.evaluate(() => {
+          const el = document.getElementById('t');
+          const cs = getComputedStyle(el);
+          const before = getComputedStyle(el, '::before');
+          return {
+            bg: cs.backgroundColor,
+            border: cs.borderTopColor,
+            beforeBg: before.backgroundImage,
+            beforeContent: before.content,
+          };
+        });
+          // Button itself: transparent fill, transparent solid border (the
+          // visible ring is the masked gradient ::before).
+        expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(res.bg);
+        expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(res.border);
+        expect(res.beforeContent).toBe('""');
+        expect(res.beforeBg).toContain('linear-gradient');
+      });
+    }
+
+    test('--gradient is a solid no-op for families without a gradient token', async ({ page }) => {
+      await mount(
+        page,
+        `<button class="sf-btn sf-btn--danger" id="plain">A</button>
+         <button class="sf-btn sf-btn--danger sf-btn--gradient" id="grad">B</button>`,
+      );
+      const [plain, grad] = await page.evaluate(() =>
+        ['plain', 'grad'].map(
+          (id) => getComputedStyle(document.getElementById(id)).backgroundColor,
+        ),
+      );
+      // Same solid danger fill — composing --gradient is always safe.
+      expect(grad).toBe(plain);
     });
 
     test('--outline: transparent fill, border matches text colour', async ({ page }) => {
