@@ -65,6 +65,11 @@ layout: null
         letter-spacing: var(--sf-tracking-tight);
       }
       .site-nav .brand b { color: var(--sf-color-primary); }
+      /* The header is a nav bar, not a content section: .sf-section--xs still
+         resolves to the section rhythm scale (--sf-space-xl ≈ 3.25rem a side),
+         which stacks a ~150px-tall band around a 49px nav. Pin it to a compact,
+         symmetric bar instead — the gutter (inline padding) stays. */
+      header:has(.site-nav) { padding-block: var(--sf-space-s); }
       /* The link cluster is the part that has room to give: on narrow
          viewports it's dropped in favor of the primary CTA + theme toggle,
          instead of wrapping into three cramped rows. */
@@ -116,7 +121,7 @@ layout: null
         color:           var(--sf-color-heading);
         margin:          0;
       }
-      .al { display: inline-flex; align-items: baseline; cursor: default; }
+      .al { position: relative; display: inline-flex; align-items: baseline; cursor: default; }
       .al b {
         background-image: var(--sf-gradient-brand);
         background-clip:  text;
@@ -130,49 +135,52 @@ layout: null
         font-weight:  var(--sf-font-weight-light);
         margin-inline: 0.1em;
       }
-      @media (any-hover: hover) {
-        /* Per-word widths (ch). Each word expands to exactly --w, and the
-           centered row is counter-shifted by --w/2, so the hovered letter
-           stays put under the cursor instead of sliding onto a neighbour
-           and re-firing the hover. */
-        .al:nth-of-type(1) { --w: 8.2ch; }
-        .al:nth-of-type(2) { --w: 3.1ch; }
-        .al:nth-of-type(3) { --w: 6ch; }
-        .al:nth-of-type(4) { --w: 7.8ch; }
-        .al:nth-of-type(5) { --w: 4.3ch; }
-        .al:nth-of-type(6) { --w: 5ch; }
-        .al:nth-of-type(7) { --w: 9.8ch; }
+      /* Gate the collapsed/unfold interaction on a PRIMARY input that can
+         actually hover (a fine pointer), not `any-hover` — which is true on
+         hybrid devices (touchscreen laptops, a phone with a stylus/mouse)
+         even while the user is touching, which would strand the acronym in
+         its collapsed state with no touch way to reveal the words. Touch /
+         coarse-pointer devices keep the default in-flow state above, where
+         every word is already shown. */
+      @media (hover: hover) and (pointer: fine) {
+        /* Collapsed to the tight letter-row; each word unfolds on hover.
+           The unfolded text is taken OUT OF FLOW — absolutely positioned and
+           revealed with clip-path — so unfolding a word changes the size and
+           position of nothing else. No letter ever moves under the cursor, so
+           a hovered word can't slide onto a neighbour and re-fire the hover.
+           (The old approach animated real width and tried to counter-shift the
+           centered row by a hardcoded per-word amount; the amounts couldn't
+           match the real glyph widths, so siblings leapt and re-triggered.) */
         .acronym-hero {
-          /* Never wrap mid-interaction, and cap the size — relative to the
-             hero's own container, with a floor so a hover-capable device
-             at a narrow width (a resized browser, a laptop touchscreen)
-             never shrinks below a readable size — so the widest unfolded
-             word still fits the row on one line. */
-          flex-wrap:  nowrap;
-          row-gap:    0;
-          font-size:  max(2.75rem, min(var(--sf-text-4xl), 4.4cqi));
+          /* Never wrap mid-interaction; cap the size relative to the hero's
+             own container, with a readable floor for narrow hover-capable
+             viewports (resized browser, laptop touchscreen). */
+          flex-wrap:   nowrap;
+          row-gap:     0;
+          /* Floor sized so the longest unfolded word (Deterministic) still
+             fits the hero without clipping on narrow hover-capable widths. */
+          font-size:   max(2.4rem, min(var(--sf-text-4xl), 4.4cqi));
           line-height: var(--sf-display-l-line-height);
-          transition: translate var(--sf-duration-slow) var(--sf-ease-out);
         }
         .al { white-space: nowrap; }
         .al .rest {
-          display:     inline-block;
-          width:       0;
-          opacity:     0;
-          overflow:    hidden;
-          transition: width   var(--sf-duration-slow) var(--sf-ease-out),
-                      opacity var(--sf-duration-normal) var(--sf-ease-out);
+          position:           absolute;
+          inset-block-start:  0;
+          inset-inline-start: 100%;              /* immediately after the bold letter */
+          width:              max-content;
+          opacity:            0;
+          clip-path:          inset(0 100% 0 0); /* hidden by clip, so it occupies no layout space */
+          transition: clip-path var(--sf-duration-slow)   var(--sf-ease-out),
+                      opacity   var(--sf-duration-normal) var(--sf-ease-out);
         }
-        .al:hover .rest { width: var(--w); opacity: 1; transition-delay: 120ms; }
+        /* The unfolded word overlays its dimmed neighbours cleanly. */
+        .al:hover { z-index: 1; }
+        .al:hover .rest {
+          opacity:          1;
+          clip-path:        inset(0 0 0 0);
+          transition-delay: 60ms;
+        }
         .acronym-hero:hover .al:not(:hover) b { opacity: 0.35; }
-        .acronym-hero:has(.al:hover) { transition-delay: 120ms; }
-        .acronym-hero:has(.al:nth-of-type(1):hover) { translate: calc(8.2ch / 2) 0; }
-        .acronym-hero:has(.al:nth-of-type(2):hover) { translate: calc(3.1ch / 2) 0; }
-        .acronym-hero:has(.al:nth-of-type(3):hover) { translate: calc(6ch / 2) 0; }
-        .acronym-hero:has(.al:nth-of-type(4):hover) { translate: calc(7.8ch / 2) 0; }
-        .acronym-hero:has(.al:nth-of-type(5):hover) { translate: calc(4.3ch / 2) 0; }
-        .acronym-hero:has(.al:nth-of-type(6):hover) { translate: calc(5ch / 2) 0; }
-        .acronym-hero:has(.al:nth-of-type(7):hover) { translate: calc(9.8ch / 2) 0; }
       }
       @media (prefers-reduced-motion: reduce) {
         .acronym-hero, .al b, .al .rest { transition: none; }
@@ -365,9 +373,11 @@ layout: null
       .doc-list a small { color: var(--sf-color-text--muted); margin-inline-start: var(--sf-space-2xs); }
 
       .footer-meta, .footer-meta a { color: var(--sf-color-text--muted); font-size: var(--sf-text-xs); }
-      /* The hover hint only makes sense where hovering is a thing. */
+      /* The hover hint only makes sense where hovering is a thing — and it
+         must match the interaction gate above, or a hybrid touch device
+         would see "hover the name" over an already-unfolded acronym. */
       .hover-hint { display: none; }
-      @media (any-hover: hover) { .hover-hint { display: inline; } }
+      @media (hover: hover) and (pointer: fine) { .hover-hint { display: inline; } }
 
       .eyebrow {
         font-size:      var(--sf-text-xs);
@@ -393,7 +403,7 @@ layout: null
       <div class="nav-links sf-cluster sf-cluster--s sf-cluster--no-wrap">
         <a href="/docs/architecture">Docs</a>
         <a href="/docs/tokens">Tokens</a>
-        <a href="/docs/demo.html">Demo</a>
+        <a href="/docs/test-coverage.html">Coverage</a>
         <a href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
       </div>
       <div class="nav-actions sf-cluster sf-cluster--xs sf-cluster--no-wrap">
@@ -420,8 +430,8 @@ layout: null
         <p class="lede">A cascade-layer CSS framework: 729 design tokens, automatic dark mode, fluid type &amp; spacing — zero JavaScript, zero build step. Override six tokens and the whole site rebrands.</p>
         <div class="sf-cluster sf-cluster--center sf-cluster--s">
           <a class="btn btn--primary" href="/configurator/">Open Configurator →</a>
-          <a class="btn btn--quiet" href="/docs/demo.html">View Demo</a>
           <a class="btn btn--quiet" href="/demos/full-api-demo.html">Full API Demo</a>
+          <a class="btn btn--quiet" href="/docs/test-coverage.html">Coverage Suite</a>
           <a class="btn btn--quiet" href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
         </div>
         <p class="footer-meta"><span class="hover-hint">Psst — hover the name. </span>This page is styled by <code>slashed.optimal.css</code> itself: switch your OS to dark mode and watch it follow.</p>
@@ -627,7 +637,6 @@ layout: null
             <a href="/docs/llm-guide">LLM Guide <small>AI-assisted development reference</small></a>
             <a href="/docs/api-index">API Index <small>machine-readable catalogue</small></a>
             <a href="/docs/source-comment-policy">Comment Policy <small>contributor conventions</small></a>
-            <a href="/docs/demo.html">Demo <small>live showcase</small></a>
             <a href="/demos/full-api-demo.html">Full API Demo <small>every class &amp; token, live · dark mode</small></a>
             <a href="/docs/test-coverage.html">Test Coverage <small>visual regression suite</small></a>
           </div>
