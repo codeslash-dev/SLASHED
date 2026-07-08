@@ -15,7 +15,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { readFile as readFileLib } from './lib/parse.js';
 
-const ROOT = path.resolve(import.meta.dirname, '..');
+// SLASHED_ROOT lets tests point the writer at a throwaway fixture tree; falls
+// back to the repo root in normal use. Mirrors scripts/check-version-sync.js.
+// An empty/whitespace value counts as unset, and a relative override is
+// resolved to absolute — the parse.js helpers require an absolute root.
+const slashedRoot = process.env.SLASHED_ROOT?.trim();
+const ROOT = slashedRoot
+  ? path.resolve(slashedRoot)
+  : path.resolve(import.meta.dirname, '..');
 
 function readFile(rel) {
   return readFileLib(rel, ROOT);
