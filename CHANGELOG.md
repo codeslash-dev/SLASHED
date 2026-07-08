@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.4] - 2026-07-08
+
 ### Bug Fixes
 - **components:** `.sf-btn` size modifiers (`--xs`/`--s`/`--l`/`--xl`) no longer shadow the sizing knobs — a `:root` override of `--sf-btn-font-size`/`-padding-block`/`-padding-inline`/`-min-height` now applies on every button size (previously it only affected the default `m` size). The four knobs are now declared `initial` (opt-in hooks with no baked default); their per-size defaults live on rule-local `--sf-btn-*--size` tier tokens. Public token surface is unchanged — the knobs stay catalogued and share-encodable.
 - **components:** `.sf-btn--secondary` is now a soft tonal fill (a light wash of the family colour, no border) instead of being visually identical to `--outline`, giving a real emphasis ladder (fill > secondary > ghost > outline).
