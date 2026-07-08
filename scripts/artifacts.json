@@ -13,6 +13,7 @@
       "token-registry.json",
       "dist/css-custom-data.json",
       "configurator/src/data/api-index.generated.json",
+      "configurator/src/data/classes.generated.json",
       "configurator/src/data/bundles.generated.json",
       "configurator/src/data/token-registry.generated.json"
     ]
@@ -23,8 +24,19 @@
     "buildCmd": "npm run configurator:sync",
     "outputs": [
       "configurator/src/data/api-index.generated.json",
+      "configurator/src/data/classes.generated.json",
       "configurator/src/data/bundles.generated.json",
       "configurator/src/data/token-registry.generated.json"
+    ]
+  },
+  {
+    "name": "full-api demos",
+    "srcPrefixes": ["docs/api-index.json", "package.json", "core/", "optional/"],
+    "buildCmd": "node demos/generate.mjs",
+    "outputs": [
+      "demos/full-api-demo.html",
+      "demos/full-api-demo-with-overrides.html",
+      "demos/ultimate-override.css"
     ]
   }
 ]
