@@ -5,7 +5,7 @@ SLASHED ships breakpoint-free, container-query-driven layout primitives in the
 per-instance tokens you can override inline (`style="--sf-stack-gap: …"`).
 Tokens are declared in `core/tokens.layout.css`.
 
-All primitives are demoed in [`demo.html`](demo.html).
+All primitives are demoed in the [layout coverage page](test-coverage-3-layout.html).
 
 ## The primitives
 
