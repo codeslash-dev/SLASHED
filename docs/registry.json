@@ -20,7 +20,7 @@
       "optional/utilities.css"
     ],
     "counts": {
-      "tokens": 729,
+      "tokens": 725,
       "sf_classes": 288,
       "is_classes": 28
     }
@@ -86,12 +86,8 @@
     "--sf-box-padding",
     "--sf-breakout-width",
     "--sf-btn-border-width",
-    "--sf-btn-font-size",
     "--sf-btn-font-weight",
     "--sf-btn-gap",
-    "--sf-btn-min-height",
-    "--sf-btn-padding-block",
-    "--sf-btn-padding-inline",
     "--sf-btn-radius",
     "--sf-card-bg",
     "--sf-card-border-color",

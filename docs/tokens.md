@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**729 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**725 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -738,17 +738,13 @@ rebrand workflow.
 
 ## Component tokens (`optional/tokens.components.css`)
 
-25 tokens.
+21 tokens.
 
 | Token | Default |
 |---|---|
 | `--sf-btn-border-width` | `var(--sf-border-width-1)` |
-| `--sf-btn-font-size` | `var(--sf-text-m)` |
 | `--sf-btn-font-weight` | `var(--sf-font-weight-interactive)` |
 | `--sf-btn-gap` | `var(--sf-space-2xs)` |
-| `--sf-btn-min-height` | `var(--sf-touch-target)` |
-| `--sf-btn-padding-block` | `var(--sf-space-xs)` |
-| `--sf-btn-padding-inline` | `var(--sf-space-m)` |
 | `--sf-btn-radius` | `var(--sf-radius-m)` |
 | `--sf-card-bg` | `var(--sf-color-surface)` |
 | `--sf-card-border-color` | `var(--sf-color-border)` |

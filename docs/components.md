@@ -62,7 +62,7 @@ classless `<button>` styling in `optional/forms.css` (via `:not([class*="sf-"])`
 | Group | Modifier | Effect |
 |---|---|---|
 | Colour | `--primary` `--neutral` `--success` `--warning` `--info` `--danger` | Swaps the colour family; base (no modifier) uses `--sf-color-action`. |
-| Style | `--secondary` | Transparent fill, coloured text + border; subtle tint on hover. |
+| Style | `--secondary` | Soft **tonal fill** — a light wash of the family colour, coloured text, no border; wash deepens on hover. Lower-emphasis than the solid fill but visually distinct from `--outline`. (Degrades to a bordered treatment where `color-mix()` is unsupported.) |
 | Style | `--ghost` | Transparent fill **and** border; tint on hover. |
 | Style | `--outline` | Coloured border/text, transparent fill; **fills** with the family colour on hover. Composes with any colour family. |
 | Size | `--xs` `--s` `--l` `--xl` | Scales padding, font-size, and min-height (`m` = default). |

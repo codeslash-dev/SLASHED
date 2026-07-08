@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 729,
+      "tokens": 725,
       "by_tier": {
-        "PUBLIC": 673,
+        "PUBLIC": 669,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 238,
-        "consumption": 491
+        "consumption": 487
       }
     }
   },
@@ -501,14 +501,6 @@
       ],
       "value": "var(--sf-border-width-1)"
     },
-    "--sf-btn-font-size": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.components.css"
-      ],
-      "value": "var(--sf-text-m)"
-    },
     "--sf-btn-font-weight": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -524,30 +516,6 @@
         "optional/tokens.components.css"
       ],
       "value": "var(--sf-space-2xs)"
-    },
-    "--sf-btn-min-height": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.components.css"
-      ],
-      "value": "var(--sf-touch-target)"
-    },
-    "--sf-btn-padding-block": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.components.css"
-      ],
-      "value": "var(--sf-space-xs)"
-    },
-    "--sf-btn-padding-inline": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "optional/tokens.components.css"
-      ],
-      "value": "var(--sf-space-m)"
     },
     "--sf-btn-radius": {
       "tier": "PUBLIC",

@@ -28,28 +28,28 @@
       "optimal-utilities"
     ],
     "counts": {
-      "total": 1054,
+      "total": 1050,
       "by_type": {
         "class": 325,
-        "token": 729
+        "token": 725
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 998,
+        "PUBLIC": 994,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
-        "consumption": 491,
+        "consumption": 487,
         "knob": 238
       },
-      "tokens": 729,
+      "tokens": 725,
       "classes": 325,
       "sf_classes": 288,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
-        "Component tokens": 25,
+        "Component tokens": 21,
         "Components": 26,
         "Core tokens": 617,
         "Layout primitives": 145,
@@ -1771,32 +1771,6 @@
       ]
     },
     {
-      "name": "--sf-btn-font-size",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "area": "components",
-      "group": "BUTTON TOKENS",
-      "description": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.",
-      "value": "var(--sf-text-m)",
-      "aliasOf": "--sf-text-m",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.components.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
       "name": "--sf-btn-font-weight",
       "type": "token",
       "tier": "PUBLIC",
@@ -1834,84 +1808,6 @@
       "description": "Gap between an icon and the label inside .sf-btn.",
       "value": "var(--sf-space-2xs)",
       "aliasOf": "--sf-space-2xs",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.components.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
-      "name": "--sf-btn-min-height",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "area": "components",
-      "group": "BUTTON TOKENS",
-      "description": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.",
-      "value": "var(--sf-touch-target)",
-      "aliasOf": "--sf-touch-target",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.components.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
-      "name": "--sf-btn-padding-block",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "area": "components",
-      "group": "BUTTON TOKENS",
-      "description": "Vertical (block) padding inside .sf-btn.",
-      "value": "var(--sf-space-xs)",
-      "aliasOf": "--sf-space-xs",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.components.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
-      "name": "--sf-btn-padding-inline",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "area": "components",
-      "group": "BUTTON TOKENS",
-      "description": "Horizontal (inline) padding inside .sf-btn.",
-      "value": "var(--sf-space-m)",
-      "aliasOf": "--sf-space-m",
       "registered": false,
       "animatable": false,
       "syntax": null,

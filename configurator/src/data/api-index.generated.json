@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "f854bfdb6773",
+    "tokensHash": "273929476056",
     "bundles": [
       "full",
       "optimal",
@@ -10,9 +10,9 @@
       "optimal-utilities"
     ],
     "counts": {
-      "tokens": 729,
+      "tokens": 725,
       "byTier": {
-        "PUBLIC": 673,
+        "PUBLIC": 669,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
@@ -20,7 +20,7 @@
         "Layout tokens": 53,
         "Core tokens": 617,
         "Macro tokens": 34,
-        "Component tokens": 25
+        "Component tokens": 21
       }
     }
   },
@@ -1404,27 +1404,6 @@
       ]
     },
     {
-      "name": "--sf-btn-font-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "group": "BUTTON TOKENS",
-      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.",
-      "value": "var(--sf-text-m)",
-      "aliasOf": "--sf-text-m",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
       "name": "--sf-btn-font-weight",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1456,69 +1435,6 @@
       "note": "Gap between an icon and the label inside .sf-btn.",
       "value": "var(--sf-space-2xs)",
       "aliasOf": "--sf-space-2xs",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
-      "name": "--sf-btn-min-height",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "group": "BUTTON TOKENS",
-      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.",
-      "value": "var(--sf-touch-target)",
-      "aliasOf": "--sf-touch-target",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
-      "name": "--sf-btn-padding-block",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "group": "BUTTON TOKENS",
-      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "Vertical (block) padding inside .sf-btn.",
-      "value": "var(--sf-space-xs)",
-      "aliasOf": "--sf-space-xs",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal-components"
-      ]
-    },
-    {
-      "name": "--sf-btn-padding-inline",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "btn",
-      "category": "Component tokens",
-      "group": "BUTTON TOKENS",
-      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
-      "note": "Horizontal (inline) padding inside .sf-btn.",
-      "value": "var(--sf-space-m)",
-      "aliasOf": "--sf-space-m",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

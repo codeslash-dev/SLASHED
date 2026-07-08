@@ -2818,11 +2818,13 @@
     },
     {
       "id": 698,
-      "name": "--sf-btn-padding-block"
+      "name": "--sf-btn-padding-block",
+      "removed": true
     },
     {
       "id": 699,
-      "name": "--sf-btn-padding-inline"
+      "name": "--sf-btn-padding-inline",
+      "removed": true
     },
     {
       "id": 700,
@@ -2908,7 +2910,8 @@
     },
     {
       "id": 718,
-      "name": "--sf-btn-font-size"
+      "name": "--sf-btn-font-size",
+      "removed": true
     },
     {
       "id": 719,
@@ -2920,7 +2923,8 @@
     },
     {
       "id": 721,
-      "name": "--sf-btn-min-height"
+      "name": "--sf-btn-min-height",
+      "removed": true
     },
     {
       "id": 722,

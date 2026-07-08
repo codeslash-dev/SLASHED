@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 729,
-    "rendered": 729,
+    "totalTokens": 725,
+    "rendered": 725,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 28,
@@ -797,21 +797,6 @@
       "changedInDark": false
     },
     {
-      "name": "--sf-btn-font-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Component tokens",
-      "declared": "var(--sf-text-m)",
-      "aliasOf": "--sf-text-m",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
-      "changedInDark": false
-    },
-    {
       "name": "--sf-btn-font-weight",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -833,51 +818,6 @@
       "category": "Component tokens",
       "declared": "var(--sf-space-2xs)",
       "aliasOf": "--sf-space-2xs",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-btn-min-height",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Component tokens",
-      "declared": "var(--sf-touch-target)",
-      "aliasOf": "--sf-touch-target",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-btn-padding-block",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Component tokens",
-      "declared": "var(--sf-space-xs)",
-      "aliasOf": "--sf-space-xs",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-btn-padding-inline",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Component tokens",
-      "declared": "var(--sf-space-m)",
-      "aliasOf": "--sf-space-m",
       "issues": [
         "EMPTY_COMPUTED"
       ],
