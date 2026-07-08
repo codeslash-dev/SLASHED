@@ -2,8 +2,8 @@
  * Shared CSS/file-reading helpers for the scripts/*.js generators and checks.
  *
  * Before this module, `stripComments`/`maskComments`, `readValue`, and
- * `readFile` were each reimplemented independently across 4+ scripts (the
- * SL-007 consolidation; see scripts/README.md). `stripComments` and `maskComments`
+ * `readFile` were each reimplemented independently across 4+ scripts — see
+ * docs/technical-debt-audit.md SL-007. `stripComments` and `maskComments`
  * are NOT interchangeable and must stay separate exports:
  *   - stripComments REMOVES comment bodies, shortening the string. Fine for
  *     scripts that only count/extract values and don't need offsets to line
@@ -22,13 +22,9 @@ export function stripComments(css) {
   return css.replace(/\/\*[\s\S]*?\*\//g, '');
 }
 
-/**
- * Remove quoted string literals, shortening the string. Not offset-safe.
- * Honours backslash escapes so a literal quote inside a string
- * (e.g. `content: "\""`) doesn't end the match early.
- */
+/** Remove quoted string literals, shortening the string. Not offset-safe. */
 export function stripStrings(css) {
-  return css.replace(/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/g, '""');
+  return css.replace(/"[^"]*"|'[^']*'/g, '""');
 }
 
 /**
@@ -48,7 +44,7 @@ export function maskComments(css) {
  * @returns {string} CSS with string bodies blanked
  */
 export function maskStrings(css) {
-  return css.replace(/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/g, (m) => m.replace(/[^\n]/g, ' '));
+  return css.replace(/"[^"]*"|'[^']*'/g, (m) => m.replace(/[^\n]/g, ' '));
 }
 
 /**

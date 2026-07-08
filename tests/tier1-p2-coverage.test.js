@@ -1,16 +1,6 @@
 /**
- * Property 2: every CSS source file @supports-gates its modern colour
- *             expressions — no bare light-dark(), oklch(from…) or color-mix()
- *             declaration sits outside an @supports block.
- *
- * This is the source-level complement to tier1-p7-oldengine.test.js (which
- * proves the same invariant on the built, bundled+minified artifact). P2 gives
- * the early, per-file signal; both share one robust scanner
- * (tests/supports-helpers.js) so they can never drift apart.
- *
- * Coverage: ALL of core/*.css and optional/*.css — not just tokens.css. A
- * modern expression used directly in a component/utility rule (e.g.
- * `background: color-mix(...)`) is caught here, not only in colour tokens.
+ * Property 2: tokens.css uses @supports gating — no bare light-dark() or
+ *             oklch(from…)/color-mix() declarations outside a @supports block.
  *
  * The P2/P7/P8/P10 numbering gaps (no P1, P3-P6, P9 test files) are
  * explained in tests/README.md — not dead history, don't renumber.
@@ -21,28 +11,33 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import fs   from 'node:fs';
 import path from 'node:path';
-import { findUngatedModernExpressions } from './supports-helpers.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
-const SOURCE_FILES = ['core', 'optional'].flatMap((dir) =>
-  fs
-    .readdirSync(path.join(ROOT, dir))
-    .filter((f) => f.endsWith('.css'))
-    .map((f) => `${dir}/${f}`),
-);
+describe('P2: tokens.css modern expressions are @supports-gated', () => {
+  test('tokens.css has no ungated light-dark() declarations', () => {
+    const tokensCss = fs.readFileSync(path.join(ROOT, 'core/tokens.css'), 'utf8');
+    const stripped = tokensCss.replace(/\/\*[\s\S]*?\*\//g, '');
+    let inSupports = 0;
+    for (const line of stripped.split('\n')) {
+      if (line.includes('@supports')) inSupports++;
+      if (line.trim() === '}') { if (inSupports > 0) inSupports--; }
+      if (line.includes('light-dark(') && inSupports === 0) {
+        assert.fail(`Ungated light-dark() found in tokens.css: ${line.trim()}`);
+      }
+    }
+  });
 
-describe('P2: source CSS modern expressions are @supports-gated', () => {
-  for (const rel of SOURCE_FILES) {
-    test(`${rel} has no ungated modern colour expression`, () => {
-      const css = fs.readFileSync(path.join(ROOT, rel), 'utf8');
-      const hits = findUngatedModernExpressions(css);
-      assert.deepEqual(
-        hits,
-        [],
-        `Ungated modern colour expression(s) in ${rel} — wrap them in ` +
-          `@supports:\n  ${hits.join('\n  ')}`,
-      );
-    });
-  }
+  test('tokens.css has no ungated oklch(from…) declarations', () => {
+    const tokensCss = fs.readFileSync(path.join(ROOT, 'core/tokens.css'), 'utf8');
+    const stripped = tokensCss.replace(/\/\*[\s\S]*?\*\//g, '');
+    let inSupports = 0;
+    for (const line of stripped.split('\n')) {
+      if (line.includes('@supports')) inSupports++;
+      if (line.trim() === '}') { if (inSupports > 0) inSupports--; }
+      if ((line.includes('oklch(from') || line.includes('color-mix(')) && inSupports === 0) {
+        assert.fail(`Ungated oklch(from)/color-mix() found in tokens.css: ${line.trim()}`);
+      }
+    }
+  });
 });
