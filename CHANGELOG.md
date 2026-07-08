@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.5] - 2026-07-08
+
+### Bug Fixes
+- resolve the trimmed SLASHED_ROOT value, not the raw env var
+- normalize SLASHED_ROOT override in root-resolving scripts
+- **tests:** make @supports stripper skip string literals
+- close audit gaps in artifact gates and @supports coverage
+- enforce flat bundle source order
+- order flat bundles by cascade layers
+
 ## [0.7.3] - 2026-07-07
 
 ### Bug Fixes
