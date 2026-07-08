@@ -1,3 +1,14 @@
+<!-- OWNERSHIP / STATUS
+     This directory is a MANUALLY-RUN audit harness, not part of `npm run
+     build`/`docs` or any CI job. The check-*.mjs / probe-*.mjs scripts here are
+     re-runnable but require a configurator dev server + Playwright, so they are
+     intentionally not wired into the standard pipeline.
+     NOTE: the committed snapshots under `results/` (tokens-report.json,
+     reachable-ui.json, …) are consumed by tests/docs-artifacts-sync.test.js,
+     which asserts they reference no tokens absent from docs/api-index.json. That
+     test guards against stale token *names* only — it does not re-run the audit,
+     so refresh these snapshots by hand when the audited surface changes. -->
+
 # SLASHED Full-API Testing Operation — Report
 
 **Framework:** SLASHED v0.6.25 · **Date:** 2026-06-30
