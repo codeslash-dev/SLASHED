@@ -16,7 +16,8 @@ import fs   from 'node:fs';
 import path from 'node:path';
 import { stripComments, stripStrings } from './lib/parse.js';
 
-const ROOT = path.resolve(import.meta.dirname, '..');
+// SLASHED_ROOT lets negative tests run the gate against a fixture tree.
+const ROOT = process.env.SLASHED_ROOT ?? path.resolve(import.meta.dirname, '..');
 
 // Source files that define the macro layer
 const CSS_SOURCES = [
