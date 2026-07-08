@@ -135,7 +135,14 @@ layout: null
         font-weight:  var(--sf-font-weight-light);
         margin-inline: 0.1em;
       }
-      @media (any-hover: hover) {
+      /* Gate the collapsed/unfold interaction on a PRIMARY input that can
+         actually hover (a fine pointer), not `any-hover` — which is true on
+         hybrid devices (touchscreen laptops, a phone with a stylus/mouse)
+         even while the user is touching, which would strand the acronym in
+         its collapsed state with no touch way to reveal the words. Touch /
+         coarse-pointer devices keep the default in-flow state above, where
+         every word is already shown. */
+      @media (hover: hover) and (pointer: fine) {
         /* Collapsed to the tight letter-row; each word unfolds on hover.
            The unfolded text is taken OUT OF FLOW — absolutely positioned and
            revealed with clip-path — so unfolding a word changes the size and
@@ -366,9 +373,11 @@ layout: null
       .doc-list a small { color: var(--sf-color-text--muted); margin-inline-start: var(--sf-space-2xs); }
 
       .footer-meta, .footer-meta a { color: var(--sf-color-text--muted); font-size: var(--sf-text-xs); }
-      /* The hover hint only makes sense where hovering is a thing. */
+      /* The hover hint only makes sense where hovering is a thing — and it
+         must match the interaction gate above, or a hybrid touch device
+         would see "hover the name" over an already-unfolded acronym. */
       .hover-hint { display: none; }
-      @media (any-hover: hover) { .hover-hint { display: inline; } }
+      @media (hover: hover) and (pointer: fine) { .hover-hint { display: inline; } }
 
       .eyebrow {
         font-size:      var(--sf-text-xs);
