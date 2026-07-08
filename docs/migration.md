@@ -17,7 +17,7 @@ gradient axis shipped:
 | `.sf-btn--ghost` | **removed, no alias** — closest replacements: `.sf-btn--soft` (tonal wash) or a plain link |
 | — | `.sf-btn--secondary` now selects the **secondary brand colour** (new meaning) |
 | — | new colour families: `.sf-btn--tertiary`, `.sf-btn--action`, `.sf-btn--base` |
-| — | new gradient axis: `.sf-btn--gradient` (fill; add `.sf-btn--outline` for a gradient border ring). Core-4 brand families |
+| — | new gradient axis: `.sf-btn--gradient` — gradient fill, or a gradient border ring when combined with `.sf-btn--outline`; covers the core-4 brand families (`primary`/`secondary`/`tertiary`/`action`), solid no-op elsewhere |
 
 ### `--sf-color-*-ghost` tokens renamed to `--sf-color-*-tint` (breaking)
 

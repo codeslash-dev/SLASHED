@@ -89,14 +89,20 @@ for (const theme of ['light', 'dark']) {
 
     test('--secondary is now a colour family (solid secondary fill, not a style)', async ({ page }) => {
       // Breaking rename guard (0.7.7): .sf-btn--secondary used to be the soft
-      // tonal STYLE; it now selects the secondary brand COLOUR. A secondary
-      // button must be a solid, opaque fill like every other colour family.
+      // tonal STYLE; it now selects the secondary brand COLOUR. The fill must
+      // equal the full-strength family colour — a tonal/semi-transparent wash
+      // (the old 14% color-mix) would not match the probe.
       await mount(
         page,
-        `<button class="sf-btn sf-btn--secondary" id="t">B</button>`,
+        `<button class="sf-btn sf-btn--secondary" id="t">B</button>
+         <div id="probe" style="background: var(--sf-color-secondary)"></div>`,
       );
-      const cs = await computed(page, ['background-color']);
-      expect(TRANSPARENT.has(cs['background-color'])).toBe(false);
+      const { btn, probe } = await page.evaluate(() => ({
+        btn: getComputedStyle(document.getElementById('t')).backgroundColor,
+        probe: getComputedStyle(document.getElementById('probe')).backgroundColor,
+      }));
+      expect(TRANSPARENT.has(btn)).toBe(false);
+      expect(btn).toBe(probe);
     });
 
     test('--ghost no longer exists (renders as the plain default button)', async ({ page }) => {

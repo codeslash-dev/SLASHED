@@ -58,6 +58,19 @@ describe('forward compatibility', () => {
     };
     expect(encode({ [t0]: '1rem' }, removedRegistry)).toBe('');
   });
+
+  test('removed-token ids are dropped during decode (legacy share codes)', () => {
+    // A legacy share code minted while the token was still live…
+    const liveRegistry = {
+      tokens: [{ id: active[0].id, name: t0, removed: false }],
+    };
+    const code = encode({ [t0]: '1rem' }, liveRegistry);
+    // …must not rehydrate a no-op override once the registry flags it removed.
+    const removedRegistry = {
+      tokens: [{ id: active[0].id, name: t0, removed: true }],
+    };
+    expect(decode(code, removedRegistry)).toEqual({});
+  });
 });
 
 describe('error resilience', () => {

@@ -907,13 +907,13 @@
       "role": "consumption",
       "category": "Component tokens",
       "declared": "2.5rem",
-      "aliasOf": "--sf-text-xl",
+      "aliasOf": null,
       "issues": [
         "EMPTY_COMPUTED"
       ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
+      "computed": "2.5rem",
+      "shown": "2.5rem",
+      "darkComputed": "2.5rem",
       "changedInDark": false
     },
     {
@@ -2200,9 +2200,9 @@
       "declared": "oklch(from var(--sf-color-danger) l c h / 0.05)",
       "aliasOf": null,
       "issues": [],
-      "computed": "oklch(from oklch(0.48 0.22 12) l c h / 0.1)",
-      "shown": "oklch(from oklch(0.48 0.22 12) l c h / 0.1)",
-      "darkComputed": "oklch(from oklch(0.71 0.198 12) l c h / 0.1)",
+      "computed": "oklch(from oklch(0.48 0.22 12) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.48 0.22 12) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.71 0.198 12) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -2317,9 +2317,9 @@
       "declared": "oklch(from var(--sf-color-info) l c h / 0.05)",
       "aliasOf": null,
       "issues": [],
-      "computed": "oklch(from oklch(0.48 0.18 235) l c h / 0.1)",
-      "shown": "oklch(from oklch(0.48 0.18 235) l c h / 0.1)",
-      "darkComputed": "oklch(from oklch(0.71 0.162 235) l c h / 0.1)",
+      "computed": "oklch(from oklch(0.48 0.18 235) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.48 0.18 235) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.71 0.162 235) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -3805,9 +3805,9 @@
       "declared": "oklch(from var(--sf-color-success) l c h / 0.05)",
       "aliasOf": null,
       "issues": [],
-      "computed": "oklch(from oklch(0.5 0.16 145) l c h / 0.12)",
-      "shown": "oklch(from oklch(0.5 0.16 145) l c h / 0.12)",
-      "darkComputed": "oklch(from oklch(0.7 0.144 145) l c h / 0.12)",
+      "computed": "oklch(from oklch(0.5 0.16 145) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.5 0.16 145) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.7 0.144 145) l c h / 0.05)",
       "changedInDark": true
     },
     {
@@ -4520,9 +4520,9 @@
       "declared": "oklch(from var(--sf-color-warning) l c h / 0.05)",
       "aliasOf": null,
       "issues": [],
-      "computed": "oklch(from oklch(0.75 0.17 80) l c h / 0.12)",
-      "shown": "oklch(from oklch(0.75 0.17 80) l c h / 0.12)",
-      "darkComputed": "oklch(from oklch(0.65 0.153 80) l c h / 0.12)",
+      "computed": "oklch(from oklch(0.75 0.17 80) l c h / 0.05)",
+      "shown": "oklch(from oklch(0.75 0.17 80) l c h / 0.05)",
+      "darkComputed": "oklch(from oklch(0.65 0.153 80) l c h / 0.05)",
       "changedInDark": true
     },
     {
