@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 238 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 491 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 242 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 487 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -151,12 +151,12 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-box-padding` | PUBLIC | consumption | Layout | `var(--sf-space-m)` |
 | `--sf-breakout-width` | PUBLIC | consumption | Layout | `var(--sf-container-wide)` |
 | `--sf-btn-border-width` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-border-width-1)` |
-| `--sf-btn-font-size` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-text-m)` |
+| `--sf-btn-font-size` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-font-weight` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-font-weight-interactive)` |
 | `--sf-btn-gap` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-2xs)` |
-| `--sf-btn-min-height` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-touch-target)` |
-| `--sf-btn-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-xs)` |
-| `--sf-btn-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-m)` |
+| `--sf-btn-min-height` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
 | `--sf-card-bg` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-surface)` |
 | `--sf-card-border-color` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-border)` |

@@ -15,8 +15,8 @@
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 238,
-        "consumption": 491
+        "knob": 242,
+        "consumption": 487
       }
     }
   },
@@ -503,11 +503,11 @@
     },
     "--sf-btn-font-size": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "optional/tokens.components.css"
       ],
-      "value": "var(--sf-text-m)"
+      "value": "initial"
     },
     "--sf-btn-font-weight": {
       "tier": "PUBLIC",
@@ -527,27 +527,27 @@
     },
     "--sf-btn-min-height": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "optional/tokens.components.css"
       ],
-      "value": "var(--sf-touch-target)"
+      "value": "initial"
     },
     "--sf-btn-padding-block": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "optional/tokens.components.css"
       ],
-      "value": "var(--sf-space-xs)"
+      "value": "initial"
     },
     "--sf-btn-padding-inline": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "optional/tokens.components.css"
       ],
-      "value": "var(--sf-space-m)"
+      "value": "initial"
     },
     "--sf-btn-radius": {
       "tier": "PUBLIC",

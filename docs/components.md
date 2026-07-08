@@ -62,7 +62,7 @@ classless `<button>` styling in `optional/forms.css` (via `:not([class*="sf-"])`
 | Group | Modifier | Effect |
 |---|---|---|
 | Colour | `--primary` `--neutral` `--success` `--warning` `--info` `--danger` | Swaps the colour family; base (no modifier) uses `--sf-color-action`. |
-| Style | `--secondary` | Transparent fill, coloured text + border; subtle tint on hover. |
+| Style | `--secondary` | Soft **tonal fill** — a light wash of the family colour, coloured text, no border; wash deepens on hover. Lower-emphasis than the solid fill but visually distinct from `--outline`. (Degrades to a bordered treatment where `color-mix()` is unsupported.) |
 | Style | `--ghost` | Transparent fill **and** border; tint on hover. |
 | Style | `--outline` | Coloured border/text, transparent fill; **fills** with the family colour on hover. Composes with any colour family. |
 | Size | `--xs` `--s` `--l` `--xl` | Scales padding, font-size, and min-height (`m` = default). |
@@ -80,13 +80,22 @@ stay orthogonal to the colour families.
 | Token | Default | Controls |
 |---|---|---|
 | `--sf-btn-radius` | `var(--sf-radius-m)` | Corner radius |
-| `--sf-btn-padding-block` | `var(--sf-space-xs)` | Vertical padding |
-| `--sf-btn-padding-inline` | `var(--sf-space-m)` | Horizontal padding |
+| `--sf-btn-padding-block` | `initial` → `var(--sf-space-xs)` at size `m` | Vertical padding |
+| `--sf-btn-padding-inline` | `initial` → `var(--sf-space-m)` at size `m` | Horizontal padding |
 | `--sf-btn-gap` | `var(--sf-space-2xs)` | Gap between icon + label |
-| `--sf-btn-font-size` | `var(--sf-text-m)` | Label size |
+| `--sf-btn-font-size` | `initial` → `var(--sf-text-m)` at size `m` | Label size |
 | `--sf-btn-font-weight` | `var(--sf-font-weight-interactive)` | Label weight |
-| `--sf-btn-min-height` | `var(--sf-touch-target)` | Minimum target height (WCAG 2.2) |
+| `--sf-btn-min-height` | `initial` → `var(--sf-touch-target)` at size `m` | Minimum target height (WCAG 2.2) |
 | `--sf-btn-border-width` | `var(--sf-border-width-1)` | Border thickness |
+
+The four size-varying knobs (`--sf-btn-padding-block`, `--sf-btn-padding-inline`,
+`--sf-btn-font-size`, `--sf-btn-min-height`) are declared `initial`, not with a
+concrete value: their effective per-size default lives on the rule-local
+`--sf-btn-*--size` tier tokens that the size modifiers (`--xs`/`--s`/`--l`/`--xl`)
+retune. Because each property reads the public knob first — e.g.
+`font-size: var(--sf-btn-font-size, var(--sf-btn-font-size--size))` — setting a
+knob on `:root` overrides **every** button size, while leaving it unset keeps the
+size scale intact.
 
 ---
 

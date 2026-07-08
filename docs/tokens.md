@@ -743,12 +743,12 @@ rebrand workflow.
 | Token | Default |
 |---|---|
 | `--sf-btn-border-width` | `var(--sf-border-width-1)` |
-| `--sf-btn-font-size` | `var(--sf-text-m)` |
+| `--sf-btn-font-size` | `initial` |
 | `--sf-btn-font-weight` | `var(--sf-font-weight-interactive)` |
 | `--sf-btn-gap` | `var(--sf-space-2xs)` |
-| `--sf-btn-min-height` | `var(--sf-touch-target)` |
-| `--sf-btn-padding-block` | `var(--sf-space-xs)` |
-| `--sf-btn-padding-inline` | `var(--sf-space-m)` |
+| `--sf-btn-min-height` | `initial` |
+| `--sf-btn-padding-block` | `initial` |
+| `--sf-btn-padding-inline` | `initial` |
 | `--sf-btn-radius` | `var(--sf-radius-m)` |
 | `--sf-card-bg` | `var(--sf-color-surface)` |
 | `--sf-card-border-color` | `var(--sf-color-border)` |

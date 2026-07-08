@@ -303,7 +303,7 @@
     },
     {
       "name": "--sf-btn-font-size",
-      "description": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.\n\nDefault: `var(--sf-text-m)`",
+      "description": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
@@ -318,17 +318,17 @@
     },
     {
       "name": "--sf-btn-min-height",
-      "description": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.\n\nDefault: `var(--sf-touch-target)`",
+      "description": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-padding-block",
-      "description": "Vertical (block) padding inside .sf-btn.\n\nDefault: `var(--sf-space-xs)`",
+      "description": "Vertical (block) padding inside .sf-btn.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-padding-inline",
-      "description": "Horizontal (inline) padding inside .sf-btn.\n\nDefault: `var(--sf-space-m)`",
+      "description": "Horizontal (inline) padding inside .sf-btn.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {

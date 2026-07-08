@@ -68,23 +68,42 @@ for (const theme of ['light', 'dark']) {
       expect(new Set(bgs).size).toBe(4);
     });
 
-    test('--secondary and --ghost are transparent-filled', async ({ page }) => {
+    test('--ghost is transparent-filled and borderless', async ({ page }) => {
+      await mount(page, `<button class="sf-btn sf-btn--ghost" id="ghost">B</button>`);
+      const ghost = await page.evaluate(() => {
+        const cs = getComputedStyle(document.getElementById('ghost'));
+        return { bg: cs.backgroundColor, border: cs.borderTopColor };
+      });
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(ghost.bg);
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(ghost.border);
+    });
+
+    test('--secondary is a tonal fill, distinct from --outline', async ({ page }) => {
+      // Regression guard: secondary and outline were once pixel-identical at
+      // rest (both transparent + bordered). Secondary is now a soft tonal fill
+      // with no border, so the two treatments must read differently. Modern
+      // engines (all Playwright targets) support the color-mix() wash; the
+      // @supports fallback degrades secondary to a border, still != outline.
       await mount(
         page,
         `<button class="sf-btn sf-btn--secondary" id="sec">A</button>
-         <button class="sf-btn sf-btn--ghost" id="ghost">B</button>`,
+         <button class="sf-btn sf-btn--outline" id="out">B</button>`,
       );
-      const [sec, ghost] = await page.evaluate(() =>
-        ['sec', 'ghost'].map((id) => {
-          const cs = getComputedStyle(document.getElementById(id));
-          return { bg: cs.backgroundColor, border: cs.borderTopColor };
-        }),
-      );
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(sec.bg);
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(ghost.bg);
-      // Ghost drops the border too; secondary keeps a visible one.
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(ghost.border);
-      expect(['rgba(0, 0, 0, 0)', 'transparent']).not.toContain(sec.border);
+      const { sec, out } = await page.evaluate(() => {
+        const read = (id) => {
+          const c = getComputedStyle(document.getElementById(id));
+          return { bg: c.backgroundColor, border: c.borderTopColor };
+        };
+        return { sec: read('sec'), out: read('out') };
+      });
+      // Secondary: soft tonal fill (not fully transparent), no border.
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).not.toContain(sec.bg);
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(sec.border);
+      // Outline: transparent fill with a visible border.
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).toContain(out.bg);
+      expect(['rgba(0, 0, 0, 0)', 'transparent']).not.toContain(out.border);
+      // The whole point: the two styles are no longer indistinguishable.
+      expect(sec.bg).not.toBe(out.bg);
     });
 
     test('--outline: transparent fill, border matches text colour', async ({ page }) => {
