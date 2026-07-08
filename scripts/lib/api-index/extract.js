@@ -85,24 +85,6 @@ export const FILE_META = {
   'optional/utilities.css':     { category: 'Utilities',             area: 'utilities',     kind: 'utility'       },
 };
 
-/**
- * FILE_META lookup that fails loudly for a source file added to
- * registry-sources.js (TOKEN_FILES/CLASS_FILES) but not described here — instead
- * of the opaque `Cannot read properties of undefined (reading 'kind')` crash.
- * @param {string} rel source path relative to repo root
- * @returns {{category:string, area:string, kind:string}}
- */
-function metaFor(rel) {
-  const meta = FILE_META[rel];
-  if (!meta) {
-    throw new Error(
-      `[api-index] ${rel} is in registry-sources.js but has no FILE_META entry ` +
-        `(scripts/lib/api-index/extract.js). Add its { category, area, kind }.`,
-    );
-  }
-  return meta;
-}
-
 // ── Source masking (length-preserving) ─────────────────────────────────────────
 // Replacing comment/string bodies with spaces (NOT removing them) keeps every
 // character index stable, so a token/class match found in the masked text can
@@ -438,7 +420,7 @@ export function extractClassesFromFile(rel, root, bundlesFor) {
   const masked   = maskStrings(maskComments(original));
   const comments = collectComments(original);
   const layer    = layerOf(masked);
-  const meta     = metaFor(rel);
+  const meta     = FILE_META[rel];
   const rows = new Map(); // name -> entry
 
   /**
@@ -506,7 +488,7 @@ export function buildTokenEntries(root, bundlesFor, tokenAnnotations = {}, exist
 
   for (const rel of TOKEN_FILES) {
     const rows = extractTokensFromFile(rel, root);
-    const meta = metaFor(rel);
+    const meta = FILE_META[rel];
     for (const [name, data] of rows) {
       const existing = merged.get(name);
       if (!existing) {

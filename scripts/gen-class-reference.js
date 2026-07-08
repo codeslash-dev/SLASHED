@@ -9,45 +9,37 @@
 import fs   from 'node:fs';
 import path from 'node:path';
 import { CLASS_FILES } from './registry-sources.js';
-import { stripComments, stripStrings, requireFile } from './lib/parse.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
-// Human-facing section title per class-source file. Keyed by the same paths
-// as registry-sources.js CLASS_FILES — a file added there without a title here
-// fails loudly below rather than emitting an "undefined" section.
-const FILE_TITLES = {
-  'core/layout.css':            'Layout primitives',
-  'core/macros.css':            'Macro classes',
-  'core/states.css':            'State classes',
-  'core/accessibility.css':     'Accessibility',
-  'core/motion.css':            'Motion / entrances',
-  'core/print.css':             'Print utilities',
-  'core/themes.css':            'Theme utilities',
-  'optional/forms.css':         'Forms',
-  'optional/components.css':    'Components',
-  'optional/theme-example.css': 'Theme example',
-  'optional/utilities.css':     'Utilities',
+const FILE_META = {
+  'core/layout.css':        { title: 'Layout primitives',    prefix: 'sf-' },
+  'core/macros.css':        { title: 'Macro classes',         prefix: 'sf-' },
+  'core/states.css':        { title: 'State classes',         prefix: 'sf-is-' },
+  'core/accessibility.css': { title: 'Accessibility',         prefix: 'sf-' },
+  'core/motion.css':        { title: 'Motion / entrances',    prefix: 'sf-' },
+  'core/print.css':         { title: 'Print utilities',       prefix: ''    },
+  'core/themes.css':        { title: 'Theme utilities',       prefix: 'sf-' },
+  'optional/forms.css':     { title: 'Forms',                 prefix: 'sf-' },
+  'optional/components.css':{ title: 'Components',            prefix: 'sf-' },
+  'optional/theme-example.css': { title: 'Theme example',     prefix: ''    },
+  'optional/utilities.css':     { title: 'Utilities',         prefix: 'sf-' },
 };
 
-const SOURCES = CLASS_FILES.map(f => {
-  const title = FILE_TITLES[f];
-  if (!title) {
-    throw new Error(
-      `[docs:classes] ${f} is in registry-sources.js CLASS_FILES but has no title ` +
-        `in FILE_TITLES (scripts/gen-class-reference.js). Add one.`,
-    );
-  }
-  return { file: f, title: `${title} (\`${f}\`)` };
-});
+const SOURCES = CLASS_FILES.map(f => ({
+  file:   f,
+  title:  `${FILE_META[f].title} (\`${f}\`)`,
+  prefix: FILE_META[f].prefix,
+}));
 
 function extract(file) {
-  // Same parsing contract as scripts/audit.js (the authoritative counter):
-  // strip comments then string literals so content:"…" can't yield false
-  // `.sf-*` matches. Shared via scripts/lib/parse.js so the two never diverge.
-  const css = stripStrings(stripComments(
-    requireFile(file, ROOT, `[docs:classes] Missing canonical class source file: ${file}`),
-  ));
+  const abs = path.join(ROOT, file);
+  if (!fs.existsSync(abs)) {
+    throw new Error(`[docs:classes] Missing canonical class source file: ${abs}`);
+  }
+  const css = fs.readFileSync(abs, 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, '')     // strip block comments
+    .replace(/"[^"]*"|'[^']*'/g, '""');   // strip string literals
   const names = new Set();
   for (const m of css.matchAll(/\.(sf-[\w-]+)/g)) names.add(m[1]);
   return [...names].sort();
