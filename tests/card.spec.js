@@ -137,6 +137,10 @@ for (const theme of ['light', 'dark']) {
 // otherwise light page.
 test.describe('.sf-card — nested data-theme scoping', () => {
   test('a card inside a non-root [data-theme="dark"] section matches that section, not :root', async ({ page }) => {
+    // Root must be deterministically light — don't rely on Playwright's
+    // default colorScheme, since core/themes.css auto-flips
+    // :root:not([data-theme]) dark under prefers-color-scheme.
+    await page.emulateMedia({ colorScheme: 'light' });
     await renderWithBundle(
       page,
       `<div id="scope" data-theme="dark">
@@ -147,19 +151,31 @@ test.describe('.sf-card — nested data-theme scoping', () => {
       { bundle: COMPONENTS_BUNDLE, extraStyle: NO_TRANSITIONS_STYLE },
     );
     // :root stays light (no data-theme there) — only the nested section opts into dark.
-    const { cardBg, textColor } = await page.evaluate(() => ({
-      cardBg: getComputedStyle(document.getElementById('card')).backgroundColor,
-      textColor: getComputedStyle(document.getElementById('text')).color,
-    }));
-    const lightness = (color) => parseFloat(color.match(/oklch\(([\d.]+)/)?.[1] ?? 'NaN');
+    // Canvas-luminance probe (shared technique with section-theme-aliases.spec.js)
+    // avoids relying on oklch() showing up in getComputedStyle — some engines
+    // serialize computed colors as rgb()/rgba() regardless of the authored syntax.
+    const { cardBgLum, textLum } = await page.evaluate(() => {
+      const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+      const ctx = cv.getContext('2d', { willReadFrequently: true });
+      const toLum = (color) => {
+        ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = color; ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+        const lin = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+        return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+      };
+      return {
+        cardBgLum: toLum(getComputedStyle(document.getElementById('card')).backgroundColor),
+        textLum: toLum(getComputedStyle(document.getElementById('text')).color),
+      };
+    });
     // Regression guard: --sf-card-bg is a plain var(--sf-color-surface) alias
     // declared once at :root in optional/tokens.components.css. Without a
     // matching re-declaration scoped to nested [data-theme] elements, that
     // alias freezes at :root's (light) value and ignores the section's own
     // dark override, producing dark text on a light card. The card's own
     // background must read as dark (not stuck at the light ~0.96 value)...
-    expect(lightness(cardBg)).toBeLessThan(0.3);
+    expect(cardBgLum).toBeLessThan(0.3);
     // ...and text must read as light (dark-theme text), not light-theme's dark text.
-    expect(lightness(textColor)).toBeGreaterThan(0.6);
+    expect(textLum).toBeGreaterThan(0.5);
   });
 });
