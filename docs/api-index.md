@@ -564,7 +564,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-shadow-xl` | PUBLIC | consumption | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Extra-large shadow for modals, dialogs, and high-elevation sheets. |
 | `--sf-shadow-xs` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Extra-small shadow for barely-elevated elements (focused inputs, small chips). |
 | `--sf-size-l` | PUBLIC | knob | size | `2.75rem` | Large UI component height (~44px). Touch-friendly interactive elements. |
-| `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | ~40px UI component height (scale rung `m`); not currently consumed by any shipped rule. |
+| `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
 | `--sf-size-s` | PUBLIC | knob | size | `2rem` | Small UI component height (~32px). Compact buttons and input variants. |
 | `--sf-size-xl` | PUBLIC | knob | size | `3.5rem` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
 | `--sf-size-xs` | PUBLIC | knob | size | `1.5rem` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |

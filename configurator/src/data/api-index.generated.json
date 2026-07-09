@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "1f1aad252020",
+    "tokensHash": "a69d67db119d",
     "bundles": [
       "full",
       "optimal"
@@ -12815,7 +12815,7 @@
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
-      "note": "~40px UI component height (scale rung `m`); not currently consumed by any shipped rule.",
+      "note": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.",
       "value": "2.5rem",
       "aliasOf": null,
       "registered": false,

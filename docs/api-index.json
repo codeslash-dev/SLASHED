@@ -15933,7 +15933,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "UI sizes",
-      "description": "~40px UI component height (scale rung `m`); not currently consumed by any shipped rule.",
+      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.",
       "value": "2.5rem",
       "aliasOf": null,
       "registered": false,

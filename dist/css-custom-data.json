@@ -3048,7 +3048,7 @@
     },
     {
       "name": "--sf-size-m",
-      "description": "~40px UI component height (scale rung `m`); not currently consumed by any shipped rule.\n\nDefault: `2.5rem`",
+      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `2.5rem`",
       "syntax": "*"
     },
     {
