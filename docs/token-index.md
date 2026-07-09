@@ -800,7 +800,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-text-xs-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
 | `--sf-text-xs-max-width` | PUBLIC | knob | Core | `60ch` |
 | `--sf-theme-transition-duration` | PUBLIC | consumption | Core | `calc(300ms * var(--sf-motion-scale))` |
-| `--sf-touch-target` | PUBLIC | consumption | Core | `var(--sf-size-l)` |
+| `--sf-touch-target` | PUBLIC | consumption | Core | `max(44px, var(--sf-size-l))` |
 | `--sf-tracking-normal` | PUBLIC | knob | Core | `0` |
 | `--sf-tracking-tight` | PUBLIC | knob | Core | `-0.025em` |
 | `--sf-tracking-wide` | PUBLIC | knob | Core | `0.025em` |

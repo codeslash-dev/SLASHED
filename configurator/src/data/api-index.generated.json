@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "3a36b882c8dd",
+    "tokensHash": "c212ae16976f",
     "bundles": [
       "full",
       "optimal"
@@ -12794,7 +12794,7 @@
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
-      "note": "Large UI component height (~44px). Touch-friendly interactive elements.",
+      "note": "Large UI component height (~44px at the default size scale). A configurable design-scale token — not an accessibility guarantee. The WCAG 2.5.5 touch-target floor is enforced independently by --sf-touch-target.",
       "value": "2.75rem",
       "aliasOf": null,
       "registered": false,
@@ -14894,9 +14894,9 @@
       "category": "Core tokens",
       "group": "Layout & a11y",
       "description": "Focus ring, header height, sticky offset, touch-target, text-contrast knobs, and device safe-area insets. These govern keyboard accessibility, scroll behaviour, and adaptive contrast globally.",
-      "note": "Minimum touch-target size for interactive elements per WCAG 2.5.5.",
-      "value": "var(--sf-size-l)",
-      "aliasOf": "--sf-size-l",
+      "note": "Minimum touch-target size for interactive elements per WCAG 2.5.5. An accessibility floor, not a design-scale token: max()-clamped to at least 44px so retuning the configurable UI size scale smaller can never drop it below the WCAG minimum.",
+      "value": "max(44px, var(--sf-size-l))",
+      "aliasOf": null,
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

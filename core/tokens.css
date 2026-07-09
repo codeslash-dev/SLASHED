@@ -1432,7 +1432,14 @@
     --sf-focus-ring-width:  2px;
     --sf-focus-ring-offset: 2px;
     --sf-focus-ring-style:  solid;
-    --sf-touch-target:      var(--sf-size-l);
+    /* Minimum interactive target size. This is an ACCESSIBILITY FLOOR, not a
+       design-scale token. WCAG 2.5.5 requires 44×44 CSS px, so the 44px is a
+       hard constraint that must survive any reconfiguration of the UI size
+       scale. It tracks --sf-size-l for visual consistency, but max() clamps
+       it so retuning --sf-size-l (or the whole size scale) smaller can never
+       lower the floor below 44px. Override only if you accept losing the
+       WCAG 2.5.5 guarantee. */
+    --sf-touch-target:      max(44px, var(--sf-size-l));
     /* Global text-contrast knob. Nudges derived reading-text colours
        toward the extremes (darker in light mode, lighter in dark mode).
        Positive = more contrast; 0 = no change. Consumed by

@@ -613,7 +613,7 @@ rebrand workflow.
 | `--sf-text-xs-line-height` | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
 | `--sf-text-xs-max-width` | `60ch` |
 | `--sf-theme-transition-duration` | `calc(300ms * var(--sf-motion-scale))` |
-| `--sf-touch-target` | `var(--sf-size-l)` |
+| `--sf-touch-target` | `max(44px, var(--sf-size-l))` |
 | `--sf-tracking-normal` | `0` |
 | `--sf-tracking-tight` | `-0.025em` |
 | `--sf-tracking-wide` | `0.025em` |

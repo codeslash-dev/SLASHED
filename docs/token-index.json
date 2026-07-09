@@ -5699,7 +5699,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-size-l)"
+      "value": "max(44px, var(--sf-size-l))"
     },
     "--sf-tracking-normal": {
       "tier": "PUBLIC",

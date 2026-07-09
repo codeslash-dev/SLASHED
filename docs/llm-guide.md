@@ -678,11 +678,13 @@ For headers, `.sf-header--xs … --xl` (`core/layout.css`) set **block** padding
 --sf-icon-m:   1.5em      --sf-icon-l:  2em
 --sf-icon-xl:  3em         --sf-icon-2xl: 4em
 
-/* UI sizes — rem-based, fixed (buttons, inputs, touch targets) */
+/* UI sizes — rem-based design scale (buttons, inputs). Freely configurable;
+   these are NOT accessibility guarantees — the WCAG touch-target floor lives
+   in --sf-touch-target, independent of this scale. */
 --sf-size-xs:  1.5rem   /* 24px */
 --sf-size-s:   2rem     /* 32px */
 --sf-size-m:   2.5rem   /* 40px */
---sf-size-l:   2.75rem  /* 44px — WCAG 2.5.5 touch target */
+--sf-size-l:   2.75rem  /* 44px at default scale */
 --sf-size-xl:  3.5rem   /* 56px */
 ```
 
@@ -1064,7 +1066,7 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 
 ```css
 --sf-caret-color:           var(--sf-color-action)
---sf-touch-target:          var(--sf-size-l)    /* 44px — WCAG 2.5.5 */
+--sf-touch-target:          max(44px, var(--sf-size-l))  /* WCAG 2.5.5 floor — never < 44px */
 --sf-opacity-disabled:      0.45
 --sf-state-pending-opacity: 0.7                  /* async operations */
 --sf-opacity-muted:         0.5
