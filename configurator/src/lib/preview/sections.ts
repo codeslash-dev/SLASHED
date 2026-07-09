@@ -47,13 +47,31 @@ export function color(): string {
       ),
     ),
   );
+  const textRoles = well(`<div class="sf-stack sf-stack--xs">
+    <span style="color:var(--sf-color-heading);font-size:var(--sf-text-l);font-weight:600">Heading — --sf-color-heading</span>
+    <span style="color:var(--sf-color-text)">Body text — --sf-color-text</span>
+    <span style="color:var(--sf-color-text--secondary)">Secondary — --sf-color-text--secondary</span>
+    <span style="color:var(--sf-color-text--muted)">Muted — --sf-color-text--muted</span>
+    <a href="#" onclick="event.preventDefault()" style="color:var(--sf-color-link)">Link — --sf-color-link</a>
+  </div>`);
+  const borders = grid(
+    10,
+    ...["border", "border--subtle", "border--strong"].map((b) =>
+      specimen(
+        `--sf-color-${b}`,
+        `<div style="block-size:48px;border:2px solid var(--sf-color-${b});border-radius:var(--sf-radius-m)"></div>`,
+      ),
+    ),
+  );
   return page(
     "Color",
-    "Every brand family ramp (50–950), status colours, gradients, surfaces and readable text-on-colour pairs. Change any colour token in the Colors panel and watch the whole system re-tint.",
+    "Every brand family ramp (50–950), status colours, gradients, surfaces, text roles, borders and readable text-on-colour pairs. Change any colour token in the Colors panel and watch the whole system re-tint.",
     section("Brand family ramps", ramps, "primary · secondary · tertiary · action · base · neutral"),
     section("Status colours", status),
     section("Gradients", grads),
     section("Surfaces", surfaces),
+    section("Text roles & links", textRoles),
+    section("Borders", borders),
     section("Text on colour (contrast pairs)", onColor),
   );
 }
@@ -78,11 +96,39 @@ export function type(): string {
     <p class="pv-muted">Muted / caption — timestamps, tags, helper text.</p>
     <p><code>const tokens = design()</code> — <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <a href="#" onclick="event.preventDefault()">a link</a>.</p>
   </div>`;
+  const families = grid(
+    12,
+    ...["body", "heading", "mono"].map((f) =>
+      specimen(
+        `--sf-font-${f}`,
+        `<div style="font-family:var(--sf-font-${f});font-size:var(--sf-text-l)">Ag 123</div>`,
+      ),
+    ),
+  );
+  const weights = familySteps("--sf-font-weight-");
+  const weightRow = weights.length
+    ? well(cluster(
+        ...weights.map((w) =>
+          specimen(
+            `weight-${w}`,
+            `<span style="font-weight:var(--sf-font-weight-${w});font-size:var(--sf-text-l)">Aa</span>`,
+          ),
+        ),
+      ))
+    : "";
+  const leading = well(`<div class="sf-cluster sf-cluster--m">
+    <p style="line-height:var(--sf-leading-tight);max-inline-size:12rem">Tight leading — --sf-leading-tight. Two or three lines of copy to show the rhythm.</p>
+    <p style="line-height:var(--sf-leading-normal);max-inline-size:12rem">Normal leading — --sf-leading-normal. Two or three lines of copy to show the rhythm.</p>
+    <p style="line-height:var(--sf-leading-loose);max-inline-size:12rem">Loose leading — --sf-leading-loose. Two or three lines of copy to show the rhythm.</p>
+  </div>`);
   return page(
     "Typography",
-    "Display and heading scale, body prose, weights and the mono/code face — all fluid via --sf-text-* and the type-ratio knobs.",
+    "Display and heading scale, body prose, font families, weights and leading — all fluid via --sf-text-* and the type-ratio knobs.",
     section("Display scale", display),
     section("Heading scale", headings),
+    section("Font families", well(families)),
+    ...(weightRow ? [section("Font weights", weightRow)] : []),
+    section("Line height", leading),
     section("Prose, inline & links", well(prose)),
   );
 }
@@ -107,10 +153,20 @@ export function space(): string {
       ),
     ),
   );
+  const sizeSteps = familySteps("--sf-size-");
+  const sizes = sizeSteps.length
+    ? well(`<div class="sf-cluster sf-cluster--s" style="align-items:flex-end">${sizeSteps
+        .map(
+          (s) =>
+            `<div class="sf-stack sf-stack--xs sf-stack--center pv-center-text"><div style="inline-size:var(--sf-size-${s});block-size:var(--sf-size-${s});background:var(--sf-color-primary-300);border-radius:var(--sf-radius-s)"></div>${tag(`size-${s}`)}</div>`,
+        )
+        .join("")}</div>`)
+    : "";
   return page(
     "Spacing",
-    "The fluid spacing scale (--sf-space-*) and how it drives real gaps. Adjust the spacing base/scale in the Spacing panel and every bar and gap rescales together.",
+    "The fluid spacing scale (--sf-space-*), the control-size scale (--sf-size-*), and how they drive real gaps. Adjust the base/scale in the Spacing panel and every bar and gap rescales together.",
     section("Spacing scale", bars),
+    ...(sizes ? [section("Size scale (--sf-size-*)", sizes)] : []),
     section("Gaps in context (sf-cluster)", gapDemo),
   );
 }
@@ -130,13 +186,26 @@ export function borders(): string {
       ),
     ),
   ));
-  const divider = well(`<div class="sf-stack sf-stack--s"><span class="pv-secondary">Above</span><hr class="sf-divider" /><span class="pv-secondary">Below</span></div>`);
+  const styles = well(cluster(
+    ...["solid", "dashed", "dotted"].map((s) =>
+      specimen(
+        s,
+        `<div style="inline-size:56px;block-size:56px;border:2px ${s} var(--sf-color-border);border-radius:var(--sf-radius-m)"></div>`,
+      ),
+    ),
+  ));
+  const divider = well(`<div class="sf-stack sf-stack--s">
+    <span class="pv-secondary">Above</span><hr class="sf-divider" />
+    <span class="pv-secondary">Dashed</span><hr class="sf-divider sf-divider--dashed" />
+    <span class="pv-secondary">Below</span>
+  </div>`);
   return page(
     "Borders & radius",
-    "Radius scale, border widths and the divider — driven by --sf-radius-* and --sf-border-*.",
+    "Radius scale, border widths, styles and the divider — driven by --sf-radius-* and --sf-border-*.",
     section("Radius scale", radiusRow),
     section("Border widths", widths),
-    section("Divider (.sf-divider)", divider),
+    section("Border styles", styles),
+    section("Dividers (.sf-divider)", divider),
   );
 }
 
@@ -220,11 +289,36 @@ export function layout(): string {
     "sf-center",
     `<div class="sf-center" style="min-block-size:5rem;background:var(--sf-color-inset);border-radius:var(--sf-radius-m)">${box("centered")}</div>`,
   );
+  const asymGrid = stack(
+    "s",
+    ...(["1-2", "2-1", "1-3"] as const).map((c) =>
+      specimen(
+        `sf-grid-cols-${c}`,
+        `<div class="sf-grid sf-grid-cols-${c}">${box("a")}${box("b")}</div>`,
+      ),
+    ),
+  );
+  const bentoDemo = specimen(
+    "sf-bento",
+    `<div class="sf-bento">${["a", "b", "c", "d", "e"].map((t) => `<div class="pv-box pv-box--tall">${t}</div>`).join("")}</div>`,
+  );
+  const frameDemo = grid(
+    9,
+    ...(["video", "square", "portrait"] as const).map((r) =>
+      specimen(
+        `sf-frame--${r}`,
+        `<div class="sf-frame sf-frame--${r}" style="background:var(--sf-color-primary-100);border-radius:var(--sf-radius-m)"></div>`,
+      ),
+    ),
+  );
   return page(
     "Layout",
-    "The token-driven layout primitives — stack, cluster, grid, switcher, sidebar, center. Boxes make the gaps and columns visible; every gap is a --sf-space-* token.",
+    "The token-driven layout primitives — stack, cluster, grid, switcher, sidebar, center, bento and aspect-ratio frames. Boxes make the gaps and columns visible; every gap is a --sf-space-* token.",
     section("Stack & cluster", well(stack("m", stackDemo, clusterDemo))),
     section("Grid column presets", well(gridCols)),
+    section("Asymmetric grids", well(asymGrid)),
+    section("Bento grid", well(bentoDemo)),
+    section("Aspect-ratio frames", well(frameDemo)),
     section("Switcher, sidebar & center", well(stack("m", switcherDemo, sidebarDemo, centerDemo))),
   );
 }
