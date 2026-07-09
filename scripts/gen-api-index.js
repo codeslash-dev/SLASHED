@@ -94,7 +94,7 @@ function main() {
     description: 'Documentation hint derived from section-banner / attached comments (may be empty).',
     sourceFiles: 'Array of source CSS files that declare the element.',
     layer:       'The CSS @layer the element lives in (e.g. slashed.layout).',
-    bundles:     'Array of bundle tiers that ship the element (optimal, optimal-components, optimal-utilities, full).',
+    bundles:     'Array of bundle tiers that ship the element (optimal, full).',
     optional:    'True when the element ships from optional/ (not core).',
     // token-only
     namespace:   'TOKEN: second name segment, a filterable facet (color, space, font, radius, shadow, …).',
