@@ -306,9 +306,10 @@
      floor; that pinned m to --sf-size-l and pushed --l/--xl up. The offset was
      dropped so the size names read predictably — see docs/migration.md.) The
      default control is now --sf-size-m (40px), which still clears the WCAG 2.2
-     AA 24px target; consumers who want the 44px AAA target back can set
-     `--sf-btn-min-height: var(--sf-touch-target)` (globally) or add
-     `.sf-btn--l`. */
+     AA 24px target; consumers who want the 44px AAA touch target back can set
+     `--sf-btn-min-height: var(--sf-touch-target)` globally (exactly 44px, an
+     accessibility anchor independent of the size scale) or reach for
+     `.sf-btn--l` (--sf-size-l, 48px). */
   .sf-btn--xs {
     --sf-btn-padding-block--size:  0.125rem;
     --sf-btn-padding-inline--size: var(--sf-space-xs);

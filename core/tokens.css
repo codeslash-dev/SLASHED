@@ -1176,12 +1176,16 @@
     --sf-space-4xl: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale));
 
     /* ----------------------------------------------------------
-       UI sizes
+       UI sizes — a purely geometric rung ladder (+0.5rem / 8px per
+       step: 24 · 32 · 40 · 48 · 56 px). These are free design knobs:
+       nothing external constrains them, so overriding them just
+       rescales component heights. Accessibility floors live on their
+       own tokens (--sf-touch-target), never on a rung — see below.
        ---------------------------------------------------------- */
     --sf-size-xs: 1.5rem;
     --sf-size-s:  2rem;
     --sf-size-m:  2.5rem;
-    --sf-size-l:  2.75rem;
+    --sf-size-l:  3rem;
     --sf-size-xl: 3.5rem;
 
     /* ----------------------------------------------------------
@@ -1437,11 +1441,15 @@
       calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)),
       var(--sf-sticky-offset-desktop));
     /* Focus ring dimensions and minimum touch-target size. Governs keyboard
-       navigation affordance and WCAG 2.5.5 pointer-target requirements. */
+       navigation affordance and WCAG 2.5.5 pointer-target requirements.
+       --sf-touch-target owns the 44px WCAG floor as a literal — it is NOT an
+       alias of a --sf-size-* rung, so retuning the size scale can never drag
+       the accessibility minimum below spec. Override it deliberately if you
+       have your own target policy. */
     --sf-focus-ring-width:  2px;
     --sf-focus-ring-offset: 2px;
     --sf-focus-ring-style:  solid;
-    --sf-touch-target:      var(--sf-size-l);
+    --sf-touch-target:      2.75rem;  /* 44px — WCAG 2.5.5 minimum, independent of the size scale */
     /* Global text-contrast knob. Nudges derived reading-text colours
        toward the extremes (darker in light mode, lighter in dark mode).
        Positive = more contrast; 0 = no change. Consumed by

@@ -5,7 +5,7 @@
    Perturbs every CONFIGURABLE (role: "knob") token to a valid, visibly-distinct
    value so full-api-demo.html can prove each one is wired end to end.
 
-   Coverage: 219 of 243 knob tokens overridden.
+   Coverage: 220 of 244 knob tokens overridden.
    24 knobs are intentionally NOT perturbed (structural /
    meta / sentinel) — listed with reasons at the bottom of this file.
    ============================================================================ */
@@ -303,7 +303,7 @@
   --sf-sidebar-width: 28.8rem; /* was: 18rem */
 
   /* size */
-  --sf-size-l: 4.4rem; /* was: 2.75rem */
+  --sf-size-l: 4.8rem; /* was: 3rem */
   --sf-size-m: 4rem; /* was: 2.5rem */
   --sf-size-s: 3.2rem; /* was: 2rem */
   --sf-size-xl: 5.6rem; /* was: 3.5rem */
@@ -351,6 +351,9 @@
   --sf-text-scale: 1.6; /* was: 1 */
   --sf-text-xl-max-width: 50ch; /* was: none */
   --sf-text-xs-max-width: 96ch; /* was: 60ch */
+
+  /* touch */
+  --sf-touch-target: 4.4rem; /* was: 2.75rem */
 
   /* tracking */
   --sf-tracking-normal: 0.03em; /* was: 0 */

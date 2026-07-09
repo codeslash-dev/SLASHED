@@ -525,7 +525,7 @@ rebrand workflow.
 | `--sf-shadow-strength` | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
 | `--sf-shadow-xl` | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-shadow-xs` | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` |
-| `--sf-size-l` | `2.75rem` |
+| `--sf-size-l` | `3rem` |
 | `--sf-size-m` | `2.5rem` |
 | `--sf-size-s` | `2rem` |
 | `--sf-size-xl` | `3.5rem` |
@@ -613,7 +613,7 @@ rebrand workflow.
 | `--sf-text-xs-line-height` | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
 | `--sf-text-xs-max-width` | `60ch` |
 | `--sf-theme-transition-duration` | `calc(300ms * var(--sf-motion-scale))` |
-| `--sf-touch-target` | `var(--sf-size-l)` |
+| `--sf-touch-target` | `2.75rem` |
 | `--sf-tracking-normal` | `0` |
 | `--sf-tracking-tight` | `-0.025em` |
 | `--sf-tracking-wide` | `0.025em` |

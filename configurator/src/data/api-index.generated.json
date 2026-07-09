@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "a69d67db119d",
+    "tokensHash": "edc94fa13e23",
     "bundles": [
       "full",
       "optimal"
@@ -12794,8 +12794,8 @@
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
-      "note": "Large UI component height (~44px). Touch-friendly interactive elements.",
-      "value": "2.75rem",
+      "note": "Large UI component height (~48px). Touch-friendly interactive elements.",
+      "value": "3rem",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -14889,14 +14889,14 @@
     {
       "name": "--sf-touch-target",
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "touch",
       "category": "Core tokens",
       "group": "Layout & a11y",
       "description": "Focus ring, header height, sticky offset, touch-target, text-contrast knobs, and device safe-area insets. These govern keyboard accessibility, scroll behaviour, and adaptive contrast globally.",
-      "note": "Minimum touch-target size for interactive elements per WCAG 2.5.5.",
-      "value": "var(--sf-size-l)",
-      "aliasOf": "--sf-size-l",
+      "note": "Minimum touch-target size for interactive elements per WCAG 2.5.5. Fixed 44px anchor, independent of the --sf-size-* scale.",
+      "value": "2.75rem",
+      "aliasOf": null,
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

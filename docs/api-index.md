@@ -563,7 +563,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | shadow | `calc(0.08 + var(--sf-is-dark) * 0.17)` | Base opacity for the entire shadow ramp. Auto-boosted in dark mode via --sf-is-dark. Override with calc() to preserve the adaptation: e.g. calc(0.12 + var(--sf-is-dark) * 0.17). |
 | `--sf-shadow-xl` | PUBLIC | consumption | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Extra-large shadow for modals, dialogs, and high-elevation sheets. |
 | `--sf-shadow-xs` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Extra-small shadow for barely-elevated elements (focused inputs, small chips). |
-| `--sf-size-l` | PUBLIC | knob | size | `2.75rem` | Large UI component height (~44px). Touch-friendly interactive elements. |
+| `--sf-size-l` | PUBLIC | knob | size | `3rem` | Large UI component height (~48px). Touch-friendly interactive elements. |
 | `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
 | `--sf-size-s` | PUBLIC | knob | size | `2rem` | Small UI component height (~32px). Compact buttons and input variants. |
 | `--sf-size-xl` | PUBLIC | knob | size | `3.5rem` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
@@ -651,7 +651,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-text-xs-line-height` | PUBLIC | consumption | text | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` | Line height for extra-small text. |
 | `--sf-text-xs-max-width` | PUBLIC | knob | text | `60ch` | Optimal line length for extra-small text. |
 | `--sf-theme-transition-duration` | PUBLIC | consumption | theme | `calc(300ms * var(--sf-motion-scale))` | Duration of the .sf-theme-transition animated color-scheme crossfade. Scales with --sf-motion-scale so reduced-motion preferences are respected. Default 300ms. |
-| `--sf-touch-target` | PUBLIC | consumption | touch | `var(--sf-size-l)` | Minimum touch-target size for interactive elements per WCAG 2.5.5. |
+| `--sf-touch-target` | PUBLIC | knob | touch | `2.75rem` | Minimum touch-target size for interactive elements per WCAG 2.5.5. Fixed 44px anchor, independent of the --sf-size-* scale. |
 | `--sf-tracking-normal` | PUBLIC | knob | tracking | `0` | Normal letter-spacing (0). Default for body text. |
 | `--sf-tracking-tight` | PUBLIC | knob | tracking | `-0.025em` | Tight letter-spacing (slightly negative). Suitable for large headings. |
 | `--sf-tracking-wide` | PUBLIC | knob | tracking | `0.025em` | Wide letter-spacing. Use for small-caps labels. |

@@ -678,11 +678,13 @@ For headers, `.sf-header--xs … --xl` (`core/layout.css`) set **block** padding
 --sf-icon-m:   1.5em      --sf-icon-l:  2em
 --sf-icon-xl:  3em         --sf-icon-2xl: 4em
 
-/* UI sizes — rem-based, fixed (buttons, inputs, touch targets) */
+/* UI sizes — rem-based geometric ladder, +8px per step (buttons, inputs).
+   Purely a design scale: no external constraint pins any rung. The WCAG
+   touch-target floor lives on its own token (--sf-touch-target), not here. */
 --sf-size-xs:  1.5rem   /* 24px */
 --sf-size-s:   2rem     /* 32px */
 --sf-size-m:   2.5rem   /* 40px */
---sf-size-l:   2.75rem  /* 44px — WCAG 2.5.5 touch target */
+--sf-size-l:   3rem     /* 48px */
 --sf-size-xl:  3.5rem   /* 56px */
 ```
 
@@ -1064,7 +1066,7 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 
 ```css
 --sf-caret-color:           var(--sf-color-action)
---sf-touch-target:          var(--sf-size-l)    /* 44px — WCAG 2.5.5 */
+--sf-touch-target:          2.75rem            /* 44px — WCAG 2.5.5, fixed independent of --sf-size-* */
 --sf-opacity-disabled:      0.45
 --sf-state-pending-opacity: 0.7                  /* async operations */
 --sf-opacity-muted:         0.5
