@@ -106,18 +106,6 @@ jobs:
             dist/slashed.optimal.flat.css
             dist/slashed.optimal.flat.min.css
             dist/slashed.optimal.flat.min.css.map
-            dist/slashed.optimal-components.css
-            dist/slashed.optimal-components.min.css
-            dist/slashed.optimal-components.min.css.map
-            dist/slashed.optimal-components.flat.css
-            dist/slashed.optimal-components.flat.min.css
-            dist/slashed.optimal-components.flat.min.css.map
-            dist/slashed.optimal-utilities.css
-            dist/slashed.optimal-utilities.min.css
-            dist/slashed.optimal-utilities.min.css.map
-            dist/slashed.optimal-utilities.flat.css
-            dist/slashed.optimal-utilities.flat.min.css
-            dist/slashed.optimal-utilities.flat.min.css.map
             dist/slashed.full.css
             dist/slashed.full.min.css
             dist/slashed.full.min.css.map
