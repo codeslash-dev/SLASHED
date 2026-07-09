@@ -203,29 +203,34 @@
   </div>
 </header>
 <main class="sf-container sf-section sf-stack sf-stack--2xl">
-  <section class="sf-card sf-card--elevated sf-section sf-stack sf-stack--xl sf-stack--center pv-center-text">
-    <div class="sf-stack sf-stack--m sf-stack--center">
-      <span class="pv-tag pv-tag--primary">Token-native CSS framework</span>
-      <h1 class="pv-type--display-l pv-heading">Build branded interfaces without leaving the system.</h1>
-      <p class="pv-lead pv-measure">Typography, colour, spacing, radius, motion, shadows, buttons and cards all respond instantly to the configurator.</p>
-      <div class="sf-cluster sf-cluster--center sf-cluster--s">
-        <button class="sf-btn sf-btn--primary sf-btn--l">Start designing</button>
-        <button class="sf-btn sf-btn--outline sf-btn--l">Explore tokens</button>
+  <section class="sf-card sf-card--elevated sf-section pv-center-text">
+    <!-- .sf-card sets display:block (slashed.components layer, which wins over
+         slashed.layout), so a layout primitive cannot live on the card element
+         itself — its gap/flex would be dead. Nest the stack one level in. -->
+    <div class="sf-stack sf-stack--xl sf-stack--center">
+      <div class="sf-stack sf-stack--m sf-stack--center">
+        <span class="pv-tag pv-tag--primary">Token-native CSS framework</span>
+        <h1 class="pv-type--display-l pv-heading">Build branded interfaces without leaving the system.</h1>
+        <p class="pv-lead pv-measure">Typography, colour, spacing, radius, motion, shadows, buttons and cards all respond instantly to the configurator.</p>
+        <div class="sf-cluster sf-cluster--center sf-cluster--s">
+          <button class="sf-btn sf-btn--primary sf-btn--l">Start designing</button>
+          <button class="sf-btn sf-btn--outline sf-btn--l">Explore tokens</button>
+        </div>
       </div>
-    </div>
-    <div class="sf-grid sf-grid-cols-3 sf-grid--m">
-      <article class="sf-card sf-card--bordered">
-        <span class="pv-stat">840+</span>
-        <span class="pv-stat-label">Design tokens</span>
-      </article>
-      <article class="sf-card sf-card--bordered">
-        <span class="pv-stat">0 JS</span>
-        <span class="pv-stat-label">Framework runtime</span>
-      </article>
-      <article class="sf-card sf-card--bordered">
-        <span class="pv-stat">AA</span>
-        <span class="pv-stat-label">Contrast workflow</span>
-      </article>
+      <div class="sf-grid sf-grid-cols-3 sf-grid--m">
+        <article class="sf-card sf-card--bordered">
+          <span class="pv-stat">840+</span>
+          <span class="pv-stat-label">Design tokens</span>
+        </article>
+        <article class="sf-card sf-card--bordered">
+          <span class="pv-stat">0 JS</span>
+          <span class="pv-stat-label">Framework runtime</span>
+        </article>
+        <article class="sf-card sf-card--bordered">
+          <span class="pv-stat">AA</span>
+          <span class="pv-stat-label">Contrast workflow</span>
+        </article>
+      </div>
     </div>
   </section>
 
