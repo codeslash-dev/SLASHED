@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.8] - 2026-07-09
+
 ### Bug Fixes
 - **components:** `.sf-card__media` had no `margin-block-end`, so it touched whatever followed (`__header` or `__body`) directly with zero gap. Now spaces itself the same as the header/footer dividers (`--sf-card-gap`).
 - **themes:** a card (or any component whose tokens simply alias a themed core token, e.g. `--sf-card-bg: var(--sf-color-surface)`) nested inside a non-root `[data-theme]` section — `<section data-theme="dark">` on an otherwise light page — kept the *page's* background while its text correctly switched to the section's theme, since the alias froze at `:root`'s value and never re-evaluated locally. `--sf-card-bg`/`--sf-card-border-color` are now re-declared at the same nested-section scope as the rest of the section-level theming block, restoring the "`data-theme` works on any element" guarantee (`docs/theming.md`) for cards.
