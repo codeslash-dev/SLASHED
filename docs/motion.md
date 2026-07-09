@@ -98,7 +98,7 @@ Combine with a `--sf-animation-delay-*` token for staggered sequences.
 
 | Class | Effect |
 |---|---|
-| `.sf-color-pulse` | animates `--sf-color-primary-light` lightness via `@property` interpolation in oklch |
+| `.sf-color-pulse` | animates `--sf-color-primary-source-light` lightness via `@property` interpolation in oklch |
 
 ## Keyframes
 

@@ -249,7 +249,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 ### BEM consumer-API tokens
 
-Many tokens — `--sf-shadow-*`, `--sf-blur-*`, `--sf-gap`, `--sf-gradient-*`,
+Many tokens — `--sf-shadow-*`, `--sf-blur`, `--sf-gap`, `--sf-gradient-*`,
 `--sf-scrollbar-*`, `--sf-optical-sizing` — are **not consumed by the framework
 itself**. They exist for your own BEM classes
 (`.card { box-shadow: var(--sf-shadow-m) }`) and are exercised in

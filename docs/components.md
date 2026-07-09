@@ -100,7 +100,7 @@ stay orthogonal to the colour families.
 | `--sf-btn-gap` | `var(--sf-space-2xs)` | Gap between icon + label |
 | `--sf-btn-font-size` | `initial` → `var(--sf-text-m)` at size `m` | Label size |
 | `--sf-btn-font-weight` | `var(--sf-font-weight-interactive)` | Label weight |
-| `--sf-btn-min-height` | `initial` → `var(--sf-touch-target)` at size `m` | Minimum target height (WCAG 2.2) |
+| `--sf-btn-min-height` | `initial` → `var(--sf-size-m)` at size `m` | Minimum target height (40px, WCAG 2.2 AA; set to `var(--sf-touch-target)` for the 44px AAA floor) |
 | `--sf-btn-border-width` | `var(--sf-border-width-1)` | Border thickness |
 
 The four size-varying knobs (`--sf-btn-padding-block`, `--sf-btn-padding-inline`,

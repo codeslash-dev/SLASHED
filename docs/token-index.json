@@ -15,8 +15,8 @@
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 243,
-        "consumption": 492
+        "knob": 244,
+        "consumption": 491
       }
     }
   },
@@ -3155,7 +3155,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-space-l)"
+      "value": "var(--sf-space-xs)"
     },
     "--sf-field-padding-block": {
       "tier": "PUBLIC",
@@ -4899,7 +4899,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "2.75rem"
+      "value": "3rem"
     },
     "--sf-size-m": {
       "tier": "PUBLIC",
@@ -5695,11 +5695,11 @@
     },
     "--sf-touch-target": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-size-l)"
+      "value": "2.75rem"
     },
     "--sf-tracking-normal": {
       "tier": "PUBLIC",

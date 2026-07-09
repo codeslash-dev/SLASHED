@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 243 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 492 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 244 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 491 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -482,7 +482,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-equal-rule-color` | PUBLIC | consumption | Layout | `var(--sf-color-border)` |
 | `--sf-equal-rule-style` | PUBLIC | knob | Layout | `solid` |
 | `--sf-equal-rule-width` | PUBLIC | knob | Layout | `0` |
-| `--sf-field-block` | PUBLIC | consumption | Core | `var(--sf-space-l)` |
+| `--sf-field-block` | PUBLIC | consumption | Core | `var(--sf-space-xs)` |
 | `--sf-field-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-xs)` |
 | `--sf-field-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-s)` |
 | `--sf-field-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
@@ -700,7 +700,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-sidebar-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-sidebar-min-width` | PUBLIC | knob | Layout | `50%` |
 | `--sf-sidebar-width` | PUBLIC | knob | Layout | `18rem` |
-| `--sf-size-l` | PUBLIC | knob | Core | `2.75rem` |
+| `--sf-size-l` | PUBLIC | knob | Core | `3rem` |
 | `--sf-size-m` | PUBLIC | knob | Core | `2.5rem` |
 | `--sf-size-s` | PUBLIC | knob | Core | `2rem` |
 | `--sf-size-xl` | PUBLIC | knob | Core | `3.5rem` |
@@ -800,7 +800,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-text-xs-line-height` | PUBLIC | consumption | Core | `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))` |
 | `--sf-text-xs-max-width` | PUBLIC | knob | Core | `60ch` |
 | `--sf-theme-transition-duration` | PUBLIC | consumption | Core | `calc(300ms * var(--sf-motion-scale))` |
-| `--sf-touch-target` | PUBLIC | consumption | Core | `var(--sf-size-l)` |
+| `--sf-touch-target` | PUBLIC | knob | Core | `2.75rem` |
 | `--sf-tracking-normal` | PUBLIC | knob | Core | `0` |
 | `--sf-tracking-tight` | PUBLIC | knob | Core | `-0.025em` |
 | `--sf-tracking-wide` | PUBLIC | knob | Core | `0.025em` |

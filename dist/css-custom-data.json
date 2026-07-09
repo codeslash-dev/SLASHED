@@ -1863,12 +1863,12 @@
     },
     {
       "name": "--sf-duration-fast",
-      "description": "Fast duration (~100ms). Hover transitions, tooltip appear.\n\nDefault: `calc(150ms * var(--sf-motion-scale))`",
+      "description": "Fast duration (~150ms). Hover transitions, tooltip appear.\n\nDefault: `calc(150ms * var(--sf-motion-scale))`",
       "syntax": "*"
     },
     {
       "name": "--sf-duration-instant",
-      "description": "Near-instant duration (~50ms). Micro-interactions and cursor-follow effects.\n\nDefault: `calc(100ms * var(--sf-motion-scale))`",
+      "description": "Near-instant duration (~100ms). Micro-interactions and cursor-follow effects.\n\nDefault: `calc(100ms * var(--sf-motion-scale))`",
       "syntax": "*"
     },
     {
@@ -1878,12 +1878,12 @@
     },
     {
       "name": "--sf-duration-normal",
-      "description": "Normal duration (~200ms). Default for most transitions.\n\nDefault: `calc(250ms * var(--sf-motion-scale))`",
+      "description": "Normal duration (~250ms). Default for most transitions.\n\nDefault: `calc(250ms * var(--sf-motion-scale))`",
       "syntax": "*"
     },
     {
       "name": "--sf-duration-slow",
-      "description": "Slow duration (~350ms). Emphasis transitions, drawers.\n\nDefault: `calc(400ms * var(--sf-motion-scale))`",
+      "description": "Slow duration (~400ms). Emphasis transitions, drawers.\n\nDefault: `calc(400ms * var(--sf-motion-scale))`",
       "syntax": "*"
     },
     {
@@ -1958,7 +1958,7 @@
     },
     {
       "name": "--sf-field-block",
-      "description": "Vertical (block) padding inside form fields.\n\nDefault: `var(--sf-space-l)`",
+      "description": "Vertical (block) padding inside form fields.\n\nDefault: `var(--sf-space-xs)`",
       "syntax": "<length>"
     },
     {
@@ -3043,22 +3043,22 @@
     },
     {
       "name": "--sf-size-l",
-      "description": "Large UI component height (~44px). Touch-friendly interactive elements.\n\nDefault: `2.75rem`",
+      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `3rem`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-m",
-      "description": "Medium UI component height (~36px). Default size for buttons and inputs.\n\nDefault: `2.5rem`",
+      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `2.5rem`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-s",
-      "description": "Small UI component height (~28px). Compact buttons and input variants.\n\nDefault: `2rem`",
+      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `2rem`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-xl",
-      "description": "Extra-large interactive component height (~52px). For oversized or prominently touch-friendly controls.\n\nDefault: `3.5rem`",
+      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `3.5rem`",
       "syntax": "*"
     },
     {
@@ -3543,7 +3543,7 @@
     },
     {
       "name": "--sf-touch-target",
-      "description": "Minimum touch-target size for interactive elements per WCAG 2.5.5.\n\nDefault: `var(--sf-size-l)`",
+      "description": "Minimum touch-target size for interactive elements per WCAG 2.5.5. Fixed 44px anchor, independent of the --sf-size-* scale.\n\nDefault: `2.75rem`",
       "syntax": "*"
     },
     {

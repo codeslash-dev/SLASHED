@@ -198,6 +198,25 @@ test.describe('a11y: touch target token', () => {
     });
     expect(px).toBeGreaterThanOrEqual(44);
   });
+
+  // #582: the WCAG floor must NOT track the configurable --sf-size-* scale.
+  // Shrinking a size rung must not drag the touch target below spec.
+  test('--sf-touch-target is independent of the --sf-size-* scale', async ({ page }) => {
+    await setup(page, `<button>x</button>`);
+    const px = await page.evaluate(() => {
+      const el = document.createElement('div');
+      // Retune the size scale hard: if the touch target were an alias of a rung
+      // it would collapse with it.
+      el.style.setProperty('--sf-size-l', '10px');
+      el.style.setProperty('--sf-size-m', '8px');
+      el.style.width = 'var(--sf-touch-target)';
+      document.body.appendChild(el);
+      const v = parseFloat(getComputedStyle(el).width);
+      el.remove();
+      return v;
+    });
+    expect(px).toBeGreaterThanOrEqual(44);
+  });
 });
 
 // ── Focus ring (:focus-visible) ─────────────────────────────────

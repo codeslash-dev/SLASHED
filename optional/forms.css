@@ -20,14 +20,21 @@
 
     display: block;
     inline-size: 100%;
-    padding-block: var(--sf-space-xs);
-    padding-inline: var(--sf-space-s);
+    /* Field metrics resolve through the component-tier field knobs first, then
+       the core rhythm knob, then the literal — so overriding any of them retunes
+       fields without touching global spacing/radius. Every fallback equals the
+       shipped default, so the default render is unchanged. --sf-field-padding-*
+       and --sf-field-radius live in optional/tokens.components.css (present in
+       the -components/full bundles); --sf-field-block is the core-tier fallback
+       so the knob still works in the forms-only bundles. */
+    padding-block: var(--sf-field-padding-block, var(--sf-field-block, var(--sf-space-xs)));
+    padding-inline: var(--sf-field-padding-inline, var(--sf-space-s));
     font-size: var(--sf-text-m);
     line-height: var(--sf-leading-normal);
     color: var(--sf-color-text);
     background-color: var(--sf-color-surface);
     border: var(--sf-border-width-1) solid var(--sf-field-border-color, var(--sf-color-border));
-    border-radius: var(--sf-radius-m);
+    border-radius: var(--sf-field-radius, var(--sf-radius-m));
     transition: var(--sf-transition-form-field);
   }
 

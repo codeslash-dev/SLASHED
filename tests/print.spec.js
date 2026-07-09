@@ -58,6 +58,37 @@ test.describe('Print styles', () => {
     expect(pca).toBe('exact');
   });
 
+  // A1 (#582): --sf-print-page-size / -margin must actually reach the @page box.
+  // page.pdf() is Chromium-only, so this geometry check runs there; the var()
+  // fallbacks keep the default render identical on every engine.
+  test('@page size reads --sf-print-page-size', async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium', 'page.pdf() is Chromium-only');
+
+    // MediaBox is emitted in the PDF in points; extract the first page box.
+    const boxOf = (buf) => {
+      const s = buf.toString('latin1');
+      const m = s.match(/\/MediaBox\s*\[\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\]/);
+      return m ? { w: +m[3] - +m[1], h: +m[4] - +m[2] } : null;
+    };
+
+    // Default: token unset → a4 fallback (≈595×842pt).
+    await page.setContent('<p>x</p>');
+    await page.addStyleTag({ path: BUNDLE });
+    const def = boxOf(await page.pdf({ preferCSSPageSize: true }));
+    expect(def).not.toBeNull();
+    expect(def.w).toBeCloseTo(595, -1);
+    expect(def.h).toBeCloseTo(842, -1);
+
+    // Override the token on :root → the @page size follows (letter ≈612×792pt),
+    // proving var() is substituted inside the @page descriptor.
+    await page.setContent('<style>:root{--sf-print-page-size:letter}</style><p>x</p>');
+    await page.addStyleTag({ path: BUNDLE });
+    const over = boxOf(await page.pdf({ preferCSSPageSize: true }));
+    expect(over).not.toBeNull();
+    expect(over.w).toBeCloseTo(612, -1);
+    expect(over.h).toBeCloseTo(792, -1);
+  });
+
   test('headings get static pt sizes, not the fluid vw-based scale', async ({ page }) => {
     await page.setContent(`<h1 id="h1">Title</h1><h6 id="h6">Subtitle</h6>`);
     await page.addStyleTag({ path: BUNDLE });

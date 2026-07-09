@@ -3,6 +3,67 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
+## SLASHED 0.7.8 → 0.8.0
+
+### `--sf-touch-target` decoupled from `--sf-size-l`; size scale regularised (breaking)
+
+`--sf-touch-target` used to be `var(--sf-size-l)`, which coupled the WCAG 2.5.5
+accessibility floor to a freely-configurable design-scale rung — retuning the
+size scale could silently drag the touch target below spec. It now owns its
+value as a fixed literal, and `--sf-size-l` is freed to complete a clean
+geometric ladder (`+8px` per step):
+
+| Token | Before (≤ 0.7.8) | After (0.8.0) |
+|---|---|---|
+| `--sf-touch-target` | `var(--sf-size-l)` (44px, tracked the scale) | `2.75rem` (44px, fixed WCAG anchor) |
+| `--sf-size-l` | `2.75rem` (44px) | `3rem` (48px) |
+| `--sf-size-*` ladder | 24 · 32 · 40 · 44 · 56 | 24 · 32 · 40 · **48** · 56 |
+
+If you relied on `--sf-size-l` being 44px (e.g. read it directly for a target
+size), read `--sf-touch-target` instead — that's the token that carries the
+44px guarantee now. The a11y min-target helper is unchanged (still 44px).
+
+### `.sf-btn` min-height ladder remapped onto the `--sf-size-*` rungs (breaking)
+
+The button size scale now maps 1:1 onto the `--sf-size-*` scale rungs.
+Previously the ladder was offset by one rung so the default button cleared the
+`--sf-touch-target` (44px) floor, which pinned the default to `--sf-size-l` and
+pushed `--l`/`--xl` a rung higher. Every non-`--xs`/`--s` button therefore
+changes height:
+
+| Button | Before (≤ 0.7.8) `min-block-size` | After (0.8.0) |
+|---|---|---|
+| `.sf-btn` (default / m) | `--sf-touch-target` = `--sf-size-l` (44px) | `--sf-size-m` (40px) |
+| `.sf-btn--l` | `--sf-size-xl` (56px) | `--sf-size-l` (48px) |
+| `.sf-btn--xl` | `calc(--sf-size-xl + --sf-space-s)` (~64px) | `--sf-size-xl` (56px) |
+| `.sf-btn--xs` / `--s` | `--sf-size-xs` / `--sf-size-s` | unchanged |
+
+The default control is still above the WCAG 2.2 AA 24px target, but no longer
+meets the 44px AAA target by default. To restore the previous heights:
+
+- **Globally**: `:root { --sf-btn-min-height: var(--sf-touch-target); }` pins
+  every button to the exact 44px floor.
+- **Per button**: use `.sf-btn--l` where you previously relied on the default
+  clearing 44px (now 48px).
+
+### `--sf-field-block` default reduced from `--sf-space-l` to `--sf-space-xs` (breaking)
+
+The global form-field block-padding token now defaults to `var(--sf-space-xs)`
+instead of `var(--sf-space-l)`, so it matches the block padding the shipped
+field default actually applies (see `optional/forms.css`). Previously the token
+advertised a much larger value than the fields used, so anyone reading
+`--sf-field-block` to align custom controls got spacing that didn't match the
+built-in fields.
+
+| Token | Before (≤ 0.7.8) | After (0.8.0) |
+|---|---|---|
+| `--sf-field-block` | `var(--sf-space-l)` | `var(--sf-space-xs)` |
+
+If you overrode field block padding by *reading* `--sf-field-block` (e.g.
+`padding-block: var(--sf-field-block)` on a custom control), your control now
+tracks the tighter, correct default. To keep the old roomier spacing, pin it
+explicitly: `:root { --sf-field-block: var(--sf-space-l); }`.
+
 ## SLASHED 0.7.6 → 0.7.7
 
 ### `.sf-btn` axes reworked (breaking)

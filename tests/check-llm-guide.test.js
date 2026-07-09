@@ -71,6 +71,32 @@ describe('check-llm-guide failure cases', () => {
     assert.match(r.stderr, /llm-guide\.md not found/);
   });
 
+  test('a guide ref that is only CONSUMED, never declared, is now flagged (D3)', () => {
+    // core/tokens.css declares --sf-space-m but only *consumes* --sf-ghost-read
+    // via var(); before #582 D3 the `[:,)]` lookahead counted the `)` after a
+    // consumed token as a declaration, so the guide could name it and pass.
+    const dir = buildFixture(
+      `# LLM guide\n\nUse \`--sf-color-text\`, \`--sf-space-m\`, and \`--sf-ghost-read\`.\n`,
+    );
+    fs.writeFileSync(
+      path.join(dir, 'core', 'tokens.css'),
+      `:root { --sf-space-m: 1rem; gap: var(--sf-ghost-read); }\n`,
+    );
+    const r = runGate(dir);
+    assert.equal(r.status, 1, 'a consumed-only token must not count as a live declaration');
+    assert.match(r.stderr, /stale: --sf-ghost-read/);
+  });
+
+  test('fallback-only hook tokens are allowed even though undeclared (D5)', () => {
+    // The real hook tokens (scripts/hook-tokens.js) are undeclared by design;
+    // the guide is allowed to name them.
+    const dir = buildFixture(
+      `# LLM guide\n\n\`--sf-color-text\`, \`--sf-space-m\`, and hook \`--sf-color-code-block-bg\`.\n`,
+    );
+    const r = runGate(dir);
+    assert.equal(r.status, 0, `hook tokens should be treated as live:\n${r.stderr}`);
+  });
+
   test('a bare prefix (name ending in "-") is prose, not a checked reference', () => {
     // "--sf-color-text--on-" is glob-like prose and must NOT be flagged stale.
     const dir = buildFixture(

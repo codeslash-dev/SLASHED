@@ -5,9 +5,14 @@
  * Check 1 (hard fail): every --sf-* name mentioned in the guide must exist as
  * a live token. The live set is the union of:
  *   a) token-registry.json (non-removed entries) — the catalogued public API
- *   b) --sf-* custom property declarations in core/ and optional/ CSS files —
- *      catches scoped override hooks (e.g. --sf-field-border-color) that are
- *      actively used in the framework but not yet catalogued in the registry.
+ *   b) --sf-* custom property DECLARATIONS in core/ and optional/ CSS files —
+ *      `@property --sf-x` registrations and `--sf-x:` declarations only, NOT
+ *      `var(--sf-x)` consumption. Catches scoped override hooks (e.g.
+ *      --sf-field-border-color) that are actively declared in the framework but
+ *      not yet catalogued in the registry, without letting a guide reference a
+ *      name that is *only ever consumed* slip through unnoticed (#582 D3).
+ *   c) the fallback-only hook tokens (scripts/hook-tokens.js) — deliberately
+ *      undeclared override hooks the guide is allowed to name (#582 D5).
  *
  * Check 2 (warning): PUBLIC and PUBLIC-ADVANCED *knob* tokens absent from the
  * guide are reported so authors know what coverage gaps exist. This is a
@@ -25,6 +30,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { stripComments } from './lib/parse.js';
+import { HOOK_TOKEN_NAMES } from './hook-tokens.js';
 
 // SLASHED_ROOT lets negative tests run the gate against a fixture tree. An
 // empty/whitespace value counts as unset; a relative override is resolved to
@@ -60,18 +67,28 @@ const liveTokens = new Set(
   registry.tokens.filter((t) => !t.removed).map((t) => t.name),
 );
 
-// Live set b): any --sf-* declared as a custom property in CSS source files.
-// Matches "  --sf-foo:" (declaration) and "--sf-foo," / "--sf-foo)" in
-// comment-listed token inventories in tokens.css headers.
-const CSS_DECL_RE = /--sf-[a-z0-9_-]+(?=\s*[:,)])/g;
+// Live set b): any --sf-* DECLARED as a custom property in CSS source files.
+// Only real declarations count — `@property --sf-x` registrations and `--sf-x:`
+// declarations — never `var(--sf-x)` consumption. (Before #582 D3 the lookahead
+// `[:,)]` also matched the `,`/`)` after a consumed token, so the guide could
+// name a --sf-* that is only ever read, never declared, and still pass.)
+// Comments are stripped first so a token that appears only inside a comment
+// isn't mistaken for a declaration.
+const PROPERTY_RE = /@property\s+(--sf-[a-z0-9_-]+)/g;
+const DECL_RE = /(--sf-[a-z0-9_-]+)\s*:/g;
 const cssDirs = [path.join(ROOT, 'core'), path.join(ROOT, 'optional')];
 for (const dir of cssDirs) {
   if (!fs.existsSync(dir)) continue;
   for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.css'))) {
-    const text = fs.readFileSync(path.join(dir, file), 'utf8');
-    for (const m of text.matchAll(CSS_DECL_RE)) liveTokens.add(m[0]);
+    const text = stripComments(fs.readFileSync(path.join(dir, file), 'utf8'));
+    for (const m of text.matchAll(PROPERTY_RE)) liveTokens.add(m[1]);
+    for (const m of text.matchAll(DECL_RE)) liveTokens.add(m[1]);
   }
 }
+
+// Live set c): fallback-only hook tokens — undeclared by design, documented in
+// the guide as override hooks (see scripts/hook-tokens.js and #582 D5).
+for (const name of HOOK_TOKEN_NAMES) liveTokens.add(name);
 
 // PUBLIC + PUBLIC-ADVANCED knob tokens — the ones most likely to need docs.
 const publicKnobs = new Set(

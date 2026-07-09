@@ -637,7 +637,7 @@ Apply heading-level typography to a non-heading element with `.sf-h1` … `.sf-h
 --sf-content-gap:   var(--sf-space-s)  /* tight gap — within content (stack, flow, prose) */
 --sf-gutter:        var(--sf-space-l)  /* wide gutter — page/section edges (center) */
 --sf-component-pad: var(--sf-space-m)  /* button, card padding */
---sf-field-block:   var(--sf-space-l)  /* vertical spacing for form field groups */
+--sf-field-block:   var(--sf-space-xs) /* form-field block padding (core-tier fallback for --sf-field-padding-block) */
 ```
 
 ### 7.4 Section padding
@@ -678,11 +678,13 @@ For headers, `.sf-header--xs … --xl` (`core/layout.css`) set **block** padding
 --sf-icon-m:   1.5em      --sf-icon-l:  2em
 --sf-icon-xl:  3em         --sf-icon-2xl: 4em
 
-/* UI sizes — rem-based, fixed (buttons, inputs, touch targets) */
+/* UI sizes — rem-based geometric ladder, +8px per step (buttons, inputs).
+   Purely a design scale: no external constraint pins any rung. The WCAG
+   touch-target floor lives on its own token (--sf-touch-target), not here. */
 --sf-size-xs:  1.5rem   /* 24px */
 --sf-size-s:   2rem     /* 32px */
 --sf-size-m:   2.5rem   /* 40px */
---sf-size-l:   2.75rem  /* 44px — WCAG 2.5.5 touch target */
+--sf-size-l:   3rem     /* 48px */
 --sf-size-xl:  3.5rem   /* 56px */
 ```
 
@@ -1064,7 +1066,7 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 
 ```css
 --sf-caret-color:           var(--sf-color-action)
---sf-touch-target:          var(--sf-size-l)    /* 44px — WCAG 2.5.5 */
+--sf-touch-target:          2.75rem            /* 44px — WCAG 2.5.5, fixed independent of --sf-size-* */
 --sf-opacity-disabled:      0.45
 --sf-state-pending-opacity: 0.7                  /* async operations */
 --sf-opacity-muted:         0.5
@@ -1108,7 +1110,7 @@ Component tokens from `optional/tokens.components.css`:
 --sf-btn-gap:            var(--sf-space-2xs)
 --sf-btn-font-size:      var(--sf-text-m)
 --sf-btn-font-weight:    var(--sf-font-weight-interactive)
---sf-btn-min-height:     var(--sf-touch-target)
+--sf-btn-min-height:     var(--sf-size-m)   /* size m default; set to var(--sf-touch-target) for the 44px AAA floor */
 --sf-btn-border-width:   var(--sf-border-width-1)
 
 /* Cards — .sf-card (live since 0.7.0) */
