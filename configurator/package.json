@@ -18,7 +18,8 @@
     "test:unit": "vitest run tests/",
     "test:components": "vitest run tests-components/",
     "pretest:e2e": "npm run build",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "check:preview": "vitest run tests/preview-coverage.test.ts"
   },
   "dependencies": {
     "@lucide/svelte": "^1.23.0",

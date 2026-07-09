@@ -4,7 +4,7 @@
 // Foundations enumerate the real API via ./catalog; components are curated.
 
 import { page, section, specimen, tag, cluster, grid, stack, well, esc } from "./specimen";
-import { familySteps, classesOfKind, tokensMatching } from "./catalog";
+import { familySteps, classesOfKind, tokensMatching, tokensByGroup, classesByKind } from "./catalog";
 
 const RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 const RAMP_FAMILIES = ["primary", "secondary", "tertiary", "action", "base", "neutral"];
@@ -298,5 +298,30 @@ export function macros(): string {
     "Surface macros and the full set of shipped macro utility classes.",
     section("Surfaces (sf-surface--*)", surfaces),
     section("All macro classes", list, `${macroClasses.length} classes in @layer slashed.macros`),
+  );
+}
+
+// ── Advanced / All (exhaustive, searchable reference) ──────────────────────
+const chips = (items: string[]) =>
+  `<div class="sf-cluster sf-cluster--xs">${items
+    .map((s) => `<code class="pv-swatch-label">${esc(s)}</code>`)
+    .join("")}</div>`;
+
+export function advanced(): string {
+  // Every class, grouped by kind — guarantees the whole class API is at least
+  // listed even where a rich specimen would be noise (state/print/a11y).
+  const classSections = classesByKind().map(({ kind, classes }) =>
+    section(`${kind} · ${classes.length}`, well(chips(classes.map((c) => c.name))))
+  );
+  // Every public token, grouped — the full variable reference the domain tabs
+  // visualise. Kept exhaustive so nothing configurable is undocumented here.
+  const tokenSections = tokensByGroup().map(({ group, tokens }) =>
+    section(`${group} · ${tokens.length}`, well(chips(tokens.map((t) => t.name))))
+  );
+  return page(
+    "Advanced / All",
+    "The exhaustive reference: every class and every variable in the framework, grouped. The domain tabs visualise these live — this tab is the complete searchable index (including advanced and draft surface).",
+    section("Classes", stack("s", ...classSections.map((s) => s))),
+    section("Variables (tokens)", stack("s", ...tokenSections.map((s) => s))),
   );
 }

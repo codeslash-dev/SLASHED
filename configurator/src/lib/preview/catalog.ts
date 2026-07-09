@@ -69,3 +69,30 @@ export function baseSelectors(...kinds: string[]): string[] {
   }
   return [...seen];
 }
+
+/** Every non-internal token (PUBLIC + PUBLIC-ADVANCED). */
+export const PUBLIC_TOKENS: ApiToken[] = TOKENS.filter((t) => t.tier !== "INTERNAL");
+
+/** Tokens bucketed by their API `group`, in first-seen order. Powers the
+ *  exhaustive variable reference on the Advanced tab and the coverage gate. */
+export function tokensByGroup(): { group: string; tokens: ApiToken[] }[] {
+  const order: string[] = [];
+  const map = new Map<string, ApiToken[]>();
+  for (const t of PUBLIC_TOKENS) {
+    const g = t.group || t.category || "Other";
+    if (!map.has(g)) { map.set(g, []); order.push(g); }
+    map.get(g)!.push(t);
+  }
+  return order.map((g) => ({ group: g, tokens: map.get(g)! }));
+}
+
+/** Classes bucketed by `kind`, in first-seen order. */
+export function classesByKind(): { kind: string; classes: ApiClass[] }[] {
+  const order: string[] = [];
+  const map = new Map<string, ApiClass[]>();
+  for (const c of CLASSES) {
+    if (!map.has(c.kind)) { map.set(c.kind, []); order.push(c.kind); }
+    map.get(c.kind)!.push(c);
+  }
+  return order.map((k) => ({ kind: k, classes: map.get(k)! }));
+}

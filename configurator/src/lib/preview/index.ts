@@ -7,7 +7,7 @@ export { previewSkinCSS } from "./skin";
 
 export type PreviewTab =
   | "color" | "type" | "space" | "borders" | "shadows"
-  | "effects" | "motion" | "layout" | "components" | "macros";
+  | "effects" | "motion" | "layout" | "components" | "macros" | "advanced";
 
 export interface TabDef {
   id: PreviewTab;
@@ -26,6 +26,7 @@ export const TABS: TabDef[] = [
   { id: "layout",     label: "Layout",     build: S.layout },
   { id: "components", label: "Components", build: S.components },
   { id: "macros",     label: "Macros",     build: S.macros },
+  { id: "advanced",   label: "All / API",  build: S.advanced },
 ];
 
 const BY_ID = new Map(TABS.map((t) => [t.id, t]));
@@ -50,4 +51,5 @@ export const PANEL_TO_TAB: Record<string, PreviewTab> = {
   misc: "macros",
   themes: "color",
   wcag: "color",
+  cheatsheet: "advanced",
 };
