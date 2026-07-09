@@ -243,7 +243,58 @@ spoza listy.
 
 ---
 
-## 7. Rekomendacje (wg priorytetu)
+## 7. Weryfikacja zewnętrznego audytu (2026-07-09)
+
+Dostarczony równolegle zewnętrzny audyt („SLASHED CSS source audit — tokens,
+classes, primitives, macros") zweryfikowano względem tego repozytorium.
+Kluczowe zastrzeżenie: audytował **inne drzewo** —
+`SLASHED-for-WP/admin-app/framework-css`, czyli 9-plikową kopię osadzoną we
+wtyczce WP (tylko tokens/themes/layout/macros/components). Stąd inne liczby
+(247 klas / 745 tokenów vs 292 / 735 tutaj) i skrypt `npm run verify`, który
+w tym repo nie istnieje (odpowiedniki: `check:*`). Poza jego zasięgiem były
+`base`, `forms`, `print`, `states`, `motion`, `accessibility`, `utilities`,
+`reset`, `legacy` — dlatego nie mógł zobaczyć defektów F1, F2 i F4 ani
+hooków `--sf-color-code-block-*`.
+
+Weryfikacja twierdzeń, punkt po punkcie:
+
+- **`--sf-overlap-host-pad` jako „orphan hook" — POTWIERDZONE** (zbieżne
+  z sekcją 4). Potwierdzono też jego tezę o niewidoczności dla inwentarzy:
+  token nie występuje w `token-registry.json`, `docs/registry.json` ani
+  `docs/token-index.json`; w `docs/api-index.json` pojawia się tylko w prozie
+  opisu `--sf-overlap-pull`, nie jako wpis. Widoczny jedynie w `llm-guide.md`.
+- **Jego rekomendacja „dodać `--sf-overlap-host-pad: var(--sf-overlap-pull)`
+  do `tokens.macros.css`" — ODRZUCONA jako szkodliwa w tym repo.** Deklaracja
+  na `:root` zapiekłaby substytucję: `var(--sf-overlap-host-pad, …)` na hoście
+  czytałby odziedziczoną, już rozwiązaną wartość, więc lokalny override
+  `--sf-overlap-pull` przestałby wpływać na padding — dokładnie pułapka
+  #496 opisana w komentarzu przy `macros.css:433-437`, którą obecna
+  konstrukcja celowo omija. Właściwa jest jego opcja B (jawna klasyfikacja
+  jako fallback-only hook) — patrz nowa rekomendacja nr 5 poniżej.
+- **„Token surface needs classification (public/internal/…)" — JUŻ
+  ZAIMPLEMENTOWANE tutaj**: `scripts/token-tiers.js` definiuje tiery
+  PUBLIC / PUBLIC-ADVANCED / INTERNAL plus role knob/consumption. Genuinnie
+  nowy jest jedynie brakujący czwarty byt: **fallback-hook** — tokeny
+  czytane wyłącznie przez `var(…, fallback)` bez deklaracji
+  (`--sf-overlap-host-pad`, `--sf-color-code-block-bg/-text`). Warto je
+  wprowadzić do tiers/registry jako enumerowaną listę.
+- **„Card token ownership blurry (themes vs tokens.components)" —
+  CZĘŚCIOWO ZASADNE.** Zbieżne z sekcją 5: duplikacja jest celowa
+  i obszernie skomentowana w `themes.css:16-34` (re-substytucja aliasu dla
+  sekcyjnego `data-theme`). Drobna obserwacja z weryfikacji: `themes.css`
+  deklaruje aliasy kart także w bundle'ach bez modułu komponentów
+  (np. `slashed.optimal.css`) — nieszkodliwy balast, nie konflikt.
+- **„Layout primitives / macros poprawnie stokenizowane" — ZGODNE** z wynikami
+  sekcji 6 (0 osieroconych tokenów w plikach kompanionowych, 0 martwych
+  referencji bez fallbacku).
+
+Wniosek: zewnętrzny audyt nie wnosi nowych defektów, potwierdza obraz
+z węższego wycinka i jedną rekomendację wartą adopcji (klasyfikacja
+hook-tokenów); jego jedyną konkretną poprawkę kodu należy odrzucić.
+
+---
+
+## 8. Rekomendacje (wg priorytetu)
 
 1. **F1:** podpiąć `--sf-field-{radius,padding-block,padding-inline}` w
    `forms.css` przez `var(token, dotychczasowa-wartość)`.
@@ -253,4 +304,10 @@ spoza listy.
    udokumentować je jako tokeny wyłącznie dla własnych arkuszy użytkownika.
 4. **F4/F5:** kosmetyka — ujednolicić caret w autofill, dodać komentarz
    „keep in sync" przy fallbacku `--sf-card-radius-outer`.
-5. Rozważyć CI-owy strażnik niekonsumowanych tokenów (sekcja 6).
+5. **Hook-tokeny (z weryfikacji zewnętrznego audytu):** dodać kategorię
+   „fallback-hook" do `scripts/token-tiers.js`/registry i zarejestrować
+   `--sf-overlap-host-pad`, `--sf-color-code-block-bg`,
+   `--sf-color-code-block-text`, żeby inwentarze (token-index, api-index,
+   konfigurator) je widziały. **Nie** deklarować ich na `:root` — złamałoby
+   to mechanikę fallbacku rozwiązywanego na elemencie (pułapka #496).
+6. Rozważyć CI-owy strażnik niekonsumowanych tokenów (sekcja 6).
