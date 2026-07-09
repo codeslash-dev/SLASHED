@@ -78,10 +78,19 @@ function baseValue(name, seen = new Set()) {
   return v;
 }
 
-/** Milliseconds if the base value carries a concrete ms literal, else null. */
+/**
+ * Milliseconds if the base value is a single concrete ms literal, else null.
+ * Accepts a bare `Nms` or the framework's scaled form `calc(Nms * var(--sf-motion-scale))`
+ * (the annotation quotes the unscaled base). Anchored end-to-end so compound
+ * expressions such as `calc(100ms + 200ms)` resolve to null rather than silently
+ * yielding the first literal — matching how resolvePx rejects non-literal lengths.
+ */
 function resolveMs(name) {
   const v = baseValue(name);
-  const m = v && v.match(/(-?[\d.]+)\s*ms/);
+  if (v == null) return null;
+  let m = v.match(/^(-?[\d.]+)\s*ms$/);
+  if (m) return Number(m[1]);
+  m = v.match(/^calc\(\s*(-?[\d.]+)\s*ms\s*\*\s*var\(\s*--sf-motion-scale\s*\)\s*\)$/);
   return m ? Number(m[1]) : null;
 }
 

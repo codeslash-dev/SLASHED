@@ -46,6 +46,24 @@ meets the 44px AAA target by default. To restore the previous heights:
 - **Per button**: use `.sf-btn--l` where you previously relied on the default
   clearing 44px (now 48px).
 
+### `--sf-field-block` default reduced from `--sf-space-l` to `--sf-space-xs` (breaking)
+
+The global form-field block-padding token now defaults to `var(--sf-space-xs)`
+instead of `var(--sf-space-l)`, so it matches the block padding the shipped
+field default actually applies (see `optional/forms.css`). Previously the token
+advertised a much larger value than the fields used, so anyone reading
+`--sf-field-block` to align custom controls got spacing that didn't match the
+built-in fields.
+
+| Token | Before (≤ 0.7.8) | After (0.8.0) |
+|---|---|---|
+| `--sf-field-block` | `var(--sf-space-l)` | `var(--sf-space-xs)` |
+
+If you overrode field block padding by *reading* `--sf-field-block` (e.g.
+`padding-block: var(--sf-field-block)` on a custom control), your control now
+tracks the tighter, correct default. To keep the old roomier spacing, pin it
+explicitly: `:root { --sf-field-block: var(--sf-space-l); }`.
+
 ## SLASHED 0.7.6 → 0.7.7
 
 ### `.sf-btn` axes reworked (breaking)

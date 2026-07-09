@@ -35,6 +35,9 @@ const ANNOTATIONS = path.join(ROOT, 'docs', 'token-annotations.json');
 // intentionally excluded so a truthful "this isn't wired" note can't trip the
 // gate.
 const WIRING_CLAIM = /\bmaps to\b|\bapplied (?:to|in|on)\b|\bwired to\b|\bhooks? into\b/i;
+// Negated forms of the wiring phrases above. A truthful disclaimer such as
+// "not wired to any rule" must never be read as a wiring promise.
+const NEGATED_CLAIM = /\bnot\s+(?:maps to|applied (?:to|in|on)|wired to|hooks? into)\b/i;
 
 const cssFiles = [];
 for (const dir of ['core', 'optional']) {
@@ -69,6 +72,7 @@ for (const [name, note] of Object.entries(tokenNotes)) {
   if (typeof note !== 'string') continue;
   if (!name.startsWith('--sf-')) continue;
   if (!WIRING_CLAIM.test(note)) continue;         // only annotations that PROMISE wiring
+  if (NEGATED_CLAIM.test(note)) continue;         // …but not a negated "not wired to" disclaimer
   if (!declared.has(name)) continue;              // undeclared hooks are handled elsewhere
   // @property-registered tokens are "used" by their registration; but a wiring
   // claim still requires a real consumer, so don't exempt them here.
