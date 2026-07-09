@@ -482,7 +482,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-equal-rule-color` | PUBLIC | consumption | Layout | `var(--sf-color-border)` |
 | `--sf-equal-rule-style` | PUBLIC | knob | Layout | `solid` |
 | `--sf-equal-rule-width` | PUBLIC | knob | Layout | `0` |
-| `--sf-field-block` | PUBLIC | consumption | Core | `var(--sf-space-l)` |
+| `--sf-field-block` | PUBLIC | consumption | Core | `var(--sf-space-xs)` |
 | `--sf-field-padding-block` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-xs)` |
 | `--sf-field-padding-inline` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-s)` |
 | `--sf-field-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |

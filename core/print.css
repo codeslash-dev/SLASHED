@@ -12,10 +12,15 @@
 
   @media print {
 
+    /* --sf-print-page-size / -margin are read here so a :root override retunes
+       the printed page box. Each fallback equals the historical literal, so the
+       default print render is unchanged. Verified in Chromium that var() is
+       substituted inside @page descriptors; engines lacking general custom-
+       property substitution in @page fall back to the literal. */
     @page {
 
-      size:   a4 portrait;
-      margin: 2cm;
+      size:   var(--sf-print-page-size, a4) portrait;
+      margin: var(--sf-print-page-margin, 2cm);
     }
 
     body {

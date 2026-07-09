@@ -176,7 +176,16 @@
      Radius + space: <length> syntax enables CSS transitions on layout values —
      border-radius/padding/gap etc. now interpolate instead of snapping.
      Shadow: syntax:"*" (no <shadow> type in spec); inherits:true so :root values
-     cascade normally; registers the properties formally for DevTools inspection. */
+     cascade normally; registers the properties formally for DevTools inspection.
+
+     initial-value ≠ :root default (by spec): a registered <length> requires a
+     computationally-independent initial-value, so these carry `initial-value: 0`
+     while their real defaults are the calc()-derived values set on :root below
+     (see --sf-fluid-width above for the same constraint stated at length). One
+     consequence worth flagging: once a property is registered, the initial
+     value IS a value — so a fallback like `var(--sf-radius-m, 12px)` will NEVER
+     fire; an unset --sf-radius-m resolves to the registered `0`, not to "no
+     value". Author fallbacks against the token's :root default, not this 0. */
 
   @property --sf-radius-none  { syntax: "<length>"; inherits: true; initial-value: 0; }
   @property --sf-radius-2xs   { syntax: "<length>"; inherits: true; initial-value: 0; }
@@ -1609,7 +1618,7 @@
     --sf-content-gap:   var(--sf-space-s);  /* tight: within content       */
     --sf-gutter:        var(--sf-space-l);  /* wide: page/section gutters  */
     --sf-component-pad: var(--sf-space-m);  /* standard component padding  */
-    --sf-field-block:   var(--sf-space-l);  /* form-field block spacing */
+    --sf-field-block:   var(--sf-space-xs); /* form-field block padding — matches the shipped field default (see optional/forms.css) */
     --sf-field-required-marker: " *";
     /* Leading space is baked into the default so consumers can fully
        disable the indicator with `--sf-link-external-marker: ""` —

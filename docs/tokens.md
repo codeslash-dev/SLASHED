@@ -352,7 +352,7 @@ rebrand workflow.
 | `--sf-ease-out` | `cubic-bezier(0.25, 0, 0.15, 1)` |
 | `--sf-ease-overshoot` | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` |
 | `--sf-ease-spring` | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` |
-| `--sf-field-block` | `var(--sf-space-l)` |
+| `--sf-field-block` | `var(--sf-space-xs)` |
 | `--sf-field-required-marker` | `" *"` |
 | `--sf-fluid-max-vw` | `90` |
 | `--sf-fluid-min-vw` | `22.5` |

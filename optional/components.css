@@ -298,7 +298,17 @@
   }
 
   /* --- Sizes (m is the default; retune the rule-local *-size tier so a
-         :root override of the public knob still wins over the size) --- */
+         :root override of the public knob still wins over the size) ---
+
+     Note on the min-height ladder: the variant names (--xs/--s/--l/--xl) do
+     NOT map 1:1 onto the --sf-size-* scale rungs. The default (m) button
+     resolves min-height through --sf-touch-target (= --sf-size-l, 2.75rem) so
+     the baseline control always clears the touch-target floor, which pushes
+     the whole ladder up by one rung: --l reads --sf-size-xl and --xl adds
+     --sf-space-s on top of it. This offset is deliberate — a button needs a
+     larger hit area than the bare type-scale rung of the same name — so
+     --sf-size-m is intentionally not consumed here. Remapping onto the literal
+     rungs would resize every existing button (a visual regression); don't. */
   .sf-btn--xs {
     --sf-btn-padding-block--size:  0.125rem;
     --sf-btn-padding-inline--size: var(--sf-space-xs);

@@ -637,7 +637,7 @@ Apply heading-level typography to a non-heading element with `.sf-h1` … `.sf-h
 --sf-content-gap:   var(--sf-space-s)  /* tight gap — within content (stack, flow, prose) */
 --sf-gutter:        var(--sf-space-l)  /* wide gutter — page/section edges (center) */
 --sf-component-pad: var(--sf-space-m)  /* button, card padding */
---sf-field-block:   var(--sf-space-l)  /* vertical spacing for form field groups */
+--sf-field-block:   var(--sf-space-xs) /* form-field block padding (core-tier fallback for --sf-field-padding-block) */
 ```
 
 ### 7.4 Section padding

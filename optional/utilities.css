@@ -28,7 +28,10 @@
   /* ============================================================
    * HEADING HELPER CLASSES (.sf-h1 – .sf-h6)
    * Heading-level typography on any element without changing
-   * document semantics. Mirrors the h1–h6 rules in core/base.css.
+   * document semantics. Carries the typographic scale from the
+   * h1–h6 rules in core/base.css, including overflow-wrap; margins
+   * are intentionally NOT reset here (a visual class shouldn't clear
+   * the caller's spacing the way the base element reset does).
    *   <div class="sf-h2">Visually H2, semantically a div</div>
    * ============================================================ */
   .sf-h1,
@@ -41,6 +44,7 @@
     font-weight:   var(--sf-font-weight-heading);
     color:         var(--sf-heading-color, var(--sf-color-heading));
     text-wrap:     var(--sf-heading-text-wrap);
+    overflow-wrap: break-word;
   }
   .sf-h1 { font-size: var(--sf-h1-size); line-height: var(--sf-h1-line-height); font-weight: var(--sf-h1-font-weight); letter-spacing: var(--sf-h1-letter-spacing); max-inline-size: var(--sf-h1-max-width); }
   .sf-h2 { font-size: var(--sf-h2-size); line-height: var(--sf-h2-line-height); font-weight: var(--sf-h2-font-weight); letter-spacing: var(--sf-h2-letter-spacing); max-inline-size: var(--sf-h2-max-width); }

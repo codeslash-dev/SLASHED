@@ -3155,7 +3155,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "var(--sf-space-l)"
+      "value": "var(--sf-space-xs)"
     },
     "--sf-field-padding-block": {
       "tier": "PUBLIC",

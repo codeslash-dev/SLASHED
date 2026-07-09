@@ -376,11 +376,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-drop-shadow-s` | PUBLIC | consumption | drop | `drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))` | Small CSS filter: drop-shadow. Use filter (not box-shadow) for elements with transparent areas — SVGs, PNGs, cutout images. |
 | `--sf-drop-shadow-xl` | PUBLIC | consumption | drop | `drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))` | Extra-large CSS filter: drop-shadow for hero-scale illustrated or cut-out elements. |
 | `--sf-drop-shadow-xs` | PUBLIC | consumption | drop | `drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))` | Extra-small CSS filter: drop-shadow, for the subtlest depth on small icons and cutout images. |
-| `--sf-duration-fast` | PUBLIC | consumption | duration | `calc(150ms * var(--sf-motion-scale))` | Fast duration (~100ms). Hover transitions, tooltip appear. |
-| `--sf-duration-instant` | PUBLIC | consumption | duration | `calc(100ms * var(--sf-motion-scale))` | Near-instant duration (~50ms). Micro-interactions and cursor-follow effects. |
+| `--sf-duration-fast` | PUBLIC | consumption | duration | `calc(150ms * var(--sf-motion-scale))` | Fast duration (~150ms). Hover transitions, tooltip appear. |
+| `--sf-duration-instant` | PUBLIC | consumption | duration | `calc(100ms * var(--sf-motion-scale))` | Near-instant duration (~100ms). Micro-interactions and cursor-follow effects. |
 | `--sf-duration-none` | PUBLIC | knob | duration | `0ms` | 0ms duration. Disables transitions (respects prefers-reduced-motion). |
-| `--sf-duration-normal` | PUBLIC | consumption | duration | `calc(250ms * var(--sf-motion-scale))` | Normal duration (~200ms). Default for most transitions. |
-| `--sf-duration-slow` | PUBLIC | consumption | duration | `calc(400ms * var(--sf-motion-scale))` | Slow duration (~350ms). Emphasis transitions, drawers. |
+| `--sf-duration-normal` | PUBLIC | consumption | duration | `calc(250ms * var(--sf-motion-scale))` | Normal duration (~250ms). Default for most transitions. |
+| `--sf-duration-slow` | PUBLIC | consumption | duration | `calc(400ms * var(--sf-motion-scale))` | Slow duration (~400ms). Emphasis transitions, drawers. |
 | `--sf-duration-slower` | PUBLIC | consumption | duration | `calc(600ms * var(--sf-motion-scale))` | Extra-slow duration (~600ms). Page-level enter/exit transitions. |
 | `--sf-ease-bounce` | PUBLIC | knob | ease | `linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1)` | Bounce easing. Playful overshooting effect. |
 | `--sf-ease-elastic` | PUBLIC | knob | ease | `linear(0, 0.3, 1.2, 0.9, 1.05, 1)` | Elastic easing. Spring-like overshooting effect. |
@@ -390,7 +390,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-ease-out` | PUBLIC | knob | ease | `cubic-bezier(0.25, 0, 0.15, 1)` | Decelerating easing. Use for elements entering the viewport. |
 | `--sf-ease-overshoot` | PUBLIC | knob | ease | `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)` | Subtle overshoot easing. Softer spring effect. |
 | `--sf-ease-spring` | PUBLIC | knob | ease | `linear(0, 0.5, 1.1, 0.95, 1.02, 1)` | Spring easing. Natural physics-based motion. |
-| `--sf-field-block` | PUBLIC | consumption | field | `var(--sf-space-l)` | Vertical (block) padding inside form fields. |
+| `--sf-field-block` | PUBLIC | consumption | field | `var(--sf-space-xs)` | Vertical (block) padding inside form fields. |
 | `--sf-field-required-marker` | PUBLIC | knob | field | `" *"` | CSS content value for required-field markers (e.g. " *"). Used by pseudo-elements in the .required utility pattern. |
 | `--sf-fluid-max-vw` | PUBLIC-ADVANCED | knob | fluid | `90` | Maximum viewport width (in rem) at which the fluid scale clamps to its largest values. Default 90rem (~1440px). Part of the fluid scale engine. |
 | `--sf-fluid-min-vw` | PUBLIC-ADVANCED | knob | fluid | `22.5` | Minimum viewport width (in rem) at which the fluid scale clamps to its smallest values. Default 22.5rem (~360px). Part of the fluid scale engine. |
@@ -564,9 +564,9 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-shadow-xl` | PUBLIC | consumption | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Extra-large shadow for modals, dialogs, and high-elevation sheets. |
 | `--sf-shadow-xs` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Extra-small shadow for barely-elevated elements (focused inputs, small chips). |
 | `--sf-size-l` | PUBLIC | knob | size | `2.75rem` | Large UI component height (~44px). Touch-friendly interactive elements. |
-| `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | Medium UI component height (~36px). Default size for buttons and inputs. |
-| `--sf-size-s` | PUBLIC | knob | size | `2rem` | Small UI component height (~28px). Compact buttons and input variants. |
-| `--sf-size-xl` | PUBLIC | knob | size | `3.5rem` | Extra-large interactive component height (~52px). For oversized or prominently touch-friendly controls. |
+| `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | ~40px UI component height (scale rung `m`); not currently consumed by any shipped rule. |
+| `--sf-size-s` | PUBLIC | knob | size | `2rem` | Small UI component height (~32px). Compact buttons and input variants. |
+| `--sf-size-xl` | PUBLIC | knob | size | `3.5rem` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
 | `--sf-size-xs` | PUBLIC | knob | size | `1.5rem` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |
 | `--sf-space-2xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` | 48px-equivalent spacing. Large section spacing. |
 | `--sf-space-2xs` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` | 4px-equivalent spacing. Tight inline gaps, icon-to-text padding. |
