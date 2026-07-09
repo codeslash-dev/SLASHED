@@ -45,13 +45,14 @@ Waga: **W** = wysoka (użytkownik robi to, co mówi dokumentacja, i nic się nie
 | 4 | **Ś** | rozjazd kod↔dok (nagłówek pliku) | Nagłówek `optional/forms.css:4`: „Values resolve through **core and optional component tokens**" — mechanicznie: forms.css konsumuje 33 unikalne tokeny, z czego **0** pochodzi z `optional/tokens.components.css`. Twierdzenie jest stęchłe (prawdopodobnie z czasów planowania tokenów `--sf-field-*`). | `optional/forms.css:4`; `results/classify.txt` |
 | 5 | **Ś** | udokumentowana rezerwacja, ale pułapka publicznego API | `--sf-field-radius` / `--sf-field-padding-block` / `--sf-field-padding-inline` (`optional/tokens.components.css:46-48`) — komentarz i adnotacje uczciwie mówią „Reserved for a future .sf-field class — no consumer ships in this layer yet", ale tokeny są w tierze PUBLIC, trafiają do bundli `*-components`/`full` i do rejestru/indeksu jak każdy działający knob, a `optional/forms.css:23-30` styluje pola **identycznymi wartościami surowymi** (`--sf-space-xs`/`--sf-space-s`/`--sf-radius-m`) z pominięciem tych tokenów. Użytkownik, który je ustawi, nie dostaje nic. To 3 z 26 tokenów pliku kompanionowego bez konsumenta (pozostałe pary tokens.X→X mają 100% pokrycia — patrz §3.E). | `optional/tokens.components.css:40-48`; `optional/forms.css:23,24,30` |
 | 6 | **Ś** | przeskok skali w wariantach klasy, bez komentarza | Drabinka rozmiarów `.sf-btn`: default(m) → `--sf-touch-target`(=`size-l`), `--l` → **`--sf-size-xl`** (przeskakuje `size-l`), `--xl` → `calc(var(--sf-size-xl) + var(--sf-space-s))` (improwizacja ponad skalą), `--xs` → `padding-block: 0.125rem` (literał — skala space nie ma szczebla 3xs). Efekt: mapowanie wariantów jest przesunięte o 1 względem nazw skali i osieroca `--sf-size-m` (znal. #3). Komentarz w pliku (`components.css:60-64`) tłumaczy dwupoziomowe knoby, ale nie tłumaczy przeskoku. | `optional/components.css:302-325` |
-| 7 | **Ś** | niewidoczność hook‑tokenów w inwentarzach | 3 tokeny konsumowane wyłącznie przez fallback (`var(--x, …)`), nigdzie nie definiowane — celowe „hooki" udokumentowane w llm-guide, ale **nieobecne w `docs/token-index.json`, `docs/api-index.json` i `token-registry.json`** (brak id, tier, opisu; konfigurator ich nie widzi): `--sf-color-code-block-bg`, `--sf-color-code-block-text` (`core/base.css:118-119`), `--sf-overlap-host-pad` (`core/macros.css:437`, z komentarzem #496). Szerzej: **17 tokenów definiowanych poza 4 plikami tokenów** jest poza indeksem (celowy zakres `token_sources`), w tym 4 udokumentowane w llm-guide: `--sf-bento-cols`, `--sf-bento-row`, `--sf-field-border-color`, `--sf-field-text-color`. | `results/classify.txt` |
+| 7 | **Ś** | niewidoczność hook‑tokenów w inwentarzach | 3 tokeny konsumowane wyłącznie przez fallback (`var(--x, …)`), nigdzie nie definiowane — celowe „hooki" udokumentowane w llm-guide, ale **nieobecne w `docs/token-index.json`, `docs/api-index.json` i `token-registry.json`** (brak id, tier, opisu; konfigurator ich nie widzi): `--sf-color-code-block-bg`, `--sf-color-code-block-text` (`core/base.css:118-119`), `--sf-overlap-host-pad` (`core/macros.css:437`, z komentarzem #496). Doprecyzowanie (po weryfikacji audytu zewnętrznego): dla `--sf-overlap-host-pad` brak rejestracji jest **jawnie udokumentowany** („…so it isn't part of the token registry — set … inline", `docs/macros.md:760-762`), więc tam zostaje tylko pytanie o spójność polityki; hooki code-block takiej noty **nie mają** — dla nich niewidoczność pozostaje pełnym znaleziskiem. Szerzej: **17 tokenów definiowanych poza 4 plikami tokenów** jest poza indeksem (celowy zakres `token_sources`), w tym 4 udokumentowane w llm-guide: `--sf-bento-cols`, `--sf-bento-row`, `--sf-field-border-color`, `--sf-field-text-color`. | `results/classify.txt`; `docs/macros.md:760-762` |
 | 8 | **Ś** | luka w bramce CI | `scripts/check-llm-guide.js:66` — regex „żywych" tokenów `--sf-[a-z0-9_-]+(?=\s*[:,)])` zalicza także nazwy, które są tylko **konsumowane** (`var(--x)`) albo tylko **wymienione w komentarzu** źródła. Guide może więc bez alarmu odwoływać się do tokenu, którego nie da się ustawić (nie istnieje żadna definicja) — dokładnie ten mechanizm sprawia, że hooki z #7 przechodzą (tu akurat słusznie), ale też literówka pokrywająca się z komentarzem przejdzie. | `scripts/check-llm-guide.js:66-74` |
 | 9 | **Ś** | rozjazd wartości w adnotacji | `--sf-duration-instant`: adnotacja „Near-instant duration (**~50ms**)" (`docs/api-index.md:380`), faktyczny default `calc(100ms * var(--sf-motion-scale))` (`core/tokens.css:1311`); llm-guide i motion.md mówią poprawnie 100ms. Nazwa „instant" dla 100 ms jest też myląca sama w sobie (skala: instant 100 < fast 150). | `core/tokens.css:1311`; `docs/api-index.md:380` |
 | 10 | **N** | dryf lustrzanej kopii (komentarz „Mirrors") | `optional/utilities.css:31` deklaruje: `.sf-h1–.sf-h6` „Mirrors the h1–h6 rules in core/base.css" — mechaniczny diff: mirror nie odtwarza `overflow-wrap: break-word` (`core/base.css:28`) ani `margin: 0` (`:23`); grupowy `line-height: var(--sf-leading-tight)` (`:25`) jest pokryty przez per-nagłówkowe `--sf-hN-line-height`, więc bez skutku. Pominięcie `margin:0` jest zapewne celowe (klasa wizualna nie powinna kasować marginesów), ale wtedy słowo „mirrors" obiecuje za dużo. | `optional/utilities.css:31-50`; `core/base.css:23-37` |
 | 11 | **N** | rozjazd dok (nieistniejąca rodzina) | `docs/architecture.md:252` wymienia „`--sf-blur-*`" jako rodzinę — istnieje tylko pojedynczy `--sf-blur` (`core/tokens.css:1304`). | `docs/architecture.md:252` |
 | 12 | **N** | celowa architektura bez komentarza | 33 rejestracje `@property` typu `<length>` dla tokenów radius/space/gap mają `initial-value: 0`, podczas gdy realny default na `:root` to `calc(...)` — to ograniczenie spec (initial-value musi być obliczeniowo niezależne; autorzy znają je, bo przy `--sf-fluid-width` (`core/tokens.css:166-172`) jest pełny komentarz), ale przy bloku „Output token @property registrations" (`core/tokens.css:175-179`) rozjazd `initial ≠ default` nie jest odnotowany. Skutek uboczny wart 1 zdania komentarza: po rejestracji fallback w `var(--sf-radius-m, 12px)` nigdy nie zadziała — niewidoczna wartość to `0`, nie brak wartości. | `core/tokens.css:175-217` |
 | 13 | **N** | wariant poza tokenem, bez komentarza | `.sf-cover--min { min-height: 50dvh }` (`core/layout.css:359`) — bazowy `.sf-cover` czyta `--sf-cover-min-height` (`:351`), wariant `--min` hardcoduje 50dvh (nie skaluje się z knobem). Prawdopodobnie celowe („połowa ekranu"), nieskomentowane. Analogicznie `textarea { min-block-size: 6rem }` (`optional/forms.css:102`). | `core/layout.css:351,359` |
+| 14 | **N** | rozjazd dokumentacji (za audytem zewnętrznym, zweryfikowany) | `docs/motion.md:101`: „`.sf-color-pulse` animates **`--sf-color-primary-light`**" — token o tej nazwie nie istnieje w źródle; keyframes `sf-color-pulse` animują `--sf-color-primary-source-light` (`core/motion.css:129-132`). Kolejny dowód na lukę CI §4.4 (motion.md bez bramki). | `docs/motion.md:101`; `core/motion.css:129-132` |
 
 **Twarde błędy, których NIE znaleziono (wynik = 0 ze skryptów):** użycia `var()` bez definicji
 i bez fallbacku — **0**; `@property` zarejestrowane bez żadnej deklaracji wartości — **0**;
@@ -222,3 +223,51 @@ z fallbackami, we wszystkich bundlach identycznie).
 *Skrypty i surowe wyniki: `extract.cjs` (parser/ekstraktor), `analyzeA.cjs` (tokeny),
 `analyzeB.cjs` (kontrakty sync), `analyzeC.cjs` (klasy/warianty), `classify.cjs`
 (klasyfikacja vs inwentarze), `hardcoded.cjs` (literały w konsumentach) → `results/`.*
+
+---
+
+## Aneks A — weryfikacja audytu zewnętrznego (2026-07-09)
+
+Otrzymany równolegle audyt zewnętrzny (znaleziska CSS-001…CSS-010) zweryfikowano
+punkt po punkcie względem źródła i wyników niniejszych skryptów.
+
+**Przyjęte (nowe lub doprecyzowujące):**
+- **CSS-004 → znalezisko #14** (jedyne nowe): `docs/motion.md:101` odwołuje się do
+  nieistniejącego `--sf-color-primary-light`. Potwierdzone grepem: token nie występuje
+  w żadnym pliku źródłowym (poza niezależnymi definicjami testowymi w
+  `docs/test-*.html`); faktyczna zmienna to `--sf-color-primary-source-light`.
+- Doprecyzowanie **#7**: `docs/macros.md:760-762` jawnie dokumentuje, że
+  `--sf-overlap-host-pad` celowo nie jest w rejestrze — dla tego hooka problemem jest
+  co najwyżej spójność polityki, nie brak dokumentacji. Hooki `--sf-color-code-block-*`
+  pozostają bez takiej noty.
+- Kontekst do §2.1/§3.D: plan klas dekoracyjnych (`.sf-spin`, `.sf-ping`, `.sf-blink`,
+  `.sf-float`, `.sf-shimmer`) jest jawny — zakomentowany blok
+  `optional/utilities.css:95-112` + `docs/roadmap.md:87-90`.
+
+**Odrzucone po weryfikacji (błędy audytu zewnętrznego):**
+- **CSS-005** („`@property --x` w `core/motion.css:127` zarejestrowane jako kanał
+  interpolacji; `.sf-color-pulse` używa `var(--x)` w oklch") — **nieprawda**.
+  `core/motion.css:127` to warunek `@supports (@property --x { … })` — sonda wykrywania
+  wsparcia at-rule, nie rejestracja; `var(--x)` nie występuje nigdzie w źródle
+  (grep: 0 trafień); keyframes animują zarejestrowany `--sf-color-primary-source-light`.
+  Stąd też zawyżona liczba „105 @property" (faktycznie 104 rejestracje; sonda to 105-te
+  *wystąpienie tekstu*).
+- Teza o „ukrytej zależności" `test:unit` od builda — zależność jest **jawnie
+  udokumentowana** w `CLAUDE.md` (tabela skryptów: „Some tests read from `dist/` — run
+  `npm run build` first on a clean checkout; CI downloads the dist artifact").
+- Cytowane artefakty `audit-css-source.mjs` / `mechanical.json` **nie istnieją w repo** —
+  liczb (1340 deklaracji, 2411 `var()`, 554 tokeny czytane) nie da się odtworzyć.
+  Rozbieżność zakresu: 23 pliki = nasze 21 + `configurator/src/app.css` +
+  `demos/ultimate-override.css`; sprawdzono — żaden z tych dwóch plików nie czyta ani
+  nie definiuje tokenów `--sf-*`, więc ich włączenie zmienia tylko surowe liczniki,
+  nie wnioski. Niższa liczba `var()` (2411 vs 2506) przy większym zakresie sugeruje,
+  że parser zewnętrzny gubi `var()` zagnieżdżone w wartościach custom properties
+  lub w fallbackach.
+
+**Pokrywające się z niniejszym raportem (bez nowej treści):** CSS-001/002 ≈ #7;
+CSS-003 ≈ §3.D (tu wykonane od razu poprawnie — konsumpcja przez tokeny
+`--sf-animation-*`); CSS-006 ≈ luka CI §4.5 (z tą różnicą, że tutaj weryfikację luster
+wykonano: 0 rozjazdów); CSS-007 ≈ §2.6 (tu policzone: 0 realnych konfliktów);
+CSS-008 ≈ #5; CSS-009 — zgodnie uznane za fałszywy alarm; CSS-010 ≈ §3.F (rekomendowany
+tam test per-bundle został tutaj faktycznie wykonany: 0 twardych braków, 3 hooki
+z fallbackiem).
