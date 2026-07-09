@@ -376,9 +376,7 @@ so `bundle.config.json` lists eight outputs in total — are built by
 | Bundle | Contents |
 |---|---|
 | `slashed.optimal.css` | all `core/` + `forms` |
-| `slashed.optimal-components.css` | optimal + `tokens.components` + `components` *(btn + card — the only two)* |
-| `slashed.optimal-utilities.css` | optimal + `utilities` *(curated subset active, rest staged)* |
-| `slashed.full.css` | optimal + `tokens.components` + `components` *(btn + card)* + `utilities` *(curated subset active, rest staged)* |
+| `slashed.full.css` | optimal + `tokens.components` + `components` *(btn + card — the only two)* + `utilities` *(curated subset active, rest staged)* |
 
 `optional/legacy.css` is **not bundled by default** — add it explicitly when
 you need back-compat shims. Because every rule sits in an `@layer`,

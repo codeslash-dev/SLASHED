@@ -105,9 +105,7 @@ Pre-built bundles ship with every [release](https://github.com/codeslash-dev/SLA
 | Bundle | Contents |
 | --- | --- |
 | `slashed.optimal.css` | all of `core/` + classless forms — **recommended** |
-| `slashed.optimal-components.css` | optimal + the component layer — `.sf-btn` and `.sf-card` (the only two components) |
-| `slashed.optimal-utilities.css` | optimal + the utility layer — curated helpers active (heading, text-size, hover, list-reset, marker, selection, sticky), rest staged |
-| `slashed.full.css` | optimal + the component and utility layers |
+| `slashed.full.css` | optimal + the component and utility layers (`.sf-btn`, `.sf-card`, and the curated utility helpers) |
 
 <details>
 <summary>À la carte loading (individual source files)</summary>
