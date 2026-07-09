@@ -1,0 +1,63 @@
+== classes defined/used in selectors of multiple files ==
+.sf-is-loading -> core/accessibility.css(234) core/states.css(41,47,51) optional/components.css(92,204,216,259,293,335,339,342,356)
+.sf-text-gradient -> core/accessibility.css(226) core/macros.css(333)
+.sf-prose -> core/macros.css(9,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,35,36,38,39,40,46,47,48,49,50,51,52) optional/utilities.css(165,165,166,166,167,167,168,168)
+.sf-link-external -> core/macros.css(339,349) core/print.css(32)
+.sf-is-disabled -> core/states.css(26) optional/components.css(92,204,216,259,293,328)
+total multi-file classes: 5
+
+== variant classes and the token steps they read ==
+sf-btn--l => --sf-btn-padding-block--size:--sf-space-s@optional/components.css:315 | --sf-btn-padding-inline--size:--sf-space-l@optional/components.css:316 | --sf-btn-font-size--size:--sf-text-l@optional/components.css:317 | --sf-btn-min-height--size:--sf-size-xl@optional/components.css:318
+sf-btn--s => --sf-btn-padding-block--size:--sf-space-2xs@optional/components.css:309 | --sf-btn-padding-inline--size:--sf-space-s@optional/components.css:310 | --sf-btn-font-size--size:--sf-text-s@optional/components.css:311 | --sf-btn-min-height--size:--sf-size-s@optional/components.css:312
+sf-btn--xl => --sf-btn-padding-block--size:--sf-space-m@optional/components.css:321 | --sf-btn-padding-inline--size:--sf-space-xl@optional/components.css:322 | --sf-btn-font-size--size:--sf-text-xl@optional/components.css:323 | --sf-btn-min-height--size:--sf-size-xl+--sf-space-s@optional/components.css:324
+sf-btn--xs => --sf-btn-padding-inline--size:--sf-space-xs@optional/components.css:304 | --sf-btn-font-size--size:--sf-text-xs@optional/components.css:305 | --sf-btn-min-height--size:--sf-size-xs@optional/components.css:306
+sf-cluster--2xl => gap:--sf-space-2xl@core/layout.css:218
+sf-cluster--l => gap:--sf-space-l@core/layout.css:216
+sf-cluster--m => gap:--sf-space-m@core/layout.css:215
+sf-cluster--s => gap:--sf-space-s@core/layout.css:214
+sf-cluster--xl => gap:--sf-space-xl@core/layout.css:217
+sf-cluster--xs => gap:--sf-space-xs@core/layout.css:213
+sf-gap--2xl => gap:--sf-space-2xl@core/layout.css:179
+sf-gap--l => gap:--sf-space-l@core/layout.css:177
+sf-gap--m => gap:--sf-space-m@core/layout.css:176
+sf-gap--s => gap:--sf-space-s@core/layout.css:175
+sf-gap--xl => gap:--sf-space-xl@core/layout.css:178
+sf-gap--xs => gap:--sf-space-xs@core/layout.css:174
+sf-grid--2xl => --sf-grid-min:--sf-grid-min-2xl@core/layout.css:291
+sf-grid--l => --sf-grid-min:--sf-grid-min-l@core/layout.css:289
+sf-grid--m => --sf-grid-min:--sf-grid-min-m@core/layout.css:288
+sf-grid--s => --sf-grid-min:--sf-grid-min-s@core/layout.css:287
+sf-grid--xl => --sf-grid-min:--sf-grid-min-xl@core/layout.css:290
+sf-grid--xs => --sf-grid-min:--sf-grid-min-xs@core/layout.css:286
+sf-grid-flex--2xl => --sf-grid-min:--sf-grid-min-2xl@core/layout.css:319
+sf-grid-flex--l => --sf-grid-min:--sf-grid-min-l@core/layout.css:317
+sf-grid-flex--m => --sf-grid-min:--sf-grid-min-m@core/layout.css:316
+sf-grid-flex--s => --sf-grid-min:--sf-grid-min-s@core/layout.css:315
+sf-grid-flex--xl => --sf-grid-min:--sf-grid-min-xl@core/layout.css:318
+sf-grid-flex--xs => --sf-grid-min:--sf-grid-min-xs@core/layout.css:314
+sf-header--l => padding-block:--sf-space-l@core/layout.css:34
+sf-header--m => padding-block:--sf-space-m@core/layout.css:33
+sf-header--s => padding-block:--sf-space-s@core/layout.css:32
+sf-header--xl => padding-block:--sf-space-xl@core/layout.css:35
+sf-header--xs => padding-block:--sf-space-xs@core/layout.css:31
+sf-icon--2xl => --sf-icon-size:--sf-icon-2xl@core/layout.css:334
+sf-icon--l => --sf-icon-size:--sf-icon-l@core/layout.css:332
+sf-icon--m => --sf-icon-size:--sf-icon-m@core/layout.css:331
+sf-icon--s => --sf-icon-size:--sf-icon-s@core/layout.css:330
+sf-icon--xl => --sf-icon-size:--sf-icon-xl@core/layout.css:333
+sf-icon--xs => --sf-icon-size:--sf-icon-xs@core/layout.css:329
+sf-section--2xl => --sf-section-pad:--sf-section-pad--2xl@core/layout.css:19
+sf-section--l => --sf-section-pad:--sf-section-pad--l@core/layout.css:17
+sf-section--m => --sf-section-pad:--sf-section-pad--m@core/layout.css:16
+sf-section--s => --sf-section-pad:--sf-section-pad--s@core/layout.css:15
+sf-section--xl => --sf-section-pad:--sf-section-pad--xl@core/layout.css:18
+sf-section--xs => --sf-section-pad:--sf-section-pad--xs@core/layout.css:14
+sf-stack--2xl => gap:--sf-space-2xl@core/layout.css:167
+sf-stack--l => gap:--sf-space-l@core/layout.css:165
+sf-stack--m => gap:--sf-space-m@core/layout.css:164
+sf-stack--s => gap:--sf-space-s@core/layout.css:163
+sf-stack--xl => gap:--sf-space-xl@core/layout.css:166
+sf-stack--xs => gap:--sf-space-xs@core/layout.css:162
+sf-sticky--l => inset-block-start:--sf-space-l@optional/utilities.css:197
+sf-sticky--m => inset-block-start:--sf-space-m@optional/utilities.css:196
+sf-sticky--s => inset-block-start:--sf-space-s@optional/utilities.css:195

@@ -1,0 +1,32 @@
+unconsumed total: 190
+unconsumed & NOT in token-index: 0
+
+defined in source, missing from token-index: 17
+  --sf-clickable-overlay-z | core/accessibility.css:166 | guide: false | registry: false
+  --sf-icon-size | core/layout.css:329 | guide: false | registry: false
+  --sf-bento-cols | core/layout.css:592 | guide: true | registry: false
+  --sf-bento-row | core/layout.css:597 | guide: true | registry: false
+  --sf-surface-contrast | core/macros.css:271 | guide: false | registry: false
+  --sf-field-border-color | core/states.css:142 | guide: true | registry: false
+  --sf-field-text-color | core/states.css:143 | guide: true | registry: false
+  --sf-btn-color | optional/components.css:53 | guide: false | registry: false
+  --sf-btn-color--hover | optional/components.css:54 | guide: false | registry: false
+  --sf-btn-on-color | optional/components.css:55 | guide: false | registry: false
+  --sf-btn-soft-bg | optional/components.css:56 | guide: false | registry: false
+  --sf-btn-soft-bg--hover | optional/components.css:57 | guide: false | registry: false
+  --sf-btn-font-size--size | optional/components.css:65 | guide: false | registry: false
+  --sf-btn-padding-block--size | optional/components.css:66 | guide: false | registry: false
+  --sf-btn-padding-inline--size | optional/components.css:67 | guide: false | registry: false
+  --sf-btn-min-height--size | optional/components.css:68 | guide: false | registry: false
+  --sf-btn-gradient | optional/components.css:233 | guide: false | registry: false
+
+in token-index, not defined in source: 0 
+in token-registry, not defined in source: 36 --sf-button-padding-block, --sf-button-padding-inline, --sf-button-radius, --sf-color-action-ghost, --sf-color-base-darker, --sf-color-base-ghost, --sf-color-base-lighter, --sf-color-base-superdark, --sf-color-base-superlight, --sf-color-base-xdark, --sf-color-base-xlight, --sf-color-error, --sf-color-error-dark, --sf-color-error-light, --sf-color-error-muted, --sf-color-error-strong, --sf-color-error-subtle, --sf-color-neutral-ghost, --sf-color-primary-ghost, --sf-color-secondary-ghost, --sf-color-tertiary-ghost, --sf-color-text--on-error, --sf-equal-min-col-2, --sf-equal-min-col-3, --sf-equal-min-col-4, --sf-equal-min-col-6, --sf-boxed-bg, --sf-boxed-border-color, --sf-boxed-border-width, --sf-boxed-padding, --sf-boxed-radius, --sf-boxed-shadow, --sf-corners-end-end, --sf-corners-end-start, --sf-corners-start-end, --sf-corners-start-start
+defined in source, not in token-registry: 17
+hook --sf-color-code-block-bg | index: false | registry: false | guide: true
+hook --sf-color-code-block-text | index: false | registry: false | guide: true
+hook --sf-overlap-host-pad | index: false | registry: false | guide: true
+hook --sf-color-code-text | index: true | registry: true | guide: true
+hook --sf-current-font-weight | index: true | registry: true | guide: true
+
+guide tokens not defined in source: 16 --sf-color-text--on-, --sf-color-code-block-bg, --sf-color-code-block-text, --sf-color-, --sf-palette-mix-, --sf-text-ratio-, --sf-text-base-, --sf-text-, --sf-h1-, --sf-h6-, --sf-space-ratio-, --sf-space-base-, --sf-space-, --sf-section-pad-, --sf-overlap-host-pad, --sf-color-selection-

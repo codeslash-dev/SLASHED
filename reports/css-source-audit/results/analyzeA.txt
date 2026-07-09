@@ -1,0 +1,270 @@
+{
+ "definedFw": 752,
+ "usedFw": 565,
+ "unconsumed": 190,
+ "undefNoFallback": 0,
+ "undefWithFallback": 3,
+ "regNoDef": 0,
+ "initialMismatch": 41,
+ "multiSameScope": 0,
+ "crossFileConflict": 0
+}
+
+== UNDEF NO FALLBACK ==
+
+== @property registered but never defined ==
+(none)
+
+== initial-value mismatches ==
+--sf-color-primary initial: oklch(0.47 0.27 264) vs root: var(--sf-color-primary-source-light) @ core/tokens.css:77 core/tokens.css:92
+--sf-color-secondary initial: oklch(0.22 0.04 264) vs root: var(--sf-color-secondary-source-light) @ core/tokens.css:78 core/tokens.css:93
+--sf-color-tertiary initial: oklch(0.42 0.22 295) vs root: var(--sf-color-tertiary-source-light) @ core/tokens.css:79 core/tokens.css:94
+--sf-color-action initial: oklch(0.50 0.22 235) vs root: var(--sf-color-action-source-light) @ core/tokens.css:80 core/tokens.css:95
+--sf-color-neutral initial: oklch(0.52 0.025 260) vs root: var(--sf-color-neutral-source-light) @ core/tokens.css:81 core/tokens.css:96
+--sf-color-base initial: oklch(0.96 0.006 250) vs root: var(--sf-color-base-source-light) @ core/tokens.css:82 core/tokens.css:97
+--sf-color-success initial: oklch(0.50 0.16 145) vs root: var(--sf-color-success-source-light) @ core/tokens.css:83 core/tokens.css:98
+--sf-color-warning initial: oklch(0.75 0.17 80) vs root: var(--sf-color-warning-source-light) @ core/tokens.css:84 core/tokens.css:99
+--sf-color-info initial: oklch(0.48 0.18 235) vs root: var(--sf-color-info-source-light) @ core/tokens.css:85 core/tokens.css:100
+--sf-color-danger initial: oklch(0.48 0.22 12) vs root: var(--sf-color-danger-source-light) @ core/tokens.css:86 core/tokens.css:101
+--sf-radius-2xs initial: 0 vs root: calc(1px  * var(--sf-radius-scale)) @ core/tokens.css:182 core/tokens.css:1255
+--sf-radius-xs initial: 0 vs root: calc(2px  * var(--sf-radius-scale)) @ core/tokens.css:183 core/tokens.css:1256
+--sf-radius-s initial: 0 vs root: calc(4px  * var(--sf-radius-scale)) @ core/tokens.css:184 core/tokens.css:1257
+--sf-radius-m initial: 0 vs root: calc(8px  * var(--sf-radius-scale)) @ core/tokens.css:185 core/tokens.css:1258
+--sf-radius-l initial: 0 vs root: calc(12px * var(--sf-radius-scale)) @ core/tokens.css:186 core/tokens.css:1259
+--sf-radius-xl initial: 0 vs root: calc(16px * var(--sf-radius-scale)) @ core/tokens.css:187 core/tokens.css:1260
+--sf-radius-2xl initial: 0 vs root: calc(24px * var(--sf-radius-scale)) @ core/tokens.css:188 core/tokens.css:1261
+--sf-radius-3xl initial: 0 vs root: calc(32px * var(--sf-radius-scale)) @ core/tokens.css:189 core/tokens.css:1262
+--sf-radius-4xl initial: 0 vs root: calc(48px * var(--sf-radius-scale)) @ core/tokens.css:190 core/tokens.css:1263
+--sf-radius-pill initial: 9999px vs root: var(--sf-radius-full) @ core/tokens.css:192 core/tokens.css:1275
+--sf-radius-outer initial: 0 vs root: calc(var(--sf-radius-m) + var(--sf-component-pad)) @ core/tokens.css:193 core/tokens.css:1282
+--sf-space-2xs initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:198 core/tokens.css:1159
+--sf-space-xs initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:199 core/tokens.css:1160
+--sf-space-s initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:200 core/tokens.css:1161
+--sf-space-m initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:201 core/tokens.css:1162
+--sf-space-l initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:202 core/tokens.css:1163
+--sf-space-xl initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:203 core/tokens.css:1164
+--sf-space-2xl initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:204 core/tokens.css:1165
+--sf-space-3xl initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:205 core/tokens.css:1166
+--sf-space-4xl initial: 0 vs root: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale)) @ core/tokens.css:206 core/tokens.css:1167
+--sf-gap initial: 0 vs root: var(--sf-space-m) @ core/tokens.css:207 core/tokens.css:1608
+--sf-content-gap initial: 0 vs root: var(--sf-space-s) @ core/tokens.css:208 core/tokens.css:1609
+--sf-gutter initial: 0 vs root: var(--sf-space-l) @ core/tokens.css:209 core/tokens.css:1610
+--sf-component-pad initial: 0 vs root: var(--sf-space-m) @ core/tokens.css:210 core/tokens.css:1611
+--sf-field-block initial: 0 vs root: var(--sf-space-l) @ core/tokens.css:211 core/tokens.css:1612
+--sf-section-pad--xs initial: 0 vs root: calc(var(--sf-space-xl)  * var(--sf-section-scale)) @ core/tokens.css:212 core/tokens.css:1632
+--sf-section-pad--s initial: 0 vs root: calc(var(--sf-space-2xl) * var(--sf-section-scale)) @ core/tokens.css:213 core/tokens.css:1633
+--sf-section-pad--m initial: 0 vs root: calc(var(--sf-space-3xl) * var(--sf-section-scale)) @ core/tokens.css:214 core/tokens.css:1634
+--sf-section-pad--l initial: 0 vs root: calc(var(--sf-space-4xl) * var(--sf-section-scale)) @ core/tokens.css:215 core/tokens.css:1635
+--sf-section-pad--xl initial: 0 vs root: calc(var(--sf-space-4xl) * 1.5 * var(--sf-section-scale)) @ core/tokens.css:216 core/tokens.css:1636
+--sf-section-pad--2xl initial: 0 vs root: calc(var(--sf-space-4xl) * 2 * var(--sf-section-scale)) @ core/tokens.css:217 core/tokens.css:1637
+
+== same-scope multi-def conflicts ==
+
+== cross-file :root conflicts ==
+
+== scale families with unconsumed steps ==
+--sf-color-primary (11 members) unconsumed: --sf-color-primary-100, --sf-color-primary-300, --sf-color-primary-500, --sf-color-primary-700, --sf-color-primary-900
+--sf-color-secondary (11 members) unconsumed: --sf-color-secondary-100, --sf-color-secondary-300, --sf-color-secondary-500, --sf-color-secondary-700, --sf-color-secondary-900
+--sf-color-tertiary (11 members) unconsumed: --sf-color-tertiary-100, --sf-color-tertiary-300, --sf-color-tertiary-500, --sf-color-tertiary-700, --sf-color-tertiary-900
+--sf-color-action (11 members) unconsumed: --sf-color-action-100, --sf-color-action-300, --sf-color-action-500, --sf-color-action-700, --sf-color-action-900
+--sf-color-neutral (11 members) unconsumed: --sf-color-neutral-100, --sf-color-neutral-300, --sf-color-neutral-500, --sf-color-neutral-700, --sf-color-neutral-900
+--sf-size (5 members) unconsumed: --sf-size-m
+--sf-border-width (4 members) unconsumed: --sf-border-width-4
+--sf-radius (6 members) unconsumed: --sf-radius-l, --sf-radius-xl, --sf-radius-3xl
+--sf-shadow (5 members) unconsumed: --sf-shadow-xs, --sf-shadow-m, --sf-shadow-xl
+
+== unconsumed tokens == 190
+--sf-duration-instant | core/accessibility.css:38 = 0.01ms
+--sf-blur | core/accessibility.css:89 = 0px
+--sf-text-display-s | core/layout.css:141 = calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-dis
+--sf-text-display-m | core/layout.css:142 = calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 
+--sf-text-display-l | core/layout.css:143 = calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 
+--sf-color-text--secondary | core/macros.css:279 = oklch(from var(--sf-surface-contrast) l c h / 0.70)
+--sf-is-active | core/states.css:101 = 1
+--sf-is-current | core/states.css:110 = 1
+--sf-is-pressed | core/states.css:120 = 1
+--sf-is-open | core/states.css:127 = 1
+--sf-color-overlay | core/themes.css:109 = oklch(from var(--sf-color-base) l c h / 0.9)
+--sf-color-text--inverse | core/themes.css:121 = oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4),  0.35) c h)
+--sf-color-link--disabled | core/themes.css:145 = var(--sf-color-text--disabled)
+--sf-color-white | core/tokens.css:345 = oklch(100% 0 0)
+--sf-color-black | core/tokens.css:346 = oklch(0% 0 0)
+--sf-color-border--disabled | core/tokens.css:567 = oklch(from var(--sf-color-border--subtle) l 0 h / 0.5)
+--sf-color-border--translucent | core/tokens.css:568 = oklch(from var(--sf-color-neutral) l c h / 0.15)
+--sf-color-bg--hover | core/tokens.css:578 = oklch(from var(--sf-color-neutral) l c h / 0.08)
+--sf-color-bg--active | core/tokens.css:579 = oklch(from var(--sf-color-neutral) l c h / 0.12)
+--sf-color-success-tint | core/tokens.css:596 = oklch(from var(--sf-color-success) l c h / 0.05)
+--sf-color-warning-tint | core/tokens.css:600 = oklch(from var(--sf-color-warning) l c h / 0.05)
+--sf-color-info-tint | core/tokens.css:604 = oklch(from var(--sf-color-info) l c h / 0.05)
+--sf-color-danger-tint | core/tokens.css:608 = oklch(from var(--sf-color-danger) l c h / 0.05)
+--sf-gradient-brand | core/tokens.css:621 = linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-co
+--sf-gradient-surface | core/tokens.css:622 = linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))
+--sf-gradient-fade--r | core/tokens.css:624 = linear-gradient(in oklch to right,  transparent, var(--sf-color-bg))
+--sf-gradient-fade--l | core/tokens.css:625 = linear-gradient(in oklch to left,   transparent, var(--sf-color-bg))
+--sf-gradient-fade--t | core/tokens.css:626 = linear-gradient(in oklch to top,    transparent, var(--sf-color-bg))
+--sf-gradient-fade--b | core/tokens.css:627 = linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))
+--sf-shadow-glow | core/tokens.css:632 = 0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--
+--sf-color-primary-100 | core/tokens.css:719 = color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-
+--sf-color-primary-300 | core/tokens.css:721 = color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-
+--sf-color-primary-500 | core/tokens.css:723 = var(--sf-color-primary)
+--sf-color-primary-700 | core/tokens.css:725 = color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-
+--sf-color-primary-900 | core/tokens.css:727 = color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-
+--sf-color-primary-a50 | core/tokens.css:733 = oklch(from var(--sf-color-primary) l c h / 0.50)
+--sf-color-primary-a80 | core/tokens.css:734 = oklch(from var(--sf-color-primary) l c h / 0.80)
+--sf-color-primary-superlight | core/tokens.css:736 = var(--sf-color-primary-50)
+--sf-color-primary-xlight | core/tokens.css:737 = var(--sf-color-primary-200)
+--sf-color-primary-lighter | core/tokens.css:738 = var(--sf-color-primary-400)
+--sf-color-primary-superdark | core/tokens.css:741 = var(--sf-color-primary-950)
+--sf-color-primary--active | core/tokens.css:743 = var(--sf-color-primary-xdark)
+--sf-color-primary-tint | core/tokens.css:746 = var(--sf-color-primary-a5)
+--sf-color-secondary-100 | core/tokens.css:754 = color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--s
+--sf-color-secondary-300 | core/tokens.css:756 = color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--s
+--sf-color-secondary-500 | core/tokens.css:758 = var(--sf-color-secondary)
+--sf-color-secondary-700 | core/tokens.css:760 = color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--s
+--sf-color-secondary-900 | core/tokens.css:762 = color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--s
+--sf-color-secondary-a50 | core/tokens.css:768 = oklch(from var(--sf-color-secondary) l c h / 0.50)
+--sf-color-secondary-a80 | core/tokens.css:769 = oklch(from var(--sf-color-secondary) l c h / 0.80)
+--sf-color-secondary-superlight | core/tokens.css:771 = var(--sf-color-secondary-50)
+--sf-color-secondary-xlight | core/tokens.css:772 = var(--sf-color-secondary-200)
+--sf-color-secondary-lighter | core/tokens.css:773 = var(--sf-color-secondary-400)
+--sf-color-secondary-superdark | core/tokens.css:776 = var(--sf-color-secondary-950)
+--sf-color-secondary--active | core/tokens.css:778 = var(--sf-color-secondary-xdark)
+--sf-color-secondary-tint | core/tokens.css:781 = var(--sf-color-secondary-a5)
+--sf-color-tertiary-100 | core/tokens.css:789 = color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf
+--sf-color-tertiary-300 | core/tokens.css:791 = color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf
+--sf-color-tertiary-500 | core/tokens.css:793 = var(--sf-color-tertiary)
+--sf-color-tertiary-700 | core/tokens.css:795 = color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf
+--sf-color-tertiary-900 | core/tokens.css:797 = color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf
+--sf-color-tertiary-a50 | core/tokens.css:803 = oklch(from var(--sf-color-tertiary) l c h / 0.50)
+--sf-color-tertiary-a80 | core/tokens.css:804 = oklch(from var(--sf-color-tertiary) l c h / 0.80)
+--sf-color-tertiary-superlight | core/tokens.css:806 = var(--sf-color-tertiary-50)
+--sf-color-tertiary-xlight | core/tokens.css:807 = var(--sf-color-tertiary-200)
+--sf-color-tertiary-lighter | core/tokens.css:808 = var(--sf-color-tertiary-400)
+--sf-color-tertiary-superdark | core/tokens.css:811 = var(--sf-color-tertiary-950)
+--sf-color-tertiary--active | core/tokens.css:813 = var(--sf-color-tertiary-xdark)
+--sf-color-tertiary-tint | core/tokens.css:816 = var(--sf-color-tertiary-a5)
+--sf-color-action-100 | core/tokens.css:824 = color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-c
+--sf-color-action-300 | core/tokens.css:826 = color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-c
+--sf-color-action-500 | core/tokens.css:828 = var(--sf-color-action)
+--sf-color-action-700 | core/tokens.css:830 = color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-c
+--sf-color-action-900 | core/tokens.css:832 = color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-c
+--sf-color-action-a50 | core/tokens.css:838 = oklch(from var(--sf-color-action) l c h / 0.50)
+--sf-color-action-a80 | core/tokens.css:839 = oklch(from var(--sf-color-action) l c h / 0.80)
+--sf-color-action-superlight | core/tokens.css:841 = var(--sf-color-action-50)
+--sf-color-action-xlight | core/tokens.css:842 = var(--sf-color-action-200)
+--sf-color-action-lighter | core/tokens.css:843 = var(--sf-color-action-400)
+--sf-color-action-superdark | core/tokens.css:846 = var(--sf-color-action-950)
+--sf-color-action--active | core/tokens.css:848 = var(--sf-color-action-xdark)
+--sf-color-action-tint | core/tokens.css:851 = var(--sf-color-action-a5)
+--sf-color-neutral-100 | core/tokens.css:859 = color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-
+--sf-color-neutral-300 | core/tokens.css:861 = color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-
+--sf-color-neutral-500 | core/tokens.css:863 = var(--sf-color-neutral)
+--sf-color-neutral-700 | core/tokens.css:865 = color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-
+--sf-color-neutral-900 | core/tokens.css:867 = color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-
+--sf-color-neutral-a50 | core/tokens.css:873 = oklch(from var(--sf-color-neutral) l c h / 0.50)
+--sf-color-neutral-a80 | core/tokens.css:874 = oklch(from var(--sf-color-neutral) l c h / 0.80)
+--sf-color-neutral-superlight | core/tokens.css:876 = var(--sf-color-neutral-50)
+--sf-color-neutral-xlight | core/tokens.css:877 = var(--sf-color-neutral-200)
+--sf-color-neutral-lighter | core/tokens.css:878 = var(--sf-color-neutral-400)
+--sf-color-neutral-superdark | core/tokens.css:881 = var(--sf-color-neutral-950)
+--sf-color-neutral--active | core/tokens.css:883 = var(--sf-color-neutral-xdark)
+--sf-color-neutral-tint | core/tokens.css:886 = var(--sf-color-neutral-a5)
+--sf-color-base-50 | core/tokens.css:917 = oklch(from var(--sf-color-base) 0.97 c h)
+--sf-color-base-100 | core/tokens.css:918 = oklch(from var(--sf-color-base) 0.94 c h)
+--sf-color-base-200 | core/tokens.css:919 = oklch(from var(--sf-color-base) 0.88 c h)
+--sf-color-base-300 | core/tokens.css:920 = oklch(from var(--sf-color-base) 0.78 c h)
+--sf-color-base-400 | core/tokens.css:921 = oklch(from var(--sf-color-base) 0.65 c h)
+--sf-color-base-500 | core/tokens.css:922 = oklch(from var(--sf-color-base) 0.50 c h)
+--sf-color-base-600 | core/tokens.css:923 = oklch(from var(--sf-color-base) 0.37 c h)
+--sf-color-base-700 | core/tokens.css:924 = oklch(from var(--sf-color-base) 0.27 c h)
+--sf-color-base-800 | core/tokens.css:925 = oklch(from var(--sf-color-base) 0.17 c h)
+--sf-color-base-900 | core/tokens.css:926 = oklch(from var(--sf-color-base) 0.11 c h)
+--sf-color-base-950 | core/tokens.css:927 = oklch(from var(--sf-color-base) 0.06 c h)
+--sf-color-base-a50 | core/tokens.css:932 = oklch(from var(--sf-color-base) l c h / 0.50)
+--sf-color-base-a80 | core/tokens.css:933 = oklch(from var(--sf-color-base) l c h / 0.80)
+--sf-color-base--active | core/tokens.css:941 = oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 
+--sf-color-base-tint | core/tokens.css:944 = var(--sf-color-base-a5)
+--sf-font-display | core/tokens.css:971 = var(--sf-font-heading)
+--sf-font-humanist | core/tokens.css:975 = "       ", "              ", "      ", "       ", "           ", source-sans-pro
+--sf-font-geometric | core/tokens.css:976 = "      ", "          ", "      ", "          ", source-sans-pro, sans-serif
+--sf-font-slab | core/tokens.css:977 = "        ", "             ", "           ", "            ", "           ", serif
+--sf-font-features | core/tokens.css:980 = normal
+--sf-font-variation | core/tokens.css:981 = normal
+--sf-optical-sizing | core/tokens.css:982 = auto
+--sf-font-weight-light | core/tokens.css:990 = 300
+--sf-font-weight-medium | core/tokens.css:992 = 500
+--sf-font-weight-display | core/tokens.css:1000 = var(--sf-font-weight-bold)
+--sf-display-s-line-height | core/tokens.css:1056 = var(--sf-leading-tight)
+--sf-display-m-line-height | core/tokens.css:1057 = 1.05
+--sf-display-l-line-height | core/tokens.css:1058 = 1
+--sf-tracking-wider | core/tokens.css:1063 = 0.05em
+--sf-tracking-widest | core/tokens.css:1064 = 0.1em
+--sf-space-none | core/tokens.css:1153 = 0
+--sf-space-px | core/tokens.css:1154 = 1px
+--sf-size-m | core/tokens.css:1174 = 2.5rem
+--sf-border-width-4 | core/tokens.css:1215 = calc(4px * var(--sf-border-scale, 1))
+--sf-border | core/tokens.css:1238 = var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)
+--sf-border-strong | core/tokens.css:1240 = var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)
+--sf-radius-none | core/tokens.css:1254 = 0
+--sf-radius-2xs | core/tokens.css:1255 = calc(1px  * var(--sf-radius-scale))
+--sf-radius-l | core/tokens.css:1259 = calc(12px * var(--sf-radius-scale))
+--sf-radius-xl | core/tokens.css:1260 = calc(16px * var(--sf-radius-scale))
+--sf-radius-3xl | core/tokens.css:1262 = calc(32px * var(--sf-radius-scale))
+--sf-radius-4xl | core/tokens.css:1263 = calc(48px * var(--sf-radius-scale))
+--sf-radius-pill | core/tokens.css:1275 = var(--sf-radius-full)
+--sf-radius-outer | core/tokens.css:1282 = calc(var(--sf-radius-m) + var(--sf-component-pad))
+--sf-duration-none | core/tokens.css:1310 = 0ms
+--sf-ease-linear | core/tokens.css:1322 = linear
+--sf-ease-spring | core/tokens.css:1326 = linear(0, 0.5, 1.1, 0.95, 1.02, 1)
+--sf-ease-elastic | core/tokens.css:1327 = linear(0, 0.3, 1.2, 0.9, 1.05, 1)
+--sf-ease-bounce | core/tokens.css:1328 = linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1)
+--sf-animation-slide-out-up | core/tokens.css:1343 = sf-slide-out-up    var(--sf-duration-normal) var(--sf-ease-in) both
+--sf-animation-slide-out-down | core/tokens.css:1344 = sf-slide-out-down  var(--sf-duration-normal) var(--sf-ease-in) both
+--sf-animation-slide-out-left | core/tokens.css:1345 = sf-slide-out-left  var(--sf-duration-normal) var(--sf-ease-in) both
+--sf-animation-slide-out-right | core/tokens.css:1346 = sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both
+--sf-animation-ping | core/tokens.css:1348 = sf-ping           var(--sf-duration-slow)   var(--sf-ease-out)       infinite
+--sf-animation-blink | core/tokens.css:1349 = sf-blink          calc(1s * var(--sf-motion-scale)) steps(1, end) infinite
+--sf-animation-float | core/tokens.css:1350 = sf-float          calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infini
+--sf-animation-delay-1 | core/tokens.css:1357 = calc(75ms  * var(--sf-motion-scale))
+--sf-animation-delay-2 | core/tokens.css:1358 = calc(150ms * var(--sf-motion-scale))
+--sf-animation-delay-3 | core/tokens.css:1359 = calc(225ms * var(--sf-motion-scale))
+--sf-animation-delay-4 | core/tokens.css:1360 = calc(300ms * var(--sf-motion-scale))
+--sf-animation-delay-5 | core/tokens.css:1361 = calc(375ms * var(--sf-motion-scale))
+--sf-z-below | core/tokens.css:1399 = -1
+--sf-z-base | core/tokens.css:1400 = 0
+--sf-z-fixed | core/tokens.css:1403 = 1010
+--sf-z-dropdown | core/tokens.css:1404 = 1020
+--sf-z-overlay | core/tokens.css:1405 = 1030
+--sf-z-modal | core/tokens.css:1406 = 1040
+--sf-z-toast | core/tokens.css:1407 = 1050
+--sf-safe-top | core/tokens.css:1463 = env(safe-area-inset-top,    0px)
+--sf-safe-bottom | core/tokens.css:1464 = env(safe-area-inset-bottom, 0px)
+--sf-safe-left | core/tokens.css:1465 = env(safe-area-inset-left,   0px)
+--sf-safe-right | core/tokens.css:1466 = env(safe-area-inset-right,  0px)
+--sf-print-page-margin | core/tokens.css:1471 = 2cm
+--sf-print-page-size | core/tokens.css:1472 = a4
+--sf-shadow-none | core/tokens.css:1499 = none
+--sf-shadow-xs | core/tokens.css:1500 = 0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-sha
+--sf-shadow-m | core/tokens.css:1503 = 0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-sha
+--sf-shadow-xl | core/tokens.css:1508 = 0 2px 8px 0   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-s
+--sf-shadow-2xl | core/tokens.css:1511 = 0 4px 12px 0       oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(-
+--sf-shadow-inner | core/tokens.css:1514 = inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--
+--sf-text-shadow-none | core/tokens.css:1519 = none
+--sf-text-shadow-xs | core/tokens.css:1520 = 0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-sha
+--sf-text-shadow-s | core/tokens.css:1521 = 0 1px 2px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-sha
+--sf-text-shadow-m | core/tokens.css:1522 = 0 2px 4px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-sha
+--sf-text-shadow-l | core/tokens.css:1523 = 0 4px 8px   oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-sha
+--sf-text-shadow-xl | core/tokens.css:1524 = 0 8px 16px  oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-sha
+--sf-field-block | core/tokens.css:1612 = var(--sf-space-l)
+--sf-transition-opacity | core/tokens.css:1668 = opacity var(--sf-duration-normal) var(--sf-ease-out)
+--sf-transition-fast | core/tokens.css:1673 = color var(--sf-duration-fast) var(--sf-ease-out),
+      background-color var(--s
+--sf-transition-slow | core/tokens.css:1682 = color var(--sf-duration-slow) var(--sf-ease-in-out),
+      background-color var(
+--sf-transition-enter | core/tokens.css:1691 = color var(--sf-duration-normal) var(--sf-ease-out),
+      background-color var(-
+--sf-transition-exit | core/tokens.css:1700 = color var(--sf-duration-fast) var(--sf-ease-in),
+      background-color var(--sf
+--sf-field-radius | optional/tokens.components.css:46 = var(--sf-radius-m)
+--sf-field-padding-block | optional/tokens.components.css:47 = var(--sf-space-xs)
+--sf-field-padding-inline | optional/tokens.components.css:48 = var(--sf-space-s)

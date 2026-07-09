@@ -1,0 +1,70 @@
+core/accessibility.css:48 | *,
+    *::before,
+    *::after | animation-duration: 0.01ms !important
+core/accessibility.css:50 | *,
+    *::before,
+    *::after | transition-duration: 0.01ms !important
+core/accessibility.css:59 | .no-motion,
+  .no-motion *,
+  .no-motion *::before,
+  .no-mo | animation-duration: 0.01ms !important
+core/accessibility.css:61 | .no-motion,
+  .no-motion *,
+  .no-motion *::before,
+  .no-mo | transition-duration: 0.01ms !important
+core/accessibility.css:124 | .sr-only,
+  .sr-only-focusable:not(:focus, :focus-within) | width: 1px                 !important
+core/accessibility.css:125 | .sr-only,
+  .sr-only-focusable:not(:focus, :focus-within) | height: 1px                 !important
+core/accessibility.css:127 | .sr-only,
+  .sr-only-focusable:not(:focus, :focus-within) | margin: -1px                !important
+core/accessibility.css:138 | .skip-link | inset-block-start: -100%
+core/base.css:75 | sub, sup | font-size: 75%
+core/base.css:107 | code | padding: 0.125em 0.3em
+core/layout.css:359 | .sf-cover--min | min-height: 50dvh
+core/layout.css:499 | .sf-pancake | min-height: 100dvh
+core/macros.css:38 | .sf-prose .sf-not-prose :is(ul,ol) | padding-inline-start: revert
+core/macros.css:51 | .sf-prose .sf-not-prose :is(th,td) | padding: revert
+core/motion.css:15 | a, button, input, select, textarea, summary | transition-property: color, background-color, border-color, text-decoration-color,
+        
+core/motion.css:52 | .sf-entrance--fade,
+    .sf-entrance--fade-up,
+    .sf-entra | animation-fill-mode: both
+core/motion.css:61 | .sf-entrance--fade,
+      .sf-entrance--fade-up,
+      .sf-e | animation-fill-mode: forwards
+core/motion.css:62 | .sf-entrance--fade,
+      .sf-entrance--fade-up,
+      .sf-e | animation-timeline: view()
+core/motion.css:67 | .sf-entrance--fade | animation-name: sf-fade-in
+core/motion.css:68 | .sf-entrance--fade-up | animation-name: sf-slide-in-up
+core/motion.css:69 | .sf-entrance--fade-down | animation-name: sf-slide-in-down
+core/motion.css:70 | .sf-entrance--fade-left | animation-name: sf-slide-in-left
+core/motion.css:71 | .sf-entrance--fade-right | animation-name: sf-slide-in-right
+core/motion.css:72 | .sf-entrance--scale-up | animation-name: sf-scale-up
+core/motion.css:90 | .sf-exit--fade,
+      .sf-exit--fade-up,
+      .sf-exit--fad | animation-fill-mode: both
+core/motion.css:91 | .sf-exit--fade,
+      .sf-exit--fade-up,
+      .sf-exit--fad | animation-timeline: view()
+core/motion.css:95 | .sf-exit--fade | animation-name: sf-fade-out
+core/motion.css:96 | .sf-exit--fade-up | animation-name: sf-slide-out-up
+core/motion.css:97 | .sf-exit--fade-down | animation-name: sf-slide-out-down
+core/motion.css:98 | .sf-exit--fade-left | animation-name: sf-slide-out-left
+core/motion.css:99 | .sf-exit--fade-right | animation-name: sf-slide-out-right
+core/motion.css:100 | .sf-exit--scale-down | animation-name: sf-scale-down
+core/print.css:18 | @page | margin: 2cm [a11y/print ctx]
+core/print.css:34 | a[href]:not([href^=" "], [href^="           " i], [href^="   | font-size: 90% [a11y/print ctx]
+core/print.css:63 | h1 | font-size: 24pt [a11y/print ctx]
+core/print.css:64 | h2 | font-size: 20pt [a11y/print ctx]
+core/print.css:65 | h3 | font-size: 16pt [a11y/print ctx]
+core/print.css:66 | h4 | font-size: 14pt [a11y/print ctx]
+core/print.css:67 | h5 | font-size: 12pt [a11y/print ctx]
+core/print.css:68 | h6 | font-size: 11pt [a11y/print ctx]
+core/reset.css:27 | body | min-height: 100dvh
+core/states.css:58 | .sf-is-loading::after | margin-block-start: -0.5em
+core/states.css:59 | .sf-is-loading::after | margin-inline-start: -0.5em
+optional/legacy.css:12 | body | min-height: 100vh
+optional/utilities.css:134 | .sf-hover-grow, .sf-hover-shrink, .sf-hover-float, .sf-hover | transition-property: scale, translate
+total: 45
