@@ -319,10 +319,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Components (`optional/components.css`)
 
-32 classes.
+43 classes.
 
 | Class |
 |---|
+| `.sf-bento` |
 | `.sf-btn` |
 | `.sf-btn--action` |
 | `.sf-btn--base` |
@@ -353,8 +354,18 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-card__header` |
 | `.sf-card__media` |
 | `.sf-card__title` |
+| `.sf-center` |
+| `.sf-cluster` |
+| `.sf-cover` |
+| `.sf-frame` |
+| `.sf-grid` |
+| `.sf-grid-flex` |
 | `.sf-is-disabled` |
 | `.sf-is-loading` |
+| `.sf-reel` |
+| `.sf-sidebar` |
+| `.sf-stack` |
+| `.sf-switcher` |
 
 ## Utilities (`optional/utilities.css`)
 

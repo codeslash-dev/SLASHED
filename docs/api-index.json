@@ -19344,14 +19344,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Bento grid",
+      "group": ".sf-card",
       "description": "Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -20303,14 +20304,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Center",
+      "group": ".sf-card",
       "description": "Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -20395,14 +20397,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Cluster",
+      "group": ".sf-card",
       "description": "Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -20947,14 +20950,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Cover",
+      "group": ".sf-card",
       "description": "Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -21982,14 +21986,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Frame",
+      "group": ".sf-card",
       "description": "Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -22350,14 +22355,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Grid (auto)",
+      "group": ".sf-card",
       "description": "Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -22764,14 +22770,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Grid (flex)",
+      "group": ".sf-card",
       "description": "Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -24868,14 +24875,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Reel",
+      "group": ".sf-card",
       "description": "Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -25350,14 +25358,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Sidebar",
+      "group": ".sf-card",
       "description": "Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -25534,14 +25543,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Stack",
+      "group": ".sf-card",
       "description": "Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
@@ -26174,14 +26184,15 @@
       "kind": "layout",
       "category": "Layout primitives",
       "area": "layout",
-      "group": "Switcher",
+      "group": ".sf-card",
       "description": "Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css"
+        "core/layout.css",
+        "optional/components.css"
       ],
       "bundles": [
         "full",
