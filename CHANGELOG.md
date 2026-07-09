@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.9] - 2026-07-09
+
+### Breaking Changes
+- **tokens:** decouple --sf-touch-target from --sf-size-l; regularise the size scale (#582)
+- **components:** remap .sf-btn min-height ladder onto the --sf-size-* rungs (#582 E1)
+
+### Bug Fixes
+- **ci:** drop stale bundle names from release asset list
+- **audit:** address PR #584 review comments
+- **tokens:** remediate source-CSS audit findings (#582)
+- **configurator:** keep Marketing preview nav links inert inside the iframe
+
 ## [0.7.8] - 2026-07-09
 
 ### Bug Fixes
