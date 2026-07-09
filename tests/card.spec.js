@@ -8,7 +8,9 @@ import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { renderWithBundle, NO_TRANSITIONS_STYLE } from './render-helpers.js';
 
-const COMPONENTS_BUNDLE = path.join(process.cwd(), 'dist', 'slashed.optimal-components.css');
+// Components ship only in the full bundle (the optimal-components tier was
+// retired when the bundle set was reduced to optimal + full).
+const COMPONENTS_BUNDLE = path.join(process.cwd(), 'dist', 'slashed.full.css');
 
 for (const theme of ['light', 'dark']) {
   test.describe(`.sf-card — ${theme} theme`, () => {
