@@ -73,10 +73,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-animation-slide-in-left` | PUBLIC | consumption | animation | `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both` | Slide-in from the left. Use for left-side drawers and navigation panels. |
 | `--sf-animation-slide-in-right` | PUBLIC | consumption | animation | `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both` | Slide-in from the right. Use for right-side drawers and detail panels. |
 | `--sf-animation-slide-in-up` | PUBLIC | consumption | animation | `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both` | Slide-in from below. Use for bottom sheets, toasts, and floating action buttons. |
-| `--sf-animation-slide-out-down` | PUBLIC | consumption | animation | `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
-| `--sf-animation-slide-out-left` | PUBLIC | consumption | animation | `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
-| `--sf-animation-slide-out-right` | PUBLIC | consumption | animation | `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
-| `--sf-animation-slide-out-up` | PUBLIC | consumption | animation | `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both` | pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in); |
+| `--sf-animation-slide-out-down` | PUBLIC | consumption | animation | `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both` | Ready-made animation shorthand: slides the element out downward (sf-slide-out-down) at the normal duration with ease-in. |
+| `--sf-animation-slide-out-left` | PUBLIC | consumption | animation | `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both` | Ready-made animation shorthand: slides the element out to the left (sf-slide-out-left) at the normal duration with ease-in. |
+| `--sf-animation-slide-out-right` | PUBLIC | consumption | animation | `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both` | Ready-made animation shorthand: slides the element out to the right (sf-slide-out-right) at the normal duration with ease-in. |
+| `--sf-animation-slide-out-up` | PUBLIC | consumption | animation | `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both` | Ready-made animation shorthand: slides the element out upward (sf-slide-out-up) at the normal duration with ease-in. |
 | `--sf-animation-spin` | PUBLIC | consumption | animation | `sf-spin var(--sf-duration-slower) linear infinite` | Continuous rotation loop. Use for loading spinners and progress indicators. |
 | `--sf-blur` | PUBLIC | knob | blur | `12px` | Backdrop-filter blur amount for frosted-glass surfaces (navbars, overlays, dialogs). Default 12px. Pair with a semi-transparent background. |
 | `--sf-body-color` | PUBLIC | consumption | body | `var(--sf-color-text)` | Text color for body copy. Alias of --sf-color-text. Override here to deviate body text from the global text color. |
@@ -198,7 +198,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral--active` | PUBLIC | consumption | color | `var(--sf-color-neutral-xdark)` | Neutral color at pressed/active brightness. |
 | `--sf-color-neutral--hover` | PUBLIC | consumption | color | `var(--sf-color-neutral-darker)` | Neutral color at hover brightness. |
 | `--sf-color-neutral-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light neutral shade. |
-| `--sf-color-neutral-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light neutral shade. |
+| `--sf-color-neutral-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
 | `--sf-color-neutral-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid neutral shade. |
 | `--sf-color-neutral-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light neutral shade. |
 | `--sf-color-neutral-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest neutral tint. |
@@ -206,7 +206,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark neutral shade. |
 | `--sf-color-neutral-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark neutral shade. |
 | `--sf-color-neutral-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark neutral shade. |
-| `--sf-color-neutral-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black neutral shade. |
+| `--sf-color-neutral-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
 | `--sf-color-neutral-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest neutral tint. |
 | `--sf-color-neutral-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.10)` | 10% opacity neutral tint. |
 | `--sf-color-neutral-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.30)` | 30% opacity neutral tint. |
@@ -214,12 +214,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.50)` | 50% opacity neutral tint. |
 | `--sf-color-neutral-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.80)` | 80% opacity neutral tint. |
 | `--sf-color-neutral-darker` | PUBLIC | consumption | color | `var(--sf-color-neutral-600)` | Deep neutral shade for high-contrast contexts. |
-| `--sf-color-neutral-lighter` | PUBLIC | consumption | color | `var(--sf-color-neutral-400)` | Light neutral shade. |
+| `--sf-color-neutral-lighter` | PUBLIC | consumption | color | `var(--sf-color-neutral-400)` | Light neutral shade for soft accents — alias of --sf-color-neutral-400. |
 | `--sf-color-neutral-muted` | PUBLIC | consumption | color | `var(--sf-color-neutral-a30)` | Muted neutral fill for low-emphasis contexts. |
 | `--sf-color-neutral-source-dark` | PUBLIC | knob | color | `oklch(0.69 0.0225 260)` | Registered <color> dark counterpart of --sf-color-neutral. |
 | `--sf-color-neutral-source-light` | PUBLIC | knob | color | `oklch(0.52 0.025 260)` | OKLCH lightness source for the neutral color. |
 | `--sf-color-neutral-subtle` | PUBLIC | consumption | color | `var(--sf-color-neutral-a10)` | Lightest neutral semantic tint. |
-| `--sf-color-neutral-superdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-950)` | Near-black neutral shade. |
+| `--sf-color-neutral-superdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-950)` | Near-black neutral shade for maximum contrast on light surfaces — alias of --sf-color-neutral-950. |
 | `--sf-color-neutral-superlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-50)` | Near-white neutral shade. |
 | `--sf-color-neutral-tint` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | Extra-dark neutral shade. |
@@ -229,7 +229,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | Primary color at pressed/active brightness. |
 | `--sf-color-primary--hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | Primary color at hover brightness. |
 | `--sf-color-primary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light primary shade. |
-| `--sf-color-primary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light primary shade. |
+| `--sf-color-primary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
 | `--sf-color-primary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid primary shade. |
 | `--sf-color-primary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light primary shade. |
 | `--sf-color-primary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest primary tint. |
@@ -237,7 +237,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark primary shade. |
 | `--sf-color-primary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark primary shade. |
 | `--sf-color-primary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark primary shade. |
-| `--sf-color-primary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black primary shade. |
+| `--sf-color-primary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
 | `--sf-color-primary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest primary tint. |
 | `--sf-color-primary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.10)` | 10% opacity primary tint. |
 | `--sf-color-primary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.30)` | 30% opacity primary tint. |
@@ -245,12 +245,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.50)` | 50% opacity primary tint. |
 | `--sf-color-primary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.80)` | 80% opacity primary tint. |
 | `--sf-color-primary-darker` | PUBLIC | consumption | color | `var(--sf-color-primary-600)` | Deep primary shade. |
-| `--sf-color-primary-lighter` | PUBLIC | consumption | color | `var(--sf-color-primary-400)` | Light primary shade. |
+| `--sf-color-primary-lighter` | PUBLIC | consumption | color | `var(--sf-color-primary-400)` | Light primary shade for soft accents — alias of --sf-color-primary-400. |
 | `--sf-color-primary-muted` | PUBLIC | consumption | color | `var(--sf-color-primary-a30)` | Muted primary fill. |
 | `--sf-color-primary-source-dark` | PUBLIC | knob | color | `oklch(0.715 0.243 264)` | Registered <color> dark counterpart of --sf-color-primary. |
 | `--sf-color-primary-source-light` | PUBLIC | knob | color | `oklch(0.47 0.27 264)` | OKLCH lightness source for the primary color. |
 | `--sf-color-primary-subtle` | PUBLIC | consumption | color | `var(--sf-color-primary-a10)` | Lightest primary semantic tint. |
-| `--sf-color-primary-superdark` | PUBLIC | consumption | color | `var(--sf-color-primary-950)` | Near-black primary shade. |
+| `--sf-color-primary-superdark` | PUBLIC | consumption | color | `var(--sf-color-primary-950)` | Near-black primary shade for maximum contrast on light surfaces — alias of --sf-color-primary-950. |
 | `--sf-color-primary-superlight` | PUBLIC | consumption | color | `var(--sf-color-primary-50)` | Near-white primary shade. |
 | `--sf-color-primary-tint` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-primary-xdark` | PUBLIC | consumption | color | `var(--sf-color-primary-800)` | Extra-dark primary shade. |
@@ -261,7 +261,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary--active` | PUBLIC | consumption | color | `var(--sf-color-secondary-xdark)` | Secondary color at pressed/active brightness. |
 | `--sf-color-secondary--hover` | PUBLIC | consumption | color | `var(--sf-color-secondary-darker)` | Secondary color at hover brightness. |
 | `--sf-color-secondary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light secondary shade. |
-| `--sf-color-secondary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light secondary shade. |
+| `--sf-color-secondary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
 | `--sf-color-secondary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid secondary shade. |
 | `--sf-color-secondary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light secondary shade. |
 | `--sf-color-secondary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest secondary tint. |
@@ -269,7 +269,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark secondary shade. |
 | `--sf-color-secondary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark secondary shade. |
 | `--sf-color-secondary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark secondary shade. |
-| `--sf-color-secondary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black secondary shade. |
+| `--sf-color-secondary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
 | `--sf-color-secondary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest secondary tint. |
 | `--sf-color-secondary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.10)` | 10% opacity secondary tint. |
 | `--sf-color-secondary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.30)` | 30% opacity secondary tint. |
@@ -277,20 +277,20 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.50)` | 50% opacity secondary tint. |
 | `--sf-color-secondary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.80)` | 80% opacity secondary tint. |
 | `--sf-color-secondary-darker` | PUBLIC | consumption | color | `var(--sf-color-secondary-600)` | Deep secondary shade. |
-| `--sf-color-secondary-lighter` | PUBLIC | consumption | color | `var(--sf-color-secondary-400)` | Light secondary shade. |
+| `--sf-color-secondary-lighter` | PUBLIC | consumption | color | `var(--sf-color-secondary-400)` | Light secondary shade for soft accents — alias of --sf-color-secondary-400. |
 | `--sf-color-secondary-muted` | PUBLIC | consumption | color | `var(--sf-color-secondary-a30)` | Muted secondary fill. |
 | `--sf-color-secondary-source-dark` | PUBLIC | knob | color | `oklch(0.84 0.036 264)` | Registered <color> dark counterpart of --sf-color-secondary. |
 | `--sf-color-secondary-source-light` | PUBLIC | knob | color | `oklch(0.22 0.04 264)` | OKLCH lightness source for the secondary color. |
 | `--sf-color-secondary-subtle` | PUBLIC | consumption | color | `var(--sf-color-secondary-a10)` | Lightest secondary semantic tint. |
-| `--sf-color-secondary-superdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-950)` | Near-black secondary shade. |
+| `--sf-color-secondary-superdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-950)` | Near-black secondary shade for maximum contrast on light surfaces — alias of --sf-color-secondary-950. |
 | `--sf-color-secondary-superlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-50)` | Near-white secondary shade. |
 | `--sf-color-secondary-tint` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-800)` | Extra-dark secondary shade. |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | Extra-light secondary shade. |
 | `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Background color applied to browser text selections. |
-| `--sf-color-selection-bg--alt` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )` | Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css). |
+| `--sf-color-selection-bg--alt` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )` | Alt selection background — the inverse-scheme highlight fill for surfaces that deliberately flip colour scheme (e.g. a dark hero in light mode). |
 | `--sf-color-selection-text` | PUBLIC | knob | color | `inherit` | Text color inside browser text selections. |
-| `--sf-color-selection-text--alt` | PUBLIC | knob | color | `inherit` | Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css). |
+| `--sf-color-selection-text--alt` | PUBLIC | knob | color | `inherit` | Alt selection text colour paired with --sf-color-selection-bg--alt; inherits by default so the underlying text colour shows through. |
 | `--sf-color-success` | PUBLIC | consumption | color | `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Positive / success color for confirmation messages and completed-state indicators. |
 | `--sf-color-success-muted` | PUBLIC | consumption | color | `oklch(from var(--sf-color-success) l c h / 0.3)` | Medium success fill for success icons and status chips. |
 | `--sf-color-success-source-dark` | PUBLIC | knob | color | `oklch(0.70 0.144 145)` | Registered <color> dark counterpart of --sf-color-success. |
@@ -303,7 +303,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | Tertiary color at pressed/active brightness. |
 | `--sf-color-tertiary--hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | Tertiary color at hover brightness. |
 | `--sf-color-tertiary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light tertiary shade. |
-| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light tertiary shade. |
+| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
 | `--sf-color-tertiary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid tertiary shade. |
 | `--sf-color-tertiary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light tertiary shade. |
 | `--sf-color-tertiary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest tertiary tint. |
@@ -311,7 +311,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark tertiary shade. |
 | `--sf-color-tertiary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark tertiary shade. |
 | `--sf-color-tertiary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark tertiary shade. |
-| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black tertiary shade. |
+| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
 | `--sf-color-tertiary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest tertiary tint. |
 | `--sf-color-tertiary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.10)` | 10% opacity tertiary tint. |
 | `--sf-color-tertiary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.30)` | 30% opacity tertiary tint. |
@@ -319,12 +319,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.50)` | 50% opacity tertiary tint. |
 | `--sf-color-tertiary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.80)` | 80% opacity tertiary tint. |
 | `--sf-color-tertiary-darker` | PUBLIC | consumption | color | `var(--sf-color-tertiary-600)` | Deep tertiary shade. |
-| `--sf-color-tertiary-lighter` | PUBLIC | consumption | color | `var(--sf-color-tertiary-400)` | Light tertiary shade. |
+| `--sf-color-tertiary-lighter` | PUBLIC | consumption | color | `var(--sf-color-tertiary-400)` | Light tertiary shade for soft accents — alias of --sf-color-tertiary-400. |
 | `--sf-color-tertiary-muted` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a30)` | Muted tertiary fill. |
 | `--sf-color-tertiary-source-dark` | PUBLIC | knob | color | `oklch(0.74 0.198 295)` | Registered <color> dark counterpart of --sf-color-tertiary. |
 | `--sf-color-tertiary-source-light` | PUBLIC | knob | color | `oklch(0.42 0.22 295)` | OKLCH lightness source for the tertiary color. |
 | `--sf-color-tertiary-subtle` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a10)` | Lightest tertiary semantic tint. |
-| `--sf-color-tertiary-superdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-950)` | Near-black tertiary shade. |
+| `--sf-color-tertiary-superdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-950)` | Near-black tertiary shade for maximum contrast on light surfaces — alias of --sf-color-tertiary-950. |
 | `--sf-color-tertiary-superlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-50)` | Near-white tertiary shade. |
 | `--sf-color-tertiary-tint` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-tertiary-xdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-800)` | Extra-dark tertiary shade. |
@@ -537,8 +537,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-safe-right` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-right, 0px)` | Device safe-area inset at the right edge (rounded corners, home indicator). Resolves to env(safe-area-inset-right, 0px). |
 | `--sf-safe-top` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-top, 0px)` | Device safe-area inset at the top edge (notch, Dynamic Island). Resolves to env(safe-area-inset-top, 0px). Use for fixed headers on notched devices. |
 | `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | knob | scroll | `cover 30%` | animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes. |
-| `--sf-scroll-timeline-range-exit-end` | PUBLIC | knob | scroll | `exit 100%` | Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out. |
-| `--sf-scroll-timeline-range-exit-start` | PUBLIC | knob | scroll | `cover 70%` | Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out. |
+| `--sf-scroll-timeline-range-exit-end` | PUBLIC | knob | scroll | `exit 100%` | Scroll-timeline range at which a scroll-out exit animation finishes. Default: exit 100%. |
+| `--sf-scroll-timeline-range-exit-start` | PUBLIC | knob | scroll | `cover 70%` | Scroll-timeline range at which a scroll-out exit animation begins. Default: cover 70%. |
 | `--sf-scroll-timeline-range-start` | PUBLIC-ADVANCED | knob | scroll | `entry 0%` | animation-range start value for scroll-driven entrance effects. Default 'entry 0%'. Override on an element to control when its entrance animation begins. |
 | `--sf-scrollbar-thumb` | PUBLIC | consumption | scrollbar | `var(--sf-color-neutral)` | Color of the custom scrollbar thumb. |
 | `--sf-scrollbar-track` | PUBLIC | knob | scrollbar | `transparent` | Color of the custom scrollbar track. |
@@ -742,8 +742,8 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|---|
 | `--sf-aspect` | PUBLIC | knob | aspect | `16 / 9` | Aspect ratio value for the .aspect-ratio macro. |
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
-| `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)" (cut radius) or style="--sf-corner-scoop-at: 0 0" (which corner). |
-| `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | radius and corner position for .sf-corner-scoop. Override per element: style="--sf-corner-scoop-size: var(--sf-radius-3xl)" (cut radius) or style="--sf-corner-scoop-at: 0 0" (which corner). |
+| `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0. |
+| `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl). |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
 | `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
@@ -765,14 +765,14 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-scrim-gradient` | PUBLIC | consumption | scrim | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` | Full gradient shorthand for the scrim. Override to customise the fade. |
 | `--sf-scrim-text-shadow` | PUBLIC | knob | scrim | `0 1px 3px oklch(0 0 0 / 0.6)` | Text-shadow layered over the scrim gradient to ensure legibility for text placed directly on image backgrounds. |
 | `--sf-scroll-shadow-size` | PUBLIC | knob | scroll | `2rem` | Size of the scroll-shadow fade effect on overflowing containers. |
-| `--sf-surface-bg-animation` | PUBLIC | knob | surface | `none` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
-| `--sf-surface-bg-attachment` | PUBLIC | knob | surface | `scroll` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
-| `--sf-surface-bg-color` | PUBLIC | knob | surface | `transparent` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
-| `--sf-surface-bg-image` | PUBLIC | knob | surface | `none` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
-| `--sf-surface-bg-overlay` | PUBLIC | knob | surface | `none` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
-| `--sf-surface-bg-position` | PUBLIC | knob | surface | `center` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
-| `--sf-surface-bg-repeat` | PUBLIC | knob | surface | `no-repeat` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
-| `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose… |
+| `--sf-surface-bg-animation` | PUBLIC | knob | surface | `none` | animation shorthand applied to the .sf-surface-bg layer, e.g. a slow pan. Default: none. |
+| `--sf-surface-bg-attachment` | PUBLIC | knob | surface | `scroll` | background-attachment for the .sf-surface-bg image (scroll vs fixed). Default: scroll. |
+| `--sf-surface-bg-color` | PUBLIC | knob | surface | `transparent` | Background colour slot for the .sf-surface-bg macro. Default: transparent. |
+| `--sf-surface-bg-image` | PUBLIC | knob | surface | `none` | Background image slot for the .sf-surface-bg macro (e.g. url(…)). Default: none. |
+| `--sf-surface-bg-overlay` | PUBLIC | knob | surface | `none` | Overlay layer composited above the image in .sf-surface-bg — e.g. a scrim gradient. Default: none. |
+| `--sf-surface-bg-position` | PUBLIC | knob | surface | `center` | background-position for the .sf-surface-bg image. Default: center. |
+| `--sf-surface-bg-repeat` | PUBLIC | knob | surface | `no-repeat` | background-repeat for the .sf-surface-bg image. Default: no-repeat. |
+| `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
 ## Classes (329)
@@ -869,8 +869,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-cover--padding-l` | PUBLIC | layout | Cover | Cover variant with large vertical padding above and below the centered content. |
 | `.sf-cover--padding-s` | PUBLIC | layout | Cover | Cover variant with small vertical padding above and below the centered content. |
 | `.sf-cq` | PUBLIC | layout | Container query context | Assigns an inline-size container context to any element. Children can then use @container rules or container-query-aware tokens. |
-| `.sf-divide` | PUBLIC | layout | Divide | Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap. |
-| `.sf-divide--vertical` | PUBLIC | layout | Divide | Divide — rules between direct children, reusing .sf-divider's tokens. Unlike .sf-divider (a standalone separator element), .sf-divide is applied to the container and needs no extra markup per gap. |
+| `.sf-divide` | PUBLIC | layout | Divide | Rules between direct children (a border on each child after the first), reusing .sf-divider's tokens — no per-gap markup needed. |
+| `.sf-divide--vertical` | PUBLIC | layout | Divide | Vertical rules between direct children (inline-start borders), for row/horizontal layouts. |
 | `.sf-divider` | PUBLIC | layout | Divider | Horizontal rule (divider line). Uses --sf-divider-* tokens for color, width, and style. Modifiers change dash style or orientation. |
 | `.sf-divider--dashed` | PUBLIC | layout | Divider | Divider variant with a dashed stroke. |
 | `.sf-divider--dotted` | PUBLIC | layout | Divider | Divider variant with a dotted stroke. |
@@ -926,11 +926,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-grid-flex--s` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a small (s) minimum item width. |
 | `.sf-grid-flex--xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xl minimum item width. |
 | `.sf-grid-flex--xs` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xs minimum item width. |
-| `.sf-header--l` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
-| `.sf-header--m` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
-| `.sf-header--s` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
-| `.sf-header--xl` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
-| `.sf-header--xs` | PUBLIC | layout | — | Header — block padding on the standard spacing scale. Headers usually want lighter vertical rhythm than .sf-section, so these map to --sf-space-* directly. Only block padding is set; any inline gutter (from .sf-section--guttered, a container, or the element itself) is left… |
+| `.sf-header--l` | PUBLIC | layout | — | Header block padding at the l step (--sf-space-l). |
+| `.sf-header--m` | PUBLIC | layout | — | Header block padding at the m step (--sf-space-m). |
+| `.sf-header--s` | PUBLIC | layout | — | Header block padding at the s step (--sf-space-s). |
+| `.sf-header--xl` | PUBLIC | layout | — | Header block padding at the xl step (--sf-space-xl). |
+| `.sf-header--xs` | PUBLIC | layout | — | Header block padding at the xs step (--sf-space-xs). |
 | `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
 | `.sf-icon--2xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
 | `.sf-icon--boxed` | PUBLIC | layout | Icon | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |
@@ -981,16 +981,16 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
 | `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
-| `.sf-corner-scoop` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
-| `.sf-corner-scoop--bottom-left` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
-| `.sf-corner-scoop--bottom-right` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
-| `.sf-corner-scoop--top-left` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
-| `.sf-corner-scoop--top-right` | PUBLIC | macro | — | Concave corner — a corner that curves AWAY from the box (revealing whatever sits behind it), via a radial-gradient mask. Physical corner names (mask geometry has no logical form, same rationale as .sf-overflow-fade's physical directions). Cuts the element's full paint at that… |
-| `.sf-drop-shadow-l` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
-| `.sf-drop-shadow-m` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
-| `.sf-drop-shadow-s` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
-| `.sf-drop-shadow-xl` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
-| `.sf-drop-shadow-xs` | PUBLIC | macro | — | filter: drop-shadow() utilities — unlike box-shadow, follows the element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). |
+| `.sf-corner-scoop` | PUBLIC | macro | — | Concave "scooped" corner cut with a radial-gradient mask; defaults to the top-right corner (--sf-corner-scoop-at). Add a placement modifier to move it. |
+| `.sf-corner-scoop--bottom-left` | PUBLIC | macro | — | Places the concave corner scoop at the bottom-left corner. |
+| `.sf-corner-scoop--bottom-right` | PUBLIC | macro | — | Places the concave corner scoop at the bottom-right corner. |
+| `.sf-corner-scoop--top-left` | PUBLIC | macro | — | Places the concave corner scoop at the top-left corner. |
+| `.sf-corner-scoop--top-right` | PUBLIC | macro | — | Places the concave corner scoop at the top-right corner. |
+| `.sf-drop-shadow-l` | PUBLIC | macro | — | Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l). |
+| `.sf-drop-shadow-m` | PUBLIC | macro | — | Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m). |
+| `.sf-drop-shadow-s` | PUBLIC | macro | — | Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s). |
+| `.sf-drop-shadow-xl` | PUBLIC | macro | — | Extra-large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xl). |
+| `.sf-drop-shadow-xs` | PUBLIC | macro | — | Extra-small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xs). |
 | `.sf-equal-height` | PUBLIC | macro | Equal height | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
 | `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
 | `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
@@ -1008,10 +1008,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overflow-fade--left` | PUBLIC | macro | — | Overflow fade variant: fades the left (inline-start) edge. |
 | `.sf-overflow-fade--right` | PUBLIC | macro | — | Overflow fade variant: fades the right (inline-end) edge. Explicit alias for the default sf-overflow-fade behaviour. |
 | `.sf-overflow-fade--top` | PUBLIC | macro | — | Overflow fade variant: fades the top (block-start) edge. |
-| `.sf-overlap` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
-| `.sf-overlap--down` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
-| `.sf-overlap--end` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
-| `.sf-overlap--start` | PUBLIC | macro | — | Overlap recipe — one element intentionally overlapping the previous one (e.g. an image pulled up over the card below it), via a negative logical margin + a raised stacking context. Directional variants are standalone (margins are distinct properties, not a re-pointable knob). |
+| `.sf-overlap` | PUBLIC | macro | — | Overlap recipe — pulls the element upward (negative block-start margin) so it overlaps the previous sibling by --sf-overlap-pull. |
+| `.sf-overlap--down` | PUBLIC | macro | — | Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it. |
+| `.sf-overlap--end` | PUBLIC | macro | — | Overlap recipe — pulls the element toward the inline-end (negative inline-end margin) to overlap horizontally. |
+| `.sf-overlap--start` | PUBLIC | macro | — | Overlap recipe — pulls the element toward the inline-start (negative inline-start margin) to overlap horizontally. |
 | `.sf-overlap-host` | PUBLIC | macro | — | Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both. |
 | `.sf-prose` | PUBLIC | macro | LIST MARKER COLOUR (.sf-marker--*) | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
 | `.sf-scrim` | PUBLIC | macro | Scrim | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
@@ -1049,12 +1049,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-entrance--fade-right` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving from the left toward the right. |
 | `.sf-entrance--fade-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving upward into position. |
 | `.sf-entrance--scale-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while scaling up from a slightly smaller size. |
-| `.sf-exit--fade` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
-| `.sf-exit--fade-down` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
-| `.sf-exit--fade-left` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
-| `.sf-exit--fade-right` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
-| `.sf-exit--fade-up` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
-| `.sf-exit--scale-down` | PUBLIC | motion | — | Exit counterpart of .sf-entrance--*: fires as the element scrolls out of view. Every declaration below lives inside @supports — unlike entrance (where a non-scroll fallback still ends visible), an unconditional exit animation would leave content permanently hidden on engines… |
+| `.sf-exit--fade` | PUBLIC | motion | — | Scroll-out exit animation: fades the element out in place (sf-fade-out). |
+| `.sf-exit--fade-down` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding downward (sf-slide-out-down). |
+| `.sf-exit--fade-left` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding to the left (sf-slide-out-left). |
+| `.sf-exit--fade-right` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding to the right (sf-slide-out-right). |
+| `.sf-exit--fade-up` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding upward (sf-slide-out-up). |
+| `.sf-exit--scale-down` | PUBLIC | motion | — | Scroll-out exit animation: fades out while shrinking (sf-scale-down). |
 | `.sf-fade-in` | PUBLIC | motion | Animation presets | One-shot fade-in animation (opacity 0 → 1). Scoped to no-preference so it stops automatically for reduced-motion users. |
 | `.sf-fade-out` | PUBLIC | motion | Animation presets | One-shot fade-out animation (opacity 1 → 0). Scoped to no-preference. |
 | `.sf-scale-down` | PUBLIC | motion | Animation presets | One-shot scale-down animation (element shrinks from full size). Scoped to no-preference. |
@@ -1116,8 +1116,8 @@ and a short description. The machine-readable companion (with all columns) is
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-theme-dark` | PUBLIC | theme | — |  |
-| `.sf-theme-light` | PUBLIC | theme | — |  |
+| `.sf-theme-dark` | PUBLIC | theme | — | Forces dark colour scheme on the element and its subtree (class alias of [data-theme="dark"]). |
+| `.sf-theme-light` | PUBLIC | theme | — | Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]). |
 | `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
 ### Utilities (31)
@@ -1137,15 +1137,15 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-hover-slide-end` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-end on hover. |
 | `.sf-hover-slide-start` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-start on hover. |
 | `.sf-list-none` | PUBLIC | utility | LIST RESET (.sf-list-none) | Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied). |
-| `.sf-marker--action` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
-| `.sf-marker--primary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
-| `.sf-marker--secondary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
-| `.sf-marker--tertiary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colour the ::marker of an arbitrary list. Brand/action families only — for any other colour set `::marker { color }` yourself. The :not(.sf-prose *) guard keeps this utility from reaching into a .sf-prose subtree, which owns its markers via --sf-prose-marker-color (utilities… |
+| `.sf-marker--action` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colours list ::markers with the action colour. |
+| `.sf-marker--primary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colours list ::markers with the primary brand colour. |
+| `.sf-marker--secondary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colours list ::markers with the secondary brand colour. |
+| `.sf-marker--tertiary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colours list ::markers with the tertiary brand colour. |
 | `.sf-selection--alt` | PUBLIC | utility | ALTERNATE SELECTION COLOUR (.sf-selection--alt) | Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css). |
-| `.sf-sticky` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
-| `.sf-sticky--l` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
-| `.sf-sticky--m` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
-| `.sf-sticky--s` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | The sticky mechanism — position: sticky at the header-aware --sf-sticky-offset. Offset modifiers (--s/-m/-l) add extra gap on top of that fluid offset. (position: sticky is already conditional by nature, so there is no separate runtime-toggled state class.) |
+| `.sf-sticky` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | position: sticky pinned at the header-aware --sf-sticky-offset. |
+| `.sf-sticky--l` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Sticky positioning with an extra large gap (--sf-space-l) above the header-aware offset. |
+| `.sf-sticky--m` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Sticky positioning with an extra medium gap (--sf-space-m) above the header-aware offset. |
+| `.sf-sticky--s` | PUBLIC | utility | STICKY POSITIONING (.sf-sticky) | Sticky positioning with an extra small gap (--sf-space-s) above the header-aware offset. |
 | `.sf-text-2xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-2xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-3xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |

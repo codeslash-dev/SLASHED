@@ -103,22 +103,22 @@
     },
     {
       "name": "--sf-animation-slide-out-down",
-      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "description": "Ready-made animation shorthand: slides the element out downward (sf-slide-out-down) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both`",
       "syntax": "*"
     },
     {
       "name": "--sf-animation-slide-out-left",
-      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "description": "Ready-made animation shorthand: slides the element out to the left (sf-slide-out-left) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both`",
       "syntax": "*"
     },
     {
       "name": "--sf-animation-slide-out-right",
-      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "description": "Ready-made animation shorthand: slides the element out to the right (sf-slide-out-right) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both`",
       "syntax": "*"
     },
     {
       "name": "--sf-animation-slide-out-up",
-      "description": "pair keyframes (core/motion.css) with duration + easing. Use directly: animation: var(--sf-animation-fade-in);\n\nDefault: `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "description": "Ready-made animation shorthand: slides the element out upward (sf-slide-out-up) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both`",
       "syntax": "*"
     },
     {
@@ -943,7 +943,7 @@
     },
     {
       "name": "--sf-color-neutral-200",
-      "description": "Light neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))`",
       "syntax": "*"
     },
     {
@@ -983,7 +983,7 @@
     },
     {
       "name": "--sf-color-neutral-900",
-      "description": "Near-black neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))`",
       "syntax": "*"
     },
     {
@@ -1023,7 +1023,7 @@
     },
     {
       "name": "--sf-color-neutral-lighter",
-      "description": "Light neutral shade.\n\nDefault: `var(--sf-color-neutral-400)`",
+      "description": "Light neutral shade for soft accents — alias of --sf-color-neutral-400.\n\nDefault: `var(--sf-color-neutral-400)`",
       "syntax": "*"
     },
     {
@@ -1048,7 +1048,7 @@
     },
     {
       "name": "--sf-color-neutral-superdark",
-      "description": "Near-black neutral shade.\n\nDefault: `var(--sf-color-neutral-950)`",
+      "description": "Near-black neutral shade for maximum contrast on light surfaces — alias of --sf-color-neutral-950.\n\nDefault: `var(--sf-color-neutral-950)`",
       "syntax": "*"
     },
     {
@@ -1098,7 +1098,7 @@
     },
     {
       "name": "--sf-color-primary-200",
-      "description": "Light primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
       "syntax": "*"
     },
     {
@@ -1138,7 +1138,7 @@
     },
     {
       "name": "--sf-color-primary-900",
-      "description": "Near-black primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))`",
       "syntax": "*"
     },
     {
@@ -1178,7 +1178,7 @@
     },
     {
       "name": "--sf-color-primary-lighter",
-      "description": "Light primary shade.\n\nDefault: `var(--sf-color-primary-400)`",
+      "description": "Light primary shade for soft accents — alias of --sf-color-primary-400.\n\nDefault: `var(--sf-color-primary-400)`",
       "syntax": "*"
     },
     {
@@ -1203,7 +1203,7 @@
     },
     {
       "name": "--sf-color-primary-superdark",
-      "description": "Near-black primary shade.\n\nDefault: `var(--sf-color-primary-950)`",
+      "description": "Near-black primary shade for maximum contrast on light surfaces — alias of --sf-color-primary-950.\n\nDefault: `var(--sf-color-primary-950)`",
       "syntax": "*"
     },
     {
@@ -1258,7 +1258,7 @@
     },
     {
       "name": "--sf-color-secondary-200",
-      "description": "Light secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
       "syntax": "*"
     },
     {
@@ -1298,7 +1298,7 @@
     },
     {
       "name": "--sf-color-secondary-900",
-      "description": "Near-black secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))`",
       "syntax": "*"
     },
     {
@@ -1338,7 +1338,7 @@
     },
     {
       "name": "--sf-color-secondary-lighter",
-      "description": "Light secondary shade.\n\nDefault: `var(--sf-color-secondary-400)`",
+      "description": "Light secondary shade for soft accents — alias of --sf-color-secondary-400.\n\nDefault: `var(--sf-color-secondary-400)`",
       "syntax": "*"
     },
     {
@@ -1363,7 +1363,7 @@
     },
     {
       "name": "--sf-color-secondary-superdark",
-      "description": "Near-black secondary shade.\n\nDefault: `var(--sf-color-secondary-950)`",
+      "description": "Near-black secondary shade for maximum contrast on light surfaces — alias of --sf-color-secondary-950.\n\nDefault: `var(--sf-color-secondary-950)`",
       "syntax": "*"
     },
     {
@@ -1393,7 +1393,7 @@
     },
     {
       "name": "--sf-color-selection-bg--alt",
-      "description": "Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css).\n\nDefault: `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )`",
+      "description": "Alt selection background — the inverse-scheme highlight fill for surfaces that deliberately flip colour scheme (e.g. a dark hero in light mode).\n\nDefault: `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )`",
       "syntax": "*"
     },
     {
@@ -1403,7 +1403,7 @@
     },
     {
       "name": "--sf-color-selection-text--alt",
-      "description": "Alt selection — the opposite scheme's treatment, for a surface that deliberately inverts colours relative to the page (e.g. a dark card on a light page) where the default pairing above would land with poor contrast. Consumed by .sf-selection--alt (optional/utilities.css).\n\nDefault: `inherit`",
+      "description": "Alt selection text colour paired with --sf-color-selection-bg--alt; inherits by default so the underlying text colour shows through.\n\nDefault: `inherit`",
       "syntax": "*"
     },
     {
@@ -1468,7 +1468,7 @@
     },
     {
       "name": "--sf-color-tertiary-200",
-      "description": "Light tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
       "syntax": "*"
     },
     {
@@ -1508,7 +1508,7 @@
     },
     {
       "name": "--sf-color-tertiary-900",
-      "description": "Near-black tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))`",
       "syntax": "*"
     },
     {
@@ -1548,7 +1548,7 @@
     },
     {
       "name": "--sf-color-tertiary-lighter",
-      "description": "Light tertiary shade.\n\nDefault: `var(--sf-color-tertiary-400)`",
+      "description": "Light tertiary shade for soft accents — alias of --sf-color-tertiary-400.\n\nDefault: `var(--sf-color-tertiary-400)`",
       "syntax": "*"
     },
     {
@@ -1573,7 +1573,7 @@
     },
     {
       "name": "--sf-color-tertiary-superdark",
-      "description": "Near-black tertiary shade.\n\nDefault: `var(--sf-color-tertiary-950)`",
+      "description": "Near-black tertiary shade for maximum contrast on light surfaces — alias of --sf-color-tertiary-950.\n\nDefault: `var(--sf-color-tertiary-950)`",
       "syntax": "*"
     },
     {
@@ -1778,12 +1778,12 @@
     },
     {
       "name": "--sf-corner-scoop-at",
-      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\" (cut radius) or style=\"--sf-corner-scoop-at: 0 0\" (which corner).\n\nDefault: `100% 0`",
+      "description": "Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0.\n\nDefault: `100% 0`",
       "syntax": "*"
     },
     {
       "name": "--sf-corner-scoop-size",
-      "description": "radius and corner position for .sf-corner-scoop. Override per element: style=\"--sf-corner-scoop-size: var(--sf-radius-3xl)\" (cut radius) or style=\"--sf-corner-scoop-at: 0 0\" (which corner).\n\nDefault: `var(--sf-radius-2xl)`",
+      "description": "Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl).\n\nDefault: `var(--sf-radius-2xl)`",
       "syntax": "*"
     },
     {
@@ -2898,12 +2898,12 @@
     },
     {
       "name": "--sf-scroll-timeline-range-exit-end",
-      "description": "Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out.\n\nDefault: `exit 100%`",
+      "description": "Scroll-timeline range at which a scroll-out exit animation finishes. Default: exit 100%.\n\nDefault: `exit 100%`",
       "syntax": "*"
     },
     {
       "name": "--sf-scroll-timeline-range-exit-start",
-      "description": "Exit counterpart — element is well into view before starting to leave, finishing exactly as it scrolls fully out.\n\nDefault: `cover 70%`",
+      "description": "Scroll-timeline range at which a scroll-out exit animation begins. Default: cover 70%.\n\nDefault: `cover 70%`",
       "syntax": "*"
     },
     {
@@ -3173,42 +3173,42 @@
     },
     {
       "name": "--sf-surface-bg-animation",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `none`",
+      "description": "animation shorthand applied to the .sf-surface-bg layer, e.g. a slow pan. Default: none.\n\nDefault: `none`",
       "syntax": "*"
     },
     {
       "name": "--sf-surface-bg-attachment",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `scroll`",
+      "description": "background-attachment for the .sf-surface-bg image (scroll vs fixed). Default: scroll.\n\nDefault: `scroll`",
       "syntax": "*"
     },
     {
       "name": "--sf-surface-bg-color",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `transparent`",
+      "description": "Background colour slot for the .sf-surface-bg macro. Default: transparent.\n\nDefault: `transparent`",
       "syntax": "*"
     },
     {
       "name": "--sf-surface-bg-image",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `none`",
+      "description": "Background image slot for the .sf-surface-bg macro (e.g. url(…)). Default: none.\n\nDefault: `none`",
       "syntax": "*"
     },
     {
       "name": "--sf-surface-bg-overlay",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `none`",
+      "description": "Overlay layer composited above the image in .sf-surface-bg — e.g. a scrim gradient. Default: none.\n\nDefault: `none`",
       "syntax": "*"
     },
     {
       "name": "--sf-surface-bg-position",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `center`",
+      "description": "background-position for the .sf-surface-bg image. Default: center.\n\nDefault: `center`",
       "syntax": "*"
     },
     {
       "name": "--sf-surface-bg-repeat",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `no-repeat`",
+      "description": "background-repeat for the .sf-surface-bg image. Default: no-repeat.\n\nDefault: `no-repeat`",
       "syntax": "*"
     },
     {
       "name": "--sf-surface-bg-size",
-      "description": "input set for the .sf-surface-bg macro (issue #523). One reusable, named background bundling a base colour fallback + image/gradient/pattern + sizing + an optional overlay + an optional animation. Define a preset by setting these on a scope, then apply .sf-surface-bg to compose…\n\nDefault: `cover`",
+      "description": "background-size for the .sf-surface-bg image. Default: cover.\n\nDefault: `cover`",
       "syntax": "*"
     },
     {
