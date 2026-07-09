@@ -255,6 +255,43 @@ for (const theme of ['light', 'dark']) {
       expect(l).toBeLessThan(xl);
     });
 
+    // #582 E1: the min-height ladder maps 1:1 onto the --sf-size-* rungs.
+    // min-block-size is the floor, so each size's computed min-block-size must
+    // equal the matching --sf-size-* token (default m → size-m, 40px).
+    test('min-height ladder maps 1:1 onto --sf-size-* rungs', async ({ page }) => {
+      await mount(
+        page,
+        `<button class="sf-btn sf-btn--xs" id="xs">A</button>
+         <button class="sf-btn" id="m">B</button>
+         <button class="sf-btn sf-btn--s" id="s">E</button>
+         <button class="sf-btn sf-btn--l" id="l">C</button>
+         <button class="sf-btn sf-btn--xl" id="xl">D</button>`,
+      );
+      const pairs = await page.evaluate(() => {
+        // Resolve each --sf-size-* token to px via a probe element so the
+        // comparison is unit-agnostic (computed min-block-size is px, the token
+        // is rem).
+        const probe = document.createElement('div');
+        document.body.appendChild(probe);
+        const rungPx = (token) => {
+          probe.style.minBlockSize = `var(${token})`;
+          return parseFloat(getComputedStyle(probe).getPropertyValue('min-block-size'));
+        };
+        const btnPx = (id) =>
+          parseFloat(getComputedStyle(document.getElementById(id)).getPropertyValue('min-block-size'));
+        return [
+          [btnPx('xs'), rungPx('--sf-size-xs')],
+          [btnPx('s'), rungPx('--sf-size-s')],
+          [btnPx('m'), rungPx('--sf-size-m')],
+          [btnPx('l'), rungPx('--sf-size-l')],
+          [btnPx('xl'), rungPx('--sf-size-xl')],
+        ];
+      });
+      for (const [got, want] of pairs) {
+        expect(got).toBeCloseTo(want, 1);
+      }
+    });
+
     test('--block stretches to the container width', async ({ page }) => {
       await mount(
         page,

@@ -3,6 +3,31 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
+## SLASHED 0.7.8 → 0.8.0
+
+### `.sf-btn` min-height ladder remapped onto the `--sf-size-*` rungs (breaking)
+
+The button size scale now maps 1:1 onto the `--sf-size-*` scale rungs.
+Previously the ladder was offset by one rung so the default button cleared the
+`--sf-touch-target` (44px) floor, which pinned the default to `--sf-size-l` and
+pushed `--l`/`--xl` a rung higher. Every non-`--xs`/`--s` button therefore
+becomes shorter:
+
+| Button | Before (≤ 0.7.8) `min-block-size` | After (0.8.0) |
+|---|---|---|
+| `.sf-btn` (default / m) | `--sf-touch-target` = `--sf-size-l` (44px) | `--sf-size-m` (40px) |
+| `.sf-btn--l` | `--sf-size-xl` (56px) | `--sf-size-l` (44px) |
+| `.sf-btn--xl` | `calc(--sf-size-xl + --sf-space-s)` (~64px) | `--sf-size-xl` (56px) |
+| `.sf-btn--xs` / `--s` | `--sf-size-xs` / `--sf-size-s` | unchanged |
+
+The default control is still above the WCAG 2.2 AA 24px target, but no longer
+meets the 44px AAA target by default. To restore the previous heights:
+
+- **Globally**: `:root { --sf-btn-min-height: var(--sf-touch-target); }` pins
+  every button back to the 44px floor.
+- **Per button**: use `.sf-btn--l` where you previously relied on the default
+  clearing 44px.
+
 ## SLASHED 0.7.6 → 0.7.7
 
 ### `.sf-btn` axes reworked (breaking)
