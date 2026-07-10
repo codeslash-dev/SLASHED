@@ -1110,7 +1110,7 @@ Component tokens from `optional/tokens.components.css`:
 --sf-btn-gap:            var(--sf-space-2xs)
 --sf-btn-font-size:      var(--sf-text-m)
 --sf-btn-font-weight:    var(--sf-font-weight-interactive)
---sf-btn-min-height:     var(--sf-size-m)   /* size m default; set to var(--sf-touch-target) for the 44px AAA floor */
+--sf-btn-min-height:     var(--sf-size-m)   /* size m default; honoured on touch too (.sf-btn is exempt from the coarse-pointer 44px floor) — set to var(--sf-touch-target) for the 44px AAA floor */
 --sf-btn-border-width:   var(--sf-border-width-1)
 
 /* Cards — .sf-card (live since 0.7.0) */
