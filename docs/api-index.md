@@ -830,7 +830,7 @@ and a short description. The machine-readable companion (with all columns) is
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-alternate` | PUBLIC | layout | Alternate (zigzag / media-object) | Zigzag / alternating two-column layout. Even children align image-left/text-right; odd children flip. Collapses to a single column below the breakpoint. |
-| `.sf-bento` | PUBLIC | layout | Bento grid | Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid. |
+| `.sf-bento` | PUBLIC | layout | .sf-card | Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid. |
 | `.sf-bento--2` | PUBLIC | layout | Bento grid | Bento grid variant with a 2-column base layout. |
 | `.sf-bento--3` | PUBLIC | layout | Bento grid | Bento grid variant with a 3-column base layout. |
 | `.sf-bento--6` | PUBLIC | layout | Bento grid | Bento grid variant with a 6-column base layout. |
@@ -843,9 +843,9 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bg-layer` | PUBLIC | layout | — | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg-layer"> or as a wrapper with a nested > img / > video / > picture. |
 | `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
 | `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
-| `.sf-center` | PUBLIC | layout | Center | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
+| `.sf-center` | PUBLIC | layout | .sf-card | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
 | `.sf-center--intrinsic` | PUBLIC | layout | Center | Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space). |
-| `.sf-cluster` | PUBLIC | layout | Cluster | Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows. |
+| `.sf-cluster` | PUBLIC | layout | .sf-card | Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows. |
 | `.sf-cluster--2xl` | PUBLIC | layout | Cluster | Cluster variant with 2xl gap between items. |
 | `.sf-cluster--between` | PUBLIC | layout | Cluster | Cluster variant that distributes items with space-between alignment. |
 | `.sf-cluster--center` | PUBLIC | layout | Cluster | Cluster variant that centers the item row horizontally. |
@@ -862,7 +862,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-container--prose` | PUBLIC | layout | Container | Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content. |
 | `.sf-container--wide` | PUBLIC | layout | Container | Container variant with a wider max-width (--sf-container-l). Use for dashboards and wide media. |
 | `.sf-content-grid` | PUBLIC | layout | Content grid (breakout pattern) | Holy-grail content grid with named areas: full-bleed, popout, and content columns. Use sf-breakout on children to escape the content column. |
-| `.sf-cover` | PUBLIC | layout | Cover | Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections. |
+| `.sf-cover` | PUBLIC | layout | .sf-card | Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections. |
 | `.sf-cover__center` | PUBLIC | layout | Cover | The centered focal element inside an sf-cover. Stays vertically centered even when the cover content is shorter than the viewport. |
 | `.sf-cover--max` | PUBLIC | layout | Cover | Cover variant that uses a max-height instead of min-height for the viewport constraint. |
 | `.sf-cover--min` | PUBLIC | layout | Cover | Cover variant that reduces the minimum height to half a viewport. |
@@ -884,7 +884,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-equal--4` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 4. |
 | `.sf-equal--6` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 6. |
 | `.sf-fluid-cq` | PUBLIC | layout | — | .sf-fluid-cq: opt a subtree into a CONTAINER-relative fluid scale (issue #497). By default --sf-text-* / --sf-space-* interpolate against 100vw (the viewport); inside .sf-fluid-cq they interpolate against 100cqi (this box's inline size), so type + spacing track the container… |
-| `.sf-frame` | PUBLIC | layout | Frame | Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9. |
+| `.sf-frame` | PUBLIC | layout | .sf-card | Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9. |
 | `.sf-frame--3-2` | PUBLIC | layout | Frame | Frame variant locked to a 3:2 aspect ratio. |
 | `.sf-frame--4-3` | PUBLIC | layout | Frame | Frame variant locked to a 4:3 aspect ratio. |
 | `.sf-frame--cinema` | PUBLIC | layout | Frame | Frame variant locked to a cinematic 21:9 aspect ratio. |
@@ -900,7 +900,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-gap--s` | PUBLIC | layout | Gap | Gap injection variant with small (s) gap value. |
 | `.sf-gap--xl` | PUBLIC | layout | Gap | Gap injection variant with xl gap value. |
 | `.sf-gap--xs` | PUBLIC | layout | Gap | Gap injection variant with xs gap value. |
-| `.sf-grid` | PUBLIC | layout | Grid (auto) | Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col. |
+| `.sf-grid` | PUBLIC | layout | .sf-card | Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col. |
 | `.sf-grid--2xl` | PUBLIC | layout | Grid (auto) | Grid variant with a 2xl minimum column width. |
 | `.sf-grid--dense` | PUBLIC | layout | Grid (auto) | Grid variant with grid-auto-flow: dense, allowing the grid to fill holes created by span modifiers. |
 | `.sf-grid--fit` | PUBLIC | layout | Grid (auto) | Grid variant that switches from auto-fill to auto-fit, collapsing empty columns. |
@@ -918,7 +918,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-grid-cols-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive. |
 | `.sf-grid-cols-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 4-column fixed grid. Collapses progressively on narrow containers. |
 | `.sf-grid-cols-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 6-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-grid-flex` | PUBLIC | layout | Grid (flex) | Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. |
+| `.sf-grid-flex` | PUBLIC | layout | .sf-card | Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. |
 | `.sf-grid-flex--2xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a 2xl minimum item width. |
 | `.sf-grid-flex--center` | PUBLIC | layout | Grid (flex) | Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching. |
 | `.sf-grid-flex--l` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a large (l) minimum item width. |
@@ -944,7 +944,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-imposter--fixed` | PUBLIC | layout | Imposter | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
 | `.sf-overlay` | PUBLIC | layout | — | Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims. |
 | `.sf-pancake` | PUBLIC | layout | Pancake (sticky footer) | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
-| `.sf-reel` | PUBLIC | layout | Reel | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
+| `.sf-reel` | PUBLIC | layout | .sf-card | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
 | `.sf-section` | PUBLIC | layout | Section | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
 | `.sf-section--2xl` | PUBLIC | layout | Section | Section variant with 2xl vertical padding. |
 | `.sf-section--collapse` | PUBLIC | layout | Collapse modifier | Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks). |
@@ -955,11 +955,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-section--xl` | PUBLIC | layout | Section | Section variant with xl vertical padding. |
 | `.sf-section--xs` | PUBLIC | layout | Section | Section variant with xs vertical padding. |
 | `.sf-section-group` | PUBLIC | layout | Section | Groups adjacent sf-section elements so their combined padding collapses correctly at the top and bottom edges. |
-| `.sf-sidebar` | PUBLIC | layout | Sidebar | Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left. |
+| `.sf-sidebar` | PUBLIC | layout | .sf-card | Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left. |
 | `.sf-sidebar--narrow` | PUBLIC | layout | Sidebar | Sidebar variant with a narrower sidebar column. |
 | `.sf-sidebar--right` | PUBLIC | layout | Sidebar | Sidebar variant with the sidebar on the right (second child becomes the sidebar). |
 | `.sf-sidebar--wide` | PUBLIC | layout | Sidebar | Sidebar variant with a wider sidebar column. |
-| `.sf-stack` | PUBLIC | layout | Stack | Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm. |
+| `.sf-stack` | PUBLIC | layout | .sf-card | Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm. |
 | `.sf-stack--2xl` | PUBLIC | layout | Stack | Stack variant with 2xl gap between children. |
 | `.sf-stack--center` | PUBLIC | layout | Stack | Stack variant that centers children on the cross axis. |
 | `.sf-stack--end` | PUBLIC | layout | Stack | Stack variant that aligns children to the cross-axis end (right in LTR). |
@@ -971,7 +971,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-stack--xs` | PUBLIC | layout | Stack | Stack variant with xs gap between children. |
 | `.sf-subgrid` | PUBLIC | layout | Subgrid | Passes the parent grid columns through to children via subgrid. Place on a grid item that should align its own children to the outer grid columns. |
 | `.sf-subgrid-rows` | PUBLIC | layout | Subgrid | Passes the parent grid rows through to children via subgrid. Place on a grid item that should align its own children to the outer grid rows. |
-| `.sf-switcher` | PUBLIC | layout | Switcher | Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold. |
+| `.sf-switcher` | PUBLIC | layout | .sf-card | Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold. |
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
