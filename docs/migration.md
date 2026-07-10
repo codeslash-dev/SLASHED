@@ -5,6 +5,35 @@ upgrade notes.
 
 ## SLASHED 0.7.8 → 0.8.0
 
+### `.sf-btn` size scale honoured on touch; blanket 44px floor no longer applies to buttons (breaking)
+
+The blanket `@media (pointer: coarse) { … min-block-size: var(--sf-touch-target) }`
+rule in `core/accessibility.css` used to apply to every `<button>`, including
+`.sf-btn`. On any touch device this silently overrode the button's own XS–XL
+size ladder and pinned every rung to 44px — so the whole size scale collapsed to
+one height on phones and tablets, even though it renders correctly with a mouse.
+
+`.sf-btn` is now **excluded** from that blanket floor (`button:not(.sf-btn)`).
+Buttons honour their `--sf-btn-min-height` / `--sf-size-*` ladder everywhere,
+touch included. The default control (`--sf-size-m`, 40px) still clears the WCAG
+2.2 **AA** 24px target, and the smallest rung `.sf-btn--xs` sits at exactly the
+24px AA minimum.
+
+**What changed for you:** on touch devices, un-customised `.sf-btn--xs/--s`
+buttons now render at their true (smaller) height instead of 44px. Bare
+`<button>`s without `.sf-btn`, and native form controls (`input`, `select`,
+`summary`), are unaffected — they keep the 44px floor.
+
+**Opt back into the 44px AAA touch target** (previous behaviour) by setting the
+button min-height to the accessibility anchor — globally:
+
+```css
+:root { --sf-btn-min-height: var(--sf-touch-target); } /* 44px on every .sf-btn */
+```
+
+or per-button with `.sf-btn--l` (`--sf-size-l`, 48px). In the configurator this
+is the **Min height → touch-target** choice.
+
 ### `--sf-touch-target` decoupled from `--sf-size-l`; size scale regularised (breaking)
 
 `--sf-touch-target` used to be `var(--sf-size-l)`, which coupled the WCAG 2.5.5

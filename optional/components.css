@@ -309,7 +309,12 @@
      AA 24px target; consumers who want the 44px AAA touch target back can set
      `--sf-btn-min-height: var(--sf-touch-target)` globally (exactly 44px, an
      accessibility anchor independent of the size scale) or reach for
-     `.sf-btn--l` (--sf-size-l, 48px). */
+     `.sf-btn--l` (--sf-size-l, 48px).
+
+     This ladder is honoured on touch devices too: .sf-btn is excluded from the
+     blanket `@media (pointer: coarse)` 44px floor in core/accessibility.css, so
+     the size scale stays visible on phones/tablets instead of every rung
+     collapsing to 44px. The AAA opt-in above restores the floor when wanted. */
   .sf-btn--xs {
     --sf-btn-padding-block--size:  0.125rem;
     --sf-btn-padding-inline--size: var(--sf-space-xs);
