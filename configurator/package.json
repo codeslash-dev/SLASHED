@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "sync": "node scripts/sync-api.mjs",
-    "predev": "node scripts/sync-api.mjs",
+    "predev": "node scripts/ensure-framework-dist.mjs && node scripts/sync-api.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/sync-api.mjs",
+    "prebuild": "node scripts/ensure-framework-dist.mjs && node scripts/sync-api.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
