@@ -13,7 +13,10 @@ rule in `core/accessibility.css` used to apply to every `<button>`, including
 size ladder and pinned every rung to 44px — so the whole size scale collapsed to
 one height on phones and tablets, even though it renders correctly with a mouse.
 
-`.sf-btn` is now **excluded** from that blanket floor (`button:not(.sf-btn)`).
+`.sf-btn` is now **excluded** from that blanket floor. The rule targets
+`button:not([class~="sf-btn"])` (the attribute form is exactly equivalent to
+`:not(.sf-btn)` in behaviour and specificity — it keeps the class-catalogue
+tooling from re-filing `.sf-btn` under the `accessibility` layer).
 Buttons honour their `--sf-btn-min-height` / `--sf-size-*` ladder everywhere,
 touch included. The default control (`--sf-size-m`, 40px) still clears the WCAG
 2.2 **AA** 24px target, and the smallest rung `.sf-btn--xs` sits at exactly the
