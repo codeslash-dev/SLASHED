@@ -54,6 +54,7 @@ const SKIP = {
   '--sf-shadow-none': 'sentinel "none" — the API guarantees no shadow; overriding would add one where none is promised',
   '--sf-text-shadow-none': 'sentinel "none" — the API guarantees no text-shadow',
   '--sf-surface-bg-animation': 'background animation shorthand on .sf-surface — a global value would force motion on every surface and fight reduced-motion; no safe single-element visual perturbation',
+  '--sf-btn-font-size': 'flatten-all label size — reads FIRST in the font-size cascade, so setting it would shadow the per-size --sf-btn-{size}-font-size knobs (and mask the --sf-btn-font-scale multiplier) this demo exercises; the per-size ladder is the recommended surface',
 };
 
 // Curated overrides for keyword / numeric / zero-valued knobs that no generic
@@ -62,12 +63,15 @@ const CURATED = {
   // Button sizing knobs declared `initial` (opt-in hooks with no baked value —
   // their default lives on the rule-local --sf-btn-*--size tier). Give explicit
   // lengths so the demo exercises them; `initial` carries no type to infer.
-  '--sf-btn-font-size': '1.5rem',
+  // (The flatten-all --sf-btn-font-size is intentionally in SKIP above so it
+  // doesn't shadow the per-size knobs below.)
   '--sf-btn-padding-block': '0.9rem',
   '--sf-btn-padding-inline': '2rem',
   '--sf-btn-min-height': '4rem',
   // Uniform label-size multiplier (unitless) + per-size label knobs (also
-  // `initial`) — explicit lengths exercise each rung's per-size override.
+  // `initial`). With the flatten-all skipped, these explicit per-rung lengths
+  // actually take effect — each rung's font-size differs, then --sf-btn-font-scale
+  // multiplies the whole ladder.
   '--sf-btn-font-scale': '1.6',
   '--sf-btn-xs-font-size': '0.9rem',
   '--sf-btn-s-font-size': '1.1rem',
@@ -430,6 +434,7 @@ function tokenVisual(t) {
     'prose', 'stack', 'cluster', 'switcher', 'imposter', 'breakout', 'alternate', 'center', 'btn', 'field', 'scrim',
     'sticky', 'heading']);
   if (lenNs.has(ns) && /(\d|\bvar\()/.test(v) && !/\//.test(v) && !/,/.test(v)
+      && !/^[\d.]+$/.test(v.trim())  // unitless numbers (e.g. --sf-btn-font-scale) can't max() with 3px
       && !/^(none|auto|inherit|normal|max-content|min-content|transparent)/.test(v)) {
     return `<div class="tvis tvis--bar" style="inline-size:min(max(var(${n}),3px),100%)"></div>`;
   }

@@ -303,12 +303,12 @@
     },
     {
       "name": "--sf-btn-font-scale",
-      "description": "Uniform label-size multiplier — the everyday \"make button text a little larger / smaller\" knob. Scales the resolved font-size of EVERY button size (.sf-btn--xs…xl) by the same factor while KEEPING the size ladder intact (xs < s < m < l < xl). Contrast with --sf-btn-font-size…\n\nDefault: `1`",
+      "description": "Uniform label-size multiplier for .sf-btn — scales every size's font-size by one factor while keeping the xs…xl ladder intact. The everyday 'bigger/smaller button text' knob.\n\nDefault: `1`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-font-size",
-      "description": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.\n\nDefault: `initial`",
+      "description": "Flatten-all label font-size for .sf-btn — once set it overrides every size (--xs/--s/--l/--xl) to the same value. For proportional sizing use --sf-btn-font-scale; to retune a single rung use --sf-btn-{size}-font-size.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
@@ -323,12 +323,12 @@
     },
     {
       "name": "--sf-btn-l-font-size",
-      "description": "Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without…\n\nDefault: `initial`",
+      "description": "Label font-size for the large button (.sf-btn--l). Unset, falls through to --sf-text-l; set to retune this rung without touching the others.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-m-font-size",
-      "description": "Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without…\n\nDefault: `initial`",
+      "description": "Label font-size for the default (medium) button (.sf-btn). Unset, falls through to --sf-text-m; set to retune this rung without touching the others.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
@@ -353,17 +353,17 @@
     },
     {
       "name": "--sf-btn-s-font-size",
-      "description": "Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without…\n\nDefault: `initial`",
+      "description": "Label font-size for the small button (.sf-btn--s). Unset, falls through to --sf-text-s; set to retune this rung without touching the others.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-xl-font-size",
-      "description": "Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without…\n\nDefault: `initial`",
+      "description": "Label font-size for the extra-large button (.sf-btn--xl). Unset, falls through to --sf-text-xl; set to retune this rung without touching the others.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-xs-font-size",
-      "description": "Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without…\n\nDefault: `initial`",
+      "description": "Label font-size for the extra-small button (.sf-btn--xs). Unset, falls through to --sf-text-xs; set to retune this rung without touching the others.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {

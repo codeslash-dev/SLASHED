@@ -116,14 +116,16 @@
         {#each list as t, i (t.name)}
           <!-- Tier group dividers: the list is tier-sorted (Public → Advanced →
                Internal), so a break before the FIRST token of each non-Public
-               tier separates everyday knobs from the advanced/internal ones. -->
-          {#if t.tier === "PUBLIC-ADVANCED" && (i === 0 || list[i - 1].tier !== "PUBLIC-ADVANCED")}
+               tier separates everyday knobs from the advanced/internal ones.
+               The `i > 0` guard skips the header when a filter leaves the group
+               at the very top of the list — nothing above it to separate from. -->
+          {#if t.tier === "PUBLIC-ADVANCED" && i > 0 && list[i - 1].tier !== "PUBLIC-ADVANCED"}
             <div class="flex items-center gap-2 px-1.5 pt-3 pb-1">
               <span class="text-[8px] font-bold uppercase tracking-widest text-amber-600/80 dark:text-amber-400/80">Advanced</span>
               <div class="h-px flex-1 bg-amber-600/25"></div>
             </div>
           {/if}
-          {#if t.tier === "INTERNAL" && (i === 0 || list[i - 1].tier !== "INTERNAL")}
+          {#if t.tier === "INTERNAL" && i > 0 && list[i - 1].tier !== "INTERNAL"}
             <div class="flex items-center gap-2 px-1.5 pt-3 pb-1">
               <span class="text-[8px] font-bold uppercase tracking-widest text-rose-700/80 dark:text-rose-400/80">Internal</span>
               <div class="h-px flex-1 bg-rose-800/25"></div>
