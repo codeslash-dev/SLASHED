@@ -26,28 +26,28 @@
       "optimal"
     ],
     "counts": {
-      "total": 1064,
+      "total": 1070,
       "by_type": {
         "class": 329,
-        "token": 735
+        "token": 741
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1008,
+        "PUBLIC": 1014,
         "PUBLIC-ADVANCED": 55
       },
       "by_role": {
         "consumption": 491,
-        "knob": 244
+        "knob": 250
       },
-      "tokens": 735,
+      "tokens": 741,
       "classes": 329,
       "sf_classes": 292,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
-        "Component tokens": 26,
+        "Component tokens": 32,
         "Components": 30,
         "Core tokens": 622,
         "Layout primitives": 145,
@@ -1650,6 +1650,31 @@
       ]
     },
     {
+      "name": "--sf-btn-font-scale",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Uniform label-size multiplier for .sf-btn — scales every size's font-size by one factor while keeping the xs…xl ladder intact. The everyday 'bigger/smaller button text' knob.",
+      "value": "1",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
       "name": "--sf-btn-font-size",
       "type": "token",
       "tier": "PUBLIC",
@@ -1658,7 +1683,7 @@
       "category": "Component tokens",
       "area": "components",
       "group": "BUTTON TOKENS",
-      "description": "Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button.",
+      "description": "Flatten-all label font-size for .sf-btn — once set it overrides every size (--xs/--s/--l/--xl) to the same value. For proportional sizing use --sf-btn-font-scale; to retune a single rung use --sf-btn-{size}-font-size.",
       "value": "initial",
       "aliasOf": null,
       "registered": false,
@@ -1711,6 +1736,56 @@
       "description": "Gap between an icon and the label inside .sf-btn.",
       "value": "var(--sf-space-2xs)",
       "aliasOf": "--sf-space-2xs",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-l-font-size",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Label font-size for the large button (.sf-btn--l). Unset, falls through to --sf-text-l; set to retune this rung without touching the others.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-m-font-size",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Label font-size for the default (medium) button (.sf-btn). Unset, falls through to --sf-text-m; set to retune this rung without touching the others.",
+      "value": "initial",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
@@ -1811,6 +1886,81 @@
       "description": "Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens.",
       "value": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-s-font-size",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Label font-size for the small button (.sf-btn--s). Unset, falls through to --sf-text-s; set to retune this rung without touching the others.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xl-font-size",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Label font-size for the extra-large button (.sf-btn--xl). Unset, falls through to --sf-text-xl; set to retune this rung without touching the others.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xs-font-size",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Label font-size for the extra-small button (.sf-btn--xs). Unset, falls through to --sf-text-xs; set to retune this rung without touching the others.",
+      "value": "initial",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,

@@ -29,6 +29,11 @@ const EXPECTED_EMPTY = new Set([
   '--sf-btn-padding-block',
   '--sf-btn-padding-inline',
   '--sf-btn-min-height',
+  '--sf-btn-xs-font-size',
+  '--sf-btn-s-font-size',
+  '--sf-btn-m-font-size',
+  '--sf-btn-l-font-size',
+  '--sf-btn-xl-font-size',
 ]);
 
 function declaredTokens() {
@@ -238,3 +243,67 @@ for (const theme of ['light', 'dark']) {
     });
   });
 }
+
+// ---- Per-size button label knobs + font-scale multiplier ------------------
+// The per-size knobs (--sf-btn-{xs,s,m,l,xl}-font-size) are `initial` at :root
+// (so excluded from the coverage check above); this proves the fallback +
+// consumption chain: each retunes ONLY its rung, and --sf-btn-font-scale
+// multiplies the whole ladder without collapsing it. Theme-independent, so
+// measured once.
+function measureButtonSizes() {
+  const host = document.getElementById('probe-host');
+  const mk = (cls) => {
+    const b = document.createElement('button');
+    b.className = cls;
+    b.textContent = 'x';
+    host.appendChild(b);
+    return b;
+  };
+  const els = {
+    xs: mk('sf-btn sf-btn--xs'),
+    s:  mk('sf-btn sf-btn--s'),
+    m:  mk('sf-btn'),
+    l:  mk('sf-btn sf-btn--l'),
+    xl: mk('sf-btn sf-btn--xl'),
+  };
+  const read = () => Object.fromEntries(
+    Object.entries(els).map(([k, el]) => [k, parseFloat(getComputedStyle(el).fontSize)])
+  );
+  const root = document.documentElement;
+  const baseline = read();
+  // Per-size knob: retune only the xs rung.
+  root.style.setProperty('--sf-btn-xs-font-size', '3rem');
+  const afterXs = read();
+  root.style.removeProperty('--sf-btn-xs-font-size');
+  // Multiplier: scale every rung by 2×.
+  root.style.setProperty('--sf-btn-font-scale', '2');
+  const afterScale = read();
+  root.style.removeProperty('--sf-btn-font-scale');
+  for (const el of Object.values(els)) el.remove();
+  return { baseline, afterXs, afterScale };
+}
+
+test('button per-size label knobs retune one rung; font-scale multiplies the ladder', async ({ browser }) => {
+  const page = await browser.newPage();
+  await page.goto(FIXTURE);
+  const { baseline, afterXs, afterScale } = await page.evaluate(measureButtonSizes);
+  await page.close();
+
+  // Default ladder is strictly increasing: xs < s < m < l < xl.
+  expect(baseline.xs).toBeLessThan(baseline.s);
+  expect(baseline.s).toBeLessThan(baseline.m);
+  expect(baseline.m).toBeLessThan(baseline.l);
+  expect(baseline.l).toBeLessThan(baseline.xl);
+
+  // Per-size knob retunes ONLY its rung (xs → 3rem = 48px); the rest are untouched.
+  expect(afterXs.xs).toBeCloseTo(48, 0);
+  expect(afterXs.s).toBeCloseTo(baseline.s, 1);
+  expect(afterXs.m).toBeCloseTo(baseline.m, 1);
+  expect(afterXs.l).toBeCloseTo(baseline.l, 1);
+  expect(afterXs.xl).toBeCloseTo(baseline.xl, 1);
+
+  // Multiplier scales every rung by the same factor — ladder preserved, not flattened.
+  for (const k of ['xs', 's', 'm', 'l', 'xl']) {
+    expect(afterScale[k] / baseline[k], `${k} ×scale`).toBeCloseTo(2, 2);
+  }
+});

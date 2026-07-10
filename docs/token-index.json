@@ -8,14 +8,14 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 735,
+      "tokens": 741,
       "by_tier": {
-        "PUBLIC": 679,
+        "PUBLIC": 685,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 244,
+        "knob": 250,
         "consumption": 491
       }
     }
@@ -501,6 +501,14 @@
       ],
       "value": "var(--sf-border-width-1)"
     },
+    "--sf-btn-font-scale": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "1"
+    },
     "--sf-btn-font-size": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -524,6 +532,22 @@
         "optional/tokens.components.css"
       ],
       "value": "var(--sf-space-2xs)"
+    },
+    "--sf-btn-l-font-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-m-font-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
     },
     "--sf-btn-min-height": {
       "tier": "PUBLIC",
@@ -556,6 +580,30 @@
         "optional/tokens.components.css"
       ],
       "value": "var(--sf-radius-m)"
+    },
+    "--sf-btn-s-font-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-xl-font-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-xs-font-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
     },
     "--sf-card-avatar-size": {
       "tier": "PUBLIC",
