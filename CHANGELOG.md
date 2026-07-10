@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.11] - 2026-07-10
+
+### Features
+- **configurator:** enrich preview domain tabs with remaining primitives
+- **configurator:** exhaustive API coverage + preview coverage gate
+- **configurator:** rebuild live preview as a token-driven API gallery
+
+### Bug Fixes
+- **css:** layout layer wins over components (cards compose with layout)
+- **css:** let .sf-card compose with layout primitives
+- **configurator:** make button size-scale behaviour intuitive
+- **configurator:** restore hero spacing collapsed by sf-card + sf-stack
+
 ## [0.7.10] - 2026-07-09
 
 ## [0.7.9] - 2026-07-09
