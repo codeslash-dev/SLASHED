@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.14] - 2026-07-10
+
 ### Features
 - **components:** add `--sf-btn-font-scale` label-size multiplier + per-size label knobs (`--sf-btn-{xs,s,m,l,xl}-font-size`) — scale button text proportionally, or retune a single rung, without flattening the `.sf-btn--xs…xl` size ladder
 - **configurator:** rework button label-size controls (scale multiplier + per-size editor; demote the flatten-all knobs to an Advanced disclosure) and add tier group dividers (Public → Advanced → Internal) to the All-tokens tab
