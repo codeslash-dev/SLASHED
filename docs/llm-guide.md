@@ -1108,7 +1108,13 @@ Component tokens from `optional/tokens.components.css`:
 --sf-btn-padding-block:  var(--sf-space-xs)
 --sf-btn-padding-inline: var(--sf-space-m)
 --sf-btn-gap:            var(--sf-space-2xs)
---sf-btn-font-size:      var(--sf-text-m)
+--sf-btn-font-size:      var(--sf-text-m)   /* flatten-ALL override; unset by default so the per-size scale wins. Prefer --sf-btn-font-scale or --sf-btn-{size}-font-size */
+--sf-btn-font-scale:     1                  /* multiply EVERY size's label by this factor, keeping the xs…xl ladder intact — the everyday "bigger/smaller button text" knob */
+--sf-btn-xs-font-size:   var(--sf-text-xs)  /* per-size label size; unset → scale default. Set one to retune a single rung, mirroring the per-heading size knobs */
+--sf-btn-s-font-size:    var(--sf-text-s)
+--sf-btn-m-font-size:    var(--sf-text-m)
+--sf-btn-l-font-size:    var(--sf-text-l)
+--sf-btn-xl-font-size:   var(--sf-text-xl)
 --sf-btn-font-weight:    var(--sf-font-weight-interactive)
 --sf-btn-min-height:     var(--sf-size-m)   /* size m default; honoured on touch too (.sf-btn is exempt from the coarse-pointer 44px floor) — set to var(--sf-touch-target) for the 44px AAA floor */
 --sf-btn-border-width:   var(--sf-border-width-1)

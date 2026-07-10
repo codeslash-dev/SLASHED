@@ -1,10 +1,10 @@
 {
   "summary": {
-    "totalTokens": 735,
-    "rendered": 735,
+    "totalTokens": 741,
+    "rendered": 741,
     "consoleErrors": 0,
     "requestFailures": 0,
-    "empties": 28,
+    "empties": 33,
     "demoShownMismatch": 0,
     "literalDefaultMismatch": 2,
     "aliasMismatch": 0,
@@ -797,6 +797,19 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-btn-font-scale",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "1",
+      "aliasOf": null,
+      "issues": [],
+      "computed": "1",
+      "shown": "1",
+      "darkComputed": "1",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-btn-font-size",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -833,6 +846,36 @@
       "category": "Component tokens",
       "declared": "var(--sf-space-2xs)",
       "aliasOf": "--sf-space-2xs",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-l-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-m-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
       "issues": [
         "EMPTY_COMPUTED"
       ],
@@ -893,6 +936,51 @@
       "category": "Component tokens",
       "declared": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-s-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-xl-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-xs-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
       "issues": [
         "EMPTY_COMPUTED"
       ],

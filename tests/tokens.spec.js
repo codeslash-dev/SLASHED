@@ -29,6 +29,11 @@ const EXPECTED_EMPTY = new Set([
   '--sf-btn-padding-block',
   '--sf-btn-padding-inline',
   '--sf-btn-min-height',
+  '--sf-btn-xs-font-size',
+  '--sf-btn-s-font-size',
+  '--sf-btn-m-font-size',
+  '--sf-btn-l-font-size',
+  '--sf-btn-xl-font-size',
 ]);
 
 function declaredTokens() {

@@ -66,6 +66,14 @@ const CURATED = {
   '--sf-btn-padding-block': '0.9rem',
   '--sf-btn-padding-inline': '2rem',
   '--sf-btn-min-height': '4rem',
+  // Uniform label-size multiplier (unitless) + per-size label knobs (also
+  // `initial`) — explicit lengths exercise each rung's per-size override.
+  '--sf-btn-font-scale': '1.6',
+  '--sf-btn-xs-font-size': '0.9rem',
+  '--sf-btn-s-font-size': '1.1rem',
+  '--sf-btn-m-font-size': '1.4rem',
+  '--sf-btn-l-font-size': '1.8rem',
+  '--sf-btn-xl-font-size': '2.2rem',
   // zero-valued lengths → small but visible
   '--sf-bg-layer-inset': '0.75rem',
   '--sf-bg-layer-radius': '0.75rem',

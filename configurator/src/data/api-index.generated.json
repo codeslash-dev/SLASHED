@@ -2,15 +2,15 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "46e82162ef0c",
+    "tokensHash": "8338f2b184e4",
     "bundles": [
       "full",
       "optimal"
     ],
     "counts": {
-      "tokens": 735,
+      "tokens": 741,
       "byTier": {
-        "PUBLIC": 679,
+        "PUBLIC": 685,
         "PUBLIC-ADVANCED": 55,
         "INTERNAL": 1
       },
@@ -18,7 +18,7 @@
         "Layout tokens": 53,
         "Core tokens": 622,
         "Macro tokens": 34,
-        "Component tokens": 26
+        "Component tokens": 32
       }
     }
   },
@@ -1283,6 +1283,26 @@
       ]
     },
     {
+      "name": "--sf-btn-font-scale",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "1",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full"
+      ]
+    },
+    {
       "name": "--sf-btn-font-size",
       "tier": "PUBLIC",
       "role": "knob",
@@ -1333,6 +1353,46 @@
       "note": "Gap between an icon and the label inside .sf-btn.",
       "value": "var(--sf-space-2xs)",
       "aliasOf": "--sf-space-2xs",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-l-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-m-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "initial",
+      "aliasOf": null,
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,
@@ -1413,6 +1473,66 @@
       "note": "Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens.",
       "value": "var(--sf-radius-m)",
       "aliasOf": "--sf-radius-m",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-s-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xl-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xs-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "group": "BUTTON TOKENS",
+      "description": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+      "note": "",
+      "value": "initial",
+      "aliasOf": null,
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

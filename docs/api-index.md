@@ -10,28 +10,34 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1064 elements** — 735 tokens, 329 classes.
+**1070 elements** — 741 tokens, 329 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1008 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1014 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (735)
+## Tokens (741)
 
-### Component tokens (26)
+### Component tokens (32)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
 | `--sf-btn-border-width` | PUBLIC | consumption | btn | `var(--sf-border-width-1)` | Border thickness for .sf-btn (used by all fill, outline, and secondary treatments). |
+| `--sf-btn-font-scale` | PUBLIC | knob | btn | `1` | Uniform label-size multiplier — the everyday "make button text a little larger / smaller" knob. Scales the resolved font-size of EVERY button size (.sf-btn--xs…xl) by the same factor while KEEPING the size ladder intact (xs < s < m < l < xl). Contrast with --sf-btn-font-size… |
 | `--sf-btn-font-size` | PUBLIC | knob | btn | `initial` | Label font-size for .sf-btn. The size modifiers (--xs/--s/--l/--xl) override this per button. |
 | `--sf-btn-font-weight` | PUBLIC | consumption | btn | `var(--sf-font-weight-interactive)` | Label font-weight for .sf-btn. Defaults to the interactive weight. |
 | `--sf-btn-gap` | PUBLIC | consumption | btn | `var(--sf-space-2xs)` | Gap between an icon and the label inside .sf-btn. |
+| `--sf-btn-l-font-size` | PUBLIC | knob | btn | `initial` | Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without… |
+| `--sf-btn-m-font-size` | PUBLIC | knob | btn | `initial` | Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without… |
 | `--sf-btn-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum. |
 | `--sf-btn-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding inside .sf-btn. |
 | `--sf-btn-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding inside .sf-btn. |
 | `--sf-btn-radius` | PUBLIC | consumption | btn | `var(--sf-radius-m)` | Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens. |
+| `--sf-btn-s-font-size` | PUBLIC | knob | btn | `initial` | Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without… |
+| `--sf-btn-xl-font-size` | PUBLIC | knob | btn | `initial` | Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without… |
+| `--sf-btn-xs-font-size` | PUBLIC | knob | btn | `initial` | Per-size label font-size knobs — one PUBLIC knob per size rung, the button counterpart of the per-heading --sf-hN-size knobs. Each is `initial` so, unset, that rung falls through to its scale default (--sf-text-{size}); set one on :root to pin a SINGLE rung's label size without… |
 | `--sf-card-avatar-size` | PUBLIC | knob | card | `2.5rem` | Diameter of .sf-card__avatar. Defaults to 2.5rem. |
 | `--sf-card-bg` | PUBLIC | consumption | card | `var(--sf-color-surface)` | Background surface for .sf-card. Defaults to --sf-color-surface. |
 | `--sf-card-border-color` | PUBLIC | consumption | card | `var(--sf-color-border)` | Border colour for .sf-card. Defaults to --sf-color-border. |
