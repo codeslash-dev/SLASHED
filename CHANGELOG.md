@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.13] - 2026-07-10
+
+### Breaking Changes
+- **a11y:** let .sf-btn size scale win over the coarse-pointer 44px floor
+
 ## [0.7.12] - 2026-07-10
 
 ### Bug Fixes
