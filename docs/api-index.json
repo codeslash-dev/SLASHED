@@ -19351,8 +19351,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -20311,8 +20310,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -20404,8 +20402,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -20957,8 +20954,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -21993,8 +21989,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -22362,8 +22357,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -22777,8 +22771,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -24882,8 +24875,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -25365,8 +25357,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -25550,8 +25541,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",
@@ -26191,8 +26181,7 @@
       "optional": false,
       "layer": "slashed.layout",
       "sourceFiles": [
-        "core/layout.css",
-        "optional/components.css"
+        "core/layout.css"
       ],
       "bundles": [
         "full",

@@ -394,22 +394,16 @@
    * --sf-card-btn-font-size.
    * ============================================================ */
   .sf-card {
+    /* A card is a block box. When combined with a layout primitive on the same
+       element (.sf-card.sf-stack, .sf-card.sf-grid, …) the primitive's
+       flex/grid display wins, because slashed.layout layers AFTER
+       slashed.components — see core/layers.css. No guard needed. */
+    display:       block;
     padding:       var(--sf-card-padding, var(--sf-space-l));
     background:    var(--sf-card-bg, var(--sf-color-surface));
     border:        var(--sf-card-border-width, var(--sf-border-width-1)) solid var(--sf-card-border-color, var(--sf-color-border));
     border-radius: var(--sf-card-radius-outer, calc(var(--sf-radius-m) + var(--sf-space-l)));
     box-shadow:    var(--sf-card-shadow, var(--sf-shadow-s));
-  }
-  /* A card is a block box by default, but must YIELD to a layout primitive put
-     on the same element (.sf-card.sf-stack, .sf-card.sf-grid, …). Because
-     slashed.components layers AFTER slashed.layout, an unconditional
-     display:block would beat the primitive's flex/grid and silently kill its
-     gap. Excluding the display-setting primitives lets them win, while every
-     other card — including inline-by-default <a>/<label> cards — stays block.
-     :where() keeps this at .sf-card's original (0,1,0) specificity.
-     Keep the list in sync with the display-setting primitives in core/layout.css. */
-  .sf-card:not(:where(.sf-stack, .sf-cluster, .sf-grid, .sf-grid-flex, .sf-switcher, .sf-sidebar, .sf-center, .sf-cover, .sf-frame, .sf-reel, .sf-bento)) {
-    display: block;
   }
 
   .sf-card__header,
