@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**741 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**756 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -743,7 +743,7 @@ rebrand workflow.
 
 ## Component tokens (`optional/tokens.components.css`)
 
-32 tokens.
+47 tokens.
 
 | Token | Default |
 |---|---|
@@ -753,14 +753,29 @@ rebrand workflow.
 | `--sf-btn-font-weight` | `var(--sf-font-weight-interactive)` |
 | `--sf-btn-gap` | `var(--sf-space-2xs)` |
 | `--sf-btn-l-font-size` | `initial` |
+| `--sf-btn-l-min-height` | `initial` |
+| `--sf-btn-l-padding-block` | `initial` |
+| `--sf-btn-l-padding-inline` | `initial` |
 | `--sf-btn-m-font-size` | `initial` |
+| `--sf-btn-m-min-height` | `initial` |
+| `--sf-btn-m-padding-block` | `initial` |
+| `--sf-btn-m-padding-inline` | `initial` |
 | `--sf-btn-min-height` | `initial` |
 | `--sf-btn-padding-block` | `initial` |
 | `--sf-btn-padding-inline` | `initial` |
 | `--sf-btn-radius` | `var(--sf-radius-m)` |
 | `--sf-btn-s-font-size` | `initial` |
+| `--sf-btn-s-min-height` | `initial` |
+| `--sf-btn-s-padding-block` | `initial` |
+| `--sf-btn-s-padding-inline` | `initial` |
 | `--sf-btn-xl-font-size` | `initial` |
+| `--sf-btn-xl-min-height` | `initial` |
+| `--sf-btn-xl-padding-block` | `initial` |
+| `--sf-btn-xl-padding-inline` | `initial` |
 | `--sf-btn-xs-font-size` | `initial` |
+| `--sf-btn-xs-min-height` | `initial` |
+| `--sf-btn-xs-padding-block` | `initial` |
+| `--sf-btn-xs-padding-inline` | `initial` |
 | `--sf-card-avatar-size` | `2.5rem` |
 | `--sf-card-bg` | `var(--sf-color-surface)` |
 | `--sf-card-border-color` | `var(--sf-color-border)` |

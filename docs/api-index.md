@@ -10,34 +10,49 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1070 elements** — 741 tokens, 329 classes.
+**1085 elements** — 756 tokens, 329 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1014 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 1025 | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (741)
+## Tokens (756)
 
-### Component tokens (32)
+### Component tokens (47)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
 | `--sf-btn-border-width` | PUBLIC | consumption | btn | `var(--sf-border-width-1)` | Border thickness for .sf-btn (used by all fill, outline, and secondary treatments). |
 | `--sf-btn-font-scale` | PUBLIC | knob | btn | `1` | Uniform label-size multiplier for .sf-btn — scales every size's font-size by one factor while keeping the xs…xl ladder intact. The everyday 'bigger/smaller button text' knob. |
-| `--sf-btn-font-size` | PUBLIC | knob | btn | `initial` | Flatten-all label font-size for .sf-btn — once set it overrides every size (--xs/--s/--l/--xl) to the same value. For proportional sizing use --sf-btn-font-scale; to retune a single rung use --sf-btn-{size}-font-size. |
+| `--sf-btn-font-size` | PUBLIC-ADVANCED | knob | btn | `initial` | Flatten-all label font-size for .sf-btn — once set it overrides every size (--xs/--s/--l/--xl) to the same value. For proportional sizing use --sf-btn-font-scale; to retune a single rung use --sf-btn-{size}-font-size. |
 | `--sf-btn-font-weight` | PUBLIC | consumption | btn | `var(--sf-font-weight-interactive)` | Label font-weight for .sf-btn. Defaults to the interactive weight. |
 | `--sf-btn-gap` | PUBLIC | consumption | btn | `var(--sf-space-2xs)` | Gap between an icon and the label inside .sf-btn. |
 | `--sf-btn-l-font-size` | PUBLIC | knob | btn | `initial` | Label font-size for the large button (.sf-btn--l). Unset, falls through to --sf-text-l; set to retune this rung without touching the others. |
+| `--sf-btn-l-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-l-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-l-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone. |
 | `--sf-btn-m-font-size` | PUBLIC | knob | btn | `initial` | Label font-size for the default (medium) button (.sf-btn). Unset, falls through to --sf-text-m; set to retune this rung without touching the others. |
-| `--sf-btn-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum. |
-| `--sf-btn-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding inside .sf-btn. |
-| `--sf-btn-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding inside .sf-btn. |
+| `--sf-btn-m-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-m-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-m-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-min-height` | PUBLIC-ADVANCED | knob | btn | `initial` | Flatten-all minimum target height for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-min-height. |
+| `--sf-btn-padding-block` | PUBLIC-ADVANCED | knob | btn | `initial` | Flatten-all vertical (block) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-block. |
+| `--sf-btn-padding-inline` | PUBLIC-ADVANCED | knob | btn | `initial` | Flatten-all horizontal (inline) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-inline. |
 | `--sf-btn-radius` | PUBLIC | consumption | btn | `var(--sf-radius-m)` | Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens. |
 | `--sf-btn-s-font-size` | PUBLIC | knob | btn | `initial` | Label font-size for the small button (.sf-btn--s). Unset, falls through to --sf-text-s; set to retune this rung without touching the others. |
+| `--sf-btn-s-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-s-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-s-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone. |
 | `--sf-btn-xl-font-size` | PUBLIC | knob | btn | `initial` | Label font-size for the extra-large button (.sf-btn--xl). Unset, falls through to --sf-text-xl; set to retune this rung without touching the others. |
+| `--sf-btn-xl-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-xl-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-xl-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone. |
 | `--sf-btn-xs-font-size` | PUBLIC | knob | btn | `initial` | Label font-size for the extra-small button (.sf-btn--xs). Unset, falls through to --sf-text-xs; set to retune this rung without touching the others. |
+| `--sf-btn-xs-min-height` | PUBLIC | knob | btn | `initial` | Minimum target height for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-xs-padding-block` | PUBLIC | knob | btn | `initial` | Vertical (block) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone. |
+| `--sf-btn-xs-padding-inline` | PUBLIC | knob | btn | `initial` | Horizontal (inline) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone. |
 | `--sf-card-avatar-size` | PUBLIC | knob | card | `2.5rem` | Diameter of .sf-card__avatar. Defaults to 2.5rem. |
 | `--sf-card-bg` | PUBLIC | consumption | card | `var(--sf-color-surface)` | Background surface for .sf-card. Defaults to --sf-color-surface. |
 | `--sf-card-border-color` | PUBLIC | consumption | card | `var(--sf-color-border)` | Border colour for .sf-card. Defaults to --sf-color-border. |

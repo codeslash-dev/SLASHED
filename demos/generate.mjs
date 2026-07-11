@@ -55,29 +55,41 @@ const SKIP = {
   '--sf-text-shadow-none': 'sentinel "none" — the API guarantees no text-shadow',
   '--sf-surface-bg-animation': 'background animation shorthand on .sf-surface — a global value would force motion on every surface and fight reduced-motion; no safe single-element visual perturbation',
   '--sf-btn-font-size': 'flatten-all label size — reads FIRST in the font-size cascade, so setting it would shadow the per-size --sf-btn-{size}-font-size knobs (and mask the --sf-btn-font-scale multiplier) this demo exercises; the per-size ladder is the recommended surface',
+  '--sf-btn-padding-block': 'flatten-all block padding — reads FIRST in the cascade, shadowing the per-size --sf-btn-{size}-padding-block knobs this demo exercises',
+  '--sf-btn-padding-inline': 'flatten-all inline padding — reads FIRST in the cascade, shadowing the per-size --sf-btn-{size}-padding-inline knobs this demo exercises',
+  '--sf-btn-min-height': 'flatten-all min-height — reads FIRST in the cascade, shadowing the per-size --sf-btn-{size}-min-height knobs this demo exercises',
 };
 
 // Curated overrides for keyword / numeric / zero-valued knobs that no generic
 // numeric rule can safely transform. Each is a valid, visibly-distinct value.
 const CURATED = {
-  // Button sizing knobs declared `initial` (opt-in hooks with no baked value —
+  // Button per-size knobs declared `initial` (opt-in hooks with no baked value —
   // their default lives on the rule-local --sf-btn-*--size tier). Give explicit
-  // lengths so the demo exercises them; `initial` carries no type to infer.
-  // (The flatten-all --sf-btn-font-size is intentionally in SKIP above so it
-  // doesn't shadow the per-size knobs below.)
-  '--sf-btn-padding-block': '0.9rem',
-  '--sf-btn-padding-inline': '2rem',
-  '--sf-btn-min-height': '4rem',
-  // Uniform label-size multiplier (unitless) + per-size label knobs (also
-  // `initial`). With the flatten-all skipped, these explicit per-rung lengths
-  // actually take effect — each rung's font-size differs, then --sf-btn-font-scale
-  // multiplies the whole ladder.
+  // per-rung lengths so the demo exercises each rung; `initial` carries no type
+  // to infer. The flatten-all --sf-btn-{font-size,padding-block,padding-inline,
+  // min-height} are intentionally in SKIP above so they don't shadow these.
+  // The unitless --sf-btn-font-scale multiplier then scales the whole ladder.
   '--sf-btn-font-scale': '1.6',
   '--sf-btn-xs-font-size': '0.9rem',
   '--sf-btn-s-font-size': '1.1rem',
   '--sf-btn-m-font-size': '1.4rem',
   '--sf-btn-l-font-size': '1.8rem',
   '--sf-btn-xl-font-size': '2.2rem',
+  '--sf-btn-xs-padding-block': '0.2rem',
+  '--sf-btn-s-padding-block': '0.35rem',
+  '--sf-btn-m-padding-block': '0.5rem',
+  '--sf-btn-l-padding-block': '0.7rem',
+  '--sf-btn-xl-padding-block': '0.9rem',
+  '--sf-btn-xs-padding-inline': '0.6rem',
+  '--sf-btn-s-padding-inline': '0.9rem',
+  '--sf-btn-m-padding-inline': '1.2rem',
+  '--sf-btn-l-padding-inline': '1.6rem',
+  '--sf-btn-xl-padding-inline': '2rem',
+  '--sf-btn-xs-min-height': '1.8rem',
+  '--sf-btn-s-min-height': '2.1rem',
+  '--sf-btn-m-min-height': '2.5rem',
+  '--sf-btn-l-min-height': '3rem',
+  '--sf-btn-xl-min-height': '3.5rem',
   // zero-valued lengths → small but visible
   '--sf-bg-layer-inset': '0.75rem',
   '--sf-bg-layer-radius': '0.75rem',

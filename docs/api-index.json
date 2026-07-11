@@ -26,28 +26,28 @@
       "optimal"
     ],
     "counts": {
-      "total": 1070,
+      "total": 1085,
       "by_type": {
         "class": 329,
-        "token": 741
+        "token": 756
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1014,
-        "PUBLIC-ADVANCED": 55
+        "PUBLIC": 1025,
+        "PUBLIC-ADVANCED": 59
       },
       "by_role": {
         "consumption": 491,
-        "knob": 250
+        "knob": 265
       },
-      "tokens": 741,
+      "tokens": 756,
       "classes": 329,
       "sf_classes": 292,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
-        "Component tokens": 32,
+        "Component tokens": 47,
         "Components": 30,
         "Core tokens": 622,
         "Layout primitives": 145,
@@ -1677,7 +1677,7 @@
     {
       "name": "--sf-btn-font-size",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "btn",
       "category": "Component tokens",
@@ -1775,6 +1775,81 @@
       ]
     },
     {
+      "name": "--sf-btn-l-min-height",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Minimum target height for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-l-padding-block",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Vertical (block) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-l-padding-inline",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Horizontal (inline) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
       "name": "--sf-btn-m-font-size",
       "type": "token",
       "tier": "PUBLIC",
@@ -1800,7 +1875,7 @@
       ]
     },
     {
-      "name": "--sf-btn-min-height",
+      "name": "--sf-btn-m-min-height",
       "type": "token",
       "tier": "PUBLIC",
       "role": "knob",
@@ -1808,7 +1883,82 @@
       "category": "Component tokens",
       "area": "components",
       "group": "BUTTON TOKENS",
-      "description": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.",
+      "description": "Minimum target height for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-m-padding-block",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Vertical (block) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-m-padding-inline",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Horizontal (inline) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-min-height",
+      "type": "token",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Flatten-all minimum target height for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-min-height.",
       "value": "initial",
       "aliasOf": null,
       "registered": false,
@@ -1827,13 +1977,13 @@
     {
       "name": "--sf-btn-padding-block",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "btn",
       "category": "Component tokens",
       "area": "components",
       "group": "BUTTON TOKENS",
-      "description": "Vertical (block) padding inside .sf-btn.",
+      "description": "Flatten-all vertical (block) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-block.",
       "value": "initial",
       "aliasOf": null,
       "registered": false,
@@ -1852,13 +2002,13 @@
     {
       "name": "--sf-btn-padding-inline",
       "type": "token",
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "namespace": "btn",
       "category": "Component tokens",
       "area": "components",
       "group": "BUTTON TOKENS",
-      "description": "Horizontal (inline) padding inside .sf-btn.",
+      "description": "Flatten-all horizontal (inline) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-inline.",
       "value": "initial",
       "aliasOf": null,
       "registered": false,
@@ -1925,6 +2075,81 @@
       ]
     },
     {
+      "name": "--sf-btn-s-min-height",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Minimum target height for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-s-padding-block",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Vertical (block) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-s-padding-inline",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Horizontal (inline) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
       "name": "--sf-btn-xl-font-size",
       "type": "token",
       "tier": "PUBLIC",
@@ -1950,6 +2175,81 @@
       ]
     },
     {
+      "name": "--sf-btn-xl-min-height",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Minimum target height for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xl-padding-block",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Vertical (block) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xl-padding-inline",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Horizontal (inline) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
       "name": "--sf-btn-xs-font-size",
       "type": "token",
       "tier": "PUBLIC",
@@ -1959,6 +2259,81 @@
       "area": "components",
       "group": "BUTTON TOKENS",
       "description": "Label font-size for the extra-small button (.sf-btn--xs). Unset, falls through to --sf-text-xs; set to retune this rung without touching the others.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xs-min-height",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Minimum target height for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xs-padding-block",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Vertical (block) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.",
+      "value": "initial",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": true,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "optional/tokens.components.css"
+      ],
+      "bundles": [
+        "full"
+      ]
+    },
+    {
+      "name": "--sf-btn-xs-padding-inline",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "btn",
+      "category": "Component tokens",
+      "area": "components",
+      "group": "BUTTON TOKENS",
+      "description": "Horizontal (inline) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.",
       "value": "initial",
       "aliasOf": null,
       "registered": false,
