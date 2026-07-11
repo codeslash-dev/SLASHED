@@ -3,7 +3,7 @@
 // configurable token/class is visible and reacts live to the configurator.
 // Foundations enumerate the real API via ./catalog; components are curated.
 
-import { page, section, specimen, tag, cluster, grid, stack, well, esc } from "./specimen";
+import { page, section, specimen, tag, cluster, grid, stack, well, frame, esc } from "./specimen";
 import { familySteps, classesOfKind, tokensMatching, tokensByGroup, classesByKind } from "./catalog";
 
 const RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
@@ -331,14 +331,10 @@ const BTN_SIZES: [string, string][] = [["xs", "XS"], ["s", "S"], ["", "M"], ["l"
 export function components(): string {
   const btn = (mods: string, label: string) => `<button class="sf-btn ${mods}">${esc(label)}</button>`;
 
-  // Backdrop for the button rows. NOT a .sf-card: the framework's
-  // `.sf-card .sf-btn { --sf-btn-font-size--size: var(--sf-card-btn-font-size,
-  // var(--sf-text-s)) }` rule pins every nested button's label to text-s, which
+  // Button rows use frame() (a non-card backdrop), NOT well(): the framework's
+  // `.sf-card .sf-btn` rule pins a nested button's label to --sf-text-s, which
   // would flatten the per-rung font ladder in the Size-scale demo (padding and
-  // min-height still grow, but the label wouldn't). A plain framed surface lets
-  // each rung render its true font-size. (Cards below intentionally keep .sf-card.)
-  const frame = (content: string) =>
-    `<div style="padding:var(--sf-space-l);background:var(--sf-color-surface);border:var(--sf-border-width-1) solid var(--sf-color-border);border-radius:var(--sf-radius-l)">${content}</div>`;
+  // min-height still grow, but the label wouldn't). Cards below keep .sf-card.
 
   // Families — every shipped colour family as a fill button.
   const families = frame(cluster(
