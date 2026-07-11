@@ -1105,19 +1105,24 @@ Component tokens from `optional/tokens.components.css`:
 
 /* Buttons — .sf-btn (live since 0.7.0) */
 --sf-btn-radius:         var(--sf-radius-m)
---sf-btn-padding-block:  var(--sf-space-xs)
---sf-btn-padding-inline: var(--sf-space-m)
 --sf-btn-gap:            var(--sf-space-2xs)
---sf-btn-font-size:      var(--sf-text-m)   /* flatten-ALL override; unset by default so the per-size scale wins. Prefer --sf-btn-font-scale or --sf-btn-{size}-font-size */
+--sf-btn-border-width:   var(--sf-border-width-1)
+--sf-btn-font-weight:    var(--sf-font-weight-interactive)
 --sf-btn-font-scale:     1                  /* multiply EVERY size's label by this factor, keeping the xs…xl ladder intact — the everyday "bigger/smaller button text" knob */
---sf-btn-xs-font-size:   var(--sf-text-xs)  /* per-size label size; unset → scale default. Set one to retune a single rung, mirroring the per-heading size knobs */
+/* Per-size knobs — retune ONE rung; unset → that rung's own scale default. Mirror the per-heading typography knobs. */
+--sf-btn-xs-font-size:   var(--sf-text-xs)
 --sf-btn-s-font-size:    var(--sf-text-s)
 --sf-btn-m-font-size:    var(--sf-text-m)
 --sf-btn-l-font-size:    var(--sf-text-l)
 --sf-btn-xl-font-size:   var(--sf-text-xl)
---sf-btn-font-weight:    var(--sf-font-weight-interactive)
---sf-btn-min-height:     var(--sf-size-m)   /* size m default; honoured on touch too (.sf-btn is exempt from the coarse-pointer 44px floor) — set to var(--sf-touch-target) for the 44px AAA floor */
---sf-btn-border-width:   var(--sf-border-width-1)
+--sf-btn-xs-padding-block --sf-btn-s-padding-block --sf-btn-m-padding-block --sf-btn-l-padding-block --sf-btn-xl-padding-block
+--sf-btn-xs-padding-inline --sf-btn-s-padding-inline --sf-btn-m-padding-inline --sf-btn-l-padding-inline --sf-btn-xl-padding-inline
+--sf-btn-xs-min-height --sf-btn-s-min-height --sf-btn-m-min-height --sf-btn-l-min-height --sf-btn-xl-min-height
+/* Flatten-ALL overrides (PUBLIC-ADVANCED) — collapse the whole --xs…xl ladder to one value; prefer the --sf-btn-font-scale / per-size knobs above */
+--sf-btn-font-size:      var(--sf-text-m)   /* effective m default; unset by default */
+--sf-btn-padding-block:  var(--sf-space-xs)
+--sf-btn-padding-inline: var(--sf-space-m)
+--sf-btn-min-height:     var(--sf-size-m)   /* effective m default; .sf-btn is exempt from the coarse-pointer 44px floor — set var(--sf-touch-target) for the 44px AAA floor */
 
 /* Cards — .sf-card (live since 0.7.0) */
 --sf-card-padding:          var(--sf-space-l)

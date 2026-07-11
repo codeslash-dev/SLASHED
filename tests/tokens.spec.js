@@ -34,6 +34,21 @@ const EXPECTED_EMPTY = new Set([
   '--sf-btn-m-font-size',
   '--sf-btn-l-font-size',
   '--sf-btn-xl-font-size',
+  '--sf-btn-xs-padding-block',
+  '--sf-btn-s-padding-block',
+  '--sf-btn-m-padding-block',
+  '--sf-btn-l-padding-block',
+  '--sf-btn-xl-padding-block',
+  '--sf-btn-xs-padding-inline',
+  '--sf-btn-s-padding-inline',
+  '--sf-btn-m-padding-inline',
+  '--sf-btn-l-padding-inline',
+  '--sf-btn-xl-padding-inline',
+  '--sf-btn-xs-min-height',
+  '--sf-btn-s-min-height',
+  '--sf-btn-m-min-height',
+  '--sf-btn-l-min-height',
+  '--sf-btn-xl-min-height',
 ]);
 
 function declaredTokens() {
@@ -269,6 +284,11 @@ function measureButtonSizes() {
   const read = () => Object.fromEntries(
     Object.entries(els).map(([k, el]) => [k, parseFloat(getComputedStyle(el).fontSize)])
   );
+  // xs box metrics — padding-inline (LTR → paddingLeft) and min-block-size.
+  const xsBox = () => {
+    const cs = getComputedStyle(els.xs);
+    return { pi: parseFloat(cs.paddingLeft), mh: parseFloat(cs.minBlockSize || cs.minHeight) };
+  };
   const root = document.documentElement;
   const baseline = read();
   // Per-size knob: retune only the xs rung.
@@ -279,14 +299,21 @@ function measureButtonSizes() {
   root.style.setProperty('--sf-btn-font-scale', '2');
   const afterScale = read();
   root.style.removeProperty('--sf-btn-font-scale');
+  // Per-size padding + min-height knobs on the xs rung.
+  const boxBefore = xsBox();
+  root.style.setProperty('--sf-btn-xs-padding-inline', '5rem');
+  root.style.setProperty('--sf-btn-xs-min-height', '7rem');
+  const boxAfter = xsBox();
+  root.style.removeProperty('--sf-btn-xs-padding-inline');
+  root.style.removeProperty('--sf-btn-xs-min-height');
   for (const el of Object.values(els)) el.remove();
-  return { baseline, afterXs, afterScale };
+  return { baseline, afterXs, afterScale, boxBefore, boxAfter };
 }
 
 test('button per-size label knobs retune one rung; font-scale multiplies the ladder', async ({ browser }) => {
   const page = await browser.newPage();
   await page.goto(FIXTURE);
-  const { baseline, afterXs, afterScale } = await page.evaluate(measureButtonSizes);
+  const { baseline, afterXs, afterScale, boxBefore, boxAfter } = await page.evaluate(measureButtonSizes);
   await page.close();
 
   // Default ladder is strictly increasing: xs < s < m < l < xl.
@@ -306,4 +333,9 @@ test('button per-size label knobs retune one rung; font-scale multiplies the lad
   for (const k of ['xs', 's', 'm', 'l', 'xl']) {
     expect(afterScale[k] / baseline[k], `${k} ×scale`).toBeCloseTo(2, 2);
   }
+
+  // Per-size padding + min-height knobs retune the xs rung (5rem = 80px, 7rem = 112px).
+  expect(boxBefore.pi).not.toBeCloseTo(80, 0);
+  expect(boxAfter.pi).toBeCloseTo(80, 0);
+  expect(boxAfter.mh).toBeCloseTo(112, 0);
 });

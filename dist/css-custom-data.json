@@ -308,7 +308,7 @@
     },
     {
       "name": "--sf-btn-font-size",
-      "description": "Flatten-all label font-size for .sf-btn — once set it overrides every size (--xs/--s/--l/--xl) to the same value. For proportional sizing use --sf-btn-font-scale; to retune a single rung use --sf-btn-{size}-font-size.\n\nDefault: `initial`",
+      "description": "Flatten-all label font-size for .sf-btn — once set it overrides every size (--xs/--s/--l/--xl) to the same value. For proportional sizing use --sf-btn-font-scale; to retune a single rung use --sf-btn-{size}-font-size.\n\nDefault: `initial`\n\n(advanced token)",
       "syntax": "*"
     },
     {
@@ -327,23 +327,53 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-btn-l-min-height",
+      "description": "Minimum target height for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-l-padding-block",
+      "description": "Vertical (block) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-l-padding-inline",
+      "description": "Horizontal (inline) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-btn-m-font-size",
       "description": "Label font-size for the default (medium) button (.sf-btn). Unset, falls through to --sf-text-m; set to retune this rung without touching the others.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
+      "name": "--sf-btn-m-min-height",
+      "description": "Minimum target height for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-m-padding-block",
+      "description": "Vertical (block) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-m-padding-inline",
+      "description": "Horizontal (inline) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-btn-min-height",
-      "description": "Minimum target height for .sf-btn. Defaults to --sf-touch-target so buttons meet the WCAG 2.2 target-size minimum.\n\nDefault: `initial`",
+      "description": "Flatten-all minimum target height for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-min-height.\n\nDefault: `initial`\n\n(advanced token)",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-padding-block",
-      "description": "Vertical (block) padding inside .sf-btn.\n\nDefault: `initial`",
+      "description": "Flatten-all vertical (block) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-block.\n\nDefault: `initial`\n\n(advanced token)",
       "syntax": "*"
     },
     {
       "name": "--sf-btn-padding-inline",
-      "description": "Horizontal (inline) padding inside .sf-btn.\n\nDefault: `initial`",
+      "description": "Flatten-all horizontal (inline) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-inline.\n\nDefault: `initial`\n\n(advanced token)",
       "syntax": "*"
     },
     {
@@ -357,13 +387,58 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-btn-s-min-height",
+      "description": "Minimum target height for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-s-padding-block",
+      "description": "Vertical (block) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-s-padding-inline",
+      "description": "Horizontal (inline) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-btn-xl-font-size",
       "description": "Label font-size for the extra-large button (.sf-btn--xl). Unset, falls through to --sf-text-xl; set to retune this rung without touching the others.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {
+      "name": "--sf-btn-xl-min-height",
+      "description": "Minimum target height for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xl-padding-block",
+      "description": "Vertical (block) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xl-padding-inline",
+      "description": "Horizontal (inline) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-btn-xs-font-size",
       "description": "Label font-size for the extra-small button (.sf-btn--xs). Unset, falls through to --sf-text-xs; set to retune this rung without touching the others.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xs-min-height",
+      "description": "Minimum target height for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xs-padding-block",
+      "description": "Vertical (block) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xs-padding-inline",
+      "description": "Horizontal (inline) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
       "syntax": "*"
     },
     {

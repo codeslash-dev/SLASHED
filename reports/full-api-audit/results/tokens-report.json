@@ -1,10 +1,10 @@
 {
   "summary": {
-    "totalTokens": 741,
-    "rendered": 741,
+    "totalTokens": 756,
+    "rendered": 756,
     "consoleErrors": 0,
     "requestFailures": 0,
-    "empties": 33,
+    "empties": 48,
     "demoShownMismatch": 0,
     "literalDefaultMismatch": 2,
     "aliasMismatch": 0,
@@ -870,7 +870,97 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-btn-l-min-height",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-l-padding-block",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-l-padding-inline",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-btn-m-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-m-min-height",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-m-padding-block",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-m-padding-inline",
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Component tokens",
@@ -960,6 +1050,51 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-btn-s-min-height",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-s-padding-block",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-s-padding-inline",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-btn-xl-font-size",
       "tier": "PUBLIC",
       "role": "knob",
@@ -975,7 +1110,97 @@
       "changedInDark": false
     },
     {
+      "name": "--sf-btn-xl-min-height",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-xl-padding-block",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-xl-padding-inline",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
       "name": "--sf-btn-xs-font-size",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-xs-min-height",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-xs-padding-block",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "category": "Component tokens",
+      "declared": "initial",
+      "aliasOf": null,
+      "issues": [
+        "EMPTY_COMPUTED"
+      ],
+      "computed": "",
+      "shown": "(empty)",
+      "darkComputed": "",
+      "changedInDark": false
+    },
+    {
+      "name": "--sf-btn-xs-padding-inline",
       "tier": "PUBLIC",
       "role": "knob",
       "category": "Component tokens",

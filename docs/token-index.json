@@ -8,14 +8,14 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 741,
+      "tokens": 756,
       "by_tier": {
-        "PUBLIC": 685,
-        "PUBLIC-ADVANCED": 55,
+        "PUBLIC": 696,
+        "PUBLIC-ADVANCED": 59,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 250,
+        "knob": 265,
         "consumption": 491
       }
     }
@@ -510,7 +510,7 @@
       "value": "1"
     },
     "--sf-btn-font-size": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.components.css"
@@ -541,6 +541,30 @@
       ],
       "value": "initial"
     },
+    "--sf-btn-l-min-height": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-l-padding-block": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-l-padding-inline": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
     "--sf-btn-m-font-size": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -549,8 +573,32 @@
       ],
       "value": "initial"
     },
-    "--sf-btn-min-height": {
+    "--sf-btn-m-min-height": {
       "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-m-padding-block": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-m-padding-inline": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-min-height": {
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.components.css"
@@ -558,7 +606,7 @@
       "value": "initial"
     },
     "--sf-btn-padding-block": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.components.css"
@@ -566,7 +614,7 @@
       "value": "initial"
     },
     "--sf-btn-padding-inline": {
-      "tier": "PUBLIC",
+      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "optional/tokens.components.css"
@@ -589,6 +637,30 @@
       ],
       "value": "initial"
     },
+    "--sf-btn-s-min-height": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-s-padding-block": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-s-padding-inline": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
     "--sf-btn-xl-font-size": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -597,7 +669,55 @@
       ],
       "value": "initial"
     },
+    "--sf-btn-xl-min-height": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-xl-padding-block": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-xl-padding-inline": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
     "--sf-btn-xs-font-size": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-xs-min-height": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-xs-padding-block": {
+      "tier": "PUBLIC",
+      "role": "knob",
+      "files": [
+        "optional/tokens.components.css"
+      ],
+      "value": "initial"
+    },
+    "--sf-btn-xs-padding-inline": {
       "tier": "PUBLIC",
       "role": "knob",
       "files": [

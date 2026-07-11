@@ -8,12 +8,12 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**741 tokens** (deduplicated by name across the 4 token source files).
+**756 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 685 | Everyday knobs. SemVer-stable. |
-| PUBLIC-ADVANCED | 55 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 696 | Everyday knobs. SemVer-stable. |
+| PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
 Every token also carries a **role** — an orthogonal, SemVer-neutral hint about
@@ -22,7 +22,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 250 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| knob | 265 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
 | consumption | 491 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
@@ -31,6 +31,10 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 ## PUBLIC-ADVANCED tokens
 
+- `--sf-btn-font-size`
+- `--sf-btn-min-height`
+- `--sf-btn-padding-block`
+- `--sf-btn-padding-inline`
 - `--sf-contrast-bias`
 - `--sf-contrast-threshold`
 - `--sf-fluid-max-vw`
@@ -152,18 +156,33 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-breakout-width` | PUBLIC | consumption | Layout | `var(--sf-container-wide)` |
 | `--sf-btn-border-width` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-border-width-1)` |
 | `--sf-btn-font-scale` | PUBLIC | knob | Components (optional, incomplete) | `1` |
-| `--sf-btn-font-size` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-font-size` | PUBLIC-ADVANCED | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-font-weight` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-font-weight-interactive)` |
 | `--sf-btn-gap` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-2xs)` |
 | `--sf-btn-l-font-size` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-l-min-height` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-l-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-l-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-m-font-size` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
-| `--sf-btn-min-height` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
-| `--sf-btn-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
-| `--sf-btn-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-m-min-height` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-m-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-m-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-min-height` | PUBLIC-ADVANCED | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-padding-block` | PUBLIC-ADVANCED | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-padding-inline` | PUBLIC-ADVANCED | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-radius-m)` |
 | `--sf-btn-s-font-size` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-s-min-height` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-s-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-s-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-xl-font-size` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-xl-min-height` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-xl-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-xl-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-btn-xs-font-size` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-xs-min-height` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-xs-padding-block` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
+| `--sf-btn-xs-padding-inline` | PUBLIC | knob | Components (optional, incomplete) | `initial` |
 | `--sf-card-avatar-size` | PUBLIC | knob | Components (optional, incomplete) | `2.5rem` |
 | `--sf-card-bg` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-surface)` |
 | `--sf-card-border-color` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-border)` |
