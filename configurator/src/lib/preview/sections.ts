@@ -325,48 +325,93 @@ export function layout(): string {
 
 // ── Components ─────────────────────────────────────────────────────────────
 const BTN_FAMILIES = ["primary", "secondary", "tertiary", "action", "base", "neutral", "success", "warning", "danger", "info"];
-const BTN_SIZES: [string, string][] = [["xs", "XS"], ["s", "Small"], ["", "Default"], ["l", "Large"], ["xl", "XL"]];
+// [modifier suffix, visible label] — "" is the default (medium) rung.
+const BTN_SIZES: [string, string][] = [["xs", "XS"], ["s", "S"], ["", "M"], ["l", "L"], ["xl", "XL"]];
 
 export function components(): string {
   const btn = (mods: string, label: string) => `<button class="sf-btn ${mods}">${esc(label)}</button>`;
 
-  const families = well(cluster(...BTN_FAMILIES.map((f) => btn(`sf-btn--${f}`, f[0].toUpperCase() + f.slice(1)))));
-  const stylesRow = well(cluster(
-    btn("sf-btn--primary", "Fill"),
-    btn("sf-btn--primary sf-btn--soft", "Soft"),
-    btn("sf-btn--primary sf-btn--outline", "Outline"),
-    btn("sf-btn--primary sf-btn--gradient", "Gradient"),
+  // Families — every shipped colour family as a fill button.
+  const families = well(cluster(
+    ...BTN_FAMILIES.map((f) => btn(`sf-btn--${f}`, f[0].toUpperCase() + f.slice(1))),
   ));
-  const sizes = well(`<div class="sf-cluster sf-cluster--s" style="align-items:center">${BTN_SIZES.map(
-    ([s, label]) => btn(`sf-btn--primary${s ? ` sf-btn--${s}` : ""}`, label),
-  ).join("")}</div>`);
+
+  // Styles — fill · soft · outline · gradient, on a brand family and a neutral.
+  const styleRow = (family: string, withGradient: boolean) => cluster(
+    btn(`sf-btn--${family}`, "Fill"),
+    btn(`sf-btn--${family} sf-btn--soft`, "Soft"),
+    btn(`sf-btn--${family} sf-btn--outline`, "Outline"),
+    ...(withGradient ? [btn(`sf-btn--${family} sf-btn--gradient`, "Gradient")] : []),
+  );
+  const styles = well(stack("s", styleRow("primary", true), styleRow("neutral", false)));
+
+  // Size scale — the hero. Aligned to a common baseline so the per-rung
+  // font-size / padding / min-height ladder reads as a clear staircase.
+  const sizes = well(
+    `<div class="sf-cluster sf-cluster--s" style="align-items:flex-end">${BTN_SIZES.map(
+      ([s, label]) => btn(`sf-btn--primary${s ? ` sf-btn--${s}` : ""}`, label),
+    ).join("")}</div>`,
+  );
+
+  // Full width — the block modifier stretches to the container inline size.
+  const widths = well(stack("s",
+    `<button class="sf-btn sf-btn--primary sf-btn--block">Block — full width</button>`,
+    `<button class="sf-btn sf-btn--outline sf-btn--block">Block — outline</button>`,
+  ));
+
+  // States — default, disabled, loading.
   const states = well(cluster(
     btn("sf-btn--primary", "Default"),
     `<button class="sf-btn sf-btn--primary" disabled>Disabled</button>`,
     `<button class="sf-btn sf-btn--primary sf-is-loading">Loading</button>`,
   ));
 
+  // A rich card that exercises the full slot API: media, avatar header,
+  // title, body and a footer action row. Media/avatar use a token-driven
+  // gradient (no external asset) so they re-tint live with the colour panel.
+  const swatch = "var(--sf-gradient-primary, var(--sf-color-primary))";
+  const mediaCard = `<article class="sf-card sf-card--elevated" style="max-inline-size:22rem">
+    <div class="sf-card__media" style="background:${swatch}"></div>
+    <div class="sf-card__header">
+      <div class="sf-cluster sf-cluster--s" style="align-items:center;flex-wrap:nowrap">
+        <div class="sf-card__avatar" style="background:${swatch}"></div>
+        <div class="sf-stack sf-stack--xs">
+          <h3 class="sf-card__title" style="margin:0">Media card</h3>
+          <span class="pv-secondary">__media · __avatar · __title</span>
+        </div>
+      </div>
+    </div>
+    <div class="sf-card__body"><p class="pv-secondary">Composed from the full card slot API. Every dimension — padding, radius, gap, media ratio, avatar size — is token-driven and reacts live.</p></div>
+    <div class="sf-card__footer">${cluster(
+      btn("sf-btn--primary sf-btn--s", "Open"),
+      btn("sf-btn--outline sf-btn--s", "Share"),
+    )}</div>
+  </article>`;
+
+  // The three shipped card modifiers, side by side.
   const card = (mods: string, title: string, body: string, btnMods: string, action: string) =>
     `<article class="sf-card ${mods}">
       <div class="sf-card__header"><h3 class="sf-card__title">${esc(title)}</h3></div>
       <div class="sf-card__body"><p class="pv-secondary">${esc(body)}</p></div>
       <div class="sf-card__footer">${btn(btnMods, action)}</div>
     </article>`;
-  const cards = grid(
-    16,
-    card("", "Base card", "Default surface, radius, border and text tokens.", "sf-btn--primary sf-btn--s", "Open"),
-    card("sf-card--bordered", "Bordered card", "The shipped bordered modifier for clearer structure.", "sf-btn--outline sf-btn--s", "Details"),
-    card("sf-card--elevated sf-card--interactive", "Interactive card", "Elevation and interaction states react to tokens.", "sf-btn--soft sf-btn--s", "Select"),
+  const cardModifiers = grid(
+    15,
+    card("", "Base", "Default surface, radius, border and shadow.", "sf-btn--primary sf-btn--s", "Open"),
+    card("sf-card--bordered", "Bordered", "Keeps the border, drops the shadow.", "sf-btn--outline sf-btn--s", "Details"),
+    card("sf-card--elevated sf-card--interactive", "Interactive", "Elevated, with a hover/focus lift.", "sf-btn--soft sf-btn--s", "Select"),
   );
 
   return page(
     "Components",
-    "Buttons and cards — every family, style, the full XS–XL size scale and states. This is where the size-scale knobs in the Components panel show their effect immediately.",
-    section("Button families", families),
-    section("Styles", stylesRow),
-    section("Size scale (xs · s · default · l · xl)", sizes, "Global Padding / Min-height / Label-size knobs override this whole scale."),
+    "Buttons and cards built from the real .sf-btn / .sf-card classes — every family and style, the full XS–XL size ladder, states, full-width and the card slot API. Edit the Components panel and each specimen reacts live.",
+    section("Button families", families, `${BTN_FAMILIES.length} shipped colour families`),
+    section("Styles", styles, "fill · soft · outline · gradient"),
+    section("Size scale (xs · s · default · l · xl)", sizes, "Each rung has its own font-size, padding and min-height knob (Components panel ▸ Per-size); the Label-size multiplier scales the whole ladder proportionally."),
+    section("Full width", widths, "sf-btn--block stretches to the container; sf-btn--block-cq does so only in a narrow query container."),
     section("States", states),
-    section("Cards", cards),
+    section("Card — full slot API", mediaCard),
+    section("Card modifiers", cardModifiers, "base · bordered · elevated + interactive"),
   );
 }
 
