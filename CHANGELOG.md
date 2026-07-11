@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.15] - 2026-07-11
+
 ### Features
 - **components:** extend the per-size `.sf-btn` knobs to padding + height — `--sf-btn-{xs,s,m,l,xl}-{padding-block,padding-inline,min-height}` (15 new PUBLIC knobs) join the per-size `font-size` knobs, so each rung's font/padding/height can be retuned independently without flattening the `.sf-btn--xs…xl` ladder
 - **configurator:** the button panel's per-size editor now tunes font-size / padding / min-height per rung (and drives the live preview); the flatten-all knobs move out of the panel into the All-tokens tab's Advanced group
