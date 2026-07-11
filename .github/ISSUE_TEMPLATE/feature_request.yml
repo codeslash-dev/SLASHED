@@ -1,0 +1,36 @@
+name: Feature request
+description: Suggest a new token, class, macro, or framework improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to style or do that the framework makes hard or impossible?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: New token / class / macro, or a change to an existing one. Note if it's a PUBLIC or advanced API.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Core tokens / theme
+        - Layout primitives
+        - Components
+        - Optional layer
+        - Macros
+        - Configurator
+        - Docs / tooling
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

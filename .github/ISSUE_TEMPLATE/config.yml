@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: SLASHED for WordPress (Bricks / Gutenberg integration)
+    url: https://github.com/codeslash-dev/SLASHED-Plugins/issues
+    about: Report issues with the WordPress plugin or its builders, not the CSS framework itself.
+  - name: Security vulnerability
+    url: https://github.com/codeslash-dev/SLASHED/security/advisories/new
+    about: Report security issues privately (see SECURITY.md). Do not open a public issue.
