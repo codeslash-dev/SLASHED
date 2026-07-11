@@ -353,11 +353,19 @@ export function components(): string {
     ).join("")}</div>`,
   );
 
-  // Full width — the block modifier stretches to the container inline size.
-  const widths = well(stack("s",
-    `<button class="sf-btn sf-btn--primary sf-btn--block">Block — full width</button>`,
-    `<button class="sf-btn sf-btn--outline sf-btn--block">Block — outline</button>`,
-  ));
+  // Full width — --block stretches unconditionally; --block-cq only inside a
+  // query container narrower than 20rem, so it's shown inside a 16rem container
+  // (dashed) where it actually fills its width.
+  // align-items:flex-start so buttons size to content — only --block (explicit
+  // 100%) and the block-cq inside the 16rem query container actually stretch.
+  const widths = well(`<div class="sf-stack sf-stack--s" style="align-items:flex-start">
+    <button class="sf-btn sf-btn--primary sf-btn--block">Block — full width</button>
+    <button class="sf-btn sf-btn--neutral sf-btn--outline sf-btn--block">Block — outline</button>
+    <button class="sf-btn sf-btn--primary sf-btn--block-cq">Block-cq — auto here (wide container)</button>
+    <div style="container-type:inline-size;inline-size:16rem;padding:var(--sf-space-s);border:1px dashed var(--sf-color-border);border-radius:var(--sf-radius-s)">
+      <button class="sf-btn sf-btn--primary sf-btn--block-cq">Block-cq — fills</button>
+    </div>
+  </div>`);
 
   // States — default, disabled, loading.
   const states = well(cluster(
