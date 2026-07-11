@@ -337,5 +337,6 @@ test('button per-size label knobs retune one rung; font-scale multiplies the lad
   // Per-size padding + min-height knobs retune the xs rung (5rem = 80px, 7rem = 112px).
   expect(boxBefore.pi).not.toBeCloseTo(80, 0);
   expect(boxAfter.pi).toBeCloseTo(80, 0);
+  expect(boxBefore.mh).not.toBeCloseTo(112, 0);
   expect(boxAfter.mh).toBeCloseTo(112, 0);
 });

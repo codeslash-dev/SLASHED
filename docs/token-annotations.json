@@ -88,7 +88,7 @@
     "Macro tokens | Scroll shadow / overflow fade": "Size of the scroll-shadow fade effect on overflowing containers.",
     "Macro tokens | Content visibility": "intrinsic-size hint for content-visibility: auto (lazy off-screen rendering).",
     "Macro tokens | Line clamp": "Number of lines before text truncates with an ellipsis.",
-    "Component tokens | BUTTON TOKENS": "Padding and radius tokens that control button geometry. Override these to give buttons a distinct visual language from form fields.",
+    "Component tokens | BUTTON TOKENS": "Sizing and geometry tokens — padding, min-height, label size, radius, gap, and border width — that control button appearance, including per-size (xs…xl) knobs. Override these to give buttons a distinct visual language from form fields.",
     "Component tokens | FIELD TOKENS": "Padding and radius tokens that control form field geometry. Override these to give inputs a distinct visual language from buttons.",
     "Core tokens | Link alpha token": "Semi-transparent underline color token used to tint the link underline independently from the link text color.",
     "Core tokens | Selection & mark": "Background and text colors for browser text selections and <mark> highlights. Adapts automatically in dark mode.",

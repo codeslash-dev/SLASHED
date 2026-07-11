@@ -1115,9 +1115,21 @@ Component tokens from `optional/tokens.components.css`:
 --sf-btn-m-font-size:    var(--sf-text-m)
 --sf-btn-l-font-size:    var(--sf-text-l)
 --sf-btn-xl-font-size:   var(--sf-text-xl)
---sf-btn-xs-padding-block --sf-btn-s-padding-block --sf-btn-m-padding-block --sf-btn-l-padding-block --sf-btn-xl-padding-block
---sf-btn-xs-padding-inline --sf-btn-s-padding-inline --sf-btn-m-padding-inline --sf-btn-l-padding-inline --sf-btn-xl-padding-inline
---sf-btn-xs-min-height --sf-btn-s-min-height --sf-btn-m-min-height --sf-btn-l-min-height --sf-btn-xl-min-height
+--sf-btn-xs-padding-block:   initial  /* unset → 0.125rem (rung default) */
+--sf-btn-s-padding-block:    initial  /* unset → var(--sf-space-2xs) */
+--sf-btn-m-padding-block:    initial  /* unset → var(--sf-space-xs) */
+--sf-btn-l-padding-block:    initial  /* unset → var(--sf-space-s) */
+--sf-btn-xl-padding-block:   initial  /* unset → var(--sf-space-m) */
+--sf-btn-xs-padding-inline:  initial  /* unset → var(--sf-space-xs) */
+--sf-btn-s-padding-inline:   initial  /* unset → var(--sf-space-s) */
+--sf-btn-m-padding-inline:   initial  /* unset → var(--sf-space-m) */
+--sf-btn-l-padding-inline:   initial  /* unset → var(--sf-space-l) */
+--sf-btn-xl-padding-inline:  initial  /* unset → var(--sf-space-xl) */
+--sf-btn-xs-min-height:      initial  /* unset → var(--sf-size-xs) */
+--sf-btn-s-min-height:       initial  /* unset → var(--sf-size-s) */
+--sf-btn-m-min-height:       initial  /* unset → var(--sf-size-m) */
+--sf-btn-l-min-height:       initial  /* unset → var(--sf-size-l) */
+--sf-btn-xl-min-height:      initial  /* unset → var(--sf-size-xl) */
 /* Flatten-ALL overrides (PUBLIC-ADVANCED) — collapse the whole --xs…xl ladder to one value; prefer the --sf-btn-font-scale / per-size knobs above */
 --sf-btn-font-size:      var(--sf-text-m)   /* effective m default; unset by default */
 --sf-btn-padding-block:  var(--sf-space-xs)

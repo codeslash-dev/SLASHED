@@ -341,6 +341,7 @@
               {@const touched = [`--sf-btn-${rung}-font-size`, `--sf-btn-${rung}-padding-block`, `--sf-btn-${rung}-padding-inline`, `--sf-btn-${rung}-min-height`].some((k) => k in overrides)}
               <button
                 onclick={() => { activeBtnRung = rung; btnSize = rung; }}
+                aria-pressed={activeBtnRung === rung}
                 class={`relative flex-1 py-1 rounded-md text-[10px] font-bold uppercase transition-all cursor-pointer ${
                   activeBtnRung === rung
                     ? "bg-black/12 dark:bg-white/12 text-slate-900 dark:text-white"
@@ -361,6 +362,7 @@
                 {@const cur = currentStep(activeFontToken, "text", TEXT_STEPS, activeFontDef)}
                 <button
                   onclick={() => setStep(activeFontToken, "text", step, activeFontDef)}
+                  aria-pressed={cur === step}
                   class={`px-2 py-1 rounded-lg text-[10px] border transition-all cursor-pointer ${
                     cur === step
                       ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
