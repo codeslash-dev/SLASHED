@@ -1,0 +1,42 @@
+name: Bug report
+description: Something in the SLASHED CSS framework is broken
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What went wrong, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: A minimal repro helps — link a CodePen/JSFiddle or paste the smallest HTML + classes/tokens that show the problem.
+      placeholder: |
+        1. Load `dist/slashed.css`
+        2. Markup: ...
+        3. Observed: ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: SLASHED version
+      description: The `/*! SLASHED vX.Y.Z */` header of the bundle you loaded, or the npm/release version.
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: Browser(s) and OS. Note if it's light or dark mode specific.
+      placeholder: Chrome 126, Firefox 128, Safari 17 — macOS 14
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Console output, screenshots, or notes on which token/class is involved.
