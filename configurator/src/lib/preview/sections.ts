@@ -3,7 +3,7 @@
 // configurable token/class is visible and reacts live to the configurator.
 // Foundations enumerate the real API via ./catalog; components are curated.
 
-import { page, section, specimen, tag, cluster, grid, stack, well, esc } from "./specimen";
+import { page, section, specimen, tag, cluster, grid, stack, well, frame, esc } from "./specimen";
 import { familySteps, classesOfKind, tokensMatching, tokensByGroup, classesByKind } from "./catalog";
 
 const RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
@@ -331,8 +331,13 @@ const BTN_SIZES: [string, string][] = [["xs", "XS"], ["s", "S"], ["", "M"], ["l"
 export function components(): string {
   const btn = (mods: string, label: string) => `<button class="sf-btn ${mods}">${esc(label)}</button>`;
 
+  // Button rows use frame() (a non-card backdrop), NOT well(): the framework's
+  // `.sf-card .sf-btn` rule pins a nested button's label to --sf-text-s, which
+  // would flatten the per-rung font ladder in the Size-scale demo (padding and
+  // min-height still grow, but the label wouldn't). Cards below keep .sf-card.
+
   // Families — every shipped colour family as a fill button.
-  const families = well(cluster(
+  const families = frame(cluster(
     ...BTN_FAMILIES.map((f) => btn(`sf-btn--${f}`, f[0].toUpperCase() + f.slice(1))),
   ));
 
@@ -343,11 +348,11 @@ export function components(): string {
     btn(`sf-btn--${family} sf-btn--outline`, "Outline"),
     ...(withGradient ? [btn(`sf-btn--${family} sf-btn--gradient`, "Gradient")] : []),
   );
-  const styles = well(stack("s", styleRow("primary", true), styleRow("neutral", false)));
+  const styles = frame(stack("s", styleRow("primary", true), styleRow("neutral", false)));
 
   // Size scale — the hero. Aligned to a common baseline so the per-rung
   // font-size / padding / min-height ladder reads as a clear staircase.
-  const sizes = well(
+  const sizes = frame(
     `<div class="sf-cluster sf-cluster--s" style="align-items:flex-end">${BTN_SIZES.map(
       ([s, label]) => btn(`sf-btn--primary${s ? ` sf-btn--${s}` : ""}`, label),
     ).join("")}</div>`,
@@ -358,7 +363,7 @@ export function components(): string {
   // (dashed) where it actually fills its width.
   // align-items:flex-start so buttons size to content — only --block (explicit
   // 100%) and the block-cq inside the 16rem query container actually stretch.
-  const widths = well(`<div class="sf-stack sf-stack--s" style="align-items:flex-start">
+  const widths = frame(`<div class="sf-stack sf-stack--s" style="align-items:flex-start">
     <button class="sf-btn sf-btn--primary sf-btn--block">Block — full width</button>
     <button class="sf-btn sf-btn--neutral sf-btn--outline sf-btn--block">Block — outline</button>
     <button class="sf-btn sf-btn--primary sf-btn--block-cq">Block-cq — auto here (wide container)</button>
@@ -368,7 +373,7 @@ export function components(): string {
   </div>`);
 
   // States — default, disabled, loading.
-  const states = well(cluster(
+  const states = frame(cluster(
     btn("sf-btn--primary", "Default"),
     `<button class="sf-btn sf-btn--primary" disabled>Disabled</button>`,
     `<button class="sf-btn sf-btn--primary sf-is-loading">Loading</button>`,
