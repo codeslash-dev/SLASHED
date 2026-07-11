@@ -143,9 +143,9 @@ proportional.
 </a>
 ```
 
-A `.sf-btn` nested in a card automatically shrinks to `--sf-card-btn-font-size`.
-Pair `--interactive` with `.sf-clickable-parent` (from `core/accessibility.css`)
-when the entire card should be a single link.
+A `.sf-btn` nested in a card keeps its own size — add `.sf-btn--s` explicitly
+for a compact card action. Pair `--interactive` with `.sf-clickable-parent`
+(from `core/accessibility.css`) when the entire card should be a single link.
 
 **Modifiers**
 
@@ -172,7 +172,6 @@ when the entire card should be a single link.
 | `--sf-card-media-ratio` | `var(--sf-ratio-video)` | `__media` aspect ratio |
 | `--sf-card-avatar-size` | `2.5rem` | `__avatar` diameter |
 | `--sf-card-heading-size` | `var(--sf-text-xl)` | `__title` size |
-| `--sf-card-btn-font-size` | `var(--sf-text-s)` | Nested `.sf-btn` size |
 
 **Coloured cards**
 
