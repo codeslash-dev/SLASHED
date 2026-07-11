@@ -68,7 +68,7 @@
     "@playwright/test": "^1.61.1",
     "@release-it/conventional-changelog": "^11.0.1",
     "culori": "^4.0.2",
-    "fast-check": "^4.8.0",
+    "fast-check": "^4.9.0",
     "release-it": "^20.2.1",
     "stylelint": "^17.14.0",
     "stylelint-config-standard": "^40.0.0"
