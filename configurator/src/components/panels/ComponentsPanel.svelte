@@ -587,23 +587,6 @@
         </div>
 
         <div>
-          <div class="text-[9px] text-slate-500 mb-1">Nested button size — --sf-card-btn-font-size</div>
-          <div class="flex flex-wrap gap-1">
-            {#each TEXT_STEPS as step (step)}
-              {@const cur = currentStep("--sf-card-btn-font-size", "text", TEXT_STEPS, "s")}
-              <button
-                onclick={() => setStep("--sf-card-btn-font-size", "text", step, "s")}
-                class={`px-2 py-1 rounded-lg text-[10px] border transition-all cursor-pointer ${
-                  cur === step
-                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                    : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5"
-                }`}
-              >{step}</button>
-            {/each}
-          </div>
-        </div>
-
-        <div>
           <div class="text-[9px] text-slate-500 mb-1">Media object-fit — --sf-object-fit (global, affects all img/video)</div>
           <div class="flex flex-wrap gap-1">
             {#each ["cover", "contain"] as fit (fit)}

@@ -10,17 +10,17 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1085 elements** — 756 tokens, 329 classes.
+**1084 elements** — 755 tokens, 329 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1025 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1024 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (756)
+## Tokens (755)
 
-### Component tokens (47)
+### Component tokens (46)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -57,7 +57,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-card-bg` | PUBLIC | consumption | card | `var(--sf-color-surface)` | Background surface for .sf-card. Defaults to --sf-color-surface. |
 | `--sf-card-border-color` | PUBLIC | consumption | card | `var(--sf-color-border)` | Border colour for .sf-card. Defaults to --sf-color-border. |
 | `--sf-card-border-width` | PUBLIC | consumption | card | `var(--sf-border-width-1)` | Border thickness for .sf-card. |
-| `--sf-card-btn-font-size` | PUBLIC | consumption | card | `var(--sf-text-s)` | Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s. |
 | `--sf-card-gap` | PUBLIC | consumption | card | `var(--sf-space-m)` | Divider spacing for .sf-card__header / __footer (padding + margin around the rule). |
 | `--sf-card-heading-size` | PUBLIC | consumption | card | `var(--sf-text-xl)` | Font-size for .sf-card__title. Defaults to --sf-text-xl. |
 | `--sf-card-media-radius` | PUBLIC | consumption | card | `var(--sf-card-radius, var(--sf-radius-m))` | Corner radius for .sf-card__media. Mirrors the card's inner radius by default. |

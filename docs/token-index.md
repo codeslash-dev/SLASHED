@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**756 tokens** (deduplicated by name across the 4 token source files).
+**755 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 696 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 695 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 265 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 491 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 490 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -187,7 +187,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-card-bg` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-surface)` |
 | `--sf-card-border-color` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-color-border)` |
 | `--sf-card-border-width` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-border-width-1)` |
-| `--sf-card-btn-font-size` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-text-s)` |
 | `--sf-card-gap` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-space-m)` |
 | `--sf-card-heading-size` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-text-xl)` |
 | `--sf-card-media-radius` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-card-radius, var(--sf-radius-m))` |

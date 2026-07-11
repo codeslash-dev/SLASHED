@@ -37,6 +37,36 @@ button min-height to the accessibility anchor — globally:
 or per-button with `.sf-btn--l` (`--sf-size-l`, 48px). In the configurator this
 is the **Min height → touch-target** choice.
 
+### `.sf-btn` inside `.sf-card` no longer auto-shrinks its label (breaking)
+
+A `.sf-card .sf-btn { --sf-btn-font-size--size: var(--sf-card-btn-font-size,
+var(--sf-text-s)) }` rule used to silently pin every button nested in a card to
+the `--sf-text-s` label size — so the *same* `.sf-btn` rendered smaller inside a
+card than outside it, and a `.sf-btn--xl` in a card footer lost its size. This
+context-dependent restyling was surprising (one component quietly overriding
+another) and is the only rule of its kind, so it has been removed. The
+now-orphaned `--sf-card-btn-font-size` token is deleted.
+
+**What changed for you:** buttons in cards now render at their own size (default
+`.sf-btn` = `--sf-text-m`), exactly as they do anywhere else — the Bootstrap /
+Tailwind model where an element looks the same regardless of container.
+
+**Restore the compact card action** by sizing the button explicitly — the same
+way you would anywhere else:
+
+```html
+<div class="sf-card__footer">
+  <button class="sf-btn sf-btn--primary sf-btn--s">Open</button>
+</div>
+```
+
+Or, to shrink *every* button inside a given card without touching each one, set
+the size tier on that card:
+
+```css
+.sf-card--compact .sf-btn { --sf-btn-font-size--size: var(--sf-text-s); }
+```
+
 ### `--sf-touch-target` decoupled from `--sf-size-l`; size scale regularised (breaking)
 
 `--sf-touch-target` used to be `var(--sf-size-l)`, which coupled the WCAG 2.5.5

@@ -26,28 +26,28 @@
       "optimal"
     ],
     "counts": {
-      "total": 1085,
+      "total": 1084,
       "by_type": {
         "class": 329,
-        "token": 756
+        "token": 755
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1025,
+        "PUBLIC": 1024,
         "PUBLIC-ADVANCED": 59
       },
       "by_role": {
-        "consumption": 491,
+        "consumption": 490,
         "knob": 265
       },
-      "tokens": 756,
+      "tokens": 755,
       "classes": 329,
       "sf_classes": 292,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
         "Accessibility": 8,
-        "Component tokens": 47,
+        "Component tokens": 46,
         "Components": 30,
         "Core tokens": 622,
         "Layout primitives": 145,
@@ -2436,31 +2436,6 @@
       "description": "Border thickness for .sf-card.",
       "value": "var(--sf-border-width-1)",
       "aliasOf": "--sf-border-width-1",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "optional/tokens.components.css"
-      ],
-      "bundles": [
-        "full"
-      ]
-    },
-    {
-      "name": "--sf-card-btn-font-size",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "card",
-      "category": "Component tokens",
-      "area": "components",
-      "group": "CARD TOKENS",
-      "description": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.",
-      "value": "var(--sf-text-s)",
-      "aliasOf": "--sf-text-s",
       "registered": false,
       "animatable": false,
       "syntax": null,

@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 756,
-    "rendered": 756,
+    "totalTokens": 755,
+    "rendered": 755,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 48,
@@ -1266,21 +1266,6 @@
       "category": "Component tokens",
       "declared": "var(--sf-border-width-1)",
       "aliasOf": "--sf-border-width-1",
-      "issues": [
-        "EMPTY_COMPUTED"
-      ],
-      "computed": "",
-      "shown": "(empty)",
-      "darkComputed": "",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-card-btn-font-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Component tokens",
-      "declared": "var(--sf-text-s)",
-      "aliasOf": "--sf-text-s",
       "issues": [
         "EMPTY_COMPUTED"
       ],

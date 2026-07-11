@@ -1151,7 +1151,6 @@ Component tokens from `optional/tokens.components.css`:
 --sf-card-media-radius:     var(--sf-card-radius, var(--sf-radius-m))
 --sf-card-avatar-size:      2.5rem
 --sf-card-heading-size:     var(--sf-text-xl)
---sf-card-btn-font-size:    var(--sf-text-s)
 ```
 
 `.sf-btn` colour families (all 10, 1:1 with the palette): `--primary

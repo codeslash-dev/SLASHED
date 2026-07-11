@@ -462,11 +462,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-card-btn-font-size",
-      "description": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.\n\nDefault: `var(--sf-text-s)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-card-gap",
       "description": "Divider spacing for .sf-card__header / __footer (padding + margin around the rule).\n\nDefault: `var(--sf-space-m)`",
       "syntax": "*"

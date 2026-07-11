@@ -20,7 +20,7 @@
       "optional/utilities.css"
     ],
     "counts": {
-      "tokens": 756,
+      "tokens": 755,
       "sf_classes": 292,
       "is_classes": 28
     }
@@ -118,7 +118,6 @@
     "--sf-card-bg",
     "--sf-card-border-color",
     "--sf-card-border-width",
-    "--sf-card-btn-font-size",
     "--sf-card-gap",
     "--sf-card-heading-size",
     "--sf-card-media-radius",

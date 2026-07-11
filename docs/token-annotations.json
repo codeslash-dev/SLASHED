@@ -767,7 +767,6 @@
     "--sf-card-media-ratio": "Aspect ratio for .sf-card__media. Defaults to --sf-ratio-video (16/9).",
     "--sf-card-media-radius": "Corner radius for .sf-card__media. Mirrors the card's inner radius by default.",
     "--sf-card-heading-size": "Font-size for .sf-card__title. Defaults to --sf-text-xl.",
-    "--sf-card-btn-font-size": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.",
     "--sf-h1-max-width": "Max-inline-size cap for <h1>. Default none (unconstrained). Set to a ch value (e.g. 20ch) to prevent wide headings from spanning the full column on large screens.",
     "--sf-h2-max-width": "Max-inline-size cap for <h2>. Default none.",
     "--sf-h3-max-width": "Max-inline-size cap for <h3>. Default none.",
