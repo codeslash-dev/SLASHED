@@ -2,15 +2,15 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "ed57360d56f3",
+    "tokensHash": "ea14629a05b1",
     "bundles": [
       "full",
       "optimal"
     ],
     "counts": {
-      "tokens": 756,
+      "tokens": 755,
       "byTier": {
-        "PUBLIC": 696,
+        "PUBLIC": 695,
         "PUBLIC-ADVANCED": 59,
         "INTERNAL": 1
       },
@@ -18,7 +18,7 @@
         "Layout tokens": 53,
         "Core tokens": 622,
         "Macro tokens": 34,
-        "Component tokens": 47
+        "Component tokens": 46
       }
     }
   },
@@ -1913,26 +1913,6 @@
       "note": "Border thickness for .sf-card.",
       "value": "var(--sf-border-width-1)",
       "aliasOf": "--sf-border-width-1",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": true,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full"
-      ]
-    },
-    {
-      "name": "--sf-card-btn-font-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "card",
-      "category": "Component tokens",
-      "group": "CARD TOKENS",
-      "description": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.",
-      "note": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.",
-      "value": "var(--sf-text-s)",
-      "aliasOf": "--sf-text-s",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

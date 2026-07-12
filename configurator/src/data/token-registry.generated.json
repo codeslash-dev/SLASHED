@@ -2942,7 +2942,8 @@
     },
     {
       "id": 725,
-      "name": "--sf-card-btn-font-size"
+      "name": "--sf-card-btn-font-size",
+      "removed": true
     },
     {
       "id": 726,

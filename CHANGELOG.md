@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Breaking Changes
+- **components:** `.sf-btn` nested in `.sf-card` no longer auto-shrinks its label to `--sf-text-s`. Buttons in cards now render at their own size like anywhere else; add `.sf-btn--s` for a compact card action. The orphaned `--sf-card-btn-font-size` token is removed. See `docs/migration.md`.
+
 ## [0.7.15] - 2026-07-11
 
 ### Features
