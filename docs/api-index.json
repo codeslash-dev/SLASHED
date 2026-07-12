@@ -26,14 +26,14 @@
       "optimal"
     ],
     "counts": {
-      "total": 1084,
+      "total": 1085,
       "by_type": {
-        "class": 329,
+        "class": 330,
         "token": 755
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1024,
+        "PUBLIC": 1025,
         "PUBLIC-ADVANCED": 59
       },
       "by_role": {
@@ -41,8 +41,8 @@
         "knob": 265
       },
       "tokens": 755,
-      "classes": 329,
-      "sf_classes": 292,
+      "classes": 330,
+      "sf_classes": 293,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
@@ -50,6 +50,7 @@
         "Component tokens": 46,
         "Components": 30,
         "Core tokens": 622,
+        "Forms": 1,
         "Layout primitives": 145,
         "Layout tokens": 53,
         "Macro classes": 58,
@@ -24877,6 +24878,29 @@
       ],
       "bundles": [
         "full"
+      ]
+    },
+    {
+      "name": "sf-live-validate",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-live-validate",
+      "prefix": "sf",
+      "kind": "form",
+      "category": "Forms",
+      "area": "forms",
+      "group": "",
+      "description": "Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a <form> or <fieldset>. Off by default so a still-empty required field isn't marked invalid before a submit is attempted.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.forms",
+      "sourceFiles": [
+        "optional/forms.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
       ]
     },
     {

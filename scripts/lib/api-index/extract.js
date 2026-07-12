@@ -79,7 +79,7 @@ export const FILE_META = {
   'core/motion.css':            { category: 'Motion / animation',    area: 'motion',        kind: 'motion'        },
   'core/print.css':             { category: 'Print',                 area: 'print',         kind: 'print'         },
   'core/themes.css':            { category: 'Theme utilities',        area: 'theme',         kind: 'theme'         },
-  'optional/forms.css':         { category: 'Forms (classless)',     area: 'forms',         kind: 'form'          },
+  'optional/forms.css':         { category: 'Forms',                 area: 'forms',         kind: 'form'          },
   'optional/components.css':    { category: 'Components',             area: 'components',    kind: 'component'     },
   'optional/theme-example.css': { category: 'Theme example',         area: 'theme',         kind: 'theme'         },
   'optional/utilities.css':     { category: 'Utilities',             area: 'utilities',     kind: 'utility'       },

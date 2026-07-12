@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1084 elements** — 755 tokens, 329 classes.
+**1085 elements** — 755 tokens, 330 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1024 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1025 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -795,7 +795,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (329)
+## Classes (330)
 
 ### Accessibility (8)
 
@@ -844,6 +844,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-card--bordered` | PUBLIC | component | .sf-card | Flat, outlined card: keeps the border, drops the shadow. |
 | `.sf-card--elevated` | PUBLIC | component | .sf-card | Floating card: hides the border, applies a larger shadow. |
 | `.sf-card--interactive` | PUBLIC | component | .sf-card | Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion. |
+
+### Forms (1)
+
+| Class | Tier | Kind | Group | Description |
+|---|---|---|---|---|
+| `.sf-live-validate` | PUBLIC | form | — | Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a <form> or <fieldset>. Off by default so a still-empty required field isn't marked invalid before a submit is attempted. |
 
 ### Layout primitives (145)
 
