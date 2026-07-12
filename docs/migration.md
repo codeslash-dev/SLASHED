@@ -93,6 +93,20 @@ The underlying `--sf-field-border-color` token and its consumers (resting
 border, focus, autofill) are unchanged — only the automatic pseudo-class
 trigger is gone.
 
+**Want the native-triggered feedback back, without writing JS?** Add
+`.sf-live-validate` to the `<form>` (or a `<fieldset>`) — it re-enables the
+`:user-invalid`/`:user-valid` → `--sf-field-border-color` pivot, scoped to that
+subtree, but only once a submit has actually been attempted (not on simple
+focus+blur, which is what made the original unconditional behaviour fire
+prematurely mid-form-fill):
+
+```html
+<form class="sf-live-validate">
+  <input type="email" required>
+  <button type="submit">Submit</button>
+</form>
+```
+
 ### `--sf-touch-target` decoupled from `--sf-size-l`; size scale regularised (breaking)
 
 `--sf-touch-target` used to be `var(--sf-size-l)`, which coupled the WCAG 2.5.5

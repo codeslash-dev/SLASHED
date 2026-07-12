@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**292 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
+**293 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -316,6 +316,14 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-theme-dark` |
 | `.sf-theme-light` |
 | `.sf-theme-transition` |
+
+## Forms (`optional/forms.css`)
+
+1 classes.
+
+| Class |
+|---|
+| `.sf-live-validate` |
 
 ## Components (`optional/components.css`)
 

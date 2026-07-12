@@ -1063,6 +1063,7 @@
     "sf-link--reverse": "Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse.",
     "sf-link--subtle": "Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover.",
     "sf-link-external": "Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain.",
+    "sf-live-validate": "Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a <form> or <fieldset>. Off by default so a still-empty required field isn't marked invalid before a submit is attempted.",
     "sf-no-tap-highlight": "Removes the mobile tap highlight color (-webkit-tap-highlight-color: transparent). Use on interactive elements with a custom active state.",
     "sf-not-prose": "Opt-out of sf-prose typography styles within a prose block. Apply to an element that should keep default browser or component styles.",
     "sf-overflow-fade": "Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container.",

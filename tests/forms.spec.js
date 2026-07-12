@@ -67,6 +67,34 @@ for (const theme of ['light', 'dark']) {
       expect(cs['border-top-color']).toBe('rgb(1, 2, 3)');
     });
 
+    test('.sf-live-validate scopes native validation feedback to a submitted form', async ({ page }) => {
+      // Two forms, both with an invalid required field, both submitted (a real,
+      // trusted click — :user-invalid needs genuine interaction, not a bare JS
+      // focus()/blur() call, to match reliably). Only "validated" carries the
+      // opt-in class, so only its field should pick up --sf-field-border-color.
+      // The invalid-event listener suppresses the native validation bubble —
+      // the standard pairing for custom validation styling — so the assertion
+      // isn't confused by the browser's own transient bubble-UI rendering.
+      await mount(page, `
+        <form id="plain"><input type="email" id="plain-input" value="not-an-email" required><button type="submit">Go</button></form>
+        <form id="validated" class="sf-live-validate"><input type="email" id="validated-input" value="not-an-email" required><button type="submit">Go</button></form>
+        <script>
+          for (const id of ['plain-input', 'validated-input']) {
+            document.getElementById(id).addEventListener('invalid', (e) => e.preventDefault());
+          }
+        </script>
+      `);
+      await page.locator('#plain button[type=submit]').click();
+      await page.locator('#validated button[type=submit]').click();
+      const [plainVar, validatedVar, danger] = await page.evaluate(() => [
+        getComputedStyle(document.getElementById('plain-input')).getPropertyValue('--sf-field-border-color').trim(),
+        getComputedStyle(document.getElementById('validated-input')).getPropertyValue('--sf-field-border-color').trim(),
+        getComputedStyle(document.body).getPropertyValue('--sf-color-danger').trim(),
+      ]);
+      expect(plainVar).toBe('');            // unscoped: no auto-colouring, even on submit
+      expect(validatedVar).toBe(danger);    // scoped: native invalidity now drives the token
+    });
+
     test('textarea is vertically resizable with a minimum height', async ({ page }) => {
       await mount(page, `<textarea id="t"></textarea>`);
       const cs = await computed(page, ['resize', 'min-block-size']);
