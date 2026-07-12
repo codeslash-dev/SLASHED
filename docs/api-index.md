@@ -845,7 +845,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-card--elevated` | PUBLIC | component | .sf-card | Floating card: hides the border, applies a larger shadow. |
 | `.sf-card--interactive` | PUBLIC | component | .sf-card | Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion. |
 
-### Forms (classless) (1)
+### Forms (1)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|

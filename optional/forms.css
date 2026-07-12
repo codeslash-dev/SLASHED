@@ -93,7 +93,15 @@
      Bootstrap's own .was-validated gate exists to avoid. .sf-live-validate is
      that same gate: put it on a <form> or <fieldset> to scope the pivot to
      that subtree, so it only lights up on a real submit attempt (or explicit
-     interaction) instead of applying everywhere by default. */
+     interaction) instead of applying everywhere by default.
+
+     Safe to combine with manual validation: .sf-is-invalid/.sf-is-valid
+     (core/states.css, @layer slashed.states) always win over the rules below
+     regardless of selector specificity, because slashed.states is declared
+     AFTER slashed.forms in the layer order (core/layers.css) — cascade layer
+     order beats specificity. A field you've manually marked .sf-is-invalid
+     (e.g. a server-side error) can't be silently un-coloured by these rules
+     even if the browser considers it natively valid. */
   .sf-live-validate input:user-invalid,
   .sf-live-validate select:user-invalid,
   .sf-live-validate textarea:user-invalid {

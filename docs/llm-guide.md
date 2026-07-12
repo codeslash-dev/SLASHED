@@ -1091,9 +1091,17 @@ Used by `.sf-is-active`, `.sf-is-current`, etc. in `core/states.css`. Allow comp
 --sf-link-external-marker:  " ↗"              /* marker for .sf-link-external */
 
 /* Scoped override hooks — set per-field/form to override global borders/text */
---sf-field-border-color     /* set by validation states (error/success/warning/info/danger) */
+--sf-field-border-color     /* set by validation states (error/success/warning/info/danger); also set natively by :user-invalid/:user-valid within .sf-live-validate (opt-in — see below) */
 --sf-field-text-color       /* set by validation states for text color feedback */
 ```
+
+Native browser validation (`:user-invalid`/`:user-valid`) does NOT colour a field's
+border by default — add `.sf-live-validate` to the `<form>`/`<fieldset>` to opt a
+subtree into that feedback, gated behind a real submit attempt (not simple
+focus+blur, which would flag a still-empty required field prematurely). The
+explicit `.sf-is-invalid`/`.sf-is-valid` state classes (`core/states.css`) always
+win over `.sf-live-validate`'s native-triggered colour, regardless of specificity —
+`slashed.states` is declared after `slashed.forms` in the layer order (`core/layers.css`).
 
 Component tokens from `optional/tokens.components.css`:
 
