@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Breaking Changes
 - **components:** `.sf-btn` nested in `.sf-card` no longer auto-shrinks its label to `--sf-text-s`. Buttons in cards now render at their own size like anywhere else; add `.sf-btn--s` for a compact card action. The orphaned `--sf-card-btn-font-size` token is removed. See `docs/migration.md`.
+- **forms:** form fields no longer auto-colour on native `:user-invalid` / `:user-valid` — a field no longer looks "broken" the instant the browser considers it invalid, before your app or the user submits anything. The explicit `.sf-is-invalid` / `.sf-is-valid` (and `.sf-is-warning` / `.sf-is-info` / `.sf-is-danger`) state classes are unaffected and remain the way to colour a field's validation state. See `docs/migration.md`.
 
 ## [0.7.15] - 2026-07-11
 
