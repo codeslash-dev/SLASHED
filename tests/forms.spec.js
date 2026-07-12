@@ -3,8 +3,8 @@
 // previously with no dedicated spec (only touched incidentally by a11y.spec).
 // Asserts the computed styling contract for text inputs, textarea, select, the
 // disabled state, and the --sf-field-border-color token indirection that the
-// :user-invalid / :user-valid states pivot on. Loads the optimal bundle (which
-// includes optional/forms.css) in both themes.
+// explicit .sf-is-invalid / .sf-is-valid state classes (core/states.css) set.
+// Loads the optimal bundle (which includes optional/forms.css) in both themes.
 import { test, expect } from '@playwright/test';
 import { renderWithBundle, NO_TRANSITIONS_STYLE } from './render-helpers.js';
 
@@ -63,7 +63,7 @@ for (const theme of ['light', 'dark']) {
       await mount(page, `<input type="text" id="t" style="--sf-field-border-color: rgb(1, 2, 3)">`);
       const cs = await computed(page, ['border-top-color']);
       // The border resolves through --sf-field-border-color (the same hook
-      // :user-invalid/:user-valid flip to danger/success).
+      // .sf-is-invalid/.sf-is-valid flip to danger/success — core/states.css).
       expect(cs['border-top-color']).toBe('rgb(1, 2, 3)');
     });
 

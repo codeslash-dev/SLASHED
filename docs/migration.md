@@ -67,6 +67,32 @@ the size tier on that card:
 .sf-card--compact .sf-btn { --sf-btn-font-size--size: var(--sf-text-s); }
 ```
 
+### Form fields no longer auto-colour on native `:user-invalid` / `:user-valid` (breaking)
+
+`optional/forms.css` used to flip `--sf-field-border-color` to `--sf-color-danger`
+/ `--sf-color-success` automatically whenever the browser's own constraint
+validation (`:user-invalid` / `:user-valid`) fired — so a `required` or
+`pattern`-constrained field could render "broken" (red border) as soon as it was
+touched, before the user submitted anything or your app ran its own validation.
+This was the same category of surprise as the card/button rule above — the
+framework silently overriding an element's appearance based on browser-internal
+state you didn't opt into — so it has been removed.
+
+**What changed for you:** native constraint validation no longer changes a
+field's border colour by itself. The explicit state classes in `core/states.css`
+— `.sf-is-invalid` / `.sf-is-error`, `.sf-is-valid` / `.sf-is-success`,
+`.sf-is-warning`, `.sf-is-info`, `.sf-is-danger` — are unaffected and remain the
+one way to colour a field's validation state; add the class when *your* code
+(not the browser) decides the field is invalid:
+
+```html
+<input type="email" class="sf-is-invalid" aria-invalid="true">
+```
+
+The underlying `--sf-field-border-color` token and its consumers (resting
+border, focus, autofill) are unchanged — only the automatic pseudo-class
+trigger is gone.
+
 ### `--sf-touch-target` decoupled from `--sf-size-l`; size scale regularised (breaking)
 
 `--sf-touch-target` used to be `var(--sf-size-l)`, which coupled the WCAG 2.5.5
