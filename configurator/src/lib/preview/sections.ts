@@ -9,7 +9,7 @@ import { familySteps, classesOfKind, tokensMatching, tokensByGroup, classesByKin
 const RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 const RAMP_FAMILIES = ["primary", "secondary", "tertiary", "action", "base", "neutral"];
 const STATUS = ["success", "warning", "danger", "info"];
-const GRADS = ["primary", "brand", "tertiary", "surface"];
+const GRADS = ["primary", "secondary", "tertiary", "action", "brand", "surface"];
 
 const rampRow = (family: string) =>
   specimen(
@@ -35,7 +35,7 @@ export function color(): string {
   const surfaces = grid(
     10,
     ...surfaceTokens.map((name) =>
-      specimen(name, `<div class="sf-card" style="background:var(${name});block-size:56px"></div>`),
+      specimen(name, `<div class="sf-card" style="inline-size:100%;background:var(${name});block-size:56px"></div>`),
     ),
   );
   const onColor = grid(
@@ -59,7 +59,7 @@ export function color(): string {
     ...["border", "border--subtle", "border--strong"].map((b) =>
       specimen(
         `--sf-color-${b}`,
-        `<div style="block-size:48px;border:2px solid var(--sf-color-${b});border-radius:var(--sf-radius-m)"></div>`,
+        `<div style="inline-size:100%;block-size:48px;border:2px solid var(--sf-color-${b});border-radius:var(--sf-radius-m)"></div>`,
       ),
     ),
   );
@@ -307,7 +307,7 @@ export function layout(): string {
     ...(["video", "square", "portrait"] as const).map((r) =>
       specimen(
         `sf-frame--${r}`,
-        `<div class="sf-frame sf-frame--${r}" style="background:var(--sf-color-primary-100);border-radius:var(--sf-radius-m)"></div>`,
+        `<div class="sf-frame sf-frame--${r}" style="inline-size:100%;background:var(--sf-color-primary-100);border-radius:var(--sf-radius-m)"></div>`,
       ),
     ),
   );

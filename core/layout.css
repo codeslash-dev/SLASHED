@@ -43,6 +43,7 @@
   }
 
   .sf-divider {
+    inline-size:        100%;
     border:             none;
     border-block-start: var(--sf-divider-width) var(--sf-divider-style) var(--sf-divider-color);
     margin-block:       var(--sf-divider-gap);
