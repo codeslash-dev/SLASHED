@@ -5,6 +5,8 @@
 // references a live --sf-* token, so configurator overrides drive these exactly
 // like the framework's own classes — the whole gallery reacts to every change.
 
+import { GRADS } from "./catalog";
+
 const RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 const RAMP_FAMILIES = ["primary", "secondary", "tertiary", "action", "base", "neutral"];
 const STATUS = ["success", "warning", "danger", "info"];
@@ -12,7 +14,6 @@ const RADII = ["xs", "s", "m", "l", "xl", "2xl", "full"];
 const SHADOWS = ["xs", "s", "m", "l", "xl", "2xl"];
 const SPACES = ["3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl", "3xl", "4xl"];
 const TYPE_STEPS = ["display-l", "display-m", "display-s", "2xl", "xl", "l", "m", "s", "xs"];
-const GRADS = ["primary", "secondary", "tertiary", "action", "brand", "surface"];
 
 export function previewSkinCSS(): string {
   const rampClass = (family: string) =>

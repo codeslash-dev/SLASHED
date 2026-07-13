@@ -4,12 +4,11 @@
 // Foundations enumerate the real API via ./catalog; components are curated.
 
 import { page, section, specimen, tag, cluster, grid, stack, well, frame, esc } from "./specimen";
-import { familySteps, classesOfKind, tokensMatching, tokensByGroup, classesByKind } from "./catalog";
+import { familySteps, classesOfKind, tokensMatching, tokensByGroup, classesByKind, GRADS } from "./catalog";
 
 const RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 const RAMP_FAMILIES = ["primary", "secondary", "tertiary", "action", "base", "neutral"];
 const STATUS = ["success", "warning", "danger", "info"];
-const GRADS = ["primary", "secondary", "tertiary", "action", "brand", "surface"];
 
 const rampRow = (family: string) =>
   specimen(
