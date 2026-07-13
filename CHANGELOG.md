@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Bug Fixes
+- **layout:** `.sf-bento` and `.sf-grid-cols-2/3/4/6` now actually respond to their `@container` breakpoints — both used to declare a `container` on themselves and then query that same container to resize themselves, which is a no-op per spec (a container can't be the subject of its own `@container` query). Fixed by relying on an ancestor container (`.sf-container` / `.sf-cq` / `.sf-fluid-cq`) instead, matching how `.sf-alternate` and `.sf-grid-cols-1-2` etc. already do it. `.sf-bento-wide` / `.sf-bento-featured` also no longer force a phantom 2nd column once the grid collapses to 1 column at the mobile breakpoint.
+
 ## [0.7.16] - 2026-07-13
 
 ### Features
