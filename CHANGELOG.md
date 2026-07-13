@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.16] - 2026-07-13
+
 ### Features
 - **forms:** add `.sf-live-validate` — an opt-in scope (apply to a `<form>`/`<fieldset>`) that restores native `:user-invalid`/`:user-valid` → `--sf-field-border-color` feedback within that subtree, gated behind a real submit attempt rather than firing unconditionally on simple focus+blur. The zero-JS convenience of the removed automatic behaviour, without its premature-feedback failure mode.
 
