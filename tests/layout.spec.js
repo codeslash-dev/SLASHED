@@ -678,6 +678,22 @@ test.describe('layout: .sf-bento', () => {
     expect(itemWidth).toBeLessThanOrEqual(gridWidth + 1);
   });
 
+  test('--featured (span 2/2) also does not force a phantom 2nd column at the mobile breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div class="sf-bento">
+          <div id="f" class="sf-bento-featured">featured</div>
+          <div>B</div>
+        </div>
+      </div>
+    `);
+    const [gridWidth, itemWidth] = await Promise.all([
+      page.locator('.sf-bento').evaluate(el => el.getBoundingClientRect().width),
+      page.locator('#f').evaluate(el => el.getBoundingClientRect().width),
+    ]);
+    expect(itemWidth).toBeLessThanOrEqual(gridWidth + 1);
+  });
+
   test('uses the wider column count once past the mobile breakpoint', async ({ page }) => {
     await setup(page, `
       <div style="container-type:inline-size; width:900px">
@@ -718,6 +734,23 @@ test.describe('layout: .sf-grid-cols-2/3/4/6', () => {
       getComputedStyle(el).gridTemplateColumns.split(' ').length
     );
     expect(cols).toBe(1);
+  });
+
+  // Below 30em NEITHER @container rule matches, so gridTemplateColumns falls
+  // back to the unset "none" (still 1 "column" by construction) — the case
+  // above alone can't distinguish a working ancestor container from a
+  // completely absent one. This mid-range case only passes if the 30em
+  // breakpoint's ancestor-container query actually fired.
+  test('uses the 2-column mid breakpoint between 30em and 48em', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:600px">
+        <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(2);
   });
 });
 
