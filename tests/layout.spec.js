@@ -696,7 +696,7 @@ test.describe('layout: .sf-bento', () => {
 
   test('uses the wider column count once past the mobile breakpoint', async ({ page }) => {
     await setup(page, `
-      <div style="container-type:inline-size; width:900px">
+      <div style="container-type:inline-size; width:1600px">
         <div id="g" class="sf-bento"><div>A</div><div>B</div></div>
       </div>
     `);
@@ -705,6 +705,24 @@ test.describe('layout: .sf-bento', () => {
     );
     expect(cols).toBeGreaterThan(1);
   });
+
+  // `em` inside an @container condition resolves against the container's
+  // (fluid, viewport-driven) inherited font-size here — not a fixed 16px —
+  // so the effective pixel breakpoint isn't identical across engines. 750px
+  // sits comfortably between every observed 30em/48em interpretation; 900px
+  // was measured to land right on that boundary and flipped between 2 and 4
+  // columns depending on the browser (see the grid-cols-4 test below).
+  test('uses 2 columns in the mid-range between 30em and 48em', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:750px">
+        <div id="g" class="sf-bento"><div>A</div><div>B</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(2);
+  });
 });
 
 // ── .sf-grid-cols-2/3/4/6 ──────────────────────────────────────────
@@ -712,9 +730,17 @@ test.describe('layout: .sf-grid-cols-2/3/4/6', () => {
   // Same SL-034 constraint as .sf-bento above: these used to establish and
   // then query their own container, so the breakpoint below was dead code
   // at every viewport — only an ancestor container makes it fire.
+  // A width of 900px (56.25em at a fixed 16px basis) originally lived here
+  // and was flaky in CI: `em` inside an @container condition resolves
+  // against the container's inherited font-size, which here is the fluid
+  // `--sf-text-m` (~19px at this viewport, not 16px), and engines don't
+  // agree on the resulting effective breakpoint down to the pixel — 900px
+  // sat close enough to the 48em boundary that Chromium read it as past the
+  // breakpoint while Firefox/WebKit read it as short of it. 1600px clears
+  // every observed interpretation.
   test('resolves its column count against an ancestor container, not itself', async ({ page }) => {
     await setup(page, `
-      <div style="container-type:inline-size; width:900px">
+      <div style="container-type:inline-size; width:1600px">
         <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
       </div>
     `);
@@ -743,7 +769,7 @@ test.describe('layout: .sf-grid-cols-2/3/4/6', () => {
   // breakpoint's ancestor-container query actually fired.
   test('uses the 2-column mid breakpoint between 30em and 48em', async ({ page }) => {
     await setup(page, `
-      <div style="container-type:inline-size; width:600px">
+      <div style="container-type:inline-size; width:750px">
         <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
       </div>
     `);

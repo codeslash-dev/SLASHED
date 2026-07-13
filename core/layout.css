@@ -12,9 +12,12 @@
    silent no-op, not an error). Primitives that need to resize THEMSELVES
    (.sf-grid-cols-2/3/4/6, .sf-bento) must therefore rely on an ancestor
    container (.sf-container / .sf-cq / .sf-fluid-cq) rather than declaring
-   `container` on themselves — unlike .sf-alternate/.sf-grid-cols-1-2 etc.,
-   which query a self-established container to restyle their CHILDREN and
-   are fine. Not re-explained at each site below. */
+   `container` on themselves. .sf-grid-cols-1-2 etc. already follow this —
+   they've never declared their own `container` — so they were unaffected.
+   .sf-alternate is a different, unrelated-but-similar-looking pattern: it
+   DOES declare `container` on itself, but only to restyle its CHILDREN
+   (`.sf-alternate > *`), which is not self-querying and is fine. Not
+   re-explained at each site below. */
 
 @layer slashed.layout {
 
