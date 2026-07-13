@@ -51,13 +51,17 @@ layout: null
       .btn--quiet:hover { background: var(--sf-color-bg--hover); border-color: var(--sf-color-primary); }
 
       /* ---------- nav ---------- */
-      .site-nav a {
+      /* :not(.btn) keeps this from out-specificity-ing .btn--primary's
+         on-primary text color — .site-nav a (0,1,1) otherwise beats
+         .btn--primary (0,1,0) in the same layer and leaves the button's
+         text the same color as its gradient background. */
+      .site-nav a:not(.btn) {
         text-decoration: none;
         color:           var(--sf-color-text--secondary);
         font-size:       var(--sf-text-s);
         font-weight:     var(--sf-font-weight-medium);
       }
-      .site-nav a:hover  { color: var(--sf-color-primary); }
+      .site-nav a:not(.btn):hover  { color: var(--sf-color-primary); }
       .site-nav .brand   {
         color:          var(--sf-color-heading);
         font-weight:    var(--sf-font-weight-display);
@@ -69,7 +73,15 @@ layout: null
          resolves to the section rhythm scale (--sf-space-xl ≈ 3.25rem a side),
          which stacks a ~150px-tall band around a 49px nav. Pin it to a compact,
          symmetric bar instead — the gutter (inline padding) stays. */
-      header:has(.site-nav) { padding-block: var(--sf-space-s); }
+      /* The standalone .sf-divider that used to follow the header stacked
+         its own margin-block on top of the header's padding AND the hero's
+         cover padding — three independent gaps compounding into a dead
+         band nobody designed on purpose. A border on the header itself
+         gives the same visual seam with none of the extra margin. */
+      header:has(.site-nav) {
+        padding-block: var(--sf-space-s);
+        border-block-end: 1px solid var(--sf-color-border--subtle);
+      }
       /* The link cluster is the part that has room to give: on narrow
          viewports it's dropped in favor of the primary CTA + theme toggle,
          instead of wrapping into three cramped rows. */
@@ -413,8 +425,6 @@ layout: null
     </nav>
   </header>
 
-  <div class="sf-divider sf-divider--soft" role="presentation"></div>
-
   <main>
 
     <!-- Hero — the name unfolds into the manifesto -->
@@ -434,13 +444,13 @@ layout: null
           <a class="btn btn--quiet" href="/docs/test-coverage.html">Coverage Suite</a>
           <a class="btn btn--quiet" href="https://github.com/codeslash-dev/SLASHED">GitHub</a>
         </div>
-        <p class="footer-meta"><span class="hover-hint">Psst — hover the name. </span>This page is styled by <code>slashed.optimal.css</code> itself: switch your OS to dark mode and watch it follow.</p>
+        <p class="footer-meta"><span class="hover-hint">Hover the name for the full words. </span>Styled by <code>slashed.optimal.css</code> — toggle your OS color scheme to see dark mode apply with no JS.</p>
       </div>
     </section>
 
     <!-- Stats strip -->
     <section class="sf-section sf-section--s sf-section--guttered">
-      <dl class="stats sf-container sf-container--wide sf-grid sf-grid--fit sf-grid--s sf-gap--m" style="text-align: center; margin: 0;">
+      <dl class="stats sf-container sf-container--wide sf-grid-flex sf-grid-flex--center sf-grid-flex--s sf-gap--m" style="text-align: center; margin: 0;">
         <div class="stat sf-tabular-nums"><dt>729</dt><dd>design tokens</dd></div>
         <div class="stat sf-tabular-nums"><dt>15</dt><dd>cascade layers</dd></div>
         <div class="stat sf-tabular-nums"><dt>0</dt><dd>lines of frontend JS</dd></div>
@@ -452,8 +462,8 @@ layout: null
     <section class="sf-section sf-section--l sf-section--guttered">
       <div class="sf-container sf-container--wide sf-stack sf-stack--m">
         <div class="sf-stack sf-stack--xs">
-          <p class="eyebrow">What it does</p>
-          <h2>Every demo below is live framework CSS</h2>
+          <p class="eyebrow">Features</p>
+          <h2>Live CSS, not screenshots</h2>
         </div>
         <div class="sf-bento sf-bento--3 sf-gap--m">
 
@@ -578,8 +588,8 @@ layout: null
       <div class="sf-container sf-stack sf-stack--m">
         <div class="sf-stack sf-stack--xs">
           <p class="eyebrow">Install</p>
-          <h2>One link tag. That's the toolchain.</h2>
-          <p class="footer-meta">By the way: this band is just <code>&lt;section data-theme="dark"&gt;</code> — mixing light and dark sections is one attribute.</p>
+          <h2>Install: one link tag</h2>
+          <p class="footer-meta">This section is <code>&lt;section data-theme="dark"&gt;</code> — mixing light and dark sections is one attribute, no wrapper JS.</p>
         </div>
 
 <pre><code>&lt;!-- jsDelivr CDN — recommended --&gt;
