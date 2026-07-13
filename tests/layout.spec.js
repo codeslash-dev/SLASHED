@@ -534,6 +534,24 @@ test.describe('layout: .sf-divider', () => {
     expect(cs.inline).toBeGreaterThan(0);
     expect(cs.block).toBe(0);
   });
+
+  test('spans its container width in normal (block) flow', async ({ page }) => {
+    await setup(page, `<div style="inline-size:400px"><hr id="t" class="sf-divider"></div>`);
+    const w = await page.locator('#t').evaluate(el => el.getBoundingClientRect().width);
+    expect(w).toBeGreaterThan(300);
+  });
+
+  test('--vertical stays a narrow rule inside a flex row, not stretched to the row width', async ({ page }) => {
+    await setup(page, `
+      <div style="display:flex;inline-size:400px">
+        <span>Left</span>
+        <hr id="t" class="sf-divider sf-divider--vertical">
+        <span>Right</span>
+      </div>
+    `);
+    const w = await page.locator('#t').evaluate(el => el.getBoundingClientRect().width);
+    expect(w).toBeLessThan(20);
+  });
 });
 
 // ── .sf-divide ──────────────────────────────────────────────────
