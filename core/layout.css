@@ -5,7 +5,16 @@
    SL-005: every @container query in this file hardcodes its breakpoint
    instead of referencing a --sf-* token — var() is not allowed inside an
    @container condition per the CSS spec. This applies framework-wide to
-   every @container site below; not re-explained at each one. */
+   every @container site below; not re-explained at each one.
+   SL-034: a query container cannot be the subject of its own @container
+   query — conditions only ever match descendants of the nearest ancestor
+   container, never the element that establishes it (self-querying is a
+   silent no-op, not an error). Primitives that need to resize THEMSELVES
+   (.sf-grid-cols-2/3/4/6, .sf-bento) must therefore rely on an ancestor
+   container (.sf-container / .sf-cq / .sf-fluid-cq) rather than declaring
+   `container` on themselves — unlike .sf-alternate/.sf-grid-cols-1-2 etc.,
+   which query a self-established container to restyle their CHILDREN and
+   are fine. Not re-explained at each site below. */
 
 @layer slashed.layout {
 
@@ -509,9 +518,8 @@
 
   
   .sf-grid-cols-2, .sf-grid-cols-3, .sf-grid-cols-4, .sf-grid-cols-6 {
-    display:   grid;
-    gap:       var(--sf-grid-gap);
-    container: sf-grid / inline-size;
+    display: grid;
+    gap:     var(--sf-grid-gap);
   }
 
   @container (min-width: 30em) {
@@ -579,7 +587,6 @@
     grid-auto-rows:        minmax(var(--sf-bento-row, var(--sf-bento-row-default)), auto);
     grid-auto-flow:        dense;
     gap:                   var(--sf-bento-gap);
-    container:             sf-bento / inline-size;
   }
 
   @container (max-width: 29.99em) {
@@ -604,6 +611,15 @@
   .sf-bento-full     { grid-column: 1 / -1; }
   .sf-bento-tall     { grid-row:    span 2; }
   .sf-bento-featured { grid-column: span 2; grid-row: span 2; }
+
+  /* A spanning child can't request more columns than the 1-column mobile
+     grid has, or CSS Grid adds an implicit column to satisfy the span,
+     breaking the single-column layout the query above exists to guarantee.
+     Placed after the modifiers above (equal specificity) so it wins on
+     source order regardless of query-match state. */
+  @container (max-width: 29.99em) {
+    .sf-bento-wide, .sf-bento-featured { grid-column: span 1; }
+  }
 
   
   .sf-subgrid      { display: grid; grid-template-columns: subgrid; }

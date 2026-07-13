@@ -644,6 +644,81 @@ test.describe('layout: .sf-bento', () => {
     );
     expect(cols).toBe(2);
   });
+
+  // .sf-bento's own @container breakpoints must resolve against an ANCESTOR
+  // container, not itself — a size container cannot be the subject of its
+  // own @container query (SL-034); .sf-bento used to declare `container`
+  // on itself, which made these breakpoints a permanent silent no-op at
+  // every viewport, mobile included.
+  test('collapses to 1 column below the mobile breakpoint (ancestor container)', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div id="g" class="sf-bento"><div>A</div><div>B</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(1);
+  });
+
+  test('a spanning child does not force a phantom 2nd column at the mobile breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div class="sf-bento">
+          <div id="w" class="sf-bento-wide">wide</div>
+          <div>B</div>
+        </div>
+      </div>
+    `);
+    const [gridWidth, itemWidth] = await Promise.all([
+      page.locator('.sf-bento').evaluate(el => el.getBoundingClientRect().width),
+      page.locator('#w').evaluate(el => el.getBoundingClientRect().width),
+    ]);
+    expect(itemWidth).toBeLessThanOrEqual(gridWidth + 1);
+  });
+
+  test('uses the wider column count once past the mobile breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:900px">
+        <div id="g" class="sf-bento"><div>A</div><div>B</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBeGreaterThan(1);
+  });
+});
+
+// ── .sf-grid-cols-2/3/4/6 ──────────────────────────────────────────
+test.describe('layout: .sf-grid-cols-2/3/4/6', () => {
+  // Same SL-034 constraint as .sf-bento above: these used to establish and
+  // then query their own container, so the breakpoint below was dead code
+  // at every viewport — only an ancestor container makes it fire.
+  test('resolves its column count against an ancestor container, not itself', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:900px">
+        <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(4);
+  });
+
+  test('stays 1 column below the breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(1);
+  });
 });
 
 // ── .sf-alternate ───────────────────────────────────────────────
