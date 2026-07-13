@@ -182,6 +182,12 @@ layout: null
           width:              max-content;
           opacity:            0;
           clip-path:          inset(0 100% 0 0); /* hidden by clip, so it occupies no layout space */
+          /* The revealed word visually overlaps the next collapsed letters,
+             but it must not catch the pointer — otherwise sweeping the mouse
+             left-to-right hits this overlay instead of the next .al's own
+             (still tiny, unmoved) hit target, and the sweep gets stuck on
+             whichever word revealed first. */
+          pointer-events:     none;
           transition: clip-path var(--sf-duration-slow)   var(--sf-ease-out),
                       opacity   var(--sf-duration-normal) var(--sf-ease-out);
         }
@@ -193,9 +199,43 @@ layout: null
           transition-delay: 60ms;
         }
         .acronym-hero:hover .al:not(:hover) b { opacity: 0.35; }
+
+        /* One-sentence gloss for the hovered letter, pulled from its own
+           data-tip so the acronym and the philosophy section below share
+           a single source of copy. pointer-events: none for the same
+           reason as .rest above — it must never be what the sweep hits. */
+        .al[data-tip]::after {
+          content:            attr(data-tip);
+          position:           absolute;
+          inset-block-start:  100%;
+          inset-inline-start: 50%;
+          translate:          -50% var(--sf-space-xs);
+          width:              max-content;
+          max-width:          min(70vw, 26rem);
+          padding:            var(--sf-space-2xs) var(--sf-space-s);
+          border-radius:      var(--sf-radius-s);
+          background:         var(--sf-color-surface);
+          color:              var(--sf-color-text--secondary);
+          border:             1px solid var(--sf-color-border--subtle);
+          box-shadow:         var(--sf-shadow-m);
+          font-size:          var(--sf-text-xs);
+          font-weight:        var(--sf-font-weight-normal);
+          letter-spacing:     normal;
+          line-height:        1.4;
+          text-align:         start;
+          text-wrap:          balance;
+          opacity:            0;
+          pointer-events:     none;
+          transition:         opacity var(--sf-duration-fast) var(--sf-ease-out);
+          z-index:            2;
+        }
+        .al:hover[data-tip]::after {
+          opacity:          1;
+          transition-delay: 300ms; /* let the word unfold first */
+        }
       }
       @media (prefers-reduced-motion: reduce) {
-        .acronym-hero, .al b, .al .rest { transition: none; }
+        .acronym-hero, .al b, .al .rest, .al[data-tip]::after { transition: none; }
       }
 
       .tagline {
@@ -433,7 +473,7 @@ layout: null
         <a class="pill" href="https://github.com/codeslash-dev/SLASHED/releases">Latest release — see what's new →</a>
         <h1 class="acronym-hero" aria-label="SLASHED — Standalone, Lean, Agnostic, Structured, Hybrid, Explicit, Deterministic">
           <span aria-hidden="true" style="display: contents;">
-            <span class="al"><b>S</b><span class="rest">tandalone</span></span><span class="al"><b>L</b><span class="rest">ean</span></span><span class="al"><b>A</b><span class="rest">gnostic</span></span><span class="al"><b>S</b><span class="rest">tructured</span></span><span class="al"><b>H</b><span class="rest">ybrid</span></span><span class="al"><b>E</b><span class="rest">xplicit</span></span><span class="al"><b>D</b><span class="rest">eterministic</span></span>
+            <span class="al" data-tip="One stylesheet. No build step, no Node, no runtime dependencies."><b>S</b><span class="rest">tandalone</span></span><span class="al" data-tip="A foundation, not a kit. No utility bloat, nothing to purge, nothing you didn't ask for."><b>L</b><span class="rest">ean</span></span><span class="al" data-tip="No stack assumptions. Any CMS, any builder, any framework, plain HTML — no vendor lock-in, ever."><b>A</b><span class="rest">gnostic</span></span><span class="al" data-tip="Fifteen named cascade layers in a fixed order, and a catalogued token API with stability tiers."><b>S</b><span class="rest">tructured</span></span><span class="al" data-tip="Classless where it can be — base elements, opt-in forms — class-based where it counts: layout, macros, states."><b>H</b><span class="rest">ybrid</span></span><span class="al" data-tip="Every visual value is a named token; hardcoded numbers are treated as bugs. Even the browser floor is stated up front."><b>E</b><span class="rest">xplicit</span></span><span class="al" data-tip="Same tokens in, same design out. Load order never changes the cascade; every derived color is computed by formula."><b>D</b><span class="rest">eterministic</span></span>
           </span>
         </h1>
         <p class="tagline">The name is the manifesto. Seven promises, one stylesheet.</p>
