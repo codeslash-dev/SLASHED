@@ -22,7 +22,7 @@
     "check:preview": "vitest run tests/preview-coverage.test.ts"
   },
   "dependencies": {
-    "@lucide/svelte": "^1.23.0",
+    "@lucide/svelte": "^1.24.0",
     "fflate": "^0.8.3"
   },
   "devDependencies": {
