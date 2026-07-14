@@ -17,7 +17,7 @@ of these in sync:
 | `dist/*.css` (unminified) | `/*! SLASHED vX.Y.Z */` comment header | **build-derived** — stamped from `package.json`/tag by `bundle.js`; `dist/*.css` is git-ignored, so it cannot drift. `release.yml` re-verifies the stamp before publishing |
 | Configurator UI version pill | baked in via Vite `__SLASHED_VERSION__` at build time | **build-derived** — injected from root `package.json` at Vite build; cannot drift |
 
-The first five rows are the ones you ever sync; the last two are **build-derived**
+The first six rows are the ones you ever sync; the last two are **build-derived**
 (regenerated from `package.json` at build time and not committed as text you edit),
 so `version-sync`/`check:version` intentionally don't touch them — never hand-edit them.
 
