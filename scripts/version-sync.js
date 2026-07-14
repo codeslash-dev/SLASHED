@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Propagates the version from package.json to every other artifact that must
-// stay in sync: docs/roadmap.md, configurator/package.json, and both lock files
-// under configurator/.
+// stay in sync: docs/roadmap.md, docs/llm-guide.md, configurator/package.json,
+// and both lock files under configurator/.
 //
 // Does NOT touch the root package-lock.json — that is updated by npm itself
 // when `npm version` runs (called by the release-it after:bump hook before this
@@ -68,6 +68,14 @@ changed += sync(
   new RegExp(`(Current version: \\*\\*)${SEMVER_RE.source}(\\*\\*)`),
   `$1${version}$2`,
   `roadmap version = ${version}`
+) ? 1 : 0;
+
+// ── docs/llm-guide.md ────────────────────────────────────────────────────────
+changed += sync(
+  'docs/llm-guide.md',
+  new RegExp(`(Version:\\s*\\*\\*)${SEMVER_RE.source}(\\*\\*)`),
+  `$1${version}$2`,
+  `llm-guide version = ${version}`
 ) ? 1 : 0;
 
 // ── configurator/package.json + package-lock.json ───────────────────────────
