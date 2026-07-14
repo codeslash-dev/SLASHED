@@ -52,6 +52,39 @@ test.describe('motion — prefers-reduced-motion: no-preference', () => {
     await renderWithBundle(page, `<div class="sf-entrance--fade" id="t">x</div>`);
     expect(await prop(page, 'animation-name')).toBe('sf-fade-in');
   });
+
+  test('.sf-stagger gives successive children an incrementing animation-delay', async ({ page }) => {
+    await renderWithBundle(
+      page,
+      `<ul class="sf-stagger">
+         <li class="sf-fade-in">1</li>
+         <li class="sf-fade-in" id="t">2</li>
+         <li class="sf-fade-in" id="t3">3</li>
+       </ul>`,
+    );
+    // 1st child → index 0 → 0s; 2nd child → index 1 → 1 × 75ms.
+    const second = seconds(await prop(page, 'animation-delay'));
+    expect(second).toBeCloseTo(0.075, 3);
+    const third = await page.evaluate(
+      () => parseFloat(getComputedStyle(document.getElementById('t3')).animationDelay),
+    );
+    expect(third).toBeCloseTo(0.15, 3); // index 2 → 2 × 75ms
+  });
+
+  test('.sf-stagger delay follows --sf-stagger-step and --sf-motion-scale', async ({ page }) => {
+    await renderWithBundle(
+      page,
+      `<ul class="sf-stagger" id="s">
+         <li>1</li><li id="t">2</li>
+       </ul>`,
+    );
+    await page.evaluate(() => {
+      document.documentElement.style.setProperty('--sf-stagger-step', '100ms');
+      document.documentElement.style.setProperty('--sf-motion-scale', '2');
+    });
+    // 2nd child index 1 → 1 × 100ms × 2 = 200ms.
+    expect(seconds(await prop(page, 'animation-delay'))).toBeCloseTo(0.2, 3);
+  });
 });
 
 test.describe('motion — prefers-reduced-motion: reduce', () => {

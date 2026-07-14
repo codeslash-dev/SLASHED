@@ -192,6 +192,10 @@ const CURATED = {
   '--sf-lumlocker': '0.5',
   '--sf-shadow-lightness': '0.4',
   '--sf-state-pending-opacity': '0.4',
+  // hover-transform magnitudes (unitless scale factors) + stagger step (time)
+  '--sf-hover-grow-scale': '1.4',
+  '--sf-hover-shrink-scale': '0.6',
+  '--sf-stagger-step': '200ms',
   // scale knobs → amplify everything downstream
   '--sf-border-scale': '1.6',
   '--sf-radius-scale': '1.6',
@@ -355,7 +359,16 @@ function example(c) {
     case 'layout': return layoutExample(n, applied);
     case 'macro': return macroExample(n, applied);
     case 'state': return stateExample(n);
-    case 'motion': return `<div class="${applied} dbox dbox--anim">${n.replace('sf-', '')}</div>`;
+    case 'motion':
+      // .sf-stagger is a parent-level choreography helper — it needs multiple
+      // animated children to show anything, unlike the single-element motion
+      // classes handled by the generic tile below.
+      if (n === 'sf-stagger') {
+        return `<div class="${applied}">${
+          [1, 2, 3].map((i) => `<div class="sf-fade-in dbox dbox--anim">${i}</div>`).join('')
+        }</div>`;
+      }
+      return `<div class="${applied} dbox dbox--anim">${n.replace('sf-', '')}</div>`;
     case 'accessibility': return a11yExample(n, applied);
     case 'print': return printExample(n);
     case 'theme': return `<div class="${applied} dpad">${n}</div>`;

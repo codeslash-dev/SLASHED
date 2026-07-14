@@ -1004,6 +1004,15 @@ Ready-made hover transforms: `.sf-hover-grow` / `-shrink` / `-float` / `-sink` /
 <img class="sf-hover-float" src="icon.svg" alt="">
 ```
 
+The magnitude of each effect is one global knob (override on `:root` or any scope):
+
+```css
+--sf-hover-grow-scale     /* .sf-hover-grow scale factor, default 1.05 */
+--sf-hover-shrink-scale   /* .sf-hover-shrink scale factor, default 0.95 */
+--sf-hover-lift           /* .sf-hover-float / -sink distance, default 0.25em */
+--sf-hover-slide          /* .sf-hover-slide-start / -end distance, default 0.5em */
+```
+
 Small opt-in helpers (all `optional/utilities.css`):
 
 - `.sf-list-none` — drop list marker + inline-start padding in one class.
@@ -1027,8 +1036,14 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 --sf-animation-shimmer       /* Skeleton loader */
 --sf-animation-color-pulse   /* Live status badge */
 
-/* Stagger delays — scaled by motion-scale */
---sf-animation-delay-1 / -2 / -3 / -4 / -5   /* 75ms … 375ms */
+/* Stagger — put .sf-stagger on a parent; each direct child gets an
+   incrementing animation-delay = index × --sf-stagger-step × --sf-motion-scale.
+   Index is unbounded where sibling-index() is supported, else an 8-step
+   :nth-child fallback that plateaus (children 9+ share the last delay).
+   Gated by prefers-reduced-motion: no-preference. Pair with the time-based
+   looping classes (.sf-fade-in / .sf-slide-in-*); the scroll-driven
+   .sf-entrance--*/.sf-exit--* path is not staggered (it uses animation-range). */
+--sf-stagger-step            /* per-item delay increment, default 75ms */
 ```
 
 ### 9.5 Scroll-driven animations
@@ -1427,9 +1442,15 @@ a:visited { color: var(--sf-color-link--visited); }
     animation: var(--sf-animation-slide-in-up);
 }
 
-/* Staggered list */
-.list-item:nth-child(1) { animation-delay: var(--sf-animation-delay-1); }
-.list-item:nth-child(2) { animation-delay: var(--sf-animation-delay-2); }
+/* Staggered list — .sf-stagger on the parent choreographs every child; each
+   item still needs its own entrance animation (here .sf-fade-in). */
+```
+```html
+<ul class="sf-stagger">
+  <li class="sf-fade-in">First</li>
+  <li class="sf-fade-in">Second</li>
+  <!-- any number of children; delay increments automatically -->
+</ul>
 ```
 
 ### Section-level dark mode

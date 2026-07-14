@@ -26,23 +26,23 @@
       "optimal"
     ],
     "counts": {
-      "total": 1085,
+      "total": 1086,
       "by_type": {
-        "class": 330,
+        "class": 331,
         "token": 755
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1025,
+        "PUBLIC": 1026,
         "PUBLIC-ADVANCED": 59
       },
       "by_role": {
-        "consumption": 490,
-        "knob": 265
+        "consumption": 485,
+        "knob": 270
       },
       "tokens": 755,
-      "classes": 330,
-      "sf_classes": 293,
+      "classes": 331,
+      "sf_classes": 294,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
@@ -55,7 +55,7 @@
         "Layout tokens": 53,
         "Macro classes": 58,
         "Macro tokens": 34,
-        "Motion / animation": 21,
+        "Motion / animation": 22,
         "Print": 4,
         "State classes": 28,
         "Theme example": 1,
@@ -180,136 +180,6 @@
       "group": "Animation presets",
       "description": "Pulsing color loop. Use for live-status badges (recording, live). Respect prefers-reduced-motion.",
       "value": "sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-1",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Animation presets",
-      "description": "Shortest stagger delay. Apply to the first element in a sequentially animated group.",
-      "value": "calc(75ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-2",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Animation presets",
-      "description": "Second stagger delay step.",
-      "value": "calc(150ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-3",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Animation presets",
-      "description": "Third stagger delay step.",
-      "value": "calc(225ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-4",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Animation presets",
-      "description": "Fourth stagger delay step.",
-      "value": "calc(300ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-5",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Animation presets",
-      "description": "Longest stagger delay. Apply to the last element in a sequentially animated group.",
-      "value": "calc(375ms * var(--sf-motion-scale))",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -13098,6 +12968,110 @@
       ]
     },
     {
+      "name": "--sf-hover-grow-scale",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "Scale factor applied by .sf-hover-grow on hover (>1 grows).",
+      "value": "1.05",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-hover-lift",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "Translate distance for .sf-hover-float (up) and .sf-hover-sink (down) on hover.",
+      "value": "0.25em",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-hover-shrink-scale",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "Scale factor applied by .sf-hover-shrink on hover (<1 shrinks).",
+      "value": "0.95",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-hover-slide",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "Translate distance for .sf-hover-slide-start / .sf-hover-slide-end on hover.",
+      "value": "0.5em",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
       "name": "--sf-icon-2xl",
       "type": "token",
       "tier": "PUBLIC",
@@ -16965,6 +16939,32 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-stagger-step",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "stagger",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.",
+      "value": "75ms",
+      "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
       ],
       "bundles": [
         "full",
@@ -26273,6 +26273,29 @@
       "layer": "slashed.layout",
       "sourceFiles": [
         "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "sf-stagger",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-stagger",
+      "prefix": "sf",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "area": "motion",
+      "group": "",
+      "description": "Stagger — choreography, not the animation itself. Put .sf-stagger on a PARENT; every direct child gets an incrementing animation-delay so a time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence. Children WITHOUT an animation just carry an inert delay (no-op), so…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.motion",
+      "sourceFiles": [
+        "core/motion.css"
       ],
       "bundles": [
         "full",

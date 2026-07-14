@@ -13,7 +13,7 @@
   "components": ["btn-", "card-"],
   "borders":    ["radius", "border-width", "border-scale", "border-style", "divider"],
   "shadows":    ["shadow"],
-  "motion":     ["motion", "duration", "easing", "ease", "scroll-timeline"],
+  "motion":     ["motion", "duration", "easing", "ease", "scroll-timeline", "stagger", "hover-"],
   "effects":    ["filter", "blur", "backdrop", "opacity", "effect"],
   "misc":       ["z-", "cursor", "ring", "focus", "outline", "selection", "icon",
                  "sf-is-active", "sf-is-current", "sf-is-open", "sf-is-pressed",

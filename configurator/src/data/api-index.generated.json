@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "ea14629a05b1",
+    "tokensHash": "5624c486ab4d",
     "bundles": [
       "full",
       "optimal"
@@ -96,111 +96,6 @@
       "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
       "note": "Pulsing color loop. Use for live-status badges (recording, live). Respect prefers-reduced-motion.",
       "value": "sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-1",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "group": "Animation presets",
-      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
-      "note": "Shortest stagger delay. Apply to the first element in a sequentially animated group.",
-      "value": "calc(75ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-2",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "group": "Animation presets",
-      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
-      "note": "Second stagger delay step.",
-      "value": "calc(150ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-3",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "group": "Animation presets",
-      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
-      "note": "Third stagger delay step.",
-      "value": "calc(225ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-4",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "group": "Animation presets",
-      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
-      "note": "Fourth stagger delay step.",
-      "value": "calc(300ms * var(--sf-motion-scale))",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-animation-delay-5",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "animation",
-      "category": "Core tokens",
-      "group": "Animation presets",
-      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
-      "note": "Longest stagger delay. Apply to the last element in a sequentially animated group.",
-      "value": "calc(375ms * var(--sf-motion-scale))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -10520,6 +10415,90 @@
       ]
     },
     {
+      "name": "--sf-hover-grow-scale",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "Scale factor applied by .sf-hover-grow on hover (>1 grows).",
+      "value": "1.05",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-hover-lift",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "Translate distance for .sf-hover-float (up) and .sf-hover-sink (down) on hover.",
+      "value": "0.25em",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-hover-shrink-scale",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "Scale factor applied by .sf-hover-shrink on hover (<1 shrinks).",
+      "value": "0.95",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-hover-slide",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "hover",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "Translate distance for .sf-hover-slide-start / .sf-hover-slide-end on hover.",
+      "value": "0.5em",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
       "name": "--sf-icon-2xl",
       "tier": "PUBLIC",
       "role": "knob",
@@ -13638,6 +13617,27 @@
       "note": "Vertical gap between stacked block-level elements in the stack layout.",
       "value": "var(--sf-content-gap)",
       "aliasOf": "--sf-content-gap",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-stagger-step",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "stagger",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.",
+      "value": "75ms",
+      "aliasOf": null,
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

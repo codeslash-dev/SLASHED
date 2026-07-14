@@ -19,11 +19,6 @@ rebrand workflow.
 |---|---|
 | `--sf-animation-blink` | `sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite` |
 | `--sf-animation-color-pulse` | `sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite` |
-| `--sf-animation-delay-1` | `calc(75ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-2` | `calc(150ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-3` | `calc(225ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-4` | `calc(300ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-5` | `calc(375ms * var(--sf-motion-scale))` |
 | `--sf-animation-fade-in` | `sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-fade-out` | `sf-fade-out var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-float` | `sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite` |
@@ -430,6 +425,10 @@ rebrand workflow.
 | `--sf-heading-color` | `var(--sf-color-heading)` |
 | `--sf-heading-font-family` | `var(--sf-font-heading)` |
 | `--sf-heading-text-wrap` | `balance` |
+| `--sf-hover-grow-scale` | `1.05` |
+| `--sf-hover-lift` | `0.25em` |
+| `--sf-hover-shrink-scale` | `0.95` |
+| `--sf-hover-slide` | `0.5em` |
 | `--sf-icon-2xl` | `4em` |
 | `--sf-icon-l` | `2em` |
 | `--sf-icon-m` | `1.5em` |
@@ -546,6 +545,7 @@ rebrand workflow.
 | `--sf-space-scale` | `1` |
 | `--sf-space-xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` |
+| `--sf-stagger-step` | `75ms` |
 | `--sf-state-pending-opacity` | `0.7` |
 | `--sf-sticky-offset` | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | `var(--sf-header-height-desktop)` |

@@ -100,6 +100,45 @@
       .sf-exit--scale-down  { animation-name: sf-scale-down; }
     }
 
+    /* Stagger — choreography, not the animation itself. Put .sf-stagger on a
+       PARENT; every direct child gets an incrementing animation-delay so a
+       time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence.
+       Children WITHOUT an animation just carry an inert delay (no-op), so you
+       opt in per child with no need to exclude anything. Pairs with time-based
+       animations only — the .sf-entrance / .sf-exit families are scroll-driven
+       (their rhythm is animation-range, not animation-delay).
+
+       One formula, one knob (--sf-stagger-step); the two paths below only
+       differ in how --sf-stagger-i (the child's index) is set. */
+    .sf-stagger > * {
+      animation-delay: calc(
+        var(--sf-stagger-i, 0) * var(--sf-stagger-step, 75ms) * var(--sf-motion-scale, 1)
+      );
+    }
+
+    /* Modern path: real, unbounded index straight from the DOM position. */
+    @supports (animation-delay: calc(sibling-index() * 1ms)) {
+      .sf-stagger > * { --sf-stagger-i: calc(sibling-index() - 1); }
+    }
+
+    /* Fallback (no sibling-index()): a bounded :nth-child ramp reusing the same
+       formula. The default is the plateau value, so the 9th child onward shares
+       the last rung's delay instead of growing without limit — 8 rungs cover a
+       4-column grid's first two visible rows. Split into @supports not(...) so
+       the modern override above wins cleanly without a specificity fight
+       (:nth-child would otherwise out-specify the sibling-index rule). */
+    @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+      .sf-stagger > *              { --sf-stagger-i: 8; }
+      .sf-stagger > *:nth-child(1) { --sf-stagger-i: 0; }
+      .sf-stagger > *:nth-child(2) { --sf-stagger-i: 1; }
+      .sf-stagger > *:nth-child(3) { --sf-stagger-i: 2; }
+      .sf-stagger > *:nth-child(4) { --sf-stagger-i: 3; }
+      .sf-stagger > *:nth-child(5) { --sf-stagger-i: 4; }
+      .sf-stagger > *:nth-child(6) { --sf-stagger-i: 5; }
+      .sf-stagger > *:nth-child(7) { --sf-stagger-i: 6; }
+      .sf-stagger > *:nth-child(8) { --sf-stagger-i: 7; }
+    }
+
   }
 
   @keyframes sf-fade-in   { from { opacity: 0; } to { opacity: 1; } }
