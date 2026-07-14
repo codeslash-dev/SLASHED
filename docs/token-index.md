@@ -8,12 +8,12 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**755 tokens** (deduplicated by name across the 4 token source files).
+**756 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
 | PUBLIC | 695 | Everyday knobs. SemVer-stable. |
-| PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC-ADVANCED | 60 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
 Every token also carries a **role** — an orthogonal, SemVer-neutral hint about
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 270 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 485 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 266 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 490 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -37,6 +37,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 - `--sf-btn-padding-inline`
 - `--sf-contrast-bias`
 - `--sf-contrast-threshold`
+- `--sf-density`
 - `--sf-fluid-max-vw`
 - `--sf-fluid-min-vw`
 - `--sf-focus-ring-shadow`
@@ -470,6 +471,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-cover-min-height` | PUBLIC | knob | Layout | `100dvh` |
 | `--sf-cover-padding` | PUBLIC | consumption | Layout | `var(--sf-section-pad)` |
 | `--sf-current-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-bold)` |
+| `--sf-density` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-display-l-line-height` | PUBLIC | knob | Core | `1` |
 | `--sf-display-m-line-height` | PUBLIC | knob | Core | `1.05` |
 | `--sf-display-s-line-height` | PUBLIC | consumption | Core | `var(--sf-leading-tight)` |
@@ -723,11 +725,11 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-sidebar-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-sidebar-min-width` | PUBLIC | knob | Layout | `50%` |
 | `--sf-sidebar-width` | PUBLIC | knob | Layout | `18rem` |
-| `--sf-size-l` | PUBLIC | knob | Core | `3rem` |
-| `--sf-size-m` | PUBLIC | knob | Core | `2.5rem` |
-| `--sf-size-s` | PUBLIC | knob | Core | `2rem` |
-| `--sf-size-xl` | PUBLIC | knob | Core | `3.5rem` |
-| `--sf-size-xs` | PUBLIC | knob | Core | `1.5rem` |
+| `--sf-size-l` | PUBLIC | consumption | Core | `calc(3rem * var(--sf-density))` |
+| `--sf-size-m` | PUBLIC | consumption | Core | `calc(2.5rem * var(--sf-density))` |
+| `--sf-size-s` | PUBLIC | consumption | Core | `calc(2rem * var(--sf-density))` |
+| `--sf-size-xl` | PUBLIC | consumption | Core | `calc(3.5rem * var(--sf-density))` |
+| `--sf-size-xs` | PUBLIC | consumption | Core | `calc(1.5rem * var(--sf-density))` |
 | `--sf-space-2xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-2xs` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-3xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` |

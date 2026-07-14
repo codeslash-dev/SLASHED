@@ -1877,6 +1877,11 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-density",
+      "description": "Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it).\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-display-l-line-height",
       "description": "Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes.\n\nDefault: `1`",
       "syntax": "*"
@@ -3138,27 +3143,27 @@
     },
     {
       "name": "--sf-size-l",
-      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `3rem`",
+      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `calc(3rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-m",
-      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `2.5rem`",
+      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `calc(2.5rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-s",
-      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `2rem`",
+      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `calc(2rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-xl",
-      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `3.5rem`",
+      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `calc(3.5rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-xs",
-      "description": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.\n\nDefault: `1.5rem`",
+      "description": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.\n\nDefault: `calc(1.5rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
