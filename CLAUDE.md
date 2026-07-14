@@ -11,6 +11,7 @@ of these in sync:
 | `package.json` | `.version` ← **source of truth** | you bump it (`npm version`) |
 | `package-lock.json` | `.version` + `.packages[""].version` | `npm version`; checked by `check:version` (CI) |
 | `docs/roadmap.md` | `Current version: **X.Y.Z**` line | `version-sync`; checked by `check:version` (CI) |
+| `docs/llm-guide.md` | `Version: **X.Y.Z**` header line | `version-sync`; checked by `check:version` (CI) |
 | `configurator/package.json` | `.version` | `version-sync`; checked by `check:version` (CI) |
 | `configurator/package-lock.json` | `.version` + `.packages[""].version` | `version-sync`; checked by `check:version` (CI) |
 | `dist/*.css` (unminified) | `/*! SLASHED vX.Y.Z */` comment header | **build-derived** — stamped from `package.json`/tag by `bundle.js`; `dist/*.css` is git-ignored, so it cannot drift. `release.yml` re-verifies the stamp before publishing |

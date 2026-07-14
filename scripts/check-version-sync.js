@@ -6,6 +6,7 @@
 // Checks:
 //   1. package-lock.json version (root and packages[""]) === package.json
 //   2. docs/roadmap.md "Current version" === package.json
+//   3. docs/llm-guide.md "Version" header === package.json
 //
 // Note: configurator/src/data/api-index.generated.json no longer stores a
 // frameworkVersion field — the version is injected at Vite build time from the
@@ -55,7 +56,18 @@ if (!m) {
   );
 }
 
-// 3. configurator/package.json must match package.json.
+// 3. docs/llm-guide.md "Version" header must match package.json.
+const llmGuide = read('docs/llm-guide.md');
+const guideMatch = llmGuide.match(/Version:\s*\*\*([^*]+)\*\*/);
+if (!guideMatch) {
+  errors.push('docs/llm-guide.md: "Version" header not found');
+} else if (guideMatch[1].trim() !== version) {
+  errors.push(
+    `docs/llm-guide.md version "${guideMatch[1].trim()}" != package.json "${version}"`,
+  );
+}
+
+// 4. configurator/package.json must match package.json.
 const configPkg = JSON.parse(read('configurator/package.json'));
 if (configPkg.version !== version) {
   errors.push(
@@ -63,7 +75,7 @@ if (configPkg.version !== version) {
   );
 }
 
-// 4. configurator/package-lock.json must match package.json.
+// 5. configurator/package-lock.json must match package.json.
 const configLock = JSON.parse(read('configurator/package-lock.json'));
 if (configLock.version !== version) {
   errors.push(
