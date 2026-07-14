@@ -1036,8 +1036,13 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 --sf-animation-shimmer       /* Skeleton loader */
 --sf-animation-color-pulse   /* Live status badge */
 
-/* Stagger — put .sf-stagger on a parent; children get an incrementing
-   animation-delay (index × --sf-stagger-step × --sf-motion-scale). */
+/* Stagger — put .sf-stagger on a parent; each direct child gets an
+   incrementing animation-delay = index × --sf-stagger-step × --sf-motion-scale.
+   Index is unbounded where sibling-index() is supported, else an 8-step
+   :nth-child fallback that plateaus (children 9+ share the last delay).
+   Gated by prefers-reduced-motion: no-preference. Pair with the time-based
+   looping classes (.sf-fade-in / .sf-slide-in-*); the scroll-driven
+   .sf-entrance--*/.sf-exit--* path is not staggered (it uses animation-range). */
 --sf-stagger-step            /* per-item delay increment, default 75ms */
 ```
 

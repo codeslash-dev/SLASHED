@@ -720,9 +720,14 @@ Each child's delay is `index × --sf-stagger-step × --sf-motion-scale`. Where
 `:nth-child` ramp (covering a 4-column grid's first two rows) plateaus so
 arbitrarily long lists still animate.
 
-**Pairs with time-based animations only.** `.sf-entrance--*` / `.sf-exit--*`
-are scroll-driven (rhythm via `animation-range`), so `.sf-stagger` has no
-effect on them. Gated by `prefers-reduced-motion: no-preference`.
+**Best paired with the time-based fade / slide-in looping classes** (see
+[motion.md](./motion.md)), which stagger consistently everywhere. On the
+scroll-driven path (`.sf-entrance--*`/`.sf-exit--*` under
+`animation-timeline: view()`) the rhythm is `animation-range`, not
+`animation-delay`, so stagger has no effect there — though `.sf-entrance--*`
+does stagger in its time-based fallback on engines without `view()`, while
+`.sf-exit--*` has no such fallback. Gated by
+`prefers-reduced-motion: no-preference`.
 
 Lives in `core/motion.css`, layer `slashed.motion`.
 

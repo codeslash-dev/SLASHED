@@ -1299,8 +1299,8 @@
           <button type="button" class="sf-scale-up"        style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">scale-up</button>
         </div>
 
-        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-stagger</code> <small style="font-weight: normal; color: var(--sf-color-text--muted)">(motion.css — parent choreographs children's <code>animation-delay</code>)</small></h3>
-        <ul class="sf-cluster sf-cluster--s sf-stagger" style="list-style: none; padding: 0">
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-stagger</code> <small style="font-weight: normal; color: var(--sf-color-text--muted)">(motion.css — parent choreographs children's <code>animation-delay</code>; click to replay)</small></h3>
+        <ul class="sf-cluster sf-cluster--s sf-stagger" id="demo-stagger" style="list-style: none; padding: 0; cursor: pointer">
           <li class="sf-fade-in" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">1</li>
           <li class="sf-fade-in" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">2</li>
           <li class="sf-fade-in" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">3</li>
@@ -3167,6 +3167,19 @@
         el.style.animation = '';    // restore the class-driven animation
       });
     });
+
+    // Replay the stagger demo on click — reset every child so the staggered
+    // entrance plays again (the delays only fire once on load otherwise).
+    const staggerDemo = document.getElementById('demo-stagger');
+    if (staggerDemo) {
+      staggerDemo.addEventListener('click', () => {
+        staggerDemo.querySelectorAll('*').forEach(child => {
+          child.style.animation = 'none';
+          void child.offsetWidth;   // force reflow
+          child.style.animation = '';
+        });
+      });
+    }
 
     // Fade-out demo: separate trigger button + target, so the trigger stays
     // visible while the target plays the animation (which ends at opacity: 0).

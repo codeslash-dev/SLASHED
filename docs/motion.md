@@ -141,9 +141,13 @@ Where the browser supports `sibling-index()` the ramp is unbounded; older
 engines fall back to an 8-step `:nth-child` ramp (covering a 4-column grid's
 first two rows) that then plateaus, so arbitrarily long lists still animate.
 
-> Pairs with time-based animations only. `.sf-entrance--*` / `.sf-exit--*`
-> are scroll-driven — their rhythm is `animation-range`, not
-> `animation-delay`, so `.sf-stagger` does not apply to them.
+> Best paired with the time-based looping classes (`.sf-fade-in` /
+> `.sf-slide-in-*`), which stagger consistently everywhere. On the
+> scroll-driven path — `.sf-entrance--*`/`.sf-exit--*` under
+> `animation-timeline: view()` — the rhythm is `animation-range`, not
+> `animation-delay`, so stagger has no effect there. (`.sf-entrance--*`
+> does fall back to a time-based one-shot on engines without `view()`,
+> where the delay *does* apply; `.sf-exit--*` has no such fallback.)
 
 ## Motion scale
 

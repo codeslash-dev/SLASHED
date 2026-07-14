@@ -359,7 +359,16 @@ function example(c) {
     case 'layout': return layoutExample(n, applied);
     case 'macro': return macroExample(n, applied);
     case 'state': return stateExample(n);
-    case 'motion': return `<div class="${applied} dbox dbox--anim">${n.replace('sf-', '')}</div>`;
+    case 'motion':
+      // .sf-stagger is a parent-level choreography helper — it needs multiple
+      // animated children to show anything, unlike the single-element motion
+      // classes handled by the generic tile below.
+      if (n === 'sf-stagger') {
+        return `<div class="${applied}">${
+          [1, 2, 3].map((i) => `<div class="sf-fade-in dbox dbox--anim">${i}</div>`).join('')
+        }</div>`;
+      }
+      return `<div class="${applied} dbox dbox--anim">${n.replace('sf-', '')}</div>`;
     case 'accessibility': return a11yExample(n, applied);
     case 'print': return printExample(n);
     case 'theme': return `<div class="${applied} dpad">${n}</div>`;

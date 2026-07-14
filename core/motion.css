@@ -112,7 +112,7 @@
        differ in how --sf-stagger-i (the child's index) is set. */
     .sf-stagger > * {
       animation-delay: calc(
-        var(--sf-stagger-i, 0) * var(--sf-stagger-step) * var(--sf-motion-scale)
+        var(--sf-stagger-i, 0) * var(--sf-stagger-step, 75ms) * var(--sf-motion-scale, 1)
       );
     }
 
