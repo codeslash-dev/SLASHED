@@ -139,12 +139,12 @@
     transition-duration:        var(--sf-duration-normal);
     transition-timing-function: var(--sf-ease-out);
   }
-  .sf-hover-grow:hover    { scale: 1.05; }
-  .sf-hover-shrink:hover  { scale: 0.95; }
-  .sf-hover-float:hover   { translate: 0 -0.25em; }
-  .sf-hover-sink:hover    { translate: 0 0.25em; }
-  .sf-hover-slide-start:hover { translate: -0.5em 0; }
-  .sf-hover-slide-end:hover   { translate: 0.5em 0; }
+  .sf-hover-grow:hover    { scale: var(--sf-hover-grow-scale, 1.05); }
+  .sf-hover-shrink:hover  { scale: var(--sf-hover-shrink-scale, 0.95); }
+  .sf-hover-float:hover   { translate: 0 calc(-1 * var(--sf-hover-lift, 0.25em)); }
+  .sf-hover-sink:hover    { translate: 0 var(--sf-hover-lift, 0.25em); }
+  .sf-hover-slide-start:hover { translate: calc(-1 * var(--sf-hover-slide, 0.5em)) 0; }
+  .sf-hover-slide-end:hover   { translate: var(--sf-hover-slide, 0.5em) 0; }
 
   /* ============================================================
    * LIST RESET (.sf-list-none)

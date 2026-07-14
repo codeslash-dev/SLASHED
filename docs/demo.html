@@ -1299,6 +1299,14 @@
           <button type="button" class="sf-scale-up"        style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-surface); border: 1px solid var(--sf-color-border); border-radius: var(--sf-radius-m); cursor: pointer">scale-up</button>
         </div>
 
+        <h3 style="margin-block-start: var(--sf-space-l)"><code>.sf-stagger</code> <small style="font-weight: normal; color: var(--sf-color-text--muted)">(motion.css — parent choreographs children's <code>animation-delay</code>)</small></h3>
+        <ul class="sf-cluster sf-cluster--s sf-stagger" style="list-style: none; padding: 0">
+          <li class="sf-fade-in" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">1</li>
+          <li class="sf-fade-in" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">2</li>
+          <li class="sf-fade-in" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">3</li>
+          <li class="sf-fade-in" style="padding: var(--sf-space-s) var(--sf-space-m); background: var(--sf-color-inset); border-radius: var(--sf-radius-m)">4</li>
+        </ul>
+
         <h3>@property Color Interpolation <small style="font-weight: normal; color: var(--sf-color-text--muted)">(motion.css — sf-color-pulse)</small></h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--secondary); margin-block-end: var(--sf-space-s)">
           Demonstrates smooth <code>oklch</code> color animation via <code>@property</code>-registered tokens.

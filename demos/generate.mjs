@@ -192,6 +192,10 @@ const CURATED = {
   '--sf-lumlocker': '0.5',
   '--sf-shadow-lightness': '0.4',
   '--sf-state-pending-opacity': '0.4',
+  // hover-transform magnitudes (unitless scale factors) + stagger step (time)
+  '--sf-hover-grow-scale': '1.4',
+  '--sf-hover-shrink-scale': '0.6',
+  '--sf-stagger-step': '200ms',
   // scale knobs → amplify everything downstream
   '--sf-border-scale': '1.6',
   '--sf-radius-scale': '1.6',

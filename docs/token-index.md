@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 265 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 490 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 270 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 485 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -99,11 +99,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-alternate-inner-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-animation-blink` | PUBLIC | consumption | Core | `sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite` |
 | `--sf-animation-color-pulse` | PUBLIC | consumption | Core | `sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite` |
-| `--sf-animation-delay-1` | PUBLIC | consumption | Core | `calc(75ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-2` | PUBLIC | consumption | Core | `calc(150ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-3` | PUBLIC | consumption | Core | `calc(225ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-4` | PUBLIC | consumption | Core | `calc(300ms * var(--sf-motion-scale))` |
-| `--sf-animation-delay-5` | PUBLIC | consumption | Core | `calc(375ms * var(--sf-motion-scale))` |
 | `--sf-animation-fade-in` | PUBLIC | consumption | Core | `sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both` |
 | `--sf-animation-fade-out` | PUBLIC | consumption | Core | `sf-fade-out var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-float` | PUBLIC | consumption | Core | `sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite` |
@@ -597,6 +592,10 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-heading-color` | PUBLIC | consumption | Core | `var(--sf-color-heading)` |
 | `--sf-heading-font-family` | PUBLIC | consumption | Core | `var(--sf-font-heading)` |
 | `--sf-heading-text-wrap` | PUBLIC | knob | Core | `balance` |
+| `--sf-hover-grow-scale` | PUBLIC | knob | Core | `1.05` |
+| `--sf-hover-lift` | PUBLIC | knob | Core | `0.25em` |
+| `--sf-hover-shrink-scale` | PUBLIC | knob | Core | `0.95` |
+| `--sf-hover-slide` | PUBLIC | knob | Core | `0.5em` |
 | `--sf-icon-2xl` | PUBLIC | knob | Core | `4em` |
 | `--sf-icon-box-bg` | PUBLIC | consumption | Layout | `var(--sf-color-inset)` |
 | `--sf-icon-box-border` | PUBLIC | consumption | Layout | `var(--sf-border-width-1) solid var(--sf-color-border)` |
@@ -746,6 +745,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-space-xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-xs` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-stack-gap` | PUBLIC | consumption | Layout | `var(--sf-content-gap)` |
+| `--sf-stagger-step` | PUBLIC | knob | Core | `75ms` |
 | `--sf-state-pending-opacity` | PUBLIC | knob | Core | `0.7` |
 | `--sf-sticky-offset` | PUBLIC | consumption | Core | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | PUBLIC | consumption | Core | `var(--sf-header-height-desktop)` |

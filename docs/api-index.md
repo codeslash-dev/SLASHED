@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1085 elements** — 755 tokens, 330 classes.
+**1086 elements** — 755 tokens, 331 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1025 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1026 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -77,11 +77,6 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|---|
 | `--sf-animation-blink` | PUBLIC | consumption | animation | `sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite` | Blinking visibility loop. Use for cursor indicators or critical attention cues. Respect prefers-reduced-motion. |
 | `--sf-animation-color-pulse` | PUBLIC | consumption | animation | `sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite` | Pulsing color loop. Use for live-status badges (recording, live). Respect prefers-reduced-motion. |
-| `--sf-animation-delay-1` | PUBLIC | consumption | animation | `calc(75ms * var(--sf-motion-scale))` | Shortest stagger delay. Apply to the first element in a sequentially animated group. |
-| `--sf-animation-delay-2` | PUBLIC | consumption | animation | `calc(150ms * var(--sf-motion-scale))` | Second stagger delay step. |
-| `--sf-animation-delay-3` | PUBLIC | consumption | animation | `calc(225ms * var(--sf-motion-scale))` | Third stagger delay step. |
-| `--sf-animation-delay-4` | PUBLIC | consumption | animation | `calc(300ms * var(--sf-motion-scale))` | Fourth stagger delay step. |
-| `--sf-animation-delay-5` | PUBLIC | consumption | animation | `calc(375ms * var(--sf-motion-scale))` | Longest stagger delay. Apply to the last element in a sequentially animated group. |
 | `--sf-animation-fade-in` | PUBLIC | consumption | animation | `sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both` | Fade-in entrance animation shorthand. Use directly as animation property value. |
 | `--sf-animation-fade-out` | PUBLIC | consumption | animation | `sf-fade-out var(--sf-duration-normal) var(--sf-ease-in) both` | Fade-out exit animation shorthand. |
 | `--sf-animation-float` | PUBLIC | consumption | animation | `sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite` | Gentle floating / levitating loop. Use for hero illustrations or floating UI elements. Decorative — disable for prefers-reduced-motion. |
@@ -488,6 +483,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-heading-color` | PUBLIC | consumption | heading | `var(--sf-color-heading)` | Text color for all headings (h1–h6). Alias of --sf-color-heading. |
 | `--sf-heading-font-family` | PUBLIC | consumption | heading | `var(--sf-font-heading)` | Font family for all headings. Alias of --sf-font-heading. |
 | `--sf-heading-text-wrap` | PUBLIC | knob | heading | `balance` | text-wrap for headings. 'balance' prevents orphaned short last lines in multi-line headings. |
+| `--sf-hover-grow-scale` | PUBLIC | knob | hover | `1.05` | Scale factor applied by .sf-hover-grow on hover (>1 grows). |
+| `--sf-hover-lift` | PUBLIC | knob | hover | `0.25em` | Translate distance for .sf-hover-float (up) and .sf-hover-sink (down) on hover. |
+| `--sf-hover-shrink-scale` | PUBLIC | knob | hover | `0.95` | Scale factor applied by .sf-hover-shrink on hover (<1 shrinks). |
+| `--sf-hover-slide` | PUBLIC | knob | hover | `0.5em` | Translate distance for .sf-hover-slide-start / .sf-hover-slide-end on hover. |
 | `--sf-icon-2xl` | PUBLIC | knob | icon | `4em` | 2× large icon size (~40px+). Hero or onboarding icons. |
 | `--sf-icon-l` | PUBLIC | knob | icon | `2em` | Large icon size (~24px). Standalone icon buttons. |
 | `--sf-icon-m` | PUBLIC | knob | icon | `1.5em` | Medium icon size (~20px). Default for inline and button icons. |
@@ -604,6 +603,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-space-scale` | PUBLIC-ADVANCED | knob | space | `1` | Global spacing multiplier. Scales the fluid spacing ramp. Increase above 1 for airier layouts; reduce below 1 for compact UIs. |
 | `--sf-space-xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` | 32px-equivalent spacing. Feature row gaps, generous section padding. |
 | `--sf-space-xs` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` | 8px-equivalent spacing. Compact list rows, tab padding. |
+| `--sf-stagger-step` | PUBLIC | knob | stagger | `75ms` | Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale. |
 | `--sf-state-pending-opacity` | PUBLIC | knob | state | `0.7` | Opacity for pending / loading state elements. |
 | `--sf-sticky-offset` | PUBLIC | consumption | sticky | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` | top offset for position: sticky elements, accounting for the header height. |
 | `--sf-sticky-offset-desktop` | PUBLIC | consumption | sticky | `var(--sf-header-height-desktop)` | Sticky offset at desktop breakpoints. |
@@ -795,7 +795,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (330)
+## Classes (331)
 
 ### Accessibility (8)
 
@@ -1064,7 +1064,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-text-protect` | PUBLIC | macro | Text protect | Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image. |
 | `.sf-truncate` | PUBLIC | macro | Truncate / line-clamp | Single-line text overflow with ellipsis. Equivalent to the classic text-overflow: ellipsis trio (white-space nowrap, overflow hidden, text-overflow ellipsis). |
 
-### Motion / animation (21)
+### Motion / animation (22)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1089,6 +1089,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-slide-in-left` | PUBLIC | motion | Animation presets | One-shot slide-in-from-right animation (slides to the left). Scoped to no-preference. |
 | `.sf-slide-in-right` | PUBLIC | motion | Animation presets | One-shot slide-in-from-left animation (slides to the right). Scoped to no-preference. |
 | `.sf-slide-in-up` | PUBLIC | motion | Animation presets | One-shot slide-in-from-below animation. Scoped to no-preference. |
+| `.sf-stagger` | PUBLIC | motion | — | Stagger — choreography, not the animation itself. Put .sf-stagger on a PARENT; every direct child gets an incrementing animation-delay so a time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence. Children WITHOUT an animation just carry an inert delay (no-op), so… |
 
 ### Print (4)
 

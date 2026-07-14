@@ -690,6 +690,44 @@ Lives in `core/motion.css`, layer `slashed.motion`.
 
 ---
 
+## `.sf-stagger`
+
+Choreography helper: put it on a **parent** and every direct child receives
+an incrementing `animation-delay`, so a group of time-based entrance
+animations plays in sequence.
+
+```html
+<ul class="sf-stagger">
+  <li class="sf-fade-in">First</li>
+  <li class="sf-fade-in">Second</li>
+  <li class="sf-fade-in">Third</li>
+</ul>
+```
+
+`.sf-stagger` sets **only** the delay — each child still needs its own
+time-based entrance animation (the fade / slide-in looping classes in
+[motion.md](./motion.md)). A child without one carries an inert delay (a
+no-op), so animating only some children needs no opt-out on the rest.
+
+Tokens:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-stagger-step` | `75ms` | per-item delay increment |
+
+Each child's delay is `index × --sf-stagger-step × --sf-motion-scale`. Where
+`sibling-index()` is supported the index is unbounded; otherwise an 8-step
+`:nth-child` ramp (covering a 4-column grid's first two rows) plateaus so
+arbitrarily long lists still animate.
+
+**Pairs with time-based animations only.** `.sf-entrance--*` / `.sf-exit--*`
+are scroll-driven (rhythm via `animation-range`), so `.sf-stagger` has no
+effect on them. Gated by `prefers-reduced-motion: no-preference`.
+
+Lives in `core/motion.css`, layer `slashed.motion`.
+
+---
+
 ## `.sf-corner-scoop`
 
 A corner that curves **away** from the box (a concave "notch"), instead

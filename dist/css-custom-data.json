@@ -22,31 +22,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-animation-delay-1",
-      "description": "Shortest stagger delay. Apply to the first element in a sequentially animated group.\n\nDefault: `calc(75ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-2",
-      "description": "Second stagger delay step.\n\nDefault: `calc(150ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-3",
-      "description": "Third stagger delay step.\n\nDefault: `calc(225ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-4",
-      "description": "Fourth stagger delay step.\n\nDefault: `calc(300ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-5",
-      "description": "Longest stagger delay. Apply to the last element in a sequentially animated group.\n\nDefault: `calc(375ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-animation-fade-in",
       "description": "Fade-in entrance animation shorthand. Use directly as animation property value.\n\nDefault: `sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both`",
       "syntax": "*"
@@ -2512,6 +2487,26 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-hover-grow-scale",
+      "description": "Scale factor applied by .sf-hover-grow on hover (>1 grows).\n\nDefault: `1.05`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-lift",
+      "description": "Translate distance for .sf-hover-float (up) and .sf-hover-sink (down) on hover.\n\nDefault: `0.25em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-shrink-scale",
+      "description": "Scale factor applied by .sf-hover-shrink on hover (<1 shrinks).\n\nDefault: `0.95`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-slide",
+      "description": "Translate distance for .sf-hover-slide-start / .sf-hover-slide-end on hover.\n\nDefault: `0.5em`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-icon-2xl",
       "description": "2× large icon size (~40px+). Hero or onboarding icons.\n\nDefault: `4em`",
       "syntax": "*"
@@ -3249,6 +3244,11 @@
     {
       "name": "--sf-stack-gap",
       "description": "Vertical gap between stacked block-level elements in the stack layout.\n\nDefault: `var(--sf-content-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-stagger-step",
+      "description": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.\n\nDefault: `75ms`",
       "syntax": "*"
     },
     {

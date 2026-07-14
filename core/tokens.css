@@ -1364,14 +1364,21 @@
     --sf-animation-spin:    sf-spin var(--sf-duration-slower) linear infinite;
     --sf-animation-shimmer: sf-shimmer calc(1.5s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite;
 
-    /* Stagger delays — apply to successive items for entrance choreography
-       (e.g. style="animation-delay: var(--sf-animation-delay-2)"). Tokens
-       only; SLASHED ships no .sf-stagger utility class (by design — apply via token presets or your own BEM rules). */
-    --sf-animation-delay-1: calc(75ms  * var(--sf-motion-scale));
-    --sf-animation-delay-2: calc(150ms * var(--sf-motion-scale));
-    --sf-animation-delay-3: calc(225ms * var(--sf-motion-scale));
-    --sf-animation-delay-4: calc(300ms * var(--sf-motion-scale));
-    --sf-animation-delay-5: calc(375ms * var(--sf-motion-scale));
+    /* Stagger step — the per-item delay increment consumed by the .sf-stagger
+       utility (core/motion.css). One knob retunes the whole choreography; the
+       class multiplies it by the child's index and by --sf-motion-scale, so the
+       rhythm follows the motion knob without baking the scale in here. */
+    --sf-stagger-step: 75ms;
+
+    /* Hover-transform magnitudes — the .sf-hover-* utilities (optional/
+       utilities.css) read these so the effect strength is one global knob per
+       axis rather than hard-coded per class. --grow/--shrink are scale factors;
+       --lift is the float/sink translate distance; --slide is the slide
+       distance. */
+    --sf-hover-grow-scale:   1.05;
+    --sf-hover-shrink-scale: 0.95;
+    --sf-hover-lift:         0.25em;
+    --sf-hover-slide:        0.5em;
 
     /* ----------------------------------------------------------
        Scroll-driven animation range — consumer API. Attach these

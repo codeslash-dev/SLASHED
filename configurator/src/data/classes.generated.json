@@ -2895,6 +2895,16 @@
       "layer": "slashed.layout"
     },
     {
+      "name": "sf-stagger",
+      "selector": ".sf-stagger",
+      "kind": "motion",
+      "category": "Motion / animation",
+      "group": "",
+      "description": "Stagger — choreography, not the animation itself. Put .sf-stagger on a PARENT; every direct child gets an incrementing animation-delay so a time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence. Children WITHOUT an animation just carry an inert delay (no-op), so…",
+      "optional": false,
+      "layer": "slashed.motion"
+    },
+    {
       "name": "sf-sticky",
       "selector": ".sf-sticky",
       "kind": "utility",

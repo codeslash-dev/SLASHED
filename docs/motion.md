@@ -70,7 +70,9 @@ your own components:
 ### Entrance animations
 
 Apply one of these classes to trigger a one-shot entrance animation.
-Combine with a `--sf-animation-delay-*` token for staggered sequences.
+These are scroll-driven (their timing is `animation-range`, not
+`animation-delay`); for staggering a group of **time-based** entrances
+(`.sf-fade-in` / `.sf-slide-in-*`), see [Stagger](#stagger) below.
 
 | Class | Effect |
 |---|---|
@@ -110,25 +112,38 @@ All keyframe names use the `sf-` prefix:
 - `sf-float`, `sf-ping`, `sf-spin`, `sf-shimmer`, `sf-blink`
 - `sf-color-pulse`
 
-## Stagger delays
+## Stagger
 
-Use the delay tokens to stagger children:
+Put `.sf-stagger` on a **parent**; every direct child gets an incrementing
+`animation-delay`, so a time-based entrance plays in sequence. `.sf-stagger`
+is choreography only — each child still needs its own animation
+(`.sf-fade-in`, `.sf-slide-in-*`, …). Children without one just carry an
+inert delay, so you opt in per child with nothing to exclude.
 
 ```html
-<div class="sf-entrance--fade-up" style="animation-delay: var(--sf-animation-delay-1)">First</div>
-<div class="sf-entrance--fade-up" style="animation-delay: var(--sf-animation-delay-2)">Second</div>
-<div class="sf-entrance--fade-up" style="animation-delay: var(--sf-animation-delay-3)">Third</div>
+<ul class="sf-stagger">
+  <li class="sf-fade-in">First</li>
+  <li class="sf-fade-in">Second</li>
+  <li class="sf-fade-in">Third</li>
+  <!-- any number of children -->
+</ul>
 ```
+
+The per-item increment is one knob:
 
 | Token | Value |
 |---|---|
-| `--sf-animation-delay-1` | `75ms` |
-| `--sf-animation-delay-2` | `150ms` |
-| `--sf-animation-delay-3` | `225ms` |
-| `--sf-animation-delay-4` | `300ms` |
-| `--sf-animation-delay-5` | `375ms` |
+| `--sf-stagger-step` | `75ms` |
 
-> Delay values are also scaled by `--sf-motion-scale`.
+Each child's delay is `index × --sf-stagger-step × --sf-motion-scale`.
+
+Where the browser supports `sibling-index()` the ramp is unbounded; older
+engines fall back to an 8-step `:nth-child` ramp (covering a 4-column grid's
+first two rows) that then plateaus, so arbitrarily long lists still animate.
+
+> Pairs with time-based animations only. `.sf-entrance--*` / `.sf-exit--*`
+> are scroll-driven — their rhythm is `animation-range`, not
+> `animation-delay`, so `.sf-stagger` does not apply to them.
 
 ## Motion scale
 
