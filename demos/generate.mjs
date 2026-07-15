@@ -134,7 +134,6 @@ const CURATED = {
   '--sf-link-underline-thickness': '3px',
   '--sf-link-external-marker': '" \\2192"',
   '--sf-link-external-label': '"leaves this site"',
-  '--sf-corner-scoop-at': '30% 70%',
   '--sf-field-required-marker': '" \\2737"',
   '--sf-color-mark-text': 'oklch(0.45 0.27 320)',
   '--sf-color-selection-text': 'oklch(0.98 0 0)',

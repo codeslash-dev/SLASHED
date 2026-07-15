@@ -2,22 +2,22 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "2733b25b05b9",
+    "tokensHash": "5a5ec9f40624",
     "bundles": [
       "full",
       "optimal"
     ],
     "counts": {
-      "tokens": 756,
+      "tokens": 754,
       "byTier": {
-        "PUBLIC": 695,
+        "PUBLIC": 693,
         "PUBLIC-ADVANCED": 60,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
         "Core tokens": 623,
-        "Macro tokens": 34,
+        "Macro tokens": 32,
         "Component tokens": 46
       }
     }
@@ -7740,48 +7740,6 @@
       "note": "OKLCH lightness crossover for auto-contrast on colored surfaces. Colors with L above this get dark text; below get light text. Default 0.6.",
       "value": "0.6",
       "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-corner-scoop-at",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "corner",
-      "category": "Macro tokens",
-      "group": "Concave corner",
-      "description": "Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0.",
-      "note": "Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0.",
-      "value": "100% 0",
-      "aliasOf": null,
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-corner-scoop-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corner",
-      "category": "Macro tokens",
-      "group": "Concave corner",
-      "description": "Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl).",
-      "note": "Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl).",
-      "value": "var(--sf-radius-2xl)",
-      "aliasOf": "--sf-radius-2xl",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

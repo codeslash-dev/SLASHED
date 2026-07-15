@@ -120,16 +120,19 @@ describe('readFile vs requireFile — missing-file behavior', () => {
 });
 
 describe('collectComments / describe — directive comments never become descriptions', () => {
-  // Reproduces the .sf-corner-scoop--* leak: a stylelint-disable comment sits
-  // right above a vendor-prefixed declaration inside the base rule, with no
-  // comment of their own governing the variant selectors that follow.
+  // Synthetic reproduction of a historical directive-comment leak: a
+  // stylelint-disable comment sits right above a vendor-prefixed declaration
+  // inside the base rule, with no comment of their own governing the variant
+  // selectors that follow — those variants must fall back to the base rule's
+  // governing note, never inherit the stylelint-disable directive as a
+  // description.
   const css = `
-    /* Concave corner — a corner that curves away from the box. */
-    .sf-corner-scoop {
+    /* Masked shape — an element clipped by a radial-gradient mask. */
+    .sf-mask-cut {
       /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari < 18 */
       -webkit-mask-image: radial-gradient(circle, transparent 1rem, black 1rem);
     }
-    .sf-corner-scoop--top-left { --sf-corner-scoop-at: 0 0; }
+    .sf-mask-cut--top-left { --sf-mask-cut-at: 0 0; }
   `;
 
   test('a stylelint-disable comment is classified as a directive, not a note', () => {
@@ -141,10 +144,10 @@ describe('collectComments / describe — directive comments never become descrip
 
   test('a variant selector with no comment of its own falls back to the governing note, not the directive', () => {
     const comments = collectComments(css);
-    const idx = css.indexOf('.sf-corner-scoop--top-left');
+    const idx = css.indexOf('.sf-mask-cut--top-left');
     const { description } = describeElement(comments, idx);
     assert.ok(!description.includes('stylelint-disable'));
-    assert.match(description, /concave corner/i);
+    assert.match(description, /masked shape/i);
   });
 });
 

@@ -369,8 +369,6 @@
   "--sf-content-width",
   "--sf-contrast-bias",
   "--sf-contrast-threshold",
-  "--sf-corner-scoop-at",
-  "--sf-corner-scoop-size",
   "--sf-cover-min-height",
   "--sf-cover-padding",
   "--sf-current-font-weight",

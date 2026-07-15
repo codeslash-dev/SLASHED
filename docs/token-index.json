@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 756,
+      "tokens": 754,
       "by_tier": {
-        "PUBLIC": 695,
+        "PUBLIC": 693,
         "PUBLIC-ADVANCED": 60,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 266,
-        "consumption": 490
+        "knob": 265,
+        "consumption": 489
       }
     }
   },
@@ -2980,22 +2980,6 @@
         "core/tokens.css"
       ],
       "value": "0.6"
-    },
-    "--sf-corner-scoop-at": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "100% 0"
-    },
-    "--sf-corner-scoop-size": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "var(--sf-radius-2xl)"
     },
     "--sf-cover-min-height": {
       "tier": "PUBLIC",

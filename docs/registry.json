@@ -19,8 +19,8 @@
       "optional/utilities.css"
     ],
     "counts": {
-      "tokens": 756,
-      "sf_classes": 294,
+      "tokens": 754,
+      "sf_classes": 289,
       "is_classes": 28
     }
   },
@@ -395,8 +395,6 @@
     "--sf-content-width",
     "--sf-contrast-bias",
     "--sf-contrast-threshold",
-    "--sf-corner-scoop-at",
-    "--sf-corner-scoop-size",
     "--sf-cover-min-height",
     "--sf-cover-padding",
     "--sf-current-font-weight",
@@ -851,11 +849,6 @@
     "sf-container--wide",
     "sf-content-auto",
     "sf-content-grid",
-    "sf-corner-scoop",
-    "sf-corner-scoop--bottom-left",
-    "sf-corner-scoop--bottom-right",
-    "sf-corner-scoop--top-left",
-    "sf-corner-scoop--top-right",
     "sf-cover",
     "sf-cover--max",
     "sf-cover--min",
