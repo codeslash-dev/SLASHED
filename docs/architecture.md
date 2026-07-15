@@ -277,7 +277,6 @@ without reducing collision risk in practice.
 | `.print-only` | print | Reads as a behaviour toggle |
 | `.print-color-exact` | print | Self-documenting intent |
 | `.print-no-color` | print | Self-documenting intent |
-| `.theme-transition` | themes | Scoped opt-in helper |
 
 ---
 

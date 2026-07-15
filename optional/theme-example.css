@@ -47,16 +47,7 @@
 
   /* 4. COMPONENT-LEVEL TOKEN OVERRIDES (examples) */
 
-  /* 5. SMOOTH THEME-TRANSITION HELPER */
-
-  .theme-transition,
-  .theme-transition * {
-    transition-property:        color, background-color, border-color;
-    transition-duration:        var(--sf-duration-normal);
-    transition-timing-function: var(--sf-ease-out);
-  }
-
-  /* 6. FULL TOKEN REFERENCE (commented out) */
+  /* 5. FULL TOKEN REFERENCE (commented out) */
 
     
 }

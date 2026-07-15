@@ -1117,7 +1117,6 @@
     "print-only",
     "skip-link",
     "sr-only",
-    "sr-only-focusable",
-    "theme-transition"
+    "sr-only-focusable"
   ]
 }

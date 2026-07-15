@@ -3303,16 +3303,6 @@
       "description": "Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets.",
       "optional": false,
       "layer": "slashed.accessibility"
-    },
-    {
-      "name": "theme-transition",
-      "selector": ".theme-transition",
-      "kind": "theme",
-      "category": "Theme example",
-      "group": "5. SMOOTH THEME-TRANSITION HELPER",
-      "description": "Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches.",
-      "optional": true,
-      "layer": "slashed.themes"
     }
   ]
 }

@@ -26,14 +26,14 @@
       "optimal"
     ],
     "counts": {
-      "total": 1087,
+      "total": 1086,
       "by_type": {
-        "class": 331,
+        "class": 330,
         "token": 756
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1026,
+        "PUBLIC": 1025,
         "PUBLIC-ADVANCED": 60
       },
       "by_role": {
@@ -41,10 +41,10 @@
         "knob": 266
       },
       "tokens": 756,
-      "classes": 331,
+      "classes": 330,
       "sf_classes": 294,
       "is_classes": 28,
-      "unprefixed_classes": 9,
+      "unprefixed_classes": 8,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 46,
@@ -58,7 +58,6 @@
         "Motion / animation": 22,
         "Print": 4,
         "State classes": 28,
-        "Theme example": 1,
         "Theme utilities": 3,
         "Utilities": 31
       }
@@ -27235,26 +27234,6 @@
         "full",
         "optimal"
       ]
-    },
-    {
-      "name": "theme-transition",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".theme-transition",
-      "prefix": "",
-      "kind": "theme",
-      "category": "Theme example",
-      "area": "theme",
-      "group": "5. SMOOTH THEME-TRANSITION HELPER",
-      "description": "Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": true,
-      "layer": "slashed.themes",
-      "sourceFiles": [
-        "optional/theme-example.css"
-      ],
-      "bundles": []
     }
   ]
 }
