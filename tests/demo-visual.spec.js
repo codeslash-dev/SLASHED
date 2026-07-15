@@ -804,7 +804,9 @@ test.describe('Print Styles', () => {
 test.describe('Accessibility', () => {
   test('.skip-link exists and is visually hidden until focused', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const skipLink = page.locator('.skip-link');
+    // The canonical skip link is first in the DOM (the coverage gallery also
+    // showcases a .skip-link further down the page).
+    const skipLink = page.locator('.skip-link').first();
     await expect(skipLink).toBeAttached();
     // Before focus, it should be positioned off-screen
     const box = await skipLink.boundingBox();

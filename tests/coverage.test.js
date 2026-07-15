@@ -12,7 +12,10 @@
  *  2. every token in docs/api-index.json appears in the demo;
  *  3. the embedded #cov-data token list is EXACTLY the current API token set
  *     (no stale/removed tokens linger — folds in the old
- *     docs-artifacts-sync token-reference check).
+ *     docs-artifacts-sync token-reference check);
+ *  4. every documented class gets its own live preview card in the gallery,
+ *     and the embedded #cov-data class list is EXACTLY the current API class
+ *     set (nothing rendered that no longer exists, nothing missing).
  *
  * Run: node --test tests/coverage.test.js
  */
@@ -26,6 +29,11 @@ const DEMO_PATH = path.join(ROOT, 'demo', 'index.html');
 const API_INDEX_PATH = path.join(ROOT, 'docs', 'api-index.json');
 
 const demoContent = fs.readFileSync(DEMO_PATH, 'utf8');
+const apiIndex = JSON.parse(fs.readFileSync(API_INDEX_PATH, 'utf8'));
+const covData = (() => {
+  const m = demoContent.match(/<script type="application\/json" id="cov-data">([\s\S]*?)<\/script>/);
+  return m ? JSON.parse(m[1]) : null;
+})();
 
 describe('Selector coverage', () => {
   test('every .sf-* and .sf-is-* class from core/*.css appears in demo/index.html', () => {
@@ -75,10 +83,7 @@ describe('Selector coverage', () => {
 });
 
 describe('Token coverage', () => {
-  const apiTokens = JSON.parse(fs.readFileSync(API_INDEX_PATH, 'utf8'))
-    .entries
-    .filter(e => e.type === 'token')
-    .map(e => e.name);
+  const apiTokens = apiIndex.entries.filter(e => e.type === 'token').map(e => e.name);
 
   test('every token in docs/api-index.json appears in demo/index.html', () => {
     const missing = apiTokens.filter(name => !demoContent.includes(name));
@@ -89,9 +94,33 @@ describe('Token coverage', () => {
   });
 
   test('embedded #cov-data token list equals the current API token set', () => {
-    const m = demoContent.match(/<script type="application\/json" id="cov-data">([\s\S]*?)<\/script>/);
-    assert.ok(m, 'demo/index.html must embed <script id="cov-data">…</script>');
-    const embedded = JSON.parse(m[1]).tokens;
-    assert.deepEqual([...embedded].sort(), [...apiTokens].sort());
+    assert.ok(covData, 'demo/index.html must embed <script id="cov-data">…</script>');
+    assert.deepEqual([...covData.tokens].sort(), [...apiTokens].sort());
+  });
+});
+
+describe('Class gallery coverage', () => {
+  // Every documented class (api-index) is rendered live in the gallery. Each
+  // class name must appear applied in markup — a live <figure> preview card.
+  const apiClasses = apiIndex.entries
+    .filter(e => e.type === 'class')
+    .map(e => e.selector.replace(/^\./, ''));
+
+  test('every class in docs/api-index.json appears in demo/index.html', () => {
+    const missing = apiClasses.filter(name => !demoContent.includes(name));
+    if (missing.length > 0) {
+      console.log('Classes missing from demo/index.html:', missing.sort().join(', '));
+    }
+    assert.deepEqual(missing, []);
+  });
+
+  test('the gallery renders one preview card per documented class', () => {
+    const cards = (demoContent.match(/class="cov-card"/g) || []).length;
+    assert.equal(cards, apiClasses.length);
+  });
+
+  test('embedded #cov-data class list equals the current API class set', () => {
+    assert.ok(covData, 'demo/index.html must embed <script id="cov-data">…</script>');
+    assert.deepEqual([...covData.classes].sort(), [...apiClasses].sort());
   });
 });
