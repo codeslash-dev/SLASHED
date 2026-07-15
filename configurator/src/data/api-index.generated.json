@@ -2,21 +2,21 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "5624c486ab4d",
+    "tokensHash": "2733b25b05b9",
     "bundles": [
       "full",
       "optimal"
     ],
     "counts": {
-      "tokens": 755,
+      "tokens": 756,
       "byTier": {
         "PUBLIC": 695,
-        "PUBLIC-ADVANCED": 59,
+        "PUBLIC-ADVANCED": 60,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
-        "Core tokens": 622,
+        "Core tokens": 623,
         "Macro tokens": 34,
         "Component tokens": 46
       }
@@ -7856,6 +7856,27 @@
       ]
     },
     {
+      "name": "--sf-density",
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "namespace": "density",
+      "category": "Core tokens",
+      "group": "Density",
+      "description": "Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it).",
+      "note": "Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it).",
+      "value": "1",
+      "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
       "name": "--sf-display-l-line-height",
       "tier": "PUBLIC",
       "role": "knob",
@@ -13168,13 +13189,13 @@
     {
       "name": "--sf-size-l",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "size",
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
       "note": "Large UI component height (~48px). Touch-friendly interactive elements.",
-      "value": "3rem",
+      "value": "calc(3rem * var(--sf-density))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -13189,13 +13210,13 @@
     {
       "name": "--sf-size-m",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "size",
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
       "note": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.",
-      "value": "2.5rem",
+      "value": "calc(2.5rem * var(--sf-density))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -13210,13 +13231,13 @@
     {
       "name": "--sf-size-s",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "size",
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
       "note": "Small UI component height (~32px). Compact buttons and input variants.",
-      "value": "2rem",
+      "value": "calc(2rem * var(--sf-density))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -13231,13 +13252,13 @@
     {
       "name": "--sf-size-xl",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "size",
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
       "note": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.",
-      "value": "3.5rem",
+      "value": "calc(3.5rem * var(--sf-density))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -13252,13 +13273,13 @@
     {
       "name": "--sf-size-xs",
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "namespace": "size",
       "category": "Core tokens",
       "group": "UI sizes",
       "description": "Fixed sizes for interactive components (buttons, inputs, chips) at S / M / L.",
       "note": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.",
-      "value": "1.5rem",
+      "value": "calc(1.5rem * var(--sf-density))",
       "aliasOf": null,
       "registered": false,
       "syntax": null,

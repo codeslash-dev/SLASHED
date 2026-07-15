@@ -204,6 +204,7 @@ const CURATED = {
   '--sf-text-scale': '1.6',
   '--sf-text-display-scale': '1.6',
   '--sf-motion-scale': '1.6',
+  '--sf-density': '1.6',
 };
 
 const LEN_UNIT = /^(-?[\d.]+)(px|rem|em|ch|vw|vh|dvh|svh|lvh|vmin|vmax|pt|cm|mm|ex|cap|lh|q)$/i;

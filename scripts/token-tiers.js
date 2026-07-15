@@ -45,6 +45,7 @@ const ADVANCED = new Set([
   '--sf-font-features', '--sf-font-variation', '--sf-optical-sizing',
   '--sf-space-scale', '--sf-text-scale', '--sf-text-display-scale',
   '--sf-radius-scale', '--sf-motion-scale', '--sf-section-scale',
+  '--sf-density',
   '--sf-leading-taper',
   '--sf-fluid-min-vw', '--sf-fluid-max-vw',
   '--sf-text-ratio-min', '--sf-text-ratio-max',

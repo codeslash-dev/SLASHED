@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 755,
+      "tokens": 756,
       "by_tier": {
         "PUBLIC": 695,
-        "PUBLIC-ADVANCED": 59,
+        "PUBLIC-ADVANCED": 60,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 270,
-        "consumption": 485
+        "knob": 266,
+        "consumption": 490
       }
     }
   },
@@ -3021,6 +3021,14 @@
       ],
       "value": "var(--sf-font-weight-bold)"
     },
+    "--sf-density": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "1"
+    },
     "--sf-display-l-line-height": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -5047,43 +5055,43 @@
     },
     "--sf-size-l": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "3rem"
+      "value": "calc(3rem * var(--sf-density))"
     },
     "--sf-size-m": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "2.5rem"
+      "value": "calc(2.5rem * var(--sf-density))"
     },
     "--sf-size-s": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "2rem"
+      "value": "calc(2rem * var(--sf-density))"
     },
     "--sf-size-xl": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "3.5rem"
+      "value": "calc(3.5rem * var(--sf-density))"
     },
     "--sf-size-xs": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "1.5rem"
+      "value": "calc(1.5rem * var(--sf-density))"
     },
     "--sf-space-2xl": {
       "tier": "PUBLIC",

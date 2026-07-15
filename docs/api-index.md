@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1086 elements** — 755 tokens, 331 classes.
+**1087 elements** — 756 tokens, 331 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
 | PUBLIC | 1026 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC-ADVANCED | 60 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (755)
+## Tokens (756)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (622)
+### Core tokens (623)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -379,6 +379,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-contrast-bias` | PUBLIC-ADVANCED | knob | contrast | `0` | Global text-contrast nudge. Positive values push derived reading-text colors toward the extremes (darker in light mode, lighter in dark). Default 0 (neutral). |
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | contrast | `0.6` | OKLCH lightness crossover for auto-contrast on colored surfaces. Colors with L above this get dark text; below get light text. Default 0.6. |
 | `--sf-current-font-weight` | PUBLIC | consumption | current | `var(--sf-font-weight-bold)` | Inherits the current font-weight from context. Useful as a reset. |
+| `--sf-density` | PUBLIC-ADVANCED | knob | density | `1` | Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it). |
 | `--sf-display-l-line-height` | PUBLIC | knob | display | `1` | Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes. |
 | `--sf-display-m-line-height` | PUBLIC | knob | display | `1.05` | Line height for medium display text (--sf-text-display-m). |
 | `--sf-display-s-line-height` | PUBLIC | consumption | display | `var(--sf-leading-tight)` | Line height for small display text (--sf-text-display-s). |
@@ -582,11 +583,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | shadow | `calc(0.08 + var(--sf-is-dark) * 0.17)` | Base opacity for the entire shadow ramp. Auto-boosted in dark mode via --sf-is-dark. Override with calc() to preserve the adaptation: e.g. calc(0.12 + var(--sf-is-dark) * 0.17). |
 | `--sf-shadow-xl` | PUBLIC | consumption | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Extra-large shadow for modals, dialogs, and high-elevation sheets. |
 | `--sf-shadow-xs` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Extra-small shadow for barely-elevated elements (focused inputs, small chips). |
-| `--sf-size-l` | PUBLIC | knob | size | `3rem` | Large UI component height (~48px). Touch-friendly interactive elements. |
-| `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
-| `--sf-size-s` | PUBLIC | knob | size | `2rem` | Small UI component height (~32px). Compact buttons and input variants. |
-| `--sf-size-xl` | PUBLIC | knob | size | `3.5rem` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
-| `--sf-size-xs` | PUBLIC | knob | size | `1.5rem` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |
+| `--sf-size-l` | PUBLIC | consumption | size | `calc(3rem * var(--sf-density))` | Large UI component height (~48px). Touch-friendly interactive elements. |
+| `--sf-size-m` | PUBLIC | consumption | size | `calc(2.5rem * var(--sf-density))` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
+| `--sf-size-s` | PUBLIC | consumption | size | `calc(2rem * var(--sf-density))` | Small UI component height (~32px). Compact buttons and input variants. |
+| `--sf-size-xl` | PUBLIC | consumption | size | `calc(3.5rem * var(--sf-density))` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
+| `--sf-size-xs` | PUBLIC | consumption | size | `calc(1.5rem * var(--sf-density))` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |
 | `--sf-space-2xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` | 48px-equivalent spacing. Large section spacing. |
 | `--sf-space-2xs` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` | 4px-equivalent spacing. Tight inline gaps, icon-to-text padding. |
 | `--sf-space-3xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` | 64px-equivalent spacing. Extra-large layout gaps. |

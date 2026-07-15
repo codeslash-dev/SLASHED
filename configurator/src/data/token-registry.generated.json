@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 797
+    "nextId": 798
   },
   "tokens": [
     {
@@ -3233,6 +3233,10 @@
     {
       "id": 796,
       "name": "--sf-stagger-step"
+    },
+    {
+      "id": 797,
+      "name": "--sf-density"
     }
   ]
 }

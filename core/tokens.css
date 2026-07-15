@@ -1176,17 +1176,37 @@
     --sf-space-4xl: calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale));
 
     /* ----------------------------------------------------------
+       Density — the compact ↔ comfortable dial for interactive
+       control GEOMETRY. 1 = default; <1 packs controls tighter
+       (dashboards, data tables, power-user tools), >1 loosens them.
+       It is a discrete design/product choice (or a user preference),
+       NOT a viewport response — control height must never shrink on
+       small screens where touch targets need to be larger, so unlike
+       the fluid text and space scales the size ladder stays non-fluid
+       and is scaled only by this deliberate knob. Orthogonal to
+       --sf-space-scale (overall whitespace) and --sf-section-scale
+       (macro section rhythm); combine them for a fully compact UI.
+       Accessibility is unaffected: the coarse-pointer floor lives on
+       --sf-touch-target (core/accessibility.css), never on a rung, so
+       a small --sf-density can't shrink native controls below the
+       WCAG target. Like the other global multipliers it is a :root
+       dial — the size ladder is computed at :root and inherits, so a
+       nested override does not retroactively rescale it (same
+       computed-value rule as --sf-space-scale et al.). */
+    --sf-density: 1;
+
+    /* ----------------------------------------------------------
        UI sizes — a purely geometric rung ladder (+0.5rem / 8px per
-       step: 24 · 32 · 40 · 48 · 56 px). These are free design knobs:
-       nothing external constrains them, so overriding them just
-       rescales component heights. Accessibility floors live on their
-       own tokens (--sf-touch-target), never on a rung — see below.
+       step: 24 · 32 · 40 · 48 · 56 px at density 1). These are free
+       design knobs, scaled by --sf-density; overriding a rung just
+       rescales that component height. Accessibility floors live on
+       their own tokens (--sf-touch-target), never on a rung.
        ---------------------------------------------------------- */
-    --sf-size-xs: 1.5rem;
-    --sf-size-s:  2rem;
-    --sf-size-m:  2.5rem;
-    --sf-size-l:  3rem;
-    --sf-size-xl: 3.5rem;
+    --sf-size-xs: calc(1.5rem * var(--sf-density));
+    --sf-size-s:  calc(2rem   * var(--sf-density));
+    --sf-size-m:  calc(2.5rem * var(--sf-density));
+    --sf-size-l:  calc(3rem   * var(--sf-density));
+    --sf-size-xl: calc(3.5rem * var(--sf-density));
 
     /* ----------------------------------------------------------
        Containers

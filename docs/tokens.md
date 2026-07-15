@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**755 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**756 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-622 tokens.
+623 tokens.
 
 | Token | Default |
 |---|---|
@@ -321,6 +321,7 @@ rebrand workflow.
 | `--sf-contrast-bias` | `0` |
 | `--sf-contrast-threshold` | `0.6` |
 | `--sf-current-font-weight` | `var(--sf-font-weight-bold)` |
+| `--sf-density` | `1` |
 | `--sf-display-l-line-height` | `1` |
 | `--sf-display-m-line-height` | `1.05` |
 | `--sf-display-s-line-height` | `var(--sf-leading-tight)` |
@@ -524,11 +525,11 @@ rebrand workflow.
 | `--sf-shadow-strength` | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
 | `--sf-shadow-xl` | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-shadow-xs` | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` |
-| `--sf-size-l` | `3rem` |
-| `--sf-size-m` | `2.5rem` |
-| `--sf-size-s` | `2rem` |
-| `--sf-size-xl` | `3.5rem` |
-| `--sf-size-xs` | `1.5rem` |
+| `--sf-size-l` | `calc(3rem * var(--sf-density))` |
+| `--sf-size-m` | `calc(2.5rem * var(--sf-density))` |
+| `--sf-size-s` | `calc(2rem * var(--sf-density))` |
+| `--sf-size-xl` | `calc(3.5rem * var(--sf-density))` |
+| `--sf-size-xs` | `calc(1.5rem * var(--sf-density))` |
 | `--sf-space-2xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-2xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-3xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` |

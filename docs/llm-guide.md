@@ -1204,7 +1204,20 @@ One token changes the entire design. Override on `:root`. All are PUBLIC-ADVANCE
 --sf-space-scale:        1  /* global fluid spacing multiplier */
 --sf-text-scale:         1  /* global body type scale multiplier */
 --sf-text-display-scale: 1  /* global display type scale multiplier */
+--sf-density:            1  /* control-size ladder (--sf-size-*): <1 compact, >1 roomy */
 ```
+
+`--sf-density` is the compact ↔ comfortable dial for interactive control
+**geometry** (the `--sf-size-*` rung ladder). Unlike `--sf-text-*` / `--sf-space-*`
+it is intentionally **not** viewport-fluid — control height must not shrink on
+small screens where touch targets need to grow — so the size ladder is static and
+moves only by this deliberate knob (a product mode or user preference), never
+automatically. It is orthogonal to `--sf-space-scale` (whitespace) and
+`--sf-section-scale` (section rhythm); combine them for a fully compact UI. The
+`--sf-touch-target` accessibility floor is independent, so a small `--sf-density`
+cannot pull native controls under the WCAG target. Like the other multipliers in
+this section it is a `:root` dial — the `--sf-size-*` ladder is computed at `:root`
+and inherits, so a nested override does not retroactively rescale it.
 
 ---
 

@@ -374,6 +374,7 @@
   "--sf-cover-min-height",
   "--sf-cover-padding",
   "--sf-current-font-weight",
+  "--sf-density",
   "--sf-display-l-line-height",
   "--sf-display-m-line-height",
   "--sf-display-s-line-height",
