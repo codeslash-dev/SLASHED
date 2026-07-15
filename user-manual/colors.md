@@ -47,7 +47,7 @@ works (hex, `hsl`, `oklch`, …):
 
 That's it — dark mode, hover states, tints, and text contrast all recompute
 from these six values. A starter file is provided at
-[`optional/theme-example.css`](../optional/theme-example.css).
+[`optional/customize-example.css`](../optional/customize-example.css).
 
 ## Light and dark mode, automatically
 

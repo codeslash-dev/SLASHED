@@ -48,7 +48,7 @@ core/
   print.css                    slashed.print
 optional/
   tokens.components.css   slashed.tokens  (component tokens for btn + card)
-  theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
+  customize-example.css   slashed.themes, slashed.overrides  (copy-and-customise rebrand/config/overrides starter; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
   components.css          slashed.components  (btn + card — the only two components)
   utilities.css           slashed.utilities  (curated subset active — heading/text-size/hover/list-reset/marker-colour/alternate-selection/sticky)
@@ -185,7 +185,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 **slashed.states** — `.sf-is-*` markers. Exclusive prefix — utilities never use it. `.sf-is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
 
-**slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/theme-example.css`).
+**slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/customize-example.css`).
 
 **slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`. Transition tokens live in `core/tokens.css` — see [motion.md](motion.md). `.sf-color-pulse` animates `--sf-color-primary-source-light` lightness, demonstrating `@property` colour interpolation in oklch.
 
@@ -277,7 +277,6 @@ without reducing collision risk in practice.
 | `.print-only` | print | Reads as a behaviour toggle |
 | `.print-color-exact` | print | Self-documenting intent |
 | `.print-no-color` | print | Self-documenting intent |
-| `.theme-transition` | themes | Scoped opt-in helper |
 
 ---
 
