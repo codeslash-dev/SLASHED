@@ -115,21 +115,21 @@
       "layer": "slashed.layout"
     },
     {
-      "name": "sf-bento--compact",
-      "selector": ".sf-bento--compact",
+      "name": "sf-bento--row-compact",
+      "selector": ".sf-bento--row-compact",
       "kind": "layout",
       "category": "Layout primitives",
-      "group": "Bento grid",
+      "group": "",
       "description": "Bento grid variant with shorter default row height.",
       "optional": false,
       "layer": "slashed.layout"
     },
     {
-      "name": "sf-bento--tall",
-      "selector": ".sf-bento--tall",
+      "name": "sf-bento--row-tall",
+      "selector": ".sf-bento--row-tall",
       "kind": "layout",
       "category": "Layout primitives",
-      "group": "Bento grid",
+      "group": "",
       "description": "Bento grid variant with taller default row height.",
       "optional": false,
       "layer": "slashed.layout"
@@ -3303,16 +3303,6 @@
       "description": "Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets.",
       "optional": false,
       "layer": "slashed.accessibility"
-    },
-    {
-      "name": "theme-transition",
-      "selector": ".theme-transition",
-      "kind": "theme",
-      "category": "Theme example",
-      "group": "5. SMOOTH THEME-TRANSITION HELPER",
-      "description": "Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches.",
-      "optional": true,
-      "layer": "slashed.themes"
     }
   ]
 }

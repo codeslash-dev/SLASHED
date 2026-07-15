@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1087 elements** — 756 tokens, 331 classes.
+**1086 elements** — 756 tokens, 330 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1026 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1025 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 60 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -796,7 +796,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (331)
+## Classes (330)
 
 ### Accessibility (8)
 
@@ -861,8 +861,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-bento--2` | PUBLIC | layout | Bento grid | Bento grid variant with a 2-column base layout. |
 | `.sf-bento--3` | PUBLIC | layout | Bento grid | Bento grid variant with a 3-column base layout. |
 | `.sf-bento--6` | PUBLIC | layout | Bento grid | Bento grid variant with a 6-column base layout. |
-| `.sf-bento--compact` | PUBLIC | layout | Bento grid | Bento grid variant with shorter default row height. |
-| `.sf-bento--tall` | PUBLIC | layout | Bento grid | Bento grid variant with taller default row height. |
+| `.sf-bento--row-compact` | PUBLIC | layout | — | Bento grid variant with shorter default row height. |
+| `.sf-bento--row-tall` | PUBLIC | layout | — | Bento grid variant with taller default row height. |
 | `.sf-bento-featured` | PUBLIC | layout | Bento grid | Span modifier for a bento item: takes up 2×2 cells (featured hero placement). |
 | `.sf-bento-full` | PUBLIC | layout | Bento grid | Span modifier for a bento item: stretches across all columns (full-width banner). |
 | `.sf-bento-tall` | PUBLIC | layout | Bento grid | Span modifier for a bento item: doubles the row height (tall card). |
@@ -1133,12 +1133,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context. |
 | `.sf-is-visible` | PUBLIC | state | VISIBILITY | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
 | `.sf-is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
-
-### Theme example (1)
-
-| Class | Tier | Kind | Group | Description |
-|---|---|---|---|---|
-| `.theme-transition` | PUBLIC | theme | 5. SMOOTH THEME-TRANSITION HELPER | Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches. |
 
 ### Theme utilities (3)
 

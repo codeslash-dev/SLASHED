@@ -81,7 +81,6 @@ export const FILE_META = {
   'core/themes.css':            { category: 'Theme utilities',        area: 'theme',         kind: 'theme'         },
   'optional/forms.css':         { category: 'Forms',                 area: 'forms',         kind: 'form'          },
   'optional/components.css':    { category: 'Components',             area: 'components',    kind: 'component'     },
-  'optional/theme-example.css': { category: 'Theme example',         area: 'theme',         kind: 'theme'         },
   'optional/utilities.css':     { category: 'Utilities',             area: 'utilities',     kind: 'utility'       },
 };
 

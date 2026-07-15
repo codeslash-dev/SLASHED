@@ -62,7 +62,7 @@ slashed/
     ├── forms.css             # Form styles
     ├── utilities.css         # Utility classes (staged — commented out, not yet active)
     ├── components.css        # Optional components
-    └── overrides-example.css / theme-example.css / config-example.css
+    └── customize-example.css # Copy-and-customise rebrand/config/overrides starter
 ```
 
 **Optional files** (`optional/`) are loaded only when needed. The full numeric color scale lives in `core/tokens.css` alongside the semantic aliases (`-superlight`, `-xlight`, etc.).

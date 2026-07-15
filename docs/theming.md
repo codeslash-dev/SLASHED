@@ -4,7 +4,7 @@ Rebrand the whole framework by overriding a handful of source tokens. Dark mode,
 surfaces, reading text, status tints, and on-colours all auto-derive via relative
 colour syntax. No build step, no SCSS.
 
-Starter file: [`optional/theme-example.css`](../optional/theme-example.css).
+Starter file: [`optional/customize-example.css`](../optional/customize-example.css).
 
 ## Rebrand in 6 tokens
 
@@ -86,7 +86,7 @@ and `--sf-leading-taper` (progressively tightens the per-size line-heights up
 the scale; default `0`).
 
 For a single copy-paste file exposing every dial, see
-[`optional/config-example.css`](../optional/config-example.css).
+[`optional/customize-example.css`](../optional/customize-example.css).
 
 ### Ad-hoc fluid values
 
@@ -193,7 +193,7 @@ need a value the formula can't produce):
 ```
 
 Place Tier 3 overrides in `slashed.overrides` (loaded after the bundle) so they
-survive framework updates. See `optional/overrides-example.css`.
+survive framework updates. See `optional/customize-example.css`.
 
 ## Per-surface color control
 

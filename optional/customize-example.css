@@ -1,0 +1,121 @@
+/* SLASHED — optional/customize-example.css
+   @layers slashed.themes, slashed.overrides
+   Copy-and-customise starter: brand tokens, the fluid engine, dark-mode and
+   multi-brand theming, plus escape-hatch overrides for anything the token
+   API can't reach. Nothing here is loaded by the framework bundles — copy
+   the sections you need into your own stylesheet. */
+
+@layer slashed.themes {
+
+  :root {
+
+    /* 1. BRAND COLORS */
+    --sf-color-primary-source-light:   oklch(0.47 0.27 264);
+    --sf-color-secondary-source-light: oklch(0.22 0.04 264);
+    --sf-color-tertiary-source-light:  oklch(0.42 0.22 295);
+    --sf-color-action-source-light:    oklch(0.50 0.22 235);
+    --sf-color-neutral-source-light:   oklch(0.52 0.025 260);
+    --sf-color-base-source-light:      oklch(0.96 0.006 250);
+
+    /* 2. FLUID ENGINE */
+
+    --sf-fluid-min-vw:          22.5;
+    --sf-fluid-max-vw:          90;
+
+    --sf-text-ratio-min:        1.25;
+    --sf-text-ratio-max:        1.333;
+    --sf-text-base-min:         1;
+    --sf-text-base-max:         1.25;
+
+    --sf-text-display-base-min: 2.4;
+    --sf-text-display-base-max: 3;
+
+    --sf-space-ratio-min:       1.25;
+    --sf-space-ratio-max:       1.333;
+    --sf-space-base-min:        1;
+    --sf-space-base-max:        2;
+
+    /* 3. GLOBAL SCALE MULTIPLIERS */
+    --sf-text-scale:         1;
+    --sf-text-display-scale: 1;
+    --sf-space-scale:        1;
+    --sf-section-scale:      1;
+    --sf-radius-scale:       1;
+    --sf-motion-scale:       1;
+
+    --sf-leading-taper:      0;
+
+    /* 4. FONT FAMILIES */
+    --sf-font-body:    system-ui, -apple-system, sans-serif;
+    --sf-font-heading: var(--sf-font-body);
+    --sf-font-display: var(--sf-font-heading);
+    --sf-font-mono:    ui-monospace, monospace;
+
+  }
+
+  /* 5. FULL DARK-MODE OVERRIDE (optional) */
+
+  :root {
+    --sf-color-primary-source-dark: oklch(0.78 0.16 280);
+  }
+
+  /* 6. MULTI-BRAND SCOPING */
+
+  [data-brand="sunset"] {
+    --sf-color-primary-source-light:   oklch(0.62 0.20 35);
+    --sf-color-secondary-source-light: oklch(0.50 0.12 30);
+    --sf-color-tertiary-source-light:  oklch(0.55 0.18 60);
+    --sf-color-action-source-light:    oklch(0.70 0.18 60);
+    --sf-color-neutral-source-light:   oklch(0.40 0.02 35);
+    --sf-color-base-source-light:      oklch(0.98 0.005 35);
+  }
+
+  [data-brand="ocean"] {
+    --sf-color-primary-source-light:   oklch(0.50 0.14 230);
+    --sf-color-secondary-source-light: oklch(0.40 0.08 230);
+    --sf-color-tertiary-source-light:  oklch(0.58 0.12 180);
+    --sf-color-action-source-light:    oklch(0.55 0.16 200);
+    --sf-color-neutral-source-light:   oklch(0.42 0.01 230);
+    --sf-color-base-source-light:      oklch(0.98 0.003 230);
+  }
+
+}
+
+@layer slashed.overrides {
+
+  /* 7. WHEN TO USE THIS LAYER
+     Last layer by design — beats every other framework layer (unlayered
+     consumer CSS still beats it). Reach for it when a token override alone
+     can't produce the value you need — a Tier-3 resolved-token override,
+     see theming.md. */
+
+  /* 8. ELEMENT-LEVEL OVERRIDES */
+
+  small {
+    color: var(--sf-color-text--muted);
+  }
+
+  /* 9. CLASS-LEVEL OVERRIDES */
+
+  .sf-btn {
+    letter-spacing: 0.01em;
+  }
+
+  /* 10. PER-PRIMITIVE INSTANCE OVERRIDES
+     No CSS needed here — set an inline custom property on the element:
+     <div class="sf-stack" style="--sf-stack-gap: var(--sf-space-2xl)"> */
+
+  /* 11. THIRD-PARTY CSS OVERRIDES */
+
+  .some-vendor-widget {
+    border-radius: var(--sf-radius-m);
+    font-family:   var(--sf-font-body);
+  }
+
+  /* 12. OPT-IN PATTERNS */
+
+  .sf-surface--primary {
+    --sf-color-text--on-primary: oklch(0.12 0 0);
+  }
+
+}

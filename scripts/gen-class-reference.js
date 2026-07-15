@@ -26,7 +26,6 @@ const FILE_TITLES = {
   'core/themes.css':            'Theme utilities',
   'optional/forms.css':         'Forms',
   'optional/components.css':    'Components',
-  'optional/theme-example.css': 'Theme example',
   'optional/utilities.css':     'Utilities',
 };
 
