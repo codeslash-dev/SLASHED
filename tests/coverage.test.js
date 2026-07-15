@@ -76,7 +76,7 @@ describe('Selector coverage', () => {
     }
 
     if (missing.length > 0) {
-      console.log('Missing from demo/index.html:', missing.sort().join(', '));
+      console.log(`${missing.length} selector(s) missing from demo/index.html (see assertion diff)`);
     }
     assert.deepEqual(missing, []);
   });
@@ -88,7 +88,7 @@ describe('Token coverage', () => {
   test('every token in docs/api-index.json appears in demo/index.html', () => {
     const missing = apiTokens.filter(name => !demoContent.includes(name));
     if (missing.length > 0) {
-      console.log('Tokens missing from demo/index.html:', missing.sort().join(', '));
+      console.log(`${missing.length} token(s) missing from demo/index.html (see assertion diff)`);
     }
     assert.deepEqual(missing, []);
   });
@@ -109,7 +109,7 @@ describe('Class gallery coverage', () => {
   test('every class in docs/api-index.json appears in demo/index.html', () => {
     const missing = apiClasses.filter(name => !demoContent.includes(name));
     if (missing.length > 0) {
-      console.log('Classes missing from demo/index.html:', missing.sort().join(', '));
+      console.log(`${missing.length} class(es) missing from demo/index.html (see assertion diff)`);
     }
     assert.deepEqual(missing, []);
   });
