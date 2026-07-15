@@ -654,12 +654,12 @@
             <li><a href="#layout-pancake">Pancake</a></li>
           </ul>
         </li>
-      </ul>
         <li><span class="nav-group-label">Reference</span>
           <ul class="nav-sub">
             <li><a href="#full-coverage">Full API coverage</a></li>
           </ul>
         </li>
+      </ul>
     </nav>
 
     <main id="main">
@@ -2950,7 +2950,7 @@
             <div class="cov-stage"><button type="button" class="sf-btn sf-btn--danger">Button</button></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-btn--gradient</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Gradient axis: paints the fill (or, with --outline, the border ring) with the family's --sf-gradient-* token. Core-4 brand families (primary/secondary/tertiary/action); solid no-op for other families. Composes with any colour family.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-btn--gradient</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Gradient axis: paints the fill (or, with --outline, the border ring) with the family&#39;s --sf-gradient-* token. Core-4 brand families (primary/secondary/tertiary/action); solid no-op for other families. Composes with any colour family.</p></figcaption>
             <div class="cov-stage"><button type="button" class="sf-btn sf-btn--gradient">Button</button></div>
           </figure>
           <figure class="cov-card">
@@ -3094,7 +3094,7 @@
             <div class="cov-stage"><div class="sf-bento sf-bento--3"><div class="sf-bento-wide cov-ph cov-ph--big">sf-bento-wide</div><div class="cov-ph">1</div><div class="cov-ph">2</div><div class="cov-ph">3</div></div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-bg-layer</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare &lt;img class="sf-bg-layer"&gt; or as a wrapper with a nested &gt; img / &gt; video / &gt; picture.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-bg-layer</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Background layer — absolutely-positioned cover media that sits behind a parent&#39;s content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare &lt;img class=&quot;sf-bg-layer&quot;&gt; or as a wrapper with a nested &gt; img / &gt; video / &gt; picture.</p></figcaption>
             <div class="cov-stage"><div style="position: relative; min-block-size: 8rem; overflow: clip"><div class="sf-bg-layer" style="background: var(--sf-gradient-brand)"></div><p style="position: relative; padding: var(--sf-space-s)">content over bg-layer</p></div></div>
           </figure>
           <figure class="cov-card">
@@ -3159,23 +3159,23 @@
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-container</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m.</p></figcaption>
-            <div class="cov-stage"><div class="sf-container" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">n => nContainer — centres content up to a max width.</div></div>
+            <div class="cov-stage"><div class="sf-container" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">Container — centres content up to a max width.</div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-container--full</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Container variant that spans the full viewport width (no max-width cap).</p></figcaption>
-            <div class="cov-stage"><div class="sf-container sf-container--full" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">n => nContainer — centres content up to a max width.</div></div>
+            <div class="cov-stage"><div class="sf-container sf-container--full" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">Container — centres content up to a max width.</div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-container--narrow</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Container variant with a narrower max-width (--sf-container-s). Use for single-column prose and forms.</p></figcaption>
-            <div class="cov-stage"><div class="sf-container sf-container--narrow" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">n => nContainer — centres content up to a max width.</div></div>
+            <div class="cov-stage"><div class="sf-container sf-container--narrow" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">Container — centres content up to a max width.</div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-container--prose</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content.</p></figcaption>
-            <div class="cov-stage"><div class="sf-container sf-container--prose" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">n => nContainer — centres content up to a max width.</div></div>
+            <div class="cov-stage"><div class="sf-container sf-container--prose" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">Container — centres content up to a max width.</div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-container--wide</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Container variant with a wider max-width (--sf-container-l). Use for dashboards and wide media.</p></figcaption>
-            <div class="cov-stage"><div class="sf-container sf-container--wide" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">n => nContainer — centres content up to a max width.</div></div>
+            <div class="cov-stage"><div class="sf-container sf-container--wide" style="background: var(--sf-color-surface); padding: var(--sf-space-s)">Container — centres content up to a max width.</div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-content-grid</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Holy-grail content grid with named areas: full-bleed, popout, and content columns. Use sf-breakout on children to escape the content column.</p></figcaption>
@@ -3210,7 +3210,7 @@
             <div class="cov-stage"><div class="sf-cq"><div class="cov-ph cov-ph--big">container-query context</div></div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-divide</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Rules between direct children (a border on each child after the first), reusing .sf-divider's tokens — no per-gap markup needed.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-divide</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Rules between direct children (a border on each child after the first), reusing .sf-divider&#39;s tokens — no per-gap markup needed.</p></figcaption>
             <div class="cov-stage"><ul class="sf-divide" style="list-style:none; padding:0; margin:0"><li style="padding: var(--sf-space-2xs) 0">First</li><li style="padding: var(--sf-space-2xs) 0">Second</li><li style="padding: var(--sf-space-2xs) 0">Third</li></ul></div>
           </figure>
           <figure class="cov-card">
@@ -3266,7 +3266,7 @@
             <div class="cov-stage"><div class="sf-equal sf-equal--6"><div class="cov-ph">1</div><div class="cov-ph">2</div><div class="cov-ph">3</div><div class="cov-ph">4</div><div class="cov-ph">5</div><div class="cov-ph">6</div></div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-fluid-cq</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">.sf-fluid-cq: opt a subtree into a CONTAINER-relative fluid scale (issue #497). By default --sf-text-* / --sf-space-* interpolate against 100vw (the viewport); inside .sf-fluid-cq they interpolate against 100cqi (this box's inline size), so type + spacing track the container…</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-fluid-cq</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">.sf-fluid-cq: opt a subtree into a CONTAINER-relative fluid scale (issue #497). By default --sf-text-* / --sf-space-* interpolate against 100vw (the viewport); inside .sf-fluid-cq they interpolate against 100cqi (this box&#39;s inline size), so type + spacing track the container…</p></figcaption>
             <div class="cov-stage"><div class="sf-fluid-cq"><div class="cov-ph cov-ph--big">fluid container-query context</div></div></div>
           </figure>
           <figure class="cov-card">
@@ -3406,7 +3406,7 @@
             <div class="cov-stage"><div class="sf-grid-cols-6"><div class="cov-ph">1</div><div class="cov-ph">2</div><div class="cov-ph">3</div></div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-grid-flex</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-grid-flex</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Flexbox alternative to .sf-grid for item counts that don&#39;t divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center.</p></figcaption>
             <div class="cov-stage"><div class="sf-grid-flex"><div class="cov-ph">1</div><div class="cov-ph">2</div><div class="cov-ph">3</div><div class="cov-ph">4</div><div class="cov-ph">5</div><div class="cov-ph">6</div></div></div>
           </figure>
           <figure class="cov-card">
@@ -3510,7 +3510,7 @@
             <div class="cov-stage"><div class="sf-pancake" style="min-block-size: 12rem; border: 1px dashed var(--sf-color-border)"><div class="cov-ph">header</div><div class="cov-ph cov-ph--big">main</div><div class="cov-ph">footer</div></div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-reel</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-reel</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Horizontally scrollable row of fixed-height items with snap scrolling. Children don&#39;t shrink below their intrinsic width, creating a card carousel effect.</p></figcaption>
             <div class="cov-stage"><div class="sf-reel" style="max-inline-size: 100%"><div class="cov-ph cov-ph--big">1</div><div class="cov-ph cov-ph--big">2</div><div class="cov-ph cov-ph--big">3</div><div class="cov-ph cov-ph--big">4</div><div class="cov-ph cov-ph--big">5</div><div class="cov-ph cov-ph--big">6</div><div class="cov-ph cov-ph--big">7</div><div class="cov-ph cov-ph--big">8</div></div></div>
           </figure>
           <figure class="cov-card">
@@ -3642,27 +3642,27 @@
             <div class="cov-stage"><div class="sf-content-auto cov-ph cov-ph--big">content-visibility: auto (offscreen optimisation)</div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-drop-shadow-l</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l).</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-drop-shadow-l</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Large filter drop-shadow — follows the element&#39;s alpha shape (--sf-drop-shadow-l).</p></figcaption>
             <div class="cov-stage"><div class="sf-drop-shadow-l cov-media" style="margin: var(--sf-space-s)">drop-shadow</div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-drop-shadow-m</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m).</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-drop-shadow-m</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Medium filter drop-shadow — follows the element&#39;s alpha shape (--sf-drop-shadow-m).</p></figcaption>
             <div class="cov-stage"><div class="sf-drop-shadow-m cov-ph cov-ph--big">.sf-drop-shadow-m</div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-drop-shadow-s</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s).</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-drop-shadow-s</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Small filter drop-shadow — follows the element&#39;s alpha shape (--sf-drop-shadow-s).</p></figcaption>
             <div class="cov-stage"><div class="sf-drop-shadow-s cov-ph cov-ph--big">.sf-drop-shadow-s</div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-drop-shadow-xl</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Extra-large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xl).</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-drop-shadow-xl</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Extra-large filter drop-shadow — follows the element&#39;s alpha shape (--sf-drop-shadow-xl).</p></figcaption>
             <div class="cov-stage"><div class="sf-drop-shadow-xl cov-ph cov-ph--big">.sf-drop-shadow-xl</div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-drop-shadow-xs</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Extra-small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xs).</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-drop-shadow-xs</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Extra-small filter drop-shadow — follows the element&#39;s alpha shape (--sf-drop-shadow-xs).</p></figcaption>
             <div class="cov-stage"><div class="sf-drop-shadow-xs cov-ph cov-ph--big">.sf-drop-shadow-xs</div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-equal-height</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-equal-height</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card&#39;s height.</p></figcaption>
             <div class="cov-stage"><div class="sf-grid sf-grid-cols-3 sf-equal-height"><div class="cov-ph">short</div><div class="cov-ph">taller<br>content<br>here</div><div class="cov-ph">mid</div></div></div>
           </figure>
           <figure class="cov-card">
@@ -3763,15 +3763,15 @@
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-scrim--bottom</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade).</p></figcaption>
-            <div class="cov-stage"><div style="position: relative; max-inline-size: 20rem; overflow: clip; border-radius: var(--sf-radius-m)"><div class="cov-media">photo</div><div class="sf-scrim--bottom"></div><p class="sf-scrim__content" style="position:absolute; inset-block-end:0; padding: var(--sf-space-s); color:#fff; margin:0">Caption over scrim</p></div></div>
+            <div class="cov-stage"><div style="position: relative; max-inline-size: 20rem; overflow: clip; border-radius: var(--sf-radius-m)"><div class="cov-media">photo</div><div class="sf-scrim sf-scrim--bottom"></div><p class="sf-scrim__content" style="position:absolute; inset-block-end:0; padding: var(--sf-space-s); color:#fff; margin:0">Caption over scrim</p></div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-scrim--full</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Scrim variant that covers the entire surface with a uniform translucent overlay.</p></figcaption>
-            <div class="cov-stage"><div style="position: relative; max-inline-size: 20rem; overflow: clip; border-radius: var(--sf-radius-m)"><div class="cov-media">photo</div><div class="sf-scrim--full"></div><p class="sf-scrim__content" style="position:absolute; inset-block-end:0; padding: var(--sf-space-s); color:#fff; margin:0">Caption over scrim</p></div></div>
+            <div class="cov-stage"><div style="position: relative; max-inline-size: 20rem; overflow: clip; border-radius: var(--sf-radius-m)"><div class="cov-media">photo</div><div class="sf-scrim sf-scrim--full"></div><p class="sf-scrim__content" style="position:absolute; inset-block-end:0; padding: var(--sf-space-s); color:#fff; margin:0">Caption over scrim</p></div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-scrim--top</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Scrim variant with the gradient emanating from the top edge (top-to-bottom fade).</p></figcaption>
-            <div class="cov-stage"><div style="position: relative; max-inline-size: 20rem; overflow: clip; border-radius: var(--sf-radius-m)"><div class="cov-media">photo</div><div class="sf-scrim--top"></div><p class="sf-scrim__content" style="position:absolute; inset-block-end:0; padding: var(--sf-space-s); color:#fff; margin:0">Caption over scrim</p></div></div>
+            <div class="cov-stage"><div style="position: relative; max-inline-size: 20rem; overflow: clip; border-radius: var(--sf-radius-m)"><div class="cov-media">photo</div><div class="sf-scrim sf-scrim--top"></div><p class="sf-scrim__content" style="position:absolute; inset-block-end:0; padding: var(--sf-space-s); color:#fff; margin:0">Caption over scrim</p></div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-scroll-shadow</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Adds inset box-shadows at the top and bottom of a scrollable container to indicate hidden overflow above or below.</p></figcaption>
@@ -3935,7 +3935,7 @@
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-stagger</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Stagger — choreography, not the animation itself. Put .sf-stagger on a PARENT; every direct child gets an incrementing animation-delay so a time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence. Children WITHOUT an animation just carry an inert delay (no-op), so…</p></figcaption>
-            <div class="cov-stage"><div class="cov-anim"><div class="sf-stagger" data-anim="sf-stagger" style="display:flex; gap: var(--sf-space-2xs)"><div class="cov-ph">1</div><div class="cov-ph">2</div><div class="cov-ph">3</div><div class="cov-ph">4</div></div><button type="button" class="sf-btn sf-btn--s sf-btn--outline cov-replay">▶ Replay</button></div></div>
+            <div class="cov-stage"><div class="cov-anim"><div class="sf-stagger" data-anim="sf-stagger" style="display:flex; gap: var(--sf-space-2xs)"><div class="sf-fade-in cov-ph">1</div><div class="sf-fade-in cov-ph">2</div><div class="sf-fade-in cov-ph">3</div><div class="sf-fade-in cov-ph">4</div></div><button type="button" class="sf-btn sf-btn--s sf-btn--outline cov-replay">▶ Replay</button></div></div>
           </figure>
         </div>
 
@@ -3979,7 +3979,7 @@
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-is-empty</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty.</p></figcaption>
-            <div class="cov-stage"><div style="display:flex; gap: var(--sf-space-s); align-items:center"><span class="cov-ph">reference</span><span class="cov-ph sf-is-empty">sf-is-empty</span><span class="cov-note">← element carries <code>.sf-is-empty</code></span></div></div>
+            <div class="cov-stage"><div style="display:flex; gap: var(--sf-space-s); align-items:center"><span class="cov-ph">reference</span><span class="sf-is-empty"></span><span class="cov-note">← empty element carries <code>.sf-is-empty</code> (hidden by :empty)</span></div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-is-error</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Error state — alias for sf-is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid.</p></figcaption>
@@ -4010,7 +4010,7 @@
             <div class="cov-stage"><div style="display:flex; gap: var(--sf-space-s); align-items:center"><span class="cov-ph">reference</span><span class="cov-ph sf-is-invisible">sf-is-invisible</span><span class="cov-note">← element carries <code>.sf-is-invisible</code></span></div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-is-loading</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-is-loading</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Loading state — hides the element&#39;s text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results.</p></figcaption>
             <div class="cov-stage"><button type="button" class="sf-btn sf-btn--primary sf-is-loading">sf-is-loading</button></div>
           </figure>
           <figure class="cov-card">
@@ -4186,11 +4186,11 @@
         <h3 id="cov-theme" class="cov-area-h">Theme <span class="cov-count">3</span></h3>
         <div class="cov-gallery">
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-theme-dark</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Forces dark colour scheme on the element and its subtree (class alias of [data-theme="dark"]).</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-theme-dark</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Forces dark colour scheme on the element and its subtree (class alias of [data-theme=&quot;dark&quot;]).</p></figcaption>
             <div class="cov-stage"><div class="sf-theme-dark" style="padding: var(--sf-space-m); background: var(--sf-color-bg); color: var(--sf-color-text); border-radius: var(--sf-radius-m)"><strong>sf-theme-dark</strong><p style="margin-block: var(--sf-space-2xs) 0">Forced palette zone.</p></div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-theme-light</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]).</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-theme-light</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Forces light colour scheme on the element and its subtree (class alias of [data-theme=&quot;light&quot;]).</p></figcaption>
             <div class="cov-stage"><div class="sf-theme-light cov-ph cov-ph--big">.sf-theme-light</div></div>
           </figure>
           <figure class="cov-card">
@@ -4218,7 +4218,7 @@
             <div class="cov-stage"><div class="sf-focus-parent cov-ph cov-ph--big">Parent reacts when <input placeholder="focus me" style="margin-inline-start: var(--sf-space-2xs)"> is focused</div></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-focus-shadow</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-focus-shadow</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn&#39;t render correctly.</p></figcaption>
             <div class="cov-stage"><button type="button" class="sf-btn sf-focus-shadow">focus-shadow</button></div>
           </figure>
           <figure class="cov-card">
@@ -4246,7 +4246,7 @@
             <div class="cov-stage"><div class="print-color-exact cov-ph cov-ph--big"><code>.print-color-exact</code></div><p class="cov-note">Forces exact colour printing. Use your browser's print preview to verify.</p></div>
           </figure>
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.print-no-color</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.print-no-color</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Strips color information in print (print-color-adjust: economy). Defers to the printer&#39;s ink-saving mode for backgrounds and non-critical color fills.</p></figcaption>
             <div class="cov-stage"><div class="print-no-color cov-ph cov-ph--big"><code>.print-no-color</code></div><p class="cov-note">Strips colour when printing. Use your browser's print preview to verify.</p></div>
           </figure>
           <figure class="cov-card">
@@ -4258,7 +4258,7 @@
         <h3 id="cov-forms" class="cov-area-h">Forms <span class="cov-count">1</span></h3>
         <div class="cov-gallery">
           <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-live-validate</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a &lt;form&gt; or &lt;fieldset&gt;. Off by default so a still-empty required field isn't marked invalid before a submit is attempted.</p></figcaption>
+            <figcaption class="cov-card__head"><code>.sf-live-validate</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a &lt;form&gt; or &lt;fieldset&gt;. Off by default so a still-empty required field isn&#39;t marked invalid before a submit is attempted.</p></figcaption>
             <div class="cov-stage"><form class="sf-live-validate" novalidate style="display:grid; gap: var(--sf-space-2xs); max-inline-size: 18rem"><label>Email (required)<input type="email" required placeholder="you@example.com"></label><button class="sf-btn sf-btn--primary sf-btn--s" type="submit">Submit</button></form></div>
           </figure>
         </div>
@@ -4682,7 +4682,7 @@
         <div class="cov-token" data-cov-token="--sf-field-padding-block" data-cov-default="var(--sf-space-xs)"><span class="cov-swatch" style="--cov-v: var(--sf-field-padding-block)"></span><code>--sf-field-padding-block</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-field-padding-inline" data-cov-default="var(--sf-space-s)"><span class="cov-swatch" style="--cov-v: var(--sf-field-padding-inline)"></span><code>--sf-field-padding-inline</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-field-radius" data-cov-default="var(--sf-radius-m)"><span class="cov-swatch" style="--cov-v: var(--sf-field-radius)"></span><code>--sf-field-radius</code><span class="cov-val"></span></div>
-        <div class="cov-token" data-cov-token="--sf-field-required-marker" data-cov-default="" *""><span class="cov-swatch" style="--cov-v: var(--sf-field-required-marker)"></span><code>--sf-field-required-marker</code><span class="cov-val"></span></div>
+        <div class="cov-token" data-cov-token="--sf-field-required-marker" data-cov-default="&quot; *&quot;"><span class="cov-swatch" style="--cov-v: var(--sf-field-required-marker)"></span><code>--sf-field-required-marker</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-flow-space" data-cov-default="var(--sf-content-gap)"><span class="cov-swatch" style="--cov-v: var(--sf-flow-space)"></span><code>--sf-flow-space</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-fluid-max-vw" data-cov-default="90"><span class="cov-swatch" style="--cov-v: var(--sf-fluid-max-vw)"></span><code>--sf-fluid-max-vw</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-fluid-min-vw" data-cov-default="22.5"><span class="cov-swatch" style="--cov-v: var(--sf-fluid-min-vw)"></span><code>--sf-fluid-min-vw</code><span class="cov-val"></span></div>
@@ -4695,12 +4695,12 @@
         <div class="cov-token" data-cov-token="--sf-font-body" data-cov-default="system-ui, -apple-system, sans-serif"><span class="cov-swatch" style="--cov-v: var(--sf-font-body)"></span><code>--sf-font-body</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-display" data-cov-default="var(--sf-font-heading)"><span class="cov-swatch" style="--cov-v: var(--sf-font-display)"></span><code>--sf-font-display</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-features" data-cov-default="normal"><span class="cov-swatch" style="--cov-v: var(--sf-font-features)"></span><code>--sf-font-features</code><span class="cov-val"></span></div>
-        <div class="cov-token" data-cov-token="--sf-font-geometric" data-cov-default=""Avenir", "Montserrat", "Corbel", "URW Gothic", source-sans-pro, sans-serif"><span class="cov-swatch" style="--cov-v: var(--sf-font-geometric)"></span><code>--sf-font-geometric</code><span class="cov-val"></span></div>
+        <div class="cov-token" data-cov-token="--sf-font-geometric" data-cov-default="&quot;Avenir&quot;, &quot;Montserrat&quot;, &quot;Corbel&quot;, &quot;URW Gothic&quot;, source-sans-pro, sans-serif"><span class="cov-swatch" style="--cov-v: var(--sf-font-geometric)"></span><code>--sf-font-geometric</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-heading" data-cov-default="var(--sf-font-body)"><span class="cov-swatch" style="--cov-v: var(--sf-font-heading)"></span><code>--sf-font-heading</code><span class="cov-val"></span></div>
-        <div class="cov-token" data-cov-token="--sf-font-humanist" data-cov-default=""Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif"><span class="cov-swatch" style="--cov-v: var(--sf-font-humanist)"></span><code>--sf-font-humanist</code><span class="cov-val"></span></div>
+        <div class="cov-token" data-cov-token="--sf-font-humanist" data-cov-default="&quot;Seravek&quot;, &quot;Gill Sans Nova&quot;, &quot;Ubuntu&quot;, &quot;Calibri&quot;, &quot;DejaVu Sans&quot;, source-sans-pro, sans-serif"><span class="cov-swatch" style="--cov-v: var(--sf-font-humanist)"></span><code>--sf-font-humanist</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-mono" data-cov-default="ui-monospace, monospace"><span class="cov-swatch" style="--cov-v: var(--sf-font-mono)"></span><code>--sf-font-mono</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-numeric" data-cov-default="tabular-nums"><span class="cov-swatch" style="--cov-v: var(--sf-font-numeric)"></span><code>--sf-font-numeric</code><span class="cov-val"></span></div>
-        <div class="cov-token" data-cov-token="--sf-font-slab" data-cov-default=""Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif"><span class="cov-swatch" style="--cov-v: var(--sf-font-slab)"></span><code>--sf-font-slab</code><span class="cov-val"></span></div>
+        <div class="cov-token" data-cov-token="--sf-font-slab" data-cov-default="&quot;Rockwell&quot;, &quot;Rockwell Nova&quot;, &quot;Roboto Slab&quot;, &quot;DejaVu Serif&quot;, &quot;Sitka Small&quot;, serif"><span class="cov-swatch" style="--cov-v: var(--sf-font-slab)"></span><code>--sf-font-slab</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-variation" data-cov-default="normal"><span class="cov-swatch" style="--cov-v: var(--sf-font-variation)"></span><code>--sf-font-variation</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-weight-body" data-cov-default="var(--sf-font-weight-normal)"><span class="cov-swatch" style="--cov-v: var(--sf-font-weight-body)"></span><code>--sf-font-weight-body</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-font-weight-bold" data-cov-default="700"><span class="cov-swatch" style="--cov-v: var(--sf-font-weight-bold)"></span><code>--sf-font-weight-bold</code><span class="cov-val"></span></div>
@@ -4795,8 +4795,8 @@
         <div class="cov-token" data-cov-token="--sf-leading-taper" data-cov-default="0"><span class="cov-swatch" style="--cov-v: var(--sf-leading-taper)"></span><code>--sf-leading-taper</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-leading-tight" data-cov-default="1.1"><span class="cov-swatch" style="--cov-v: var(--sf-leading-tight)"></span><code>--sf-leading-tight</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-line-clamp" data-cov-default="3"><span class="cov-swatch" style="--cov-v: var(--sf-line-clamp)"></span><code>--sf-line-clamp</code><span class="cov-val"></span></div>
-        <div class="cov-token" data-cov-token="--sf-link-external-label" data-cov-default=""opens in a new window or external site""><span class="cov-swatch" style="--cov-v: var(--sf-link-external-label)"></span><code>--sf-link-external-label</code><span class="cov-val"></span></div>
-        <div class="cov-token" data-cov-token="--sf-link-external-marker" data-cov-default="" \2197""><span class="cov-swatch" style="--cov-v: var(--sf-link-external-marker)"></span><code>--sf-link-external-marker</code><span class="cov-val"></span></div>
+        <div class="cov-token" data-cov-token="--sf-link-external-label" data-cov-default="&quot;opens in a new window or external site&quot;"><span class="cov-swatch" style="--cov-v: var(--sf-link-external-label)"></span><code>--sf-link-external-label</code><span class="cov-val"></span></div>
+        <div class="cov-token" data-cov-token="--sf-link-external-marker" data-cov-default="&quot; \2197&quot;"><span class="cov-swatch" style="--cov-v: var(--sf-link-external-marker)"></span><code>--sf-link-external-marker</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-link-underline-offset" data-cov-default="0.15em"><span class="cov-swatch" style="--cov-v: var(--sf-link-underline-offset)"></span><code>--sf-link-underline-offset</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-link-underline-thickness" data-cov-default="auto"><span class="cov-swatch" style="--cov-v: var(--sf-link-underline-thickness)"></span><code>--sf-link-underline-thickness</code><span class="cov-val"></span></div>
         <div class="cov-token" data-cov-token="--sf-lumlocker" data-cov-default="0.65"><span class="cov-swatch" style="--cov-v: var(--sf-lumlocker)"></span><code>--sf-lumlocker</code><span class="cov-val"></span></div>
@@ -5387,6 +5387,16 @@
       var cc = document.querySelector('[data-cov-class-count]');
       if (tc) tc.textContent = data.tokens.length;
       if (cc) cc.textContent = data.classes.length;
+      // derive each section heading's count from what actually rendered,
+      // so the numbers never drift from the gallery/token contents
+      document.querySelectorAll('.cov-area-h').forEach(function (h) {
+        var span = h.querySelector('.cov-count');
+        var next = h.nextElementSibling;
+        while (next && !(next.classList.contains('cov-gallery') || next.classList.contains('cov-tokens'))) {
+          next = next.nextElementSibling;
+        }
+        if (span && next) span.textContent = next.children.length;
+      });
       document.querySelectorAll('.cov-replay').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var stage = btn.closest('.cov-stage');

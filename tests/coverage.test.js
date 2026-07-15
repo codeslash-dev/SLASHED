@@ -31,7 +31,8 @@ const API_INDEX_PATH = path.join(ROOT, 'docs', 'api-index.json');
 const demoContent = fs.readFileSync(DEMO_PATH, 'utf8');
 const apiIndex = JSON.parse(fs.readFileSync(API_INDEX_PATH, 'utf8'));
 const covData = (() => {
-  const m = demoContent.match(/<script type="application\/json" id="cov-data">([\s\S]*?)<\/script>/);
+  // match by id without pinning attribute order/extra attributes
+  const m = demoContent.match(/<script[^>]*\bid="cov-data"[^>]*>([\s\S]*?)<\/script>/);
   return m ? JSON.parse(m[1]) : null;
 })();
 
