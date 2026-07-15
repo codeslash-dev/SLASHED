@@ -609,7 +609,9 @@
   .sf-bento--compact { --sf-bento-row: var(--sf-bento-row-compact); }
   .sf-bento--tall    { --sf-bento-row: var(--sf-bento-row-tall); }
 
-  /* Child span modifiers */
+  /* Child span modifiers — go on an item inside .sf-bento, never on
+     .sf-bento itself. .sf-bento-tall (this item spans 2 rows) is not an
+     alias of .sf-bento--tall above (every row in the grid is taller). */
   .sf-bento-wide     { grid-column: span 2; }
   .sf-bento-full     { grid-column: 1 / -1; }
   .sf-bento-tall     { grid-row:    span 2; }
