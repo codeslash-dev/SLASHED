@@ -7,15 +7,19 @@
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.full.min.css"> -->
 <link rel="stylesheet" href="dist/slashed.full.css">
 </head>
-<body>
+<body style="--sf-box-border-width: 1px">
 
 <div class="sf-container">
   <div class="sf-box sf-surface--info">
-    <p>This page is an automated coverage audit for the SLASHED framework. Every
+    <p>This page is a hand-authored coverage audit for the SLASHED framework. Every
     <code>.sf-*</code> class documented in <code>docs/classes.md</code> is applied to
     real, visible markup below, organised by source file. It loads only
     <code>dist/slashed.full.css</code> — no custom CSS, no scripts, no third-party
-    resources.</p>
+    resources. <code>.sf-box</code>'s border is opt-in via its
+    <code>--sf-box-border-width</code> custom property (0 by default); it's set to
+    <code>1px</code> once here on <code>&lt;body&gt;</code> — a documented public token,
+    inherited like any CSS custom property — purely so every box demo below is
+    visible at a glance.</p>
   </div>
 </div>
 
@@ -212,7 +216,8 @@ exercises one primitive (and its size/variant modifiers) with realistic children
   <p>Host box (positioning context)</p>
   <span class="sf-imposter sf-btn sf-btn--s">imposter (centered)</span>
 </div>
-<div class="sf-box" style="position: relative; min-block-size: 8rem">
+<div class="sf-box" style="position: relative; min-block-size: 8rem; transform: translateZ(0)">
+  <p>Host box (transform creates a containing block so the fixed-positioned imposter stays inside it)</p>
   <span class="sf-imposter sf-imposter--fixed sf-btn sf-btn--s sf-btn--danger">imposter--fixed</span>
 </div>
 <div class="sf-box" style="position: relative; min-block-size: 8rem; max-inline-size: 12rem">
@@ -269,7 +274,7 @@ exercises one primitive (and its size/variant modifiers) with realistic children
 </section>
 
 <!-- ============================================================ -->
-<section class="sf-section sf-surface--neutral">
+<section class="sf-section">
 <div class="sf-container">
 <h2 class="sf-h1">Macro classes (core/macros.css)</h2>
 <p>Recipes that answer "what does this element do/look like?" — composable on top of layout primitives.</p>
@@ -438,7 +443,7 @@ exercises one primitive (and its size/variant modifiers) with realistic children
 </div>
 
 <h3>Overlap &amp; overlap-host</h3>
-<div class="sf-grid-cols-4 sf-gap sf-gap--l">
+<div class="sf-grid-cols-4 sf-gap sf-gap--l" style="margin-block-start: var(--sf-space-xl)">
   <div>
     <img class="sf-overlap" width="56" height="56" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='56' height='56'&gt;&lt;circle cx='28' cy='28' r='24' fill='%23888'/&gt;&lt;/svg&gt;" alt="badge">
     <article class="sf-card sf-overlap-host">overlap (pulls up) + overlap-host reserves space</article>
@@ -477,14 +482,14 @@ exercises one primitive (and its size/variant modifiers) with realistic children
   <button class="sf-btn sf-is-busy">is-busy cursor</button>
   <div class="sf-box sf-is-skeleton" style="block-size: 3rem"></div>
   <button class="sf-btn sf-is-active">is-active</button>
-  <li class="sf-box sf-is-selected" aria-selected="true" style="list-style:none">is-selected list item</li>
+  <ul style="list-style:none"><li class="sf-box sf-is-selected" aria-selected="true">is-selected list item</li></ul>
   <a class="sf-btn sf-is-current" href="#top" aria-current="page">is-current nav item</a>
-  <button class="sf-btn sf-is-pressed" aria-pressed="true">is-pressed toggle</button>
+  <button class="sf-btn sf-btn--outline sf-is-pressed" aria-pressed="true">is-pressed toggle</button>
   <div class="sf-box sf-is-highlighted">is-highlighted</div>
   <div class="sf-box sf-is-open">is-open panel</div>
   <div class="sf-box sf-is-collapsed">is-collapsed panel</div>
   <button class="sf-btn" aria-expanded="true">
-    <span class="sf-is-expanded">is-expanded disclosure trigger</span>
+    <span class="sf-is-expanded">is-expanded trigger</span>
   </button>
 </div>
 
@@ -517,7 +522,7 @@ exercises one primitive (and its size/variant modifiers) with realistic children
 </section>
 
 <!-- ============================================================ -->
-<section class="sf-section sf-surface--neutral">
+<section class="sf-section">
 <div class="sf-container">
 <h2 class="sf-h1">Accessibility (core/accessibility.css)</h2>
 <p>Focus and clickable-area helpers.</p>
@@ -733,7 +738,7 @@ after a submit attempt.</p>
 </section>
 
 <!-- ============================================================ -->
-<section class="sf-section sf-surface--neutral">
+<section class="sf-section">
 <div class="sf-container">
 <h2 class="sf-h1">Utilities (optional/utilities.css)</h2>
 
@@ -791,21 +796,25 @@ after a submit attempt.</p>
 <p class="sf-selection--alt sf-surface--inverse sf-box">Select this text — sf-selection--alt swaps the ::selection colours for a surface with poor default contrast.</p>
 
 <h3>Sticky positioning</h3>
-<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+<p><code>--sf-sticky-offset</code> normally reads the page's fixed header height (0 here,
+since this page has none) — set to <code>0</code> per demo box below so the base case
+sticks flush to each isolated scroll container's own top edge; scroll each box to see
+it hold in place.</p>
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto; --sf-sticky-offset: 0">
   <div class="sf-sticky sf-box">sf-sticky (base offset)</div>
-  <p>Scroll content…</p><p>More…</p><p>More…</p>
+  <p>Scroll content…</p><p>More…</p><p>More…</p><p>More…</p><p>More…</p>
 </div>
-<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto; --sf-sticky-offset: 0">
   <div class="sf-sticky sf-sticky--s sf-box">sf-sticky--s (extra gap)</div>
-  <p>Scroll content…</p><p>More…</p><p>More…</p>
+  <p>Scroll content…</p><p>More…</p><p>More…</p><p>More…</p><p>More…</p>
 </div>
-<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto; --sf-sticky-offset: 0">
   <div class="sf-sticky sf-sticky--m sf-box">sf-sticky--m</div>
-  <p>Scroll content…</p><p>More…</p><p>More…</p>
+  <p>Scroll content…</p><p>More…</p><p>More…</p><p>More…</p><p>More…</p>
 </div>
-<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto; --sf-sticky-offset: 0">
   <div class="sf-sticky sf-sticky--l sf-box">sf-sticky--l</div>
-  <p>Scroll content…</p><p>More…</p><p>More…</p>
+  <p>Scroll content…</p><p>More…</p><p>More…</p><p>More…</p><p>More…</p>
 </div>
 
 </div>
