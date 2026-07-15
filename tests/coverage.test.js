@@ -65,19 +65,10 @@ describe('Selector coverage', () => {
       'sf-nav',
     ]);
 
-    const missing = [];
-    for (const sel of selectors) {
-      if (EXCLUDED.has(sel)) continue;
-      // Check if the class name appears in the demo (class attribute value,
-      // the coverage reference list, or descriptive text)
-      if (!demoContent.includes(sel)) {
-        missing.push(sel);
-      }
-    }
-
-    if (missing.length > 0) {
-      console.log(`${missing.length} selector(s) missing from demo/index.html (see assertion diff)`);
-    }
+    // Check each class name appears in the demo (class attribute value, the
+    // coverage reference list, or descriptive text). On failure the deepEqual
+    // diff lists exactly which selectors are missing.
+    const missing = [...selectors].filter(sel => !EXCLUDED.has(sel) && !demoContent.includes(sel));
     assert.deepEqual(missing, []);
   });
 });
@@ -86,10 +77,8 @@ describe('Token coverage', () => {
   const apiTokens = apiIndex.entries.filter(e => e.type === 'token').map(e => e.name);
 
   test('every token in docs/api-index.json appears in demo/index.html', () => {
+    // On failure the deepEqual diff lists exactly which tokens are missing.
     const missing = apiTokens.filter(name => !demoContent.includes(name));
-    if (missing.length > 0) {
-      console.log(`${missing.length} token(s) missing from demo/index.html (see assertion diff)`);
-    }
     assert.deepEqual(missing, []);
   });
 
@@ -107,15 +96,15 @@ describe('Class gallery coverage', () => {
     .map(e => e.selector.replace(/^\./, ''));
 
   test('every class in docs/api-index.json appears in demo/index.html', () => {
+    // On failure the deepEqual diff lists exactly which classes are missing.
     const missing = apiClasses.filter(name => !demoContent.includes(name));
-    if (missing.length > 0) {
-      console.log(`${missing.length} class(es) missing from demo/index.html (see assertion diff)`);
-    }
     assert.deepEqual(missing, []);
   });
 
   test('the gallery renders one preview card per documented class', () => {
-    const cards = (demoContent.match(/class="cov-card"/g) || []).length;
+    // Anchor on the <figure> tag: robust to extra classes on the card, and
+    // does not accidentally match child nodes like class="cov-card__head".
+    const cards = (demoContent.match(/<figure class="cov-card[ "]/g) || []).length;
     assert.equal(cards, apiClasses.length);
   });
 
