@@ -604,21 +604,6 @@ export function macros(): string {
   // Text gradient.
   const textGradient = well(`<h2 class="sf-text-gradient pv-strong" style="margin:0;font-size:var(--sf-text-2xl)">Gradient headline</h2>`);
 
-  // Corner scoop — the notch reveals whatever sits behind the element, so
-  // the card sits on a contrasting frame.
-  const scoopCard = (mods: string) =>
-    `<div class="sf-card ${mods}" style="background:var(--sf-color-surface);inline-size:6rem;block-size:6rem;border-radius:var(--sf-radius-s)"></div>`;
-  const cornerScoop = frame(
-    `<div class="sf-cluster sf-cluster--m" style="background:var(--sf-color-primary-100);padding:var(--sf-space-m);border-radius:var(--sf-radius-m)">${[
-      ["sf-corner-scoop", "default (top-right)"],
-      ["sf-corner-scoop sf-corner-scoop--top-left", "top-left"],
-      ["sf-corner-scoop sf-corner-scoop--bottom-left", "bottom-left"],
-      ["sf-corner-scoop sf-corner-scoop--bottom-right", "bottom-right"],
-    ]
-      .map(([mods, label]) => specimen(label, scoopCard(mods)))
-      .join("")}</div>`,
-  );
-
   // Overlap — an avatar pulled down over the card that follows it
   // (.sf-overlap--down; the plain .sf-overlap pulls UP onto whatever
   // precedes it instead — not what a leading avatar needs here), plus the
@@ -665,7 +650,6 @@ export function macros(): string {
     section("Named background preset (sf-surface-bg)", surfaceBg),
     section("Text protect (sf-text-protect)", well(textProtect)),
     section("Text gradient (sf-text-gradient)", textGradient),
-    section("Corner scoop (sf-corner-scoop + corner modifiers)", cornerScoop),
     section("Overlap (sf-overlap, sf-overlap-host)", well(stack("m", overlapHost, overlapDirections))),
     section("No tap highlight (sf-no-tap-highlight)", noTapHighlight),
   );

@@ -903,10 +903,6 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-surface-bg-attachment: scroll
 --sf-surface-bg-animation:  none         /* optional animation shorthand */
 
-/* Concave corner (.sf-corner-scoop) */
---sf-corner-scoop-size: var(--sf-radius-2xl)
---sf-corner-scoop-at:   100% 0
-
 /* Overlap recipe (.sf-overlap / .sf-overlap-host) */
 --sf-overlap-pull: var(--sf-space-xl)
 ```

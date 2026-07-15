@@ -1852,16 +1852,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-corner-scoop-at",
-      "description": "Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0.\n\nDefault: `100% 0`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-corner-scoop-size",
-      "description": "Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl).\n\nDefault: `var(--sf-radius-2xl)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-cover-min-height",
       "description": "Minimum height of the cover layout (typically 100svh).\n\nDefault: `100dvh`",
       "syntax": "*"

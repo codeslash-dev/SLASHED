@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1087 elements** — 756 tokens, 331 classes.
+**1080 elements** — 754 tokens, 326 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1026 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1019 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 60 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (756)
+## Tokens (754)
 
 ### Component tokens (46)
 
@@ -757,14 +757,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-gap)` | Gap between switcher columns / rows. |
 | `--sf-switcher-threshold` | PUBLIC | knob | switcher | `30rem` | Inline-size threshold below which the switcher flips from horizontal to vertical. |
 
-### Macro tokens (34)
+### Macro tokens (32)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
 | `--sf-aspect` | PUBLIC | knob | aspect | `16 / 9` | Aspect ratio value for the .aspect-ratio macro. |
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
-| `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0. |
-| `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl). |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
 | `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
@@ -796,7 +794,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (331)
+## Classes (326)
 
 ### Accessibility (8)
 
@@ -1002,17 +1000,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (58)
+### Macro classes (53)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
 | `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
-| `.sf-corner-scoop` | PUBLIC | macro | — | Concave "scooped" corner cut with a radial-gradient mask; defaults to the top-right corner (--sf-corner-scoop-at). Add a placement modifier to move it. |
-| `.sf-corner-scoop--bottom-left` | PUBLIC | macro | — | Places the concave corner scoop at the bottom-left corner. |
-| `.sf-corner-scoop--bottom-right` | PUBLIC | macro | — | Places the concave corner scoop at the bottom-right corner. |
-| `.sf-corner-scoop--top-left` | PUBLIC | macro | — | Places the concave corner scoop at the top-left corner. |
-| `.sf-corner-scoop--top-right` | PUBLIC | macro | — | Places the concave corner scoop at the top-right corner. |
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s). |

@@ -1,7 +1,7 @@
 {
   "summary": {
-    "totalTokens": 756,
-    "rendered": 756,
+    "totalTokens": 754,
+    "rendered": 754,
     "consoleErrors": 0,
     "requestFailures": 0,
     "empties": 48,
@@ -4912,32 +4912,6 @@
       "computed": "0.6",
       "shown": "0.6",
       "darkComputed": "0.6",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corner-scoop-at",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "category": "Macro tokens",
-      "declared": "100% 0",
-      "aliasOf": null,
-      "issues": [],
-      "computed": "100% 0",
-      "shown": "100% 0",
-      "darkComputed": "100% 0",
-      "changedInDark": false
-    },
-    {
-      "name": "--sf-corner-scoop-size",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "category": "Macro tokens",
-      "declared": "var(--sf-radius-2xl)",
-      "aliasOf": "--sf-radius-2xl",
-      "issues": [],
-      "computed": "24px",
-      "shown": "24px",
-      "darkComputed": "24px",
       "changedInDark": false
     },
     {

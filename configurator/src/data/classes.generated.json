@@ -735,56 +735,6 @@
       "layer": "slashed.layout"
     },
     {
-      "name": "sf-corner-scoop",
-      "selector": ".sf-corner-scoop",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Concave \"scooped\" corner cut with a radial-gradient mask; defaults to the top-right corner (--sf-corner-scoop-at). Add a placement modifier to move it.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
-      "name": "sf-corner-scoop--bottom-left",
-      "selector": ".sf-corner-scoop--bottom-left",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Places the concave corner scoop at the bottom-left corner.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
-      "name": "sf-corner-scoop--bottom-right",
-      "selector": ".sf-corner-scoop--bottom-right",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Places the concave corner scoop at the bottom-right corner.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
-      "name": "sf-corner-scoop--top-left",
-      "selector": ".sf-corner-scoop--top-left",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Places the concave corner scoop at the top-left corner.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
-      "name": "sf-corner-scoop--top-right",
-      "selector": ".sf-corner-scoop--top-right",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Places the concave corner scoop at the top-right corner.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
       "name": "sf-cover",
       "selector": ".sf-cover",
       "kind": "layout",

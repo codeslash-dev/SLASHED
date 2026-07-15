@@ -733,44 +733,6 @@ Lives in `core/motion.css`, layer `slashed.motion`.
 
 ---
 
-## `.sf-corner-scoop`
-
-A corner that curves **away** from the box (a concave "notch"), instead
-of the normal convex `border-radius`. Reveals whatever sits behind the
-element at that corner via a `mask-image` radial gradient. Default
-corner is top-right.
-
-```html
-<div class="sf-card sf-corner-scoop sf-corner-scoop--bottom-right">
-  Panel with a corner that curves away
-</div>
-```
-
-Variants:
-
-| Class | Effect |
-|---|---|
-| `.sf-corner-scoop--top-left` | scoop at the top-left corner |
-| `.sf-corner-scoop--top-right` | scoop at the top-right corner |
-| `.sf-corner-scoop--bottom-left` | scoop at the bottom-left corner |
-| `.sf-corner-scoop--bottom-right` | scoop at the bottom-right corner |
-
-Tokens:
-
-| Token | Default | What it controls |
-|---|---|---|
-| `--sf-corner-scoop-size` | `var(--sf-radius-2xl)` | radius of the concave cut |
-| `--sf-corner-scoop-at` | `100% 0` | position of the cut (set by the variants above) |
-
-**Limitations:** masking cuts the element's entire paint at that
-corner — `box-shadow`/`border` don't survive the cut there (put shadows
-on a wrapper element if needed). Only one scoop per element — a second
-mask layer would fill the first hole rather than adding a second cut.
-Doesn't compose with other mask-based macros (`.sf-overflow-fade`,
-`.sf-scroll-shadow`) on the same element — the last `mask-image` wins.
-
----
-
 ## `.sf-overlap` and `.sf-overlap-host`
 
 A recipe for one element intentionally overlapping the element before

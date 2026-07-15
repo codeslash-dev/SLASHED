@@ -26,23 +26,23 @@
       "optimal"
     ],
     "counts": {
-      "total": 1087,
+      "total": 1080,
       "by_type": {
-        "class": 331,
-        "token": 756
+        "class": 326,
+        "token": 754
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1026,
+        "PUBLIC": 1019,
         "PUBLIC-ADVANCED": 60
       },
       "by_role": {
-        "consumption": 490,
-        "knob": 266
+        "consumption": 489,
+        "knob": 265
       },
-      "tokens": 756,
-      "classes": 331,
-      "sf_classes": 294,
+      "tokens": 754,
+      "classes": 326,
+      "sf_classes": 289,
       "is_classes": 28,
       "unprefixed_classes": 9,
       "by_category": {
@@ -53,8 +53,8 @@
         "Forms": 1,
         "Layout primitives": 145,
         "Layout tokens": 53,
-        "Macro classes": 58,
-        "Macro tokens": 34,
+        "Macro classes": 53,
+        "Macro tokens": 32,
         "Motion / animation": 22,
         "Print": 4,
         "State classes": 28,
@@ -9662,58 +9662,6 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-corner-scoop-at",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "corner",
-      "category": "Macro tokens",
-      "area": "macros",
-      "group": "Concave corner",
-      "description": "Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0.",
-      "value": "100% 0",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-corner-scoop-size",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "corner",
-      "category": "Macro tokens",
-      "area": "macros",
-      "group": "Concave corner",
-      "description": "Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl).",
-      "value": "var(--sf-radius-2xl)",
-      "aliasOf": "--sf-radius-2xl",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.macros.css"
       ],
       "bundles": [
         "full",
@@ -21344,121 +21292,6 @@
       "layer": "slashed.layout",
       "sourceFiles": [
         "core/layout.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-corner-scoop",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corner-scoop",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Concave \"scooped\" corner cut with a radial-gradient mask; defaults to the top-right corner (--sf-corner-scoop-at). Add a placement modifier to move it.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-corner-scoop--bottom-left",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corner-scoop--bottom-left",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Places the concave corner scoop at the bottom-left corner.",
-      "isVariant": true,
-      "baseClass": "sf-corner-scoop",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-corner-scoop--bottom-right",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corner-scoop--bottom-right",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Places the concave corner scoop at the bottom-right corner.",
-      "isVariant": true,
-      "baseClass": "sf-corner-scoop",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-corner-scoop--top-left",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corner-scoop--top-left",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Places the concave corner scoop at the top-left corner.",
-      "isVariant": true,
-      "baseClass": "sf-corner-scoop",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-corner-scoop--top-right",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-corner-scoop--top-right",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Places the concave corner scoop at the top-right corner.",
-      "isVariant": true,
-      "baseClass": "sf-corner-scoop",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
       ],
       "bundles": [
         "full",
