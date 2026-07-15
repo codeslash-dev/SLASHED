@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLASHED .sf-* Class Coverage Audit</title>
+<link rel="stylesheet" href="dist/slashed.full.css">
+</head>
+<body>
+
+<div class="sf-container">
+  <div class="sf-box sf-surface--info">
+    <p>This page is an automated coverage audit for the SLASHED framework. Every
+    <code>.sf-*</code> class documented in <code>docs/classes.md</code> is applied to
+    real, visible markup below, organised by source file. It loads only
+    <code>dist/slashed.full.css</code> — no custom CSS, no scripts, no third-party
+    resources.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<section class="sf-section">
+<div class="sf-container">
+<h2 class="sf-h1">Layout primitives (core/layout.css)</h2>
+<p>Breakpoint-free, container-query-driven layout building blocks. Each demo below
+exercises one primitive (and its size/variant modifiers) with realistic children.</p>
+
+<h3>Section rhythm &amp; section-group</h3>
+<div class="sf-section-group">
+  <section class="sf-section sf-section--xs"><div class="sf-box">section--xs</div></section>
+  <section class="sf-section sf-section--s"><div class="sf-box">section--s</div></section>
+  <section class="sf-section sf-section--m"><div class="sf-box">section--m (default)</div></section>
+  <section class="sf-section sf-section--l"><div class="sf-box">section--l</div></section>
+  <section class="sf-section sf-section--xl"><div class="sf-box">section--xl</div></section>
+  <section class="sf-section sf-section--2xl sf-section--collapse"><div class="sf-box">section--2xl + section--collapse (shares padding with neighbour)</div></section>
+</div>
+<section class="sf-section sf-section--guttered">
+  <p class="sf-box">section--guttered adds inline gutters without a container</p>
+</section>
+
+<h3>Header padding rhythm</h3>
+<header class="sf-header--xs"><div class="sf-box">header--xs</div></header>
+<header class="sf-header--s"><div class="sf-box">header--s</div></header>
+<header class="sf-header--m"><div class="sf-box">header--m</div></header>
+<header class="sf-header--l"><div class="sf-box">header--l</div></header>
+<header class="sf-header--xl"><div class="sf-box">header--xl</div></header>
+
+<h3>Containers &amp; container-query scopes</h3>
+<div class="sf-box"><div class="sf-container"><p>default .sf-container</p></div></div>
+<div class="sf-box"><div class="sf-container sf-container--narrow"><p>container--narrow</p></div></div>
+<div class="sf-box"><div class="sf-container sf-container--prose"><p>container--prose</p></div></div>
+<div class="sf-box"><div class="sf-container sf-container--wide"><p>container--wide</p></div></div>
+<div class="sf-box"><div class="sf-container sf-container--full"><p>container--full</p></div></div>
+<div class="sf-cq"><div class="sf-grid-cols-2"><div class="sf-box">sf-cq scope, col 1</div><div class="sf-box">col 2 — resizes by container width, not viewport</div></div></div>
+<div class="sf-fluid-cq"><p>sf-fluid-cq — children interpolate type/space against this box's own inline size rather than the viewport.</p></div>
+
+<h3>Box &amp; centering</h3>
+<div class="sf-box">sf-box — isolated padded unit with an outline</div>
+<div class="sf-center"><div class="sf-box">sf-center — intrinsic centering with gutters</div></div>
+<div class="sf-center sf-center--intrinsic"><div class="sf-box">sf-center--intrinsic</div></div>
+
+<h3>Stack — vertical flow</h3>
+<div class="sf-grid-cols-3 sf-gap sf-gap--s">
+  <div class="sf-stack sf-stack--xs sf-box"><p>xs</p><p>gap</p></div>
+  <div class="sf-stack sf-stack--s sf-box"><p>s</p><p>gap</p></div>
+  <div class="sf-stack sf-stack--m sf-box"><p>m</p><p>gap (default)</p></div>
+  <div class="sf-stack sf-stack--l sf-box"><p>l</p><p>gap</p></div>
+  <div class="sf-stack sf-stack--xl sf-box"><p>xl</p><p>gap</p></div>
+  <div class="sf-stack sf-stack--2xl sf-box"><p>2xl</p><p>gap</p></div>
+</div>
+<div class="sf-grid-cols-3 sf-gap sf-gap--s">
+  <div class="sf-stack sf-stack--center sf-box"><button class="sf-btn sf-btn--s">stack--center</button><button class="sf-btn sf-btn--s">short</button></div>
+  <div class="sf-stack sf-stack--end sf-box"><button class="sf-btn sf-btn--s">stack--end</button><button class="sf-btn sf-btn--s">short</button></div>
+  <div class="sf-stack sf-stack--stretch sf-box"><button class="sf-btn sf-btn--s">stack--stretch</button><button class="sf-btn sf-btn--s">fills width</button></div>
+</div>
+
+<h3>Cluster — wrapping inline group</h3>
+<div class="sf-stack">
+  <div class="sf-cluster sf-cluster--xs"><span class="sf-btn sf-btn--xs">xs</span><span class="sf-btn sf-btn--xs">gap</span></div>
+  <div class="sf-cluster sf-cluster--s"><span class="sf-btn sf-btn--xs">s</span><span class="sf-btn sf-btn--xs">gap</span></div>
+  <div class="sf-cluster sf-cluster--m"><span class="sf-btn sf-btn--xs">m</span><span class="sf-btn sf-btn--xs">gap (default)</span></div>
+  <div class="sf-cluster sf-cluster--l"><span class="sf-btn sf-btn--xs">l</span><span class="sf-btn sf-btn--xs">gap</span></div>
+  <div class="sf-cluster sf-cluster--xl"><span class="sf-btn sf-btn--xs">xl</span><span class="sf-btn sf-btn--xs">gap</span></div>
+  <div class="sf-cluster sf-cluster--2xl"><span class="sf-btn sf-btn--xs">2xl</span><span class="sf-btn sf-btn--xs">gap</span></div>
+  <div class="sf-cluster sf-cluster--no-wrap" style="max-inline-size: 8rem"><span class="sf-btn sf-btn--xs">no-wrap</span><span class="sf-btn sf-btn--xs">stays</span><span class="sf-btn sf-btn--xs">on one line</span></div>
+  <div class="sf-cluster sf-cluster--between"><span>cluster--between: left</span><span>right</span></div>
+  <div class="sf-cluster sf-cluster--center"><span class="sf-btn sf-btn--xs">cluster--center</span></div>
+  <div class="sf-cluster sf-cluster--end"><span class="sf-btn sf-btn--xs">cluster--end</span></div>
+</div>
+
+<h3>Gap — inject gap into an existing container</h3>
+<div class="sf-grid-cols-3 sf-gap sf-gap--xs"><div class="sf-box">gap xs</div><div class="sf-box">a</div><div class="sf-box">b</div></div>
+<div class="sf-grid-cols-3 sf-gap sf-gap--s"><div class="sf-box">gap s</div><div class="sf-box">a</div><div class="sf-box">b</div></div>
+<div class="sf-grid-cols-3 sf-gap sf-gap--m"><div class="sf-box">gap m</div><div class="sf-box">a</div><div class="sf-box">b</div></div>
+<div class="sf-grid-cols-3 sf-gap sf-gap--l"><div class="sf-box">gap l</div><div class="sf-box">a</div><div class="sf-box">b</div></div>
+<div class="sf-grid-cols-3 sf-gap sf-gap--xl"><div class="sf-box">gap xl</div><div class="sf-box">a</div><div class="sf-box">b</div></div>
+<div class="sf-grid-cols-3 sf-gap sf-gap--2xl"><div class="sf-box">gap 2xl</div><div class="sf-box">a</div><div class="sf-box">b</div></div>
+
+<h3>Sidebar</h3>
+<div class="sf-sidebar"><aside class="sf-box">Sidebar (fixed-ish)</aside><div class="sf-box">Main content wraps below when narrow</div></div>
+<div class="sf-sidebar sf-sidebar--narrow"><aside class="sf-box">narrow</aside><div class="sf-box">Main</div></div>
+<div class="sf-sidebar sf-sidebar--right"><aside class="sf-box">Main first</aside><div class="sf-box">sidebar--right panel</div></div>
+<div class="sf-sidebar sf-sidebar--wide"><aside class="sf-box">wide</aside><div class="sf-box">Main</div></div>
+
+<h3>Switcher</h3>
+<div class="sf-switcher"><div class="sf-box">A</div><div class="sf-box">B</div><div class="sf-box">C</div></div>
+<div class="sf-switcher sf-switcher--no-wrap"><div class="sf-box">A</div><div class="sf-box">B</div><div class="sf-box">C</div></div>
+<div class="sf-switcher sf-switcher--vertical"><div class="sf-box">A</div><div class="sf-box">B</div><div class="sf-box">C</div></div>
+
+<h3>Grid — auto-fill responsive</h3>
+<div class="sf-grid sf-grid--xs"><div class="sf-box">xs</div><div class="sf-box">min col</div><div class="sf-box">width</div></div>
+<div class="sf-grid sf-grid--s"><div class="sf-box">s</div><div class="sf-box">min col</div><div class="sf-box">width</div></div>
+<div class="sf-grid sf-grid--m"><div class="sf-box">m</div><div class="sf-box">min col</div><div class="sf-box">width</div></div>
+<div class="sf-grid sf-grid--l"><div class="sf-box">l</div><div class="sf-box">min col</div><div class="sf-box">width</div></div>
+<div class="sf-grid sf-grid--xl"><div class="sf-box">xl</div><div class="sf-box">min col</div><div class="sf-box">width</div></div>
+<div class="sf-grid sf-grid--2xl"><div class="sf-box">2xl</div><div class="sf-box">min col</div><div class="sf-box">width</div></div>
+<div class="sf-grid sf-grid--fit"><div class="sf-box">fit</div><div class="sf-box">stretches to fill row</div></div>
+<div class="sf-grid sf-grid--dense"><div class="sf-box">dense</div><div class="sf-box">packing</div><div class="sf-box">fills gaps</div></div>
+
+<h3>Grid — fixed columns &amp; ratios</h3>
+<div class="sf-grid-cols-1"><div class="sf-box">grid-cols-1</div></div>
+<div class="sf-grid-cols-2"><div class="sf-box">grid-cols-2 a</div><div class="sf-box">b</div></div>
+<div class="sf-grid-cols-3"><div class="sf-box">grid-cols-3 a</div><div class="sf-box">b</div><div class="sf-box">c</div></div>
+<div class="sf-grid-cols-4"><div class="sf-box">1</div><div class="sf-box">2</div><div class="sf-box">3</div><div class="sf-box">4</div></div>
+<div class="sf-grid-cols-6"><div class="sf-box">1</div><div class="sf-box">2</div><div class="sf-box">3</div><div class="sf-box">4</div><div class="sf-box">5</div><div class="sf-box">6</div></div>
+<div class="sf-grid-cols-1-2"><div class="sf-box">1fr</div><div class="sf-box">2fr</div></div>
+<div class="sf-grid-cols-2-1"><div class="sf-box">2fr</div><div class="sf-box">1fr</div></div>
+<div class="sf-grid-cols-1-3"><div class="sf-box">1fr</div><div class="sf-box">3fr</div></div>
+<div class="sf-grid-cols-3-1"><div class="sf-box">3fr</div><div class="sf-box">1fr</div></div>
+
+<h3>Grid-flex</h3>
+<div class="sf-grid-flex sf-grid-flex--xs"><div class="sf-box">xs</div><div class="sf-box">item</div><div class="sf-box">item</div></div>
+<div class="sf-grid-flex sf-grid-flex--s"><div class="sf-box">s</div><div class="sf-box">item</div><div class="sf-box">item</div></div>
+<div class="sf-grid-flex sf-grid-flex--m"><div class="sf-box">m</div><div class="sf-box">item</div><div class="sf-box">item</div></div>
+<div class="sf-grid-flex sf-grid-flex--l"><div class="sf-box">l</div><div class="sf-box">item</div><div class="sf-box">item</div></div>
+<div class="sf-grid-flex sf-grid-flex--xl"><div class="sf-box">xl</div><div class="sf-box">item</div><div class="sf-box">item</div></div>
+<div class="sf-grid-flex sf-grid-flex--2xl"><div class="sf-box">2xl</div><div class="sf-box">item</div><div class="sf-box">item</div></div>
+<div class="sf-grid-flex sf-grid-flex--center"><div class="sf-box">center</div><div class="sf-box">last row</div><div class="sf-box">stays fixed</div></div>
+
+<h3>Bento — dense free-form grid</h3>
+<div class="sf-bento sf-bento--3">
+  <div class="sf-box sf-bento-featured">bento-featured (span 2x2)</div>
+  <div class="sf-box sf-bento-wide">bento-wide (span 2)</div>
+  <div class="sf-box sf-bento-tall">bento-tall (row span 2)</div>
+  <div class="sf-box">normal cell</div>
+  <div class="sf-box sf-bento-full">bento-full (full width)</div>
+</div>
+<div class="sf-bento sf-bento--2 sf-bento--compact"><div class="sf-box">bento--2</div><div class="sf-box">bento--compact rows</div></div>
+<div class="sf-bento sf-bento--6 sf-bento--tall"><div class="sf-box">bento--6</div><div class="sf-box">bento--tall rows</div><div class="sf-box">c</div><div class="sf-box">d</div><div class="sf-box">e</div><div class="sf-box">f</div></div>
+
+<h3>Alternate — zigzag two-column</h3>
+<div class="sf-alternate">
+  <div>
+    <div><h4>Feature one</h4><p>Text column reverses order on alternate rows.</p></div>
+    <div class="sf-frame sf-frame--video"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="placeholder"></div>
+  </div>
+  <div>
+    <div><h4>Feature two</h4><p>Second row — image/text order swaps automatically.</p></div>
+    <div class="sf-frame sf-frame--video"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="placeholder"></div>
+  </div>
+</div>
+
+<h3>Pancake — sticky-footer grid</h3>
+<div class="sf-bg-layer sf-box" style="position:relative; min-block-size: 16rem"></div>
+<div class="sf-box">
+  <div class="sf-pancake" style="min-block-size: 12rem">
+    <header class="sf-box">Pancake header</header>
+    <main class="sf-box">Pancake main (1fr)</main>
+    <footer class="sf-box">Pancake footer</footer>
+  </div>
+</div>
+
+<h3>Content-grid — breakout &amp; full-bleed</h3>
+<div class="sf-content-grid">
+  <p>Regular content-width paragraph inside .sf-content-grid.</p>
+  <div class="sf-breakout sf-box">sf-breakout — wider than content, narrower than viewport</div>
+  <div class="sf-full-bleed sf-box">sf-full-bleed — spans the whole viewport width</div>
+</div>
+
+<h3>Cover — full-height centered region</h3>
+<div class="sf-cover sf-cover--min"><div class="sf-cover__center"><p>cover--min + cover__center</p></div></div>
+<div class="sf-cover sf-cover--max sf-cover--padding-s"><div class="sf-cover__center"><p>cover--max + cover--padding-s</p></div></div>
+<div class="sf-cover sf-cover--padding-l"><div class="sf-cover__center"><p>cover--padding-l</p></div></div>
+
+<h3>Frame — aspect-ratio media box</h3>
+<div class="sf-grid-cols-4 sf-gap sf-gap--s">
+  <div class="sf-frame"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="default 16:9"></div>
+  <div class="sf-frame sf-frame--square"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="square"></div>
+  <div class="sf-frame sf-frame--video"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="video"></div>
+  <div class="sf-frame sf-frame--cinema"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="cinema"></div>
+  <div class="sf-frame sf-frame--portrait"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="portrait"></div>
+  <div class="sf-frame sf-frame--4-3"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="4:3"></div>
+  <div class="sf-frame sf-frame--3-2"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="3:2"></div>
+  <div class="sf-frame sf-frame--golden"><img src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="golden"></div>
+</div>
+
+<h3>Background layer</h3>
+<div class="sf-frame sf-frame--video">
+  <img class="sf-bg-layer" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="">
+  <p>sf-bg-layer fills behind this text; the parent auto-positions itself.</p>
+</div>
+
+<h3>Reel — horizontal scroll strip</h3>
+<div class="sf-reel">
+  <div class="sf-box">1</div><div class="sf-box">2</div><div class="sf-box">3</div>
+  <div class="sf-box">4</div><div class="sf-box">5</div><div class="sf-box">6</div>
+</div>
+
+<h3>Imposter — absolutely-centered overlay</h3>
+<div class="sf-box" style="position: relative; min-block-size: 8rem">
+  <p>Host box (positioning context)</p>
+  <span class="sf-imposter sf-btn sf-btn--s">imposter (centered)</span>
+</div>
+<div class="sf-box" style="position: relative; min-block-size: 8rem">
+  <span class="sf-imposter sf-imposter--fixed sf-btn sf-btn--s sf-btn--danger">imposter--fixed</span>
+</div>
+<div class="sf-box" style="position: relative; min-block-size: 8rem; max-inline-size: 12rem">
+  <div class="sf-imposter sf-imposter--contain sf-box">imposter--contain: constrained + scrollable long content that overflows the imposter box on purpose to show the scrollbar in action.</div>
+</div>
+
+<h3>Overlay helper</h3>
+<div class="sf-box" style="position: relative; min-block-size: 6rem">
+  <p>Base content</p>
+  <div class="sf-overlay sf-surface--inverse" style="opacity: .15"></div>
+</div>
+
+<h3>Subgrid</h3>
+<div class="sf-grid-cols-3">
+  <div class="sf-subgrid" style="grid-column: span 3">
+    <div class="sf-box">subgrid a</div><div class="sf-box">subgrid b</div><div class="sf-box">subgrid c</div>
+  </div>
+</div>
+<div class="sf-grid-cols-1" style="grid-template-rows: repeat(2, auto)">
+  <div class="sf-subgrid-rows" style="grid-row: span 2">
+    <div class="sf-box">subgrid-rows row 1</div><div class="sf-box">subgrid-rows row 2</div>
+  </div>
+</div>
+
+<h3>Divider &amp; divide</h3>
+<hr class="sf-divider">
+<hr class="sf-divider sf-divider--dashed">
+<hr class="sf-divider sf-divider--dotted">
+<hr class="sf-divider sf-divider--gradient">
+<hr class="sf-divider sf-divider--soft">
+<hr class="sf-divider sf-divider--strong">
+<div class="sf-cluster" style="block-size: 3rem"><span>Left</span><hr class="sf-divider sf-divider--vertical"><span>Right</span></div>
+<div class="sf-divide sf-stack"><p>One</p><p>Two (divide adds a border between siblings)</p><p>Three</p></div>
+<div class="sf-cluster sf-divide--vertical" style="block-size: 3rem"><span>X</span><span>Y</span><span>Z</span></div>
+
+<h3>Equal — CSS multi-column flow</h3>
+<div class="sf-equal sf-equal--2"><p>Newspaper-style flowing columns, 2 target columns. Text flows down one column, then continues at the top of the next, unlike grid cells.</p></div>
+<div class="sf-equal sf-equal--3"><p>Three target columns of flowing text content for a denser magazine layout.</p></div>
+<div class="sf-equal sf-equal--4"><p>Four target columns for a very dense flowing layout of short list items.</p></div>
+<div class="sf-equal sf-equal--6"><p>Six target columns, useful for long tag/keyword lists that should flow.</p></div>
+
+<h3>Icon sizing</h3>
+<div class="sf-cluster sf-cluster--m">
+  <span class="sf-icon sf-icon--xs">&#9733;</span>
+  <span class="sf-icon sf-icon--s">&#9733;</span>
+  <span class="sf-icon sf-icon--m">&#9733;</span>
+  <span class="sf-icon sf-icon--l">&#9733;</span>
+  <span class="sf-icon sf-icon--xl">&#9733;</span>
+  <span class="sf-icon sf-icon--2xl">&#9733;</span>
+  <span class="sf-icon sf-icon--boxed">&#9733;</span>
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section sf-surface--neutral">
+<div class="sf-container">
+<h2 class="sf-h1">Macro classes (core/macros.css)</h2>
+<p>Recipes that answer "what does this element do/look like?" — composable on top of layout primitives.</p>
+
+<h3>Prose &amp; not-prose</h3>
+<div class="sf-prose">
+  <h4>Article heading</h4>
+  <p>Paragraph one of long-form text with automatic vertical rhythm between children.</p>
+  <p>Paragraph two — automatically spaced from the previous one.</p>
+  <ul><li>Bullet one</li><li>Bullet two</li></ul>
+  <div class="sf-not-prose sf-box">This region opts out of prose spacing/list rules (sf-not-prose).</div>
+  <p>More article body after the opted-out region.</p>
+</div>
+
+<h3>Flow</h3>
+<div class="sf-flow">
+  <p>One</p>
+  <p>Two — gets margin-block-start from the flow rhythm.</p>
+  <p>Three — same.</p>
+</div>
+
+<h3>Truncate &amp; line-clamp</h3>
+<p class="sf-truncate" style="max-inline-size: 16rem">This very long sentence about the SLASHED framework will be cut off with an ellipsis after exactly one line because the box has a finite inline size.</p>
+<p class="sf-line-clamp-2">Two-line clamp: SLASHED ships breakpoint-free, container-query-driven layout primitives that respond to their own container's width instead of the viewport, which keeps components portable across sidebars, cards, and full-width sections alike.</p>
+<p class="sf-line-clamp-3">Three-line clamp: token-driven design system with a fluid type and space engine computed at runtime from a handful of input scalars, so retuning one number recalibrates the whole scale without a rebuild step or any SCSS preprocessing.</p>
+<p class="sf-line-clamp-N" style="--sf-line-clamp: 5">Five-line clamp via the N variant and the --sf-line-clamp custom property: this paragraph is intentionally long so the clamp is visible — it keeps going and going, describing layout primitives, macros, state classes, motion utilities and components until it is cut off after five lines with an ellipsis, no matter how much more text follows this point in the source.</p>
+
+<h3>Equal-height flex children</h3>
+<div class="sf-equal-height sf-gap sf-gap--s">
+  <div class="sf-box">Short</div>
+  <div class="sf-box">Two<br>lines</div>
+  <div class="sf-box">Three<br>lines<br>here</div>
+</div>
+
+<h3>Aspect ratio</h3>
+<div class="sf-aspect sf-box" style="--sf-aspect: 4 / 3">sf-aspect at 4/3 via the --sf-aspect custom property</div>
+
+<h3>Scroll shadow &amp; scroll snap</h3>
+<div class="sf-scroll-shadow sf-box" style="block-size: 8rem; overflow-y: auto">
+  <p>Long scrolling content fades near the top/bottom edges of this box.</p>
+  <p>Line two.</p><p>Line three.</p><p>Line four.</p><p>Line five.</p><p>Line six.</p>
+</div>
+<div class="sf-scroll-snap sf-box" style="block-size: 8rem; overflow-y: auto">
+  <section class="sf-box" style="block-size: 8rem">Snap A</section>
+  <section class="sf-box" style="block-size: 8rem">Snap B</section>
+  <section class="sf-box" style="block-size: 8rem">Snap C</section>
+</div>
+
+<h3>Overflow fade</h3>
+<div class="sf-overflow-fade sf-cluster" style="max-inline-size: 12rem; white-space: nowrap; overflow-x: auto">
+  <span class="sf-btn sf-btn--xs">tag</span><span class="sf-btn sf-btn--xs">tag</span><span class="sf-btn sf-btn--xs">tag</span><span class="sf-btn sf-btn--xs">tag</span>
+</div>
+<div class="sf-overflow-fade--right sf-cluster" style="max-inline-size: 12rem; white-space: nowrap; overflow-x: auto">
+  <span class="sf-btn sf-btn--xs">right</span><span class="sf-btn sf-btn--xs">fade</span><span class="sf-btn sf-btn--xs">demo</span><span class="sf-btn sf-btn--xs">tags</span>
+</div>
+<div class="sf-overflow-fade--left sf-cluster" style="max-inline-size: 12rem; white-space: nowrap; overflow-x: auto">
+  <span class="sf-btn sf-btn--xs">left</span><span class="sf-btn sf-btn--xs">fade</span><span class="sf-btn sf-btn--xs">demo</span><span class="sf-btn sf-btn--xs">tags</span>
+</div>
+<div class="sf-overflow-fade--top sf-box" style="block-size: 5rem; overflow-y: auto"><p>Top-fade content. Line 2.</p><p>Line 3.</p><p>Line 4.</p></div>
+<div class="sf-overflow-fade--bottom sf-box" style="block-size: 5rem; overflow-y: auto"><p>Bottom-fade content. Line 2.</p><p>Line 3.</p><p>Line 4.</p></div>
+<div class="sf-overflow-fade--block sf-box" style="block-size: 5rem; overflow-y: auto"><p>Both block edges fade. Line 2.</p><p>Line 3.</p><p>Line 4.</p></div>
+<div class="sf-overflow-fade--inline sf-cluster" style="max-inline-size: 12rem; white-space: nowrap; overflow-x: auto">
+  <span class="sf-btn sf-btn--xs">inline</span><span class="sf-btn sf-btn--xs">fade</span><span class="sf-btn sf-btn--xs">both</span><span class="sf-btn sf-btn--xs">edges</span>
+</div>
+
+<h3>No tap highlight</h3>
+<a class="sf-no-tap-highlight" href="#top">Link with suppressed mobile tap-highlight overlay</a>
+
+<h3>Content-visibility auto</h3>
+<section class="sf-content-auto sf-box">Offscreen rendering is skipped until this section nears the viewport (content-visibility: auto).</section>
+
+<h3>Tabular numbers</h3>
+<table class="sf-tabular-nums sf-box">
+  <tr><td>Invoice #1024</td><td>$1,204.50</td></tr>
+  <tr><td>Invoice #999</td><td>$88.00</td></tr>
+</table>
+
+<h3>Drop shadows</h3>
+<div class="sf-cluster sf-cluster--l">
+  <img class="sf-drop-shadow-xs" width="48" height="48" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'&gt;&lt;circle cx='24' cy='24' r='20' fill='%23888'/&gt;&lt;/svg&gt;" alt="xs shadow">
+  <img class="sf-drop-shadow-s" width="48" height="48" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'&gt;&lt;circle cx='24' cy='24' r='20' fill='%23888'/&gt;&lt;/svg&gt;" alt="s shadow">
+  <img class="sf-drop-shadow-m" width="48" height="48" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'&gt;&lt;circle cx='24' cy='24' r='20' fill='%23888'/&gt;&lt;/svg&gt;" alt="m shadow">
+  <img class="sf-drop-shadow-l" width="48" height="48" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'&gt;&lt;circle cx='24' cy='24' r='20' fill='%23888'/&gt;&lt;/svg&gt;" alt="l shadow">
+  <img class="sf-drop-shadow-xl" width="48" height="48" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'&gt;&lt;circle cx='24' cy='24' r='20' fill='%23888'/&gt;&lt;/svg&gt;" alt="xl shadow">
+</div>
+
+<h3>Surfaces</h3>
+<div class="sf-grid sf-grid--s">
+  <div class="sf-box sf-surface" style="--sf-surface-color: var(--sf-color-primary-100)">sf-surface (generic, tinted)</div>
+  <div class="sf-box sf-surface--primary">surface--primary</div>
+  <div class="sf-box sf-surface--secondary">surface--secondary</div>
+  <div class="sf-box sf-surface--tertiary">surface--tertiary</div>
+  <div class="sf-box sf-surface--action">surface--action</div>
+  <div class="sf-box sf-surface--neutral">surface--neutral</div>
+  <div class="sf-box sf-surface--inverse">surface--inverse</div>
+  <div class="sf-box sf-surface--success">surface--success</div>
+  <div class="sf-box sf-surface--warning">surface--warning</div>
+  <div class="sf-box sf-surface--info">surface--info</div>
+  <div class="sf-box sf-surface--danger">surface--danger</div>
+</div>
+<div class="sf-surface-bg sf-box" style="--sf-surface-bg-color: var(--sf-color-primary-subtle); min-block-size: 4rem">sf-surface-bg — named background preset (colour fallback layer shown here)</div>
+
+<h3>Text gradient &amp; text protect</h3>
+<h4 class="sf-text-gradient">Gradient headline</h4>
+<div class="sf-frame sf-frame--video">
+  <img class="sf-bg-layer" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23555'/&gt;&lt;/svg&gt;" alt="">
+  <h4 class="sf-text-protect">Legible text over a busy photo</h4>
+</div>
+
+<h3>Link helpers</h3>
+<p>
+  <a href="https://example.com" class="sf-link-external">External link</a> ·
+  <a href="#top" class="sf-link--subtle">Subtle link (underline on hover)</a> ·
+  <a href="#top" class="sf-link--reverse">Reverse link (underline at rest)</a>
+</p>
+
+<h3>Scrim over media</h3>
+<div class="sf-scrim sf-scrim--bottom sf-frame sf-frame--video">
+  <img class="sf-bg-layer" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23666'/&gt;&lt;/svg&gt;" alt="">
+  <div class="sf-scrim__content" style="position: absolute; inset-block-end: 0; padding: 1rem">
+    <h4>scrim--bottom + scrim__content</h4>
+  </div>
+</div>
+<div class="sf-scrim sf-scrim--top sf-frame sf-frame--video">
+  <img class="sf-bg-layer" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23666'/&gt;&lt;/svg&gt;" alt="">
+  <div class="sf-scrim__content" style="position: absolute; inset-block-start: 0; padding: 1rem">
+    <h4>scrim--top</h4>
+  </div>
+</div>
+<div class="sf-scrim sf-scrim--full sf-frame sf-frame--video">
+  <img class="sf-bg-layer" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23666'/&gt;&lt;/svg&gt;" alt="">
+  <div class="sf-scrim__content" style="position: absolute; inset: 0; padding: 1rem">
+    <h4>scrim--full</h4>
+  </div>
+</div>
+
+<h3>Entrance &amp; exit scroll animations</h3>
+<div class="sf-grid-cols-3 sf-gap sf-gap--s">
+  <div class="sf-box sf-entrance--fade">entrance--fade</div>
+  <div class="sf-box sf-entrance--fade-up">entrance--fade-up</div>
+  <div class="sf-box sf-entrance--fade-down">entrance--fade-down</div>
+  <div class="sf-box sf-entrance--fade-left">entrance--fade-left</div>
+  <div class="sf-box sf-entrance--fade-right">entrance--fade-right</div>
+  <div class="sf-box sf-entrance--scale-up">entrance--scale-up</div>
+  <div class="sf-box sf-exit--fade">exit--fade</div>
+  <div class="sf-box sf-exit--fade-up">exit--fade-up</div>
+  <div class="sf-box sf-exit--fade-down">exit--fade-down</div>
+  <div class="sf-box sf-exit--fade-left">exit--fade-left</div>
+  <div class="sf-box sf-exit--fade-right">exit--fade-right</div>
+  <div class="sf-box sf-exit--scale-down">exit--scale-down</div>
+</div>
+
+<h3>Stagger</h3>
+<ul class="sf-stagger sf-grid-cols-3 sf-gap sf-gap--s sf-list-none">
+  <li class="sf-fade-in sf-box">First</li>
+  <li class="sf-fade-in sf-box">Second</li>
+  <li class="sf-fade-in sf-box">Third</li>
+</ul>
+
+<h3>Corner scoop</h3>
+<div class="sf-grid-cols-4 sf-gap sf-gap--s">
+  <div class="sf-card sf-corner-scoop sf-corner-scoop--top-left">top-left</div>
+  <div class="sf-card sf-corner-scoop sf-corner-scoop--top-right">top-right</div>
+  <div class="sf-card sf-corner-scoop sf-corner-scoop--bottom-left">bottom-left</div>
+  <div class="sf-card sf-corner-scoop sf-corner-scoop--bottom-right">bottom-right</div>
+</div>
+
+<h3>Overlap &amp; overlap-host</h3>
+<div class="sf-grid-cols-4 sf-gap sf-gap--l">
+  <div>
+    <img class="sf-overlap" width="56" height="56" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='56' height='56'&gt;&lt;circle cx='28' cy='28' r='24' fill='%23888'/&gt;&lt;/svg&gt;" alt="badge">
+    <article class="sf-card sf-overlap-host">overlap (pulls up) + overlap-host reserves space</article>
+  </div>
+  <div>
+    <article class="sf-card sf-overlap-host">Host for overlap--down</article>
+    <img class="sf-overlap--down" width="56" height="56" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='56' height='56'&gt;&lt;circle cx='28' cy='28' r='24' fill='%23888'/&gt;&lt;/svg&gt;" alt="badge">
+  </div>
+  <div class="sf-cluster">
+    <div class="sf-card">Host</div>
+    <img class="sf-overlap--start" width="40" height="40" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'&gt;&lt;circle cx='20' cy='20' r='18' fill='%23888'/&gt;&lt;/svg&gt;" alt="badge">
+  </div>
+  <div class="sf-cluster">
+    <img class="sf-overlap--end" width="40" height="40" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'&gt;&lt;circle cx='20' cy='20' r='18' fill='%23888'/&gt;&lt;/svg&gt;" alt="badge">
+    <div class="sf-card">Host</div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section">
+<div class="sf-container">
+<h2 class="sf-h1">State classes (core/states.css)</h2>
+<p>Runtime-condition classes, applied statically here on realistic hosts so each visual treatment is visible.</p>
+
+<div class="sf-grid sf-grid--s">
+  <div class="sf-box sf-is-hidden">is-hidden (removed from layout — you should not see this box)</div>
+  <div class="sf-box sf-is-invisible">is-invisible (keeps its box, invisible)</div>
+  <div class="sf-box sf-is-visible">is-visible</div>
+  <button class="sf-btn sf-is-disabled" aria-disabled="true">is-disabled button</button>
+  <div class="sf-box" aria-readonly="true"><input type="text" class="sf-is-readonly" value="readonly field" readonly></div>
+  <div class="sf-box sf-is-loading" aria-busy="true">is-loading (spinner replaces content)</div>
+  <div class="sf-box sf-is-pending" aria-busy="true">is-pending (content stays usable)</div>
+  <button class="sf-btn sf-is-busy">is-busy cursor</button>
+  <div class="sf-box sf-is-skeleton" style="block-size: 3rem"></div>
+  <button class="sf-btn sf-is-active">is-active</button>
+  <li class="sf-box sf-is-selected" aria-selected="true" style="list-style:none">is-selected list item</li>
+  <a class="sf-btn sf-is-current" href="#top" aria-current="page">is-current nav item</a>
+  <button class="sf-btn sf-is-pressed" aria-pressed="true">is-pressed toggle</button>
+  <div class="sf-box sf-is-highlighted">is-highlighted</div>
+  <div class="sf-box sf-is-open">is-open panel</div>
+  <div class="sf-box sf-is-collapsed">is-collapsed panel</div>
+  <button class="sf-btn" aria-expanded="true">
+    <span class="sf-is-expanded">is-expanded disclosure trigger</span>
+  </button>
+</div>
+
+<h3>Form validation states</h3>
+<div class="sf-grid sf-grid--s">
+  <div class="sf-is-valid"><label>Email<br><input type="email" value="a@b.com" aria-invalid="false"></label></div>
+  <div class="sf-is-invalid"><label>Email<br><input type="email" value="bad-email" aria-invalid="true"></label><span>Please enter a valid email</span></div>
+</div>
+
+<h3>Feedback states</h3>
+<div class="sf-grid sf-grid--s">
+  <p class="sf-box sf-is-success" role="status">is-success: saved successfully</p>
+  <p class="sf-box sf-is-error" role="alert">is-error: save failed</p>
+  <p class="sf-box sf-is-warning">is-warning: quota nearly reached</p>
+  <p class="sf-box sf-is-info">is-info: new version available</p>
+  <button class="sf-btn sf-btn--danger sf-is-danger">is-danger delete action</button>
+</div>
+
+<h3>Drag &amp; drop</h3>
+<div class="sf-grid sf-grid--s">
+  <div class="sf-box sf-is-draggable" draggable="true">is-draggable item</div>
+  <div class="sf-box sf-is-dragging" draggable="true">is-dragging item</div>
+  <div class="sf-box sf-is-drop-target">is-drop-target zone</div>
+</div>
+
+<h3>Empty state</h3>
+<ul class="sf-is-empty sf-box" style="list-style:none"></ul>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section sf-surface--neutral">
+<div class="sf-container">
+<h2 class="sf-h1">Accessibility (core/accessibility.css)</h2>
+<p>Focus and clickable-area helpers.</p>
+
+<div class="sf-focus-parent sf-box" tabindex="0">
+  <p>sf-focus-parent — this whole box rings when a descendant has keyboard focus.</p>
+  <input type="text" placeholder="Focus me">
+</div>
+
+<div class="sf-box"><button class="sf-btn sf-focus-shadow">sf-focus-shadow (box-shadow focus ring instead of outline)</button></div>
+
+<article class="sf-card sf-card--interactive sf-clickable-parent">
+  <div class="sf-card__body">
+    <h4>sf-clickable-parent</h4>
+    <p>The whole card is a single click target via the overlay link below.</p>
+    <a class="sf-clickable-parent__overlay" href="#top">Read more</a>
+  </div>
+</article>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section">
+<div class="sf-container">
+<h2 class="sf-h1">Motion / entrances (core/motion.css)</h2>
+<p>Looping and one-shot animation classes applied to visible elements (final/initial state may render statically depending on browser support).</p>
+
+<div class="sf-grid sf-grid--s">
+  <div class="sf-box sf-fade-in">fade-in</div>
+  <div class="sf-box sf-fade-out">fade-out</div>
+  <div class="sf-box sf-scale-up">scale-up</div>
+  <div class="sf-box sf-scale-down">scale-down</div>
+  <div class="sf-box sf-slide-in-up">slide-in-up</div>
+  <div class="sf-box sf-slide-in-down">slide-in-down</div>
+  <div class="sf-box sf-slide-in-left">slide-in-left</div>
+  <div class="sf-box sf-slide-in-right">slide-in-right</div>
+</div>
+
+<h3>Colour pulse</h3>
+<div class="sf-box sf-surface--primary sf-color-pulse">sf-color-pulse — animates the primary hue lightness</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section sf-surface--neutral">
+<div class="sf-container">
+<h2 class="sf-h1">Print utilities (core/print.css)</h2>
+<p>Print rules key off classes already used elsewhere on the page for other purposes — <code>.sf-link-external</code> also
+gains print-specific treatment (its href is expanded next to the link text when the page is printed).</p>
+<p><a href="https://example.com/print-demo" class="sf-link-external">This external link also exercises the print stylesheet</a> — see the "Link helpers" demo above for the on-screen version of the same class.</p>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section" data-theme="dark">
+<div class="sf-container">
+<h2 class="sf-h1">Theme utilities (core/themes.css)</h2>
+<p>Forcing light/dark on a region, plus the smooth-transition helper.</p>
+
+<div class="sf-grid sf-grid--s">
+  <section class="sf-theme-dark sf-box">sf-theme-dark — forces dark palette on this region</section>
+  <section class="sf-theme-light sf-box">sf-theme-light — forces light palette on this region</section>
+</div>
+<div class="sf-theme-transition sf-box" data-theme="dark">sf-theme-transition — cross-fades registered colour tokens when a theme toggle script flips <code>data-theme</code> on this element (normally applied to <code>&lt;html&gt;</code>; shown here on a scoped region since this page has no toggle script).</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section">
+<div class="sf-container">
+<h2 class="sf-h1">Forms (optional/forms.css)</h2>
+<p>Classless form controls, styled without any <code>.sf-*</code> class needed on the inputs themselves — the one opt-in
+utility here is <code>.sf-live-validate</code>, which enables native <code>:user-invalid</code>/<code>:user-valid</code> border feedback
+after a submit attempt.</p>
+
+<form class="sf-live-validate sf-stack">
+  <fieldset class="sf-stack sf-stack--s">
+    <legend>Contact details</legend>
+    <label>Name<br><input type="text" name="name" required></label>
+    <label>Email<br><input type="email" name="email" required></label>
+    <label>Message<br><textarea name="message" rows="3"></textarea></label>
+    <label>Country<br>
+      <select name="country">
+        <option>United States</option>
+        <option>Canada</option>
+        <option>United Kingdom</option>
+      </select>
+    </label>
+    <label><input type="checkbox" name="subscribe"> Subscribe to updates</label>
+    <label><input type="radio" name="plan" value="free" checked> Free plan</label>
+    <label><input type="radio" name="plan" value="pro"> Pro plan</label>
+  </fieldset>
+  <button class="sf-btn sf-btn--primary" type="submit">Submit</button>
+</form>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section sf-surface--neutral">
+<div class="sf-container">
+<h2 class="sf-h1">Components — Buttons (optional/components.css)</h2>
+<p>All colour families, style treatments, gradient axis, sizes, width, and state modifiers for <code>.sf-btn</code>.</p>
+
+<h3>Colour families</h3>
+<div class="sf-cluster sf-cluster--m">
+  <button class="sf-btn">default (action)</button>
+  <button class="sf-btn sf-btn--primary">primary</button>
+  <button class="sf-btn sf-btn--secondary">secondary</button>
+  <button class="sf-btn sf-btn--tertiary">tertiary</button>
+  <button class="sf-btn sf-btn--action">action</button>
+  <button class="sf-btn sf-btn--base">base</button>
+  <button class="sf-btn sf-btn--neutral">neutral</button>
+  <button class="sf-btn sf-btn--success">success</button>
+  <button class="sf-btn sf-btn--warning">warning</button>
+  <button class="sf-btn sf-btn--info">info</button>
+  <button class="sf-btn sf-btn--danger">danger</button>
+</div>
+
+<h3>Style treatments</h3>
+<div class="sf-cluster sf-cluster--m">
+  <button class="sf-btn sf-btn--soft">soft</button>
+  <button class="sf-btn sf-btn--outline">outline</button>
+  <button class="sf-btn sf-btn--danger sf-btn--outline">danger outline</button>
+  <button class="sf-btn sf-btn--secondary sf-btn--soft">soft secondary</button>
+</div>
+
+<h3>Gradient axis</h3>
+<div class="sf-cluster sf-cluster--m">
+  <button class="sf-btn sf-btn--gradient">gradient action</button>
+  <button class="sf-btn sf-btn--primary sf-btn--gradient">gradient primary fill</button>
+  <button class="sf-btn sf-btn--primary sf-btn--gradient sf-btn--outline">gradient border</button>
+</div>
+
+<h3>Sizes</h3>
+<div class="sf-cluster sf-cluster--m sf-cluster--center">
+  <button class="sf-btn sf-btn--xs">xs</button>
+  <button class="sf-btn sf-btn--s">s</button>
+  <button class="sf-btn">m (default)</button>
+  <button class="sf-btn sf-btn--l">l</button>
+  <button class="sf-btn sf-btn--xl">xl</button>
+</div>
+
+<h3>Width</h3>
+<button class="sf-btn sf-btn--block">block (full width)</button>
+<div class="sf-cq" style="max-inline-size: 16rem">
+  <button class="sf-btn sf-btn--block-cq">block-cq (full width only in a narrow container)</button>
+</div>
+
+<h3>States</h3>
+<div class="sf-cluster sf-cluster--m">
+  <button class="sf-btn" disabled>native disabled</button>
+  <button class="sf-btn sf-is-loading"><span>Saving…</span></button>
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section">
+<div class="sf-container">
+<h2 class="sf-h1">Components — Cards (optional/components.css)</h2>
+
+<div class="sf-grid sf-grid--m">
+  <article class="sf-card">
+    <img class="sf-card__media" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'&gt;&lt;rect width='100%25' height='100%25' fill='%23888'/&gt;&lt;/svg&gt;" alt="">
+    <header class="sf-card__header">
+      <img class="sf-card__avatar" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'&gt;&lt;circle cx='20' cy='20' r='18' fill='%23888'/&gt;&lt;/svg&gt;" alt="">
+      <h3 class="sf-card__title">Default card</h3>
+    </header>
+    <div class="sf-card__body">
+      <p>Body content with header, media, avatar and title slots.</p>
+    </div>
+    <footer class="sf-card__footer">
+      <button class="sf-btn sf-btn--primary sf-btn--s">Action</button>
+    </footer>
+  </article>
+
+  <article class="sf-card sf-card--bordered">
+    <div class="sf-card__body"><p>card--bordered: flat, outlined, no shadow.</p></div>
+  </article>
+
+  <article class="sf-card sf-card--elevated">
+    <div class="sf-card__body"><p>card--elevated: floating shadow, no border.</p></div>
+  </article>
+
+  <a class="sf-card sf-card--interactive" href="#top">
+    <div class="sf-card__body"><p>card--interactive: lifts on hover/focus.</p></div>
+  </a>
+
+  <article class="sf-card sf-is-loading">
+    <div class="sf-card__body"><p>Card in an is-loading state.</p></div>
+  </article>
+
+  <article class="sf-card sf-is-disabled">
+    <div class="sf-card__body"><p>Card in an is-disabled state.</p></div>
+  </article>
+
+  <div class="sf-card__body sf-flow">
+    <p class="sf-box">Standalone card__body composed with sf-flow for spacing.</p>
+    <p class="sf-box">Second paragraph.</p>
+  </div>
+
+  <div class="sf-card__body sf-cluster">
+    <span class="sf-btn sf-btn--xs">New</span>
+    <span class="sf-btn sf-btn--xs">Popular</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="sf-section sf-surface--neutral">
+<div class="sf-container">
+<h2 class="sf-h1">Utilities (optional/utilities.css)</h2>
+
+<h3>Heading helper classes</h3>
+<div class="sf-stack sf-stack--s">
+  <div class="sf-h1">Visually H1 (div)</div>
+  <div class="sf-h2">Visually H2 (div)</div>
+  <div class="sf-h3">Visually H3 (div)</div>
+  <div class="sf-h4">Visually H4 (div)</div>
+  <div class="sf-h5">Visually H5 (div)</div>
+  <div class="sf-h6">Visually H6 (div)</div>
+</div>
+
+<h3>Text-size utilities</h3>
+<div class="sf-stack sf-stack--xs">
+  <p class="sf-text-2xs">2xs — legal / metadata copy</p>
+  <p class="sf-text-xs">xs — fine print</p>
+  <p class="sf-text-s">s — secondary copy</p>
+  <p class="sf-text-m">m — body copy</p>
+  <p class="sf-text-l">l — larger body copy</p>
+  <p class="sf-text-xl">xl — lede paragraph</p>
+  <p class="sf-text-2xl">2xl — subheading</p>
+  <p class="sf-text-3xl">3xl — heading</p>
+  <p class="sf-text-4xl">4xl — display heading</p>
+</div>
+
+<h3>Hover transforms</h3>
+<div class="sf-cluster sf-cluster--l">
+  <div class="sf-card sf-hover-grow">hover-grow</div>
+  <div class="sf-card sf-hover-shrink">hover-shrink</div>
+  <img class="sf-hover-float" width="48" height="48" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'&gt;&lt;circle cx='24' cy='24' r='20' fill='%23888'/&gt;&lt;/svg&gt;" alt="hover-float">
+  <img class="sf-hover-sink" width="48" height="48" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'&gt;&lt;circle cx='24' cy='24' r='20' fill='%23888'/&gt;&lt;/svg&gt;" alt="hover-sink">
+  <div class="sf-card sf-hover-slide-start">hover-slide-start</div>
+  <div class="sf-card sf-hover-slide-end">hover-slide-end</div>
+</div>
+
+<h3>List reset &amp; marker colours</h3>
+<ul class="sf-list-none">
+  <li>sf-list-none: no bullets, no inline-start padding</li>
+</ul>
+<ul class="sf-marker--primary">
+  <li>marker--primary bullet</li>
+</ul>
+<ul class="sf-marker--secondary">
+  <li>marker--secondary bullet</li>
+</ul>
+<ul class="sf-marker--tertiary">
+  <li>marker--tertiary bullet</li>
+</ul>
+<ul class="sf-marker--action">
+  <li>marker--action bullet</li>
+</ul>
+
+<h3>Selection colour</h3>
+<p class="sf-selection--alt sf-surface--inverse sf-box">Select this text — sf-selection--alt swaps the ::selection colours for a surface with poor default contrast.</p>
+
+<h3>Sticky positioning</h3>
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+  <div class="sf-sticky sf-box">sf-sticky (base offset)</div>
+  <p>Scroll content…</p><p>More…</p><p>More…</p>
+</div>
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+  <div class="sf-sticky sf-sticky--s sf-box">sf-sticky--s (extra gap)</div>
+  <p>Scroll content…</p><p>More…</p><p>More…</p>
+</div>
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+  <div class="sf-sticky sf-sticky--m sf-box">sf-sticky--m</div>
+  <p>Scroll content…</p><p>More…</p><p>More…</p>
+</div>
+<div class="sf-box" style="block-size: 10rem; overflow-y: auto">
+  <div class="sf-sticky sf-sticky--l sf-box">sf-sticky--l</div>
+  <p>Scroll content…</p><p>More…</p><p>More…</p>
+</div>
+
+</div>
+</section>
+
+</body>
+</html>
