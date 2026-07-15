@@ -5,7 +5,7 @@ SLASHED ships animation primitives in the `slashed.motion` layer
 `@media (prefers-reduced-motion: no-preference)` -- users who prefer
 reduced motion see no animation from the framework.
 
-All animations are demoed in the [macros & states coverage page](test-coverage-4-macros-states.html).
+All animations are exercised live in the [demo](/demo/).
 
 ## Design principles
 

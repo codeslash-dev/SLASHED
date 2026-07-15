@@ -1,5 +1,5 @@
 // @ts-check
-// SLASHED — Comprehensive visual regression tests for docs/demo.html
+// SLASHED — Comprehensive visual regression tests for demo/index.html
 // Tests colors, shapes, shadows, layouts, grids, print, typography,
 // spacing, radius, motion states, accessibility, and all layout primitives.
 
@@ -7,7 +7,7 @@ import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'docs', 'demo.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'demo', 'index.html')).href;
 
 // Helper: resolve a CSS custom property value on an element
 async function getComputedProp(locator, prop) {
