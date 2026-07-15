@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Breaking Changes
 - **tokens:** removed the fixed `--sf-animation-delay-1…5` stagger tokens, superseded by the new `.sf-stagger` utility + `--sf-stagger-step` knob. Replace `style="animation-delay: var(--sf-animation-delay-N)"` on hand-indexed children with a single `.sf-stagger` class on their parent (see `docs/motion.md`); to keep a fixed manual delay, use a literal (e.g. `animation-delay: 150ms`).
+- **layout:** renamed `.sf-bento--compact` / `.sf-bento--tall` (container row-height modifiers) to `.sf-bento--row-compact` / `.sf-bento--row-tall`, matching the `--sf-bento-row-*` tokens they set. The old names collided visually with the unrelated child modifier `.sf-bento-tall` (spans one item over 2 rows) — same word, one dash apart. Child span classes (`.sf-bento-wide/-full/-tall/-featured`) are unchanged. See `docs/migration.md`.
 
 ### Bug Fixes
 - **layout:** `.sf-bento` and `.sf-grid-cols-2/3/4/6` now actually respond to their `@container` breakpoints — both used to declare a `container` on themselves and then query that same container to resize themselves, which is a no-op per spec (a container can't be the subject of its own `@container` query). Fixed by relying on an ancestor container (`.sf-container` / `.sf-cq` / `.sf-fluid-cq`) instead, matching how `.sf-alternate` and `.sf-grid-cols-1-2` etc. already do it. `.sf-bento-wide` / `.sf-bento-featured` also no longer force a phantom 2nd column once the grid collapses to 1 column at the mobile breakpoint.

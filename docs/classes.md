@@ -17,8 +17,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-bento--2` |
 | `.sf-bento--3` |
 | `.sf-bento--6` |
-| `.sf-bento--compact` |
-| `.sf-bento--tall` |
+| `.sf-bento--row-compact` |
+| `.sf-bento--row-tall` |
 | `.sf-bento-featured` |
 | `.sf-bento-full` |
 | `.sf-bento-tall` |

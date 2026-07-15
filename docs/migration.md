@@ -166,6 +166,27 @@ If you overrode field block padding by *reading* `--sf-field-block` (e.g.
 tracks the tighter, correct default. To keep the old roomier spacing, pin it
 explicitly: `:root { --sf-field-block: var(--sf-space-l); }`.
 
+### `.sf-bento` row-height container modifiers renamed to `--row-compact` / `--row-tall` (breaking)
+
+`.sf-bento--compact` / `--tall` (container-level, resize every auto row in the
+grid) and `.sf-bento-tall` (child-level, resize one grid item to span 2 rows)
+differed only by dash count and shared the word "tall" — an easy class to
+typo or misread. The container modifiers are renamed to match the
+`--sf-bento-row-compact` / `--sf-bento-row-tall` tokens they set, so the two
+families read distinctly:
+
+| Before (≤ 0.7.16) | After (0.8.0) |
+|---|---|
+| `.sf-bento--compact` | `.sf-bento--row-compact` |
+| `.sf-bento--tall` | `.sf-bento--row-tall` |
+
+`.sf-bento-wide` / `.sf-bento-full` / `.sf-bento-tall` / `.sf-bento-featured`
+(the child span classes) are unchanged.
+
+**What changed for you:** find-and-replace `sf-bento--compact` →
+`sf-bento--row-compact` and `sf-bento--tall` → `sf-bento--row-tall` on any
+`.sf-bento` container element.
+
 ## SLASHED 0.7.6 → 0.7.7
 
 ### `.sf-btn` axes reworked (breaking)
