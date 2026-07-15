@@ -148,11 +148,15 @@
     background-position: left var(--sf-space-s) center;
   }
 
-  /* Button / submit / reset */
-  button:not([class*="sf-"]),
-  input[type="submit"]:not([class*="sf-"]),
-  input[type="reset"]:not([class*="sf-"]),
-  input[type="button"]:not([class*="sf-"]) {
+  /* Button / submit / reset. Scoped to :where(form, fieldset) so a bare
+     <button> or <input type="submit"/"reset"/"button"> used elsewhere on
+     the page (a page-builder's hamburger toggle, a modal close control, a
+     third-party widget) is left alone — only controls living inside an
+     actual form get the classless treatment. */
+  :where(form, fieldset) button:not([class*="sf-"]),
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]),
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]),
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -171,26 +175,26 @@
     text-decoration: none;
   }
 
-  button:not([class*="sf-"]):hover,
-  input[type="submit"]:not([class*="sf-"]):hover,
-  input[type="reset"]:not([class*="sf-"]):hover,
-  input[type="button"]:not([class*="sf-"]):hover {
+  :where(form, fieldset) button:not([class*="sf-"]):hover,
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]):hover,
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]):hover,
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]):hover {
 
     background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
-  button:not([class*="sf-"]):focus-visible,
-  input[type="submit"]:not([class*="sf-"]):focus-visible,
-  input[type="reset"]:not([class*="sf-"]):focus-visible,
-  input[type="button"]:not([class*="sf-"]):focus-visible {
+  :where(form, fieldset) button:not([class*="sf-"]):focus-visible,
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]):focus-visible,
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]):focus-visible,
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]):focus-visible {
     outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  button:not([class*="sf-"]):disabled,
-  input[type="submit"]:not([class*="sf-"]):disabled,
-  input[type="reset"]:not([class*="sf-"]):disabled,
-  input[type="button"]:not([class*="sf-"]):disabled {
+  :where(form, fieldset) button:not([class*="sf-"]):disabled,
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]):disabled,
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]):disabled,
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]):disabled {
     opacity: var(--sf-opacity-disabled);
     cursor:  not-allowed;
 
