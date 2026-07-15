@@ -1,0 +1,1373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SLASHED all-class visual audit</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f7fb; color: #111827; }
+    body { margin: 0; padding: 24px; }
+    header { position: sticky; top: 0; z-index: 1; margin: -24px -24px 24px; padding: 24px; background: rgba(246,247,251,.96); border-bottom: 1px solid #d7dbe7; backdrop-filter: blur(12px); }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); }
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 0; padding: 0; list-style: none; }
+    .summary li { border: 1px solid #c8d1e0; border-radius: 999px; padding: 8px 12px; background: white; }
+    .toolbar { display: flex; gap: 12px; align-items: center; margin-top: 18px; }
+    input { width: min(520px, 100%); padding: 12px 14px; border: 1px solid #aab4c5; border-radius: 12px; font: inherit; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+    figure { margin: 0; overflow: hidden; border: 1px solid #d7dbe7; border-radius: 16px; background: white; box-shadow: 0 8px 24px rgba(24,33,61,.08); }
+    figure[data-missing="true"] { border-color: #f04438; box-shadow: 0 8px 24px rgba(240,68,56,.12); }
+    img { display: block; width: 100%; height: auto; aspect-ratio: 900 / 520; background: #fff; border-bottom: 1px solid #eef1f6; }
+    figcaption { display: grid; gap: 4px; padding: 12px 14px 14px; }
+    code { font-size: 14px; font-weight: 700; }
+    .meta { font-size: 12px; color: #667085; }
+    a { color: #175cd3; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SLASHED all-class visual audit</h1>
+    <p>Open this file directly in a browser. Every card embeds the per-class visual artifact from <code>reports/class-audit/screenshots/</code>; click an image to open it full-size.</p>
+    <ul class="summary">
+      <li><strong>331</strong> classes audited</li>
+      <li><strong>0</strong> selector render failures</li>
+      <li><strong>1</strong> missing from dist CSS</li>
+      <li>mode: <strong>svg-fallback</strong></li>
+    </ul>
+    <div class="toolbar"><input id="filter" type="search" placeholder="Filter classes, e.g. sf-grid or Theme utilities" aria-label="Filter classes"></div>
+  </header>
+  <main class="grid">
+    <figure data-filter="no-motion accessibility reduced motion. token override helps components that read slashed.accessibility" data-missing="false">
+      <a href="screenshots/001-no-motion.svg"><img loading="lazy" src="screenshots/001-no-motion.svg" alt="Visual audit artifact for .no-motion"></a>
+      <figcaption><code>.no-motion</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="no-print print print visibility utilities slashed.print" data-missing="false">
+      <a href="screenshots/002-no-print.svg"><img loading="lazy" src="screenshots/002-no-print.svg" alt="Visual audit artifact for .no-print"></a>
+      <figcaption><code>.no-print</code><span class="meta">Print · slashed.print · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="print-color-exact print opt-in colour treatment slashed.print" data-missing="false">
+      <a href="screenshots/003-print-color-exact.svg"><img loading="lazy" src="screenshots/003-print-color-exact.svg" alt="Visual audit artifact for .print-color-exact"></a>
+      <figcaption><code>.print-color-exact</code><span class="meta">Print · slashed.print · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="print-no-color print opt-in colour treatment slashed.print" data-missing="false">
+      <a href="screenshots/004-print-no-color.svg"><img loading="lazy" src="screenshots/004-print-no-color.svg" alt="Visual audit artifact for .print-no-color"></a>
+      <figcaption><code>.print-no-color</code><span class="meta">Print · slashed.print · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="print-only print print visibility utilities slashed.print" data-missing="false">
+      <a href="screenshots/005-print-only.svg"><img loading="lazy" src="screenshots/005-print-only.svg" alt="Visual audit artifact for .print-only"></a>
+      <figcaption><code>.print-only</code><span class="meta">Print · slashed.print · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-alternate layout primitives alternate (zigzag / media-object) slashed.layout" data-missing="false">
+      <a href="screenshots/006-sf-alternate.svg"><img loading="lazy" src="screenshots/006-sf-alternate.svg" alt="Visual audit artifact for .sf-alternate"></a>
+      <figcaption><code>.sf-alternate</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-aspect macro classes aspect slashed.macros" data-missing="false">
+      <a href="screenshots/007-sf-aspect.svg"><img loading="lazy" src="screenshots/007-sf-aspect.svg" alt="Visual audit artifact for .sf-aspect"></a>
+      <figcaption><code>.sf-aspect</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/008-sf-bento.svg"><img loading="lazy" src="screenshots/008-sf-bento.svg" alt="Visual audit artifact for .sf-bento"></a>
+      <figcaption><code>.sf-bento</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento--2 layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/009-sf-bento--2.svg"><img loading="lazy" src="screenshots/009-sf-bento--2.svg" alt="Visual audit artifact for .sf-bento--2"></a>
+      <figcaption><code>.sf-bento--2</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento--3 layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/010-sf-bento--3.svg"><img loading="lazy" src="screenshots/010-sf-bento--3.svg" alt="Visual audit artifact for .sf-bento--3"></a>
+      <figcaption><code>.sf-bento--3</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento--6 layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/011-sf-bento--6.svg"><img loading="lazy" src="screenshots/011-sf-bento--6.svg" alt="Visual audit artifact for .sf-bento--6"></a>
+      <figcaption><code>.sf-bento--6</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento--compact layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/012-sf-bento--compact.svg"><img loading="lazy" src="screenshots/012-sf-bento--compact.svg" alt="Visual audit artifact for .sf-bento--compact"></a>
+      <figcaption><code>.sf-bento--compact</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento--tall layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/013-sf-bento--tall.svg"><img loading="lazy" src="screenshots/013-sf-bento--tall.svg" alt="Visual audit artifact for .sf-bento--tall"></a>
+      <figcaption><code>.sf-bento--tall</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento-featured layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/014-sf-bento-featured.svg"><img loading="lazy" src="screenshots/014-sf-bento-featured.svg" alt="Visual audit artifact for .sf-bento-featured"></a>
+      <figcaption><code>.sf-bento-featured</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento-full layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/015-sf-bento-full.svg"><img loading="lazy" src="screenshots/015-sf-bento-full.svg" alt="Visual audit artifact for .sf-bento-full"></a>
+      <figcaption><code>.sf-bento-full</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento-tall layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/016-sf-bento-tall.svg"><img loading="lazy" src="screenshots/016-sf-bento-tall.svg" alt="Visual audit artifact for .sf-bento-tall"></a>
+      <figcaption><code>.sf-bento-tall</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bento-wide layout primitives bento grid slashed.layout" data-missing="false">
+      <a href="screenshots/017-sf-bento-wide.svg"><img loading="lazy" src="screenshots/017-sf-bento-wide.svg" alt="Visual audit artifact for .sf-bento-wide"></a>
+      <figcaption><code>.sf-bento-wide</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-bg-layer layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/018-sf-bg-layer.svg"><img loading="lazy" src="screenshots/018-sf-bg-layer.svg" alt="Visual audit artifact for .sf-bg-layer"></a>
+      <figcaption><code>.sf-bg-layer</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-box layout primitives box slashed.layout" data-missing="false">
+      <a href="screenshots/019-sf-box.svg"><img loading="lazy" src="screenshots/019-sf-box.svg" alt="Visual audit artifact for .sf-box"></a>
+      <figcaption><code>.sf-box</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-breakout layout primitives content grid (breakout pattern) slashed.layout" data-missing="false">
+      <a href="screenshots/020-sf-breakout.svg"><img loading="lazy" src="screenshots/020-sf-breakout.svg" alt="Visual audit artifact for .sf-breakout"></a>
+      <figcaption><code>.sf-breakout</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/021-sf-btn.svg"><img loading="lazy" src="screenshots/021-sf-btn.svg" alt="Visual audit artifact for .sf-btn"></a>
+      <figcaption><code>.sf-btn</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--action components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/022-sf-btn--action.svg"><img loading="lazy" src="screenshots/022-sf-btn--action.svg" alt="Visual audit artifact for .sf-btn--action"></a>
+      <figcaption><code>.sf-btn--action</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--base components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/023-sf-btn--base.svg"><img loading="lazy" src="screenshots/023-sf-btn--base.svg" alt="Visual audit artifact for .sf-btn--base"></a>
+      <figcaption><code>.sf-btn--base</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--block components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/024-sf-btn--block.svg"><img loading="lazy" src="screenshots/024-sf-btn--block.svg" alt="Visual audit artifact for .sf-btn--block"></a>
+      <figcaption><code>.sf-btn--block</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--block-cq components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/025-sf-btn--block-cq.svg"><img loading="lazy" src="screenshots/025-sf-btn--block-cq.svg" alt="Visual audit artifact for .sf-btn--block-cq"></a>
+      <figcaption><code>.sf-btn--block-cq</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--danger components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/026-sf-btn--danger.svg"><img loading="lazy" src="screenshots/026-sf-btn--danger.svg" alt="Visual audit artifact for .sf-btn--danger"></a>
+      <figcaption><code>.sf-btn--danger</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--gradient components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/027-sf-btn--gradient.svg"><img loading="lazy" src="screenshots/027-sf-btn--gradient.svg" alt="Visual audit artifact for .sf-btn--gradient"></a>
+      <figcaption><code>.sf-btn--gradient</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--info components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/028-sf-btn--info.svg"><img loading="lazy" src="screenshots/028-sf-btn--info.svg" alt="Visual audit artifact for .sf-btn--info"></a>
+      <figcaption><code>.sf-btn--info</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--l components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/029-sf-btn--l.svg"><img loading="lazy" src="screenshots/029-sf-btn--l.svg" alt="Visual audit artifact for .sf-btn--l"></a>
+      <figcaption><code>.sf-btn--l</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--neutral components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/030-sf-btn--neutral.svg"><img loading="lazy" src="screenshots/030-sf-btn--neutral.svg" alt="Visual audit artifact for .sf-btn--neutral"></a>
+      <figcaption><code>.sf-btn--neutral</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--outline components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/031-sf-btn--outline.svg"><img loading="lazy" src="screenshots/031-sf-btn--outline.svg" alt="Visual audit artifact for .sf-btn--outline"></a>
+      <figcaption><code>.sf-btn--outline</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--primary components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/032-sf-btn--primary.svg"><img loading="lazy" src="screenshots/032-sf-btn--primary.svg" alt="Visual audit artifact for .sf-btn--primary"></a>
+      <figcaption><code>.sf-btn--primary</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--s components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/033-sf-btn--s.svg"><img loading="lazy" src="screenshots/033-sf-btn--s.svg" alt="Visual audit artifact for .sf-btn--s"></a>
+      <figcaption><code>.sf-btn--s</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--secondary components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/034-sf-btn--secondary.svg"><img loading="lazy" src="screenshots/034-sf-btn--secondary.svg" alt="Visual audit artifact for .sf-btn--secondary"></a>
+      <figcaption><code>.sf-btn--secondary</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--soft components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/035-sf-btn--soft.svg"><img loading="lazy" src="screenshots/035-sf-btn--soft.svg" alt="Visual audit artifact for .sf-btn--soft"></a>
+      <figcaption><code>.sf-btn--soft</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--success components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/036-sf-btn--success.svg"><img loading="lazy" src="screenshots/036-sf-btn--success.svg" alt="Visual audit artifact for .sf-btn--success"></a>
+      <figcaption><code>.sf-btn--success</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--tertiary components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/037-sf-btn--tertiary.svg"><img loading="lazy" src="screenshots/037-sf-btn--tertiary.svg" alt="Visual audit artifact for .sf-btn--tertiary"></a>
+      <figcaption><code>.sf-btn--tertiary</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--warning components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/038-sf-btn--warning.svg"><img loading="lazy" src="screenshots/038-sf-btn--warning.svg" alt="Visual audit artifact for .sf-btn--warning"></a>
+      <figcaption><code>.sf-btn--warning</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--xl components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/039-sf-btn--xl.svg"><img loading="lazy" src="screenshots/039-sf-btn--xl.svg" alt="Visual audit artifact for .sf-btn--xl"></a>
+      <figcaption><code>.sf-btn--xl</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-btn--xs components .sf-btn slashed.components" data-missing="false">
+      <a href="screenshots/040-sf-btn--xs.svg"><img loading="lazy" src="screenshots/040-sf-btn--xs.svg" alt="Visual audit artifact for .sf-btn--xs"></a>
+      <figcaption><code>.sf-btn--xs</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/041-sf-card.svg"><img loading="lazy" src="screenshots/041-sf-card.svg" alt="Visual audit artifact for .sf-card"></a>
+      <figcaption><code>.sf-card</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card__avatar components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/042-sf-card__avatar.svg"><img loading="lazy" src="screenshots/042-sf-card__avatar.svg" alt="Visual audit artifact for .sf-card__avatar"></a>
+      <figcaption><code>.sf-card__avatar</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card__body components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/043-sf-card__body.svg"><img loading="lazy" src="screenshots/043-sf-card__body.svg" alt="Visual audit artifact for .sf-card__body"></a>
+      <figcaption><code>.sf-card__body</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card__footer components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/044-sf-card__footer.svg"><img loading="lazy" src="screenshots/044-sf-card__footer.svg" alt="Visual audit artifact for .sf-card__footer"></a>
+      <figcaption><code>.sf-card__footer</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card__header components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/045-sf-card__header.svg"><img loading="lazy" src="screenshots/045-sf-card__header.svg" alt="Visual audit artifact for .sf-card__header"></a>
+      <figcaption><code>.sf-card__header</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card__media components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/046-sf-card__media.svg"><img loading="lazy" src="screenshots/046-sf-card__media.svg" alt="Visual audit artifact for .sf-card__media"></a>
+      <figcaption><code>.sf-card__media</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card__title components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/047-sf-card__title.svg"><img loading="lazy" src="screenshots/047-sf-card__title.svg" alt="Visual audit artifact for .sf-card__title"></a>
+      <figcaption><code>.sf-card__title</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card--bordered components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/048-sf-card--bordered.svg"><img loading="lazy" src="screenshots/048-sf-card--bordered.svg" alt="Visual audit artifact for .sf-card--bordered"></a>
+      <figcaption><code>.sf-card--bordered</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card--elevated components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/049-sf-card--elevated.svg"><img loading="lazy" src="screenshots/049-sf-card--elevated.svg" alt="Visual audit artifact for .sf-card--elevated"></a>
+      <figcaption><code>.sf-card--elevated</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-card--interactive components .sf-card slashed.components" data-missing="false">
+      <a href="screenshots/050-sf-card--interactive.svg"><img loading="lazy" src="screenshots/050-sf-card--interactive.svg" alt="Visual audit artifact for .sf-card--interactive"></a>
+      <figcaption><code>.sf-card--interactive</code><span class="meta">Components · slashed.components · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-center layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/051-sf-center.svg"><img loading="lazy" src="screenshots/051-sf-center.svg" alt="Visual audit artifact for .sf-center"></a>
+      <figcaption><code>.sf-center</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-center--intrinsic layout primitives center slashed.layout" data-missing="false">
+      <a href="screenshots/052-sf-center--intrinsic.svg"><img loading="lazy" src="screenshots/052-sf-center--intrinsic.svg" alt="Visual audit artifact for .sf-center--intrinsic"></a>
+      <figcaption><code>.sf-center--intrinsic</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-clickable-parent accessibility clickable-parent slashed.accessibility" data-missing="false">
+      <a href="screenshots/053-sf-clickable-parent.svg"><img loading="lazy" src="screenshots/053-sf-clickable-parent.svg" alt="Visual audit artifact for .sf-clickable-parent"></a>
+      <figcaption><code>.sf-clickable-parent</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-clickable-parent__overlay accessibility clickable-parent slashed.accessibility" data-missing="false">
+      <a href="screenshots/054-sf-clickable-parent__overlay.svg"><img loading="lazy" src="screenshots/054-sf-clickable-parent__overlay.svg" alt="Visual audit artifact for .sf-clickable-parent__overlay"></a>
+      <figcaption><code>.sf-clickable-parent__overlay</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/055-sf-cluster.svg"><img loading="lazy" src="screenshots/055-sf-cluster.svg" alt="Visual audit artifact for .sf-cluster"></a>
+      <figcaption><code>.sf-cluster</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--2xl layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/056-sf-cluster--2xl.svg"><img loading="lazy" src="screenshots/056-sf-cluster--2xl.svg" alt="Visual audit artifact for .sf-cluster--2xl"></a>
+      <figcaption><code>.sf-cluster--2xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--between layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/057-sf-cluster--between.svg"><img loading="lazy" src="screenshots/057-sf-cluster--between.svg" alt="Visual audit artifact for .sf-cluster--between"></a>
+      <figcaption><code>.sf-cluster--between</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--center layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/058-sf-cluster--center.svg"><img loading="lazy" src="screenshots/058-sf-cluster--center.svg" alt="Visual audit artifact for .sf-cluster--center"></a>
+      <figcaption><code>.sf-cluster--center</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--end layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/059-sf-cluster--end.svg"><img loading="lazy" src="screenshots/059-sf-cluster--end.svg" alt="Visual audit artifact for .sf-cluster--end"></a>
+      <figcaption><code>.sf-cluster--end</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--l layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/060-sf-cluster--l.svg"><img loading="lazy" src="screenshots/060-sf-cluster--l.svg" alt="Visual audit artifact for .sf-cluster--l"></a>
+      <figcaption><code>.sf-cluster--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--m layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/061-sf-cluster--m.svg"><img loading="lazy" src="screenshots/061-sf-cluster--m.svg" alt="Visual audit artifact for .sf-cluster--m"></a>
+      <figcaption><code>.sf-cluster--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--no-wrap layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/062-sf-cluster--no-wrap.svg"><img loading="lazy" src="screenshots/062-sf-cluster--no-wrap.svg" alt="Visual audit artifact for .sf-cluster--no-wrap"></a>
+      <figcaption><code>.sf-cluster--no-wrap</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--s layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/063-sf-cluster--s.svg"><img loading="lazy" src="screenshots/063-sf-cluster--s.svg" alt="Visual audit artifact for .sf-cluster--s"></a>
+      <figcaption><code>.sf-cluster--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--xl layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/064-sf-cluster--xl.svg"><img loading="lazy" src="screenshots/064-sf-cluster--xl.svg" alt="Visual audit artifact for .sf-cluster--xl"></a>
+      <figcaption><code>.sf-cluster--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cluster--xs layout primitives cluster slashed.layout" data-missing="false">
+      <a href="screenshots/065-sf-cluster--xs.svg"><img loading="lazy" src="screenshots/065-sf-cluster--xs.svg" alt="Visual audit artifact for .sf-cluster--xs"></a>
+      <figcaption><code>.sf-cluster--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-color-pulse motion / animation @property color animation slashed.motion" data-missing="false">
+      <a href="screenshots/066-sf-color-pulse.svg"><img loading="lazy" src="screenshots/066-sf-color-pulse.svg" alt="Visual audit artifact for .sf-color-pulse"></a>
+      <figcaption><code>.sf-color-pulse</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-container layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/067-sf-container.svg"><img loading="lazy" src="screenshots/067-sf-container.svg" alt="Visual audit artifact for .sf-container"></a>
+      <figcaption><code>.sf-container</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-container--full layout primitives container slashed.layout" data-missing="false">
+      <a href="screenshots/068-sf-container--full.svg"><img loading="lazy" src="screenshots/068-sf-container--full.svg" alt="Visual audit artifact for .sf-container--full"></a>
+      <figcaption><code>.sf-container--full</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-container--narrow layout primitives container slashed.layout" data-missing="false">
+      <a href="screenshots/069-sf-container--narrow.svg"><img loading="lazy" src="screenshots/069-sf-container--narrow.svg" alt="Visual audit artifact for .sf-container--narrow"></a>
+      <figcaption><code>.sf-container--narrow</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-container--prose layout primitives container slashed.layout" data-missing="false">
+      <a href="screenshots/070-sf-container--prose.svg"><img loading="lazy" src="screenshots/070-sf-container--prose.svg" alt="Visual audit artifact for .sf-container--prose"></a>
+      <figcaption><code>.sf-container--prose</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-container--wide layout primitives container slashed.layout" data-missing="false">
+      <a href="screenshots/071-sf-container--wide.svg"><img loading="lazy" src="screenshots/071-sf-container--wide.svg" alt="Visual audit artifact for .sf-container--wide"></a>
+      <figcaption><code>.sf-container--wide</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-content-auto macro classes content visibility slashed.macros" data-missing="false">
+      <a href="screenshots/072-sf-content-auto.svg"><img loading="lazy" src="screenshots/072-sf-content-auto.svg" alt="Visual audit artifact for .sf-content-auto"></a>
+      <figcaption><code>.sf-content-auto</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-content-grid layout primitives content grid (breakout pattern) slashed.layout" data-missing="false">
+      <a href="screenshots/073-sf-content-grid.svg"><img loading="lazy" src="screenshots/073-sf-content-grid.svg" alt="Visual audit artifact for .sf-content-grid"></a>
+      <figcaption><code>.sf-content-grid</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-corner-scoop macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/074-sf-corner-scoop.svg"><img loading="lazy" src="screenshots/074-sf-corner-scoop.svg" alt="Visual audit artifact for .sf-corner-scoop"></a>
+      <figcaption><code>.sf-corner-scoop</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-corner-scoop--bottom-left macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/075-sf-corner-scoop--bottom-left.svg"><img loading="lazy" src="screenshots/075-sf-corner-scoop--bottom-left.svg" alt="Visual audit artifact for .sf-corner-scoop--bottom-left"></a>
+      <figcaption><code>.sf-corner-scoop--bottom-left</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-corner-scoop--bottom-right macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/076-sf-corner-scoop--bottom-right.svg"><img loading="lazy" src="screenshots/076-sf-corner-scoop--bottom-right.svg" alt="Visual audit artifact for .sf-corner-scoop--bottom-right"></a>
+      <figcaption><code>.sf-corner-scoop--bottom-right</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-corner-scoop--top-left macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/077-sf-corner-scoop--top-left.svg"><img loading="lazy" src="screenshots/077-sf-corner-scoop--top-left.svg" alt="Visual audit artifact for .sf-corner-scoop--top-left"></a>
+      <figcaption><code>.sf-corner-scoop--top-left</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-corner-scoop--top-right macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/078-sf-corner-scoop--top-right.svg"><img loading="lazy" src="screenshots/078-sf-corner-scoop--top-right.svg" alt="Visual audit artifact for .sf-corner-scoop--top-right"></a>
+      <figcaption><code>.sf-corner-scoop--top-right</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cover layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/079-sf-cover.svg"><img loading="lazy" src="screenshots/079-sf-cover.svg" alt="Visual audit artifact for .sf-cover"></a>
+      <figcaption><code>.sf-cover</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cover__center layout primitives cover slashed.layout" data-missing="false">
+      <a href="screenshots/080-sf-cover__center.svg"><img loading="lazy" src="screenshots/080-sf-cover__center.svg" alt="Visual audit artifact for .sf-cover__center"></a>
+      <figcaption><code>.sf-cover__center</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cover--max layout primitives cover slashed.layout" data-missing="false">
+      <a href="screenshots/081-sf-cover--max.svg"><img loading="lazy" src="screenshots/081-sf-cover--max.svg" alt="Visual audit artifact for .sf-cover--max"></a>
+      <figcaption><code>.sf-cover--max</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cover--min layout primitives cover slashed.layout" data-missing="false">
+      <a href="screenshots/082-sf-cover--min.svg"><img loading="lazy" src="screenshots/082-sf-cover--min.svg" alt="Visual audit artifact for .sf-cover--min"></a>
+      <figcaption><code>.sf-cover--min</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cover--padding-l layout primitives cover slashed.layout" data-missing="false">
+      <a href="screenshots/083-sf-cover--padding-l.svg"><img loading="lazy" src="screenshots/083-sf-cover--padding-l.svg" alt="Visual audit artifact for .sf-cover--padding-l"></a>
+      <figcaption><code>.sf-cover--padding-l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cover--padding-s layout primitives cover slashed.layout" data-missing="false">
+      <a href="screenshots/084-sf-cover--padding-s.svg"><img loading="lazy" src="screenshots/084-sf-cover--padding-s.svg" alt="Visual audit artifact for .sf-cover--padding-s"></a>
+      <figcaption><code>.sf-cover--padding-s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-cq layout primitives container query context slashed.layout" data-missing="false">
+      <a href="screenshots/085-sf-cq.svg"><img loading="lazy" src="screenshots/085-sf-cq.svg" alt="Visual audit artifact for .sf-cq"></a>
+      <figcaption><code>.sf-cq</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divide layout primitives divide slashed.layout" data-missing="false">
+      <a href="screenshots/086-sf-divide.svg"><img loading="lazy" src="screenshots/086-sf-divide.svg" alt="Visual audit artifact for .sf-divide"></a>
+      <figcaption><code>.sf-divide</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divide--vertical layout primitives divide slashed.layout" data-missing="false">
+      <a href="screenshots/087-sf-divide--vertical.svg"><img loading="lazy" src="screenshots/087-sf-divide--vertical.svg" alt="Visual audit artifact for .sf-divide--vertical"></a>
+      <figcaption><code>.sf-divide--vertical</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divider layout primitives divider slashed.layout" data-missing="false">
+      <a href="screenshots/088-sf-divider.svg"><img loading="lazy" src="screenshots/088-sf-divider.svg" alt="Visual audit artifact for .sf-divider"></a>
+      <figcaption><code>.sf-divider</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divider--dashed layout primitives divider slashed.layout" data-missing="false">
+      <a href="screenshots/089-sf-divider--dashed.svg"><img loading="lazy" src="screenshots/089-sf-divider--dashed.svg" alt="Visual audit artifact for .sf-divider--dashed"></a>
+      <figcaption><code>.sf-divider--dashed</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divider--dotted layout primitives divider slashed.layout" data-missing="false">
+      <a href="screenshots/090-sf-divider--dotted.svg"><img loading="lazy" src="screenshots/090-sf-divider--dotted.svg" alt="Visual audit artifact for .sf-divider--dotted"></a>
+      <figcaption><code>.sf-divider--dotted</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divider--gradient layout primitives divider slashed.layout" data-missing="false">
+      <a href="screenshots/091-sf-divider--gradient.svg"><img loading="lazy" src="screenshots/091-sf-divider--gradient.svg" alt="Visual audit artifact for .sf-divider--gradient"></a>
+      <figcaption><code>.sf-divider--gradient</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divider--soft layout primitives divider slashed.layout" data-missing="false">
+      <a href="screenshots/092-sf-divider--soft.svg"><img loading="lazy" src="screenshots/092-sf-divider--soft.svg" alt="Visual audit artifact for .sf-divider--soft"></a>
+      <figcaption><code>.sf-divider--soft</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divider--strong layout primitives divider slashed.layout" data-missing="false">
+      <a href="screenshots/093-sf-divider--strong.svg"><img loading="lazy" src="screenshots/093-sf-divider--strong.svg" alt="Visual audit artifact for .sf-divider--strong"></a>
+      <figcaption><code>.sf-divider--strong</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-divider--vertical layout primitives divider slashed.layout" data-missing="false">
+      <a href="screenshots/094-sf-divider--vertical.svg"><img loading="lazy" src="screenshots/094-sf-divider--vertical.svg" alt="Visual audit artifact for .sf-divider--vertical"></a>
+      <figcaption><code>.sf-divider--vertical</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-drop-shadow-l macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/095-sf-drop-shadow-l.svg"><img loading="lazy" src="screenshots/095-sf-drop-shadow-l.svg" alt="Visual audit artifact for .sf-drop-shadow-l"></a>
+      <figcaption><code>.sf-drop-shadow-l</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-drop-shadow-m macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/096-sf-drop-shadow-m.svg"><img loading="lazy" src="screenshots/096-sf-drop-shadow-m.svg" alt="Visual audit artifact for .sf-drop-shadow-m"></a>
+      <figcaption><code>.sf-drop-shadow-m</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-drop-shadow-s macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/097-sf-drop-shadow-s.svg"><img loading="lazy" src="screenshots/097-sf-drop-shadow-s.svg" alt="Visual audit artifact for .sf-drop-shadow-s"></a>
+      <figcaption><code>.sf-drop-shadow-s</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-drop-shadow-xl macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/098-sf-drop-shadow-xl.svg"><img loading="lazy" src="screenshots/098-sf-drop-shadow-xl.svg" alt="Visual audit artifact for .sf-drop-shadow-xl"></a>
+      <figcaption><code>.sf-drop-shadow-xl</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-drop-shadow-xs macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/099-sf-drop-shadow-xs.svg"><img loading="lazy" src="screenshots/099-sf-drop-shadow-xs.svg" alt="Visual audit artifact for .sf-drop-shadow-xs"></a>
+      <figcaption><code>.sf-drop-shadow-xs</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-entrance--fade motion / animation scroll-driven entrances slashed.motion" data-missing="false">
+      <a href="screenshots/100-sf-entrance--fade.svg"><img loading="lazy" src="screenshots/100-sf-entrance--fade.svg" alt="Visual audit artifact for .sf-entrance--fade"></a>
+      <figcaption><code>.sf-entrance--fade</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-entrance--fade-down motion / animation scroll-driven entrances slashed.motion" data-missing="false">
+      <a href="screenshots/101-sf-entrance--fade-down.svg"><img loading="lazy" src="screenshots/101-sf-entrance--fade-down.svg" alt="Visual audit artifact for .sf-entrance--fade-down"></a>
+      <figcaption><code>.sf-entrance--fade-down</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-entrance--fade-left motion / animation scroll-driven entrances slashed.motion" data-missing="false">
+      <a href="screenshots/102-sf-entrance--fade-left.svg"><img loading="lazy" src="screenshots/102-sf-entrance--fade-left.svg" alt="Visual audit artifact for .sf-entrance--fade-left"></a>
+      <figcaption><code>.sf-entrance--fade-left</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-entrance--fade-right motion / animation scroll-driven entrances slashed.motion" data-missing="false">
+      <a href="screenshots/103-sf-entrance--fade-right.svg"><img loading="lazy" src="screenshots/103-sf-entrance--fade-right.svg" alt="Visual audit artifact for .sf-entrance--fade-right"></a>
+      <figcaption><code>.sf-entrance--fade-right</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-entrance--fade-up motion / animation scroll-driven entrances slashed.motion" data-missing="false">
+      <a href="screenshots/104-sf-entrance--fade-up.svg"><img loading="lazy" src="screenshots/104-sf-entrance--fade-up.svg" alt="Visual audit artifact for .sf-entrance--fade-up"></a>
+      <figcaption><code>.sf-entrance--fade-up</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-entrance--scale-up motion / animation scroll-driven entrances slashed.motion" data-missing="false">
+      <a href="screenshots/105-sf-entrance--scale-up.svg"><img loading="lazy" src="screenshots/105-sf-entrance--scale-up.svg" alt="Visual audit artifact for .sf-entrance--scale-up"></a>
+      <figcaption><code>.sf-entrance--scale-up</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-equal layout primitives equal columns (intrinsically responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/106-sf-equal.svg"><img loading="lazy" src="screenshots/106-sf-equal.svg" alt="Visual audit artifact for .sf-equal"></a>
+      <figcaption><code>.sf-equal</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-equal--2 layout primitives equal columns (intrinsically responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/107-sf-equal--2.svg"><img loading="lazy" src="screenshots/107-sf-equal--2.svg" alt="Visual audit artifact for .sf-equal--2"></a>
+      <figcaption><code>.sf-equal--2</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-equal--3 layout primitives equal columns (intrinsically responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/108-sf-equal--3.svg"><img loading="lazy" src="screenshots/108-sf-equal--3.svg" alt="Visual audit artifact for .sf-equal--3"></a>
+      <figcaption><code>.sf-equal--3</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-equal--4 layout primitives equal columns (intrinsically responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/109-sf-equal--4.svg"><img loading="lazy" src="screenshots/109-sf-equal--4.svg" alt="Visual audit artifact for .sf-equal--4"></a>
+      <figcaption><code>.sf-equal--4</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-equal--6 layout primitives equal columns (intrinsically responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/110-sf-equal--6.svg"><img loading="lazy" src="screenshots/110-sf-equal--6.svg" alt="Visual audit artifact for .sf-equal--6"></a>
+      <figcaption><code>.sf-equal--6</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-equal-height macro classes equal height slashed.macros" data-missing="false">
+      <a href="screenshots/111-sf-equal-height.svg"><img loading="lazy" src="screenshots/111-sf-equal-height.svg" alt="Visual audit artifact for .sf-equal-height"></a>
+      <figcaption><code>.sf-equal-height</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-exit--fade motion / animation  slashed.motion" data-missing="false">
+      <a href="screenshots/112-sf-exit--fade.svg"><img loading="lazy" src="screenshots/112-sf-exit--fade.svg" alt="Visual audit artifact for .sf-exit--fade"></a>
+      <figcaption><code>.sf-exit--fade</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-exit--fade-down motion / animation  slashed.motion" data-missing="false">
+      <a href="screenshots/113-sf-exit--fade-down.svg"><img loading="lazy" src="screenshots/113-sf-exit--fade-down.svg" alt="Visual audit artifact for .sf-exit--fade-down"></a>
+      <figcaption><code>.sf-exit--fade-down</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-exit--fade-left motion / animation  slashed.motion" data-missing="false">
+      <a href="screenshots/114-sf-exit--fade-left.svg"><img loading="lazy" src="screenshots/114-sf-exit--fade-left.svg" alt="Visual audit artifact for .sf-exit--fade-left"></a>
+      <figcaption><code>.sf-exit--fade-left</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-exit--fade-right motion / animation  slashed.motion" data-missing="false">
+      <a href="screenshots/115-sf-exit--fade-right.svg"><img loading="lazy" src="screenshots/115-sf-exit--fade-right.svg" alt="Visual audit artifact for .sf-exit--fade-right"></a>
+      <figcaption><code>.sf-exit--fade-right</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-exit--fade-up motion / animation  slashed.motion" data-missing="false">
+      <a href="screenshots/116-sf-exit--fade-up.svg"><img loading="lazy" src="screenshots/116-sf-exit--fade-up.svg" alt="Visual audit artifact for .sf-exit--fade-up"></a>
+      <figcaption><code>.sf-exit--fade-up</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-exit--scale-down motion / animation  slashed.motion" data-missing="false">
+      <a href="screenshots/117-sf-exit--scale-down.svg"><img loading="lazy" src="screenshots/117-sf-exit--scale-down.svg" alt="Visual audit artifact for .sf-exit--scale-down"></a>
+      <figcaption><code>.sf-exit--scale-down</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-fade-in motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/118-sf-fade-in.svg"><img loading="lazy" src="screenshots/118-sf-fade-in.svg" alt="Visual audit artifact for .sf-fade-in"></a>
+      <figcaption><code>.sf-fade-in</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-fade-out motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/119-sf-fade-out.svg"><img loading="lazy" src="screenshots/119-sf-fade-out.svg" alt="Visual audit artifact for .sf-fade-out"></a>
+      <figcaption><code>.sf-fade-out</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-flow macro classes flow slashed.macros" data-missing="false">
+      <a href="screenshots/120-sf-flow.svg"><img loading="lazy" src="screenshots/120-sf-flow.svg" alt="Visual audit artifact for .sf-flow"></a>
+      <figcaption><code>.sf-flow</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-fluid-cq layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/121-sf-fluid-cq.svg"><img loading="lazy" src="screenshots/121-sf-fluid-cq.svg" alt="Visual audit artifact for .sf-fluid-cq"></a>
+      <figcaption><code>.sf-fluid-cq</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-focus-parent accessibility focus-parent slashed.accessibility" data-missing="false">
+      <a href="screenshots/122-sf-focus-parent.svg"><img loading="lazy" src="screenshots/122-sf-focus-parent.svg" alt="Visual audit artifact for .sf-focus-parent"></a>
+      <figcaption><code>.sf-focus-parent</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-focus-shadow accessibility focus-shadow opt-in slashed.accessibility" data-missing="false">
+      <a href="screenshots/123-sf-focus-shadow.svg"><img loading="lazy" src="screenshots/123-sf-focus-shadow.svg" alt="Visual audit artifact for .sf-focus-shadow"></a>
+      <figcaption><code>.sf-focus-shadow</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/124-sf-frame.svg"><img loading="lazy" src="screenshots/124-sf-frame.svg" alt="Visual audit artifact for .sf-frame"></a>
+      <figcaption><code>.sf-frame</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame--3-2 layout primitives frame slashed.layout" data-missing="false">
+      <a href="screenshots/125-sf-frame--3-2.svg"><img loading="lazy" src="screenshots/125-sf-frame--3-2.svg" alt="Visual audit artifact for .sf-frame--3-2"></a>
+      <figcaption><code>.sf-frame--3-2</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame--4-3 layout primitives frame slashed.layout" data-missing="false">
+      <a href="screenshots/126-sf-frame--4-3.svg"><img loading="lazy" src="screenshots/126-sf-frame--4-3.svg" alt="Visual audit artifact for .sf-frame--4-3"></a>
+      <figcaption><code>.sf-frame--4-3</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame--cinema layout primitives frame slashed.layout" data-missing="false">
+      <a href="screenshots/127-sf-frame--cinema.svg"><img loading="lazy" src="screenshots/127-sf-frame--cinema.svg" alt="Visual audit artifact for .sf-frame--cinema"></a>
+      <figcaption><code>.sf-frame--cinema</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame--golden layout primitives frame slashed.layout" data-missing="false">
+      <a href="screenshots/128-sf-frame--golden.svg"><img loading="lazy" src="screenshots/128-sf-frame--golden.svg" alt="Visual audit artifact for .sf-frame--golden"></a>
+      <figcaption><code>.sf-frame--golden</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame--portrait layout primitives frame slashed.layout" data-missing="false">
+      <a href="screenshots/129-sf-frame--portrait.svg"><img loading="lazy" src="screenshots/129-sf-frame--portrait.svg" alt="Visual audit artifact for .sf-frame--portrait"></a>
+      <figcaption><code>.sf-frame--portrait</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame--square layout primitives frame slashed.layout" data-missing="false">
+      <a href="screenshots/130-sf-frame--square.svg"><img loading="lazy" src="screenshots/130-sf-frame--square.svg" alt="Visual audit artifact for .sf-frame--square"></a>
+      <figcaption><code>.sf-frame--square</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-frame--video layout primitives frame slashed.layout" data-missing="false">
+      <a href="screenshots/131-sf-frame--video.svg"><img loading="lazy" src="screenshots/131-sf-frame--video.svg" alt="Visual audit artifact for .sf-frame--video"></a>
+      <figcaption><code>.sf-frame--video</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-full-bleed layout primitives content grid (breakout pattern) slashed.layout" data-missing="false">
+      <a href="screenshots/132-sf-full-bleed.svg"><img loading="lazy" src="screenshots/132-sf-full-bleed.svg" alt="Visual audit artifact for .sf-full-bleed"></a>
+      <figcaption><code>.sf-full-bleed</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-gap layout primitives gap slashed.layout" data-missing="false">
+      <a href="screenshots/133-sf-gap.svg"><img loading="lazy" src="screenshots/133-sf-gap.svg" alt="Visual audit artifact for .sf-gap"></a>
+      <figcaption><code>.sf-gap</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-gap--2xl layout primitives gap slashed.layout" data-missing="false">
+      <a href="screenshots/134-sf-gap--2xl.svg"><img loading="lazy" src="screenshots/134-sf-gap--2xl.svg" alt="Visual audit artifact for .sf-gap--2xl"></a>
+      <figcaption><code>.sf-gap--2xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-gap--l layout primitives gap slashed.layout" data-missing="false">
+      <a href="screenshots/135-sf-gap--l.svg"><img loading="lazy" src="screenshots/135-sf-gap--l.svg" alt="Visual audit artifact for .sf-gap--l"></a>
+      <figcaption><code>.sf-gap--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-gap--m layout primitives gap slashed.layout" data-missing="false">
+      <a href="screenshots/136-sf-gap--m.svg"><img loading="lazy" src="screenshots/136-sf-gap--m.svg" alt="Visual audit artifact for .sf-gap--m"></a>
+      <figcaption><code>.sf-gap--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-gap--s layout primitives gap slashed.layout" data-missing="false">
+      <a href="screenshots/137-sf-gap--s.svg"><img loading="lazy" src="screenshots/137-sf-gap--s.svg" alt="Visual audit artifact for .sf-gap--s"></a>
+      <figcaption><code>.sf-gap--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-gap--xl layout primitives gap slashed.layout" data-missing="false">
+      <a href="screenshots/138-sf-gap--xl.svg"><img loading="lazy" src="screenshots/138-sf-gap--xl.svg" alt="Visual audit artifact for .sf-gap--xl"></a>
+      <figcaption><code>.sf-gap--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-gap--xs layout primitives gap slashed.layout" data-missing="false">
+      <a href="screenshots/139-sf-gap--xs.svg"><img loading="lazy" src="screenshots/139-sf-gap--xs.svg" alt="Visual audit artifact for .sf-gap--xs"></a>
+      <figcaption><code>.sf-gap--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/140-sf-grid.svg"><img loading="lazy" src="screenshots/140-sf-grid.svg" alt="Visual audit artifact for .sf-grid"></a>
+      <figcaption><code>.sf-grid</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--2xl layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/141-sf-grid--2xl.svg"><img loading="lazy" src="screenshots/141-sf-grid--2xl.svg" alt="Visual audit artifact for .sf-grid--2xl"></a>
+      <figcaption><code>.sf-grid--2xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--dense layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/142-sf-grid--dense.svg"><img loading="lazy" src="screenshots/142-sf-grid--dense.svg" alt="Visual audit artifact for .sf-grid--dense"></a>
+      <figcaption><code>.sf-grid--dense</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--fit layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/143-sf-grid--fit.svg"><img loading="lazy" src="screenshots/143-sf-grid--fit.svg" alt="Visual audit artifact for .sf-grid--fit"></a>
+      <figcaption><code>.sf-grid--fit</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--l layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/144-sf-grid--l.svg"><img loading="lazy" src="screenshots/144-sf-grid--l.svg" alt="Visual audit artifact for .sf-grid--l"></a>
+      <figcaption><code>.sf-grid--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--m layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/145-sf-grid--m.svg"><img loading="lazy" src="screenshots/145-sf-grid--m.svg" alt="Visual audit artifact for .sf-grid--m"></a>
+      <figcaption><code>.sf-grid--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--s layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/146-sf-grid--s.svg"><img loading="lazy" src="screenshots/146-sf-grid--s.svg" alt="Visual audit artifact for .sf-grid--s"></a>
+      <figcaption><code>.sf-grid--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--xl layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/147-sf-grid--xl.svg"><img loading="lazy" src="screenshots/147-sf-grid--xl.svg" alt="Visual audit artifact for .sf-grid--xl"></a>
+      <figcaption><code>.sf-grid--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid--xs layout primitives grid (auto) slashed.layout" data-missing="false">
+      <a href="screenshots/148-sf-grid--xs.svg"><img loading="lazy" src="screenshots/148-sf-grid--xs.svg" alt="Visual audit artifact for .sf-grid--xs"></a>
+      <figcaption><code>.sf-grid--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-1 layout primitives single-column grid slashed.layout" data-missing="false">
+      <a href="screenshots/149-sf-grid-cols-1.svg"><img loading="lazy" src="screenshots/149-sf-grid-cols-1.svg" alt="Visual audit artifact for .sf-grid-cols-1"></a>
+      <figcaption><code>.sf-grid-cols-1</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-1-2 layout primitives ratio grids slashed.layout" data-missing="false">
+      <a href="screenshots/150-sf-grid-cols-1-2.svg"><img loading="lazy" src="screenshots/150-sf-grid-cols-1-2.svg" alt="Visual audit artifact for .sf-grid-cols-1-2"></a>
+      <figcaption><code>.sf-grid-cols-1-2</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-1-3 layout primitives ratio grids slashed.layout" data-missing="false">
+      <a href="screenshots/151-sf-grid-cols-1-3.svg"><img loading="lazy" src="screenshots/151-sf-grid-cols-1-3.svg" alt="Visual audit artifact for .sf-grid-cols-1-3"></a>
+      <figcaption><code>.sf-grid-cols-1-3</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-2 layout primitives fixed column grids (container-query responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/152-sf-grid-cols-2.svg"><img loading="lazy" src="screenshots/152-sf-grid-cols-2.svg" alt="Visual audit artifact for .sf-grid-cols-2"></a>
+      <figcaption><code>.sf-grid-cols-2</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-2-1 layout primitives ratio grids slashed.layout" data-missing="false">
+      <a href="screenshots/153-sf-grid-cols-2-1.svg"><img loading="lazy" src="screenshots/153-sf-grid-cols-2-1.svg" alt="Visual audit artifact for .sf-grid-cols-2-1"></a>
+      <figcaption><code>.sf-grid-cols-2-1</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-3 layout primitives fixed column grids (container-query responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/154-sf-grid-cols-3.svg"><img loading="lazy" src="screenshots/154-sf-grid-cols-3.svg" alt="Visual audit artifact for .sf-grid-cols-3"></a>
+      <figcaption><code>.sf-grid-cols-3</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-3-1 layout primitives ratio grids slashed.layout" data-missing="false">
+      <a href="screenshots/155-sf-grid-cols-3-1.svg"><img loading="lazy" src="screenshots/155-sf-grid-cols-3-1.svg" alt="Visual audit artifact for .sf-grid-cols-3-1"></a>
+      <figcaption><code>.sf-grid-cols-3-1</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-4 layout primitives fixed column grids (container-query responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/156-sf-grid-cols-4.svg"><img loading="lazy" src="screenshots/156-sf-grid-cols-4.svg" alt="Visual audit artifact for .sf-grid-cols-4"></a>
+      <figcaption><code>.sf-grid-cols-4</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-cols-6 layout primitives fixed column grids (container-query responsive) slashed.layout" data-missing="false">
+      <a href="screenshots/157-sf-grid-cols-6.svg"><img loading="lazy" src="screenshots/157-sf-grid-cols-6.svg" alt="Visual audit artifact for .sf-grid-cols-6"></a>
+      <figcaption><code>.sf-grid-cols-6</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/158-sf-grid-flex.svg"><img loading="lazy" src="screenshots/158-sf-grid-flex.svg" alt="Visual audit artifact for .sf-grid-flex"></a>
+      <figcaption><code>.sf-grid-flex</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex--2xl layout primitives grid (flex) slashed.layout" data-missing="false">
+      <a href="screenshots/159-sf-grid-flex--2xl.svg"><img loading="lazy" src="screenshots/159-sf-grid-flex--2xl.svg" alt="Visual audit artifact for .sf-grid-flex--2xl"></a>
+      <figcaption><code>.sf-grid-flex--2xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex--center layout primitives grid (flex) slashed.layout" data-missing="false">
+      <a href="screenshots/160-sf-grid-flex--center.svg"><img loading="lazy" src="screenshots/160-sf-grid-flex--center.svg" alt="Visual audit artifact for .sf-grid-flex--center"></a>
+      <figcaption><code>.sf-grid-flex--center</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex--l layout primitives grid (flex) slashed.layout" data-missing="false">
+      <a href="screenshots/161-sf-grid-flex--l.svg"><img loading="lazy" src="screenshots/161-sf-grid-flex--l.svg" alt="Visual audit artifact for .sf-grid-flex--l"></a>
+      <figcaption><code>.sf-grid-flex--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex--m layout primitives grid (flex) slashed.layout" data-missing="false">
+      <a href="screenshots/162-sf-grid-flex--m.svg"><img loading="lazy" src="screenshots/162-sf-grid-flex--m.svg" alt="Visual audit artifact for .sf-grid-flex--m"></a>
+      <figcaption><code>.sf-grid-flex--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex--s layout primitives grid (flex) slashed.layout" data-missing="false">
+      <a href="screenshots/163-sf-grid-flex--s.svg"><img loading="lazy" src="screenshots/163-sf-grid-flex--s.svg" alt="Visual audit artifact for .sf-grid-flex--s"></a>
+      <figcaption><code>.sf-grid-flex--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex--xl layout primitives grid (flex) slashed.layout" data-missing="false">
+      <a href="screenshots/164-sf-grid-flex--xl.svg"><img loading="lazy" src="screenshots/164-sf-grid-flex--xl.svg" alt="Visual audit artifact for .sf-grid-flex--xl"></a>
+      <figcaption><code>.sf-grid-flex--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-grid-flex--xs layout primitives grid (flex) slashed.layout" data-missing="false">
+      <a href="screenshots/165-sf-grid-flex--xs.svg"><img loading="lazy" src="screenshots/165-sf-grid-flex--xs.svg" alt="Visual audit artifact for .sf-grid-flex--xs"></a>
+      <figcaption><code>.sf-grid-flex--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-h1 utilities heading helper classes (.sf-h1 slashed.utilities" data-missing="false">
+      <a href="screenshots/166-sf-h1.svg"><img loading="lazy" src="screenshots/166-sf-h1.svg" alt="Visual audit artifact for .sf-h1"></a>
+      <figcaption><code>.sf-h1</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-h2 utilities heading helper classes (.sf-h1 slashed.utilities" data-missing="false">
+      <a href="screenshots/167-sf-h2.svg"><img loading="lazy" src="screenshots/167-sf-h2.svg" alt="Visual audit artifact for .sf-h2"></a>
+      <figcaption><code>.sf-h2</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-h3 utilities heading helper classes (.sf-h1 slashed.utilities" data-missing="false">
+      <a href="screenshots/168-sf-h3.svg"><img loading="lazy" src="screenshots/168-sf-h3.svg" alt="Visual audit artifact for .sf-h3"></a>
+      <figcaption><code>.sf-h3</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-h4 utilities heading helper classes (.sf-h1 slashed.utilities" data-missing="false">
+      <a href="screenshots/169-sf-h4.svg"><img loading="lazy" src="screenshots/169-sf-h4.svg" alt="Visual audit artifact for .sf-h4"></a>
+      <figcaption><code>.sf-h4</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-h5 utilities heading helper classes (.sf-h1 slashed.utilities" data-missing="false">
+      <a href="screenshots/170-sf-h5.svg"><img loading="lazy" src="screenshots/170-sf-h5.svg" alt="Visual audit artifact for .sf-h5"></a>
+      <figcaption><code>.sf-h5</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-h6 utilities heading helper classes (.sf-h1 slashed.utilities" data-missing="false">
+      <a href="screenshots/171-sf-h6.svg"><img loading="lazy" src="screenshots/171-sf-h6.svg" alt="Visual audit artifact for .sf-h6"></a>
+      <figcaption><code>.sf-h6</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-header--l layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/172-sf-header--l.svg"><img loading="lazy" src="screenshots/172-sf-header--l.svg" alt="Visual audit artifact for .sf-header--l"></a>
+      <figcaption><code>.sf-header--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-header--m layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/173-sf-header--m.svg"><img loading="lazy" src="screenshots/173-sf-header--m.svg" alt="Visual audit artifact for .sf-header--m"></a>
+      <figcaption><code>.sf-header--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-header--s layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/174-sf-header--s.svg"><img loading="lazy" src="screenshots/174-sf-header--s.svg" alt="Visual audit artifact for .sf-header--s"></a>
+      <figcaption><code>.sf-header--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-header--xl layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/175-sf-header--xl.svg"><img loading="lazy" src="screenshots/175-sf-header--xl.svg" alt="Visual audit artifact for .sf-header--xl"></a>
+      <figcaption><code>.sf-header--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-header--xs layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/176-sf-header--xs.svg"><img loading="lazy" src="screenshots/176-sf-header--xs.svg" alt="Visual audit artifact for .sf-header--xs"></a>
+      <figcaption><code>.sf-header--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-hover-float utilities hover-transform utilities (.sf-hover-*) slashed.utilities" data-missing="false">
+      <a href="screenshots/177-sf-hover-float.svg"><img loading="lazy" src="screenshots/177-sf-hover-float.svg" alt="Visual audit artifact for .sf-hover-float"></a>
+      <figcaption><code>.sf-hover-float</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-hover-grow utilities hover-transform utilities (.sf-hover-*) slashed.utilities" data-missing="false">
+      <a href="screenshots/178-sf-hover-grow.svg"><img loading="lazy" src="screenshots/178-sf-hover-grow.svg" alt="Visual audit artifact for .sf-hover-grow"></a>
+      <figcaption><code>.sf-hover-grow</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-hover-shrink utilities hover-transform utilities (.sf-hover-*) slashed.utilities" data-missing="false">
+      <a href="screenshots/179-sf-hover-shrink.svg"><img loading="lazy" src="screenshots/179-sf-hover-shrink.svg" alt="Visual audit artifact for .sf-hover-shrink"></a>
+      <figcaption><code>.sf-hover-shrink</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-hover-sink utilities hover-transform utilities (.sf-hover-*) slashed.utilities" data-missing="false">
+      <a href="screenshots/180-sf-hover-sink.svg"><img loading="lazy" src="screenshots/180-sf-hover-sink.svg" alt="Visual audit artifact for .sf-hover-sink"></a>
+      <figcaption><code>.sf-hover-sink</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-hover-slide-end utilities hover-transform utilities (.sf-hover-*) slashed.utilities" data-missing="false">
+      <a href="screenshots/181-sf-hover-slide-end.svg"><img loading="lazy" src="screenshots/181-sf-hover-slide-end.svg" alt="Visual audit artifact for .sf-hover-slide-end"></a>
+      <figcaption><code>.sf-hover-slide-end</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-hover-slide-start utilities hover-transform utilities (.sf-hover-*) slashed.utilities" data-missing="false">
+      <a href="screenshots/182-sf-hover-slide-start.svg"><img loading="lazy" src="screenshots/182-sf-hover-slide-start.svg" alt="Visual audit artifact for .sf-hover-slide-start"></a>
+      <figcaption><code>.sf-hover-slide-start</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/183-sf-icon.svg"><img loading="lazy" src="screenshots/183-sf-icon.svg" alt="Visual audit artifact for .sf-icon"></a>
+      <figcaption><code>.sf-icon</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon--2xl layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/184-sf-icon--2xl.svg"><img loading="lazy" src="screenshots/184-sf-icon--2xl.svg" alt="Visual audit artifact for .sf-icon--2xl"></a>
+      <figcaption><code>.sf-icon--2xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon--boxed layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/185-sf-icon--boxed.svg"><img loading="lazy" src="screenshots/185-sf-icon--boxed.svg" alt="Visual audit artifact for .sf-icon--boxed"></a>
+      <figcaption><code>.sf-icon--boxed</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon--l layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/186-sf-icon--l.svg"><img loading="lazy" src="screenshots/186-sf-icon--l.svg" alt="Visual audit artifact for .sf-icon--l"></a>
+      <figcaption><code>.sf-icon--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon--m layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/187-sf-icon--m.svg"><img loading="lazy" src="screenshots/187-sf-icon--m.svg" alt="Visual audit artifact for .sf-icon--m"></a>
+      <figcaption><code>.sf-icon--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon--s layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/188-sf-icon--s.svg"><img loading="lazy" src="screenshots/188-sf-icon--s.svg" alt="Visual audit artifact for .sf-icon--s"></a>
+      <figcaption><code>.sf-icon--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon--xl layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/189-sf-icon--xl.svg"><img loading="lazy" src="screenshots/189-sf-icon--xl.svg" alt="Visual audit artifact for .sf-icon--xl"></a>
+      <figcaption><code>.sf-icon--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-icon--xs layout primitives icon slashed.layout" data-missing="false">
+      <a href="screenshots/190-sf-icon--xs.svg"><img loading="lazy" src="screenshots/190-sf-icon--xs.svg" alt="Visual audit artifact for .sf-icon--xs"></a>
+      <figcaption><code>.sf-icon--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-imposter layout primitives imposter slashed.layout" data-missing="false">
+      <a href="screenshots/191-sf-imposter.svg"><img loading="lazy" src="screenshots/191-sf-imposter.svg" alt="Visual audit artifact for .sf-imposter"></a>
+      <figcaption><code>.sf-imposter</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-imposter--contain layout primitives imposter slashed.layout" data-missing="false">
+      <a href="screenshots/192-sf-imposter--contain.svg"><img loading="lazy" src="screenshots/192-sf-imposter--contain.svg" alt="Visual audit artifact for .sf-imposter--contain"></a>
+      <figcaption><code>.sf-imposter--contain</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-imposter--fixed layout primitives imposter slashed.layout" data-missing="false">
+      <a href="screenshots/193-sf-imposter--fixed.svg"><img loading="lazy" src="screenshots/193-sf-imposter--fixed.svg" alt="Visual audit artifact for .sf-imposter--fixed"></a>
+      <figcaption><code>.sf-imposter--fixed</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-active state classes active / selected / current slashed.states" data-missing="false">
+      <a href="screenshots/194-sf-is-active.svg"><img loading="lazy" src="screenshots/194-sf-is-active.svg" alt="Visual audit artifact for .sf-is-active"></a>
+      <figcaption><code>.sf-is-active</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-busy state classes loading / async feedback slashed.states" data-missing="false">
+      <a href="screenshots/195-sf-is-busy.svg"><img loading="lazy" src="screenshots/195-sf-is-busy.svg" alt="Visual audit artifact for .sf-is-busy"></a>
+      <figcaption><code>.sf-is-busy</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-collapsed state classes open / closed slashed.states" data-missing="false">
+      <a href="screenshots/196-sf-is-collapsed.svg"><img loading="lazy" src="screenshots/196-sf-is-collapsed.svg" alt="Visual audit artifact for .sf-is-collapsed"></a>
+      <figcaption><code>.sf-is-collapsed</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-current state classes active / selected / current slashed.states" data-missing="false">
+      <a href="screenshots/197-sf-is-current.svg"><img loading="lazy" src="screenshots/197-sf-is-current.svg" alt="Visual audit artifact for .sf-is-current"></a>
+      <figcaption><code>.sf-is-current</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-danger state classes validation / feedback slashed.states" data-missing="false">
+      <a href="screenshots/198-sf-is-danger.svg"><img loading="lazy" src="screenshots/198-sf-is-danger.svg" alt="Visual audit artifact for .sf-is-danger"></a>
+      <figcaption><code>.sf-is-danger</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-disabled state classes interactivity slashed.states" data-missing="false">
+      <a href="screenshots/199-sf-is-disabled.svg"><img loading="lazy" src="screenshots/199-sf-is-disabled.svg" alt="Visual audit artifact for .sf-is-disabled"></a>
+      <figcaption><code>.sf-is-disabled</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-draggable state classes drag &amp; drop slashed.states" data-missing="false">
+      <a href="screenshots/200-sf-is-draggable.svg"><img loading="lazy" src="screenshots/200-sf-is-draggable.svg" alt="Visual audit artifact for .sf-is-draggable"></a>
+      <figcaption><code>.sf-is-draggable</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-dragging state classes drag &amp; drop slashed.states" data-missing="false">
+      <a href="screenshots/201-sf-is-dragging.svg"><img loading="lazy" src="screenshots/201-sf-is-dragging.svg" alt="Visual audit artifact for .sf-is-dragging"></a>
+      <figcaption><code>.sf-is-dragging</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-drop-target state classes drag &amp; drop slashed.states" data-missing="false">
+      <a href="screenshots/202-sf-is-drop-target.svg"><img loading="lazy" src="screenshots/202-sf-is-drop-target.svg" alt="Visual audit artifact for .sf-is-drop-target"></a>
+      <figcaption><code>.sf-is-drop-target</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-empty state classes empty state slashed.states" data-missing="false">
+      <a href="screenshots/203-sf-is-empty.svg"><img loading="lazy" src="screenshots/203-sf-is-empty.svg" alt="Visual audit artifact for .sf-is-empty"></a>
+      <figcaption><code>.sf-is-empty</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-error state classes validation / feedback slashed.states" data-missing="false">
+      <a href="screenshots/204-sf-is-error.svg"><img loading="lazy" src="screenshots/204-sf-is-error.svg" alt="Visual audit artifact for .sf-is-error"></a>
+      <figcaption><code>.sf-is-error</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-expanded state classes open / closed slashed.states" data-missing="false">
+      <a href="screenshots/205-sf-is-expanded.svg"><img loading="lazy" src="screenshots/205-sf-is-expanded.svg" alt="Visual audit artifact for .sf-is-expanded"></a>
+      <figcaption><code>.sf-is-expanded</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-hidden state classes visibility slashed.states" data-missing="false">
+      <a href="screenshots/206-sf-is-hidden.svg"><img loading="lazy" src="screenshots/206-sf-is-hidden.svg" alt="Visual audit artifact for .sf-is-hidden"></a>
+      <figcaption><code>.sf-is-hidden</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-highlighted state classes active / selected / current slashed.states" data-missing="false">
+      <a href="screenshots/207-sf-is-highlighted.svg"><img loading="lazy" src="screenshots/207-sf-is-highlighted.svg" alt="Visual audit artifact for .sf-is-highlighted"></a>
+      <figcaption><code>.sf-is-highlighted</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-info state classes validation / feedback slashed.states" data-missing="false">
+      <a href="screenshots/208-sf-is-info.svg"><img loading="lazy" src="screenshots/208-sf-is-info.svg" alt="Visual audit artifact for .sf-is-info"></a>
+      <figcaption><code>.sf-is-info</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-invalid state classes validation / feedback slashed.states" data-missing="false">
+      <a href="screenshots/209-sf-is-invalid.svg"><img loading="lazy" src="screenshots/209-sf-is-invalid.svg" alt="Visual audit artifact for .sf-is-invalid"></a>
+      <figcaption><code>.sf-is-invalid</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-invisible state classes visibility slashed.states" data-missing="false">
+      <a href="screenshots/210-sf-is-invisible.svg"><img loading="lazy" src="screenshots/210-sf-is-invisible.svg" alt="Visual audit artifact for .sf-is-invisible"></a>
+      <figcaption><code>.sf-is-invisible</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-loading state classes loading / async feedback slashed.states" data-missing="false">
+      <a href="screenshots/211-sf-is-loading.svg"><img loading="lazy" src="screenshots/211-sf-is-loading.svg" alt="Visual audit artifact for .sf-is-loading"></a>
+      <figcaption><code>.sf-is-loading</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-open state classes open / closed slashed.states" data-missing="false">
+      <a href="screenshots/212-sf-is-open.svg"><img loading="lazy" src="screenshots/212-sf-is-open.svg" alt="Visual audit artifact for .sf-is-open"></a>
+      <figcaption><code>.sf-is-open</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-pending state classes loading / async feedback slashed.states" data-missing="false">
+      <a href="screenshots/213-sf-is-pending.svg"><img loading="lazy" src="screenshots/213-sf-is-pending.svg" alt="Visual audit artifact for .sf-is-pending"></a>
+      <figcaption><code>.sf-is-pending</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-pressed state classes active / selected / current slashed.states" data-missing="false">
+      <a href="screenshots/214-sf-is-pressed.svg"><img loading="lazy" src="screenshots/214-sf-is-pressed.svg" alt="Visual audit artifact for .sf-is-pressed"></a>
+      <figcaption><code>.sf-is-pressed</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-readonly state classes interactivity slashed.states" data-missing="false">
+      <a href="screenshots/215-sf-is-readonly.svg"><img loading="lazy" src="screenshots/215-sf-is-readonly.svg" alt="Visual audit artifact for .sf-is-readonly"></a>
+      <figcaption><code>.sf-is-readonly</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-selected state classes active / selected / current slashed.states" data-missing="false">
+      <a href="screenshots/216-sf-is-selected.svg"><img loading="lazy" src="screenshots/216-sf-is-selected.svg" alt="Visual audit artifact for .sf-is-selected"></a>
+      <figcaption><code>.sf-is-selected</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-skeleton state classes loading / async feedback slashed.states" data-missing="false">
+      <a href="screenshots/217-sf-is-skeleton.svg"><img loading="lazy" src="screenshots/217-sf-is-skeleton.svg" alt="Visual audit artifact for .sf-is-skeleton"></a>
+      <figcaption><code>.sf-is-skeleton</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-success state classes validation / feedback slashed.states" data-missing="false">
+      <a href="screenshots/218-sf-is-success.svg"><img loading="lazy" src="screenshots/218-sf-is-success.svg" alt="Visual audit artifact for .sf-is-success"></a>
+      <figcaption><code>.sf-is-success</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-valid state classes validation / feedback slashed.states" data-missing="false">
+      <a href="screenshots/219-sf-is-valid.svg"><img loading="lazy" src="screenshots/219-sf-is-valid.svg" alt="Visual audit artifact for .sf-is-valid"></a>
+      <figcaption><code>.sf-is-valid</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-visible state classes visibility slashed.states" data-missing="false">
+      <a href="screenshots/220-sf-is-visible.svg"><img loading="lazy" src="screenshots/220-sf-is-visible.svg" alt="Visual audit artifact for .sf-is-visible"></a>
+      <figcaption><code>.sf-is-visible</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-is-warning state classes validation / feedback slashed.states" data-missing="false">
+      <a href="screenshots/221-sf-is-warning.svg"><img loading="lazy" src="screenshots/221-sf-is-warning.svg" alt="Visual audit artifact for .sf-is-warning"></a>
+      <figcaption><code>.sf-is-warning</code><span class="meta">State classes · slashed.states · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-line-clamp-2 macro classes truncate / line-clamp slashed.macros" data-missing="false">
+      <a href="screenshots/222-sf-line-clamp-2.svg"><img loading="lazy" src="screenshots/222-sf-line-clamp-2.svg" alt="Visual audit artifact for .sf-line-clamp-2"></a>
+      <figcaption><code>.sf-line-clamp-2</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-line-clamp-3 macro classes truncate / line-clamp slashed.macros" data-missing="false">
+      <a href="screenshots/223-sf-line-clamp-3.svg"><img loading="lazy" src="screenshots/223-sf-line-clamp-3.svg" alt="Visual audit artifact for .sf-line-clamp-3"></a>
+      <figcaption><code>.sf-line-clamp-3</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-line-clamp-n macro classes truncate / line-clamp slashed.macros" data-missing="false">
+      <a href="screenshots/224-sf-line-clamp-N.svg"><img loading="lazy" src="screenshots/224-sf-line-clamp-N.svg" alt="Visual audit artifact for .sf-line-clamp-N"></a>
+      <figcaption><code>.sf-line-clamp-N</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-link--reverse macro classes link variants slashed.macros" data-missing="false">
+      <a href="screenshots/225-sf-link--reverse.svg"><img loading="lazy" src="screenshots/225-sf-link--reverse.svg" alt="Visual audit artifact for .sf-link--reverse"></a>
+      <figcaption><code>.sf-link--reverse</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-link--subtle macro classes link variants slashed.macros" data-missing="false">
+      <a href="screenshots/226-sf-link--subtle.svg"><img loading="lazy" src="screenshots/226-sf-link--subtle.svg" alt="Visual audit artifact for .sf-link--subtle"></a>
+      <figcaption><code>.sf-link--subtle</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-link-external macro classes external link indication slashed.macros" data-missing="false">
+      <a href="screenshots/227-sf-link-external.svg"><img loading="lazy" src="screenshots/227-sf-link-external.svg" alt="Visual audit artifact for .sf-link-external"></a>
+      <figcaption><code>.sf-link-external</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-list-none utilities list reset (.sf-list-none) slashed.utilities" data-missing="false">
+      <a href="screenshots/228-sf-list-none.svg"><img loading="lazy" src="screenshots/228-sf-list-none.svg" alt="Visual audit artifact for .sf-list-none"></a>
+      <figcaption><code>.sf-list-none</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-live-validate forms  slashed.forms" data-missing="false">
+      <a href="screenshots/229-sf-live-validate.svg"><img loading="lazy" src="screenshots/229-sf-live-validate.svg" alt="Visual audit artifact for .sf-live-validate"></a>
+      <figcaption><code>.sf-live-validate</code><span class="meta">Forms · slashed.forms · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-marker--action utilities list marker colour (.sf-marker--*) slashed.utilities" data-missing="false">
+      <a href="screenshots/230-sf-marker--action.svg"><img loading="lazy" src="screenshots/230-sf-marker--action.svg" alt="Visual audit artifact for .sf-marker--action"></a>
+      <figcaption><code>.sf-marker--action</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-marker--primary utilities list marker colour (.sf-marker--*) slashed.utilities" data-missing="false">
+      <a href="screenshots/231-sf-marker--primary.svg"><img loading="lazy" src="screenshots/231-sf-marker--primary.svg" alt="Visual audit artifact for .sf-marker--primary"></a>
+      <figcaption><code>.sf-marker--primary</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-marker--secondary utilities list marker colour (.sf-marker--*) slashed.utilities" data-missing="false">
+      <a href="screenshots/232-sf-marker--secondary.svg"><img loading="lazy" src="screenshots/232-sf-marker--secondary.svg" alt="Visual audit artifact for .sf-marker--secondary"></a>
+      <figcaption><code>.sf-marker--secondary</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-marker--tertiary utilities list marker colour (.sf-marker--*) slashed.utilities" data-missing="false">
+      <a href="screenshots/233-sf-marker--tertiary.svg"><img loading="lazy" src="screenshots/233-sf-marker--tertiary.svg" alt="Visual audit artifact for .sf-marker--tertiary"></a>
+      <figcaption><code>.sf-marker--tertiary</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-no-tap-highlight macro classes no tap highlight slashed.macros" data-missing="false">
+      <a href="screenshots/234-sf-no-tap-highlight.svg"><img loading="lazy" src="screenshots/234-sf-no-tap-highlight.svg" alt="Visual audit artifact for .sf-no-tap-highlight"></a>
+      <figcaption><code>.sf-no-tap-highlight</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-not-prose macro classes prose slashed.macros" data-missing="false">
+      <a href="screenshots/235-sf-not-prose.svg"><img loading="lazy" src="screenshots/235-sf-not-prose.svg" alt="Visual audit artifact for .sf-not-prose"></a>
+      <figcaption><code>.sf-not-prose</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overflow-fade macro classes overflow fade slashed.macros" data-missing="false">
+      <a href="screenshots/236-sf-overflow-fade.svg"><img loading="lazy" src="screenshots/236-sf-overflow-fade.svg" alt="Visual audit artifact for .sf-overflow-fade"></a>
+      <figcaption><code>.sf-overflow-fade</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overflow-fade--block macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/237-sf-overflow-fade--block.svg"><img loading="lazy" src="screenshots/237-sf-overflow-fade--block.svg" alt="Visual audit artifact for .sf-overflow-fade--block"></a>
+      <figcaption><code>.sf-overflow-fade--block</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overflow-fade--bottom macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/238-sf-overflow-fade--bottom.svg"><img loading="lazy" src="screenshots/238-sf-overflow-fade--bottom.svg" alt="Visual audit artifact for .sf-overflow-fade--bottom"></a>
+      <figcaption><code>.sf-overflow-fade--bottom</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overflow-fade--inline macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/239-sf-overflow-fade--inline.svg"><img loading="lazy" src="screenshots/239-sf-overflow-fade--inline.svg" alt="Visual audit artifact for .sf-overflow-fade--inline"></a>
+      <figcaption><code>.sf-overflow-fade--inline</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overflow-fade--left macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/240-sf-overflow-fade--left.svg"><img loading="lazy" src="screenshots/240-sf-overflow-fade--left.svg" alt="Visual audit artifact for .sf-overflow-fade--left"></a>
+      <figcaption><code>.sf-overflow-fade--left</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overflow-fade--right macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/241-sf-overflow-fade--right.svg"><img loading="lazy" src="screenshots/241-sf-overflow-fade--right.svg" alt="Visual audit artifact for .sf-overflow-fade--right"></a>
+      <figcaption><code>.sf-overflow-fade--right</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overflow-fade--top macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/242-sf-overflow-fade--top.svg"><img loading="lazy" src="screenshots/242-sf-overflow-fade--top.svg" alt="Visual audit artifact for .sf-overflow-fade--top"></a>
+      <figcaption><code>.sf-overflow-fade--top</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overlap macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/243-sf-overlap.svg"><img loading="lazy" src="screenshots/243-sf-overlap.svg" alt="Visual audit artifact for .sf-overlap"></a>
+      <figcaption><code>.sf-overlap</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overlap--down macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/244-sf-overlap--down.svg"><img loading="lazy" src="screenshots/244-sf-overlap--down.svg" alt="Visual audit artifact for .sf-overlap--down"></a>
+      <figcaption><code>.sf-overlap--down</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overlap--end macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/245-sf-overlap--end.svg"><img loading="lazy" src="screenshots/245-sf-overlap--end.svg" alt="Visual audit artifact for .sf-overlap--end"></a>
+      <figcaption><code>.sf-overlap--end</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overlap--start macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/246-sf-overlap--start.svg"><img loading="lazy" src="screenshots/246-sf-overlap--start.svg" alt="Visual audit artifact for .sf-overlap--start"></a>
+      <figcaption><code>.sf-overlap--start</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overlap-host macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/247-sf-overlap-host.svg"><img loading="lazy" src="screenshots/247-sf-overlap-host.svg" alt="Visual audit artifact for .sf-overlap-host"></a>
+      <figcaption><code>.sf-overlap-host</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-overlay layout primitives  slashed.layout" data-missing="false">
+      <a href="screenshots/248-sf-overlay.svg"><img loading="lazy" src="screenshots/248-sf-overlay.svg" alt="Visual audit artifact for .sf-overlay"></a>
+      <figcaption><code>.sf-overlay</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-pancake layout primitives pancake (sticky footer) slashed.layout" data-missing="false">
+      <a href="screenshots/249-sf-pancake.svg"><img loading="lazy" src="screenshots/249-sf-pancake.svg" alt="Visual audit artifact for .sf-pancake"></a>
+      <figcaption><code>.sf-pancake</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-prose macro classes list marker colour (.sf-marker--*) slashed.macros" data-missing="false">
+      <a href="screenshots/250-sf-prose.svg"><img loading="lazy" src="screenshots/250-sf-prose.svg" alt="Visual audit artifact for .sf-prose"></a>
+      <figcaption><code>.sf-prose</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-reel layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/251-sf-reel.svg"><img loading="lazy" src="screenshots/251-sf-reel.svg" alt="Visual audit artifact for .sf-reel"></a>
+      <figcaption><code>.sf-reel</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scale-down motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/252-sf-scale-down.svg"><img loading="lazy" src="screenshots/252-sf-scale-down.svg" alt="Visual audit artifact for .sf-scale-down"></a>
+      <figcaption><code>.sf-scale-down</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scale-up motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/253-sf-scale-up.svg"><img loading="lazy" src="screenshots/253-sf-scale-up.svg" alt="Visual audit artifact for .sf-scale-up"></a>
+      <figcaption><code>.sf-scale-up</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scrim macro classes scrim slashed.macros" data-missing="false">
+      <a href="screenshots/254-sf-scrim.svg"><img loading="lazy" src="screenshots/254-sf-scrim.svg" alt="Visual audit artifact for .sf-scrim"></a>
+      <figcaption><code>.sf-scrim</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scrim__content macro classes scrim slashed.macros" data-missing="false">
+      <a href="screenshots/255-sf-scrim__content.svg"><img loading="lazy" src="screenshots/255-sf-scrim__content.svg" alt="Visual audit artifact for .sf-scrim__content"></a>
+      <figcaption><code>.sf-scrim__content</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scrim--bottom macro classes scrim slashed.macros" data-missing="false">
+      <a href="screenshots/256-sf-scrim--bottom.svg"><img loading="lazy" src="screenshots/256-sf-scrim--bottom.svg" alt="Visual audit artifact for .sf-scrim--bottom"></a>
+      <figcaption><code>.sf-scrim--bottom</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scrim--full macro classes scrim slashed.macros" data-missing="false">
+      <a href="screenshots/257-sf-scrim--full.svg"><img loading="lazy" src="screenshots/257-sf-scrim--full.svg" alt="Visual audit artifact for .sf-scrim--full"></a>
+      <figcaption><code>.sf-scrim--full</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scrim--top macro classes scrim slashed.macros" data-missing="false">
+      <a href="screenshots/258-sf-scrim--top.svg"><img loading="lazy" src="screenshots/258-sf-scrim--top.svg" alt="Visual audit artifact for .sf-scrim--top"></a>
+      <figcaption><code>.sf-scrim--top</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scroll-shadow macro classes scroll shadow slashed.macros" data-missing="false">
+      <a href="screenshots/259-sf-scroll-shadow.svg"><img loading="lazy" src="screenshots/259-sf-scroll-shadow.svg" alt="Visual audit artifact for .sf-scroll-shadow"></a>
+      <figcaption><code>.sf-scroll-shadow</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-scroll-snap macro classes scroll snap slashed.macros" data-missing="false">
+      <a href="screenshots/260-sf-scroll-snap.svg"><img loading="lazy" src="screenshots/260-sf-scroll-snap.svg" alt="Visual audit artifact for .sf-scroll-snap"></a>
+      <figcaption><code>.sf-scroll-snap</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/261-sf-section.svg"><img loading="lazy" src="screenshots/261-sf-section.svg" alt="Visual audit artifact for .sf-section"></a>
+      <figcaption><code>.sf-section</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--2xl layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/262-sf-section--2xl.svg"><img loading="lazy" src="screenshots/262-sf-section--2xl.svg" alt="Visual audit artifact for .sf-section--2xl"></a>
+      <figcaption><code>.sf-section--2xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--collapse layout primitives collapse modifier slashed.layout" data-missing="false">
+      <a href="screenshots/263-sf-section--collapse.svg"><img loading="lazy" src="screenshots/263-sf-section--collapse.svg" alt="Visual audit artifact for .sf-section--collapse"></a>
+      <figcaption><code>.sf-section--collapse</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--guttered layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/264-sf-section--guttered.svg"><img loading="lazy" src="screenshots/264-sf-section--guttered.svg" alt="Visual audit artifact for .sf-section--guttered"></a>
+      <figcaption><code>.sf-section--guttered</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--l layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/265-sf-section--l.svg"><img loading="lazy" src="screenshots/265-sf-section--l.svg" alt="Visual audit artifact for .sf-section--l"></a>
+      <figcaption><code>.sf-section--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--m layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/266-sf-section--m.svg"><img loading="lazy" src="screenshots/266-sf-section--m.svg" alt="Visual audit artifact for .sf-section--m"></a>
+      <figcaption><code>.sf-section--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--s layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/267-sf-section--s.svg"><img loading="lazy" src="screenshots/267-sf-section--s.svg" alt="Visual audit artifact for .sf-section--s"></a>
+      <figcaption><code>.sf-section--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--xl layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/268-sf-section--xl.svg"><img loading="lazy" src="screenshots/268-sf-section--xl.svg" alt="Visual audit artifact for .sf-section--xl"></a>
+      <figcaption><code>.sf-section--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section--xs layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/269-sf-section--xs.svg"><img loading="lazy" src="screenshots/269-sf-section--xs.svg" alt="Visual audit artifact for .sf-section--xs"></a>
+      <figcaption><code>.sf-section--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-section-group layout primitives section slashed.layout" data-missing="false">
+      <a href="screenshots/270-sf-section-group.svg"><img loading="lazy" src="screenshots/270-sf-section-group.svg" alt="Visual audit artifact for .sf-section-group"></a>
+      <figcaption><code>.sf-section-group</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-selection--alt utilities alternate selection colour (.sf-selection--alt) slashed.utilities" data-missing="false">
+      <a href="screenshots/271-sf-selection--alt.svg"><img loading="lazy" src="screenshots/271-sf-selection--alt.svg" alt="Visual audit artifact for .sf-selection--alt"></a>
+      <figcaption><code>.sf-selection--alt</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sidebar layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/272-sf-sidebar.svg"><img loading="lazy" src="screenshots/272-sf-sidebar.svg" alt="Visual audit artifact for .sf-sidebar"></a>
+      <figcaption><code>.sf-sidebar</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sidebar--narrow layout primitives sidebar slashed.layout" data-missing="false">
+      <a href="screenshots/273-sf-sidebar--narrow.svg"><img loading="lazy" src="screenshots/273-sf-sidebar--narrow.svg" alt="Visual audit artifact for .sf-sidebar--narrow"></a>
+      <figcaption><code>.sf-sidebar--narrow</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sidebar--right layout primitives sidebar slashed.layout" data-missing="false">
+      <a href="screenshots/274-sf-sidebar--right.svg"><img loading="lazy" src="screenshots/274-sf-sidebar--right.svg" alt="Visual audit artifact for .sf-sidebar--right"></a>
+      <figcaption><code>.sf-sidebar--right</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sidebar--wide layout primitives sidebar slashed.layout" data-missing="false">
+      <a href="screenshots/275-sf-sidebar--wide.svg"><img loading="lazy" src="screenshots/275-sf-sidebar--wide.svg" alt="Visual audit artifact for .sf-sidebar--wide"></a>
+      <figcaption><code>.sf-sidebar--wide</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-slide-in-down motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/276-sf-slide-in-down.svg"><img loading="lazy" src="screenshots/276-sf-slide-in-down.svg" alt="Visual audit artifact for .sf-slide-in-down"></a>
+      <figcaption><code>.sf-slide-in-down</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-slide-in-left motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/277-sf-slide-in-left.svg"><img loading="lazy" src="screenshots/277-sf-slide-in-left.svg" alt="Visual audit artifact for .sf-slide-in-left"></a>
+      <figcaption><code>.sf-slide-in-left</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-slide-in-right motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/278-sf-slide-in-right.svg"><img loading="lazy" src="screenshots/278-sf-slide-in-right.svg" alt="Visual audit artifact for .sf-slide-in-right"></a>
+      <figcaption><code>.sf-slide-in-right</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-slide-in-up motion / animation animation presets slashed.motion" data-missing="false">
+      <a href="screenshots/279-sf-slide-in-up.svg"><img loading="lazy" src="screenshots/279-sf-slide-in-up.svg" alt="Visual audit artifact for .sf-slide-in-up"></a>
+      <figcaption><code>.sf-slide-in-up</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/280-sf-stack.svg"><img loading="lazy" src="screenshots/280-sf-stack.svg" alt="Visual audit artifact for .sf-stack"></a>
+      <figcaption><code>.sf-stack</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--2xl layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/281-sf-stack--2xl.svg"><img loading="lazy" src="screenshots/281-sf-stack--2xl.svg" alt="Visual audit artifact for .sf-stack--2xl"></a>
+      <figcaption><code>.sf-stack--2xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--center layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/282-sf-stack--center.svg"><img loading="lazy" src="screenshots/282-sf-stack--center.svg" alt="Visual audit artifact for .sf-stack--center"></a>
+      <figcaption><code>.sf-stack--center</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--end layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/283-sf-stack--end.svg"><img loading="lazy" src="screenshots/283-sf-stack--end.svg" alt="Visual audit artifact for .sf-stack--end"></a>
+      <figcaption><code>.sf-stack--end</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--l layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/284-sf-stack--l.svg"><img loading="lazy" src="screenshots/284-sf-stack--l.svg" alt="Visual audit artifact for .sf-stack--l"></a>
+      <figcaption><code>.sf-stack--l</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--m layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/285-sf-stack--m.svg"><img loading="lazy" src="screenshots/285-sf-stack--m.svg" alt="Visual audit artifact for .sf-stack--m"></a>
+      <figcaption><code>.sf-stack--m</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--s layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/286-sf-stack--s.svg"><img loading="lazy" src="screenshots/286-sf-stack--s.svg" alt="Visual audit artifact for .sf-stack--s"></a>
+      <figcaption><code>.sf-stack--s</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--stretch layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/287-sf-stack--stretch.svg"><img loading="lazy" src="screenshots/287-sf-stack--stretch.svg" alt="Visual audit artifact for .sf-stack--stretch"></a>
+      <figcaption><code>.sf-stack--stretch</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--xl layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/288-sf-stack--xl.svg"><img loading="lazy" src="screenshots/288-sf-stack--xl.svg" alt="Visual audit artifact for .sf-stack--xl"></a>
+      <figcaption><code>.sf-stack--xl</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stack--xs layout primitives stack slashed.layout" data-missing="false">
+      <a href="screenshots/289-sf-stack--xs.svg"><img loading="lazy" src="screenshots/289-sf-stack--xs.svg" alt="Visual audit artifact for .sf-stack--xs"></a>
+      <figcaption><code>.sf-stack--xs</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-stagger motion / animation  slashed.motion" data-missing="false">
+      <a href="screenshots/290-sf-stagger.svg"><img loading="lazy" src="screenshots/290-sf-stagger.svg" alt="Visual audit artifact for .sf-stagger"></a>
+      <figcaption><code>.sf-stagger</code><span class="meta">Motion / animation · slashed.motion · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sticky utilities sticky positioning (.sf-sticky) slashed.utilities" data-missing="false">
+      <a href="screenshots/291-sf-sticky.svg"><img loading="lazy" src="screenshots/291-sf-sticky.svg" alt="Visual audit artifact for .sf-sticky"></a>
+      <figcaption><code>.sf-sticky</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sticky--l utilities sticky positioning (.sf-sticky) slashed.utilities" data-missing="false">
+      <a href="screenshots/292-sf-sticky--l.svg"><img loading="lazy" src="screenshots/292-sf-sticky--l.svg" alt="Visual audit artifact for .sf-sticky--l"></a>
+      <figcaption><code>.sf-sticky--l</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sticky--m utilities sticky positioning (.sf-sticky) slashed.utilities" data-missing="false">
+      <a href="screenshots/293-sf-sticky--m.svg"><img loading="lazy" src="screenshots/293-sf-sticky--m.svg" alt="Visual audit artifact for .sf-sticky--m"></a>
+      <figcaption><code>.sf-sticky--m</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-sticky--s utilities sticky positioning (.sf-sticky) slashed.utilities" data-missing="false">
+      <a href="screenshots/294-sf-sticky--s.svg"><img loading="lazy" src="screenshots/294-sf-sticky--s.svg" alt="Visual audit artifact for .sf-sticky--s"></a>
+      <figcaption><code>.sf-sticky--s</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-subgrid layout primitives subgrid slashed.layout" data-missing="false">
+      <a href="screenshots/295-sf-subgrid.svg"><img loading="lazy" src="screenshots/295-sf-subgrid.svg" alt="Visual audit artifact for .sf-subgrid"></a>
+      <figcaption><code>.sf-subgrid</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-subgrid-rows layout primitives subgrid slashed.layout" data-missing="false">
+      <a href="screenshots/296-sf-subgrid-rows.svg"><img loading="lazy" src="screenshots/296-sf-subgrid-rows.svg" alt="Visual audit artifact for .sf-subgrid-rows"></a>
+      <figcaption><code>.sf-subgrid-rows</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/297-sf-surface.svg"><img loading="lazy" src="screenshots/297-sf-surface.svg" alt="Visual audit artifact for .sf-surface"></a>
+      <figcaption><code>.sf-surface</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--action macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/298-sf-surface--action.svg"><img loading="lazy" src="screenshots/298-sf-surface--action.svg" alt="Visual audit artifact for .sf-surface--action"></a>
+      <figcaption><code>.sf-surface--action</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--danger macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/299-sf-surface--danger.svg"><img loading="lazy" src="screenshots/299-sf-surface--danger.svg" alt="Visual audit artifact for .sf-surface--danger"></a>
+      <figcaption><code>.sf-surface--danger</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--info macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/300-sf-surface--info.svg"><img loading="lazy" src="screenshots/300-sf-surface--info.svg" alt="Visual audit artifact for .sf-surface--info"></a>
+      <figcaption><code>.sf-surface--info</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--inverse macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/301-sf-surface--inverse.svg"><img loading="lazy" src="screenshots/301-sf-surface--inverse.svg" alt="Visual audit artifact for .sf-surface--inverse"></a>
+      <figcaption><code>.sf-surface--inverse</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--neutral macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/302-sf-surface--neutral.svg"><img loading="lazy" src="screenshots/302-sf-surface--neutral.svg" alt="Visual audit artifact for .sf-surface--neutral"></a>
+      <figcaption><code>.sf-surface--neutral</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--primary macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/303-sf-surface--primary.svg"><img loading="lazy" src="screenshots/303-sf-surface--primary.svg" alt="Visual audit artifact for .sf-surface--primary"></a>
+      <figcaption><code>.sf-surface--primary</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--secondary macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/304-sf-surface--secondary.svg"><img loading="lazy" src="screenshots/304-sf-surface--secondary.svg" alt="Visual audit artifact for .sf-surface--secondary"></a>
+      <figcaption><code>.sf-surface--secondary</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--success macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/305-sf-surface--success.svg"><img loading="lazy" src="screenshots/305-sf-surface--success.svg" alt="Visual audit artifact for .sf-surface--success"></a>
+      <figcaption><code>.sf-surface--success</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--tertiary macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/306-sf-surface--tertiary.svg"><img loading="lazy" src="screenshots/306-sf-surface--tertiary.svg" alt="Visual audit artifact for .sf-surface--tertiary"></a>
+      <figcaption><code>.sf-surface--tertiary</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface--warning macro classes surface slashed.macros" data-missing="false">
+      <a href="screenshots/307-sf-surface--warning.svg"><img loading="lazy" src="screenshots/307-sf-surface--warning.svg" alt="Visual audit artifact for .sf-surface--warning"></a>
+      <figcaption><code>.sf-surface--warning</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-surface-bg macro classes  slashed.macros" data-missing="false">
+      <a href="screenshots/308-sf-surface-bg.svg"><img loading="lazy" src="screenshots/308-sf-surface-bg.svg" alt="Visual audit artifact for .sf-surface-bg"></a>
+      <figcaption><code>.sf-surface-bg</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-switcher layout primitives .sf-card slashed.layout" data-missing="false">
+      <a href="screenshots/309-sf-switcher.svg"><img loading="lazy" src="screenshots/309-sf-switcher.svg" alt="Visual audit artifact for .sf-switcher"></a>
+      <figcaption><code>.sf-switcher</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-switcher--no-wrap layout primitives switcher slashed.layout" data-missing="false">
+      <a href="screenshots/310-sf-switcher--no-wrap.svg"><img loading="lazy" src="screenshots/310-sf-switcher--no-wrap.svg" alt="Visual audit artifact for .sf-switcher--no-wrap"></a>
+      <figcaption><code>.sf-switcher--no-wrap</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-switcher--vertical layout primitives switcher slashed.layout" data-missing="false">
+      <a href="screenshots/311-sf-switcher--vertical.svg"><img loading="lazy" src="screenshots/311-sf-switcher--vertical.svg" alt="Visual audit artifact for .sf-switcher--vertical"></a>
+      <figcaption><code>.sf-switcher--vertical</code><span class="meta">Layout primitives · slashed.layout · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-tabular-nums macro classes tabular figures slashed.macros" data-missing="false">
+      <a href="screenshots/312-sf-tabular-nums.svg"><img loading="lazy" src="screenshots/312-sf-tabular-nums.svg" alt="Visual audit artifact for .sf-tabular-nums"></a>
+      <figcaption><code>.sf-tabular-nums</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-2xl utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/313-sf-text-2xl.svg"><img loading="lazy" src="screenshots/313-sf-text-2xl.svg" alt="Visual audit artifact for .sf-text-2xl"></a>
+      <figcaption><code>.sf-text-2xl</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-2xs utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/314-sf-text-2xs.svg"><img loading="lazy" src="screenshots/314-sf-text-2xs.svg" alt="Visual audit artifact for .sf-text-2xs"></a>
+      <figcaption><code>.sf-text-2xs</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-3xl utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/315-sf-text-3xl.svg"><img loading="lazy" src="screenshots/315-sf-text-3xl.svg" alt="Visual audit artifact for .sf-text-3xl"></a>
+      <figcaption><code>.sf-text-3xl</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-4xl utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/316-sf-text-4xl.svg"><img loading="lazy" src="screenshots/316-sf-text-4xl.svg" alt="Visual audit artifact for .sf-text-4xl"></a>
+      <figcaption><code>.sf-text-4xl</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-gradient macro classes text gradient slashed.macros" data-missing="false">
+      <a href="screenshots/317-sf-text-gradient.svg"><img loading="lazy" src="screenshots/317-sf-text-gradient.svg" alt="Visual audit artifact for .sf-text-gradient"></a>
+      <figcaption><code>.sf-text-gradient</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-l utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/318-sf-text-l.svg"><img loading="lazy" src="screenshots/318-sf-text-l.svg" alt="Visual audit artifact for .sf-text-l"></a>
+      <figcaption><code>.sf-text-l</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-m utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/319-sf-text-m.svg"><img loading="lazy" src="screenshots/319-sf-text-m.svg" alt="Visual audit artifact for .sf-text-m"></a>
+      <figcaption><code>.sf-text-m</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-protect macro classes text protect slashed.macros" data-missing="false">
+      <a href="screenshots/320-sf-text-protect.svg"><img loading="lazy" src="screenshots/320-sf-text-protect.svg" alt="Visual audit artifact for .sf-text-protect"></a>
+      <figcaption><code>.sf-text-protect</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-s utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/321-sf-text-s.svg"><img loading="lazy" src="screenshots/321-sf-text-s.svg" alt="Visual audit artifact for .sf-text-s"></a>
+      <figcaption><code>.sf-text-s</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-xl utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/322-sf-text-xl.svg"><img loading="lazy" src="screenshots/322-sf-text-xl.svg" alt="Visual audit artifact for .sf-text-xl"></a>
+      <figcaption><code>.sf-text-xl</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-text-xs utilities text-size utilities (.sf-text-2xs slashed.utilities" data-missing="false">
+      <a href="screenshots/323-sf-text-xs.svg"><img loading="lazy" src="screenshots/323-sf-text-xs.svg" alt="Visual audit artifact for .sf-text-xs"></a>
+      <figcaption><code>.sf-text-xs</code><span class="meta">Utilities · slashed.utilities · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-theme-dark theme utilities  slashed.themes" data-missing="false">
+      <a href="screenshots/324-sf-theme-dark.svg"><img loading="lazy" src="screenshots/324-sf-theme-dark.svg" alt="Visual audit artifact for .sf-theme-dark"></a>
+      <figcaption><code>.sf-theme-dark</code><span class="meta">Theme utilities · slashed.themes · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-theme-light theme utilities  slashed.themes" data-missing="false">
+      <a href="screenshots/325-sf-theme-light.svg"><img loading="lazy" src="screenshots/325-sf-theme-light.svg" alt="Visual audit artifact for .sf-theme-light"></a>
+      <figcaption><code>.sf-theme-light</code><span class="meta">Theme utilities · slashed.themes · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-theme-transition theme utilities opt-in theme cross-fade slashed.themes" data-missing="false">
+      <a href="screenshots/326-sf-theme-transition.svg"><img loading="lazy" src="screenshots/326-sf-theme-transition.svg" alt="Visual audit artifact for .sf-theme-transition"></a>
+      <figcaption><code>.sf-theme-transition</code><span class="meta">Theme utilities · slashed.themes · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sf-truncate macro classes truncate / line-clamp slashed.macros" data-missing="false">
+      <a href="screenshots/327-sf-truncate.svg"><img loading="lazy" src="screenshots/327-sf-truncate.svg" alt="Visual audit artifact for .sf-truncate"></a>
+      <figcaption><code>.sf-truncate</code><span class="meta">Macro classes · slashed.macros · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="skip-link accessibility skip link slashed.accessibility" data-missing="false">
+      <a href="screenshots/328-skip-link.svg"><img loading="lazy" src="screenshots/328-skip-link.svg" alt="Visual audit artifact for .skip-link"></a>
+      <figcaption><code>.skip-link</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sr-only accessibility screen-reader-only. atomic contract: a partial override slashed.accessibility" data-missing="false">
+      <a href="screenshots/329-sr-only.svg"><img loading="lazy" src="screenshots/329-sr-only.svg" alt="Visual audit artifact for .sr-only"></a>
+      <figcaption><code>.sr-only</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="sr-only-focusable accessibility screen-reader-only. atomic contract: a partial override slashed.accessibility" data-missing="false">
+      <a href="screenshots/330-sr-only-focusable.svg"><img loading="lazy" src="screenshots/330-sr-only-focusable.svg" alt="Visual audit artifact for .sr-only-focusable"></a>
+      <figcaption><code>.sr-only-focusable</code><span class="meta">Accessibility · slashed.accessibility · in dist CSS: Yes</span></figcaption>
+    </figure>
+    <figure data-filter="theme-transition theme example 5. smooth theme-transition helper slashed.themes" data-missing="true">
+      <a href="screenshots/331-theme-transition.svg"><img loading="lazy" src="screenshots/331-theme-transition.svg" alt="Visual audit artifact for .theme-transition"></a>
+      <figcaption><code>.theme-transition</code><span class="meta">Theme example · slashed.themes · in dist CSS: No</span></figcaption>
+    </figure>
+  </main>
+  <script>
+    const input = document.querySelector('#filter');
+    const figures = [...document.querySelectorAll('figure')];
+    input.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      for (const figure of figures) figure.hidden = query && !figure.dataset.filter.includes(query);
+    });
+  </script>
+</body>
+</html>
