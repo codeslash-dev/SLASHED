@@ -253,7 +253,7 @@ Many tokens — `--sf-shadow-*`, `--sf-blur`, `--sf-gap`, `--sf-gradient-*`,
 `--sf-scrollbar-*`, `--sf-optical-sizing` — are **not consumed by the framework
 itself**. They exist for your own BEM classes
 (`.card { box-shadow: var(--sf-shadow-m) }`) and are exercised in
-`docs/demo.html` and validated by `tests/`.
+`demo/index.html` and validated by `tests/`.
 
 ### Print class naming
 
