@@ -18,7 +18,7 @@ single, independently-invoked CI-gate job, not a shared library):
   fall back to a default").
 
 Revisit this if the script count grows enough that the inconsistency itself
-becomes confusing; not worth enforcing for ~17 independent scripts.
+becomes confusing; not worth enforcing for ~27 independent scripts.
 
 ## CLI flag parsing (SL-009)
 
@@ -30,7 +30,7 @@ flags per script — revisit if any script's flag count grows past that.
 
 | Var | Read by | Purpose |
 |---|---|---|
-| `SLASHED_ROOT` | `check-version-sync.js` | Override the repo root (test-only — lets the version-sync test suite point at a fixture tree instead of the real repo). |
+| `SLASHED_ROOT` | `version-sync.js` + the `check-*.js` gates (e.g. `check-version-sync.js`, `check-llm-guide.js`, `check-doc-refs.js`, `check-layer-order.js`, `check-release-add-list.js`) | Override the repo root (test-only — lets a check's test suite point at a fixture tree instead of the real repo). |
 | `GITHUB_REF`, `GITHUB_REF_NAME` | `bundle.js` | CI-only — used to detect whether the current run is on a release tag, for badge-stamping. |
 | `GITHUB_BASE_REF` | `check-token-registry.js` | CI-only — the PR's target branch, used to diff the registry against the base ref instead of just the working tree. |
 

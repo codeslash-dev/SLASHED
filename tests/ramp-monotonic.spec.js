@@ -19,7 +19,17 @@ import { pathToFileURL } from 'node:url';
 
 const FIXTURE = pathToFileURL(path.join(import.meta.dirname, 'fixture.html')).href;
 
-const FAMILIES = ['primary', 'secondary', 'tertiary', 'action', 'neutral'];
+// Distinct hue + chroma per family so the sweep exercises genuinely different
+// source colours (not the same ramp maths five times). Monotonicity is a
+// function of lightness, but varying hue/chroma guards against any hue-specific
+// gamut-mapping surprise.
+const FAMILIES = [
+  { name: 'primary',   hue: 264, chroma: 0.16 },
+  { name: 'secondary', hue: 200, chroma: 0.09 },
+  { name: 'tertiary',  hue: 320, chroma: 0.18 },
+  { name: 'action',    hue: 150, chroma: 0.14 },
+  { name: 'neutral',   hue: 30,  chroma: 0.03 },
+];
 const STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
 // Source lightnesses spanning the whole axis, including values OUTSIDE the
@@ -29,7 +39,7 @@ const SOURCE_LS = [0.06, 0.22, 0.5, 0.78, 0.98];
 
 // Self-contained for page.evaluate: for one family, sweep several source
 // lightnesses and return, per sweep, the {step, lum, alpha} of every step.
-function sweepFamily([family, steps, sourceLs, theme]) {
+function sweepFamily([family, steps, sourceLs, theme, chroma, hue]) {
   const root = document.documentElement;
   root.setAttribute('data-theme', theme);
   // Sweep the theme's own source token: source-light under light, source-dark
@@ -42,7 +52,7 @@ function sweepFamily([family, steps, sourceLs, theme]) {
   const el = document.createElement('div'); document.body.appendChild(el);
 
   const sweeps = sourceLs.map(L => {
-    root.style.setProperty(prop, `oklch(${L} 0.16 264)`);
+    root.style.setProperty(prop, `oklch(${L} ${chroma} ${hue})`);
     const rows = steps.map(step => {
       el.style.backgroundColor = `var(--sf-color-${family}-${step})`;
       const c = getComputedStyle(el).backgroundColor;
@@ -59,11 +69,11 @@ function sweepFamily([family, steps, sourceLs, theme]) {
 }
 
 test.describe('Brand ramp is monotonic for any source colour', () => {
-  for (const family of FAMILIES) {
+  for (const { name: family, hue, chroma } of FAMILIES) {
     for (const theme of ['light', 'dark']) {
       test(`${family} ramp never folds across the lightness axis (${theme})`, async ({ page }) => {
         await page.goto(FIXTURE);
-        const sweeps = await page.evaluate(sweepFamily, [family, STEPS, SOURCE_LS, theme]);
+        const sweeps = await page.evaluate(sweepFamily, [family, STEPS, SOURCE_LS, theme, chroma, hue]);
 
         const EPS = 0.006; // absorbs 8-bit rounding; clamped extremes go flat (equal), a fold increases
         for (const { L, rows } of sweeps) {
@@ -83,7 +93,7 @@ test.describe('Brand ramp is monotonic for any source colour', () => {
 
   test('default palette keeps light-to-dark endpoints (50 light, 950 dark)', async ({ page }) => {
     await page.goto(FIXTURE);
-    for (const family of FAMILIES) {
+    for (const { name: family } of FAMILIES) {
       const ends = await page.evaluate(([fam, steps]) => {
         document.documentElement.setAttribute('data-theme', 'light');
         const cv = document.createElement('canvas'); cv.width = cv.height = 1;
