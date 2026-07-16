@@ -14,6 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { readFile as readFileLib } from './lib/parse.js';
+import { VERSION_SYNCED_FILES } from './version-synced-files.js';
 
 // SLASHED_ROOT lets tests point the writer at a throwaway fixture tree; falls
 // back to the repo root in normal use. Mirrors scripts/check-version-sync.js.
@@ -61,8 +62,14 @@ const SEMVER_RE = /\d+\.\d+\.\d+(?:[-.][a-zA-Z0-9.]+)*/;
 console.log(`\nversion-sync: syncing to ${versionTag}\n`);
 
 let changed = 0;
+// Every rel path actually written here, checked against VERSION_SYNCED_FILES
+// below so a new sync target cannot be added without registering it (which in
+// turn forces the release workflow's `git add` to include it — see
+// scripts/version-synced-files.js and scripts/check-release-add-list.js).
+const syncedPaths = [];
 
 // ── docs/roadmap.md ─────────────────────────────────────────────────────────
+syncedPaths.push('docs/roadmap.md');
 changed += sync(
   'docs/roadmap.md',
   new RegExp(`(Current version: \\*\\*)${SEMVER_RE.source}(\\*\\*)`),
@@ -71,6 +78,7 @@ changed += sync(
 ) ? 1 : 0;
 
 // ── docs/llm-guide.md ────────────────────────────────────────────────────────
+syncedPaths.push('docs/llm-guide.md');
 changed += sync(
   'docs/llm-guide.md',
   new RegExp(`(Version:\\s*\\*\\*)${SEMVER_RE.source}(\\*\\*)`),
@@ -100,8 +108,24 @@ function syncJsonVersion(rel, label) {
   return true;
 }
 
+syncedPaths.push('configurator/package.json');
 changed += syncJsonVersion('configurator/package.json', `configurator version = ${version}`) ? 1 : 0;
+syncedPaths.push('configurator/package-lock.json');
 changed += syncJsonVersion('configurator/package-lock.json', `configurator lock version = ${version}`) ? 1 : 0;
+
+// ── Guard: the write-set must equal the registered list ──────────────────────
+// Keeps scripts/version-synced-files.js honest — the release workflow's
+// `git add` guard (check-release-add-list.js) trusts that list to be complete.
+const registered = [...VERSION_SYNCED_FILES].sort().join(',');
+const actual = [...syncedPaths].sort().join(',');
+if (registered !== actual) {
+  console.error(
+    '\nversion-sync: write-set drifted from scripts/version-synced-files.js.\n' +
+    `  registered: ${registered || '(none)'}\n  actual:     ${actual || '(none)'}\n` +
+    'Update VERSION_SYNCED_FILES so the release-workflow git-add guard stays complete.',
+  );
+  process.exit(1);
+}
 
 // ── Summary ─────────────────────────────────────────────────────────────────
 if (changed === 0) {

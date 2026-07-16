@@ -55,7 +55,9 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run build` | Build all CSS bundles + docs + sync configurator API |
 | `npm run version-sync` | Sync all version references to root `package.json` |
 | `npm run check:version` | Verify all version references match (CI gate — run before every commit that touches versions) |
-| `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens (CI gate) |
+| `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens and its header token count matches the live total (CI gate) |
+| `npm run check:doc-refs` | Verify every hand-written doc only references live `--sf-*` tokens / `.sf-*` classes (or names allowlisted in `docs/ref-allowlist.json`) (CI gate) |
+| `npm run check:release-add` | Verify the release workflow's `git add` stages every file `version-sync` writes (CI gate) |
 | `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (CI gate) |
 | `npm run check:registry` | Verify `token-registry.json` is in sync with source (CI gate) |
 | `npm run audit:check` | Verify `docs/registry.json` matches source without writing (CI gate) |
@@ -125,7 +127,17 @@ After any token-touching PR, verify with:
 
 ```bash
 npm run check:llm-guide   # must pass — CI fails if it doesn't
+npm run check:doc-refs    # must pass — no hand-written doc may reference a dead token/class
 ```
+
+`check:doc-refs` extends the same live-reference guarantee to **every**
+hand-written doc (architecture, components, theming, macros, states, motion,
+layout, user-manual, README, CONTRIBUTING), not just the LLM guide. When you
+rename or remove a token/class, either update the referencing docs or — if a
+mention is deliberately non-live (a removed name in an example, an illustrative
+instance token, an example of a component the framework does not ship) — record
+it in `docs/ref-allowlist.json` with a reason. `docs/migration.md` (historical)
+and `docs/roadmap.md` (forward-looking) are whole-doc exclusions.
 
 ## Tests
 

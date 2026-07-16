@@ -30,8 +30,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { stripComments } from './lib/parse.js';
-import { HOOK_TOKEN_NAMES } from './hook-tokens.js';
+import { buildLiveTokens } from './lib/live-api.js';
 
 // SLASHED_ROOT lets negative tests run the gate against a fixture tree. An
 // empty/whitespace value counts as unset; a relative override is resolved to
@@ -41,8 +40,8 @@ const ROOT = slashedRoot
   ? path.resolve(slashedRoot)
   : path.resolve(import.meta.dirname, '..');
 const GUIDE = path.join(ROOT, 'docs', 'llm-guide.md');
-const REGISTRY = path.join(ROOT, 'token-registry.json');
 const API_INDEX = path.join(ROOT, 'docs', 'api-index.json');
+const TOKEN_INDEX = path.join(ROOT, 'docs', 'token-index.json');
 
 function readJson(file) {
   try {
@@ -59,36 +58,12 @@ if (!fs.existsSync(GUIDE)) {
 }
 
 const guideText = fs.readFileSync(GUIDE, 'utf8');
-const registry = readJson(REGISTRY);
 const apiIndex = readJson(API_INDEX);
 
-// Live set a): token-registry.json (non-removed entries).
-const liveTokens = new Set(
-  registry.tokens.filter((t) => !t.removed).map((t) => t.name),
-);
-
-// Live set b): any --sf-* DECLARED as a custom property in CSS source files.
-// Only real declarations count — `@property --sf-x` registrations and `--sf-x:`
-// declarations — never `var(--sf-x)` consumption. (Before #582 D3 the lookahead
-// `[:,)]` also matched the `,`/`)` after a consumed token, so the guide could
-// name a --sf-* that is only ever read, never declared, and still pass.)
-// Comments are stripped first so a token that appears only inside a comment
-// isn't mistaken for a declaration.
-const PROPERTY_RE = /@property\s+(--sf-[a-z0-9_-]+)/g;
-const DECL_RE = /(--sf-[a-z0-9_-]+)\s*:/g;
-const cssDirs = [path.join(ROOT, 'core'), path.join(ROOT, 'optional')];
-for (const dir of cssDirs) {
-  if (!fs.existsSync(dir)) continue;
-  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.css'))) {
-    const text = stripComments(fs.readFileSync(path.join(dir, file), 'utf8'));
-    for (const m of text.matchAll(PROPERTY_RE)) liveTokens.add(m[1]);
-    for (const m of text.matchAll(DECL_RE)) liveTokens.add(m[1]);
-  }
-}
-
-// Live set c): fallback-only hook tokens — undeclared by design, documented in
-// the guide as override hooks (see scripts/hook-tokens.js and #582 D5).
-for (const name of HOOK_TOKEN_NAMES) liveTokens.add(name);
+// Live token set (registry + declared CSS custom properties + hook tokens),
+// built by the shared scripts/lib/live-api.js so this gate and check-doc-refs.js
+// agree on one definition of "live".
+const liveTokens = buildLiveTokens(ROOT);
 
 // PUBLIC + PUBLIC-ADVANCED knob tokens — the ones most likely to need docs.
 const publicKnobs = new Set(
@@ -114,6 +89,29 @@ const stale = [...guideRefs].filter((name) => !liveTokens.has(name)).sort();
 // ── Check 2: undocumented PUBLIC knob tokens (warning only) ──────────────────
 const undocumented = [...publicKnobs].filter((name) => !guideRefs.has(name)).sort();
 
+// ── Check 3: header token count ──────────────────────────────────────────────
+// The hand-maintained "> Version: **X** · Tokens: **N** · …" header used to
+// drift silently — N stayed at 686 across dozens of token additions because no
+// gate guarded it. Assert it equals the generated total (the same 754 that
+// token-index.md/tokens.md/api-index.md headline), sourced from the token-index
+// _meta so there is exactly one authority. Enforced only when token-index.json
+// exists — it is a committed, check-artifacts-guarded artifact that production
+// always has; minimal test fixtures omit it and legitimately skip this check.
+let tokenCountError = null;
+if (fs.existsSync(TOKEN_INDEX)) {
+  const expectedTokenCount = readJson(TOKEN_INDEX)?._meta?.counts?.tokens;
+  const headerMatch = guideText.match(/Tokens:\s*\*\*(\d+)\*\*/);
+  if (typeof expectedTokenCount !== 'number') {
+    tokenCountError = 'docs/token-index.json _meta.counts.tokens missing — cannot verify header';
+  } else if (!headerMatch) {
+    tokenCountError = 'docs/llm-guide.md: "Tokens: **N**" header field not found';
+  } else if (Number(headerMatch[1]) !== expectedTokenCount) {
+    tokenCountError =
+      `docs/llm-guide.md header token count "${headerMatch[1]}" != live total "${expectedTokenCount}" ` +
+      `(from docs/token-index.json). Update the header to Tokens: **${expectedTokenCount}**.`;
+  }
+}
+
 // ── Report ───────────────────────────────────────────────────────────────────
 let failed = false;
 
@@ -125,6 +123,11 @@ if (stale.length > 0) {
     '\nFix: either update the guide to use the current token name, ' +
     'or remove the reference if the token was deleted.',
   );
+}
+
+if (tokenCountError) {
+  failed = true;
+  console.error(`check:llm-guide FAILED — ${tokenCountError}`);
 }
 
 if (undocumented.length > 0) {

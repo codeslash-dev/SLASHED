@@ -171,7 +171,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json package-lock.json docs/roadmap.md CHANGELOG.md configurator/package.json configurator/package-lock.json
+          git add package.json package-lock.json docs/roadmap.md docs/llm-guide.md CHANGELOG.md configurator/package.json configurator/package-lock.json
           if git diff --cached --quiet; then
             echo "Nothing to commit — version artifacts on main already match ${{ steps.ver.outputs.tag }}."
             echo "pushed=false" >> "$GITHUB_OUTPUT"
