@@ -320,8 +320,9 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
 ## Responsive design
 
 1. **Fluid tokens** — `--sf-space-*`, `--sf-text-*` use `clamp()`. No `@media` needed.
-2. **Container primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-alternate`, `.sf-bento` use `@container`. `.sf-container` declares the named container `sf-layout` (see Container query contract below); `.sf-alternate` declares its own `sf-alternate`.
-3. **Breakpoints** — a last resort. The framework ships no breakpoint tokens (custom properties can't be used in `@media`/`@container` conditions); hard-code a value in your own query if you truly need one.
+2. **Intrinsic primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-switcher`, `.sf-cluster`, `.sf-equal`, `.sf-content-grid` carry **no** `@container` query at all: they respond to their own width through intrinsic sizing (`minmax(min(…),1fr)`, flex-basis, `column-width`), which is both container-relative and viewport-independent for free. Prefer this pattern.
+3. **Container-query primitives** — `.sf-grid-cols-*`, `.sf-alternate`, `.sf-bento` need a *fixed* column count at a threshold, which intrinsic sizing can't express, so they use `@container`. `.sf-container` declares the named container `sf-layout` (see Container query contract below); `.sf-alternate` declares its own `sf-alternate`. Their breakpoints are hard-coded in **rem** (root-relative, viewport-independent) — never `em`, which inside `@container` resolves against the container's own fluid font-size and would re-couple the query to the viewport.
+4. **Breakpoints** — a last resort. The framework ships no breakpoint tokens (custom properties can't be used in `@media`/`@container` conditions); hard-code a rem value in your own query if you truly need one.
 
 ---
 
