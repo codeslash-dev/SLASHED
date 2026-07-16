@@ -150,9 +150,17 @@ background:
 
 Use these (not the numeric 50–950 ramp) when the element sits on top of a
 background you don't control — e.g. a colored badge that might appear on a
-light or dark card. The numeric ramp is baked against a specific surface/text
-color and will look wrong if the background changes underneath it; the alpha
-variants stay correct anywhere.
+light or dark card. The numeric ramp gives **solid** colors, so it can't blend
+into an unknown background; the alpha variants stay correct anywhere.
+
+> **How the numeric ramp is generated.** Each step pulls the family color's own
+> OKLCH lightness a fixed fraction toward an **absolute** target —
+> `--sf-palette-tint-l` (`0.97`) for tints 50–400, `--sf-palette-shade-l`
+> (`0.1`) for shades 600–950 — clamped so a tint is never darker than the base
+> and a shade never lighter. The ramp is therefore **monotonic light→dark for
+> any source color** you pick, and does not fold even if your brand color is
+> very dark/light or you move the neutral/base anchors. (`base` is a separate
+> absolute grey ladder; status colors have no numeric ramp.)
 
 ## Status colors
 

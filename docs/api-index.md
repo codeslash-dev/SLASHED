@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1079 elements** — 754 tokens, 325 classes.
+**1071 elements** — 746 tokens, 325 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
 | PUBLIC | 1018 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 60 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC-ADVANCED | 52 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (754)
+## Tokens (746)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (623)
+### Core tokens (615)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -117,17 +117,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces. |
 | `--sf-color-action--active` | PUBLIC | consumption | color | `var(--sf-color-action-xdark)` | Action color at pressed/active brightness. |
 | `--sf-color-action--hover` | PUBLIC | consumption | color | `var(--sf-color-action-darker)` | Action color at hover brightness. |
-| `--sf-color-action-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light action shade. Hover fills on white surfaces, badge backgrounds. |
-| `--sf-color-action-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light action shade. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-action-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid action shade. Borders on light backgrounds, low-emphasis fills. |
-| `--sf-color-action-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light action shade. Disabled state fills, decorative accents. |
-| `--sf-color-action-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest action tint. Background fill for subtle action-tinted surfaces. |
+| `--sf-color-action-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light action shade. Hover fills on white surfaces, badge backgrounds. |
+| `--sf-color-action-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light action shade. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-action-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid action shade. Borders on light backgrounds, low-emphasis fills. |
+| `--sf-color-action-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light action shade. Disabled state fills, decorative accents. |
+| `--sf-color-action-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest action tint. Background fill for subtle action-tinted surfaces. |
 | `--sf-color-action-500` | PUBLIC | consumption | color | `var(--sf-color-action)` | Mid action shade — the 'pure' hue. Accessible on both light and dark backgrounds. |
-| `--sf-color-action-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark action shade. Text on light surfaces, icon fills. |
-| `--sf-color-action-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark action shade. Strong text and icon fills on light backgrounds. |
-| `--sf-color-action-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark action shade. High-contrast text on white. |
-| `--sf-color-action-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black action shade. Extreme contrast on white surfaces. |
-| `--sf-color-action-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest action tint. Near-black for dark-theme surface accents. |
+| `--sf-color-action-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark action shade. Text on light surfaces, icon fills. |
+| `--sf-color-action-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark action shade. Strong text and icon fills on light backgrounds. |
+| `--sf-color-action-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark action shade. High-contrast text on white. |
+| `--sf-color-action-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black action shade. Extreme contrast on white surfaces. |
+| `--sf-color-action-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest action tint. Near-black for dark-theme surface accents. |
 | `--sf-color-action-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.10)` | 10% opacity action tint. Subtle hover or selected-row background. |
 | `--sf-color-action-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.30)` | 30% opacity action tint. |
 | `--sf-color-action-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.05)` | 5% opacity action tint. Barely-there hover highlight. |
@@ -188,7 +188,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-danger-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.198 12)` | Registered <color> dark counterpart of --sf-color-danger. |
 | `--sf-color-danger-source-light` | PUBLIC | knob | color | `oklch(0.48 0.22 12)` | OKLCH lightness source for the danger status color (covers destructive actions and form validation errors). |
 | `--sf-color-danger-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast danger color for alert body text and icons. |
-| `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.1)` | Light danger tint for error row backgrounds and alert container fills. |
+| `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.12)` | Light danger tint for error row backgrounds and alert container fills. |
 | `--sf-color-danger-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.05)` | Near-transparent danger tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-dim` | PUBLIC | knob | color | `oklch(0 0 0 / 0.5)` | Backdrop overlay color for modals, drawers, and lightboxes. |
 | `--sf-color-heading` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Heading text color. Slightly stronger contrast than body text for visual hierarchy. |
@@ -197,7 +197,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-info-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.162 235)` | Registered <color> dark counterpart of --sf-color-info. |
 | `--sf-color-info-source-light` | PUBLIC | knob | color | `oklch(0.48 0.18 235)` | OKLCH lightness source for the info status color. |
 | `--sf-color-info-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast info color for hint body text. |
-| `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.1)` | Light info tint for informational note backgrounds. |
+| `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.12)` | Light info tint for informational note backgrounds. |
 | `--sf-color-info-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.05)` | Near-transparent info tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-inset` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` | Slightly inset surface for nested areas — inputs, code blocks, sidebar panels. |
 | `--sf-color-inverse` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(1 - l) c h)` | Inverted (dark-on-light / light-on-dark) surface for high-contrast banners or tooltips. |
@@ -212,17 +212,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral` | PUBLIC | consumption | color | `light-dark(var(--sf-color-neutral-source-light), var(--sf-color-neutral-source-dark, oklch(from var(--sf-color-neutral-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Neutral interactive color for low-emphasis actions and tertiary buttons. |
 | `--sf-color-neutral--active` | PUBLIC | consumption | color | `var(--sf-color-neutral-xdark)` | Neutral color at pressed/active brightness. |
 | `--sf-color-neutral--hover` | PUBLIC | consumption | color | `var(--sf-color-neutral-darker)` | Neutral color at hover brightness. |
-| `--sf-color-neutral-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light neutral shade. |
-| `--sf-color-neutral-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-neutral-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid neutral shade. |
-| `--sf-color-neutral-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light neutral shade. |
-| `--sf-color-neutral-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest neutral tint. |
+| `--sf-color-neutral-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light neutral shade. |
+| `--sf-color-neutral-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-neutral-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid neutral shade. |
+| `--sf-color-neutral-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light neutral shade. |
+| `--sf-color-neutral-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest neutral tint. |
 | `--sf-color-neutral-500` | PUBLIC | consumption | color | `var(--sf-color-neutral)` | Mid neutral shade — the 'pure' hue. |
-| `--sf-color-neutral-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark neutral shade. |
-| `--sf-color-neutral-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark neutral shade. |
-| `--sf-color-neutral-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark neutral shade. |
-| `--sf-color-neutral-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-neutral-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest neutral tint. |
+| `--sf-color-neutral-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark neutral shade. |
+| `--sf-color-neutral-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark neutral shade. |
+| `--sf-color-neutral-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark neutral shade. |
+| `--sf-color-neutral-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-neutral-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest neutral tint. |
 | `--sf-color-neutral-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.10)` | 10% opacity neutral tint. |
 | `--sf-color-neutral-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.30)` | 30% opacity neutral tint. |
 | `--sf-color-neutral-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.05)` | 5% opacity neutral tint. |
@@ -243,17 +243,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary brand palette color. Independent from --sf-color-action by default; override either source token to couple or separate brand and action roles. |
 | `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | Primary color at pressed/active brightness. |
 | `--sf-color-primary--hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | Primary color at hover brightness. |
-| `--sf-color-primary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light primary shade. |
-| `--sf-color-primary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-primary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid primary shade. |
-| `--sf-color-primary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light primary shade. |
-| `--sf-color-primary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest primary tint. |
+| `--sf-color-primary-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light primary shade. |
+| `--sf-color-primary-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-primary-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid primary shade. |
+| `--sf-color-primary-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light primary shade. |
+| `--sf-color-primary-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest primary tint. |
 | `--sf-color-primary-500` | PUBLIC | consumption | color | `var(--sf-color-primary)` | Mid primary shade — the 'pure' hue. |
-| `--sf-color-primary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark primary shade. |
-| `--sf-color-primary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark primary shade. |
-| `--sf-color-primary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark primary shade. |
-| `--sf-color-primary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-primary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest primary tint. |
+| `--sf-color-primary-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark primary shade. |
+| `--sf-color-primary-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark primary shade. |
+| `--sf-color-primary-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark primary shade. |
+| `--sf-color-primary-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-primary-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest primary tint. |
 | `--sf-color-primary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.10)` | 10% opacity primary tint. |
 | `--sf-color-primary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.30)` | 30% opacity primary tint. |
 | `--sf-color-primary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.05)` | 5% opacity primary tint. |
@@ -275,17 +275,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw secondary palette token for the secondary brand color. |
 | `--sf-color-secondary--active` | PUBLIC | consumption | color | `var(--sf-color-secondary-xdark)` | Secondary color at pressed/active brightness. |
 | `--sf-color-secondary--hover` | PUBLIC | consumption | color | `var(--sf-color-secondary-darker)` | Secondary color at hover brightness. |
-| `--sf-color-secondary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light secondary shade. |
-| `--sf-color-secondary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-secondary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid secondary shade. |
-| `--sf-color-secondary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light secondary shade. |
-| `--sf-color-secondary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest secondary tint. |
+| `--sf-color-secondary-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light secondary shade. |
+| `--sf-color-secondary-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-secondary-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid secondary shade. |
+| `--sf-color-secondary-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light secondary shade. |
+| `--sf-color-secondary-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest secondary tint. |
 | `--sf-color-secondary-500` | PUBLIC | consumption | color | `var(--sf-color-secondary)` | Mid secondary shade — the 'pure' hue. |
-| `--sf-color-secondary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark secondary shade. |
-| `--sf-color-secondary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark secondary shade. |
-| `--sf-color-secondary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark secondary shade. |
-| `--sf-color-secondary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-secondary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest secondary tint. |
+| `--sf-color-secondary-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark secondary shade. |
+| `--sf-color-secondary-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark secondary shade. |
+| `--sf-color-secondary-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark secondary shade. |
+| `--sf-color-secondary-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-secondary-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest secondary tint. |
 | `--sf-color-secondary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.10)` | 10% opacity secondary tint. |
 | `--sf-color-secondary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.30)` | 30% opacity secondary tint. |
 | `--sf-color-secondary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.05)` | 5% opacity secondary tint. |
@@ -317,17 +317,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw tertiary palette token for the third brand color. |
 | `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | Tertiary color at pressed/active brightness. |
 | `--sf-color-tertiary--hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | Tertiary color at hover brightness. |
-| `--sf-color-tertiary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light tertiary shade. |
-| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-tertiary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid tertiary shade. |
-| `--sf-color-tertiary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light tertiary shade. |
-| `--sf-color-tertiary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest tertiary tint. |
+| `--sf-color-tertiary-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light tertiary shade. |
+| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-tertiary-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid tertiary shade. |
+| `--sf-color-tertiary-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light tertiary shade. |
+| `--sf-color-tertiary-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest tertiary tint. |
 | `--sf-color-tertiary-500` | PUBLIC | consumption | color | `var(--sf-color-tertiary)` | Mid tertiary shade — the 'pure' hue. |
-| `--sf-color-tertiary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark tertiary shade. |
-| `--sf-color-tertiary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark tertiary shade. |
-| `--sf-color-tertiary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark tertiary shade. |
-| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-tertiary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest tertiary tint. |
+| `--sf-color-tertiary-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark tertiary shade. |
+| `--sf-color-tertiary-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark tertiary shade. |
+| `--sf-color-tertiary-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark tertiary shade. |
+| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-tertiary-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest tertiary tint. |
 | `--sf-color-tertiary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.10)` | 10% opacity tertiary tint. |
 | `--sf-color-tertiary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.30)` | 30% opacity tertiary tint. |
 | `--sf-color-tertiary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.05)` | 5% opacity tertiary tint. |
@@ -518,16 +518,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-opacity-disabled` | PUBLIC | knob | opacity | `0.45` | Opacity for disabled UI elements (typically 0.4–0.5). |
 | `--sf-opacity-muted` | PUBLIC | knob | opacity | `0.5` | General de-emphasis opacity for secondary content, ghost elements, or non-primary layers. Default 0.5. |
 | `--sf-optical-sizing` | PUBLIC-ADVANCED | knob | optical | `auto` | CSS font-optical-sizing value. 'auto' lets the browser optimize letterforms for the rendered size. Set 'none' to disable optical sizing. |
-| `--sf-palette-mix-100` | PUBLIC-ADVANCED | knob | palette | `8%` | Color-mix percentage for palette step 100. Controls blend depth toward the surface. Default 8%. |
-| `--sf-palette-mix-200` | PUBLIC-ADVANCED | knob | palette | `20%` | Color-mix percentage for palette step 200. Controls blend depth toward the surface. Default 20%. |
-| `--sf-palette-mix-300` | PUBLIC-ADVANCED | knob | palette | `40%` | Color-mix percentage for palette step 300. Controls blend depth toward the surface. Default 40%. |
-| `--sf-palette-mix-400` | PUBLIC-ADVANCED | knob | palette | `65%` | Color-mix percentage for palette step 400 (near-mid tint). Controls blend depth. Default 65%. |
-| `--sf-palette-mix-50` | PUBLIC-ADVANCED | knob | palette | `4%` | Color-mix percentage for the lightest palette step (50). Controls how far step 50 blends toward the surface. Default 4%. |
-| `--sf-palette-mix-600` | PUBLIC-ADVANCED | knob | palette | `82%` | Color-mix percentage for palette step 600 (near-mid shade). Controls blend depth toward the text color. Default 82%. |
-| `--sf-palette-mix-700` | PUBLIC-ADVANCED | knob | palette | `62%` | Color-mix percentage for palette step 700. Controls blend depth toward the text color. Default 62%. |
-| `--sf-palette-mix-800` | PUBLIC-ADVANCED | knob | palette | `38%` | Color-mix percentage for palette step 800 (dark shade). Controls blend depth toward text. Default 38%. |
-| `--sf-palette-mix-900` | PUBLIC-ADVANCED | knob | palette | `18%` | Color-mix percentage for palette step 900 (very dark shade). Controls blend depth toward text. Default 18%. |
-| `--sf-palette-mix-950` | PUBLIC-ADVANCED | knob | palette | `8%` | Color-mix percentage for the darkest palette step (950). Controls how far step 950 blends toward the text color. Default 8%. |
+| `--sf-palette-shade-l` | PUBLIC-ADVANCED | knob | palette | `0.1` | Absolute OKLCH lightness the shade steps (600-950) pull toward; sets how dark the darkest palette step can reach. Default 0.1. |
+| `--sf-palette-tint-l` | PUBLIC-ADVANCED | knob | palette | `0.97` | Absolute OKLCH lightness the tint steps (50-400) pull toward; sets how light the lightest palette step can reach. Default 0.97. |
 | `--sf-print-base-size` | PUBLIC-ADVANCED | knob | print | `11pt` | Base font size for @media print stylesheets. Default 11pt. Override on :root to adjust printed body text size. |
 | `--sf-print-page-margin` | PUBLIC-ADVANCED | knob | print | `2cm` | Page margin for printed output. Default 2cm. Maps to @page margin. |
 | `--sf-print-page-size` | PUBLIC-ADVANCED | knob | print | `a4` | Target paper size for printing. Default 'a4'. Maps to @page size. Common values: a4, letter, legal. |
