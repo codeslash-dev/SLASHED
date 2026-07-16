@@ -151,6 +151,52 @@ btn.addEventListener('click', () => {
 The `::view-transition(root)` cross-fade is styled in `core/motion.css` and
 respects `prefers-reduced-motion`.
 
+### Per-element colours per mode — the simplest, universal way
+
+When you just need **one element to use a specific colour in light vs dark**,
+reach for CSS `light-dark()` before any theme selector. It is the simplest and
+most portable option: one declaration, no `[data-theme]` selector, and it works
+in **every** context that sets `color-scheme` — the OS preference, a
+`data-theme` toggle, or a host that flips `color-scheme` via its own attribute
+(e.g. a page builder's dark-mode switch):
+
+```css
+.my-element {
+  color:        light-dark(#1f2937, #e5e7eb);
+  background:   light-dark(#ffffff, #111827);
+  border-color: light-dark(#e5e7eb, #374151);
+}
+```
+
+You can mix framework tokens with a one-off accent — auto-switching base plus
+your own value only where you want it:
+
+```css
+.my-element {
+  color: light-dark(var(--sf-color-text), oklch(0.85 0.15 30));
+}
+```
+
+Reach for it whenever the difference is a **colour**. It substitutes a colour
+value, so it covers `color`, `background-color`, `border-color`, `fill`, and the
+colour part of `box-shadow`. `light-dark()` picks its branch from the inherited
+`color-scheme`, which SLASHED sets on every `[data-theme]` element (and which the
+OS default and host toggles set too) — so no selector is needed. If an element
+ever lands in a subtree with no `color-scheme` set, it falls back to the light
+branch.
+
+For a per-mode change that **isn't** a colour (`background-image`, `display`,
+layout) `light-dark()` doesn't apply — branch on the universal `--sf-is-dark`
+flag instead, which is `1` in dark and `0` in light in every context above:
+
+```css
+@layer slashed.overrides {
+  @container style(--sf-is-dark: 1) {
+    .my-element { background-image: url(hero-dark.avif); }
+  }
+}
+```
+
 ## Per-section & multi-brand
 
 Re-declare the six source tokens under your own selector for a different palette;
