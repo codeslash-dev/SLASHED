@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Bug Fixes
+- **layout:** `@container` breakpoints for `.sf-grid-cols-*`, `.sf-bento` and `.sf-alternate` now use `rem` instead of `em`. Inside a container query an `em` resolves against the query container's own font-size, which under the default fluid type scale is inherited from `body` (a `clamp()` over `100vw`, ~16–20px) — so the same fixed-width container rendered a different column count depending on the *viewport*: an 800px container showed `.sf-grid-cols-3` as 3 columns at a 500px viewport but 1 column at 1200px+. `rem` resolves against the fixed root (`html` stays 16px; fluid type is applied to `body`), restoring the documented "responds to its own container width, not the viewport" contract. Thresholds are unchanged numerically (30rem = 480px, 48rem = 768px) and still honour user zoom / root-font-size. Also corrects `docs/architecture.md`, which wrongly listed `.sf-grid` / `.sf-sidebar` as `@container` primitives (both are intrinsic and carry no container query).
+
 ## [0.7.18] - 2026-07-16
 
 ### Features
