@@ -58,6 +58,7 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens and its header token count matches the live total (CI gate) |
 | `npm run check:doc-refs` | Verify every hand-written doc only references live `--sf-*` tokens / `.sf-*` classes (or names allowlisted in `docs/ref-allowlist.json`) (CI gate) |
 | `npm run check:release-add` | Verify the release workflow's `git add` stages every file `version-sync` writes (CI gate) |
+| `npm run check:layer-order` | Verify `docs/architecture.md`'s `@layer` block and specificity ladder match `core/layers.css` (CI gate) |
 | `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (CI gate) |
 | `npm run check:registry` | Verify `token-registry.json` is in sync with source (CI gate) |
 | `npm run audit:check` | Verify `docs/registry.json` matches source without writing (CI gate) |

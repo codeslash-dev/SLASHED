@@ -98,6 +98,8 @@ jobs:
       - run: node scripts/check-doc-refs.js
       # The release workflow's git-add must stage every file version-sync writes.
       - run: node scripts/check-release-add-list.js
+      # architecture.md's layer order must match core/layers.css (the cascade contract).
+      - run: node scripts/check-layer-order.js
       - run: node scripts/check-macro-catalog.js
       # #582 source-CSS audit gates: false wiring claims, annotation/value
       # drift, fallback-only hook tokens, hand-maintained mirrors, and

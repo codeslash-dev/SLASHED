@@ -10,8 +10,8 @@ Declared once in `core/layers.css`:
   slashed.reset,
   slashed.base,
   slashed.forms,
-  slashed.layout,
   slashed.components,
+  slashed.layout,
   slashed.macros,
   slashed.utilities,
   slashed.states,
@@ -25,7 +25,7 @@ Declared once in `core/layers.css`:
 
 Priority increases left → right. Unlayered consumer CSS beats all layers. `slashed.overrides` ships empty. `slashed.legacy` is for backward-compatibility fallbacks and sits just below `slashed.overrides` so user overrides always win.
 
-`slashed.macros` sits between `components` and `utilities`. Macros may compose with primitives and components, but a single-property utility still wins on the same selector.
+`slashed.macros` sits between `layout` and `utilities`. Macros may compose with primitives and components, but a single-property utility still wins on the same selector.
 
 ---
 
@@ -293,8 +293,8 @@ slashed.themes
 slashed.states
 slashed.utilities
 slashed.macros
-slashed.components
 slashed.layout
+slashed.components
 slashed.forms
 slashed.base
 slashed.reset
@@ -405,7 +405,7 @@ Plain CSS, no runtime. The notable costs:
   `--sf-color-primary-source-light`) re-derives everything downstream each frame — fine
   for a small accent, not for a token hundreds of elements read. A theme toggle
   re-resolves the graph once (negligible).
-- **`@property` registration** (22 colours + 5 state flags) is a one-time parse
+- **`@property` registration** (30 colours + 5 state flags) is a one-time parse
   cost; immaterial.
 - **`@layer`** has no runtime cost — resolved at parse time. Low-specificity
   selectors keep style recalc fast.

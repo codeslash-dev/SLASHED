@@ -4,7 +4,7 @@ Recipes / patterns from `core/macros.css`. Macros answer
 **"what does this element do / look like?"** — distinct from layout
 primitives, which answer **"where do my children go?"**.
 
-Layer: `slashed.macros` (between `slashed.components` and
+Layer: `slashed.macros` (between `slashed.layout` and
 `slashed.utilities`). Macros may compose with primitives and components,
 but a single-property utility still wins on the same selector.
 
