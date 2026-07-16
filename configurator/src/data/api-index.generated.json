@@ -2,21 +2,21 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "5a5ec9f40624",
+    "tokensHash": "e5bb5faa97a9",
     "bundles": [
       "full",
       "optimal"
     ],
     "counts": {
-      "tokens": 754,
+      "tokens": 756,
       "byTier": {
-        "PUBLIC": 693,
+        "PUBLIC": 695,
         "PUBLIC-ADVANCED": 60,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
-        "Core tokens": 623,
+        "Core tokens": 625,
         "Macro tokens": 32,
         "Component tokens": 46
       }
@@ -5430,6 +5430,48 @@
       "note": "Extra-light primary shade.",
       "value": "var(--sf-color-primary-200)",
       "aliasOf": "--sf-color-primary-200",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-color-pulse",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "Colour the .sf-color-pulse animation breathes around. Any colour; defaults to var(--sf-color-primary). Override per element to pulse a danger / success / brand colour instead.",
+      "value": "var(--sf-color-primary)",
+      "aliasOf": "--sf-color-primary",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-color-pulse-amount",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "Animation presets",
+      "description": "Complete animation shorthand values — pair named @keyframes with duration and easing. Use directly as animation property values.",
+      "note": "How far .sf-color-pulse lifts the colour's OKLCH lightness at the animation's peak. Default: 0.25 (higher = a more pronounced brighten).",
+      "value": "0.25",
+      "aliasOf": null,
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

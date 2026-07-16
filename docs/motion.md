@@ -100,7 +100,7 @@ These are scroll-driven (their timing is `animation-range`, not
 
 | Class | Effect |
 |---|---|
-| `.sf-color-pulse` | animates `--sf-color-primary-source-light` lightness via `@property` interpolation in oklch |
+| `.sf-color-pulse` | the element's `background-color` gently "breathes" — brightens toward a lighter tint and eases back, looping. See [Colour pulse](#colour-pulse). |
 
 ## Keyframes
 
@@ -148,6 +148,38 @@ first two rows) that then plateaus, so arbitrarily long lists still animate.
 > `animation-delay`, so stagger has no effect there. (`.sf-entrance--*`
 > does fall back to a time-based one-shot on engines without `view()`,
 > where the delay *does* apply; `.sf-exit--*` has no such fallback.)
+
+## Colour pulse
+
+`.sf-color-pulse` makes an element's **`background-color`** slowly "breathe":
+it brightens toward a lighter tint at the midpoint of the loop, then eases
+back — a gentle, non-blinking heartbeat that draws the eye to something *live*
+or *ongoing* (a "● live" / "recording" dot, a "syncing…" / "processing…"
+indicator, an unsaved-changes badge).
+
+It works with **any colour**. The default is `primary`; override
+`--sf-color-pulse` per element to pulse a status or brand colour:
+
+```html
+<span class="sf-color-pulse">primary (default)</span>
+<span class="sf-color-pulse" style="--sf-color-pulse: var(--sf-color-danger)">recording</span>
+<span class="sf-color-pulse" style="--sf-color-pulse: var(--sf-color-success)">live</span>
+```
+
+Two knobs:
+
+| Token | Default | What it controls |
+|---|---|---|
+| `--sf-color-pulse` | `var(--sf-color-primary)` | the colour the pulse breathes around |
+| `--sf-color-pulse-amount` | `0.25` | how far the OKLCH lightness lifts at the peak (higher = more pronounced) |
+
+The animation drives `background-color` directly (a natively interpolable
+property, so no `@property` registration is needed) and is gated on
+relative-colour support — `@supports (color: oklch(from red l c h))` — since
+the brightened midpoint is computed with `oklch(from var(--sf-color-pulse) …)`.
+On engines without relative colour the element simply keeps its static
+`--sf-color-pulse` colour. Like the rest of the layer it is paused under
+`prefers-reduced-motion: reduce`.
 
 ## Motion scale
 

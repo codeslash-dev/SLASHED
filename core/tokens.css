@@ -1390,6 +1390,13 @@
        rhythm follows the motion knob without baking the scale in here. */
     --sf-stagger-step: 75ms;
 
+    /* Colour pulse (.sf-color-pulse) — the colour the pulse breathes around
+       (any colour; defaults to primary) and how far its OKLCH lightness lifts
+       at the animation's peak. Override --sf-color-pulse per element to pulse
+       a danger / success / brand colour instead. */
+    --sf-color-pulse:        var(--sf-color-primary);
+    --sf-color-pulse-amount: 0.25;
+
     /* Hover-transform magnitudes — the .sf-hover-* utilities (optional/
        utilities.css) read these so the effect strength is one global knob per
        axis rather than hard-coded per class. --grow/--shrink are scale factors;

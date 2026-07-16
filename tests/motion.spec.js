@@ -85,6 +85,25 @@ test.describe('motion — prefers-reduced-motion: no-preference', () => {
     // 2nd child index 1 → 1 × 100ms × 2 = 200ms.
     expect(seconds(await prop(page, 'animation-delay'))).toBeCloseTo(0.2, 3);
   });
+
+  test('.sf-color-pulse binds the sf-color-pulse keyframes', async ({ page }) => {
+    // Regression: the previous implementation was gated behind a
+    // @supports (@property …) at-rule query that many engines don't satisfy,
+    // so animation-name silently resolved to 'none' (a no-op). It now gates on
+    // relative-colour support and must actually bind the keyframes.
+    await renderWithBundle(page, `<div class="sf-color-pulse" id="t">x</div>`);
+    expect(await prop(page, 'animation-name')).toBe('sf-color-pulse');
+  });
+
+  test('.sf-color-pulse defaults --sf-color-pulse to the primary colour', async ({ page }) => {
+    await renderWithBundle(page, `<div class="sf-color-pulse" id="t">x</div>`);
+    const [pulse, primary] = await page.evaluate(() => {
+      const cs = getComputedStyle(document.getElementById('t'));
+      return [cs.getPropertyValue('--sf-color-pulse').trim(),
+              cs.getPropertyValue('--sf-color-primary').trim()];
+    });
+    expect(pulse).toBe(primary);
+  });
 });
 
 test.describe('motion — prefers-reduced-motion: reduce', () => {
@@ -101,6 +120,11 @@ test.describe('motion — prefers-reduced-motion: reduce', () => {
 
   test('.sf-fade-in animation does not apply under reduce', async ({ page }) => {
     await renderWithBundle(page, `<div class="sf-fade-in" id="t">x</div>`);
+    expect(await prop(page, 'animation-name')).toBe('none');
+  });
+
+  test('.sf-color-pulse animation does not apply under reduce', async ({ page }) => {
+    await renderWithBundle(page, `<div class="sf-color-pulse" id="t">x</div>`);
     expect(await prop(page, 'animation-name')).toBe('none');
   });
 });

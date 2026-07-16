@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 798
+    "nextId": 800
   },
   "tokens": [
     {
@@ -3239,6 +3239,14 @@
     {
       "id": 797,
       "name": "--sf-density"
+    },
+    {
+      "id": 798,
+      "name": "--sf-color-pulse"
+    },
+    {
+      "id": 799,
+      "name": "--sf-color-pulse-amount"
     }
   ]
 }

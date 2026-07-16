@@ -214,6 +214,34 @@ directly on the element — the same declaration the macro used to emit:
 Change the `at <position>` (e.g. `0 0` = top-left, `100% 100%` = bottom-right)
 to move the cut, and the two radii to resize it.
 
+### `.sf-color-pulse` now pulses `background-color` with any colour (breaking)
+
+`.sf-color-pulse` used to animate the `--sf-color-primary-source-light` seed
+token behind an `@supports (@property …)` at-rule feature query. That query is
+unsatisfied on many current engines, so the class was frequently a **no-op**;
+where it did run it re-tinted whatever read `primary` in the subtree rather than
+the element itself, and it was locked to the primary colour.
+
+It now animates the element's **own `background-color`** directly (no
+`@property` registration needed, so it runs on far more engines) and works with
+**any colour** via two knobs:
+
+| Token | Default | Controls |
+|---|---|---|
+| `--sf-color-pulse` | `var(--sf-color-primary)` | the colour the pulse breathes around |
+| `--sf-color-pulse-amount` | `0.25` | OKLCH lightness lift at the peak |
+
+**What changed for you:** put `.sf-color-pulse` on the element whose background
+should pulse, and set the colour with `--sf-color-pulse`:
+
+```html
+<span class="sf-color-pulse" style="--sf-color-pulse: var(--sf-color-danger)">● recording</span>
+```
+
+If you previously relied on it re-tinting a descendant's `primary` colour, move
+the class onto the element you actually want to pulse. The animation still
+pauses under `prefers-reduced-motion: reduce`.
+
 ## SLASHED 0.7.6 → 0.7.7
 
 ### `.sf-btn` axes reworked (breaking)

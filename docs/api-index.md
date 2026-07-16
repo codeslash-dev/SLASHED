@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1079 elements** — 754 tokens, 325 classes.
+**1081 elements** — 756 tokens, 325 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1018 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1020 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 60 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (754)
+## Tokens (756)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (623)
+### Core tokens (625)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -270,6 +270,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-tint` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-primary-xdark` | PUBLIC | consumption | color | `var(--sf-color-primary-800)` | Extra-dark primary shade. |
 | `--sf-color-primary-xlight` | PUBLIC | consumption | color | `var(--sf-color-primary-200)` | Extra-light primary shade. |
+| `--sf-color-pulse` | PUBLIC | consumption | color | `var(--sf-color-primary)` | Colour the .sf-color-pulse animation breathes around. Any colour; defaults to var(--sf-color-primary). Override per element to pulse a danger / success / brand colour instead. |
+| `--sf-color-pulse-amount` | PUBLIC | knob | color | `0.25` | How far .sf-color-pulse lifts the colour's OKLCH lightness at the animation's peak. Default: 0.25 (higher = a more pronounced brighten). |
 | `--sf-color-raised` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | Elevated card surface that floats above the page background. |
 | `--sf-color-scheme` | PUBLIC | knob | color | `light dark` | Preferred color scheme hint (light / dark / normal). Sent to the browser to influence UA chrome styling. |
 | `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw secondary palette token for the secondary brand color. |

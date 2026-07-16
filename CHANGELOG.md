@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Features
+- **motion:** `.sf-color-pulse` now works with **any colour** and is far more robust. Two knobs: `--sf-color-pulse` (the colour to breathe around, default `var(--sf-color-primary)`) and `--sf-color-pulse-amount` (OKLCH lightness lift at the peak, default `0.25`). Override per element to pulse a status/brand colour, e.g. `style="--sf-color-pulse: var(--sf-color-danger)"`. See `docs/motion.md`.
+
+### Breaking Changes
+- **motion:** `.sf-color-pulse` now animates the element's own `background-color` (driven directly, so no `@property` registration is required and it runs on far more engines) instead of animating the `--sf-color-primary-source-light` seed token. The old implementation was gated behind `@supports (@property …)` — an at-rule feature query many current browsers do not satisfy — so it was frequently a no-op; where it did run it re-tinted anything reading `primary` in the subtree rather than the element itself. **What changed for you:** `.sf-color-pulse` now paints (and pulses) the element's background. If you relied on it re-tinting a descendant's `primary` colour, put `.sf-color-pulse` on the element whose background should pulse, and set `--sf-color-pulse` to the colour you want. See `docs/migration.md`.
+
 ## [0.7.18] - 2026-07-16
 
 ### Features

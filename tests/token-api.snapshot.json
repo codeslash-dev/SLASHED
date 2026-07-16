@@ -259,6 +259,8 @@
   "--sf-color-primary-tint",
   "--sf-color-primary-xdark",
   "--sf-color-primary-xlight",
+  "--sf-color-pulse",
+  "--sf-color-pulse-amount",
   "--sf-color-raised",
   "--sf-color-scheme",
   "--sf-color-secondary",

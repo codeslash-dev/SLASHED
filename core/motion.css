@@ -163,11 +163,19 @@
   @keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.5rem; } }
 
   
-  @supports (@property --x { syntax: "<color>"; inherits: false; initial-value: white; }) {
+  /* Colour pulse — the element's own background-color gently "breathes": it
+     brightens toward a lighter tint at the midpoint, then eases back, looping.
+     Works with ANY colour via the --sf-color-pulse knob (defaults to primary);
+     --sf-color-pulse-amount tunes how far the OKLCH lightness lifts at the peak.
+     background-color is natively interpolable, so no @property registration is
+     needed — the only requirement is relative-colour support for the oklch(from
+     …) midpoint, so the keyframes (which use it) and the rule both live inside
+     the @supports guard. Paused under prefers-reduced-motion. */
+  @supports (color: oklch(from red l c h)) {
     @keyframes sf-color-pulse {
-      0%   { --sf-color-primary-source-light: var(--sf-color-primary-source-light); }
-      50%  { --sf-color-primary-source-light: oklch(from var(--sf-color-primary-source-light) clamp(0, calc(l + 0.25), 0.9) c h); }
-      100% { --sf-color-primary-source-light: var(--sf-color-primary-source-light); }
+      0%, 100% { background-color: var(--sf-color-pulse); }
+      50%      { background-color: oklch(from var(--sf-color-pulse)
+                                   clamp(0, calc(l + var(--sf-color-pulse-amount)), 0.95) c h); }
     }
 
     @media (prefers-reduced-motion: no-preference) {

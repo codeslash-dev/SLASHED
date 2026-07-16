@@ -19,7 +19,7 @@
       "optional/utilities.css"
     ],
     "counts": {
-      "tokens": 754,
+      "tokens": 756,
       "sf_classes": 289,
       "is_classes": 28
     }
@@ -285,6 +285,8 @@
     "--sf-color-primary-tint",
     "--sf-color-primary-xdark",
     "--sf-color-primary-xlight",
+    "--sf-color-pulse",
+    "--sf-color-pulse-amount",
     "--sf-color-raised",
     "--sf-color-scheme",
     "--sf-color-secondary",

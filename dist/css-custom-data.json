@@ -1302,6 +1302,16 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-color-pulse",
+      "description": "Colour the .sf-color-pulse animation breathes around. Any colour; defaults to var(--sf-color-primary). Override per element to pulse a danger / success / brand colour instead.\n\nDefault: `var(--sf-color-primary)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-pulse-amount",
+      "description": "How far .sf-color-pulse lifts the colour's OKLCH lightness at the animation's peak. Default: 0.25 (higher = a more pronounced brighten).\n\nDefault: `0.25`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-color-raised",
       "description": "Elevated card surface that floats above the page background.\n\nDefault: `oklch(from var(--sf-color-base) calc(l + 0.04) c h)`",
       "syntax": "*"

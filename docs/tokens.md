@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**754 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**756 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-623 tokens.
+625 tokens.
 
 | Token | Default |
 |---|---|
@@ -212,6 +212,8 @@ rebrand workflow.
 | `--sf-color-primary-tint` | `var(--sf-color-primary-a5)` |
 | `--sf-color-primary-xdark` | `var(--sf-color-primary-800)` |
 | `--sf-color-primary-xlight` | `var(--sf-color-primary-200)` |
+| `--sf-color-pulse` | `var(--sf-color-primary)` |
+| `--sf-color-pulse-amount` | `0.25` |
 | `--sf-color-raised` | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` |
 | `--sf-color-scheme` | `light dark` |
 | `--sf-color-secondary` | `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |

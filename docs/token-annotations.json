@@ -407,6 +407,8 @@
     "--sf-color-dim": "Backdrop overlay color for modals, drawers, and lightboxes.",
     "--sf-animation-blink": "Blinking visibility loop. Use for cursor indicators or critical attention cues. Respect prefers-reduced-motion.",
     "--sf-animation-color-pulse": "Pulsing color loop. Use for live-status badges (recording, live). Respect prefers-reduced-motion.",
+    "--sf-color-pulse": "Colour the .sf-color-pulse animation breathes around. Any colour; defaults to var(--sf-color-primary). Override per element to pulse a danger / success / brand colour instead.",
+    "--sf-color-pulse-amount": "How far .sf-color-pulse lifts the colour's OKLCH lightness at the animation's peak. Default: 0.25 (higher = a more pronounced brighten).",
     "--sf-stagger-step": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.",
     "--sf-hover-grow-scale": "Scale factor applied by .sf-hover-grow on hover (>1 grows).",
     "--sf-hover-shrink-scale": "Scale factor applied by .sf-hover-shrink on hover (<1 shrinks).",

@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.17** · Tokens: **686** · Prefix: `--sf-`
+> Version: **0.7.18** · Tokens: **686** · Prefix: `--sf-`
 
 ---
 
@@ -1031,6 +1031,13 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 --sf-animation-spin          /* Loading spinner */
 --sf-animation-shimmer       /* Skeleton loader */
 --sf-animation-color-pulse   /* Live status badge */
+
+/* Colour pulse — .sf-color-pulse breathes an element's background-color
+   (brightens + eases back, looping) for live/ongoing status. Works with ANY
+   colour; override the knob per element. Drives background-color directly
+   (no @property needed); gated on @supports (color: oklch(from red l c h)). */
+--sf-color-pulse             /* colour to pulse; default var(--sf-color-primary) */
+--sf-color-pulse-amount      /* OKLCH lightness lift at the peak; default 0.25 */
 
 /* Stagger — put .sf-stagger on a parent; each direct child gets an
    incrementing animation-delay = index × --sf-stagger-step × --sf-motion-scale.

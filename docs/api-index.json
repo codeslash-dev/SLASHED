@@ -25,21 +25,21 @@
       "optimal"
     ],
     "counts": {
-      "total": 1079,
+      "total": 1081,
       "by_type": {
         "class": 325,
-        "token": 754
+        "token": 756
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1018,
+        "PUBLIC": 1020,
         "PUBLIC-ADVANCED": 60
       },
       "by_role": {
-        "consumption": 489,
-        "knob": 265
+        "consumption": 490,
+        "knob": 266
       },
-      "tokens": 754,
+      "tokens": 756,
       "classes": 325,
       "sf_classes": 289,
       "is_classes": 28,
@@ -48,7 +48,7 @@
         "Accessibility": 8,
         "Component tokens": 46,
         "Components": 30,
-        "Core tokens": 623,
+        "Core tokens": 625,
         "Forms": 1,
         "Layout primitives": 145,
         "Layout tokens": 53,
@@ -6792,6 +6792,58 @@
       "description": "Extra-light primary shade.",
       "value": "var(--sf-color-primary-200)",
       "aliasOf": "--sf-color-primary-200",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-color-pulse",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "Colour the .sf-color-pulse animation breathes around. Any colour; defaults to var(--sf-color-primary). Override per element to pulse a danger / success / brand colour instead.",
+      "value": "var(--sf-color-primary)",
+      "aliasOf": "--sf-color-primary",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-color-pulse-amount",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "knob",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Animation presets",
+      "description": "How far .sf-color-pulse lifts the colour's OKLCH lightness at the animation's peak. Default: 0.25 (higher = a more pronounced brighten).",
+      "value": "0.25",
+      "aliasOf": null,
       "registered": false,
       "animatable": false,
       "syntax": null,
