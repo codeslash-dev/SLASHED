@@ -20,6 +20,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { stripComments } from './lib/parse.js';
 
 const slashedRoot = process.env.SLASHED_ROOT?.trim();
 const ROOT = slashedRoot
@@ -41,7 +42,10 @@ const read = (rel) => {
 const layersIn = (text) => [...text.matchAll(/slashed\.([a-z]+)/g)].map((m) => m[1]);
 
 // ── Source of truth: the @layer declaration in core/layers.css ───────────────
-const layersCss = read('core/layers.css');
+// Strip CSS comments first so an `@layer` that appears inside a file-header
+// comment (e.g. "/* keep @layer in sync with architecture.md */") can't be
+// mistaken for the real declaration.
+const layersCss = stripComments(read('core/layers.css'));
 const declStart = layersCss.indexOf('@layer');
 if (declStart === -1) fail('no @layer declaration found in core/layers.css.');
 const declEnd = layersCss.indexOf(';', declStart);

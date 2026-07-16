@@ -67,6 +67,18 @@ describe('check-layer-order failure cases', () => {
     assert.equal(r.status, 1, 'expected exit 1 for a wrong specificity ladder');
     assert.match(r.stderr, /Specificity ladder .* not the reverse/);
   });
+
+  test('ignores an @layer mention inside a comment before the real declaration', () => {
+    // A file-header comment naming @layer must not be parsed as the declaration.
+    const dir = buildFixture();
+    fs.writeFileSync(
+      path.join(dir, 'core', 'layers.css'),
+      '/* keep @layer in sync with architecture.md; order matters */\n' +
+        `@layer\n${LAYERS.map((l) => `  slashed.${l}`).join(',\n')};\n`,
+    );
+    const r = runGate(dir);
+    assert.equal(r.status, 0, `comment @layer must be ignored:\n${r.stderr}`);
+  });
 });
 
 after(() => {

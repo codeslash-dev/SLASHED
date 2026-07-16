@@ -164,8 +164,13 @@ if (countFindings.length > 0) {
 if (failed) process.exit(1);
 
 const tokenAllow = Object.values(allow).reduce((n, s) => n + s.size, 0);
+// Only claim the count check ran when token-index.json was actually present;
+// otherwise say it was skipped so a local pre-build run doesn't imply the
+// "N design tokens" prose was validated when it wasn't.
+const countNote = typeof tokenTotal === 'number'
+  ? 'token-count claims match'
+  : 'token-count check skipped (docs/token-index.json absent — run `npm run build`)';
 console.log(
   `check:doc-refs OK — ${docs.length} hand-written docs scanned, ` +
-  `all --sf-*/.sf- references live or allowlisted (${tokenAllow} allowlisted); ` +
-  'token-count claims match.',
+  `all --sf-*/.sf- references live or allowlisted (${tokenAllow} allowlisted); ${countNote}.`,
 );
