@@ -5,10 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLASHED — Demo</title>
   <!-- SLASHED local build — relative paths work for both Playwright (file://)
-       and a local dev server. For a standalone shareable demo, swap these for
-       the jsDelivr CDN links:
-         https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.optimal.css -->
-  <link rel="stylesheet" href="../dist/slashed.optimal.css">
+       and a local dev server. The demo showcases the complete API (components
+       + utilities), so it loads the FULL bundle — the OPTIMAL bundle omits
+       optional/components.css, optional/tokens.components.css and
+       optional/utilities.css, leaving .sf-btn / .sf-card / .sf-surface-* etc.
+       unstyled. For a standalone shareable demo, swap this for the jsDelivr
+       CDN link:
+         https://cdn.jsdelivr.net/gh/codeslash-dev/SLASHED@dist/slashed.full.css -->
+  <link rel="stylesheet" href="../dist/slashed.full.css">
   <style>
     /* ── demo-only overrides ──────────────────────────────── */
     :root {
