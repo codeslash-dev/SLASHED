@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.20] - 2026-07-16
+
+### Features
+- **configurator:** rewire Colors palette-ramp panel to the anchor model
+
+### Bug Fixes
+- **demo:** widen sidebar nav so labels aren't clipped
+- **demo:** load full bundle so components render styled
+- **tokens:** unify status -subtle alpha to 0.12; drop dev-notes from manual
+- address PR #627 review — changelog copy-paste, dark sweep, dead assignment
+- **tokens:** make brand colour ramps monotonic for any source colour
+
 ## [0.7.19] - 2026-07-16
 
 ### Bug Fixes
