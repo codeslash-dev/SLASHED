@@ -91,7 +91,18 @@ const liveClasses = buildLiveClasses(ROOT);
 const allow = loadAllowlist();
 const docs = discoverDocs();
 
+// Live token total from the generated index — the one authority the generated
+// docs headline (754). Used to guard hand-maintained "N design tokens" prose
+// (e.g. the README tagline) against the same silent count drift that left the
+// llm-guide header at 686. Skipped if token-index.json is absent (fixtures).
+const TOKEN_INDEX = path.join(ROOT, 'docs', 'token-index.json');
+const tokenTotal = fs.existsSync(TOKEN_INDEX)
+  ? JSON.parse(fs.readFileSync(TOKEN_INDEX, 'utf8'))?._meta?.counts?.tokens
+  : undefined;
+const COUNT_CLAIM_RE = /(\d+)\s+design tokens/g;
+
 const findings = [];
+const countFindings = [];
 for (const rel of docs) {
   const text = fs.readFileSync(path.join(ROOT, rel), 'utf8');
   const allowed = allow[rel] || new Set();
@@ -110,10 +121,20 @@ for (const rel of docs) {
       if (isLiveClass(name, liveClasses) || allowed.has(name)) continue;
       findings.push({ rel, lineNo, name, kind: 'class' });
     }
+    if (typeof tokenTotal === 'number') {
+      for (const m of line.matchAll(COUNT_CLAIM_RE)) {
+        if (Number(m[1]) !== tokenTotal) {
+          countFindings.push({ rel, lineNo, claimed: m[1] });
+        }
+      }
+    }
   });
 }
 
+let failed = false;
+
 if (findings.length > 0) {
+  failed = true;
   console.error(
     `check:doc-refs FAILED — ${findings.length} reference(s) to names that are ` +
     'neither live API nor allowlisted:',
@@ -126,11 +147,30 @@ if (findings.length > 0) {
     'if the mention is deliberate (removed-by-design, historical, illustrative) — ' +
     'add it to docs/ref-allowlist.json with a reason.',
   );
-  process.exit(1);
 }
 
+if (countFindings.length > 0) {
+  failed = true;
+  console.error(
+    `\ncheck:doc-refs FAILED — ${countFindings.length} "N design tokens" claim(s) ` +
+    `disagree with the live total (${tokenTotal}, from docs/token-index.json):`,
+  );
+  for (const f of countFindings) {
+    console.error(`  ${f.rel}:${f.lineNo}  claims ${f.claimed}, live total is ${tokenTotal}`);
+  }
+  console.error('\nFix: update the count to the live total.');
+}
+
+if (failed) process.exit(1);
+
 const tokenAllow = Object.values(allow).reduce((n, s) => n + s.size, 0);
+// Only claim the count check ran when token-index.json was actually present;
+// otherwise say it was skipped so a local pre-build run doesn't imply the
+// "N design tokens" prose was validated when it wasn't.
+const countNote = typeof tokenTotal === 'number'
+  ? 'token-count claims match'
+  : 'token-count check skipped (docs/token-index.json absent — run `npm run build`)';
 console.log(
   `check:doc-refs OK — ${docs.length} hand-written docs scanned, ` +
-  `all --sf-*/.sf- references live or allowlisted (${tokenAllow} allowlisted).`,
+  `all --sf-*/.sf- references live or allowlisted (${tokenAllow} allowlisted); ${countNote}.`,
 );

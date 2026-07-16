@@ -40,6 +40,7 @@
     "check:registry": "node scripts/check-token-registry.js",
     "check:llm-guide": "node scripts/check-llm-guide.js",
     "check:doc-refs": "node scripts/check-doc-refs.js",
+    "check:layer-order": "node scripts/check-layer-order.js",
     "check:release-add": "node scripts/check-release-add-list.js",
     "check:dead-knobs": "node scripts/check-dead-knobs.js",
     "check:annotations": "node scripts/check-annotations.js",
