@@ -107,6 +107,18 @@ describe('check-doc-refs failure cases', () => {
     }));
     assert.equal(r.status, 0, `modifier on live base should pass:\n${r.stderr}`);
   });
+
+  test('a "N design tokens" count matching the live total passes', () => {
+    // buildFixture writes token-index.json with counts.tokens === 2.
+    const r = runGate(buildFixture({ 'README.md': 'SLASHED ships 2 design tokens.\n' }));
+    assert.equal(r.status, 0, `matching count should pass:\n${r.stderr}`);
+  });
+
+  test('a stale "N design tokens" count fails against the live total', () => {
+    const r = runGate(buildFixture({ 'README.md': 'SLASHED ships 729 design tokens.\n' }));
+    assert.equal(r.status, 1, 'expected exit 1 for a stale token-count claim');
+    assert.match(r.stderr, /claims 729, live total is 2/);
+  });
 });
 
 after(() => {
