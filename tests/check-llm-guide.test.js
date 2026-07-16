@@ -107,6 +107,33 @@ describe('check-llm-guide failure cases', () => {
   });
 });
 
+describe('check-llm-guide header token count (Check 3)', () => {
+  // Builds a fixture that DOES carry a token-index.json (the committed artifact
+  // production always has) so Check 3 is exercised rather than skipped.
+  function buildCountFixture(headerCount, indexCount) {
+    const dir = buildFixture(
+      `# LLM guide\n\n> Version: **1.0.0** · Tokens: **${headerCount}** · Prefix: \`--sf-\`\n\n` +
+      'Use `--sf-color-text` and `--sf-space-m`.\n',
+    );
+    fs.writeFileSync(
+      path.join(dir, 'docs', 'token-index.json'),
+      JSON.stringify({ _meta: { counts: { tokens: indexCount } } }),
+    );
+    return dir;
+  }
+
+  test('passes when the header count equals the live total', () => {
+    const r = runGate(buildCountFixture(2, 2));
+    assert.equal(r.status, 0, `matching count should pass:\n${r.stderr}`);
+  });
+
+  test('fails when the header count is stale', () => {
+    const r = runGate(buildCountFixture(686, 2));
+    assert.equal(r.status, 1, 'expected exit 1 for a stale token count');
+    assert.match(r.stderr, /header token count "686" != live total "2"/);
+  });
+});
+
 after(() => {
   for (const d of tmpDirs) {
     try { fs.rmSync(d, { recursive: true, force: true }); } catch { /* ignore */ }
