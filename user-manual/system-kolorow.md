@@ -324,8 +324,17 @@ Aliasy do tych, po które naprawdę sięgasz:
 --sf-color-primary-xdark       (= -800)  stan wciśnięty
 ```
 
-**Ważne:** rampa numeryczna jest policzona względem **konkretnego** tła
-(`--sf-color-surface`). Używaj jej tylko, gdy znasz tło pod spodem.
+**Jak liczona jest rampa.** Każdy krok przyciąga jasność OKLCH koloru marki o
+ustalony ułamek ku **absolutnej** kotwicy — `--sf-palette-tint-l` (`0.97`) dla
+tintów 50–400, `--sf-palette-shade-l` (`0.1`) dla cieni 600–950 — z klamrą, więc
+tint nigdy nie jest ciemniejszy od bazy, a cień nigdy jaśniejszy. Dzięki temu
+rampa jest **monotoniczna (jasno→ciemno) dla dowolnego koloru źródłowego** i
+**nie składa się w „U"** — nawet gdy Twój brand jest bardzo ciemny/jasny albo
+przesuniesz kotwice `neutral`/`base`. (`base` to osobna, absolutna drabina
+szarości; statusy nie mają rampy numerycznej.)
+
+Kroki dają **jednolite** (nieprzezroczyste) kolory, więc nie wtapiają się w
+nieznane tło — do tego służą warianty alfa (niżej).
 
 ### Warianty alfa (przezroczyste)
 
@@ -339,8 +348,9 @@ ciemną kartę) — użyj wariantów alfa zamiast rampy numerycznej:
 | `-a30` | 30% | `-muted` |
 | `-a50` | 50% | — |
 
-Alfa zostaje poprawna na każdym tle; rampa numeryczna „rozjedzie się”, gdy tło
-się zmieni.
+Alfa przepuszcza tło pod spodem (przezroczystość), więc jest poprawna na każdym
+tle; rampa numeryczna daje kolory jednolite, które nie reagują na to, co jest
+pod nimi.
 
 ### Statusy: `success`, `warning`, `info`, `danger`
 

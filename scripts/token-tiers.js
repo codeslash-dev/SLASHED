@@ -77,11 +77,12 @@ const ADVANCED = new Set([
 const STEP = '(?:2xs|xs|s|m|l|xl|2xl|3xl|4xl)';
 const ADVANCED_PATTERNS = [
   new RegExp(`^--sf-(?:space|text)-${STEP}-to-${STEP}$`),
-  //   · Palette ramp-shape knobs (core/tokens.css):
-  //     `--sf-palette-mix-{step}` — color-mix() percentages reshaping the
-  //     entire numeric palette ladder at once. Niche/powerful, documented
+  //   · Palette ramp lightness anchors (core/tokens.css):
+  //     `--sf-palette-tint-l` / `--sf-palette-shade-l` — absolute OKLCH
+  //     lightness targets the tint/shade steps pull toward, reshaping the
+  //     whole numeric palette ladder at once. Niche/powerful, documented
   //     as PUBLIC-ADVANCED in the core palette section.
-  /^--sf-palette-mix-\d+$/,
+  /^--sf-palette-(?:tint|shade)-l$/,
 ];
 
 /**

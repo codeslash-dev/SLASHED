@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.18** · Tokens: **754** · Prefix: `--sf-`
+> Version: **0.7.18** · Tokens: **746** · Prefix: `--sf-`
 
 ---
 
@@ -407,21 +407,13 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 /* Alpha variants */
 --sf-color-{family}-a5 / -a10 / -a30 / -a50 / -a80
 
-/* PUBLIC-ADVANCED: ramp shape for the five mid-tone brand families */
---sf-palette-mix-50:  4%;    /* How far step 50 blends toward surface */
---sf-palette-mix-100: 8%;    /* … */
---sf-palette-mix-200: 20%;
---sf-palette-mix-300: 40%;
---sf-palette-mix-400: 65%;
-/* step 500 is the source color itself; no separate mix knob exists */
---sf-palette-mix-600: 82%;
---sf-palette-mix-700: 62%;
---sf-palette-mix-800: 38%;
---sf-palette-mix-900: 18%;
---sf-palette-mix-950: 8%;     /* deepest step */
+/* PUBLIC-ADVANCED: ramp lightness anchors for the five mid-tone families */
+--sf-palette-tint-l:  0.97;   /* absolute OKLCH L the tint steps (50–400) reach toward */
+--sf-palette-shade-l: 0.1;    /* absolute OKLCH L the shade steps (600–950) reach toward */
+/* step 500 is the source color itself; per-step pull + chroma taper are baked in */
 ```
 
-All six families honour the 50=Lightest / 950=Darkest contract. The five mid-tone brand families (`primary`, `secondary`, `tertiary`, `action`, `neutral`) are generated with `color-mix` anchored to `--sf-color-surface` and `--sf-color-text` as the two poles. **`base` uses fixed OKLCH lightness steps** (0.97 at step 50 → 0.06 at step 950) preserving the source hue and chroma. The `--sf-palette-mix-*` knobs do not affect `base`. Because it is an absolute scale, `base` deliberately has **no relative aliases** (`-lighter` / `-darker` / `-xlight` / `-superlight` / …) — those exist only on the five mid-tone brand families, where the source sits in the middle of the ramp. For mode-adaptive surface adjustments on base-coloured elements use `--sf-color-inset` / `--sf-color-raised` / `--sf-color-bg` or the `--sf-color-base--hover` / `--sf-color-base--active` tokens (which use relative oklch offsets and adapt to both modes automatically).
+All six families honour the 50=Lightest / 950=Darkest contract. The five mid-tone brand families (`primary`, `secondary`, `tertiary`, `action`, `neutral`) are generated in OKLCH by pulling the family colour's own lightness a fixed fraction toward an **absolute** target — `--sf-palette-tint-l` for tints (50–400), `--sf-palette-shade-l` for shades (600–950) — clamped (`max()`/`min()`) so a tint can never end darker than the base nor a shade lighter. Because the poles are absolute (not the theme's `--sf-color-surface` / `--sf-color-text`), the ramp stays monotonic light→dark for **any** source colour and any anchor configuration — it cannot fold into a "U". **`base` uses fixed OKLCH lightness steps** (0.97 at step 50 → 0.06 at step 950) preserving the source hue and chroma; it does not read the `--sf-palette-*-l` knobs. Because it is an absolute scale, `base` deliberately has **no relative aliases** (`-lighter` / `-darker` / `-xlight` / `-superlight` / …) — those exist only on the five mid-tone brand families, where the source sits in the middle of the ramp. For mode-adaptive surface adjustments on base-coloured elements use `--sf-color-inset` / `--sf-color-raised` / `--sf-color-bg` or the `--sf-color-base--hover` / `--sf-color-base--active` tokens (which use relative oklch offsets and adapt to both modes automatically).
 
 Status families (success/warning/info/danger) have **no numeric scale** — use their triplets.
 
@@ -1310,15 +1302,13 @@ Example — if your primary brand color has L ≈ 0.6 and you prefer white text:
 
 Each step up the type scale subtracts `step-index × taper` from that step's default line-height.
 
-### 11.5 Palette mix percentages
+### 11.5 Palette ramp lightness anchors
 
 ```css
-/* Shape of the 50–950 numeric palette ramp */
---sf-palette-mix-50:  4%    /* how far step 50 blends toward surface */
---sf-palette-mix-100: 8%
---sf-palette-mix-200: 20%
---sf-palette-mix-300: 40%
-/* … similarly for all steps */
+/* Absolute OKLCH lightness poles the 50–950 numeric ramp reaches toward */
+--sf-palette-tint-l:  0.97   /* how light the lightest step (50) can reach */
+--sf-palette-shade-l: 0.1    /* how dark the darkest step (950) can reach */
+/* per-step pull fraction + chroma taper are baked into each family */
 ```
 
 ### 11.6 Scroll and mask

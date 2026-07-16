@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**754 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**746 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-623 tokens.
+615 tokens.
 
 | Token | Default |
 |---|---|
@@ -59,17 +59,17 @@ rebrand workflow.
 | `--sf-color-action` | `light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-action--active` | `var(--sf-color-action-xdark)` |
 | `--sf-color-action--hover` | `var(--sf-color-action-darker)` |
-| `--sf-color-action-100` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))` |
-| `--sf-color-action-200` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))` |
-| `--sf-color-action-300` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))` |
-| `--sf-color-action-400` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))` |
-| `--sf-color-action-50` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))` |
+| `--sf-color-action-100` | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` |
+| `--sf-color-action-200` | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` |
+| `--sf-color-action-300` | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` |
+| `--sf-color-action-400` | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` |
+| `--sf-color-action-50` | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` |
 | `--sf-color-action-500` | `var(--sf-color-action)` |
-| `--sf-color-action-600` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))` |
-| `--sf-color-action-700` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))` |
-| `--sf-color-action-800` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))` |
-| `--sf-color-action-900` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))` |
-| `--sf-color-action-950` | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))` |
+| `--sf-color-action-600` | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` |
+| `--sf-color-action-700` | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` |
+| `--sf-color-action-800` | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` |
+| `--sf-color-action-900` | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` |
+| `--sf-color-action-950` | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` |
 | `--sf-color-action-a10` | `oklch(from var(--sf-color-action) l c h / 0.10)` |
 | `--sf-color-action-a30` | `oklch(from var(--sf-color-action) l c h / 0.30)` |
 | `--sf-color-action-a5` | `oklch(from var(--sf-color-action) l c h / 0.05)` |
@@ -154,17 +154,17 @@ rebrand workflow.
 | `--sf-color-neutral` | `light-dark(var(--sf-color-neutral-source-light), var(--sf-color-neutral-source-dark, oklch(from var(--sf-color-neutral-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-neutral--active` | `var(--sf-color-neutral-xdark)` |
 | `--sf-color-neutral--hover` | `var(--sf-color-neutral-darker)` |
-| `--sf-color-neutral-100` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))` |
-| `--sf-color-neutral-200` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))` |
-| `--sf-color-neutral-300` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))` |
-| `--sf-color-neutral-400` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))` |
-| `--sf-color-neutral-50` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))` |
+| `--sf-color-neutral-100` | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` |
+| `--sf-color-neutral-200` | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` |
+| `--sf-color-neutral-300` | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` |
+| `--sf-color-neutral-400` | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` |
+| `--sf-color-neutral-50` | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` |
 | `--sf-color-neutral-500` | `var(--sf-color-neutral)` |
-| `--sf-color-neutral-600` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))` |
-| `--sf-color-neutral-700` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))` |
-| `--sf-color-neutral-800` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))` |
-| `--sf-color-neutral-900` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))` |
-| `--sf-color-neutral-950` | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))` |
+| `--sf-color-neutral-600` | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` |
+| `--sf-color-neutral-700` | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` |
+| `--sf-color-neutral-800` | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` |
+| `--sf-color-neutral-900` | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` |
+| `--sf-color-neutral-950` | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` |
 | `--sf-color-neutral-a10` | `oklch(from var(--sf-color-neutral) l c h / 0.10)` |
 | `--sf-color-neutral-a30` | `oklch(from var(--sf-color-neutral) l c h / 0.30)` |
 | `--sf-color-neutral-a5` | `oklch(from var(--sf-color-neutral) l c h / 0.05)` |
@@ -185,17 +185,17 @@ rebrand workflow.
 | `--sf-color-primary` | `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-primary--active` | `var(--sf-color-primary-xdark)` |
 | `--sf-color-primary--hover` | `var(--sf-color-primary-darker)` |
-| `--sf-color-primary-100` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` |
-| `--sf-color-primary-200` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` |
-| `--sf-color-primary-300` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` |
-| `--sf-color-primary-400` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))` |
-| `--sf-color-primary-50` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` |
+| `--sf-color-primary-100` | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` |
+| `--sf-color-primary-200` | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` |
+| `--sf-color-primary-300` | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` |
+| `--sf-color-primary-400` | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` |
+| `--sf-color-primary-50` | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` |
 | `--sf-color-primary-500` | `var(--sf-color-primary)` |
-| `--sf-color-primary-600` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))` |
-| `--sf-color-primary-700` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` |
-| `--sf-color-primary-800` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` |
-| `--sf-color-primary-900` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` |
-| `--sf-color-primary-950` | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))` |
+| `--sf-color-primary-600` | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` |
+| `--sf-color-primary-700` | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` |
+| `--sf-color-primary-800` | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` |
+| `--sf-color-primary-900` | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` |
+| `--sf-color-primary-950` | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` |
 | `--sf-color-primary-a10` | `oklch(from var(--sf-color-primary) l c h / 0.10)` |
 | `--sf-color-primary-a30` | `oklch(from var(--sf-color-primary) l c h / 0.30)` |
 | `--sf-color-primary-a5` | `oklch(from var(--sf-color-primary) l c h / 0.05)` |
@@ -217,17 +217,17 @@ rebrand workflow.
 | `--sf-color-secondary` | `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-secondary--active` | `var(--sf-color-secondary-xdark)` |
 | `--sf-color-secondary--hover` | `var(--sf-color-secondary-darker)` |
-| `--sf-color-secondary-100` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))` |
-| `--sf-color-secondary-200` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))` |
-| `--sf-color-secondary-300` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))` |
-| `--sf-color-secondary-400` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))` |
-| `--sf-color-secondary-50` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))` |
+| `--sf-color-secondary-100` | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` |
+| `--sf-color-secondary-200` | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` |
+| `--sf-color-secondary-300` | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` |
+| `--sf-color-secondary-400` | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` |
+| `--sf-color-secondary-50` | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` |
 | `--sf-color-secondary-500` | `var(--sf-color-secondary)` |
-| `--sf-color-secondary-600` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))` |
-| `--sf-color-secondary-700` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))` |
-| `--sf-color-secondary-800` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))` |
-| `--sf-color-secondary-900` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))` |
-| `--sf-color-secondary-950` | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))` |
+| `--sf-color-secondary-600` | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` |
+| `--sf-color-secondary-700` | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` |
+| `--sf-color-secondary-800` | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` |
+| `--sf-color-secondary-900` | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` |
+| `--sf-color-secondary-950` | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` |
 | `--sf-color-secondary-a10` | `oklch(from var(--sf-color-secondary) l c h / 0.10)` |
 | `--sf-color-secondary-a30` | `oklch(from var(--sf-color-secondary) l c h / 0.30)` |
 | `--sf-color-secondary-a5` | `oklch(from var(--sf-color-secondary) l c h / 0.05)` |
@@ -259,17 +259,17 @@ rebrand workflow.
 | `--sf-color-tertiary` | `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-tertiary--active` | `var(--sf-color-tertiary-xdark)` |
 | `--sf-color-tertiary--hover` | `var(--sf-color-tertiary-darker)` |
-| `--sf-color-tertiary-100` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))` |
-| `--sf-color-tertiary-200` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))` |
-| `--sf-color-tertiary-300` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))` |
-| `--sf-color-tertiary-400` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))` |
-| `--sf-color-tertiary-50` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))` |
+| `--sf-color-tertiary-100` | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` |
+| `--sf-color-tertiary-200` | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` |
+| `--sf-color-tertiary-300` | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` |
+| `--sf-color-tertiary-400` | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` |
+| `--sf-color-tertiary-50` | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` |
 | `--sf-color-tertiary-500` | `var(--sf-color-tertiary)` |
-| `--sf-color-tertiary-600` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))` |
-| `--sf-color-tertiary-700` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))` |
-| `--sf-color-tertiary-800` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))` |
-| `--sf-color-tertiary-900` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))` |
-| `--sf-color-tertiary-950` | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))` |
+| `--sf-color-tertiary-600` | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` |
+| `--sf-color-tertiary-700` | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` |
+| `--sf-color-tertiary-800` | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` |
+| `--sf-color-tertiary-900` | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` |
+| `--sf-color-tertiary-950` | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` |
 | `--sf-color-tertiary-a10` | `oklch(from var(--sf-color-tertiary) l c h / 0.10)` |
 | `--sf-color-tertiary-a30` | `oklch(from var(--sf-color-tertiary) l c h / 0.30)` |
 | `--sf-color-tertiary-a5` | `oklch(from var(--sf-color-tertiary) l c h / 0.05)` |
@@ -460,16 +460,8 @@ rebrand workflow.
 | `--sf-opacity-disabled` | `0.45` |
 | `--sf-opacity-muted` | `0.5` |
 | `--sf-optical-sizing` | `auto` |
-| `--sf-palette-mix-100` | `8%` |
-| `--sf-palette-mix-200` | `20%` |
-| `--sf-palette-mix-300` | `40%` |
-| `--sf-palette-mix-400` | `65%` |
-| `--sf-palette-mix-50` | `4%` |
-| `--sf-palette-mix-600` | `82%` |
-| `--sf-palette-mix-700` | `62%` |
-| `--sf-palette-mix-800` | `38%` |
-| `--sf-palette-mix-900` | `18%` |
-| `--sf-palette-mix-950` | `8%` |
+| `--sf-palette-shade-l` | `0.1` |
+| `--sf-palette-tint-l` | `0.97` |
 | `--sf-print-base-size` | `11pt` |
 | `--sf-print-page-margin` | `2cm` |
 | `--sf-print-page-size` | `a4` |
