@@ -162,9 +162,9 @@ in **every** context that sets `color-scheme` — the OS preference, a
 
 ```css
 .my-element {
-  color:        light-dark(#1f2937, #e5e7eb);
-  background:   light-dark(#ffffff, #111827);
-  border-color: light-dark(#e5e7eb, #374151);
+  color:            light-dark(#1f2937, #e5e7eb);
+  background-color: light-dark(#ffffff, #111827);
+  border-color:     light-dark(#e5e7eb, #374151);
 }
 ```
 
@@ -186,16 +186,29 @@ ever lands in a subtree with no `color-scheme` set, it falls back to the light
 branch.
 
 For a per-mode change that **isn't** a colour (`background-image`, `display`,
-layout) `light-dark()` doesn't apply — branch on the universal `--sf-is-dark`
-flag instead, which is `1` in dark and `0` in light in every context above:
+layout) `light-dark()` doesn't apply — it only substitutes a `<color>`. Branch
+on the **public** `data-theme` API instead, with a `prefers-color-scheme`
+fallback for the unforced (OS-driven) case. This is the same pattern the
+Contrast bias section uses, and it stays on SemVer-guaranteed selectors:
 
 ```css
 @layer slashed.overrides {
-  @container style(--sf-is-dark: 1) {
-    .my-element { background-image: url(hero-dark.avif); }
+  /* forced dark, at any scope (mirrors .sf-theme-dark too) */
+  :is([data-theme="dark"], .sf-theme-dark) .my-element {
+    background-image: url(hero-dark.avif);
+  }
+  /* OS-preferred dark when no data-theme is set on the page */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .my-element {
+      background-image: url(hero-dark.avif);
+    }
   }
 }
 ```
+
+Don't reach for the internal `--sf-is-dark` flag here: it is an `INTERNAL`-tier
+token (see [architecture.md](architecture.md)) the framework manages itself and
+may change without a major release, so consumer CSS must not depend on it.
 
 ## Per-section & multi-brand
 
