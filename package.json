@@ -1,7 +1,7 @@
 {
   "name": "slashed",
   "type": "module",
-  "version": "0.7.18",
+  "version": "0.7.19",
   "engines": {
     "node": ">=20.11.0"
   },
