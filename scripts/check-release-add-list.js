@@ -44,14 +44,27 @@ const rest = yaml.slice(jobStart + 1);
 const nextJob = rest.search(/^ {2}\S/m);
 const jobBlock = nextJob === -1 ? yaml.slice(jobStart) : yaml.slice(jobStart, jobStart + 1 + nextJob);
 
-// Collect every path token from every `git add …` line in the job. A path may
-// carry a trailing backslash (line continuation) — strip it.
-const addLines = [...jobBlock.matchAll(/git add ([^\n]*)/g)].map((m) => m[1]);
-if (addLines.length === 0) fail('no `git add` command found in the sync-main job.');
+// Collect every path token from every `git add …` command in the job, following
+// shell backslash line-continuations so a multi-line `git add` (a common
+// reformat once the file list grows long) is read in full rather than truncated
+// at the first newline.
+const jobLines = jobBlock.split('\n');
+const addSegments = [];
+for (let i = 0; i < jobLines.length; i++) {
+  const idx = jobLines[i].indexOf('git add ');
+  if (idx === -1) continue;
+  let seg = jobLines[i].slice(idx + 'git add '.length);
+  // A trailing `\` continues the command onto the next physical line.
+  while (seg.trimEnd().endsWith('\\') && i + 1 < jobLines.length) {
+    seg = `${seg.trimEnd().slice(0, -1)} ${jobLines[++i]}`;
+  }
+  addSegments.push(seg);
+}
+if (addSegments.length === 0) fail('no `git add` command found in the sync-main job.');
 const added = new Set(
-  addLines
-    .flatMap((line) => line.split(/\s+/))
-    .map((tok) => tok.replace(/\\$/, '').trim())
+  addSegments
+    .flatMap((seg) => seg.split(/\s+/))
+    .map((tok) => tok.trim())
     .filter(Boolean),
 );
 

@@ -16,6 +16,25 @@ import { stripComments } from './parse.js';
 import { HOOK_TOKEN_NAMES } from '../hook-tokens.js';
 
 /**
+ * Read + parse a JSON file, failing with a human-readable message instead of a
+ * raw ENOENT/SyntaxError stack trace. Mirrors the readJson wrappers the gate
+ * scripts use so a missing token-registry.json / api-index.json (e.g. a fresh
+ * clone before the first `npm run docs`) produces consistent CI output.
+ * @param {string} file absolute path
+ */
+function readJson(file) {
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (err) {
+    console.error(
+      `live-api: cannot read ${file} (${err.message}). ` +
+      'Run `npm run build` (or `npm run docs`) first — the live API set is derived from generated artifacts.',
+    );
+    process.exit(1);
+  }
+}
+
+/**
  * Build the set of live `--sf-*` TOKEN names. Union of:
  *   a) token-registry.json non-removed entries (the catalogued public API),
  *   b) `--sf-*` custom properties DECLARED in core/ + optional/ CSS
@@ -27,9 +46,7 @@ import { HOOK_TOKEN_NAMES } from '../hook-tokens.js';
  * @returns {Set<string>} live token names, each including the `--sf-` prefix
  */
 export function buildLiveTokens(root) {
-  const registry = JSON.parse(
-    fs.readFileSync(path.join(root, 'token-registry.json'), 'utf8'),
-  );
+  const registry = readJson(path.join(root, 'token-registry.json'));
   const live = new Set(
     registry.tokens.filter((t) => !t.removed).map((t) => t.name),
   );
@@ -60,9 +77,7 @@ export function buildLiveTokens(root) {
  * @returns {Set<string>} live class names, e.g. "sf-btn", "sf-btn--soft"
  */
 export function buildLiveClasses(root) {
-  const api = JSON.parse(
-    fs.readFileSync(path.join(root, 'docs', 'api-index.json'), 'utf8'),
-  );
+  const api = readJson(path.join(root, 'docs', 'api-index.json'));
   const entries = Array.isArray(api.entries) ? api.entries : [];
   const live = new Set();
   for (const e of entries) {

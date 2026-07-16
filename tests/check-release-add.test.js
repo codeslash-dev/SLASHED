@@ -64,6 +64,28 @@ describe('check-release-add-list failure cases', () => {
     assert.match(r.stderr, new RegExp(dropped.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   });
 
+  test('reads a multi-line git add with backslash continuations', () => {
+    // Same complete list, but split across physical lines the way a long
+    // add-list is commonly reformatted — the gate must follow the `\`.
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'slashed-reladd-'));
+    tmpDirs.push(dir);
+    fs.mkdirSync(path.join(dir, '.github', 'workflows'), { recursive: true });
+    const cont = VERSION_SYNCED_FILES.map((f) => `            ${f}`).join(' \\\n');
+    const yaml = [
+      'jobs:',
+      '  sync-main:',
+      '    steps:',
+      '      - run: |',
+      '          git add \\',
+      `${cont}`,
+      '          git commit -m "chore: sync"',
+      '',
+    ].join('\n');
+    fs.writeFileSync(path.join(dir, '.github', 'workflows', 'release.yml'), yaml);
+    const r = runGate(dir);
+    assert.equal(r.status, 0, `multi-line git add should be fully parsed:\n${r.stderr}`);
+  });
+
   test('fails when the sync-main job has no git add at all', () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'slashed-reladd-'));
     tmpDirs.push(dir);
