@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.18] - 2026-07-16
+
+### Features
+- **demo:** render every class live in the coverage gallery
+
+### Bug Fixes
+- **demo:** address review findings in the coverage gallery
+- clear CodeQL log finding and address review nits
+- **test:** don't dump identifier lists in coverage log output
+
 ## [0.7.17] - 2026-07-15
 
 ### Features
