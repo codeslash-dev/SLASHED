@@ -2850,7 +2850,7 @@
             <code>.sf-overlap-host</code> — content clears the badge above
           </div>
         </div>
-        <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs)">Directional variants: <code>.sf-overlap--down</code> (pulls into the next element), <code>.sf-overlap--start</code> / <code>.sf-overlap--end</code> (pulls into the inline edge).</p>
+        <p style="font-size: var(--sf-text-xs); color: var(--sf-color-text--muted); margin-block-start: var(--sf-space-xs)">Directional variant: <code>.sf-overlap--down</code> (pulls into the next element).</p>
 
         <h3 style="margin-block-start: var(--sf-space-l)">Macros in action — a composed profile card</h3>
         <p style="font-size: var(--sf-text-s); color: var(--sf-color-text--muted); margin-block-end: var(--sf-space-s)">A realistic card built from the overlap recipe: a banner with an avatar overlapping into the body below (<code>.sf-overlap</code> / <code>.sf-overlap-host</code>).</p>
@@ -3740,14 +3740,6 @@
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-overlap--down</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it.</p></figcaption>
             <div class="cov-stage"><div class="sf-overlap-host" style="min-block-size: 6rem"><div class="cov-ph cov-ph--big">1</div><div class="sf-overlap sf-overlap--down cov-ph">overlap</div></div></div>
-          </figure>
-          <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-overlap--end</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Overlap recipe — pulls the element toward the inline-end (negative inline-end margin) to overlap horizontally.</p></figcaption>
-            <div class="cov-stage"><div class="sf-overlap-host" style="min-block-size: 6rem"><div class="cov-ph cov-ph--big">1</div><div class="sf-overlap sf-overlap--end cov-ph">overlap</div></div></div>
-          </figure>
-          <figure class="cov-card">
-            <figcaption class="cov-card__head"><code>.sf-overlap--start</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Overlap recipe — pulls the element toward the inline-start (negative inline-start margin) to overlap horizontally.</p></figcaption>
-            <div class="cov-stage"><div class="sf-overlap-host" style="min-block-size: 6rem"><div class="cov-ph cov-ph--big">1</div><div class="sf-overlap sf-overlap--start cov-ph">overlap</div></div></div>
           </figure>
           <figure class="cov-card">
             <figcaption class="cov-card__head"><code>.sf-overlap-host</code> <span class="cov-tier cov-tier--public">public</span><p class="cov-desc">Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both.</p></figcaption>

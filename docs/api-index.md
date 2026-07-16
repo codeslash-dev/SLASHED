@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1071 elements** — 746 tokens, 325 classes.
+**1069 elements** — 746 tokens, 323 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1018 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1016 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 52 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -786,7 +786,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (325)
+## Classes (323)
 
 ### Accessibility (8)
 
@@ -992,7 +992,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | — | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | — | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (53)
+### Macro classes (51)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1022,8 +1022,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overflow-fade--top` | PUBLIC | macro | — | Overflow fade variant: fades the top (block-start) edge. |
 | `.sf-overlap` | PUBLIC | macro | — | Overlap recipe — pulls the element upward (negative block-start margin) so it overlaps the previous sibling by --sf-overlap-pull. |
 | `.sf-overlap--down` | PUBLIC | macro | — | Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it. |
-| `.sf-overlap--end` | PUBLIC | macro | — | Overlap recipe — pulls the element toward the inline-end (negative inline-end margin) to overlap horizontally. |
-| `.sf-overlap--start` | PUBLIC | macro | — | Overlap recipe — pulls the element toward the inline-start (negative inline-start margin) to overlap horizontally. |
 | `.sf-overlap-host` | PUBLIC | macro | — | Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both. |
 | `.sf-prose` | PUBLIC | macro | LIST MARKER COLOUR (.sf-marker--*) | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
 | `.sf-scrim` | PUBLIC | macro | — | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |

@@ -753,8 +753,6 @@ since each moves a different margin):
 |---|---|
 | `.sf-overlap` | pulls up over the previous element (default) |
 | `.sf-overlap--down` | pulls down over the next element |
-| `.sf-overlap--start` | pulls into the inline-start side |
-| `.sf-overlap--end` | pulls into the inline-end side |
 
 Tokens:
 

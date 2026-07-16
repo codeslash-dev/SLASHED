@@ -25,14 +25,14 @@
       "optimal"
     ],
     "counts": {
-      "total": 1071,
+      "total": 1069,
       "by_type": {
-        "class": 325,
+        "class": 323,
         "token": 746
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1018,
+        "PUBLIC": 1016,
         "PUBLIC-ADVANCED": 52
       },
       "by_role": {
@@ -40,8 +40,8 @@
         "knob": 257
       },
       "tokens": 746,
-      "classes": 325,
-      "sf_classes": 289,
+      "classes": 323,
+      "sf_classes": 287,
       "is_classes": 28,
       "unprefixed_classes": 8,
       "by_category": {
@@ -52,7 +52,7 @@
         "Forms": 1,
         "Layout primitives": 145,
         "Layout tokens": 53,
-        "Macro classes": 53,
+        "Macro classes": 51,
         "Macro tokens": 32,
         "Motion / animation": 22,
         "Print": 4,
@@ -24881,52 +24881,6 @@
       "area": "macros",
       "group": "",
       "description": "Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it.",
-      "isVariant": true,
-      "baseClass": "sf-overlap",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-overlap--end",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-overlap--end",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Overlap recipe — pulls the element toward the inline-end (negative inline-end margin) to overlap horizontally.",
-      "isVariant": true,
-      "baseClass": "sf-overlap",
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-overlap--start",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-overlap--start",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Overlap recipe — pulls the element toward the inline-start (negative inline-start margin) to overlap horizontally.",
       "isVariant": true,
       "baseClass": "sf-overlap",
       "optional": false,
