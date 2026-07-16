@@ -422,57 +422,12 @@ Te nadpisania trzymaj w warstwie `slashed.overrides`, żeby przetrwały aktualiz
 4. **Użycie `.sf-surface--inverse` na całym ciemnym pasie z kartami i formularzem.**
    → To zadanie dla `data-theme="dark"`; `.sf-surface--*` jest do pojedynczego klocka (§2).
 5. **Rampa numeryczna (`-200`) na elemencie pływającym nad nieznanym tłem.**
-   → Użyj wariantu alfa (`-subtle` / `-tint`), bo rampa jest liczona pod konkretne tło (§6).
+   → Użyj wariantu alfa (`-subtle` / `-tint`), bo krok rampy to kolor jednolity i nie wtapia się w nieznane tło (§6).
 6. **Ręczne dobieranie czerni/bieli na kolorowym tle.** → `--sf-color-text--on-*` (§7).
 
 ---
 
-## 9. Znalezione nieścisłości we frameworku
-
-Podczas pisania tej instrukcji przejrzałem źródła. Poniżej to, co warto poprawić —
-nic krytycznego, ale realne:
-
-### 9.1. Niespójna alfa w `-subtle` dla statusów  *(realna nieścisłość)*
-
-W `core/tokens.css` (blok „Status triplets”) warianty `-subtle` nie mają jednej alfy:
-
-```css
---sf-color-success-subtle: … / 0.12;
---sf-color-warning-subtle: … / 0.12;
---sf-color-info-subtle:    … / 0.1;   /* ← 10%, nie 12% */
---sf-color-danger-subtle:  … / 0.1;   /* ← 10%, nie 12% */
-```
-
-`success` i `warning` mają 12%, a `info` i `danger` 10% — mimo że siedzą pod tym
-samym komentarzem „triplet” i pełnią tę samą rolę (tło alertu). Dokumentacja
-(`user-manual/colors.md`) opisuje je zbiorczo jako „~12% alpha”. Efekt: pudełko
-alertu błędu (`danger`) będzie odrobinę bledsze niż sukcesu przy tej samej treści.
-**Sugestia:** ujednolicić wszystkie cztery do `0.12` (albo świadomie udokumentować
-różnicę). `-muted` (0.3) i `-tint` (0.05) są już spójne we wszystkich czterech.
-
-### 9.2. Kolizja nazwy `-subtle` między marką a statusami  *(pułapka, nie błąd)*
-
-W rampach marki alias `-subtle` = `-a10` = **10%** krycia. W statusach `-subtle`
-(dla success/warning) = **12%**. Ta sama końcówka nazwy, inna nieprzezroczystość.
-Nie jest to błąd, ale łatwo o pomyłkę, gdy myślisz „subtle to zawsze 10%”. Warte
-zdania w dokumentacji.
-
-### 9.3. Degradacja `.sf-surface--*` na starych silnikach  *(świadoma, warto wiedzieć)*
-
-Auto-kontrast wnętrza powierzchni (przepisanie `--sf-color-heading`,
-`--sf-color-link`, obramowań itd. na kolor kontrastowy) siedzi w bloku
-`@supports (color: oklch(from red l c h))` w `core/macros.css`. Reguła bazowa
-poza tym blokiem ustawia tylko `color` na samej płycie (przez `--sf-color-text--on-*`),
-ale **nie** przemapowuje tokenów potomków. Na silnikach bez relatywnego `oklch`
-(Chrome < 119, Safari < 16.4, Firefox < 128) nagłówek lub link *wewnątrz*
-`.sf-surface--primary` może wziąć ciemne tokeny strony i słabo kontrastować z
-kolorowym tłem. To celowa, udokumentowana degradacja — ale jeśli wspierasz stare
-przeglądarki i wkładasz nagłówki/linki do kolorowych płyt, przetestuj to albo
-przypnij kolory jawnie w `slashed.overrides`.
-
----
-
-## 10. Ściąga „potrzebuję…”
+## 9. Ściąga „potrzebuję…”
 
 | Potrzebuję… | Sięgam po |
 |---|---|

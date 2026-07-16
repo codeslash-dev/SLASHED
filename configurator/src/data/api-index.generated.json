@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "5c5b69ba4fa3",
+    "tokensHash": "fb3441987ce7",
     "bundles": [
       "full",
       "optimal"
@@ -3727,7 +3727,7 @@
       "group": "Status triplets",
       "description": "Three-shade status triplets (subtle / muted / strong) for each status role. Use subtle for backgrounds, muted for fills, strong for text on light surfaces.",
       "note": "Light danger tint for error row backgrounds and alert container fills.",
-      "value": "oklch(from var(--sf-color-danger) l c h / 0.1)",
+      "value": "oklch(from var(--sf-color-danger) l c h / 0.12)",
       "aliasOf": null,
       "registered": false,
       "syntax": null,
@@ -3916,7 +3916,7 @@
       "group": "Status triplets",
       "description": "Three-shade status triplets (subtle / muted / strong) for each status role. Use subtle for backgrounds, muted for fills, strong for text on light surfaces.",
       "note": "Light info tint for informational note backgrounds.",
-      "value": "oklch(from var(--sf-color-info) l c h / 0.1)",
+      "value": "oklch(from var(--sf-color-info) l c h / 0.12)",
       "aliasOf": null,
       "registered": false,
       "syntax": null,

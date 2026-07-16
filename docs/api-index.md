@@ -188,7 +188,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-danger-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.198 12)` | Registered <color> dark counterpart of --sf-color-danger. |
 | `--sf-color-danger-source-light` | PUBLIC | knob | color | `oklch(0.48 0.22 12)` | OKLCH lightness source for the danger status color (covers destructive actions and form validation errors). |
 | `--sf-color-danger-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast danger color for alert body text and icons. |
-| `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.1)` | Light danger tint for error row backgrounds and alert container fills. |
+| `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.12)` | Light danger tint for error row backgrounds and alert container fills. |
 | `--sf-color-danger-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.05)` | Near-transparent danger tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-dim` | PUBLIC | knob | color | `oklch(0 0 0 / 0.5)` | Backdrop overlay color for modals, drawers, and lightboxes. |
 | `--sf-color-heading` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Heading text color. Slightly stronger contrast than body text for visual hierarchy. |
@@ -197,7 +197,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-info-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.162 235)` | Registered <color> dark counterpart of --sf-color-info. |
 | `--sf-color-info-source-light` | PUBLIC | knob | color | `oklch(0.48 0.18 235)` | OKLCH lightness source for the info status color. |
 | `--sf-color-info-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast info color for hint body text. |
-| `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.1)` | Light info tint for informational note backgrounds. |
+| `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.12)` | Light info tint for informational note backgrounds. |
 | `--sf-color-info-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.05)` | Near-transparent info tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-inset` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` | Slightly inset surface for nested areas — inputs, code blocks, sidebar panels. |
 | `--sf-color-inverse` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(1 - l) c h)` | Inverted (dark-on-light / light-on-dark) surface for high-contrast banners or tooltips. |

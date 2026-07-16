@@ -266,7 +266,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-danger-source-dark` | PUBLIC | knob | Core | `oklch(0.71 0.198 12) (registered)` |
 | `--sf-color-danger-source-light` | PUBLIC | knob | Core | `oklch(0.48 0.22 12)` |
 | `--sf-color-danger-strong` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` |
-| `--sf-color-danger-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-danger) l c h / 0.1)` |
+| `--sf-color-danger-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-danger) l c h / 0.12)` |
 | `--sf-color-danger-tint` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-danger) l c h / 0.05)` |
 | `--sf-color-dim` | PUBLIC | knob | Core | `oklch(0 0 0 / 0.5)` |
 | `--sf-color-heading` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` |
@@ -275,7 +275,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-info-source-dark` | PUBLIC | knob | Core | `oklch(0.71 0.162 235) (registered)` |
 | `--sf-color-info-source-light` | PUBLIC | knob | Core | `oklch(0.48 0.18 235)` |
 | `--sf-color-info-strong` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` |
-| `--sf-color-info-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-info) l c h / 0.1)` |
+| `--sf-color-info-subtle` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-info) l c h / 0.12)` |
 | `--sf-color-info-tint` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-info) l c h / 0.05)` |
 | `--sf-color-inset` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` |
 | `--sf-color-inverse` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-base) calc(1 - l) c h)` |

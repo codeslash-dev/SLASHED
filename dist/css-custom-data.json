@@ -893,7 +893,7 @@
     },
     {
       "name": "--sf-color-danger-subtle",
-      "description": "Light danger tint for error row backgrounds and alert container fills.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.1)`",
+      "description": "Light danger tint for error row backgrounds and alert container fills.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.12)`",
       "syntax": "*"
     },
     {
@@ -938,7 +938,7 @@
     },
     {
       "name": "--sf-color-info-subtle",
-      "description": "Light info tint for informational note backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.1)`",
+      "description": "Light info tint for informational note backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.12)`",
       "syntax": "*"
     },
     {

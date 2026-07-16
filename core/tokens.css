@@ -608,11 +608,11 @@
       --sf-color-warning-muted:  oklch(from var(--sf-color-warning) l c h / 0.3);
       --sf-color-warning-tint:   oklch(from var(--sf-color-warning) l c h / 0.05);
 
-      --sf-color-info-subtle:    oklch(from var(--sf-color-info) l c h / 0.1);
+      --sf-color-info-subtle:    oklch(from var(--sf-color-info) l c h / 0.12);
       --sf-color-info-muted:     oklch(from var(--sf-color-info) l c h / 0.3);
       --sf-color-info-tint:      oklch(from var(--sf-color-info) l c h / 0.05);
 
-      --sf-color-danger-subtle:  oklch(from var(--sf-color-danger) l c h / 0.1);
+      --sf-color-danger-subtle:  oklch(from var(--sf-color-danger) l c h / 0.12);
       --sf-color-danger-muted:   oklch(from var(--sf-color-danger) l c h / 0.3);
       --sf-color-danger-tint:    oklch(from var(--sf-color-danger) l c h / 0.05);
 

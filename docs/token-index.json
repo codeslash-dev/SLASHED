@@ -1451,7 +1451,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-danger) l c h / 0.1)"
+      "value": "oklch(from var(--sf-color-danger) l c h / 0.12)"
     },
     "--sf-color-danger-tint": {
       "tier": "PUBLIC",
@@ -1523,7 +1523,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-info) l c h / 0.1)"
+      "value": "oklch(from var(--sf-color-info) l c h / 0.12)"
     },
     "--sf-color-info-tint": {
       "tier": "PUBLIC",
