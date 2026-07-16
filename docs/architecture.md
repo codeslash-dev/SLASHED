@@ -167,12 +167,12 @@ Native form controls are out of base entirely — they live in the opt-in
 `slashed.states` recolour fields. Skip the file entirely if you prefer full
 BEM control.
 
-**slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-content-grid`, `.sf-icon`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
-
 **slashed.components** — UI blocks: `.sf-btn` and `.sf-card`, live since v0.7.0.
 These are the only two components SLASHED ships — it stays BEM-first and does
 not carry a broad component library. Every value goes through `var()`. Requires
 `tokens.components.css`.
+
+**slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-content-grid`, `.sf-icon`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
 
 **slashed.macros** — recipes / patterns: `.sf-prose`,
 `.sf-not-prose`, `.sf-flow`, `.sf-truncate`, `.sf-line-clamp-{2,3,N}`,
