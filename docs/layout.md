@@ -112,3 +112,35 @@ Override a single instance without new CSS:
 ```html
 <div class="sf-cluster" style="--sf-cluster-gap: var(--sf-space-l)">…</div>
 ```
+
+## Responsive gaps
+
+Gaps are already fluid: `--sf-grid-gap` defaults to `--sf-gap`, which interpolates
+between its mobile and desktop ends via the shared space scale. Retune the whole
+rhythm at once with the space-scale endpoints (`--sf-space-base-min` /
+`--sf-space-base-max`) rather than per-token knobs.
+
+When one primitive needs a **different** gap on small vs large screens, override
+its scoped token inside a `@container` query — the same container-driven model the
+primitives themselves use, so the gap reacts to the same width that collapses the
+columns. Endpoints stay live tokens, so they still follow any scale retuning:
+
+```css
+.product-grid { --sf-grid-gap: var(--sf-space-l); }
+
+@container (min-width: 48rem) {
+  .product-grid { --sf-grid-gap: var(--sf-space-xl); }
+}
+```
+
+```html
+<div class="sf-container">
+  <div class="sf-grid product-grid">…</div>
+</div>
+```
+
+The override needs a container ancestor (`.sf-container` or `.sf-cq`) — the same
+requirement as `.sf-grid-cols-*`. The gap steps at the breakpoint rather than
+interpolating across it; for a gap that single step is imperceptible in normal use.
+The same pattern works for any scoped gap token (`--sf-gap`, `--sf-content-gap`,
+`--sf-gutter`, `--sf-cluster-gap`, …).

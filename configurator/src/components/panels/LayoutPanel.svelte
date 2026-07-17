@@ -31,6 +31,7 @@
   let centerMax         = $derived(parseRem(overrides["--sf-center-max"],        75));
   let centerGutter      = $derived(parseRem(overrides["--sf-center-gutter"],     1));
   let gridMin           = $derived(parseRem(overrides["--sf-grid-min"],          16));
+  let gridGap           = $derived(parseRem(overrides["--sf-grid-gap"],          1));
   let headerMobile      = $derived(parseRem(overrides["--sf-header-height-mobile"],  3.5));
   let headerDesktop     = $derived(parseRem(overrides["--sf-header-height-desktop"], 5));
   let sidebarWidth      = $derived(parseRem(overrides["--sf-sidebar-width"],     18));
@@ -212,6 +213,22 @@
       <span class="text-[10px] text-slate-500">{showAutoGrid ? "▲" : "▼"}</span>
     </button>
     {#if showAutoGrid}
+      <!-- step 0.0625rem (1px) intentionally matches the gap-token sliders in
+           SpacingPanel (--sf-gap / --sf-content-gap / --sf-gutter), which
+           --sf-grid-gap defaults to — finer than the size controls elsewhere
+           in this panel, so grid gap isn't tuned coarser than the token it
+           inherits from. -->
+      <SliderRow
+        label="Grid gap" value={gridGap} min={0} max={4} step={0.0625} unit="rem"
+        help="--sf-grid-gap — gap between grid cells (.sf-grid, .sf-grid-flex, .sf-grid-cols-*); defaults to --sf-gap"
+        overridden={"--sf-grid-gap" in overrides}
+        onChange={(v) => onSet("--sf-grid-gap", `${v}rem`)}
+        onReset={() => onReset("--sf-grid-gap")}
+        rawDefault="var(--sf-gap)"
+        variableOptions={SPACE_SCALE}
+        currentRaw={overrides["--sf-grid-gap"]}
+        onRawSet={(v) => onSet("--sf-grid-gap", v)}
+      />
       <SliderRow
         label="Grid min cell width" value={gridMin} min={8} max={40} step={0.5} unit="rem"
         help="sf-grid minimum column width — browser auto-fills columns"
@@ -243,8 +260,8 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
         <div class="text-[9px] text-slate-400 dark:text-slate-600 mb-2 font-mono">Preview at 360px panel width</div>
         <div
-          class="grid gap-1"
-          style={`grid-template-columns: repeat(auto-fill, minmax(${Math.min(gridMin * 16 * (360 / 1200), 120)}px, 1fr))`}
+          class="grid"
+          style={`grid-template-columns: repeat(auto-fill, minmax(${Math.min(gridMin * 16 * (360 / 1200), 120)}px, 1fr)); gap: ${gridGap * 16 * (360 / 1200)}px`}
         >
           {#each Array.from({ length: 8 }) as _, i (i)}
             <div class="h-8 bg-indigo-500/20 border border-indigo-500/20 rounded text-[8px] font-mono text-indigo-600/60 dark:text-indigo-400/60 flex items-center justify-center">col</div>
