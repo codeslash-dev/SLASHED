@@ -106,6 +106,12 @@ describe('StudioHeader', () => {
   describe('share link', () => {
     afterEach(() => {
       delete window.slashedApp;
+      // vi.spyOn re-spying an already-spied navigator.clipboard.writeText
+      // across tests in this describe block reuses the same mock instance
+      // (its call history isn't implicitly reset between tests), so a
+      // stale calls[0] from a prior test could leak into this one. Restore
+      // explicitly so each test's mock.calls starts fresh.
+      vi.restoreAllMocks();
     });
 
     test('copies a link that carries the current overrides as a config code', async () => {
