@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "purpose": "Deliberate, non-live --sf-*/.sf- references that scripts/check-doc-refs.js must NOT flag. Every entry is a name a hand-written doc mentions ON PURPOSE even though it is not current live API (removed-by-design, illustrative, or an example of something the framework intentionally does not ship). Each key is a repo-relative doc path; each value maps a name (token with --sf- prefix, or class without the leading dot) to the reason it is allowed. Whole-doc genres (historical migration.md, forward-looking roadmap.md, generated docs) are excluded in check-doc-refs.js itself, not here.",
+    "generated_by": "hand-maintained"
+  },
+  "docs/architecture.md": {
+    "--sf-button-radius": "Illustrative instance token — shown as an example of an arbitrary per-element custom property an author may set inline (style=\"--sf-button-radius: …\"), not a framework-declared token."
+  },
+  "docs/components.md": {
+    "--sf-grad-a": "Historical example — named as an ad-hoc gradient variable the real gradient system replaced; prose, not current API.",
+    "--sf-grad-b": "Historical example — named as an ad-hoc gradient variable the real gradient system replaced; prose, not current API.",
+    "sf-tabs": "Example of a component SLASHED deliberately does NOT ship (framework carries only .sf-btn and .sf-card).",
+    "sf-accordion": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-tooltip": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-popover": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-pagination": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-breadcrumb": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-progress": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-spinner": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-table": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-form-field": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-nav": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-badge": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-tag": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-alert": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-avatar": "Example of a component SLASHED deliberately does NOT ship.",
+    "sf-modal": "Example of a component SLASHED deliberately does NOT ship."
+  }
+}

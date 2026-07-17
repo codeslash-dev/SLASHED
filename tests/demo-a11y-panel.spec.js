@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'docs', 'demo.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'demo', 'index.html')).href;
 
 test.describe('Live accessibility report', () => {
   test('renders a grade for every pair in light and dark', async ({ page }) => {

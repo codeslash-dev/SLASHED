@@ -1,6 +1,6 @@
 # SLASHED — Roadmap
 
-Current version: **0.7.15**
+Current version: **0.7.20**
 
 ## Before v1.0
 
@@ -161,12 +161,16 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   (`search_tokens`, `get_class_info`, etc.) for AI coding assistants, as a
   live alternative to the static `llms.txt`.
   Tracked in [#473](https://github.com/codeslash-dev/SLASHED/issues/473).
-- ~~**Concave/inverted corner utility**~~ ✓ **Done** — shipped as
-  `.sf-corner-scoop` (mask-based radial-gradient cut) with 4 single-corner
-  position variants (`--top-left`/`--top-right`/`--bottom-left`/`--bottom-right`).
-  A two-corner "pair variant" (for U-shaped cutouts) was explored and
-  dropped — WebKit's `mask-composite` implementation has a bug with no
-  viable workaround found.
+- ~~**Concave/inverted corner utility**~~ ✗ **Not planned** — shipped as
+  `.sf-corner-scoop` (mask-based radial-gradient cut with 4 single-corner
+  position variants) and then removed before 1.0. Judged too niche for the
+  public API relative to its cost: a single absolute `--sf-corner-scoop-size`
+  needs per-element tuning to read well across button-sized and hero-sized
+  boxes, and the mask clips `box-shadow`/`border` and can't compose with the
+  other mask-based macros (`.sf-overflow-fade`, `.sf-scroll-shadow`) on the
+  same element. (A two-corner "pair variant" for U-shaped cutouts had already
+  been dropped earlier — WebKit's `mask-composite` has a bug with no viable
+  workaround.)
   Tracked in [#484](https://github.com/codeslash-dev/SLASHED/issues/484).
 - ~~**Boxed-section layout primitive**~~ ✗ **Not planned** — a `.sf-boxed`
   section macro was implemented and then dropped after review; judged too
@@ -183,12 +187,12 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   color/gradient overlay with correct automatic stacking; documented in
   `docs/macros.md` instead of adding a redundant class.
   Tracked in [#489](https://github.com/codeslash-dev/SLASHED/issues/489).
-- **Concrete recipe macros** — **partially done**. Shipped: `.sf-corner-scoop`
-  (border-radius-style recipe, tracked as #484 above) and `.sf-overlap`/
-  `.sf-overlap-host` (overlap + card-container recipes). A `.sf-corners`
-  logical-corner recipe (with a `--leaf` asymmetric variant) was also built
-  and then cut — judged too niche for the public API relative to its
-  long-term maintenance cost.
+- **Concrete recipe macros** — **partially done**. Shipped: `.sf-overlap`/
+  `.sf-overlap-host` (overlap + card-container recipes). Two corner-recipe
+  macros were built and then cut before 1.0 — `.sf-corner-scoop` (mask-based
+  concave cut, tracked as #484 above) and a `.sf-corners` logical-corner
+  recipe (with a `--leaf` asymmetric variant) — both judged too niche for the
+  public API relative to their long-term maintenance cost.
   Tracked in [#490](https://github.com/codeslash-dev/SLASHED/issues/490).
 - **Container-relative fluid scale** — the `--sf-text-*`/`--sf-space-*` fluid
   scales are `100vw`-driven and don't respond to `@container` width the way

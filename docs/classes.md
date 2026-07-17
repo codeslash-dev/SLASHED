@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**292 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
+**289 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -17,8 +17,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-bento--2` |
 | `.sf-bento--3` |
 | `.sf-bento--6` |
-| `.sf-bento--compact` |
-| `.sf-bento--tall` |
+| `.sf-bento--row-compact` |
+| `.sf-bento--row-tall` |
 | `.sf-bento-featured` |
 | `.sf-bento-full` |
 | `.sf-bento-tall` |
@@ -160,17 +160,12 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-58 classes.
+53 classes.
 
 | Class |
 |---|
 | `.sf-aspect` |
 | `.sf-content-auto` |
-| `.sf-corner-scoop` |
-| `.sf-corner-scoop--bottom-left` |
-| `.sf-corner-scoop--bottom-right` |
-| `.sf-corner-scoop--top-left` |
-| `.sf-corner-scoop--top-right` |
 | `.sf-drop-shadow-l` |
 | `.sf-drop-shadow-m` |
 | `.sf-drop-shadow-s` |
@@ -273,7 +268,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Motion / entrances (`core/motion.css`)
 
-21 classes.
+22 classes.
 
 | Class |
 |---|
@@ -298,6 +293,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-slide-in-left` |
 | `.sf-slide-in-right` |
 | `.sf-slide-in-up` |
+| `.sf-stagger` |
 
 ## Print utilities (`core/print.css`)
 
@@ -316,6 +312,14 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-theme-dark` |
 | `.sf-theme-light` |
 | `.sf-theme-transition` |
+
+## Forms (`optional/forms.css`)
+
+1 classes.
+
+| Class |
+|---|
+| `.sf-live-validate` |
 
 ## Components (`optional/components.css`)
 

@@ -6,7 +6,7 @@ They live in the `slashed.states` layer, are single-class / low-specificity,
 and set the **minimum** needed to communicate the state; components layer
 visuals on top.
 
-All states are exercised in the [macros & states coverage page](test-coverage-4-macros-states.html).
+All states are exercised live in the [demo](/demo/).
 
 ## Reference
 

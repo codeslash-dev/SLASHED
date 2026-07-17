@@ -1,9 +1,13 @@
 // @ts-check
 // Deep container-query tests for all CQ-responsive primitives.
 // Each grid/layout variant is exercised at all relevant breakpoints:
-// below 30em, between 30em–48em, and above 48em (1em = 16px by default).
-// setupInContainer pins font-size to 16px so em-based CQ thresholds are stable
-// across browsers (WebKit 26+ resolves em against inherited font-size, not 16px).
+// below 30rem, between 30rem–48rem, and above 48rem (30rem = 480px, 48rem = 768px
+// at the default 16px root). The framework's @container breakpoints are expressed
+// in rem, which resolves against the ROOT font-size — so setupInContainer pins the
+// root to 16px to make the px equivalents deterministic across browsers. See the
+// dedicated "container-font-size-independent" describe block below for the
+// regression guard proving the thresholds do NOT move with the container's own
+// font-size (which is what a stray em unit would re-couple them to).
 import { test, expect } from '@playwright/test';
 import { BUNDLE } from './render-helpers.js';
 
@@ -19,9 +23,10 @@ async function setupInContainer(page, widthPx, innerHtml) {
     </body></html>
   `);
   await page.addStyleTag({ path: BUNDLE });
-  // Pin font-size so em in @container queries resolves consistently across browsers.
-  // WebKit 26+ resolves em against the container's inherited font-size (spec-correct),
-  // which would be ~20px with the framework's fluid scale; 16px keeps 48em = 768px.
+  // Pin the root font-size so the rem-based @container thresholds compute against a
+  // known 16px root (30rem = 480px, 48rem = 768px). Without this the framework's
+  // fluid scale would leave body at ~16–20px; that no longer affects the rem
+  // breakpoints, but pinning keeps the px equivalents exact across browsers.
   await page.addStyleTag({ content: ':root, html, body { font-size: 16px !important; }' });
 }
 
@@ -107,6 +112,54 @@ test.describe('CQ: .sf-grid-cols-6', () => {
     await setupInContainer(page, 900, GRID);
     const cols = await page.locator('#g').evaluate(colCount);
     expect(cols).toBe(6);
+  });
+});
+
+// ── Regression: breakpoints are independent of the container's font-size ──
+// The @container thresholds are in rem (root-relative). A stray `em` would
+// resolve against the QUERY CONTAINER's own font-size and re-couple the
+// breakpoint to it — the exact bug this guards. We set a large font-size on the
+// container itself (40px, root pinned to 16px) and assert the 30rem/48rem
+// transitions are unchanged. If these ever regress to `em`, 30em would be
+// 40×30 = 1200px and 48em = 1920px, so the 600px/900px cases below would drop
+// to fewer columns and fail.
+test.describe('CQ: breakpoints independent of container font-size (rem regression)', () => {
+  // Mirrors setupInContainer but gives the container a non-16px font-size.
+  async function setupWithContainerFont(page, widthPx, fontPx, innerHtml) {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.setContent(`
+      <!doctype html><html><body style="margin:0">
+        <div id="wrap" style="container-type:inline-size;width:${widthPx}px;font-size:${fontPx}px">
+          ${innerHtml}
+        </div>
+      </body></html>
+    `);
+    await page.addStyleTag({ path: BUNDLE });
+    // Root stays 16px (drives rem); the container's own 40px must NOT shift thresholds.
+    await page.addStyleTag({ content: ':root, html { font-size: 16px !important; }' });
+  }
+
+  const GRID4 = '<div id="g" class="sf-grid-cols-4"><div>A</div><div>B</div><div>C</div><div>D</div></div>';
+  const GRID6 = '<div id="g" class="sf-grid-cols-6"><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div></div>';
+
+  test('grid-cols-4 still gives 2 cols at 600px with 40px container font', async ({ page }) => {
+    await setupWithContainerFont(page, 600, 40, GRID4);
+    expect(await page.locator('#g').evaluate(colCount)).toBe(2);
+  });
+
+  test('grid-cols-4 still gives 4 cols at 900px with 40px container font', async ({ page }) => {
+    await setupWithContainerFont(page, 900, 40, GRID4);
+    expect(await page.locator('#g').evaluate(colCount)).toBe(4);
+  });
+
+  test('grid-cols-6 still gives 3 cols at 600px with 40px container font', async ({ page }) => {
+    await setupWithContainerFont(page, 600, 40, GRID6);
+    expect(await page.locator('#g').evaluate(colCount)).toBe(3);
+  });
+
+  test('grid-cols-4 stays 1 col just below 30rem (470px) regardless of 40px container font', async ({ page }) => {
+    await setupWithContainerFont(page, 470, 40, GRID4);
+    expect(await page.locator('#g').evaluate(colCount)).toBe(1);
   });
 });
 

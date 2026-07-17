@@ -534,6 +534,24 @@ test.describe('layout: .sf-divider', () => {
     expect(cs.inline).toBeGreaterThan(0);
     expect(cs.block).toBe(0);
   });
+
+  test('spans its container width in normal (block) flow', async ({ page }) => {
+    await setup(page, `<div style="inline-size:400px"><hr id="t" class="sf-divider"></div>`);
+    const w = await page.locator('#t').evaluate(el => el.getBoundingClientRect().width);
+    expect(w).toBeGreaterThan(300);
+  });
+
+  test('--vertical stays a narrow rule inside a flex row, not stretched to the row width', async ({ page }) => {
+    await setup(page, `
+      <div style="display:flex;inline-size:400px">
+        <span>Left</span>
+        <hr id="t" class="sf-divider sf-divider--vertical">
+        <span>Right</span>
+      </div>
+    `);
+    const w = await page.locator('#t').evaluate(el => el.getBoundingClientRect().width);
+    expect(w).toBeLessThan(20);
+  });
 });
 
 // ── .sf-divide ──────────────────────────────────────────────────
@@ -619,6 +637,140 @@ test.describe('layout: .sf-bento', () => {
     await setup(page, `
       <div style="container-type:inline-size; width:900px">
         <div id="g" class="sf-bento sf-bento--2"><div>A</div><div>B</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(2);
+  });
+
+  // .sf-bento's own @container breakpoints must resolve against an ANCESTOR
+  // container, not itself — a size container cannot be the subject of its
+  // own @container query (SL-034); .sf-bento used to declare `container`
+  // on itself, which made these breakpoints a permanent silent no-op at
+  // every viewport, mobile included.
+  test('collapses to 1 column below the mobile breakpoint (ancestor container)', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div id="g" class="sf-bento"><div>A</div><div>B</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(1);
+  });
+
+  test('a spanning child does not force a phantom 2nd column at the mobile breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div class="sf-bento">
+          <div id="w" class="sf-bento-wide">wide</div>
+          <div>B</div>
+        </div>
+      </div>
+    `);
+    const [gridWidth, itemWidth] = await Promise.all([
+      page.locator('.sf-bento').evaluate(el => el.getBoundingClientRect().width),
+      page.locator('#w').evaluate(el => el.getBoundingClientRect().width),
+    ]);
+    expect(itemWidth).toBeLessThanOrEqual(gridWidth + 1);
+  });
+
+  test('--featured (span 2/2) also does not force a phantom 2nd column at the mobile breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div class="sf-bento">
+          <div id="f" class="sf-bento-featured">featured</div>
+          <div>B</div>
+        </div>
+      </div>
+    `);
+    const [gridWidth, itemWidth] = await Promise.all([
+      page.locator('.sf-bento').evaluate(el => el.getBoundingClientRect().width),
+      page.locator('#f').evaluate(el => el.getBoundingClientRect().width),
+    ]);
+    expect(itemWidth).toBeLessThanOrEqual(gridWidth + 1);
+  });
+
+  test('uses the wider column count once past the mobile breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:1600px">
+        <div id="g" class="sf-bento"><div>A</div><div>B</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBeGreaterThan(1);
+  });
+
+  // `em` inside an @container condition resolves against the container's
+  // (fluid, viewport-driven) inherited font-size here — not a fixed 16px —
+  // so the effective pixel breakpoint isn't identical across engines. 750px
+  // sits comfortably between every observed 30em/48em interpretation; 900px
+  // was measured to land right on that boundary and flipped between 2 and 4
+  // columns depending on the browser (see the grid-cols-4 test below).
+  test('uses 2 columns in the mid-range between 30em and 48em', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:750px">
+        <div id="g" class="sf-bento"><div>A</div><div>B</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(2);
+  });
+});
+
+// ── .sf-grid-cols-2/3/4/6 ──────────────────────────────────────────
+test.describe('layout: .sf-grid-cols-2/3/4/6', () => {
+  // Same SL-034 constraint as .sf-bento above: these used to establish and
+  // then query their own container, so the breakpoint below was dead code
+  // at every viewport — only an ancestor container makes it fire.
+  // A width of 900px (56.25em at a fixed 16px basis) originally lived here
+  // and was flaky in CI: `em` inside an @container condition resolves
+  // against the container's inherited font-size, which here is the fluid
+  // `--sf-text-m` (~19px at this viewport, not 16px), and engines don't
+  // agree on the resulting effective breakpoint down to the pixel — 900px
+  // sat close enough to the 48em boundary that Chromium read it as past the
+  // breakpoint while Firefox/WebKit read it as short of it. 1600px clears
+  // every observed interpretation.
+  test('resolves its column count against an ancestor container, not itself', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:1600px">
+        <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(4);
+  });
+
+  test('stays 1 column below the breakpoint', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:300px">
+        <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
+    );
+    expect(cols).toBe(1);
+  });
+
+  // Below 30em NEITHER @container rule matches, so gridTemplateColumns falls
+  // back to the unset "none" (still 1 "column" by construction) — the case
+  // above alone can't distinguish a working ancestor container from a
+  // completely absent one. This mid-range case only passes if the 30em
+  // breakpoint's ancestor-container query actually fired.
+  test('uses the 2-column mid breakpoint between 30em and 48em', async ({ page }) => {
+    await setup(page, `
+      <div style="container-type:inline-size; width:750px">
+        <div id="g" class="sf-grid-cols-4"><div>1</div><div>2</div><div>3</div><div>4</div></div>
       </div>
     `);
     const cols = await page.locator('#g').evaluate(el =>

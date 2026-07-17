@@ -85,18 +85,23 @@ for (const theme of ['light', 'dark']) {
       expect(cursor).toBe('pointer');
     });
 
-    test('a nested .sf-btn shrinks relative to a standalone one', async ({ page }) => {
+    test('a nested .sf-btn keeps its own size; .sf-btn--s opts into a compact action', async ({ page }) => {
+      // Cards no longer auto-shrink nested buttons (removed in 0.8.0). A plain
+      // .sf-btn is the same size inside a card as outside it; a compact card
+      // action is opted into explicitly with .sf-btn--s.
       await mount(
         page,
         `<button class="sf-btn" id="loose">Loose</button>
          <article class="sf-card">
            <button class="sf-btn" id="nested">Nested</button>
+           <button class="sf-btn sf-btn--s" id="compact">Compact</button>
          </article>`,
       );
-      const [loose, nested] = await page.evaluate(() =>
-        ['loose', 'nested'].map((id) => parseFloat(getComputedStyle(document.getElementById(id)).fontSize)),
+      const [loose, nested, compact] = await page.evaluate(() =>
+        ['loose', 'nested', 'compact'].map((id) => parseFloat(getComputedStyle(document.getElementById(id)).fontSize)),
       );
-      expect(nested).toBeLessThan(loose);
+      expect(nested).toBeCloseTo(loose, 2);   // no auto-shrink
+      expect(compact).toBeLessThan(loose);    // explicit sizing still works
     });
 
     test('__media crops to a 16/9 aspect ratio', async ({ page }) => {

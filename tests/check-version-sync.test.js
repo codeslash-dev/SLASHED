@@ -34,6 +34,7 @@ function buildFixture(version = '1.2.3') {
 
   fs.mkdirSync(path.join(dir, 'docs'));
   fs.writeFileSync(path.join(dir, 'docs', 'roadmap.md'), `Current version: **${version}**\n`);
+  fs.writeFileSync(path.join(dir, 'docs', 'llm-guide.md'), `> Version: **${version}** · Tokens: **1**\n`);
 
   fs.mkdirSync(path.join(dir, 'configurator'));
   fs.writeFileSync(path.join(dir, 'configurator', 'package.json'), JSON.stringify({ version }));
@@ -96,6 +97,22 @@ describe('check-version-sync failure cases', () => {
     const r = runChecker(dir);
     assert.equal(r.status, 1, 'expected exit 1 for missing roadmap version line');
     assert.ok(r.stderr.includes('"Current version"'), r.stderr);
+  });
+
+  test('fails when docs/llm-guide.md version differs', () => {
+    const dir = buildFixture();
+    fs.writeFileSync(path.join(dir, 'docs', 'llm-guide.md'), '> Version: **9.9.9** · Tokens: **1**\n');
+    const r = runChecker(dir);
+    assert.equal(r.status, 1, 'expected exit 1 for mismatched llm-guide.md');
+    assert.ok(r.stderr.includes('llm-guide.md version'), r.stderr);
+  });
+
+  test('fails when docs/llm-guide.md has no "Version" header', () => {
+    const dir = buildFixture();
+    fs.writeFileSync(path.join(dir, 'docs', 'llm-guide.md'), '# LLM Guide\n\nNo version here.\n');
+    const r = runChecker(dir);
+    assert.equal(r.status, 1, 'expected exit 1 for missing llm-guide version line');
+    assert.ok(r.stderr.includes('"Version"'), r.stderr);
   });
 
   test('fails when configurator/package.json version differs', () => {

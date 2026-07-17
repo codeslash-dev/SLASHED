@@ -86,16 +86,31 @@
   }
   /* stylelint-enable selector-pseudo-class-no-unknown */
 
-  /* Native validation states */
-  input:user-invalid,
-  select:user-invalid,
-  textarea:user-invalid {
+  /* Opt-in native validation feedback. Unconditional :user-invalid/:user-valid
+     styling was removed in 0.8.0 (see docs/migration.md): it fires on simple
+     focus+blur, so a still-empty required field could be marked invalid mid
+     multi-field form-fill, before any submit was attempted — the pattern
+     Bootstrap's own .was-validated gate exists to avoid. .sf-live-validate is
+     that same gate: put it on a <form> or <fieldset> to scope the pivot to
+     that subtree, so it only lights up on a real submit attempt (or explicit
+     interaction) instead of applying everywhere by default.
+
+     Safe to combine with manual validation: .sf-is-invalid/.sf-is-valid
+     (core/states.css, @layer slashed.states) always win over the rules below
+     regardless of selector specificity, because slashed.states is declared
+     AFTER slashed.forms in the layer order (core/layers.css) — cascade layer
+     order beats specificity. A field you've manually marked .sf-is-invalid
+     (e.g. a server-side error) can't be silently un-coloured by these rules
+     even if the browser considers it natively valid. */
+  .sf-live-validate input:user-invalid,
+  .sf-live-validate select:user-invalid,
+  .sf-live-validate textarea:user-invalid {
     --sf-field-border-color: var(--sf-color-danger);
   }
 
-  input:user-valid,
-  select:user-valid,
-  textarea:user-valid {
+  .sf-live-validate input:user-valid,
+  .sf-live-validate select:user-valid,
+  .sf-live-validate textarea:user-valid {
     --sf-field-border-color: var(--sf-color-success);
   }
 
@@ -133,11 +148,15 @@
     background-position: left var(--sf-space-s) center;
   }
 
-  /* Button / submit / reset */
-  button:not([class*="sf-"]),
-  input[type="submit"]:not([class*="sf-"]),
-  input[type="reset"]:not([class*="sf-"]),
-  input[type="button"]:not([class*="sf-"]) {
+  /* Button / submit / reset. Scoped to :where(form, fieldset) so a bare
+     <button> or <input type="submit"/"reset"/"button"> used elsewhere on
+     the page (a page-builder's hamburger toggle, a modal close control, a
+     third-party widget) is left alone — only controls living inside an
+     actual form get the classless treatment. */
+  :where(form, fieldset) button:not([class*="sf-"]),
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]),
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]),
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -156,26 +175,26 @@
     text-decoration: none;
   }
 
-  button:not([class*="sf-"]):hover,
-  input[type="submit"]:not([class*="sf-"]):hover,
-  input[type="reset"]:not([class*="sf-"]):hover,
-  input[type="button"]:not([class*="sf-"]):hover {
+  :where(form, fieldset) button:not([class*="sf-"]):hover,
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]):hover,
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]):hover,
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]):hover {
 
     background-color: var(--sf-color-action--hover, var(--sf-color-action));
   }
 
-  button:not([class*="sf-"]):focus-visible,
-  input[type="submit"]:not([class*="sf-"]):focus-visible,
-  input[type="reset"]:not([class*="sf-"]):focus-visible,
-  input[type="button"]:not([class*="sf-"]):focus-visible {
+  :where(form, fieldset) button:not([class*="sf-"]):focus-visible,
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]):focus-visible,
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]):focus-visible,
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]):focus-visible {
     outline: var(--sf-focus-ring-width) var(--sf-focus-ring-style, solid) var(--sf-color-border--focus);
     outline-offset: var(--sf-focus-ring-offset);
   }
 
-  button:not([class*="sf-"]):disabled,
-  input[type="submit"]:not([class*="sf-"]):disabled,
-  input[type="reset"]:not([class*="sf-"]):disabled,
-  input[type="button"]:not([class*="sf-"]):disabled {
+  :where(form, fieldset) button:not([class*="sf-"]):disabled,
+  :where(form, fieldset) input[type="submit"]:not([class*="sf-"]):disabled,
+  :where(form, fieldset) input[type="reset"]:not([class*="sf-"]):disabled,
+  :where(form, fieldset) input[type="button"]:not([class*="sf-"]):disabled {
     opacity: var(--sf-opacity-disabled);
     cursor:  not-allowed;
 

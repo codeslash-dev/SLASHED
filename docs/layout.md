@@ -5,7 +5,7 @@ SLASHED ships breakpoint-free, container-query-driven layout primitives in the
 per-instance tokens you can override inline (`style="--sf-stack-gap: …"`).
 Tokens are declared in `core/tokens.layout.css`.
 
-All primitives are demoed in the [layout coverage page](test-coverage-3-layout.html).
+All primitives are exercised live in the [demo](/demo/).
 
 ## The primitives
 
@@ -23,7 +23,7 @@ All primitives are demoed in the [layout coverage page](test-coverage-3-layout.h
 | `.sf-grid` | auto-fill responsive grid; `--fit`, `--xs … --2xl`, `--dense` | `--sf-grid-min`, `--sf-grid-gap` |
 | `.sf-grid-cols-1 / -2 / -3 / -4 / -6` | fixed-column grids, container-responsive (no `-5`) | `--sf-grid-gap` |
 | `.sf-grid-cols-1-2 / -2-1 / -1-3 / -3-1` | ratio two-column grids | `--sf-grid-gap` |
-| `.sf-bento` | dense free-form grid; `--sf-bento-cols/-row` overrides | `--sf-bento-*` |
+| `.sf-bento` | dense free-form grid; container modifiers `--2/--3/--6`, `--row-compact/--row-tall`; child span classes `.sf-bento-wide/-full/-tall/-featured` | `--sf-bento-*` |
 | `.sf-alternate` | zigzag two-column layout, reverses every other row; CQ-responsive | `--sf-content-gap`, `--sf-gap` |
 | `.sf-pancake` | sticky-footer grid: header / main(1fr) / footer | — |
 | `.sf-content-grid` | breakout layout; children `.sf-breakout`, `.sf-full-bleed` | `--sf-content-width`, `--sf-breakout-width` |
@@ -40,6 +40,24 @@ All primitives are demoed in the [layout coverage page](test-coverage-3-layout.h
 | `.sf-section--collapse` | adjacent sections share padding 50/50 across the boundary | `--sf-section-pad` |
 | `.sf-icon` | em-based inline icon sizing; `--xs … --2xl` | `--sf-icon-*` |
 | `.sf-icon--boxed` | padded, bordered icon frame (content-box sizing) | `--sf-icon-box-pad`, `--sf-icon-box-radius`, `--sf-icon-box-bg`, `--sf-icon-box-border` |
+
+`.sf-bento` has two distinct, non-interchangeable modifier families — a `--`
+(double-dash) class always modifies the **container** (`.sf-bento` itself), a
+`-` (single-dash) class targets a **child** placed inside it:
+
+| Class | Applies to | Effect |
+|---|---|---|
+| `.sf-bento--2` / `--3` / `--6` | container | sets the column count |
+| `.sf-bento--row-compact` / `--row-tall` | container | sets the row-height tier for **every** auto row in the grid |
+| `.sf-bento-wide` | a child | that item spans 2 columns |
+| `.sf-bento-full` | a child | that item spans the full row |
+| `.sf-bento-tall` | a child | that **one item** spans 2 rows |
+| `.sf-bento-featured` | a child | that item spans 2 columns and 2 rows |
+
+`.sf-bento--row-tall` and `.sf-bento-tall` are not aliases: the first
+stretches every row in the grid, the second stretches one grid item. Put the
+container modifier on `.sf-bento`, the child modifiers on the items inside
+it — never on the same element.
 
 ## Size-modifier scale -- `xs..2xl` everywhere
 

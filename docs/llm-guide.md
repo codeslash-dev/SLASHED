@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.6.15** · Tokens: **686** · Prefix: `--sf-`
+> Version: **0.7.20** · Tokens: **746** · Prefix: `--sf-`
 
 ---
 
@@ -62,7 +62,7 @@ slashed/
     ├── forms.css             # Form styles
     ├── utilities.css         # Utility classes (staged — commented out, not yet active)
     ├── components.css        # Optional components
-    └── overrides-example.css / theme-example.css / config-example.css
+    └── customize-example.css # Copy-and-customise rebrand/config/overrides starter
 ```
 
 **Optional files** (`optional/`) are loaded only when needed. The full numeric color scale lives in `core/tokens.css` alongside the semantic aliases (`-superlight`, `-xlight`, etc.).
@@ -407,21 +407,13 @@ Examples: `--sf-color-danger-subtle`, `--sf-color-warning-strong`.
 /* Alpha variants */
 --sf-color-{family}-a5 / -a10 / -a30 / -a50 / -a80
 
-/* PUBLIC-ADVANCED: ramp shape for the five mid-tone brand families */
---sf-palette-mix-50:  4%;    /* How far step 50 blends toward surface */
---sf-palette-mix-100: 8%;    /* … */
---sf-palette-mix-200: 20%;
---sf-palette-mix-300: 40%;
---sf-palette-mix-400: 65%;
-/* step 500 is the source color itself; no separate mix knob exists */
---sf-palette-mix-600: 82%;
---sf-palette-mix-700: 62%;
---sf-palette-mix-800: 38%;
---sf-palette-mix-900: 18%;
---sf-palette-mix-950: 8%;     /* deepest step */
+/* PUBLIC-ADVANCED: ramp lightness anchors for the five mid-tone families */
+--sf-palette-tint-l:  0.97;   /* absolute OKLCH L the tint steps (50–400) reach toward */
+--sf-palette-shade-l: 0.1;    /* absolute OKLCH L the shade steps (600–950) reach toward */
+/* step 500 is the source color itself; per-step pull + chroma taper are baked in */
 ```
 
-All six families honour the 50=Lightest / 950=Darkest contract. The five mid-tone brand families (`primary`, `secondary`, `tertiary`, `action`, `neutral`) are generated with `color-mix` anchored to `--sf-color-surface` and `--sf-color-text` as the two poles. **`base` uses fixed OKLCH lightness steps** (0.97 at step 50 → 0.06 at step 950) preserving the source hue and chroma. The `--sf-palette-mix-*` knobs do not affect `base`. Because it is an absolute scale, `base` deliberately has **no relative aliases** (`-lighter` / `-darker` / `-xlight` / `-superlight` / …) — those exist only on the five mid-tone brand families, where the source sits in the middle of the ramp. For mode-adaptive surface adjustments on base-coloured elements use `--sf-color-inset` / `--sf-color-raised` / `--sf-color-bg` or the `--sf-color-base--hover` / `--sf-color-base--active` tokens (which use relative oklch offsets and adapt to both modes automatically).
+All six families honour the 50=Lightest / 950=Darkest contract. The five mid-tone brand families (`primary`, `secondary`, `tertiary`, `action`, `neutral`) are generated in OKLCH by pulling the family colour's own lightness a fixed fraction toward an **absolute** target — `--sf-palette-tint-l` for tints (50–400), `--sf-palette-shade-l` for shades (600–950) — clamped (`max()`/`min()`) so a tint can never end darker than the base nor a shade lighter. Because the poles are absolute (not the theme's `--sf-color-surface` / `--sf-color-text`), the ramp stays monotonic light→dark for **any** source colour and any anchor configuration — it cannot fold into a "U". **`base` uses fixed OKLCH lightness steps** (0.97 at step 50 → 0.06 at step 950) preserving the source hue and chroma; it does not read the `--sf-palette-*-l` knobs. Because it is an absolute scale, `base` deliberately has **no relative aliases** (`-lighter` / `-darker` / `-xlight` / `-superlight` / …) — those exist only on the five mid-tone brand families, where the source sits in the middle of the ramp. For mode-adaptive surface adjustments on base-coloured elements use `--sf-color-inset` / `--sf-color-raised` / `--sf-color-bg` or the `--sf-color-base--hover` / `--sf-color-base--active` tokens (which use relative oklch offsets and adapt to both modes automatically).
 
 Status families (success/warning/info/danger) have **no numeric scale** — use their triplets.
 
@@ -903,10 +895,6 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-surface-bg-attachment: scroll
 --sf-surface-bg-animation:  none         /* optional animation shorthand */
 
-/* Concave corner (.sf-corner-scoop) */
---sf-corner-scoop-size: var(--sf-radius-2xl)
---sf-corner-scoop-at:   100% 0
-
 /* Overlap recipe (.sf-overlap / .sf-overlap-host) */
 --sf-overlap-pull: var(--sf-space-xl)
 ```
@@ -1004,6 +992,15 @@ Ready-made hover transforms: `.sf-hover-grow` / `-shrink` / `-float` / `-sink` /
 <img class="sf-hover-float" src="icon.svg" alt="">
 ```
 
+The magnitude of each effect is one global knob (override on `:root` or any scope):
+
+```css
+--sf-hover-grow-scale     /* .sf-hover-grow scale factor, default 1.05 */
+--sf-hover-shrink-scale   /* .sf-hover-shrink scale factor, default 0.95 */
+--sf-hover-lift           /* .sf-hover-float / -sink distance, default 0.25em */
+--sf-hover-slide          /* .sf-hover-slide-start / -end distance, default 0.5em */
+```
+
 Small opt-in helpers (all `optional/utilities.css`):
 
 - `.sf-list-none` — drop list marker + inline-start padding in one class.
@@ -1027,8 +1024,14 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 --sf-animation-shimmer       /* Skeleton loader */
 --sf-animation-color-pulse   /* Live status badge */
 
-/* Stagger delays — scaled by motion-scale */
---sf-animation-delay-1 / -2 / -3 / -4 / -5   /* 75ms … 375ms */
+/* Stagger — put .sf-stagger on a parent; each direct child gets an
+   incrementing animation-delay = index × --sf-stagger-step × --sf-motion-scale.
+   Index is unbounded where sibling-index() is supported, else an 8-step
+   :nth-child fallback that plateaus (children 9+ share the last delay).
+   Gated by prefers-reduced-motion: no-preference. Pair with the time-based
+   looping classes (.sf-fade-in / .sf-slide-in-*); the scroll-driven
+   .sf-entrance--*/.sf-exit--* path is not staggered (it uses animation-range). */
+--sf-stagger-step            /* per-item delay increment, default 75ms */
 ```
 
 ### 9.5 Scroll-driven animations
@@ -1091,9 +1094,17 @@ Used by `.sf-is-active`, `.sf-is-current`, etc. in `core/states.css`. Allow comp
 --sf-link-external-marker:  " ↗"              /* marker for .sf-link-external */
 
 /* Scoped override hooks — set per-field/form to override global borders/text */
---sf-field-border-color     /* set by validation states (error/success/warning/info/danger) */
+--sf-field-border-color     /* set by validation states (error/success/warning/info/danger); also set natively by :user-invalid/:user-valid within .sf-live-validate (opt-in — see below) */
 --sf-field-text-color       /* set by validation states for text color feedback */
 ```
+
+Native browser validation (`:user-invalid`/`:user-valid`) does NOT colour a field's
+border by default — add `.sf-live-validate` to the `<form>`/`<fieldset>` to opt a
+subtree into that feedback, gated behind a real submit attempt (not simple
+focus+blur, which would flag a still-empty required field prematurely). The
+explicit `.sf-is-invalid`/`.sf-is-valid` state classes (`core/states.css`) always
+win over `.sf-live-validate`'s native-triggered colour, regardless of specificity —
+`slashed.states` is declared after `slashed.forms` in the layer order (`core/layers.css`).
 
 Component tokens from `optional/tokens.components.css`:
 
@@ -1151,7 +1162,6 @@ Component tokens from `optional/tokens.components.css`:
 --sf-card-media-radius:     var(--sf-card-radius, var(--sf-radius-m))
 --sf-card-avatar-size:      2.5rem
 --sf-card-heading-size:     var(--sf-text-xl)
---sf-card-btn-font-size:    var(--sf-text-s)
 ```
 
 `.sf-btn` colour families (all 10, 1:1 with the palette): `--primary
@@ -1182,7 +1192,20 @@ One token changes the entire design. Override on `:root`. All are PUBLIC-ADVANCE
 --sf-space-scale:        1  /* global fluid spacing multiplier */
 --sf-text-scale:         1  /* global body type scale multiplier */
 --sf-text-display-scale: 1  /* global display type scale multiplier */
+--sf-density:            1  /* control-size ladder (--sf-size-*): <1 compact, >1 roomy */
 ```
+
+`--sf-density` is the compact ↔ comfortable dial for interactive control
+**geometry** (the `--sf-size-*` rung ladder). Unlike `--sf-text-*` / `--sf-space-*`
+it is intentionally **not** viewport-fluid — control height must not shrink on
+small screens where touch targets need to grow — so the size ladder is static and
+moves only by this deliberate knob (a product mode or user preference), never
+automatically. It is orthogonal to `--sf-space-scale` (whitespace) and
+`--sf-section-scale` (section rhythm); combine them for a fully compact UI. The
+`--sf-touch-target` accessibility floor is independent, so a small `--sf-density`
+cannot pull native controls under the WCAG target. Like the other multipliers in
+this section it is a `:root` dial — the `--sf-size-*` ladder is computed at `:root`
+and inherits, so a nested override does not retroactively rescale it.
 
 ---
 
@@ -1279,15 +1302,13 @@ Example — if your primary brand color has L ≈ 0.6 and you prefer white text:
 
 Each step up the type scale subtracts `step-index × taper` from that step's default line-height.
 
-### 11.5 Palette mix percentages
+### 11.5 Palette ramp lightness anchors
 
 ```css
-/* Shape of the 50–950 numeric palette ramp */
---sf-palette-mix-50:  4%    /* how far step 50 blends toward surface */
---sf-palette-mix-100: 8%
---sf-palette-mix-200: 20%
---sf-palette-mix-300: 40%
-/* … similarly for all steps */
+/* Absolute OKLCH lightness poles the 50–950 numeric ramp reaches toward */
+--sf-palette-tint-l:  0.97   /* how light the lightest step (50) can reach */
+--sf-palette-shade-l: 0.1    /* how dark the darkest step (950) can reach */
+/* per-step pull fraction + chroma taper are baked into each family */
 ```
 
 ### 11.6 Scroll and mask
@@ -1420,9 +1441,15 @@ a:visited { color: var(--sf-color-link--visited); }
     animation: var(--sf-animation-slide-in-up);
 }
 
-/* Staggered list */
-.list-item:nth-child(1) { animation-delay: var(--sf-animation-delay-1); }
-.list-item:nth-child(2) { animation-delay: var(--sf-animation-delay-2); }
+/* Staggered list — .sf-stagger on the parent choreographs every child; each
+   item still needs its own entrance animation (here .sf-fade-in). */
+```
+```html
+<ul class="sf-stagger">
+  <li class="sf-fade-in">First</li>
+  <li class="sf-fade-in">Second</li>
+  <!-- any number of children; delay increments automatically -->
+</ul>
 ```
 
 ### Section-level dark mode

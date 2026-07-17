@@ -400,8 +400,8 @@
    * --sf-card-radius on inner elements (mirrors the math in
    * tokens.components.css).
    * Subcomponents: __media (16/9 cover image), __avatar (round),
-   * __title (unified heading size). Nested .sf-btn shrinks to
-   * --sf-card-btn-font-size.
+   * __title (unified heading size). Nested buttons keep their own
+   * size — add .sf-btn--s explicitly for a compact card action.
    * ============================================================ */
   .sf-card {
     /* A card is a block box. When combined with a layout primitive on the same
@@ -458,13 +458,6 @@
   .sf-card__title {
     font-size: var(--sf-card-heading-size, var(--sf-text-xl));
     color:     var(--sf-color-heading);
-  }
-
-  /* Nested buttons shrink to the card's button size. Feed the *-size tier
-     (not the public --sf-btn-font-size knob) so a :root override of the knob
-     still wins inside cards, exactly as it does everywhere else. */
-  .sf-card .sf-btn {
-    --sf-btn-font-size--size: var(--sf-card-btn-font-size, var(--sf-text-s));
   }
 
   /* --- Modifiers --- */

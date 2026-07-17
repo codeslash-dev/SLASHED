@@ -436,37 +436,6 @@ test.describe('macro: .sf-exit--fade', () => {
   });
 });
 
-test.describe('macro: .sf-corner-scoop', () => {
-  test('sets a radial-gradient mask', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-corner-scoop" style="width:100px;height:100px"></div>`);
-    const mask = await page.locator('#t').evaluate(el => getComputedStyle(el).maskImage);
-    expect(mask).toContain('radial-gradient');
-  });
-
-  for (const [cls, at] of [
-    ['sf-corner-scoop--top-left', '0 0'],
-    ['sf-corner-scoop--top-right', '100% 0'],
-    ['sf-corner-scoop--bottom-left', '0 100%'],
-    ['sf-corner-scoop--bottom-right', '100% 100%'],
-  ]) {
-    test(`.${cls} points the cut at ${at}`, async ({ page }) => {
-      await setup(page, `<div id="t" class="sf-corner-scoop ${cls}" style="width:100px;height:100px"></div>`);
-      const value = await page.locator('#t').evaluate(el =>
-        getComputedStyle(el).getPropertyValue('--sf-corner-scoop-at').trim()
-      );
-      expect(value).toBe(at);
-    });
-  }
-
-  test('--sf-corner-scoop-size override changes the resolved cut radius', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-corner-scoop" style="width:100px;height:100px; --sf-corner-scoop-size: 40px"></div>`);
-    const size = await page.locator('#t').evaluate(el =>
-      getComputedStyle(el).getPropertyValue('--sf-corner-scoop-size').trim()
-    );
-    expect(size).toBe('40px');
-  });
-});
-
 test.describe('macro: .sf-overlap / .sf-overlap-host', () => {
   test('pulls the element up over the previous sibling by --sf-overlap-pull', async ({ page }) => {
     await setup(page, `

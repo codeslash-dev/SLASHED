@@ -37,6 +37,76 @@ button min-height to the accessibility anchor — globally:
 or per-button with `.sf-btn--l` (`--sf-size-l`, 48px). In the configurator this
 is the **Min height → touch-target** choice.
 
+### `.sf-btn` inside `.sf-card` no longer auto-shrinks its label (breaking)
+
+A `.sf-card .sf-btn { --sf-btn-font-size--size: var(--sf-card-btn-font-size,
+var(--sf-text-s)) }` rule used to silently pin every button nested in a card to
+the `--sf-text-s` label size — so the *same* `.sf-btn` rendered smaller inside a
+card than outside it, and a `.sf-btn--xl` in a card footer lost its size. This
+context-dependent restyling was surprising (one component quietly overriding
+another) and is the only rule of its kind, so it has been removed. The
+now-orphaned `--sf-card-btn-font-size` token is deleted.
+
+**What changed for you:** buttons in cards now render at their own size (default
+`.sf-btn` = `--sf-text-m`), exactly as they do anywhere else — the Bootstrap /
+Tailwind model where an element looks the same regardless of container.
+
+**Restore the compact card action** by sizing the button explicitly — the same
+way you would anywhere else:
+
+```html
+<div class="sf-card__footer">
+  <button class="sf-btn sf-btn--primary sf-btn--s">Open</button>
+</div>
+```
+
+Or, to shrink *every* button inside a given card without touching each one, set
+the size tier on that card:
+
+```css
+.sf-card--compact .sf-btn { --sf-btn-font-size--size: var(--sf-text-s); }
+```
+
+### Form fields no longer auto-colour on native `:user-invalid` / `:user-valid` (breaking)
+
+`optional/forms.css` used to flip `--sf-field-border-color` to `--sf-color-danger`
+/ `--sf-color-success` automatically whenever the browser's own constraint
+validation (`:user-invalid` / `:user-valid`) fired — so a `required` or
+`pattern`-constrained field could render "broken" (red border) as soon as it was
+touched, before the user submitted anything or your app ran its own validation.
+This was the same category of surprise as the card/button rule above — the
+framework silently overriding an element's appearance based on browser-internal
+state you didn't opt into — so it has been removed.
+
+**What changed for you:** native constraint validation no longer changes a
+field's border colour by itself. The explicit state classes in `core/states.css`
+— `.sf-is-invalid` / `.sf-is-error`, `.sf-is-valid` / `.sf-is-success`,
+`.sf-is-warning`, `.sf-is-info`, `.sf-is-danger` — are unaffected and remain the
+one way to colour a field's validation state; add the class when *your* code
+(not the browser) decides the field is invalid:
+
+```html
+<input type="email" class="sf-is-invalid" aria-invalid="true">
+```
+
+The underlying `--sf-field-border-color` token and its consumers (resting
+border, focus, autofill) are unchanged — only the automatic pseudo-class
+trigger is gone.
+
+**Want the native-triggered feedback back, without writing JS?** Add
+`.sf-live-validate` to the `<form>` (or a `<fieldset>`) — it re-enables the
+`:user-invalid`/`:user-valid` → `--sf-field-border-color` pivot, scoped to that
+subtree, but only once a submit has actually been attempted (not on simple
+focus+blur, which is what made the original unconditional behaviour fire
+prematurely mid-form-fill):
+
+```html
+<form class="sf-live-validate">
+  <input type="email" required>
+  <button type="submit">Submit</button>
+</form>
+```
+
 ### `--sf-touch-target` decoupled from `--sf-size-l`; size scale regularised (breaking)
 
 `--sf-touch-target` used to be `var(--sf-size-l)`, which coupled the WCAG 2.5.5
@@ -95,6 +165,54 @@ If you overrode field block padding by *reading* `--sf-field-block` (e.g.
 `padding-block: var(--sf-field-block)` on a custom control), your control now
 tracks the tighter, correct default. To keep the old roomier spacing, pin it
 explicitly: `:root { --sf-field-block: var(--sf-space-l); }`.
+
+### `.sf-bento` row-height container modifiers renamed to `--row-compact` / `--row-tall` (breaking)
+
+`.sf-bento--compact` / `--tall` (container-level, resize every auto row in the
+grid) and `.sf-bento-tall` (child-level, resize one grid item to span 2 rows)
+differed only by dash count and shared the word "tall" — an easy class to
+typo or misread. The container modifiers are renamed to match the
+`--sf-bento-row-compact` / `--sf-bento-row-tall` tokens they set, so the two
+families read distinctly:
+
+| Before (≤ 0.7.16) | After (0.8.0) |
+|---|---|
+| `.sf-bento--compact` | `.sf-bento--row-compact` |
+| `.sf-bento--tall` | `.sf-bento--row-tall` |
+
+`.sf-bento-wide` / `.sf-bento-full` / `.sf-bento-tall` / `.sf-bento-featured`
+(the child span classes) are unchanged.
+
+**What changed for you:** find-and-replace `sf-bento--compact` →
+`sf-bento--row-compact` and `sf-bento--tall` → `sf-bento--row-tall` on any
+`.sf-bento` container element.
+
+### `.sf-corner-scoop` removed (breaking)
+
+The `.sf-corner-scoop` macro — a concave "notch" cut into one corner via a
+`mask-image` radial gradient — and its four placement modifiers
+(`--top-left` / `--top-right` / `--bottom-left` / `--bottom-right`) plus the
+`--sf-corner-scoop-size` / `--sf-corner-scoop-at` knobs have been removed.
+It was judged too niche for the public API relative to its cost: the single
+absolute `--sf-corner-scoop-size` needed per-element tuning to read well
+across control-sized and hero-sized boxes (no size tier), and the mask clipped
+`box-shadow` / `border` at the cut and could not compose with the other
+mask-based macros (`.sf-overflow-fade`, `.sf-scroll-shadow`) on the same
+element.
+
+**What changed for you:** elements that carried `.sf-corner-scoop*` now render
+with square (un-masked) corners. To keep the concave corner, apply the mask
+directly on the element — the same declaration the macro used to emit:
+
+```html
+<div style="-webkit-mask-image: radial-gradient(circle at 100% 0, transparent 24px, black 24.5px);
+            mask-image: radial-gradient(circle at 100% 0, transparent 24px, black 24.5px)">
+  Panel with a top-right corner that curves away
+</div>
+```
+
+Change the `at <position>` (e.g. `0 0` = top-left, `100% 100%` = bottom-right)
+to move the cut, and the two radii to resize it.
 
 ## SLASHED 0.7.6 → 0.7.7
 

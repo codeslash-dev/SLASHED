@@ -11,12 +11,13 @@ of these in sync:
 | `package.json` | `.version` ← **source of truth** | you bump it (`npm version`) |
 | `package-lock.json` | `.version` + `.packages[""].version` | `npm version`; checked by `check:version` (CI) |
 | `docs/roadmap.md` | `Current version: **X.Y.Z**` line | `version-sync`; checked by `check:version` (CI) |
+| `docs/llm-guide.md` | `Version: **X.Y.Z**` header line | `version-sync`; checked by `check:version` (CI) |
 | `configurator/package.json` | `.version` | `version-sync`; checked by `check:version` (CI) |
 | `configurator/package-lock.json` | `.version` + `.packages[""].version` | `version-sync`; checked by `check:version` (CI) |
 | `dist/*.css` (unminified) | `/*! SLASHED vX.Y.Z */` comment header | **build-derived** — stamped from `package.json`/tag by `bundle.js`; `dist/*.css` is git-ignored, so it cannot drift. `release.yml` re-verifies the stamp before publishing |
 | Configurator UI version pill | baked in via Vite `__SLASHED_VERSION__` at build time | **build-derived** — injected from root `package.json` at Vite build; cannot drift |
 
-The first five rows are the ones you ever sync; the last two are **build-derived**
+The first six rows are the ones you ever sync; the last two are **build-derived**
 (regenerated from `package.json` at build time and not committed as text you edit),
 so `version-sync`/`check:version` intentionally don't touch them — never hand-edit them.
 
@@ -54,7 +55,10 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run build` | Build all CSS bundles + docs + sync configurator API |
 | `npm run version-sync` | Sync all version references to root `package.json` |
 | `npm run check:version` | Verify all version references match (CI gate — run before every commit that touches versions) |
-| `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens (CI gate) |
+| `npm run check:llm-guide` | Verify `docs/llm-guide.md` only references live tokens and its header token count matches the live total (CI gate) |
+| `npm run check:doc-refs` | Verify every hand-written doc only references live `--sf-*` tokens / `.sf-*` classes (or names allowlisted in `docs/ref-allowlist.json`) (CI gate) |
+| `npm run check:release-add` | Verify the release workflow's `git add` stages every file `version-sync` writes (CI gate) |
+| `npm run check:layer-order` | Verify `docs/architecture.md`'s `@layer` block and specificity ladder match `core/layers.css` (CI gate) |
 | `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (CI gate) |
 | `npm run check:registry` | Verify `token-registry.json` is in sync with source (CI gate) |
 | `npm run audit:check` | Verify `docs/registry.json` matches source without writing (CI gate) |
@@ -124,7 +128,17 @@ After any token-touching PR, verify with:
 
 ```bash
 npm run check:llm-guide   # must pass — CI fails if it doesn't
+npm run check:doc-refs    # must pass — no hand-written doc may reference a dead token/class
 ```
+
+`check:doc-refs` extends the same live-reference guarantee to **every**
+hand-written doc (architecture, components, theming, macros, states, motion,
+layout, user-manual, README, CONTRIBUTING), not just the LLM guide. When you
+rename or remove a token/class, either update the referencing docs or — if a
+mention is deliberately non-live (a removed name in an example, an illustrative
+instance token, an example of a component the framework does not ship) — record
+it in `docs/ref-allowlist.json` with a reason. `docs/migration.md` (historical)
+and `docs/roadmap.md` (forward-looking) are whole-doc exclusions.
 
 ## Tests
 

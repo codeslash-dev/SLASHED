@@ -5,7 +5,7 @@ SLASHED ships animation primitives in the `slashed.motion` layer
 `@media (prefers-reduced-motion: no-preference)` -- users who prefer
 reduced motion see no animation from the framework.
 
-All animations are demoed in the [macros & states coverage page](test-coverage-4-macros-states.html).
+All animations are exercised live in the [demo](/demo/).
 
 ## Design principles
 
@@ -70,7 +70,9 @@ your own components:
 ### Entrance animations
 
 Apply one of these classes to trigger a one-shot entrance animation.
-Combine with a `--sf-animation-delay-*` token for staggered sequences.
+These are scroll-driven (their timing is `animation-range`, not
+`animation-delay`); for staggering a group of **time-based** entrances
+(`.sf-fade-in` / `.sf-slide-in-*`), see [Stagger](#stagger) below.
 
 | Class | Effect |
 |---|---|
@@ -110,25 +112,42 @@ All keyframe names use the `sf-` prefix:
 - `sf-float`, `sf-ping`, `sf-spin`, `sf-shimmer`, `sf-blink`
 - `sf-color-pulse`
 
-## Stagger delays
+## Stagger
 
-Use the delay tokens to stagger children:
+Put `.sf-stagger` on a **parent**; every direct child gets an incrementing
+`animation-delay`, so a time-based entrance plays in sequence. `.sf-stagger`
+is choreography only — each child still needs its own animation
+(`.sf-fade-in`, `.sf-slide-in-*`, …). Children without one just carry an
+inert delay, so you opt in per child with nothing to exclude.
 
 ```html
-<div class="sf-entrance--fade-up" style="animation-delay: var(--sf-animation-delay-1)">First</div>
-<div class="sf-entrance--fade-up" style="animation-delay: var(--sf-animation-delay-2)">Second</div>
-<div class="sf-entrance--fade-up" style="animation-delay: var(--sf-animation-delay-3)">Third</div>
+<ul class="sf-stagger">
+  <li class="sf-fade-in">First</li>
+  <li class="sf-fade-in">Second</li>
+  <li class="sf-fade-in">Third</li>
+  <!-- any number of children -->
+</ul>
 ```
+
+The per-item increment is one knob:
 
 | Token | Value |
 |---|---|
-| `--sf-animation-delay-1` | `75ms` |
-| `--sf-animation-delay-2` | `150ms` |
-| `--sf-animation-delay-3` | `225ms` |
-| `--sf-animation-delay-4` | `300ms` |
-| `--sf-animation-delay-5` | `375ms` |
+| `--sf-stagger-step` | `75ms` |
 
-> Delay values are also scaled by `--sf-motion-scale`.
+Each child's delay is `index × --sf-stagger-step × --sf-motion-scale`.
+
+Where the browser supports `sibling-index()` the ramp is unbounded; older
+engines fall back to an 8-step `:nth-child` ramp (covering a 4-column grid's
+first two rows) that then plateaus, so arbitrarily long lists still animate.
+
+> Best paired with the time-based looping classes (`.sf-fade-in` /
+> `.sf-slide-in-*`), which stagger consistently everywhere. On the
+> scroll-driven path — `.sf-entrance--*`/`.sf-exit--*` under
+> `animation-timeline: view()` — the rhythm is `animation-range`, not
+> `animation-delay`, so stagger has no effect there. (`.sf-entrance--*`
+> does fall back to a time-based one-shot on engines without `view()`,
+> where the delay *does* apply; `.sf-exit--*` has no such fallback.)
 
 ## Motion scale
 
@@ -167,5 +186,6 @@ the OS preference.
 ## Theme transitions
 
 For smooth colour transitions when toggling light/dark mode, use the
-`.theme-transition` helper (`optional/theme-example.css`): add it to `<html>`
-during the toggle, remove it once complete. See [theming.md](theming.md).
+opt-in `.sf-theme-transition` helper (`core/themes.css`): add it to `<html>`
+(or any subtree) so colour tokens cross-fade when `[data-theme]` changes.
+See [theming.md](theming.md).

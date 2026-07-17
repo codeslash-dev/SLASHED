@@ -22,31 +22,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-animation-delay-1",
-      "description": "Shortest stagger delay. Apply to the first element in a sequentially animated group.\n\nDefault: `calc(75ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-2",
-      "description": "Second stagger delay step.\n\nDefault: `calc(150ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-3",
-      "description": "Third stagger delay step.\n\nDefault: `calc(225ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-4",
-      "description": "Fourth stagger delay step.\n\nDefault: `calc(300ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-animation-delay-5",
-      "description": "Longest stagger delay. Apply to the last element in a sequentially animated group.\n\nDefault: `calc(375ms * var(--sf-motion-scale))`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-animation-fade-in",
       "description": "Fade-in entrance animation shorthand. Use directly as animation property value.\n\nDefault: `sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both`",
       "syntax": "*"
@@ -462,11 +437,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-card-btn-font-size",
-      "description": "Font-size a .sf-btn shrinks to when nested inside a .sf-card. Defaults to --sf-text-s.\n\nDefault: `var(--sf-text-s)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-card-gap",
       "description": "Divider spacing for .sf-card__header / __footer (padding + margin around the rule).\n\nDefault: `var(--sf-space-m)`",
       "syntax": "*"
@@ -568,27 +538,27 @@
     },
     {
       "name": "--sf-color-action-100",
-      "description": "Very light action shade. Hover fills on white surfaces, badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))`",
+      "description": "Very light action shade. Hover fills on white surfaces, badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-200",
-      "description": "Light action shade. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light action shade. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-300",
-      "description": "Light-mid action shade. Borders on light backgrounds, low-emphasis fills.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))`",
+      "description": "Light-mid action shade. Borders on light backgrounds, low-emphasis fills.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-400",
-      "description": "Mid-light action shade. Disabled state fills, decorative accents.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))`",
+      "description": "Mid-light action shade. Disabled state fills, decorative accents.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-50",
-      "description": "Lightest action tint. Background fill for subtle action-tinted surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))`",
+      "description": "Lightest action tint. Background fill for subtle action-tinted surfaces.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
       "syntax": "*"
     },
     {
@@ -598,27 +568,27 @@
     },
     {
       "name": "--sf-color-action-600",
-      "description": "Mid-dark action shade. Text on light surfaces, icon fills.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))`",
+      "description": "Mid-dark action shade. Text on light surfaces, icon fills.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-700",
-      "description": "Dark action shade. Strong text and icon fills on light backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))`",
+      "description": "Dark action shade. Strong text and icon fills on light backgrounds.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-800",
-      "description": "Very dark action shade. High-contrast text on white.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))`",
+      "description": "Very dark action shade. High-contrast text on white.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-900",
-      "description": "Near-black action shade. Extreme contrast on white surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black action shade. Extreme contrast on white surfaces.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-950",
-      "description": "Darkest action tint. Near-black for dark-theme surface accents.\n\nDefault: `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))`",
+      "description": "Darkest action tint. Near-black for dark-theme surface accents.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
       "syntax": "*"
     },
     {
@@ -923,7 +893,7 @@
     },
     {
       "name": "--sf-color-danger-subtle",
-      "description": "Light danger tint for error row backgrounds and alert container fills.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.1)`",
+      "description": "Light danger tint for error row backgrounds and alert container fills.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.12)`",
       "syntax": "*"
     },
     {
@@ -968,7 +938,7 @@
     },
     {
       "name": "--sf-color-info-subtle",
-      "description": "Light info tint for informational note backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.1)`",
+      "description": "Light info tint for informational note backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.12)`",
       "syntax": "*"
     },
     {
@@ -1043,27 +1013,27 @@
     },
     {
       "name": "--sf-color-neutral-100",
-      "description": "Very light neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))`",
+      "description": "Very light neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-200",
-      "description": "Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-300",
-      "description": "Light-mid neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))`",
+      "description": "Light-mid neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-400",
-      "description": "Mid-light neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))`",
+      "description": "Mid-light neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-50",
-      "description": "Lightest neutral tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))`",
+      "description": "Lightest neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
       "syntax": "*"
     },
     {
@@ -1073,27 +1043,27 @@
     },
     {
       "name": "--sf-color-neutral-600",
-      "description": "Mid-dark neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))`",
+      "description": "Mid-dark neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-700",
-      "description": "Dark neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))`",
+      "description": "Dark neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-800",
-      "description": "Very dark neutral shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))`",
+      "description": "Very dark neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-900",
-      "description": "Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-950",
-      "description": "Darkest neutral tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))`",
+      "description": "Darkest neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
       "syntax": "*"
     },
     {
@@ -1198,27 +1168,27 @@
     },
     {
       "name": "--sf-color-primary-100",
-      "description": "Very light primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))`",
+      "description": "Very light primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-200",
-      "description": "Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-300",
-      "description": "Light-mid primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))`",
+      "description": "Light-mid primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-400",
-      "description": "Mid-light primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))`",
+      "description": "Mid-light primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-50",
-      "description": "Lightest primary tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))`",
+      "description": "Lightest primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
       "syntax": "*"
     },
     {
@@ -1228,27 +1198,27 @@
     },
     {
       "name": "--sf-color-primary-600",
-      "description": "Mid-dark primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))`",
+      "description": "Mid-dark primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-700",
-      "description": "Dark primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))`",
+      "description": "Dark primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-800",
-      "description": "Very dark primary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))`",
+      "description": "Very dark primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-900",
-      "description": "Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-950",
-      "description": "Darkest primary tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))`",
+      "description": "Darkest primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
       "syntax": "*"
     },
     {
@@ -1358,27 +1328,27 @@
     },
     {
       "name": "--sf-color-secondary-100",
-      "description": "Very light secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))`",
+      "description": "Very light secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-200",
-      "description": "Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-300",
-      "description": "Light-mid secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))`",
+      "description": "Light-mid secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-400",
-      "description": "Mid-light secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))`",
+      "description": "Mid-light secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-50",
-      "description": "Lightest secondary tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))`",
+      "description": "Lightest secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
       "syntax": "*"
     },
     {
@@ -1388,27 +1358,27 @@
     },
     {
       "name": "--sf-color-secondary-600",
-      "description": "Mid-dark secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))`",
+      "description": "Mid-dark secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-700",
-      "description": "Dark secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))`",
+      "description": "Dark secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-800",
-      "description": "Very dark secondary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))`",
+      "description": "Very dark secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-900",
-      "description": "Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-950",
-      "description": "Darkest secondary tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))`",
+      "description": "Darkest secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
       "syntax": "*"
     },
     {
@@ -1568,27 +1538,27 @@
     },
     {
       "name": "--sf-color-tertiary-100",
-      "description": "Very light tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))`",
+      "description": "Very light tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-200",
-      "description": "Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))`",
+      "description": "Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-300",
-      "description": "Light-mid tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))`",
+      "description": "Light-mid tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-400",
-      "description": "Mid-light tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))`",
+      "description": "Mid-light tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-50",
-      "description": "Lightest tertiary tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))`",
+      "description": "Lightest tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
       "syntax": "*"
     },
     {
@@ -1598,27 +1568,27 @@
     },
     {
       "name": "--sf-color-tertiary-600",
-      "description": "Mid-dark tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))`",
+      "description": "Mid-dark tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-700",
-      "description": "Dark tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))`",
+      "description": "Dark tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-800",
-      "description": "Very dark tertiary shade.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))`",
+      "description": "Very dark tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-900",
-      "description": "Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))`",
+      "description": "Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-950",
-      "description": "Darkest tertiary tint.\n\nDefault: `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))`",
+      "description": "Darkest tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
       "syntax": "*"
     },
     {
@@ -1882,16 +1852,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-corner-scoop-at",
-      "description": "Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0.\n\nDefault: `100% 0`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-corner-scoop-size",
-      "description": "Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl).\n\nDefault: `var(--sf-radius-2xl)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-cover-min-height",
       "description": "Minimum height of the cover layout (typically 100svh).\n\nDefault: `100dvh`",
       "syntax": "*"
@@ -1904,6 +1864,11 @@
     {
       "name": "--sf-current-font-weight",
       "description": "Inherits the current font-weight from context. Useful as a reset.\n\nDefault: `var(--sf-font-weight-bold)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-density",
+      "description": "Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it).\n\nDefault: `1`\n\n(advanced token)",
       "syntax": "*"
     },
     {
@@ -2517,6 +2482,26 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-hover-grow-scale",
+      "description": "Scale factor applied by .sf-hover-grow on hover (>1 grows).\n\nDefault: `1.05`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-lift",
+      "description": "Translate distance for .sf-hover-float (up) and .sf-hover-sink (down) on hover.\n\nDefault: `0.25em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-shrink-scale",
+      "description": "Scale factor applied by .sf-hover-shrink on hover (<1 shrinks).\n\nDefault: `0.95`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-slide",
+      "description": "Translate distance for .sf-hover-slide-start / .sf-hover-slide-end on hover.\n\nDefault: `0.5em`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-icon-2xl",
       "description": "2× large icon size (~40px+). Hero or onboarding icons.\n\nDefault: `4em`",
       "syntax": "*"
@@ -2697,53 +2682,13 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-palette-mix-100",
-      "description": "Color-mix percentage for palette step 100. Controls blend depth toward the surface. Default 8%.\n\nDefault: `8%`\n\n(advanced token)",
+      "name": "--sf-palette-shade-l",
+      "description": "Absolute OKLCH lightness the shade steps (600-950) pull toward; sets how dark the darkest palette step can reach. Default 0.1.\n\nDefault: `0.1`\n\n(advanced token)",
       "syntax": "*"
     },
     {
-      "name": "--sf-palette-mix-200",
-      "description": "Color-mix percentage for palette step 200. Controls blend depth toward the surface. Default 20%.\n\nDefault: `20%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-300",
-      "description": "Color-mix percentage for palette step 300. Controls blend depth toward the surface. Default 40%.\n\nDefault: `40%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-400",
-      "description": "Color-mix percentage for palette step 400 (near-mid tint). Controls blend depth. Default 65%.\n\nDefault: `65%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-50",
-      "description": "Color-mix percentage for the lightest palette step (50). Controls how far step 50 blends toward the surface. Default 4%.\n\nDefault: `4%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-600",
-      "description": "Color-mix percentage for palette step 600 (near-mid shade). Controls blend depth toward the text color. Default 82%.\n\nDefault: `82%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-700",
-      "description": "Color-mix percentage for palette step 700. Controls blend depth toward the text color. Default 62%.\n\nDefault: `62%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-800",
-      "description": "Color-mix percentage for palette step 800 (dark shade). Controls blend depth toward text. Default 38%.\n\nDefault: `38%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-900",
-      "description": "Color-mix percentage for palette step 900 (very dark shade). Controls blend depth toward text. Default 18%.\n\nDefault: `18%`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-palette-mix-950",
-      "description": "Color-mix percentage for the darkest palette step (950). Controls how far step 950 blends toward the text color. Default 8%.\n\nDefault: `8%`\n\n(advanced token)",
+      "name": "--sf-palette-tint-l",
+      "description": "Absolute OKLCH lightness the tint steps (50-400) pull toward; sets how light the lightest palette step can reach. Default 0.97.\n\nDefault: `0.97`\n\n(advanced token)",
       "syntax": "*"
     },
     {
@@ -3148,27 +3093,27 @@
     },
     {
       "name": "--sf-size-l",
-      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `3rem`",
+      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `calc(3rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-m",
-      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `2.5rem`",
+      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `calc(2.5rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-s",
-      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `2rem`",
+      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `calc(2rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-xl",
-      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `3.5rem`",
+      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `calc(3.5rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-xs",
-      "description": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.\n\nDefault: `1.5rem`",
+      "description": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.\n\nDefault: `calc(1.5rem * var(--sf-density))`",
       "syntax": "*"
     },
     {
@@ -3254,6 +3199,11 @@
     {
       "name": "--sf-stack-gap",
       "description": "Vertical gap between stacked block-level elements in the stack layout.\n\nDefault: `var(--sf-content-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-stagger-step",
+      "description": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.\n\nDefault: `75ms`",
       "syntax": "*"
     },
     {

@@ -4,7 +4,7 @@ Recipes / patterns from `core/macros.css`. Macros answer
 **"what does this element do / look like?"** — distinct from layout
 primitives, which answer **"where do my children go?"**.
 
-Layer: `slashed.macros` (between `slashed.components` and
+Layer: `slashed.macros` (between `slashed.layout` and
 `slashed.utilities`). Macros may compose with primitives and components,
 but a single-property utility still wins on the same selector.
 
@@ -690,41 +690,46 @@ Lives in `core/motion.css`, layer `slashed.motion`.
 
 ---
 
-## `.sf-corner-scoop`
+## `.sf-stagger`
 
-A corner that curves **away** from the box (a concave "notch"), instead
-of the normal convex `border-radius`. Reveals whatever sits behind the
-element at that corner via a `mask-image` radial gradient. Default
-corner is top-right.
+Choreography helper: put it on a **parent** and every direct child receives
+an incrementing `animation-delay`, so a group of time-based entrance
+animations plays in sequence.
 
 ```html
-<div class="sf-card sf-corner-scoop sf-corner-scoop--bottom-right">
-  Panel with a corner that curves away
-</div>
+<ul class="sf-stagger">
+  <li class="sf-fade-in">First</li>
+  <li class="sf-fade-in">Second</li>
+  <li class="sf-fade-in">Third</li>
+</ul>
 ```
 
-Variants:
-
-| Class | Effect |
-|---|---|
-| `.sf-corner-scoop--top-left` | scoop at the top-left corner |
-| `.sf-corner-scoop--top-right` | scoop at the top-right corner |
-| `.sf-corner-scoop--bottom-left` | scoop at the bottom-left corner |
-| `.sf-corner-scoop--bottom-right` | scoop at the bottom-right corner |
+`.sf-stagger` sets **only** the delay — each child still needs its own
+time-based entrance animation (the fade / slide-in looping classes in
+[motion.md](./motion.md)). A child without one carries an inert delay (a
+no-op), so animating only some children needs no opt-out on the rest.
 
 Tokens:
 
 | Token | Default | What it controls |
 |---|---|---|
-| `--sf-corner-scoop-size` | `var(--sf-radius-2xl)` | radius of the concave cut |
-| `--sf-corner-scoop-at` | `100% 0` | position of the cut (set by the variants above) |
+| `--sf-stagger-step` | `75ms` | per-item delay increment |
 
-**Limitations:** masking cuts the element's entire paint at that
-corner — `box-shadow`/`border` don't survive the cut there (put shadows
-on a wrapper element if needed). Only one scoop per element — a second
-mask layer would fill the first hole rather than adding a second cut.
-Doesn't compose with other mask-based macros (`.sf-overflow-fade`,
-`.sf-scroll-shadow`) on the same element — the last `mask-image` wins.
+Each child's delay is `index × --sf-stagger-step × --sf-motion-scale`. Where
+`sibling-index()` is supported the index is unbounded; otherwise an 8-step
+`:nth-child` ramp (covering a 4-column grid's first two rows) plateaus so
+arbitrarily long lists still animate.
+
+**Best paired with the time-based fade / slide-in looping classes** (see
+[motion.md](./motion.md)), which stagger consistently everywhere. On the
+scroll-driven path (`.sf-entrance--*`/`.sf-exit--*` under
+`animation-timeline: view()`) the rhythm is `animation-range`, not
+`animation-delay`, so stagger has no effect there — though `.sf-entrance--*`
+does stagger in its time-based fallback on engines without `view()`, while
+`.sf-exit--*` has no such fallback. Gated by
+`prefers-reduced-motion: no-preference`.
+
+Lives in `core/motion.css`, layer `slashed.motion`.
 
 ---
 
