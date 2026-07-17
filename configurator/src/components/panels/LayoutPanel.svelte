@@ -260,8 +260,8 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
         <div class="text-[9px] text-slate-400 dark:text-slate-600 mb-2 font-mono">Preview at 360px panel width</div>
         <div
-          class="grid gap-1"
-          style={`grid-template-columns: repeat(auto-fill, minmax(${Math.min(gridMin * 16 * (360 / 1200), 120)}px, 1fr))`}
+          class="grid"
+          style={`grid-template-columns: repeat(auto-fill, minmax(${Math.min(gridMin * 16 * (360 / 1200), 120)}px, 1fr)); gap: ${gridGap * 16 * (360 / 1200)}px`}
         >
           {#each Array.from({ length: 8 }) as _, i (i)}
             <div class="h-8 bg-indigo-500/20 border border-indigo-500/20 rounded text-[8px] font-mono text-indigo-600/60 dark:text-indigo-400/60 flex items-center justify-center">col</div>
