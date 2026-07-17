@@ -1,5 +1,5 @@
 // @ts-check
-// SLASHED — Comprehensive visual regression tests for docs/demo.html
+// SLASHED — Comprehensive visual regression tests for demo/index.html
 // Tests colors, shapes, shadows, layouts, grids, print, typography,
 // spacing, radius, motion states, accessibility, and all layout primitives.
 
@@ -7,7 +7,7 @@ import { test, expect } from '@playwright/test';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'docs', 'demo.html')).href;
+const DEMO_URL = pathToFileURL(path.resolve(import.meta.dirname, '..', 'demo', 'index.html')).href;
 
 // Helper: resolve a CSS custom property value on an element
 async function getComputedProp(locator, prop) {
@@ -804,7 +804,9 @@ test.describe('Print Styles', () => {
 test.describe('Accessibility', () => {
   test('.skip-link exists and is visually hidden until focused', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const skipLink = page.locator('.skip-link');
+    // The canonical skip link is first in the DOM (the coverage gallery also
+    // showcases a .skip-link further down the page).
+    const skipLink = page.locator('.skip-link').first();
     await expect(skipLink).toBeAttached();
     // Before focus, it should be positioned off-screen
     const box = await skipLink.boundingBox();

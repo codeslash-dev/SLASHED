@@ -34,7 +34,7 @@ and `dist/` must be rebuilt and committed.
   derived values.
 - **Layers.** Every rule lives in its `@layer` (see `core/layers.css`). Keep
   selectors low-specificity (single class, element, `:root`).
-- **`.is-*` is reserved** for runtime state classes (the `slashed.states` layer)
+- **`.sf-is-*` is reserved** for runtime state classes (the `slashed.states` layer)
   — never utilities or variants.
 - **Public vs internal tokens.** Label new tokens in the file header (PUBLIC /
   PUBLIC-ADVANCED / INTERNAL). Keep alias chains ≤2 indirections (3 nodes max);
@@ -45,7 +45,7 @@ and `dist/` must be rebuilt and committed.
 
 ## Tests & demo coverage
 
-- Any new `.sf-*` or `.is-*` class in `core/*.css` must appear in `docs/demo.html`
+- Any new `.sf-*` or `.sf-is-*` class in `core/*.css` must appear in `demo/index.html`
   (`tests/coverage.test.js`).
 - Any new token must resolve in both themes (`tests/tokens.spec.js`); tokens whose
   value is `inherit` go in that file's `EXPECTED_EMPTY` allowlist.
@@ -66,7 +66,8 @@ runs via git hooks. `CHANGELOG.md` follows
    heading; leave a fresh empty `## [Unreleased]`.
 2. Run `npm run release` (patch), `npm run release:minor`, or
    `npm run release:major`. This bumps `package.json`, runs
-   `scripts/version-sync.js` (propagates the version to `docs/roadmap.md`),
+   `scripts/version-sync.js` (propagates the version to `docs/roadmap.md`,
+   `docs/llm-guide.md`, and the configurator package files),
    rebuilds bundles, commits, tags, and pushes.
 3. The pushed tag triggers `release.yml` (GitHub Release + dist assets) and
    re-aligns version references on main. The `dist` branch is published by

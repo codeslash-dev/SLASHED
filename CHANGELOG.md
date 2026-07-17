@@ -4,12 +4,50 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.20] - 2026-07-16
+
 ### Features
+- **configurator:** rewire Colors palette-ramp panel to the anchor model
+
+### Bug Fixes
+- **demo:** widen sidebar nav so labels aren't clipped
+- **demo:** load full bundle so components render styled
+- **tokens:** unify status -subtle alpha to 0.12; drop dev-notes from manual
+- address PR #627 review — changelog copy-paste, dark sweep, dead assignment
+- **tokens:** make brand colour ramps monotonic for any source colour
+
+## [0.7.19] - 2026-07-16
+
+### Bug Fixes
+- **tokens:** `--sf-color-info-subtle` and `--sf-color-danger-subtle` were `0.10` alpha while `--sf-color-success-subtle` / `--sf-color-warning-subtle` were `0.12`, so a `danger`/`info` alert-box background rendered slightly fainter than a `success`/`warning` one at the same content. Unified all four status `-subtle` washes to `0.12` (the `-muted` `0.3` and `-tint` `0.05` rungs were already consistent).
+- **tokens:** the numeric brand ramps (`--sf-color-{primary,secondary,tertiary,action,neutral}-50…950`) no longer fold into a "U". The previous model generated each step with `color-mix()` toward the theme's `--sf-color-surface` (tints) / `--sf-color-text` (shades) — so when a chosen source colour fell outside the band between those two anchors (e.g. a brand darker than the text colour, or a project that lightened `--sf-color-neutral`), the shade half inverted and climbed back up: steps 600–950 came out *lighter* than 500, and 50 ≈ 950. The ramp is now generated in OKLCH by pulling the family colour's own lightness a fixed fraction toward an **absolute** target — `--sf-palette-tint-l` (tints) / `--sf-palette-shade-l` (shades) — clamped with `max()`/`min()` so a tint can never end darker than the base nor a shade lighter. The ladder is therefore monotonic light→dark for **any** source colour and any anchor configuration. Chroma is tapered toward the extremes to avoid oversaturation. For default-palette colours (which already sat inside the safe band) the output is visually unchanged; only out-of-band / moved-anchor cases are corrected. `base` is unchanged (it already used absolute lightness steps). New parametric test `tests/ramp-monotonic.spec.js` sweeps the lightness axis for all five families and asserts the ramp never folds and no step is transparent.
+- **configurator:** the Colors panel's "Palette ramp" section now edits the two lightness anchors (`--sf-palette-tint-l` / `--sf-palette-shade-l`) with two `0–1` sliders instead of the ten removed `--sf-palette-mix-*` percentage sliders; the Softer/Default/Punchy presets and the live palette preview were rewired to the absolute-anchor model so the preview matches the framework and stays monotonic.
+- **layout:** `@container` breakpoints for `.sf-grid-cols-*`, `.sf-bento` and `.sf-alternate` now use `rem` instead of `em`. Inside a container query an `em` resolves against the query container's own font-size, which under the default fluid type scale is inherited from `body` (a `clamp()` over `100vw`, ~16–20px) — so the same fixed-width container rendered a different column count depending on the *viewport*: an 800px container showed `.sf-grid-cols-3` as 3 columns at a 500px viewport but 1 column at 1200px+. `rem` resolves against the fixed root (`html` stays 16px; fluid type is applied to `body`), restoring the documented "responds to its own container width, not the viewport" contract. Thresholds are unchanged numerically (30rem = 480px, 48rem = 768px) and still honour user zoom / root-font-size. Also corrects `docs/architecture.md`, which wrongly listed `.sf-grid` / `.sf-sidebar` as `@container` primitives (both are intrinsic and carry no container query).
+
+### Breaking Changes
+- **tokens:** removed the `--sf-palette-mix-50…950` ramp-shape knobs (color-mix percentages of the old model) and replaced them with two lightness-anchor knobs — `--sf-palette-tint-l` (default `0.97`) and `--sf-palette-shade-l` (default `0.1`) — which set how light the lightest / how dark the darkest generated palette step may reach. Per-step pull fraction and chroma taper are now baked into each family. If you overrode `--sf-palette-mix-*` to reshape the ramp, retune via the two new anchors instead (or override individual `--sf-color-{family}-{step}` resolved tokens).
+
+## [0.7.18] - 2026-07-16
+
+### Features
+- **demo:** render every class live in the coverage gallery
+
+### Bug Fixes
+- **demo:** address review findings in the coverage gallery
+- clear CodeQL log finding and address review nits
+- **test:** don't dump identifier lists in coverage log output
+
+## [0.7.17] - 2026-07-15
+
+### Features
+- **tokens:** add `--sf-density` (PUBLIC-ADVANCED, default `1`) — the compact ↔ comfortable dial for interactive control **geometry**. It scales the `--sf-size-*` rung ladder (24·32·40·48·56px at `1`); below `1` packs controls tighter for dashboards / data tables / power-user tools, above `1` loosens them. A deliberate design or user-preference choice, **not** viewport-fluid (control height must not shrink on small screens where touch targets need to grow), so the size ladder — previously static literals scaled by no knob — now moves only by this one dial. Orthogonal to `--sf-space-scale` (whitespace) and `--sf-section-scale` (section rhythm); combine them for a fully compact UI. The `--sf-touch-target` accessibility floor stays independent, so a small value can't pull native controls under the WCAG target. Wired through the configurator (spacing domain) and the LLM guide's global-multipliers section.
 - **motion:** add `.sf-stagger` — put it on a parent and every direct child gets an incrementing `animation-delay`, so a group of time-based entrance animations (`.sf-fade-in` / `.sf-slide-in-*`) plays in sequence. Works on any number of children with no manual per-item index: where `sibling-index()` is supported the ramp is unbounded, otherwise it falls back to an 8-step `:nth-child` ramp (covering a 4-column grid's first two rows) that plateaus. One knob, `--sf-stagger-step` (default `75ms`), retunes the whole sequence; each child's delay is `index × --sf-stagger-step × --sf-motion-scale`. Choreography only — a child without its own animation just carries an inert delay, so animating only some children needs no opt-out on the rest.
 - **tokens:** the `.sf-hover-*` transform utilities now read magnitude knobs instead of hard-coded values — `--sf-hover-grow-scale` (1.05), `--sf-hover-shrink-scale` (0.95), `--sf-hover-lift` (0.25em, float/sink), `--sf-hover-slide` (0.5em, slide-start/end) — so each effect's strength is one global override.
 
 ### Breaking Changes
 - **tokens:** removed the fixed `--sf-animation-delay-1…5` stagger tokens, superseded by the new `.sf-stagger` utility + `--sf-stagger-step` knob. Replace `style="animation-delay: var(--sf-animation-delay-N)"` on hand-indexed children with a single `.sf-stagger` class on their parent (see `docs/motion.md`); to keep a fixed manual delay, use a literal (e.g. `animation-delay: 150ms`).
+- **macros:** removed `.sf-corner-scoop` (and its `--top-left`/`--top-right`/`--bottom-left`/`--bottom-right` modifiers and `--sf-corner-scoop-size`/`--sf-corner-scoop-at` knobs). Judged too niche for the public API relative to its cost — the single absolute cut size needed per-element tuning across control- vs hero-sized boxes, and the mask clipped `box-shadow`/`border` and could not compose with the other mask-based macros. To keep a concave corner, apply the mask directly on the element: `style="-webkit-mask-image: radial-gradient(circle at 100% 0, transparent 24px, black 24.5px); mask-image: radial-gradient(circle at 100% 0, transparent 24px, black 24.5px)"`.
+- **layout:** renamed `.sf-bento--compact` / `.sf-bento--tall` (container row-height modifiers) to `.sf-bento--row-compact` / `.sf-bento--row-tall`, matching the `--sf-bento-row-*` tokens they set. The old names collided visually with the unrelated child modifier `.sf-bento-tall` (spans one item over 2 rows) — same word, one dash apart. Child span classes (`.sf-bento-wide/-full/-tall/-featured`) are unchanged. See `docs/migration.md`.
 
 ### Bug Fixes
 - **layout:** `.sf-bento` and `.sf-grid-cols-2/3/4/6` now actually respond to their `@container` breakpoints — both used to declare a `container` on themselves and then query that same container to resize themselves, which is a no-op per spec (a container can't be the subject of its own `@container` query). Fixed by relying on an ancestor container (`.sf-container` / `.sf-cq` / `.sf-fluid-cq`) instead, matching how `.sf-alternate` and `.sf-grid-cols-1-2` etc. already do it. `.sf-bento-wide` / `.sf-bento-featured` also no longer force a phantom 2nd column once the grid collapses to 1 column at the mobile breakpoint.

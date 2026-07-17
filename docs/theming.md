@@ -4,7 +4,7 @@ Rebrand the whole framework by overriding a handful of source tokens. Dark mode,
 surfaces, reading text, status tints, and on-colours all auto-derive via relative
 colour syntax. No build step, no SCSS.
 
-Starter file: [`optional/theme-example.css`](../optional/theme-example.css).
+Starter file: [`optional/customize-example.css`](../optional/customize-example.css).
 
 ## Rebrand in 6 tokens
 
@@ -86,7 +86,7 @@ and `--sf-leading-taper` (progressively tightens the per-size line-heights up
 the scale; default `0`).
 
 For a single copy-paste file exposing every dial, see
-[`optional/config-example.css`](../optional/config-example.css).
+[`optional/customize-example.css`](../optional/customize-example.css).
 
 ### Ad-hoc fluid values
 
@@ -151,6 +151,65 @@ btn.addEventListener('click', () => {
 The `::view-transition(root)` cross-fade is styled in `core/motion.css` and
 respects `prefers-reduced-motion`.
 
+### Per-element colours per mode — the simplest, universal way
+
+When you just need **one element to use a specific colour in light vs dark**,
+reach for CSS `light-dark()` before any theme selector. It is the simplest and
+most portable option: one declaration, no `[data-theme]` selector, and it works
+in **every** context that sets `color-scheme` — the OS preference, a
+`data-theme` toggle, or a host that flips `color-scheme` via its own attribute
+(e.g. a page builder's dark-mode switch):
+
+```css
+.my-element {
+  color:            light-dark(#1f2937, #e5e7eb);
+  background-color: light-dark(#ffffff, #111827);
+  border-color:     light-dark(#e5e7eb, #374151);
+}
+```
+
+You can mix framework tokens with a one-off accent — auto-switching base plus
+your own value only where you want it:
+
+```css
+.my-element {
+  color: light-dark(var(--sf-color-text), oklch(0.85 0.15 30));
+}
+```
+
+Reach for it whenever the difference is a **colour**. It substitutes a colour
+value, so it covers `color`, `background-color`, `border-color`, `fill`, and the
+colour part of `box-shadow`. `light-dark()` picks its branch from the inherited
+`color-scheme`, which SLASHED sets on every `[data-theme]` element (and which the
+OS default and host toggles set too) — so no selector is needed. If an element
+ever lands in a subtree with no `color-scheme` set, it falls back to the light
+branch.
+
+For a per-mode change that **isn't** a colour (`background-image`, `display`,
+layout) `light-dark()` doesn't apply — it only substitutes a `<color>`. Branch
+on the **public** `data-theme` API instead, with a `prefers-color-scheme`
+fallback for the unforced (OS-driven) case. This is the same pattern the
+Contrast bias section uses, and it stays on SemVer-guaranteed selectors:
+
+```css
+@layer slashed.overrides {
+  /* forced dark, at any scope (mirrors .sf-theme-dark too) */
+  :is([data-theme="dark"], .sf-theme-dark) .my-element {
+    background-image: url(hero-dark.avif);
+  }
+  /* OS-preferred dark when no data-theme is set on the page */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .my-element {
+      background-image: url(hero-dark.avif);
+    }
+  }
+}
+```
+
+Don't reach for the internal `--sf-is-dark` flag here: it is an `INTERNAL`-tier
+token (see [architecture.md](architecture.md)) the framework manages itself and
+may change without a major release, so consumer CSS must not depend on it.
+
 ## Per-section & multi-brand
 
 Re-declare the six source tokens under your own selector for a different palette;
@@ -193,7 +252,7 @@ need a value the formula can't produce):
 ```
 
 Place Tier 3 overrides in `slashed.overrides` (loaded after the bundle) so they
-survive framework updates. See `optional/overrides-example.css`.
+survive framework updates. See `optional/customize-example.css`.
 
 ## Per-surface color control
 

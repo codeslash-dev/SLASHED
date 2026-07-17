@@ -5,7 +5,7 @@ SLASHED ships animation primitives in the `slashed.motion` layer
 `@media (prefers-reduced-motion: no-preference)` -- users who prefer
 reduced motion see no animation from the framework.
 
-All animations are demoed in the [macros & states coverage page](test-coverage-4-macros-states.html).
+All animations are exercised live in the [demo](/demo/).
 
 ## Design principles
 
@@ -186,5 +186,6 @@ the OS preference.
 ## Theme transitions
 
 For smooth colour transitions when toggling light/dark mode, use the
-`.theme-transition` helper (`optional/theme-example.css`): add it to `<html>`
-during the toggle, remove it once complete. See [theming.md](theming.md).
+opt-in `.sf-theme-transition` helper (`core/themes.css`): add it to `<html>`
+(or any subtree) so colour tokens cross-fade when `[data-theme]` changes.
+See [theming.md](theming.md).

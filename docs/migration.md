@@ -166,6 +166,54 @@ If you overrode field block padding by *reading* `--sf-field-block` (e.g.
 tracks the tighter, correct default. To keep the old roomier spacing, pin it
 explicitly: `:root { --sf-field-block: var(--sf-space-l); }`.
 
+### `.sf-bento` row-height container modifiers renamed to `--row-compact` / `--row-tall` (breaking)
+
+`.sf-bento--compact` / `--tall` (container-level, resize every auto row in the
+grid) and `.sf-bento-tall` (child-level, resize one grid item to span 2 rows)
+differed only by dash count and shared the word "tall" — an easy class to
+typo or misread. The container modifiers are renamed to match the
+`--sf-bento-row-compact` / `--sf-bento-row-tall` tokens they set, so the two
+families read distinctly:
+
+| Before (≤ 0.7.16) | After (0.8.0) |
+|---|---|
+| `.sf-bento--compact` | `.sf-bento--row-compact` |
+| `.sf-bento--tall` | `.sf-bento--row-tall` |
+
+`.sf-bento-wide` / `.sf-bento-full` / `.sf-bento-tall` / `.sf-bento-featured`
+(the child span classes) are unchanged.
+
+**What changed for you:** find-and-replace `sf-bento--compact` →
+`sf-bento--row-compact` and `sf-bento--tall` → `sf-bento--row-tall` on any
+`.sf-bento` container element.
+
+### `.sf-corner-scoop` removed (breaking)
+
+The `.sf-corner-scoop` macro — a concave "notch" cut into one corner via a
+`mask-image` radial gradient — and its four placement modifiers
+(`--top-left` / `--top-right` / `--bottom-left` / `--bottom-right`) plus the
+`--sf-corner-scoop-size` / `--sf-corner-scoop-at` knobs have been removed.
+It was judged too niche for the public API relative to its cost: the single
+absolute `--sf-corner-scoop-size` needed per-element tuning to read well
+across control-sized and hero-sized boxes (no size tier), and the mask clipped
+`box-shadow` / `border` at the cut and could not compose with the other
+mask-based macros (`.sf-overflow-fade`, `.sf-scroll-shadow`) on the same
+element.
+
+**What changed for you:** elements that carried `.sf-corner-scoop*` now render
+with square (un-masked) corners. To keep the concave corner, apply the mask
+directly on the element — the same declaration the macro used to emit:
+
+```html
+<div style="-webkit-mask-image: radial-gradient(circle at 100% 0, transparent 24px, black 24.5px);
+            mask-image: radial-gradient(circle at 100% 0, transparent 24px, black 24.5px)">
+  Panel with a top-right corner that curves away
+</div>
+```
+
+Change the `at <position>` (e.g. `0 0` = top-left, `100% 100%` = bottom-right)
+to move the cut, and the two radii to resize it.
+
 ## SLASHED 0.7.6 → 0.7.7
 
 ### `.sf-btn` axes reworked (breaking)

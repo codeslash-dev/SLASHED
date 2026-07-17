@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1086 elements** — 755 tokens, 331 classes.
+**1071 elements** — 746 tokens, 325 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1026 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 59 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 1018 | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | 52 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (755)
+## Tokens (746)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (622)
+### Core tokens (615)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -117,17 +117,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces. |
 | `--sf-color-action--active` | PUBLIC | consumption | color | `var(--sf-color-action-xdark)` | Action color at pressed/active brightness. |
 | `--sf-color-action--hover` | PUBLIC | consumption | color | `var(--sf-color-action-darker)` | Action color at hover brightness. |
-| `--sf-color-action-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light action shade. Hover fills on white surfaces, badge backgrounds. |
-| `--sf-color-action-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light action shade. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-action-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid action shade. Borders on light backgrounds, low-emphasis fills. |
-| `--sf-color-action-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light action shade. Disabled state fills, decorative accents. |
-| `--sf-color-action-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest action tint. Background fill for subtle action-tinted surfaces. |
+| `--sf-color-action-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light action shade. Hover fills on white surfaces, badge backgrounds. |
+| `--sf-color-action-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light action shade. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-action-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid action shade. Borders on light backgrounds, low-emphasis fills. |
+| `--sf-color-action-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light action shade. Disabled state fills, decorative accents. |
+| `--sf-color-action-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest action tint. Background fill for subtle action-tinted surfaces. |
 | `--sf-color-action-500` | PUBLIC | consumption | color | `var(--sf-color-action)` | Mid action shade — the 'pure' hue. Accessible on both light and dark backgrounds. |
-| `--sf-color-action-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark action shade. Text on light surfaces, icon fills. |
-| `--sf-color-action-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark action shade. Strong text and icon fills on light backgrounds. |
-| `--sf-color-action-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark action shade. High-contrast text on white. |
-| `--sf-color-action-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black action shade. Extreme contrast on white surfaces. |
-| `--sf-color-action-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest action tint. Near-black for dark-theme surface accents. |
+| `--sf-color-action-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark action shade. Text on light surfaces, icon fills. |
+| `--sf-color-action-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark action shade. Strong text and icon fills on light backgrounds. |
+| `--sf-color-action-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark action shade. High-contrast text on white. |
+| `--sf-color-action-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black action shade. Extreme contrast on white surfaces. |
+| `--sf-color-action-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest action tint. Near-black for dark-theme surface accents. |
 | `--sf-color-action-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.10)` | 10% opacity action tint. Subtle hover or selected-row background. |
 | `--sf-color-action-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.30)` | 30% opacity action tint. |
 | `--sf-color-action-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.05)` | 5% opacity action tint. Barely-there hover highlight. |
@@ -188,7 +188,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-danger-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.198 12)` | Registered <color> dark counterpart of --sf-color-danger. |
 | `--sf-color-danger-source-light` | PUBLIC | knob | color | `oklch(0.48 0.22 12)` | OKLCH lightness source for the danger status color (covers destructive actions and form validation errors). |
 | `--sf-color-danger-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast danger color for alert body text and icons. |
-| `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.1)` | Light danger tint for error row backgrounds and alert container fills. |
+| `--sf-color-danger-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.12)` | Light danger tint for error row backgrounds and alert container fills. |
 | `--sf-color-danger-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-danger) l c h / 0.05)` | Near-transparent danger tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-dim` | PUBLIC | knob | color | `oklch(0 0 0 / 0.5)` | Backdrop overlay color for modals, drawers, and lightboxes. |
 | `--sf-color-heading` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Heading text color. Slightly stronger contrast than body text for visual hierarchy. |
@@ -197,7 +197,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-info-source-dark` | PUBLIC | knob | color | `oklch(0.71 0.162 235)` | Registered <color> dark counterpart of --sf-color-info. |
 | `--sf-color-info-source-light` | PUBLIC | knob | color | `oklch(0.48 0.18 235)` | OKLCH lightness source for the info status color. |
 | `--sf-color-info-strong` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )` | High-contrast info color for hint body text. |
-| `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.1)` | Light info tint for informational note backgrounds. |
+| `--sf-color-info-subtle` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.12)` | Light info tint for informational note backgrounds. |
 | `--sf-color-info-tint` | PUBLIC | consumption | color | `oklch(from var(--sf-color-info) l c h / 0.05)` | Near-transparent info tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
 | `--sf-color-inset` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l - 0.02) c h)` | Slightly inset surface for nested areas — inputs, code blocks, sidebar panels. |
 | `--sf-color-inverse` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(1 - l) c h)` | Inverted (dark-on-light / light-on-dark) surface for high-contrast banners or tooltips. |
@@ -212,17 +212,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral` | PUBLIC | consumption | color | `light-dark(var(--sf-color-neutral-source-light), var(--sf-color-neutral-source-dark, oklch(from var(--sf-color-neutral-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Neutral interactive color for low-emphasis actions and tertiary buttons. |
 | `--sf-color-neutral--active` | PUBLIC | consumption | color | `var(--sf-color-neutral-xdark)` | Neutral color at pressed/active brightness. |
 | `--sf-color-neutral--hover` | PUBLIC | consumption | color | `var(--sf-color-neutral-darker)` | Neutral color at hover brightness. |
-| `--sf-color-neutral-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light neutral shade. |
-| `--sf-color-neutral-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-neutral-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid neutral shade. |
-| `--sf-color-neutral-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light neutral shade. |
-| `--sf-color-neutral-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest neutral tint. |
+| `--sf-color-neutral-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light neutral shade. |
+| `--sf-color-neutral-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-neutral-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid neutral shade. |
+| `--sf-color-neutral-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light neutral shade. |
+| `--sf-color-neutral-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest neutral tint. |
 | `--sf-color-neutral-500` | PUBLIC | consumption | color | `var(--sf-color-neutral)` | Mid neutral shade — the 'pure' hue. |
-| `--sf-color-neutral-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark neutral shade. |
-| `--sf-color-neutral-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark neutral shade. |
-| `--sf-color-neutral-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark neutral shade. |
-| `--sf-color-neutral-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-neutral-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest neutral tint. |
+| `--sf-color-neutral-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark neutral shade. |
+| `--sf-color-neutral-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark neutral shade. |
+| `--sf-color-neutral-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark neutral shade. |
+| `--sf-color-neutral-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-neutral-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest neutral tint. |
 | `--sf-color-neutral-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.10)` | 10% opacity neutral tint. |
 | `--sf-color-neutral-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.30)` | 30% opacity neutral tint. |
 | `--sf-color-neutral-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.05)` | 5% opacity neutral tint. |
@@ -243,17 +243,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary brand palette color. Independent from --sf-color-action by default; override either source token to couple or separate brand and action roles. |
 | `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | Primary color at pressed/active brightness. |
 | `--sf-color-primary--hover` | PUBLIC | consumption | color | `var(--sf-color-primary-darker)` | Primary color at hover brightness. |
-| `--sf-color-primary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light primary shade. |
-| `--sf-color-primary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-primary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid primary shade. |
-| `--sf-color-primary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light primary shade. |
-| `--sf-color-primary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest primary tint. |
+| `--sf-color-primary-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light primary shade. |
+| `--sf-color-primary-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-primary-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid primary shade. |
+| `--sf-color-primary-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light primary shade. |
+| `--sf-color-primary-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest primary tint. |
 | `--sf-color-primary-500` | PUBLIC | consumption | color | `var(--sf-color-primary)` | Mid primary shade — the 'pure' hue. |
-| `--sf-color-primary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark primary shade. |
-| `--sf-color-primary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark primary shade. |
-| `--sf-color-primary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark primary shade. |
-| `--sf-color-primary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-primary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest primary tint. |
+| `--sf-color-primary-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark primary shade. |
+| `--sf-color-primary-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark primary shade. |
+| `--sf-color-primary-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark primary shade. |
+| `--sf-color-primary-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-primary-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest primary tint. |
 | `--sf-color-primary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.10)` | 10% opacity primary tint. |
 | `--sf-color-primary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.30)` | 30% opacity primary tint. |
 | `--sf-color-primary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.05)` | 5% opacity primary tint. |
@@ -275,17 +275,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw secondary palette token for the secondary brand color. |
 | `--sf-color-secondary--active` | PUBLIC | consumption | color | `var(--sf-color-secondary-xdark)` | Secondary color at pressed/active brightness. |
 | `--sf-color-secondary--hover` | PUBLIC | consumption | color | `var(--sf-color-secondary-darker)` | Secondary color at hover brightness. |
-| `--sf-color-secondary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light secondary shade. |
-| `--sf-color-secondary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-secondary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid secondary shade. |
-| `--sf-color-secondary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light secondary shade. |
-| `--sf-color-secondary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest secondary tint. |
+| `--sf-color-secondary-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light secondary shade. |
+| `--sf-color-secondary-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-secondary-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid secondary shade. |
+| `--sf-color-secondary-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light secondary shade. |
+| `--sf-color-secondary-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest secondary tint. |
 | `--sf-color-secondary-500` | PUBLIC | consumption | color | `var(--sf-color-secondary)` | Mid secondary shade — the 'pure' hue. |
-| `--sf-color-secondary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark secondary shade. |
-| `--sf-color-secondary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark secondary shade. |
-| `--sf-color-secondary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark secondary shade. |
-| `--sf-color-secondary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-secondary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest secondary tint. |
+| `--sf-color-secondary-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark secondary shade. |
+| `--sf-color-secondary-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark secondary shade. |
+| `--sf-color-secondary-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark secondary shade. |
+| `--sf-color-secondary-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-secondary-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest secondary tint. |
 | `--sf-color-secondary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.10)` | 10% opacity secondary tint. |
 | `--sf-color-secondary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.30)` | 30% opacity secondary tint. |
 | `--sf-color-secondary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.05)` | 5% opacity secondary tint. |
@@ -317,17 +317,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw tertiary palette token for the third brand color. |
 | `--sf-color-tertiary--active` | PUBLIC | consumption | color | `var(--sf-color-tertiary-xdark)` | Tertiary color at pressed/active brightness. |
 | `--sf-color-tertiary--hover` | PUBLIC | consumption | color | `var(--sf-color-tertiary-darker)` | Tertiary color at hover brightness. |
-| `--sf-color-tertiary-100` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))` | Very light tertiary shade. |
-| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))` | Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
-| `--sf-color-tertiary-300` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))` | Light-mid tertiary shade. |
-| `--sf-color-tertiary-400` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))` | Mid-light tertiary shade. |
-| `--sf-color-tertiary-50` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))` | Lightest tertiary tint. |
+| `--sf-color-tertiary-100` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)` | Very light tertiary shade. |
+| `--sf-color-tertiary-200` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)` | Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds. |
+| `--sf-color-tertiary-300` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)` | Light-mid tertiary shade. |
+| `--sf-color-tertiary-400` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)` | Mid-light tertiary shade. |
+| `--sf-color-tertiary-50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)` | Lightest tertiary tint. |
 | `--sf-color-tertiary-500` | PUBLIC | consumption | color | `var(--sf-color-tertiary)` | Mid tertiary shade — the 'pure' hue. |
-| `--sf-color-tertiary-600` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))` | Mid-dark tertiary shade. |
-| `--sf-color-tertiary-700` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))` | Dark tertiary shade. |
-| `--sf-color-tertiary-800` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))` | Very dark tertiary shade. |
-| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))` | Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
-| `--sf-color-tertiary-950` | PUBLIC | consumption | color | `color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))` | Darkest tertiary tint. |
+| `--sf-color-tertiary-600` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)` | Mid-dark tertiary shade. |
+| `--sf-color-tertiary-700` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)` | Dark tertiary shade. |
+| `--sf-color-tertiary-800` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)` | Very dark tertiary shade. |
+| `--sf-color-tertiary-900` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)` | Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces. |
+| `--sf-color-tertiary-950` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)` | Darkest tertiary tint. |
 | `--sf-color-tertiary-a10` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.10)` | 10% opacity tertiary tint. |
 | `--sf-color-tertiary-a30` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.30)` | 30% opacity tertiary tint. |
 | `--sf-color-tertiary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.05)` | 5% opacity tertiary tint. |
@@ -379,6 +379,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-contrast-bias` | PUBLIC-ADVANCED | knob | contrast | `0` | Global text-contrast nudge. Positive values push derived reading-text colors toward the extremes (darker in light mode, lighter in dark). Default 0 (neutral). |
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | contrast | `0.6` | OKLCH lightness crossover for auto-contrast on colored surfaces. Colors with L above this get dark text; below get light text. Default 0.6. |
 | `--sf-current-font-weight` | PUBLIC | consumption | current | `var(--sf-font-weight-bold)` | Inherits the current font-weight from context. Useful as a reset. |
+| `--sf-density` | PUBLIC-ADVANCED | knob | density | `1` | Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it). |
 | `--sf-display-l-line-height` | PUBLIC | knob | display | `1` | Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes. |
 | `--sf-display-m-line-height` | PUBLIC | knob | display | `1.05` | Line height for medium display text (--sf-text-display-m). |
 | `--sf-display-s-line-height` | PUBLIC | consumption | display | `var(--sf-leading-tight)` | Line height for small display text (--sf-text-display-s). |
@@ -517,16 +518,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-opacity-disabled` | PUBLIC | knob | opacity | `0.45` | Opacity for disabled UI elements (typically 0.4–0.5). |
 | `--sf-opacity-muted` | PUBLIC | knob | opacity | `0.5` | General de-emphasis opacity for secondary content, ghost elements, or non-primary layers. Default 0.5. |
 | `--sf-optical-sizing` | PUBLIC-ADVANCED | knob | optical | `auto` | CSS font-optical-sizing value. 'auto' lets the browser optimize letterforms for the rendered size. Set 'none' to disable optical sizing. |
-| `--sf-palette-mix-100` | PUBLIC-ADVANCED | knob | palette | `8%` | Color-mix percentage for palette step 100. Controls blend depth toward the surface. Default 8%. |
-| `--sf-palette-mix-200` | PUBLIC-ADVANCED | knob | palette | `20%` | Color-mix percentage for palette step 200. Controls blend depth toward the surface. Default 20%. |
-| `--sf-palette-mix-300` | PUBLIC-ADVANCED | knob | palette | `40%` | Color-mix percentage for palette step 300. Controls blend depth toward the surface. Default 40%. |
-| `--sf-palette-mix-400` | PUBLIC-ADVANCED | knob | palette | `65%` | Color-mix percentage for palette step 400 (near-mid tint). Controls blend depth. Default 65%. |
-| `--sf-palette-mix-50` | PUBLIC-ADVANCED | knob | palette | `4%` | Color-mix percentage for the lightest palette step (50). Controls how far step 50 blends toward the surface. Default 4%. |
-| `--sf-palette-mix-600` | PUBLIC-ADVANCED | knob | palette | `82%` | Color-mix percentage for palette step 600 (near-mid shade). Controls blend depth toward the text color. Default 82%. |
-| `--sf-palette-mix-700` | PUBLIC-ADVANCED | knob | palette | `62%` | Color-mix percentage for palette step 700. Controls blend depth toward the text color. Default 62%. |
-| `--sf-palette-mix-800` | PUBLIC-ADVANCED | knob | palette | `38%` | Color-mix percentage for palette step 800 (dark shade). Controls blend depth toward text. Default 38%. |
-| `--sf-palette-mix-900` | PUBLIC-ADVANCED | knob | palette | `18%` | Color-mix percentage for palette step 900 (very dark shade). Controls blend depth toward text. Default 18%. |
-| `--sf-palette-mix-950` | PUBLIC-ADVANCED | knob | palette | `8%` | Color-mix percentage for the darkest palette step (950). Controls how far step 950 blends toward the text color. Default 8%. |
+| `--sf-palette-shade-l` | PUBLIC-ADVANCED | knob | palette | `0.1` | Absolute OKLCH lightness the shade steps (600-950) pull toward; sets how dark the darkest palette step can reach. Default 0.1. |
+| `--sf-palette-tint-l` | PUBLIC-ADVANCED | knob | palette | `0.97` | Absolute OKLCH lightness the tint steps (50-400) pull toward; sets how light the lightest palette step can reach. Default 0.97. |
 | `--sf-print-base-size` | PUBLIC-ADVANCED | knob | print | `11pt` | Base font size for @media print stylesheets. Default 11pt. Override on :root to adjust printed body text size. |
 | `--sf-print-page-margin` | PUBLIC-ADVANCED | knob | print | `2cm` | Page margin for printed output. Default 2cm. Maps to @page margin. |
 | `--sf-print-page-size` | PUBLIC-ADVANCED | knob | print | `a4` | Target paper size for printing. Default 'a4'. Maps to @page size. Common values: a4, letter, legal. |
@@ -582,11 +575,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | shadow | `calc(0.08 + var(--sf-is-dark) * 0.17)` | Base opacity for the entire shadow ramp. Auto-boosted in dark mode via --sf-is-dark. Override with calc() to preserve the adaptation: e.g. calc(0.12 + var(--sf-is-dark) * 0.17). |
 | `--sf-shadow-xl` | PUBLIC | consumption | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Extra-large shadow for modals, dialogs, and high-elevation sheets. |
 | `--sf-shadow-xs` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Extra-small shadow for barely-elevated elements (focused inputs, small chips). |
-| `--sf-size-l` | PUBLIC | knob | size | `3rem` | Large UI component height (~48px). Touch-friendly interactive elements. |
-| `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
-| `--sf-size-s` | PUBLIC | knob | size | `2rem` | Small UI component height (~32px). Compact buttons and input variants. |
-| `--sf-size-xl` | PUBLIC | knob | size | `3.5rem` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
-| `--sf-size-xs` | PUBLIC | knob | size | `1.5rem` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |
+| `--sf-size-l` | PUBLIC | consumption | size | `calc(3rem * var(--sf-density))` | Large UI component height (~48px). Touch-friendly interactive elements. |
+| `--sf-size-m` | PUBLIC | consumption | size | `calc(2.5rem * var(--sf-density))` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
+| `--sf-size-s` | PUBLIC | consumption | size | `calc(2rem * var(--sf-density))` | Small UI component height (~32px). Compact buttons and input variants. |
+| `--sf-size-xl` | PUBLIC | consumption | size | `calc(3.5rem * var(--sf-density))` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
+| `--sf-size-xs` | PUBLIC | consumption | size | `calc(1.5rem * var(--sf-density))` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |
 | `--sf-space-2xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` | 48px-equivalent spacing. Large section spacing. |
 | `--sf-space-2xs` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` | 4px-equivalent spacing. Tight inline gaps, icon-to-text padding. |
 | `--sf-space-3xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` | 64px-equivalent spacing. Extra-large layout gaps. |
@@ -756,14 +749,12 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-gap)` | Gap between switcher columns / rows. |
 | `--sf-switcher-threshold` | PUBLIC | knob | switcher | `30rem` | Inline-size threshold below which the switcher flips from horizontal to vertical. |
 
-### Macro tokens (34)
+### Macro tokens (32)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
 | `--sf-aspect` | PUBLIC | knob | aspect | `16 / 9` | Aspect ratio value for the .aspect-ratio macro. |
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
-| `--sf-corner-scoop-at` | PUBLIC | knob | corner | `100% 0` | Corner the .sf-corner-scoop mask cuts, as a radial-gradient origin (e.g. '100% 0' = top-right). Default: 100% 0. |
-| `--sf-corner-scoop-size` | PUBLIC | consumption | corner | `var(--sf-radius-2xl)` | Cut radius of the .sf-corner-scoop mask. Default: var(--sf-radius-2xl). |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
 | `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
@@ -795,20 +786,20 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (331)
+## Classes (325)
 
 ### Accessibility (8)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.no-motion` | PUBLIC | accessibility | Reduced motion. Token override helps components that read | Suppresses all animations and transitions within the subtree. Apply to a container to create a reduced-motion zone without relying on the system preference. |
-| `.sf-clickable-parent` | PUBLIC | accessibility | Clickable-parent | Makes the entire card or list-item clickable via an absolutely-positioned child overlay link. Apply to the container; place sf-clickable-parent__overlay on the <a>. |
-| `.sf-clickable-parent__overlay` | PUBLIC | accessibility | Clickable-parent | The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks. |
-| `.sf-focus-parent` | PUBLIC | accessibility | Focus-parent | Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>. |
-| `.sf-focus-shadow` | PUBLIC | accessibility | Focus-shadow opt-in | Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly. |
-| `.skip-link` | PUBLIC | accessibility | Skip link | Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>. |
-| `.sr-only` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
-| `.sr-only-focusable` | PUBLIC | accessibility | Screen-reader-only. Atomic contract: a partial override | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
+| `.no-motion` | PUBLIC | accessibility | — | Suppresses all animations and transitions within the subtree. Apply to a container to create a reduced-motion zone without relying on the system preference. |
+| `.sf-clickable-parent` | PUBLIC | accessibility | — | Makes the entire card or list-item clickable via an absolutely-positioned child overlay link. Apply to the container; place sf-clickable-parent__overlay on the <a>. |
+| `.sf-clickable-parent__overlay` | PUBLIC | accessibility | — | The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks. |
+| `.sf-focus-parent` | PUBLIC | accessibility | — | Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>. |
+| `.sf-focus-shadow` | PUBLIC | accessibility | — | Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly. |
+| `.skip-link` | PUBLIC | accessibility | — | Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>. |
+| `.sr-only` | PUBLIC | accessibility | — | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
+| `.sr-only-focusable` | PUBLIC | accessibility | — | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |
 
 ### Components (30)
 
@@ -855,179 +846,174 @@ and a short description. The machine-readable companion (with all columns) is
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-alternate` | PUBLIC | layout | Alternate (zigzag / media-object) | Zigzag / alternating two-column layout. Even children align image-left/text-right; odd children flip. Collapses to a single column below the breakpoint. |
-| `.sf-bento` | PUBLIC | layout | .sf-card | Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid. |
-| `.sf-bento--2` | PUBLIC | layout | Bento grid | Bento grid variant with a 2-column base layout. |
-| `.sf-bento--3` | PUBLIC | layout | Bento grid | Bento grid variant with a 3-column base layout. |
-| `.sf-bento--6` | PUBLIC | layout | Bento grid | Bento grid variant with a 6-column base layout. |
-| `.sf-bento--compact` | PUBLIC | layout | Bento grid | Bento grid variant with shorter default row height. |
-| `.sf-bento--tall` | PUBLIC | layout | Bento grid | Bento grid variant with taller default row height. |
-| `.sf-bento-featured` | PUBLIC | layout | Bento grid | Span modifier for a bento item: takes up 2×2 cells (featured hero placement). |
-| `.sf-bento-full` | PUBLIC | layout | Bento grid | Span modifier for a bento item: stretches across all columns (full-width banner). |
-| `.sf-bento-tall` | PUBLIC | layout | Bento grid | Span modifier for a bento item: doubles the row height (tall card). |
-| `.sf-bento-wide` | PUBLIC | layout | Bento grid | Span modifier for a bento item: spans 2 columns (wide card). |
+| `.sf-alternate` | PUBLIC | layout | — | Zigzag / alternating two-column layout. Even children align image-left/text-right; odd children flip. Collapses to a single column below the breakpoint. |
+| `.sf-bento` | PUBLIC | layout | — | Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid. |
+| `.sf-bento--2` | PUBLIC | layout | — | Bento grid variant with a 2-column base layout. |
+| `.sf-bento--3` | PUBLIC | layout | — | Bento grid variant with a 3-column base layout. |
+| `.sf-bento--6` | PUBLIC | layout | — | Bento grid variant with a 6-column base layout. |
+| `.sf-bento--row-compact` | PUBLIC | layout | — | Bento grid variant with shorter default row height. |
+| `.sf-bento--row-tall` | PUBLIC | layout | — | Bento grid variant with taller default row height. |
+| `.sf-bento-featured` | PUBLIC | layout | — | Span modifier for a bento item: takes up 2×2 cells (featured hero placement). |
+| `.sf-bento-full` | PUBLIC | layout | — | Span modifier for a bento item: stretches across all columns (full-width banner). |
+| `.sf-bento-tall` | PUBLIC | layout | — | Span modifier for a bento item: doubles the row height (tall card). |
+| `.sf-bento-wide` | PUBLIC | layout | — | Span modifier for a bento item: spans 2 columns (wide card). |
 | `.sf-bg-layer` | PUBLIC | layout | — | Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg-layer"> or as a wrapper with a nested > img / > video / > picture. |
-| `.sf-box` | PUBLIC | layout | Box | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
-| `.sf-breakout` | PUBLIC | layout | Content grid (breakout pattern) | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
-| `.sf-center` | PUBLIC | layout | .sf-card | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
-| `.sf-center--intrinsic` | PUBLIC | layout | Center | Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space). |
-| `.sf-cluster` | PUBLIC | layout | .sf-card | Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows. |
-| `.sf-cluster--2xl` | PUBLIC | layout | Cluster | Cluster variant with 2xl gap between items. |
-| `.sf-cluster--between` | PUBLIC | layout | Cluster | Cluster variant that distributes items with space-between alignment. |
-| `.sf-cluster--center` | PUBLIC | layout | Cluster | Cluster variant that centers the item row horizontally. |
-| `.sf-cluster--end` | PUBLIC | layout | Cluster | Cluster variant that aligns items to the inline end (right in LTR). |
-| `.sf-cluster--l` | PUBLIC | layout | Cluster | Cluster variant with large (l) gap between items. |
-| `.sf-cluster--m` | PUBLIC | layout | Cluster | Cluster variant with medium (m) gap between items. |
-| `.sf-cluster--no-wrap` | PUBLIC | layout | Cluster | Cluster variant that prevents item wrapping (single-line row). |
-| `.sf-cluster--s` | PUBLIC | layout | Cluster | Cluster variant with small (s) gap between items. |
-| `.sf-cluster--xl` | PUBLIC | layout | Cluster | Cluster variant with xl gap between items. |
-| `.sf-cluster--xs` | PUBLIC | layout | Cluster | Cluster variant with xs gap between items. |
-| `.sf-container` | PUBLIC | layout | Section | Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m. |
-| `.sf-container--full` | PUBLIC | layout | Container | Container variant that spans the full viewport width (no max-width cap). |
-| `.sf-container--narrow` | PUBLIC | layout | Container | Container variant with a narrower max-width (--sf-container-s). Use for single-column prose and forms. |
-| `.sf-container--prose` | PUBLIC | layout | Container | Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content. |
-| `.sf-container--wide` | PUBLIC | layout | Container | Container variant with a wider max-width (--sf-container-l). Use for dashboards and wide media. |
-| `.sf-content-grid` | PUBLIC | layout | Content grid (breakout pattern) | Holy-grail content grid with named areas: full-bleed, popout, and content columns. Use sf-breakout on children to escape the content column. |
-| `.sf-cover` | PUBLIC | layout | .sf-card | Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections. |
-| `.sf-cover__center` | PUBLIC | layout | Cover | The centered focal element inside an sf-cover. Stays vertically centered even when the cover content is shorter than the viewport. |
-| `.sf-cover--max` | PUBLIC | layout | Cover | Cover variant that uses a max-height instead of min-height for the viewport constraint. |
-| `.sf-cover--min` | PUBLIC | layout | Cover | Cover variant that reduces the minimum height to half a viewport. |
-| `.sf-cover--padding-l` | PUBLIC | layout | Cover | Cover variant with large vertical padding above and below the centered content. |
-| `.sf-cover--padding-s` | PUBLIC | layout | Cover | Cover variant with small vertical padding above and below the centered content. |
-| `.sf-cq` | PUBLIC | layout | Container query context | Assigns an inline-size container context to any element. Children can then use @container rules or container-query-aware tokens. |
-| `.sf-divide` | PUBLIC | layout | Divide | Rules between direct children (a border on each child after the first), reusing .sf-divider's tokens — no per-gap markup needed. |
-| `.sf-divide--vertical` | PUBLIC | layout | Divide | Vertical rules between direct children (inline-start borders), for row/horizontal layouts. |
-| `.sf-divider` | PUBLIC | layout | Divider | Horizontal rule (divider line). Uses --sf-divider-* tokens for color, width, and style. Modifiers change dash style or orientation. |
-| `.sf-divider--dashed` | PUBLIC | layout | Divider | Divider variant with a dashed stroke. |
-| `.sf-divider--dotted` | PUBLIC | layout | Divider | Divider variant with a dotted stroke. |
-| `.sf-divider--gradient` | PUBLIC | layout | Divider | Divider variant rendered as a gradient that fades to transparent at both ends. |
-| `.sf-divider--soft` | PUBLIC | layout | Divider | Divider variant with reduced opacity (subtle separator). |
-| `.sf-divider--strong` | PUBLIC | layout | Divider | Divider variant with stronger/darker color for a more prominent separator. |
-| `.sf-divider--vertical` | PUBLIC | layout | Divider | Divider variant rendered as a vertical line. Use inside flex or grid containers. |
-| `.sf-equal` | PUBLIC | layout | Equal columns (intrinsically responsive) | Flowing CSS multi-column layout (not a grid) — content distributes across columns like a newspaper instead of sitting in fixed cells. Reach for .sf-grid/.sf-grid--fit for discrete grid cells instead. |
-| `.sf-equal--2` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 2. |
-| `.sf-equal--3` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 3. |
-| `.sf-equal--4` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 4. |
-| `.sf-equal--6` | PUBLIC | layout | Equal columns (intrinsically responsive) | Equal-columns variant locked to column-count: 6. |
+| `.sf-box` | PUBLIC | layout | — | Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room. |
+| `.sf-breakout` | PUBLIC | layout | — | Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose. |
+| `.sf-center` | PUBLIC | layout | — | Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content. |
+| `.sf-center--intrinsic` | PUBLIC | layout | — | Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space). |
+| `.sf-cluster` | PUBLIC | layout | — | Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows. |
+| `.sf-cluster--2xl` | PUBLIC | layout | — | Cluster variant with 2xl gap between items. |
+| `.sf-cluster--between` | PUBLIC | layout | — | Cluster variant that distributes items with space-between alignment. |
+| `.sf-cluster--center` | PUBLIC | layout | — | Cluster variant that centers the item row horizontally. |
+| `.sf-cluster--end` | PUBLIC | layout | — | Cluster variant that aligns items to the inline end (right in LTR). |
+| `.sf-cluster--l` | PUBLIC | layout | — | Cluster variant with large (l) gap between items. |
+| `.sf-cluster--m` | PUBLIC | layout | — | Cluster variant with medium (m) gap between items. |
+| `.sf-cluster--no-wrap` | PUBLIC | layout | — | Cluster variant that prevents item wrapping (single-line row). |
+| `.sf-cluster--s` | PUBLIC | layout | — | Cluster variant with small (s) gap between items. |
+| `.sf-cluster--xl` | PUBLIC | layout | — | Cluster variant with xl gap between items. |
+| `.sf-cluster--xs` | PUBLIC | layout | — | Cluster variant with xs gap between items. |
+| `.sf-container` | PUBLIC | layout | — | Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m. |
+| `.sf-container--full` | PUBLIC | layout | — | Container variant that spans the full viewport width (no max-width cap). |
+| `.sf-container--narrow` | PUBLIC | layout | — | Container variant with a narrower max-width (--sf-container-s). Use for single-column prose and forms. |
+| `.sf-container--prose` | PUBLIC | layout | — | Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content. |
+| `.sf-container--wide` | PUBLIC | layout | — | Container variant with a wider max-width (--sf-container-l). Use for dashboards and wide media. |
+| `.sf-content-grid` | PUBLIC | layout | — | Holy-grail content grid with named areas: full-bleed, popout, and content columns. Use sf-breakout on children to escape the content column. |
+| `.sf-cover` | PUBLIC | layout | — | Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections. |
+| `.sf-cover__center` | PUBLIC | layout | — | The centered focal element inside an sf-cover. Stays vertically centered even when the cover content is shorter than the viewport. |
+| `.sf-cover--max` | PUBLIC | layout | — | Cover variant that uses a max-height instead of min-height for the viewport constraint. |
+| `.sf-cover--min` | PUBLIC | layout | — | Cover variant that reduces the minimum height to half a viewport. |
+| `.sf-cover--padding-l` | PUBLIC | layout | — | Cover variant with large vertical padding above and below the centered content. |
+| `.sf-cover--padding-s` | PUBLIC | layout | — | Cover variant with small vertical padding above and below the centered content. |
+| `.sf-cq` | PUBLIC | layout | — | Assigns an inline-size container context to any element. Children can then use @container rules or container-query-aware tokens. |
+| `.sf-divide` | PUBLIC | layout | — | Rules between direct children (a border on each child after the first), reusing .sf-divider's tokens — no per-gap markup needed. |
+| `.sf-divide--vertical` | PUBLIC | layout | — | Vertical rules between direct children (inline-start borders), for row/horizontal layouts. |
+| `.sf-divider` | PUBLIC | layout | — | Horizontal rule (divider line). Uses --sf-divider-* tokens for color, width, and style. Modifiers change dash style or orientation. |
+| `.sf-divider--dashed` | PUBLIC | layout | — | Divider variant with a dashed stroke. |
+| `.sf-divider--dotted` | PUBLIC | layout | — | Divider variant with a dotted stroke. |
+| `.sf-divider--gradient` | PUBLIC | layout | — | Divider variant rendered as a gradient that fades to transparent at both ends. |
+| `.sf-divider--soft` | PUBLIC | layout | — | Divider variant with reduced opacity (subtle separator). |
+| `.sf-divider--strong` | PUBLIC | layout | — | Divider variant with stronger/darker color for a more prominent separator. |
+| `.sf-divider--vertical` | PUBLIC | layout | — | Divider variant rendered as a vertical line. Use inside flex or grid containers. |
+| `.sf-equal` | PUBLIC | layout | — | Flowing CSS multi-column layout (not a grid) — content distributes across columns like a newspaper instead of sitting in fixed cells. Reach for .sf-grid/.sf-grid--fit for discrete grid cells instead. |
+| `.sf-equal--2` | PUBLIC | layout | — | Equal-columns variant locked to column-count: 2. |
+| `.sf-equal--3` | PUBLIC | layout | — | Equal-columns variant locked to column-count: 3. |
+| `.sf-equal--4` | PUBLIC | layout | — | Equal-columns variant locked to column-count: 4. |
+| `.sf-equal--6` | PUBLIC | layout | — | Equal-columns variant locked to column-count: 6. |
 | `.sf-fluid-cq` | PUBLIC | layout | — | .sf-fluid-cq: opt a subtree into a CONTAINER-relative fluid scale (issue #497). By default --sf-text-* / --sf-space-* interpolate against 100vw (the viewport); inside .sf-fluid-cq they interpolate against 100cqi (this box's inline size), so type + spacing track the container… |
-| `.sf-frame` | PUBLIC | layout | .sf-card | Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9. |
-| `.sf-frame--3-2` | PUBLIC | layout | Frame | Frame variant locked to a 3:2 aspect ratio. |
-| `.sf-frame--4-3` | PUBLIC | layout | Frame | Frame variant locked to a 4:3 aspect ratio. |
-| `.sf-frame--cinema` | PUBLIC | layout | Frame | Frame variant locked to a cinematic 21:9 aspect ratio. |
-| `.sf-frame--golden` | PUBLIC | layout | Frame | Frame variant locked to the golden ratio (1.618:1). |
-| `.sf-frame--portrait` | PUBLIC | layout | Frame | Frame variant locked to a portrait 2:3 aspect ratio. |
-| `.sf-frame--square` | PUBLIC | layout | Frame | Frame variant locked to a square 1:1 aspect ratio. |
-| `.sf-frame--video` | PUBLIC | layout | Frame | Frame variant locked to the standard 16:9 video aspect ratio. |
-| `.sf-full-bleed` | PUBLIC | layout | Content grid (breakout pattern) | Forces an element to span the full viewport width, breaking out of any centered container. Use for full-bleed images and section backgrounds. |
-| `.sf-gap` | PUBLIC | layout | Gap | Injects the default --sf-gap into an existing flex or grid container without imposing display:flex itself. Use when the parent is already a flex or grid. |
-| `.sf-gap--2xl` | PUBLIC | layout | Gap | Gap injection variant with 2xl gap value. |
-| `.sf-gap--l` | PUBLIC | layout | Gap | Gap injection variant with large (l) gap value. |
-| `.sf-gap--m` | PUBLIC | layout | Gap | Gap injection variant with medium (m) gap value. |
-| `.sf-gap--s` | PUBLIC | layout | Gap | Gap injection variant with small (s) gap value. |
-| `.sf-gap--xl` | PUBLIC | layout | Gap | Gap injection variant with xl gap value. |
-| `.sf-gap--xs` | PUBLIC | layout | Gap | Gap injection variant with xs gap value. |
-| `.sf-grid` | PUBLIC | layout | .sf-card | Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col. |
-| `.sf-grid--2xl` | PUBLIC | layout | Grid (auto) | Grid variant with a 2xl minimum column width. |
-| `.sf-grid--dense` | PUBLIC | layout | Grid (auto) | Grid variant with grid-auto-flow: dense, allowing the grid to fill holes created by span modifiers. |
-| `.sf-grid--fit` | PUBLIC | layout | Grid (auto) | Grid variant that switches from auto-fill to auto-fit, collapsing empty columns. |
-| `.sf-grid--l` | PUBLIC | layout | Grid (auto) | Grid variant with a large (l) minimum column width. |
-| `.sf-grid--m` | PUBLIC | layout | Grid (auto) | Grid variant with a medium (m) minimum column width. |
-| `.sf-grid--s` | PUBLIC | layout | Grid (auto) | Grid variant with a small (s) minimum column width. |
-| `.sf-grid--xl` | PUBLIC | layout | Grid (auto) | Grid variant with an xl minimum column width. |
-| `.sf-grid--xs` | PUBLIC | layout | Grid (auto) | Grid variant with an xs minimum column width. |
-| `.sf-grid-cols-1` | PUBLIC | layout | Single-column grid | Single-column layout (forces all children to one column). |
-| `.sf-grid-cols-1-2` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 1fr, second takes 2fr. Container-query responsive. |
-| `.sf-grid-cols-1-3` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 1fr, second takes 3fr. Container-query responsive. |
-| `.sf-grid-cols-2` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 2-column fixed grid. Uses container queries to collapse to one column on narrow containers. |
-| `.sf-grid-cols-2-1` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 2fr, second takes 1fr. Container-query responsive. |
-| `.sf-grid-cols-3` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 3-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-grid-cols-3-1` | PUBLIC | layout | Ratio grids | Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive. |
-| `.sf-grid-cols-4` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 4-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-grid-cols-6` | PUBLIC | layout | Fixed column grids (container-query responsive) | Responsive 6-column fixed grid. Collapses progressively on narrow containers. |
-| `.sf-grid-flex` | PUBLIC | layout | .sf-card | Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. |
-| `.sf-grid-flex--2xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a 2xl minimum item width. |
-| `.sf-grid-flex--center` | PUBLIC | layout | Grid (flex) | Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching. |
-| `.sf-grid-flex--l` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a large (l) minimum item width. |
-| `.sf-grid-flex--m` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a medium (m) minimum item width. |
-| `.sf-grid-flex--s` | PUBLIC | layout | Grid (flex) | Grid-flex variant with a small (s) minimum item width. |
-| `.sf-grid-flex--xl` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xl minimum item width. |
-| `.sf-grid-flex--xs` | PUBLIC | layout | Grid (flex) | Grid-flex variant with an xs minimum item width. |
+| `.sf-frame` | PUBLIC | layout | — | Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9. |
+| `.sf-frame--3-2` | PUBLIC | layout | — | Frame variant locked to a 3:2 aspect ratio. |
+| `.sf-frame--4-3` | PUBLIC | layout | — | Frame variant locked to a 4:3 aspect ratio. |
+| `.sf-frame--cinema` | PUBLIC | layout | — | Frame variant locked to a cinematic 21:9 aspect ratio. |
+| `.sf-frame--golden` | PUBLIC | layout | — | Frame variant locked to the golden ratio (1.618:1). |
+| `.sf-frame--portrait` | PUBLIC | layout | — | Frame variant locked to a portrait 2:3 aspect ratio. |
+| `.sf-frame--square` | PUBLIC | layout | — | Frame variant locked to a square 1:1 aspect ratio. |
+| `.sf-frame--video` | PUBLIC | layout | — | Frame variant locked to the standard 16:9 video aspect ratio. |
+| `.sf-full-bleed` | PUBLIC | layout | — | Forces an element to span the full viewport width, breaking out of any centered container. Use for full-bleed images and section backgrounds. |
+| `.sf-gap` | PUBLIC | layout | — | Injects the default --sf-gap into an existing flex or grid container without imposing display:flex itself. Use when the parent is already a flex or grid. |
+| `.sf-gap--2xl` | PUBLIC | layout | — | Gap injection variant with 2xl gap value. |
+| `.sf-gap--l` | PUBLIC | layout | — | Gap injection variant with large (l) gap value. |
+| `.sf-gap--m` | PUBLIC | layout | — | Gap injection variant with medium (m) gap value. |
+| `.sf-gap--s` | PUBLIC | layout | — | Gap injection variant with small (s) gap value. |
+| `.sf-gap--xl` | PUBLIC | layout | — | Gap injection variant with xl gap value. |
+| `.sf-gap--xs` | PUBLIC | layout | — | Gap injection variant with xs gap value. |
+| `.sf-grid` | PUBLIC | layout | — | Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col. |
+| `.sf-grid--2xl` | PUBLIC | layout | — | Grid variant with a 2xl minimum column width. |
+| `.sf-grid--dense` | PUBLIC | layout | — | Grid variant with grid-auto-flow: dense, allowing the grid to fill holes created by span modifiers. |
+| `.sf-grid--fit` | PUBLIC | layout | — | Grid variant that switches from auto-fill to auto-fit, collapsing empty columns. |
+| `.sf-grid--l` | PUBLIC | layout | — | Grid variant with a large (l) minimum column width. |
+| `.sf-grid--m` | PUBLIC | layout | — | Grid variant with a medium (m) minimum column width. |
+| `.sf-grid--s` | PUBLIC | layout | — | Grid variant with a small (s) minimum column width. |
+| `.sf-grid--xl` | PUBLIC | layout | — | Grid variant with an xl minimum column width. |
+| `.sf-grid--xs` | PUBLIC | layout | — | Grid variant with an xs minimum column width. |
+| `.sf-grid-cols-1` | PUBLIC | layout | — | Single-column layout (forces all children to one column). |
+| `.sf-grid-cols-1-2` | PUBLIC | layout | — | Two-column ratio grid: first child takes 1fr, second takes 2fr. Container-query responsive. |
+| `.sf-grid-cols-1-3` | PUBLIC | layout | — | Two-column ratio grid: first child takes 1fr, second takes 3fr. Container-query responsive. |
+| `.sf-grid-cols-2` | PUBLIC | layout | — | Responsive 2-column fixed grid. Uses container queries to collapse to one column on narrow containers. |
+| `.sf-grid-cols-2-1` | PUBLIC | layout | — | Two-column ratio grid: first child takes 2fr, second takes 1fr. Container-query responsive. |
+| `.sf-grid-cols-3` | PUBLIC | layout | — | Responsive 3-column fixed grid. Collapses progressively on narrow containers. |
+| `.sf-grid-cols-3-1` | PUBLIC | layout | — | Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive. |
+| `.sf-grid-cols-4` | PUBLIC | layout | — | Responsive 4-column fixed grid. Collapses progressively on narrow containers. |
+| `.sf-grid-cols-6` | PUBLIC | layout | — | Responsive 6-column fixed grid. Collapses progressively on narrow containers. |
+| `.sf-grid-flex` | PUBLIC | layout | — | Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center. |
+| `.sf-grid-flex--2xl` | PUBLIC | layout | — | Grid-flex variant with a 2xl minimum item width. |
+| `.sf-grid-flex--center` | PUBLIC | layout | — | Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching. |
+| `.sf-grid-flex--l` | PUBLIC | layout | — | Grid-flex variant with a large (l) minimum item width. |
+| `.sf-grid-flex--m` | PUBLIC | layout | — | Grid-flex variant with a medium (m) minimum item width. |
+| `.sf-grid-flex--s` | PUBLIC | layout | — | Grid-flex variant with a small (s) minimum item width. |
+| `.sf-grid-flex--xl` | PUBLIC | layout | — | Grid-flex variant with an xl minimum item width. |
+| `.sf-grid-flex--xs` | PUBLIC | layout | — | Grid-flex variant with an xs minimum item width. |
 | `.sf-header--l` | PUBLIC | layout | — | Header block padding at the l step (--sf-space-l). |
 | `.sf-header--m` | PUBLIC | layout | — | Header block padding at the m step (--sf-space-m). |
 | `.sf-header--s` | PUBLIC | layout | — | Header block padding at the s step (--sf-space-s). |
 | `.sf-header--xl` | PUBLIC | layout | — | Header block padding at the xl step (--sf-space-xl). |
 | `.sf-header--xs` | PUBLIC | layout | — | Header block padding at the xs step (--sf-space-xs). |
-| `.sf-icon` | PUBLIC | layout | Icon | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
-| `.sf-icon--2xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
-| `.sf-icon--boxed` | PUBLIC | layout | Icon | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |
-| `.sf-icon--l` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-l (large). |
-| `.sf-icon--m` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-m (medium, same as base sf-icon). |
-| `.sf-icon--s` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-s (small). |
-| `.sf-icon--xl` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-xl (extra-large). |
-| `.sf-icon--xs` | PUBLIC | layout | Icon | Icon variant sized to --sf-icon-xs (extra-small). |
-| `.sf-imposter` | PUBLIC | layout | Imposter | Absolutely positions an element at the center of its nearest positioned ancestor. Use for overlays, badges, and floating labels. |
-| `.sf-imposter--contain` | PUBLIC | layout | Imposter | Imposter variant that clamps the element within the bounds of its parent using overflow:hidden on the parent. |
-| `.sf-imposter--fixed` | PUBLIC | layout | Imposter | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
+| `.sf-icon` | PUBLIC | layout | — | Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text. |
+| `.sf-icon--2xl` | PUBLIC | layout | — | Icon variant sized to --sf-icon-2xl (extra-extra-large). |
+| `.sf-icon--boxed` | PUBLIC | layout | — | Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons. |
+| `.sf-icon--l` | PUBLIC | layout | — | Icon variant sized to --sf-icon-l (large). |
+| `.sf-icon--m` | PUBLIC | layout | — | Icon variant sized to --sf-icon-m (medium, same as base sf-icon). |
+| `.sf-icon--s` | PUBLIC | layout | — | Icon variant sized to --sf-icon-s (small). |
+| `.sf-icon--xl` | PUBLIC | layout | — | Icon variant sized to --sf-icon-xl (extra-large). |
+| `.sf-icon--xs` | PUBLIC | layout | — | Icon variant sized to --sf-icon-xs (extra-small). |
+| `.sf-imposter` | PUBLIC | layout | — | Absolutely positions an element at the center of its nearest positioned ancestor. Use for overlays, badges, and floating labels. |
+| `.sf-imposter--contain` | PUBLIC | layout | — | Imposter variant that clamps the element within the bounds of its parent using overflow:hidden on the parent. |
+| `.sf-imposter--fixed` | PUBLIC | layout | — | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
 | `.sf-overlay` | PUBLIC | layout | — | Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims. |
-| `.sf-pancake` | PUBLIC | layout | Pancake (sticky footer) | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
-| `.sf-reel` | PUBLIC | layout | .sf-card | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
-| `.sf-section` | PUBLIC | layout | Section | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
-| `.sf-section--2xl` | PUBLIC | layout | Section | Section variant with 2xl vertical padding. |
-| `.sf-section--collapse` | PUBLIC | layout | Collapse modifier | Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks). |
-| `.sf-section--guttered` | PUBLIC | layout | Section | Adds horizontal page gutters directly to a section — use when you want to skip a separate .sf-container wrapper (gutterless layout inside section). Neutralises container gutter to prevent double padding. |
-| `.sf-section--l` | PUBLIC | layout | Section | Section variant with large (l) vertical padding. |
-| `.sf-section--m` | PUBLIC | layout | Section | Section variant with medium (m) vertical padding. |
-| `.sf-section--s` | PUBLIC | layout | Section | Section variant with small (s) vertical padding. |
-| `.sf-section--xl` | PUBLIC | layout | Section | Section variant with xl vertical padding. |
-| `.sf-section--xs` | PUBLIC | layout | Section | Section variant with xs vertical padding. |
-| `.sf-section-group` | PUBLIC | layout | Section | Groups adjacent sf-section elements so their combined padding collapses correctly at the top and bottom edges. |
-| `.sf-sidebar` | PUBLIC | layout | .sf-card | Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left. |
-| `.sf-sidebar--narrow` | PUBLIC | layout | Sidebar | Sidebar variant with a narrower sidebar column. |
-| `.sf-sidebar--right` | PUBLIC | layout | Sidebar | Sidebar variant with the sidebar on the right (second child becomes the sidebar). |
-| `.sf-sidebar--wide` | PUBLIC | layout | Sidebar | Sidebar variant with a wider sidebar column. |
-| `.sf-stack` | PUBLIC | layout | .sf-card | Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm. |
-| `.sf-stack--2xl` | PUBLIC | layout | Stack | Stack variant with 2xl gap between children. |
-| `.sf-stack--center` | PUBLIC | layout | Stack | Stack variant that centers children on the cross axis. |
-| `.sf-stack--end` | PUBLIC | layout | Stack | Stack variant that aligns children to the cross-axis end (right in LTR). |
-| `.sf-stack--l` | PUBLIC | layout | Stack | Stack variant with large (l) gap between children. |
-| `.sf-stack--m` | PUBLIC | layout | Stack | Stack variant with medium (m) gap between children. |
-| `.sf-stack--s` | PUBLIC | layout | Stack | Stack variant with small (s) gap between children. |
-| `.sf-stack--stretch` | PUBLIC | layout | Stack | Stack variant that stretches children to fill the full available width. |
-| `.sf-stack--xl` | PUBLIC | layout | Stack | Stack variant with xl gap between children. |
-| `.sf-stack--xs` | PUBLIC | layout | Stack | Stack variant with xs gap between children. |
-| `.sf-subgrid` | PUBLIC | layout | Subgrid | Passes the parent grid columns through to children via subgrid. Place on a grid item that should align its own children to the outer grid columns. |
-| `.sf-subgrid-rows` | PUBLIC | layout | Subgrid | Passes the parent grid rows through to children via subgrid. Place on a grid item that should align its own children to the outer grid rows. |
-| `.sf-switcher` | PUBLIC | layout | .sf-card | Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold. |
-| `.sf-switcher--no-wrap` | PUBLIC | layout | Switcher | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
-| `.sf-switcher--vertical` | PUBLIC | layout | Switcher | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
+| `.sf-pancake` | PUBLIC | layout | — | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
+| `.sf-reel` | PUBLIC | layout | — | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
+| `.sf-section` | PUBLIC | layout | — | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
+| `.sf-section--2xl` | PUBLIC | layout | — | Section variant with 2xl vertical padding. |
+| `.sf-section--collapse` | PUBLIC | layout | — | Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks). |
+| `.sf-section--guttered` | PUBLIC | layout | — | Adds horizontal page gutters directly to a section — use when you want to skip a separate .sf-container wrapper (gutterless layout inside section). Neutralises container gutter to prevent double padding. |
+| `.sf-section--l` | PUBLIC | layout | — | Section variant with large (l) vertical padding. |
+| `.sf-section--m` | PUBLIC | layout | — | Section variant with medium (m) vertical padding. |
+| `.sf-section--s` | PUBLIC | layout | — | Section variant with small (s) vertical padding. |
+| `.sf-section--xl` | PUBLIC | layout | — | Section variant with xl vertical padding. |
+| `.sf-section--xs` | PUBLIC | layout | — | Section variant with xs vertical padding. |
+| `.sf-section-group` | PUBLIC | layout | — | Groups adjacent sf-section elements so their combined padding collapses correctly at the top and bottom edges. |
+| `.sf-sidebar` | PUBLIC | layout | — | Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left. |
+| `.sf-sidebar--narrow` | PUBLIC | layout | — | Sidebar variant with a narrower sidebar column. |
+| `.sf-sidebar--right` | PUBLIC | layout | — | Sidebar variant with the sidebar on the right (second child becomes the sidebar). |
+| `.sf-sidebar--wide` | PUBLIC | layout | — | Sidebar variant with a wider sidebar column. |
+| `.sf-stack` | PUBLIC | layout | — | Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm. |
+| `.sf-stack--2xl` | PUBLIC | layout | — | Stack variant with 2xl gap between children. |
+| `.sf-stack--center` | PUBLIC | layout | — | Stack variant that centers children on the cross axis. |
+| `.sf-stack--end` | PUBLIC | layout | — | Stack variant that aligns children to the cross-axis end (right in LTR). |
+| `.sf-stack--l` | PUBLIC | layout | — | Stack variant with large (l) gap between children. |
+| `.sf-stack--m` | PUBLIC | layout | — | Stack variant with medium (m) gap between children. |
+| `.sf-stack--s` | PUBLIC | layout | — | Stack variant with small (s) gap between children. |
+| `.sf-stack--stretch` | PUBLIC | layout | — | Stack variant that stretches children to fill the full available width. |
+| `.sf-stack--xl` | PUBLIC | layout | — | Stack variant with xl gap between children. |
+| `.sf-stack--xs` | PUBLIC | layout | — | Stack variant with xs gap between children. |
+| `.sf-subgrid` | PUBLIC | layout | — | Passes the parent grid columns through to children via subgrid. Place on a grid item that should align its own children to the outer grid columns. |
+| `.sf-subgrid-rows` | PUBLIC | layout | — | Passes the parent grid rows through to children via subgrid. Place on a grid item that should align its own children to the outer grid rows. |
+| `.sf-switcher` | PUBLIC | layout | — | Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold. |
+| `.sf-switcher--no-wrap` | PUBLIC | layout | — | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
+| `.sf-switcher--vertical` | PUBLIC | layout | — | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (58)
+### Macro classes (53)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-aspect` | PUBLIC | macro | Aspect | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
-| `.sf-content-auto` | PUBLIC | macro | Content visibility | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
-| `.sf-corner-scoop` | PUBLIC | macro | — | Concave "scooped" corner cut with a radial-gradient mask; defaults to the top-right corner (--sf-corner-scoop-at). Add a placement modifier to move it. |
-| `.sf-corner-scoop--bottom-left` | PUBLIC | macro | — | Places the concave corner scoop at the bottom-left corner. |
-| `.sf-corner-scoop--bottom-right` | PUBLIC | macro | — | Places the concave corner scoop at the bottom-right corner. |
-| `.sf-corner-scoop--top-left` | PUBLIC | macro | — | Places the concave corner scoop at the top-left corner. |
-| `.sf-corner-scoop--top-right` | PUBLIC | macro | — | Places the concave corner scoop at the top-right corner. |
+| `.sf-aspect` | PUBLIC | macro | — | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
+| `.sf-content-auto` | PUBLIC | macro | — | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s). |
 | `.sf-drop-shadow-xl` | PUBLIC | macro | — | Extra-large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xl). |
 | `.sf-drop-shadow-xs` | PUBLIC | macro | — | Extra-small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xs). |
-| `.sf-equal-height` | PUBLIC | macro | Equal height | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
-| `.sf-flow` | PUBLIC | macro | Flow | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
-| `.sf-line-clamp-2` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
-| `.sf-line-clamp-3` | PUBLIC | macro | Truncate / line-clamp | Clamps text to 3 lines with an ellipsis. Applies -webkit-line-clamp: 3. |
-| `.sf-line-clamp-N` | PUBLIC | macro | Truncate / line-clamp | Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines. |
-| `.sf-link--reverse` | PUBLIC | macro | Link variants | Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse. |
-| `.sf-link--subtle` | PUBLIC | macro | Link variants | Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover. |
-| `.sf-link-external` | PUBLIC | macro | External link indication | Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain. |
-| `.sf-no-tap-highlight` | PUBLIC | macro | No tap highlight | Removes the mobile tap highlight color (-webkit-tap-highlight-color: transparent). Use on interactive elements with a custom active state. |
-| `.sf-not-prose` | PUBLIC | macro | Prose | Opt-out of sf-prose typography styles within a prose block. Apply to an element that should keep default browser or component styles. |
-| `.sf-overflow-fade` | PUBLIC | macro | Overflow fade | Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container. |
+| `.sf-equal-height` | PUBLIC | macro | — | Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height. |
+| `.sf-flow` | PUBLIC | macro | — | Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers. |
+| `.sf-line-clamp-2` | PUBLIC | macro | — | Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2. |
+| `.sf-line-clamp-3` | PUBLIC | macro | — | Clamps text to 3 lines with an ellipsis. Applies -webkit-line-clamp: 3. |
+| `.sf-line-clamp-N` | PUBLIC | macro | — | Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines. |
+| `.sf-link--reverse` | PUBLIC | macro | — | Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse. |
+| `.sf-link--subtle` | PUBLIC | macro | — | Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover. |
+| `.sf-link-external` | PUBLIC | macro | — | Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain. |
+| `.sf-no-tap-highlight` | PUBLIC | macro | — | Removes the mobile tap highlight color (-webkit-tap-highlight-color: transparent). Use on interactive elements with a custom active state. |
+| `.sf-not-prose` | PUBLIC | macro | — | Opt-out of sf-prose typography styles within a prose block. Apply to an element that should keep default browser or component styles. |
+| `.sf-overflow-fade` | PUBLIC | macro | — | Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container. |
 | `.sf-overflow-fade--block` | PUBLIC | macro | — | Overflow fade variant: fades both the top and bottom edges simultaneously (block axis). |
 | `.sf-overflow-fade--bottom` | PUBLIC | macro | — | Overflow fade variant: fades the bottom (block-end) edge. |
 | `.sf-overflow-fade--inline` | PUBLIC | macro | — | Overflow fade variant: fades both the left and right edges simultaneously (inline axis). |
@@ -1040,65 +1026,65 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overlap--start` | PUBLIC | macro | — | Overlap recipe — pulls the element toward the inline-start (negative inline-start margin) to overlap horizontally. |
 | `.sf-overlap-host` | PUBLIC | macro | — | Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both. |
 | `.sf-prose` | PUBLIC | macro | LIST MARKER COLOUR (.sf-marker--*) | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
-| `.sf-scrim` | PUBLIC | macro | Scrim | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
-| `.sf-scrim__content` | PUBLIC | macro | Scrim | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |
-| `.sf-scrim--bottom` | PUBLIC | macro | Scrim | Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade). |
-| `.sf-scrim--full` | PUBLIC | macro | Scrim | Scrim variant that covers the entire surface with a uniform translucent overlay. |
-| `.sf-scrim--top` | PUBLIC | macro | Scrim | Scrim variant with the gradient emanating from the top edge (top-to-bottom fade). |
-| `.sf-scroll-shadow` | PUBLIC | macro | Scroll shadow | Adds inset box-shadows at the top and bottom of a scrollable container to indicate hidden overflow above or below. |
-| `.sf-scroll-snap` | PUBLIC | macro | Scroll snap | Enables CSS scroll-snap-type: x mandatory on a horizontal scroll container. Children should have scroll-snap-align. |
-| `.sf-surface` | PUBLIC | macro | Surface | Generic semantic surface: applies --sf-surface-color as the background and automatically sets a contrasting text color. Tone variants (--primary, --action, etc.) activate preset palettes. |
-| `.sf-surface--action` | PUBLIC | macro | Surface | Surface variant using the action color palette (button/CTA primary color). |
-| `.sf-surface--danger` | PUBLIC | macro | Surface | Surface variant using the danger status palette. |
-| `.sf-surface--info` | PUBLIC | macro | Surface | Surface variant using the info status palette. |
-| `.sf-surface--inverse` | PUBLIC | macro | Surface | Surface variant that inverts light/dark, creating an always-dark surface in light mode and always-light in dark mode. |
-| `.sf-surface--neutral` | PUBLIC | macro | Surface | Surface variant using the neutral palette (muted/gray). |
-| `.sf-surface--primary` | PUBLIC | macro | Surface | Surface variant using the primary brand color palette. |
-| `.sf-surface--secondary` | PUBLIC | macro | Surface | Surface variant using the secondary brand color palette. |
-| `.sf-surface--success` | PUBLIC | macro | Surface | Surface variant using the success status palette. |
-| `.sf-surface--tertiary` | PUBLIC | macro | Surface | Surface variant using the tertiary brand color palette. |
-| `.sf-surface--warning` | PUBLIC | macro | Surface | Surface variant using the warning status palette. |
+| `.sf-scrim` | PUBLIC | macro | — | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
+| `.sf-scrim__content` | PUBLIC | macro | — | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |
+| `.sf-scrim--bottom` | PUBLIC | macro | — | Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade). |
+| `.sf-scrim--full` | PUBLIC | macro | — | Scrim variant that covers the entire surface with a uniform translucent overlay. |
+| `.sf-scrim--top` | PUBLIC | macro | — | Scrim variant with the gradient emanating from the top edge (top-to-bottom fade). |
+| `.sf-scroll-shadow` | PUBLIC | macro | — | Adds inset box-shadows at the top and bottom of a scrollable container to indicate hidden overflow above or below. |
+| `.sf-scroll-snap` | PUBLIC | macro | — | Enables CSS scroll-snap-type: x mandatory on a horizontal scroll container. Children should have scroll-snap-align. |
+| `.sf-surface` | PUBLIC | macro | — | Generic semantic surface: applies --sf-surface-color as the background and automatically sets a contrasting text color. Tone variants (--primary, --action, etc.) activate preset palettes. |
+| `.sf-surface--action` | PUBLIC | macro | — | Surface variant using the action color palette (button/CTA primary color). |
+| `.sf-surface--danger` | PUBLIC | macro | — | Surface variant using the danger status palette. |
+| `.sf-surface--info` | PUBLIC | macro | — | Surface variant using the info status palette. |
+| `.sf-surface--inverse` | PUBLIC | macro | — | Surface variant that inverts light/dark, creating an always-dark surface in light mode and always-light in dark mode. |
+| `.sf-surface--neutral` | PUBLIC | macro | — | Surface variant using the neutral palette (muted/gray). |
+| `.sf-surface--primary` | PUBLIC | macro | — | Surface variant using the primary brand color palette. |
+| `.sf-surface--secondary` | PUBLIC | macro | — | Surface variant using the secondary brand color palette. |
+| `.sf-surface--success` | PUBLIC | macro | — | Surface variant using the success status palette. |
+| `.sf-surface--tertiary` | PUBLIC | macro | — | Surface variant using the tertiary brand color palette. |
+| `.sf-surface--warning` | PUBLIC | macro | — | Surface variant using the warning status palette. |
 | `.sf-surface-bg` | PUBLIC | macro | — | Named background surface preset (issue #523). Composes the --sf-surface-bg-* token set (see tokens.macros.css) into one reusable, named background: base colour + image/gradient/pattern, sizing, an optional overlay layered above the image, and an optional animation. Inert until… |
-| `.sf-tabular-nums` | PUBLIC | macro | Tabular figures | Forces tabular (monospaced) number rendering. Use on price tables, counters, and anywhere numbers need to align vertically across rows. |
-| `.sf-text-gradient` | PUBLIC | macro | Text gradient | Applies a brand gradient to inline text. Sets the background to the gradient, clips it to the text, and makes the text color transparent. |
-| `.sf-text-protect` | PUBLIC | macro | Text protect | Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image. |
-| `.sf-truncate` | PUBLIC | macro | Truncate / line-clamp | Single-line text overflow with ellipsis. Equivalent to the classic text-overflow: ellipsis trio (white-space nowrap, overflow hidden, text-overflow ellipsis). |
+| `.sf-tabular-nums` | PUBLIC | macro | — | Forces tabular (monospaced) number rendering. Use on price tables, counters, and anywhere numbers need to align vertically across rows. |
+| `.sf-text-gradient` | PUBLIC | macro | — | Applies a brand gradient to inline text. Sets the background to the gradient, clips it to the text, and makes the text color transparent. |
+| `.sf-text-protect` | PUBLIC | macro | — | Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image. |
+| `.sf-truncate` | PUBLIC | macro | — | Single-line text overflow with ellipsis. Equivalent to the classic text-overflow: ellipsis trio (white-space nowrap, overflow hidden, text-overflow ellipsis). |
 
 ### Motion / animation (22)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-color-pulse` | PUBLIC | motion | @property color animation | Applies a gentle color-pulse animation to draw attention to a dynamic value change (e.g. a counter updating). Scoped to users who have not requested reduced motion. |
-| `.sf-entrance--fade` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in as it enters the viewport. Animation tied to scroll progress via animation-timeline. |
-| `.sf-entrance--fade-down` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving downward into position. |
-| `.sf-entrance--fade-left` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving from the right toward the left. |
-| `.sf-entrance--fade-right` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving from the left toward the right. |
-| `.sf-entrance--fade-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while moving upward into position. |
-| `.sf-entrance--scale-up` | PUBLIC | motion | Scroll-driven entrances | Scroll-driven entrance: element fades in while scaling up from a slightly smaller size. |
+| `.sf-color-pulse` | PUBLIC | motion | — | Applies a gentle color-pulse animation to draw attention to a dynamic value change (e.g. a counter updating). Scoped to users who have not requested reduced motion. |
+| `.sf-entrance--fade` | PUBLIC | motion | — | Scroll-driven entrance: element fades in as it enters the viewport. Animation tied to scroll progress via animation-timeline. |
+| `.sf-entrance--fade-down` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving downward into position. |
+| `.sf-entrance--fade-left` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving from the right toward the left. |
+| `.sf-entrance--fade-right` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving from the left toward the right. |
+| `.sf-entrance--fade-up` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while moving upward into position. |
+| `.sf-entrance--scale-up` | PUBLIC | motion | — | Scroll-driven entrance: element fades in while scaling up from a slightly smaller size. |
 | `.sf-exit--fade` | PUBLIC | motion | — | Scroll-out exit animation: fades the element out in place (sf-fade-out). |
 | `.sf-exit--fade-down` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding downward (sf-slide-out-down). |
 | `.sf-exit--fade-left` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding to the left (sf-slide-out-left). |
 | `.sf-exit--fade-right` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding to the right (sf-slide-out-right). |
 | `.sf-exit--fade-up` | PUBLIC | motion | — | Scroll-out exit animation: fades out while sliding upward (sf-slide-out-up). |
 | `.sf-exit--scale-down` | PUBLIC | motion | — | Scroll-out exit animation: fades out while shrinking (sf-scale-down). |
-| `.sf-fade-in` | PUBLIC | motion | Animation presets | One-shot fade-in animation (opacity 0 → 1). Scoped to no-preference so it stops automatically for reduced-motion users. |
-| `.sf-fade-out` | PUBLIC | motion | Animation presets | One-shot fade-out animation (opacity 1 → 0). Scoped to no-preference. |
-| `.sf-scale-down` | PUBLIC | motion | Animation presets | One-shot scale-down animation (element shrinks from full size). Scoped to no-preference. |
-| `.sf-scale-up` | PUBLIC | motion | Animation presets | One-shot scale-up animation (element grows from smaller size). Scoped to no-preference. |
-| `.sf-slide-in-down` | PUBLIC | motion | Animation presets | One-shot slide-in-from-above animation. Scoped to no-preference. |
-| `.sf-slide-in-left` | PUBLIC | motion | Animation presets | One-shot slide-in-from-right animation (slides to the left). Scoped to no-preference. |
-| `.sf-slide-in-right` | PUBLIC | motion | Animation presets | One-shot slide-in-from-left animation (slides to the right). Scoped to no-preference. |
-| `.sf-slide-in-up` | PUBLIC | motion | Animation presets | One-shot slide-in-from-below animation. Scoped to no-preference. |
+| `.sf-fade-in` | PUBLIC | motion | — | One-shot fade-in animation (opacity 0 → 1). Scoped to no-preference so it stops automatically for reduced-motion users. |
+| `.sf-fade-out` | PUBLIC | motion | — | One-shot fade-out animation (opacity 1 → 0). Scoped to no-preference. |
+| `.sf-scale-down` | PUBLIC | motion | — | One-shot scale-down animation (element shrinks from full size). Scoped to no-preference. |
+| `.sf-scale-up` | PUBLIC | motion | — | One-shot scale-up animation (element grows from smaller size). Scoped to no-preference. |
+| `.sf-slide-in-down` | PUBLIC | motion | — | One-shot slide-in-from-above animation. Scoped to no-preference. |
+| `.sf-slide-in-left` | PUBLIC | motion | — | One-shot slide-in-from-right animation (slides to the left). Scoped to no-preference. |
+| `.sf-slide-in-right` | PUBLIC | motion | — | One-shot slide-in-from-left animation (slides to the right). Scoped to no-preference. |
+| `.sf-slide-in-up` | PUBLIC | motion | — | One-shot slide-in-from-below animation. Scoped to no-preference. |
 | `.sf-stagger` | PUBLIC | motion | — | Stagger — choreography, not the animation itself. Put .sf-stagger on a PARENT; every direct child gets an incrementing animation-delay so a time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence. Children WITHOUT an animation just carry an inert delay (no-op), so… |
 
 ### Print (4)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.no-print` | PUBLIC | print | Print visibility utilities | Hides the element in @media print. Use on sidebars, navigation bars, and decorative elements that should not appear on paper. |
-| `.print-color-exact` | PUBLIC | print | Opt-in colour treatment | Forces exact color rendering in print (print-color-adjust: exact). Use on charts and colored badges that must preserve their fill colors in print. |
-| `.print-no-color` | PUBLIC | print | Opt-in colour treatment | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
-| `.print-only` | PUBLIC | print | Print visibility utilities | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
+| `.no-print` | PUBLIC | print | — | Hides the element in @media print. Use on sidebars, navigation bars, and decorative elements that should not appear on paper. |
+| `.print-color-exact` | PUBLIC | print | — | Forces exact color rendering in print (print-color-adjust: exact). Use on charts and colored badges that must preserve their fill colors in print. |
+| `.print-no-color` | PUBLIC | print | — | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
+| `.print-only` | PUBLIC | print | — | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
 
 ### State classes (28)
 
@@ -1133,19 +1119,13 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-is-visible` | PUBLIC | state | VISIBILITY | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
 | `.sf-is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
 
-### Theme example (1)
-
-| Class | Tier | Kind | Group | Description |
-|---|---|---|---|---|
-| `.theme-transition` | PUBLIC | theme | 5. SMOOTH THEME-TRANSITION HELPER | Internal helper class used by the sf-theme-transition macro. Applies per-property transitions to registered color tokens during light/dark mode switches. |
-
 ### Theme utilities (3)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-theme-dark` | PUBLIC | theme | — | Forces dark colour scheme on the element and its subtree (class alias of [data-theme="dark"]). |
 | `.sf-theme-light` | PUBLIC | theme | — | Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]). |
-| `.sf-theme-transition` | PUBLIC | theme | OPT-IN THEME CROSS-FADE | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
+| `.sf-theme-transition` | PUBLIC | theme | — | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
 ### Utilities (31)
 

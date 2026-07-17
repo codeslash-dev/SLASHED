@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 755,
+      "tokens": 746,
       "by_tier": {
-        "PUBLIC": 695,
-        "PUBLIC-ADVANCED": 59,
+        "PUBLIC": 693,
+        "PUBLIC-ADVANCED": 52,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 270,
-        "consumption": 485
+        "knob": 257,
+        "consumption": 489
       }
     }
   },
@@ -883,7 +883,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-100), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)"
     },
     "--sf-color-action-200": {
       "tier": "PUBLIC",
@@ -891,7 +891,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-200), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)"
     },
     "--sf-color-action-300": {
       "tier": "PUBLIC",
@@ -899,7 +899,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-300), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)"
     },
     "--sf-color-action-400": {
       "tier": "PUBLIC",
@@ -907,7 +907,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-400), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)"
     },
     "--sf-color-action-50": {
       "tier": "PUBLIC",
@@ -915,7 +915,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-50), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)"
     },
     "--sf-color-action-500": {
       "tier": "PUBLIC",
@@ -931,7 +931,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-600), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)"
     },
     "--sf-color-action-700": {
       "tier": "PUBLIC",
@@ -939,7 +939,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-700), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)"
     },
     "--sf-color-action-800": {
       "tier": "PUBLIC",
@@ -947,7 +947,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-800), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)"
     },
     "--sf-color-action-900": {
       "tier": "PUBLIC",
@@ -955,7 +955,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-900), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)"
     },
     "--sf-color-action-950": {
       "tier": "PUBLIC",
@@ -963,7 +963,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-action) var(--sf-palette-mix-950), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)"
     },
     "--sf-color-action-a10": {
       "tier": "PUBLIC",
@@ -1451,7 +1451,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-danger) l c h / 0.1)"
+      "value": "oklch(from var(--sf-color-danger) l c h / 0.12)"
     },
     "--sf-color-danger-tint": {
       "tier": "PUBLIC",
@@ -1523,7 +1523,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "oklch(from var(--sf-color-info) l c h / 0.1)"
+      "value": "oklch(from var(--sf-color-info) l c h / 0.12)"
     },
     "--sf-color-info-tint": {
       "tier": "PUBLIC",
@@ -1643,7 +1643,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-100), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)"
     },
     "--sf-color-neutral-200": {
       "tier": "PUBLIC",
@@ -1651,7 +1651,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-200), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)"
     },
     "--sf-color-neutral-300": {
       "tier": "PUBLIC",
@@ -1659,7 +1659,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-300), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)"
     },
     "--sf-color-neutral-400": {
       "tier": "PUBLIC",
@@ -1667,7 +1667,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-400), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)"
     },
     "--sf-color-neutral-50": {
       "tier": "PUBLIC",
@@ -1675,7 +1675,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-50), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)"
     },
     "--sf-color-neutral-500": {
       "tier": "PUBLIC",
@@ -1691,7 +1691,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-600), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)"
     },
     "--sf-color-neutral-700": {
       "tier": "PUBLIC",
@@ -1699,7 +1699,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-700), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)"
     },
     "--sf-color-neutral-800": {
       "tier": "PUBLIC",
@@ -1707,7 +1707,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-800), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)"
     },
     "--sf-color-neutral-900": {
       "tier": "PUBLIC",
@@ -1715,7 +1715,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-900), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)"
     },
     "--sf-color-neutral-950": {
       "tier": "PUBLIC",
@@ -1723,7 +1723,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-neutral) var(--sf-palette-mix-950), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)"
     },
     "--sf-color-neutral-a10": {
       "tier": "PUBLIC",
@@ -1891,7 +1891,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-100), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)"
     },
     "--sf-color-primary-200": {
       "tier": "PUBLIC",
@@ -1899,7 +1899,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-200), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)"
     },
     "--sf-color-primary-300": {
       "tier": "PUBLIC",
@@ -1907,7 +1907,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-300), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)"
     },
     "--sf-color-primary-400": {
       "tier": "PUBLIC",
@@ -1915,7 +1915,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-400), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)"
     },
     "--sf-color-primary-50": {
       "tier": "PUBLIC",
@@ -1923,7 +1923,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-50), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)"
     },
     "--sf-color-primary-500": {
       "tier": "PUBLIC",
@@ -1939,7 +1939,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-600), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)"
     },
     "--sf-color-primary-700": {
       "tier": "PUBLIC",
@@ -1947,7 +1947,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-700), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)"
     },
     "--sf-color-primary-800": {
       "tier": "PUBLIC",
@@ -1955,7 +1955,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-800), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)"
     },
     "--sf-color-primary-900": {
       "tier": "PUBLIC",
@@ -1963,7 +1963,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-900), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)"
     },
     "--sf-color-primary-950": {
       "tier": "PUBLIC",
@@ -1971,7 +1971,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-primary) var(--sf-palette-mix-950), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)"
     },
     "--sf-color-primary-a10": {
       "tier": "PUBLIC",
@@ -2147,7 +2147,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-100), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)"
     },
     "--sf-color-secondary-200": {
       "tier": "PUBLIC",
@@ -2155,7 +2155,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-200), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)"
     },
     "--sf-color-secondary-300": {
       "tier": "PUBLIC",
@@ -2163,7 +2163,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-300), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)"
     },
     "--sf-color-secondary-400": {
       "tier": "PUBLIC",
@@ -2171,7 +2171,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-400), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)"
     },
     "--sf-color-secondary-50": {
       "tier": "PUBLIC",
@@ -2179,7 +2179,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-50), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)"
     },
     "--sf-color-secondary-500": {
       "tier": "PUBLIC",
@@ -2195,7 +2195,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-600), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)"
     },
     "--sf-color-secondary-700": {
       "tier": "PUBLIC",
@@ -2203,7 +2203,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-700), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)"
     },
     "--sf-color-secondary-800": {
       "tier": "PUBLIC",
@@ -2211,7 +2211,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-800), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)"
     },
     "--sf-color-secondary-900": {
       "tier": "PUBLIC",
@@ -2219,7 +2219,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-900), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)"
     },
     "--sf-color-secondary-950": {
       "tier": "PUBLIC",
@@ -2227,7 +2227,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-secondary) var(--sf-palette-mix-950), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)"
     },
     "--sf-color-secondary-a10": {
       "tier": "PUBLIC",
@@ -2483,7 +2483,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-100), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)"
     },
     "--sf-color-tertiary-200": {
       "tier": "PUBLIC",
@@ -2491,7 +2491,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-200), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)"
     },
     "--sf-color-tertiary-300": {
       "tier": "PUBLIC",
@@ -2499,7 +2499,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-300), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)"
     },
     "--sf-color-tertiary-400": {
       "tier": "PUBLIC",
@@ -2507,7 +2507,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-400), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)"
     },
     "--sf-color-tertiary-50": {
       "tier": "PUBLIC",
@@ -2515,7 +2515,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-50), var(--sf-color-surface))"
+      "value": "oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)"
     },
     "--sf-color-tertiary-500": {
       "tier": "PUBLIC",
@@ -2531,7 +2531,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-600), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)"
     },
     "--sf-color-tertiary-700": {
       "tier": "PUBLIC",
@@ -2539,7 +2539,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-700), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)"
     },
     "--sf-color-tertiary-800": {
       "tier": "PUBLIC",
@@ -2547,7 +2547,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-800), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)"
     },
     "--sf-color-tertiary-900": {
       "tier": "PUBLIC",
@@ -2555,7 +2555,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-900), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)"
     },
     "--sf-color-tertiary-950": {
       "tier": "PUBLIC",
@@ -2563,7 +2563,7 @@
       "files": [
         "core/tokens.css"
       ],
-      "value": "color-mix(in oklab, var(--sf-color-tertiary) var(--sf-palette-mix-950), var(--sf-color-text))"
+      "value": "oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)"
     },
     "--sf-color-tertiary-a10": {
       "tier": "PUBLIC",
@@ -2981,22 +2981,6 @@
       ],
       "value": "0.6"
     },
-    "--sf-corner-scoop-at": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "100% 0"
-    },
-    "--sf-corner-scoop-size": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "var(--sf-radius-2xl)"
-    },
     "--sf-cover-min-height": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -3020,6 +3004,14 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-font-weight-bold)"
+    },
+    "--sf-density": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "knob",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "1"
     },
     "--sf-display-l-line-height": {
       "tier": "PUBLIC",
@@ -4325,85 +4317,21 @@
       ],
       "value": "var(--sf-space-xl)"
     },
-    "--sf-palette-mix-100": {
+    "--sf-palette-shade-l": {
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "8%"
+      "value": "0.1"
     },
-    "--sf-palette-mix-200": {
+    "--sf-palette-tint-l": {
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "20%"
-    },
-    "--sf-palette-mix-300": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "40%"
-    },
-    "--sf-palette-mix-400": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "65%"
-    },
-    "--sf-palette-mix-50": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "4%"
-    },
-    "--sf-palette-mix-600": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "82%"
-    },
-    "--sf-palette-mix-700": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "62%"
-    },
-    "--sf-palette-mix-800": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "38%"
-    },
-    "--sf-palette-mix-900": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "18%"
-    },
-    "--sf-palette-mix-950": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "8%"
+      "value": "0.97"
     },
     "--sf-print-base-size": {
       "tier": "PUBLIC-ADVANCED",
@@ -5047,43 +4975,43 @@
     },
     "--sf-size-l": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "3rem"
+      "value": "calc(3rem * var(--sf-density))"
     },
     "--sf-size-m": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "2.5rem"
+      "value": "calc(2.5rem * var(--sf-density))"
     },
     "--sf-size-s": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "2rem"
+      "value": "calc(2rem * var(--sf-density))"
     },
     "--sf-size-xl": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "3.5rem"
+      "value": "calc(3.5rem * var(--sf-density))"
     },
     "--sf-size-xs": {
       "tier": "PUBLIC",
-      "role": "knob",
+      "role": "consumption",
       "files": [
         "core/tokens.css"
       ],
-      "value": "1.5rem"
+      "value": "calc(1.5rem * var(--sf-density))"
     },
     "--sf-space-2xl": {
       "tier": "PUBLIC",

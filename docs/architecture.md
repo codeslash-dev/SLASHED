@@ -10,8 +10,8 @@ Declared once in `core/layers.css`:
   slashed.reset,
   slashed.base,
   slashed.forms,
-  slashed.layout,
   slashed.components,
+  slashed.layout,
   slashed.macros,
   slashed.utilities,
   slashed.states,
@@ -25,7 +25,7 @@ Declared once in `core/layers.css`:
 
 Priority increases left → right. Unlayered consumer CSS beats all layers. `slashed.overrides` ships empty. `slashed.legacy` is for backward-compatibility fallbacks and sits just below `slashed.overrides` so user overrides always win.
 
-`slashed.macros` sits between `components` and `utilities`. Macros may compose with primitives and components, but a single-property utility still wins on the same selector.
+`slashed.macros` sits between `layout` and `utilities`. Macros may compose with primitives and components, but a single-property utility still wins on the same selector.
 
 ---
 
@@ -48,7 +48,7 @@ core/
   print.css                    slashed.print
 optional/
   tokens.components.css   slashed.tokens  (component tokens for btn + card)
-  theme-example.css       slashed.themes  (copy-and-customise rebrand example; not bundled)
+  customize-example.css   slashed.themes, slashed.overrides  (copy-and-customise rebrand/config/overrides starter; not bundled)
   forms.css               slashed.forms  (classless native form-control styling)
   components.css          slashed.components  (btn + card — the only two components)
   utilities.css           slashed.utilities  (curated subset active — heading/text-size/hover/list-reset/marker-colour/alternate-selection/sticky)
@@ -167,12 +167,12 @@ Native form controls are out of base entirely — they live in the opt-in
 `slashed.states` recolour fields. Skip the file entirely if you prefer full
 BEM control.
 
-**slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-content-grid`, `.sf-icon`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
-
 **slashed.components** — UI blocks: `.sf-btn` and `.sf-card`, live since v0.7.0.
 These are the only two components SLASHED ships — it stays BEM-first and does
 not carry a broad component library. Every value goes through `var()`. Requires
 `tokens.components.css`.
+
+**slashed.layout** — layout primitives: `.sf-stack`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, `.sf-grid`, `.sf-container`, `.sf-content-grid`, `.sf-icon`, etc. Layout tokens declared in `tokens.layout.css`, overridable per-instance via `style="--sf-stack-gap: …"`.
 
 **slashed.macros** — recipes / patterns: `.sf-prose`,
 `.sf-not-prose`, `.sf-flow`, `.sf-truncate`, `.sf-line-clamp-{2,3,N}`,
@@ -185,7 +185,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 
 **slashed.states** — `.sf-is-*` markers. Exclusive prefix — utilities never use it. `.sf-is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
 
-**slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/theme-example.css`).
+**slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/customize-example.css`).
 
 **slashed.motion** — animation tokens, keyframes, transition utilities. No component selectors. Gated behind `@media (prefers-reduced-motion: no-preference)`. Transition tokens live in `core/tokens.css` — see [motion.md](motion.md). `.sf-color-pulse` animates `--sf-color-primary-source-light` lightness, demonstrating `@property` colour interpolation in oklch.
 
@@ -253,7 +253,7 @@ Many tokens — `--sf-shadow-*`, `--sf-blur`, `--sf-gap`, `--sf-gradient-*`,
 `--sf-scrollbar-*`, `--sf-optical-sizing` — are **not consumed by the framework
 itself**. They exist for your own BEM classes
 (`.card { box-shadow: var(--sf-shadow-m) }`) and are exercised in
-`docs/demo.html` and validated by `tests/`.
+`demo/index.html` and validated by `tests/`.
 
 ### Print class naming
 
@@ -277,7 +277,6 @@ without reducing collision risk in practice.
 | `.print-only` | print | Reads as a behaviour toggle |
 | `.print-color-exact` | print | Self-documenting intent |
 | `.print-no-color` | print | Self-documenting intent |
-| `.theme-transition` | themes | Scoped opt-in helper |
 
 ---
 
@@ -294,8 +293,8 @@ slashed.themes
 slashed.states
 slashed.utilities
 slashed.macros
-slashed.components
 slashed.layout
+slashed.components
 slashed.forms
 slashed.base
 slashed.reset
@@ -321,8 +320,9 @@ Selectors stay low-specificity (single class, `:root`, element). Consumer overri
 ## Responsive design
 
 1. **Fluid tokens** — `--sf-space-*`, `--sf-text-*` use `clamp()`. No `@media` needed.
-2. **Container primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-alternate`, `.sf-bento` use `@container`. `.sf-container` declares the named container `sf-layout` (see Container query contract below); `.sf-alternate` declares its own `sf-alternate`.
-3. **Breakpoints** — a last resort. The framework ships no breakpoint tokens (custom properties can't be used in `@media`/`@container` conditions); hard-code a value in your own query if you truly need one.
+2. **Intrinsic primitives** — `.sf-grid`, `.sf-sidebar`, `.sf-switcher`, `.sf-cluster`, `.sf-equal`, `.sf-content-grid` carry **no** `@container` query at all: they respond to their own width through intrinsic sizing (`minmax(min(…),1fr)`, flex-basis, `column-width`), which is both container-relative and viewport-independent for free. Prefer this pattern.
+3. **Container-query primitives** — `.sf-grid-cols-*`, `.sf-alternate`, `.sf-bento` need a *fixed* column count at a threshold, which intrinsic sizing can't express, so they use `@container`. `.sf-container` declares the named container `sf-layout` (see Container query contract below); `.sf-alternate` declares its own `sf-alternate`. Their breakpoints are hard-coded in **rem** (root-relative, viewport-independent) — never `em`, which inside `@container` resolves against the container's own fluid font-size and would re-couple the query to the viewport.
+4. **Breakpoints** — a last resort. The framework ships no breakpoint tokens (custom properties can't be used in `@media`/`@container` conditions); hard-code a rem value in your own query if you truly need one.
 
 ---
 
@@ -405,7 +405,7 @@ Plain CSS, no runtime. The notable costs:
   `--sf-color-primary-source-light`) re-derives everything downstream each frame — fine
   for a small accent, not for a token hundreds of elements read. A theme toggle
   re-resolves the graph once (negligible).
-- **`@property` registration** (22 colours + 5 state flags) is a one-time parse
+- **`@property` registration** (30 colours + 5 state flags) is a one-time parse
   cost; immaterial.
 - **`@layer`** has no runtime cost — resolved at parse time. Low-specificity
   selectors keep style recalc fast.
