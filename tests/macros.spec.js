@@ -462,8 +462,6 @@ test.describe('macro: .sf-overlap / .sf-overlap-host', () => {
 
   for (const [cls, prop] of [
     ['sf-overlap--down', 'marginBottom'],
-    ['sf-overlap--start', 'marginLeft'],
-    ['sf-overlap--end', 'marginRight'],
   ]) {
     test(`.${cls} sets a negative ${prop}`, async ({ page }) => {
       await setup(page, `<div id="t" class="${cls}" style="--sf-overlap-pull: 20px">x</div>`);

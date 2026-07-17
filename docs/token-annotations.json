@@ -1168,8 +1168,6 @@
     "sf-marker--action": "Colours list ::markers with the action colour.",
     "sf-overlap": "Overlap recipe — pulls the element upward (negative block-start margin) so it overlaps the previous sibling by --sf-overlap-pull.",
     "sf-overlap--down": "Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it.",
-    "sf-overlap--start": "Overlap recipe — pulls the element toward the inline-start (negative inline-start margin) to overlap horizontally.",
-    "sf-overlap--end": "Overlap recipe — pulls the element toward the inline-end (negative inline-end margin) to overlap horizontally.",
     "sf-sticky": "position: sticky pinned at the header-aware --sf-sticky-offset.",
     "sf-sticky--s": "Sticky positioning with an extra small gap (--sf-space-s) above the header-aware offset.",
     "sf-sticky--m": "Sticky positioning with an extra medium gap (--sf-space-m) above the header-aware offset.",
