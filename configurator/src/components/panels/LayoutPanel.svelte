@@ -213,6 +213,11 @@
       <span class="text-[10px] text-slate-500">{showAutoGrid ? "▲" : "▼"}</span>
     </button>
     {#if showAutoGrid}
+      <!-- step 0.0625rem (1px) intentionally matches the gap-token sliders in
+           SpacingPanel (--sf-gap / --sf-content-gap / --sf-gutter), which
+           --sf-grid-gap defaults to — finer than the size controls elsewhere
+           in this panel, so grid gap isn't tuned coarser than the token it
+           inherits from. -->
       <SliderRow
         label="Grid gap" value={gridGap} min={0} max={4} step={0.0625} unit="rem"
         help="--sf-grid-gap — gap between grid cells (.sf-grid, .sf-grid-flex, .sf-grid-cols-*); defaults to --sf-gap"
