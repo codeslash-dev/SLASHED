@@ -31,6 +31,7 @@
   let centerMax         = $derived(parseRem(overrides["--sf-center-max"],        75));
   let centerGutter      = $derived(parseRem(overrides["--sf-center-gutter"],     1));
   let gridMin           = $derived(parseRem(overrides["--sf-grid-min"],          16));
+  let gridGap           = $derived(parseRem(overrides["--sf-grid-gap"],          1));
   let headerMobile      = $derived(parseRem(overrides["--sf-header-height-mobile"],  3.5));
   let headerDesktop     = $derived(parseRem(overrides["--sf-header-height-desktop"], 5));
   let sidebarWidth      = $derived(parseRem(overrides["--sf-sidebar-width"],     18));
@@ -212,6 +213,17 @@
       <span class="text-[10px] text-slate-500">{showAutoGrid ? "▲" : "▼"}</span>
     </button>
     {#if showAutoGrid}
+      <SliderRow
+        label="Grid gap" value={gridGap} min={0} max={4} step={0.0625} unit="rem"
+        help="--sf-grid-gap — gap between grid cells (.sf-grid, .sf-grid-flex, .sf-grid-cols-*); defaults to --sf-gap"
+        overridden={"--sf-grid-gap" in overrides}
+        onChange={(v) => onSet("--sf-grid-gap", `${v}rem`)}
+        onReset={() => onReset("--sf-grid-gap")}
+        rawDefault="var(--sf-gap)"
+        variableOptions={SPACE_SCALE}
+        currentRaw={overrides["--sf-grid-gap"]}
+        onRawSet={(v) => onSet("--sf-grid-gap", v)}
+      />
       <SliderRow
         label="Grid min cell width" value={gridMin} min={8} max={40} step={0.5} unit="rem"
         help="sf-grid minimum column width — browser auto-fills columns"
