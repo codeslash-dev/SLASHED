@@ -268,7 +268,7 @@
     <div class="flex gap-1">
       {#each WEIGHT_OPTIONS as w (w)}
         <button
-          onclick={() => w === defaultVal ? onReset(tokenName) : onSet(tokenName, w)}
+          onclick={() => w === defaultVal ? (tokenName in overrides ? onReset(tokenName) : undefined) : onSet(tokenName, w)}
           style={`font-weight: ${parseInt(w)}`}
           class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
             current === w

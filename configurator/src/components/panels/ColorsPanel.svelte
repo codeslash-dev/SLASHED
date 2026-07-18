@@ -438,7 +438,13 @@
   function copyLightToDark(colorKey: string, dark: ColorSource | undefined, light: ColorSource) {
     if (!dark) return;
     autoDarkSet = new Set([...autoDarkSet].filter(k => k !== colorKey));
-    onSet(dark.name, sourceValue(light));
+    const lv = sourceValue(light);
+    // Freeze a concrete snapshot. A plain oklch/hex/rgb literal is copied as-is
+    // (keeps the OKLCH authoring intact); only a value that references another
+    // token (var()) is resolved, so the copy can't keep tracking that
+    // dependency. Falls back to the literal if resolution isn't available.
+    const snapshot = lv.includes("var(") ? (resolveColorForTheme(lv, "light") || lv) : lv;
+    onSet(dark.name, snapshot);
   }
 
   function toggleDarkMode(colorKey: string, dark: ColorSource | undefined, lightName: string) {

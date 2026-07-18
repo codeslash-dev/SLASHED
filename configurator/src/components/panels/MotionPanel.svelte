@@ -272,10 +272,11 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 space-y-1">
         {#each [1,2,3,4,5] as n (n)}
           {@const delayMs = Math.round(staggerBase * n)}
+          {@const maxStaggerDelay = Math.round(staggerBase * 5)}
           <div class="flex items-center gap-2">
             <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-6">–{n}</span>
             <div class="flex-1 h-1.5 bg-black/8 dark:bg-white/8 rounded-full">
-              <div class="h-full bg-indigo-500 rounded-full" style={`width: ${(n / 5) * 100}%`}></div>
+              <div class="h-full bg-indigo-500 rounded-full" style={`width: ${maxStaggerDelay > 0 ? (delayMs / maxStaggerDelay) * 100 : 0}%`}></div>
             </div>
             <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{delayMs}ms</span>
           </div>
