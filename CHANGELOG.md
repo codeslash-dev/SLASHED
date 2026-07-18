@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.21] - 2026-07-18
+
+### Features
+- **configurator:** variable-first dropdown for every scale-referencing token
+- **configurator:** consistency pass across colors, macros & effects panels
+- **configurator:** unify text & display typographic scale controls
+- **configurator:** add Grid gap control + document responsive gap pattern
+
+### Bug Fixes
+- **configurator:** address PR review comments
+- **configurator:** normalise sidebar preview bars to their max, no collapsing caps
+- **configurator:** typography scale preview shows real sizes, not capped
+- **demo:** escape <a> and <hr> tag names in two captions
+- **configurator:** reflect grid gap in the Auto grid preview
+- **demo:** drop removed overlap variants from cov-data coverage blob
+
 ## [0.7.20] - 2026-07-16
 
 ### Features
