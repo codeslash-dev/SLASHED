@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SlashedToken } from '../../types';
   import { resolveColor, previewVersion } from '../../lib/previewResolver.svelte';
+  import { scaleForValue } from '../../lib/variableScales';
 
   let { token, overrideValue, onSet, onReset }: {
     token: SlashedToken;
@@ -9,7 +10,19 @@
     onReset: () => void;
   } = $props();
 
+  const CUSTOM = "__sf_custom__";
   let expanded = $state(false);
+
+  // When a token's default is itself a scale variable (e.g. var(--sf-space-m)),
+  // offer that scale's steps as a dropdown — variable-first, with the raw text
+  // box available via "Custom…". Mirrors SliderRow's picker for the generic row.
+  let scaleOpts = $derived(scaleForValue(token.value));
+  let matchedScale = $derived(
+    !!scaleOpts && (scaleOpts.some((o) => o.value === (overrideValue ?? token.value)))
+  );
+  let showScalePicker = $derived(
+    !!scaleOpts && !expanded && (overrideValue === undefined || matchedScale)
+  );
 
   function guessType(t: SlashedToken): "color" | "font" | "number" | "text" {
     const n = t.name;
@@ -54,7 +67,26 @@
     {/if}
   </div>
 
-  {#if expanded}
+  {#if showScalePicker && scaleOpts}
+    <select
+      value={displayValue}
+      aria-label={`${shortName} value`}
+      onchange={(e) => {
+        const v = (e.target as HTMLSelectElement).value;
+        if (v === CUSTOM) { expanded = true; return; }
+        if (v === token.value) onReset(); else onSet(v);
+      }}
+      class="w-32 shrink-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-0.5 text-[10px] font-mono text-slate-700 dark:text-slate-300 focus:outline-none focus:border-indigo-500 cursor-pointer"
+    >
+      {#if !scaleOpts.some((o) => o.value === token.value)}
+        <option value={token.value}>{token.value} (default)</option>
+      {/if}
+      {#each scaleOpts as o (o.value)}
+        <option value={o.value}>{o.label}</option>
+      {/each}
+      <option value={CUSTOM}>Custom…</option>
+    </select>
+  {:else if expanded}
     <input
       value={displayValue}
       onblur={(e) => {
