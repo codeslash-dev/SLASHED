@@ -3,6 +3,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import Section from '../inputs/Section.svelte';
   import { SPACE_SCALE, RADIUS_SCALE, BORDER_WIDTH_SCALE, type VarOption } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
@@ -85,16 +86,7 @@
 <div class="p-4 space-y-5">
 
   <!-- BORDER COLOR -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showBorderColor = !showBorderColor; }}
-      aria-expanded={showBorderColor}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border color</div>
-      <span class="text-[10px] text-slate-500">{showBorderColor ? "▲" : "▼"}</span>
-    </button>
-    {#if showBorderColor}
+  <Section title="Border color" bind:open={showBorderColor}>
       <ColorInput
         token="--sf-color-border"
         value={borderColor}
@@ -106,22 +98,12 @@
       <p class="text-[9px] text-slate-400 dark:text-slate-600">
         Drives --sf-color-border--strong, --subtle, --translucent automatically.
       </p>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- BORDER SCALE -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showBorderWidths = !showBorderWidths; }}
-      aria-expanded={showBorderWidths}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Border widths</div>
-      <span class="text-[10px] text-slate-500">{showBorderWidths ? "▲" : "▼"}</span>
-    </button>
-    {#if showBorderWidths}
+  <Section title="Border widths" bind:open={showBorderWidths}>
       <SliderRow
         label="Border scale" value={borderScale} min={0} max={4} step={0.25}
         help="Multiplier applied to all border widths. 0 hides all borders."
@@ -159,22 +141,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- LINE STYLES -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showLineStyles = !showLineStyles; }}
-      aria-expanded={showLineStyles}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line styles</div>
-      <span class="text-[10px] text-slate-500">{showLineStyles ? "▲" : "▼"}</span>
-    </button>
-    {#if showLineStyles}
+  <Section title="Line styles" spacing="space-y-4" bind:open={showLineStyles}>
       <div class="grid grid-cols-2 gap-3">
         {#each [
           { label: "Border", token: "--sf-border-style", default: "solid" },
@@ -212,22 +184,12 @@
         </div>
         <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600">{(1 * borderScale).toFixed(1)}px · {borderStyle}</span>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- DIVIDERS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showDividers = !showDividers; }}
-      aria-expanded={showDividers}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Dividers</div>
-      <span class="text-[10px] text-slate-500">{showDividers ? "▲" : "▼"}</span>
-    </button>
-    {#if showDividers}
+  <Section title="Dividers" bind:open={showDividers}>
       <div class="flex items-center gap-2">
         <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-24 shrink-0">Color</div>
         <ColorInput
@@ -261,22 +223,12 @@
         currentRaw={overrides["--sf-divider-gap"]}
         onRawSet={(v) => onSet("--sf-divider-gap", v)}
       />
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- FOCUS RING -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showFocusRing = !showFocusRing; }}
-      aria-expanded={showFocusRing}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Focus ring</div>
-      <span class="text-[10px] text-slate-500">{showFocusRing ? "▲" : "▼"}</span>
-    </button>
-    {#if showFocusRing}
+  <Section title="Focus ring" bind:open={showFocusRing}>
       <SliderRow
         label="Ring width" value={focusWidth} min={0} max={6} step={0.5} unit="px"
         help="Thickness of the keyboard focus indicator"
@@ -311,8 +263,7 @@
           Focus preview
         </div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
@@ -383,16 +334,7 @@
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- GLOBAL MEDIA RADIUS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showMediaRadius = !showMediaRadius; }}
-      aria-expanded={showMediaRadius}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global media radius</div>
-      <span class="text-[10px] text-slate-500">{showMediaRadius ? "▲" : "▼"}</span>
-    </button>
-    {#if showMediaRadius}
+  <Section title="Global media radius" bind:open={showMediaRadius}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600">
         --sf-media-radius — 0 by default (off). Rounds every &lt;img&gt;/&lt;figure&gt; globally via a
         zero-specificity :where() rule; .sf-bg-layer and component-level radii still win.
@@ -414,8 +356,7 @@
           style={`border-radius: ${mediaRadius}rem`}
         ></div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 

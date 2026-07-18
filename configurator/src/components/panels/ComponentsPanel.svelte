@@ -1,5 +1,6 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
+  import Section from '../inputs/Section.svelte';
   import { SPACE_SCALE, RADIUS_SCALE, BORDER_WIDTH_SCALE, SIZE_SCALE, type VarOption } from '../../lib/variableScales';
   import { themeState } from '../../lib/theme.svelte';
 
@@ -188,16 +189,7 @@
 <div class="p-4 space-y-5">
 
   <!-- BUTTON -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showButton = !showButton; }}
-      aria-expanded={showButton}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Button (.sf-btn)</div>
-      <span class="text-[10px] text-slate-500">{showButton ? "▲" : "▼"}</span>
-    </button>
-    {#if showButton}
+  <Section title="Button (.sf-btn)" bind:open={showButton}>
       <!-- Preview pickers — local state only, not overrides -->
       <div class="space-y-2">
         <div class="text-[9px] text-slate-500">Variant (preview only)</div>
@@ -397,22 +389,12 @@
           >Reset all button tokens</button>
         {/if}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- CARD -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showCard = !showCard; }}
-      aria-expanded={showCard}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Card (.sf-card)</div>
-      <span class="text-[10px] text-slate-500">{showCard ? "▲" : "▼"}</span>
-    </button>
-    {#if showCard}
+  <Section title="Card (.sf-card)" bind:open={showCard}>
       <div class="flex items-center gap-3">
         <label class="flex items-center gap-1.5 text-[9px] text-slate-500 cursor-pointer">
           <input type="checkbox" bind:checked={cardBordered} class="cursor-pointer" /> bordered
@@ -603,6 +585,5 @@
           </div>
         </div>
       </div>
-    {/if}
-  </section>
+  </Section>
 </div>

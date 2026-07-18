@@ -1,19 +1,13 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import Section from '../inputs/Section.svelte';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
   } = $props();
-
-  const SCRIM_DIRECTIONS = [
-    { label: "To top",    value: "to top" },
-    { label: "To bottom", value: "to bottom" },
-    { label: "To left",   value: "to left" },
-    { label: "To right",  value: "to right" },
-  ];
 
   const TEXT_SHADOW_TOKENS = [
     { label: "Extra small", token: "--sf-text-shadow-xs", default: "0 0.5px 1px oklch(…)" },
@@ -34,18 +28,13 @@
   let blur            = $derived(parseNum(overrides["--sf-blur"], 12, "px"));
   let opacityMuted    = $derived(parseNum(overrides["--sf-opacity-muted"], 0.5));
   let opacityDisabled = $derived(parseNum(overrides["--sf-opacity-disabled"], 0.45));
-  let scrimDir        = $derived(overrides["--sf-scrim-direction"] ?? "to top");
-  let scrimColor      = $derived(overrides["--sf-scrim-color"] ?? "");
-  let scrollShadowSize = $derived(parseNum(overrides["--sf-scroll-shadow-size"]?.replace("rem",""), 2));
   let pendingOpacity  = $derived(parseNum(overrides["--sf-state-pending-opacity"], 0.7));
   let scrollbarThumb  = $derived(overrides["--sf-scrollbar-thumb"] ?? "");
   let scrollbarTrack  = $derived(overrides["--sf-scrollbar-track"] ?? "");
 
   let showBlur = $state(false);
   let showOpacity = $state(false);
-  let showScrim = $state(false);
   let showScrollbar = $state(false);
-  let showScrollShadow = $state(false);
   let showTextShadow = $state(false);
   let showDropShadow = $state(false);
 </script>
@@ -53,16 +42,7 @@
 <div class="p-4 space-y-6">
 
   <!-- BLUR -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showBlur = !showBlur; }}
-      aria-expanded={showBlur}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Blur</div>
-      <span class="text-[10px] text-slate-500">{showBlur ? "▲" : "▼"}</span>
-    </button>
-    {#if showBlur}
+  <Section title="Blur" bind:open={showBlur}>
       <SliderRow
         label="Blur radius" value={blur} min={0} max={48} step={1} unit="px"
         help="--sf-blur — used for frosted glass, modals, tooltips"
@@ -84,22 +64,12 @@
           <span class="text-[9px] font-mono text-slate-900/70 dark:text-white/70">{blur}px</span>
         </div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- OPACITY -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showOpacity = !showOpacity; }}
-      aria-expanded={showOpacity}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Opacity</div>
-      <span class="text-[10px] text-slate-500">{showOpacity ? "▲" : "▼"}</span>
-    </button>
-    {#if showOpacity}
+  <Section title="Opacity" spacing="space-y-4" bind:open={showOpacity}>
       <SliderRow
         label="Muted opacity" value={opacityMuted} min={0} max={1} step={0.05}
         help="--sf-opacity-muted — secondary text, icons, and placeholder content"
@@ -135,86 +105,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
-
-  <div class="h-px bg-black/6 dark:bg-white/6"></div>
-
-  <!-- SCRIM -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showScrim = !showScrim; }}
-      aria-expanded={showScrim}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrim overlay</div>
-      <span class="text-[10px] text-slate-500">{showScrim ? "▲" : "▼"}</span>
-    </button>
-    {#if showScrim}
-      <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
-        Gradient overlay for hero images and media content. Used by the <code class="text-slate-600 dark:text-slate-400">.sf-scrim</code> macro.
-      </p>
-
-      <!-- Scrim color -->
-      <div class="flex items-center gap-2">
-        <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-16 shrink-0">Color</div>
-        <ColorInput
-          token="--sf-scrim-color"
-          value={scrimColor}
-          placeholder="default (base color)"
-          isOverridden={"--sf-scrim-color" in overrides}
-          onSet={(v) => onSet("--sf-scrim-color", v)}
-          onReset={() => onReset("--sf-scrim-color")}
-        />
-      </div>
-
-      <div>
-        <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-2">Direction</div>
-        <div class="grid grid-cols-2 gap-1">
-          {#each SCRIM_DIRECTIONS as d (d.value)}
-            <button
-              onclick={() => d.value === "to top" ? onReset("--sf-scrim-direction") : onSet("--sf-scrim-direction", d.value)}
-              class={`py-2 px-3 rounded-lg text-[10px] border transition-all cursor-pointer text-left ${
-                scrimDir === d.value
-                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                  : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
-              }`}
-            >
-              {d.label}
-            </button>
-          {/each}
-        </div>
-      </div>
-
-      <!-- Scrim preview -->
-      <div class="rounded-xl overflow-hidden border border-black/8 dark:border-white/8" style="height: 80px">
-        <div
-          class="w-full h-full relative"
-          style="background: linear-gradient(135deg, oklch(0.3 0.15 264), oklch(0.25 0.1 300))"
-        >
-          <div
-            class="absolute inset-0"
-            style={`background: linear-gradient(${scrimDir}, ${scrimColor || "oklch(0 0 0 / 0.6)"}, transparent)`}
-          ></div>
-          <div class="absolute bottom-2 left-3 text-[10px] text-white/80 font-medium">Scrim preview</div>
-        </div>
-      </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- SCROLLBAR -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showScrollbar = !showScrollbar; }}
-      aria-expanded={showScrollbar}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrollbar</div>
-      <span class="text-[10px] text-slate-500">{showScrollbar ? "▲" : "▼"}</span>
-    </button>
-    {#if showScrollbar}
+  <Section title="Scrollbar" bind:open={showScrollbar}>
       {#each [
         { label: "Thumb color", token: "--sf-scrollbar-thumb", val: scrollbarThumb },
         { label: "Track color", token: "--sf-scrollbar-track", val: scrollbarTrack },
@@ -238,45 +134,12 @@
         </div>
         <span class="text-[9px] text-slate-400 dark:text-slate-600">Scrollbar preview</span>
       </div>
-    {/if}
-  </section>
-
-  <div class="h-px bg-black/6 dark:bg-white/6"></div>
-
-  <!-- SCROLL SHADOW -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showScrollShadow = !showScrollShadow; }}
-      aria-expanded={showScrollShadow}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll shadow</div>
-      <span class="text-[10px] text-slate-500">{showScrollShadow ? "▲" : "▼"}</span>
-    </button>
-    {#if showScrollShadow}
-      <SliderRow
-        label="Shadow size" value={scrollShadowSize} min={0} max={6} step={0.25} unit="rem"
-        help="--sf-scroll-shadow-size — gradient edge mask on .sf-scroll-shadow elements"
-        overridden={"--sf-scroll-shadow-size" in overrides}
-        onChange={(v) => onSet("--sf-scroll-shadow-size", `${v}rem`)}
-        onReset={() => onReset("--sf-scroll-shadow-size")}
-      />
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- TEXT SHADOW PRESETS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showTextShadow = !showTextShadow; }}
-      aria-expanded={showTextShadow}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text shadow</div>
-      <span class="text-[10px] text-slate-500">{showTextShadow ? "▲" : "▼"}</span>
-    </button>
-    {#if showTextShadow}
+  <Section title="Text shadow" bind:open={showTextShadow}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Controls text legibility over images. Applied via <code class="text-slate-600 dark:text-slate-400">text-shadow: var(--sf-text-shadow-m)</code>.
         Edit each token directly — use <code class="text-slate-600 dark:text-slate-400">none</code> to disable.
@@ -301,22 +164,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- DROP SHADOW PRESETS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showDropShadow = !showDropShadow; }}
-      aria-expanded={showDropShadow}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Drop shadow</div>
-      <span class="text-[10px] text-slate-500">{showDropShadow ? "▲" : "▼"}</span>
-    </button>
-    {#if showDropShadow}
+  <Section title="Drop shadow" bind:open={showDropShadow}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         <code class="text-slate-600 dark:text-slate-400">filter: drop-shadow(…)</code> — unlike box-shadow, follows the
         element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). Edit each token directly —
@@ -360,6 +213,5 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 </div>
