@@ -1,5 +1,6 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
+  import ColorInput from '../inputs/ColorInput.svelte';
   import { SPACE_SCALE, RADIUS_SCALE } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
@@ -258,19 +259,16 @@
       <p class="text-[9px] text-slate-400 dark:text-slate-600">--sf-scrim-color / --sf-scrim-direction — darkening gradient for .sf-scrim</p>
       <div class="flex items-center gap-2">
         <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-20 shrink-0">Color</div>
-        <input
-          type="text"
-          value={overrides["--sf-scrim-color"] ?? ""}
-          placeholder="oklch(0 0 0 / 0.55)"
-          oninput={(e) => {
-            const v = (e.target as HTMLInputElement).value.trim();
-            v ? onSet("--sf-scrim-color", v) : onReset("--sf-scrim-color");
-          }}
-          class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
-        />
-        {#if "--sf-scrim-color" in overrides}
-          <button onclick={() => onReset("--sf-scrim-color")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-        {/if}
+        <div class="flex-1 min-w-0">
+          <ColorInput
+            token="--sf-scrim-color"
+            value={overrides["--sf-scrim-color"] ?? ""}
+            placeholder="oklch(0 0 0 / 0.55)"
+            isOverridden={"--sf-scrim-color" in overrides}
+            onSet={(v) => onSet("--sf-scrim-color", v)}
+            onReset={() => onReset("--sf-scrim-color")}
+          />
+        </div>
       </div>
       <div>
         <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Direction</div>
@@ -352,19 +350,16 @@
         />
         <div class="flex items-center gap-2 pt-1">
           <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-20 shrink-0">Marker color</div>
-          <input
-            type="text"
-            value={overrides["--sf-prose-marker-color"] ?? ""}
-            placeholder="var(--sf-color-primary)"
-            oninput={(e) => {
-              const v = (e.target as HTMLInputElement).value.trim();
-              v ? onSet("--sf-prose-marker-color", v) : onReset("--sf-prose-marker-color");
-            }}
-            class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
-          />
-          {#if "--sf-prose-marker-color" in overrides}
-            <button onclick={() => onReset("--sf-prose-marker-color")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-          {/if}
+          <div class="flex-1 min-w-0">
+            <ColorInput
+              token="--sf-prose-marker-color"
+              value={overrides["--sf-prose-marker-color"] ?? ""}
+              placeholder="var(--sf-color-primary)"
+              isOverridden={"--sf-prose-marker-color" in overrides}
+              onSet={(v) => onSet("--sf-prose-marker-color", v)}
+              onReset={() => onReset("--sf-prose-marker-color")}
+            />
+          </div>
         </div>
       </div>
     {/if}
@@ -424,18 +419,31 @@
       {#each SURFACE_BG_TEXT as t (t.token)}
         <div class="flex items-center gap-2">
           <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-20 shrink-0">{t.label}</div>
-          <input
-            type="text"
-            value={overrides[t.token] ?? ""}
-            placeholder={t.placeholder}
-            oninput={(e) => {
-              const v = (e.target as HTMLInputElement).value;
-              v.trim() ? onSet(t.token, v) : onReset(t.token);
-            }}
-            class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
-          />
-          {#if t.token in overrides}
-            <button onclick={() => onReset(t.token)} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+          {#if t.token === "--sf-surface-bg-color"}
+            <div class="flex-1 min-w-0">
+              <ColorInput
+                token={t.token}
+                value={overrides[t.token] ?? ""}
+                placeholder={t.placeholder}
+                isOverridden={t.token in overrides}
+                onSet={(v) => onSet(t.token, v)}
+                onReset={() => onReset(t.token)}
+              />
+            </div>
+          {:else}
+            <input
+              type="text"
+              value={overrides[t.token] ?? ""}
+              placeholder={t.placeholder}
+              oninput={(e) => {
+                const v = (e.target as HTMLInputElement).value;
+                v.trim() ? onSet(t.token, v) : onReset(t.token);
+              }}
+              class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
+            />
+            {#if t.token in overrides}
+              <button onclick={() => onReset(t.token)} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
+            {/if}
           {/if}
         </div>
       {/each}

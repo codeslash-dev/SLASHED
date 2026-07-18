@@ -7,6 +7,7 @@
   import OklchColorDesk from '../inputs/OklchColorDesk.svelte';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
+  import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
 
   let { tokens, overrides, onSet, onReset, onBulkChange, onSelectDomain }: {
@@ -426,6 +427,19 @@
     onSet(light.name, newVal);
   }
 
+  // Brand keys that offer a "Copy to dark" action (snapshot the light source
+  // into the dark source — same effect as pasting the same colour into both).
+  const COPY_TO_DARK_KEYS = ["primary", "secondary", "tertiary", "action"];
+
+  // One-shot: copy the light source's current concrete oklch value into the
+  // dark source token and switch the row to manual. Not live-linked — a later
+  // edit to light leaves this copied dark value untouched (copy-paste, not a ref).
+  function copyLightToDark(colorKey: string, dark: ColorSource | undefined, light: ColorSource) {
+    if (!dark) return;
+    autoDarkSet = new Set([...autoDarkSet].filter(k => k !== colorKey));
+    onSet(dark.name, sourceValue(light));
+  }
+
   function toggleDarkMode(colorKey: string, dark: ColorSource | undefined, lightName: string) {
     const darkOverridden = !!(dark && (dark.name in overrides));
     const effectivelyAuto = autoDarkSet.has(colorKey) && !darkOverridden;
@@ -529,14 +543,23 @@
           <div class="flex items-center justify-between">
             <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">{light.label}</div>
             {#if dark}
-              <button
-                onclick={() => toggleDarkMode(light.colorKey, dark, light.name)}
-                class={`text-[8px] px-1.5 py-0.5 rounded border transition-all cursor-pointer ${
-                  isAutoMode
-                    ? "border-indigo-500/40 bg-indigo-500/15 text-indigo-700 dark:text-indigo-300"
-                    : "border-black/10 dark:border-white/10 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
-                }`}
-              >{isAutoMode ? "Auto dark" : "Manual dark"}</button>
+              <div class="flex items-center gap-1">
+                {#if COPY_TO_DARK_KEYS.includes(light.colorKey)}
+                  <button
+                    onclick={() => copyLightToDark(light.colorKey, dark, light)}
+                    title="Copy the light value into the dark source (snapshot)"
+                    class="text-[8px] px-1.5 py-0.5 rounded border border-black/10 dark:border-white/10 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-all cursor-pointer"
+                  >Copy to dark</button>
+                {/if}
+                <button
+                  onclick={() => toggleDarkMode(light.colorKey, dark, light.name)}
+                  class={`text-[8px] px-1.5 py-0.5 rounded border transition-all cursor-pointer ${
+                    isAutoMode
+                      ? "border-indigo-500/40 bg-indigo-500/15 text-indigo-700 dark:text-indigo-300"
+                      : "border-black/10 dark:border-white/10 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+                  }`}
+                >{isAutoMode ? "Auto dark" : "Manual dark"}</button>
+              </div>
             {/if}
           </div>
           <OklchColorDesk
@@ -1017,12 +1040,12 @@
                 {:else if g.kind !== "dir"}
                   <div class="flex items-center gap-2">
                     <span class="text-[8px] text-slate-500 w-10 shrink-0">Angle</span>
-                    <input
-                      type="range" min="0" max="360" step="1" value={e.angle}
-                      oninput={(ev) => setGradientPart(g, "angle", parseInt((ev.target as HTMLInputElement).value))}
-                      class="flex-1 accent-indigo-500"
-                    />
-                    <span class="text-[9px] font-mono text-slate-600 dark:text-slate-400 w-9 text-right shrink-0">{e.angle}°</span>
+                    <div class="flex-1 min-w-0">
+                      <RangeWithNumber
+                        value={e.angle} min={0} max={360} step={1} unit="°"
+                        onChange={(v) => setGradientPart(g, "angle", v)}
+                      />
+                    </div>
                   </div>
                 {/if}
 
