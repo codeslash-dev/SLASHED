@@ -43,6 +43,15 @@
   let vwMin      = $derived(num("--sf-fluid-min-vw", 22.5));
   let vwMax      = $derived(num("--sf-fluid-max-vw", 90));
 
+  // Largest step (4xl, offset +5) — used to normalise the preview bars so the
+  // biggest bar fills the track and every other bar stays proportional (no cap
+  // that would make different sizes render identically).
+  let spacePreviewMax = $derived.by(() => {
+    const midBase = (baseMin + baseMax) / 2;
+    const ratio = (ratioMin + ratioMax) / 2;
+    return midBase * Math.pow(ratio, 5) * spaceScale;
+  });
+
   let showLayoutGap = $state(false);
   let showModularScale = $state(false);
   let showAdvanced = $state(false);
@@ -60,7 +69,7 @@
         {@const offset = i - 3}
         {@const rawRem = offset >= 0 ? midBase * Math.pow(ratio, offset) : midBase / Math.pow(ratio, -offset)}
         {@const scaled = rawRem * spaceScale}
-        {@const barWidth = Math.min(scaled * 28, 240)}
+        {@const barWidth = spacePreviewMax > 0 ? (scaled / spacePreviewMax) * 240 : 0}
         <div class="flex items-center gap-2">
           <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-6 text-right shrink-0">{step}</span>
           <div class="bg-indigo-500/50 rounded shrink-0 h-3" style={`width: ${barWidth}px; min-width: 3px`}></div>

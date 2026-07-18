@@ -270,10 +270,11 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 flex items-end gap-2">
         {#each SIZE_TOKENS as s (s.token)}
           {@const val = getSizeValue(s)}
+          {@const maxSize = Math.max(...SIZE_TOKENS.map((x) => getSizeValue(x)), 0.001)}
           <div class="flex flex-col items-center gap-1 flex-1">
             <div
               class="w-full bg-indigo-500/30 border border-indigo-500/30 rounded flex items-center justify-center"
-              style={`height: ${Math.min(val * 14, 64)}px`}
+              style={`height: ${(val / maxSize) * 72}px`}
             ></div>
             <span class="text-[8px] font-mono text-slate-400 dark:text-slate-600">{s.label}</span>
           </div>

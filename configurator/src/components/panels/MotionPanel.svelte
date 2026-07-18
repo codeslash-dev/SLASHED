@@ -186,10 +186,11 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 space-y-3">
         {#each DURATIONS as d (d.label)}
           {@const actual = getDuration(d.token, d.base)}
+          {@const maxDur = Math.max(...DURATIONS.map((x) => getDuration(x.token, x.base)), 1)}
           <div class="flex items-center gap-3">
             <span class="text-[10px] text-slate-500 w-14 shrink-0">{d.label}</span>
             <div class="flex-1 h-1 bg-black/8 dark:bg-white/8 rounded-full overflow-hidden">
-              <div class="h-full bg-indigo-500 rounded-full" style={`width: ${Math.min((actual / 1200) * 100, 100)}%`}></div>
+              <div class="h-full bg-indigo-500 rounded-full" style={`width: ${(actual / maxDur) * 100}%`}></div>
             </div>
             <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{actual}ms</span>
           </div>
@@ -274,7 +275,7 @@
           <div class="flex items-center gap-2">
             <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-6">–{n}</span>
             <div class="flex-1 h-1.5 bg-black/8 dark:bg-white/8 rounded-full">
-              <div class="h-full bg-indigo-500 rounded-full" style={`width: ${Math.min((delayMs / 600) * 100, 100)}%`}></div>
+              <div class="h-full bg-indigo-500 rounded-full" style={`width: ${(n / 5) * 100}%`}></div>
             </div>
             <span class="text-[9px] font-mono text-slate-500 w-10 text-right">{delayMs}ms</span>
           </div>
