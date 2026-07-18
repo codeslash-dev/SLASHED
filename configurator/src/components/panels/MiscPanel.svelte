@@ -1,6 +1,7 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import Toggle from '../inputs/Toggle.svelte';
   import { SIZE_SCALE } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset, onBulkChange }: {
@@ -11,16 +12,15 @@
   } = $props();
 
   const Z_INDEX_STEPS = [
-    { label: "Below",     token: "--sf-z-below",     note: "Behind content (e.g. decorative BG)" },
-    { label: "Raised",    token: "--sf-z-raised",    note: "Slightly above flow" },
-    { label: "Dropdown",  token: "--sf-z-dropdown",  note: "Dropdowns, popovers" },
-    { label: "Sticky",    token: "--sf-z-sticky",    note: "Sticky headers, toolbars" },
-    { label: "Fixed",     token: "--sf-z-fixed",     note: "Fixed UI chrome" },
-    { label: "Overlay",   token: "--sf-z-overlay",   note: "Modals, drawers backdrop" },
-    { label: "Modal",     token: "--sf-z-modal",     note: "Modal dialogs" },
-    { label: "Popover",   token: "--sf-z-popover",   note: "Tooltips, menus" },
-    { label: "Tooltip",   token: "--sf-z-tooltip",   note: "Inline tooltips" },
-    { label: "Toast",     token: "--sf-z-toast",     note: "Notifications" },
+    { label: "Below",     token: "--sf-z-below",     note: "Behind content (e.g. decorative BG)", def: -1 },
+    { label: "Raised",    token: "--sf-z-raised",    note: "Slightly above flow",                 def: 1 },
+    { label: "Sticky",    token: "--sf-z-sticky",    note: "Sticky headers, toolbars",            def: 1000 },
+    { label: "Fixed",     token: "--sf-z-fixed",     note: "Fixed UI chrome",                     def: 1010 },
+    { label: "Dropdown",  token: "--sf-z-dropdown",  note: "Dropdowns, popovers",                 def: 1020 },
+    { label: "Overlay",   token: "--sf-z-overlay",   note: "Modals, drawers backdrop",            def: 1030 },
+    { label: "Modal",     token: "--sf-z-modal",     note: "Modal dialogs",                       def: 1040 },
+    { label: "Toast",     token: "--sf-z-toast",     note: "Notifications",                       def: 1050 },
+    { label: "Tooltip",   token: "--sf-z-tooltip",   note: "Inline tooltips",                     def: 1060 },
   ];
 
   const SCROLL_BEHAVIORS = [
@@ -155,18 +155,17 @@
         onChange={(v) => onSet("--sf-z-base", String(v))}
         onReset={() => onReset("--sf-z-base")}
       />
-      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 space-y-1.5">
+      <div class="space-y-2">
         {#each Z_INDEX_STEPS as z (z.token)}
-          {@const isOverridden = z.token in overrides}
-          <div class="flex items-center gap-2">
-            <div class={`w-1.5 h-1.5 rounded-full shrink-0 ${isOverridden ? "bg-amber-400" : "bg-black/20 dark:bg-white/20"}`}></div>
-            <span class="text-[9px] font-mono text-slate-600 dark:text-slate-400 w-20 shrink-0">{z.label}</span>
-            <span class="text-[8px] text-slate-400 dark:text-slate-600 flex-1">{z.note}</span>
-            <span class="text-[8px] font-mono text-slate-500">{z.token.replace("--sf-z-", "")}</span>
-          </div>
+          <SliderRow
+            label={z.label} value={parseNum(overrides[z.token], z.def)} min={-1} max={1100} step={1}
+            help={`${z.token} — ${z.note}`}
+            overridden={z.token in overrides}
+            onChange={(v) => onSet(z.token, String(v))}
+            onReset={() => onReset(z.token)}
+          />
         {/each}
       </div>
-      <p class="text-[9px] text-slate-400 dark:text-slate-600">Override individual z-index tokens in the "All tokens" tab.</p>
     {/if}
   </section>
 
@@ -623,15 +622,12 @@
         ] as f (f.token)}
           {@const cur = overrides[f.token] ?? "0"}
           <div class="flex items-center gap-2 py-0.5">
-            <button
-              type="button"
-              aria-label={f.label}
-              aria-pressed={cur === "1"}
-              onclick={() => cur === "1" ? onReset(f.token) : onSet(f.token, "1")}
-              class={`w-8 h-4 rounded-full transition-colors relative cursor-pointer shrink-0 ${cur === "1" ? "bg-indigo-600" : "bg-black/10 dark:bg-white/10"}`}
-            >
-              <div class={`absolute top-0.5 w-3 h-3 bg-white rounded-full shadow transition-transform ${cur === "1" ? "translate-x-4" : "translate-x-0.5"}`}></div>
-            </button>
+            <Toggle
+              size="sm"
+              checked={cur === "1"}
+              ariaLabel={f.label}
+              onToggle={() => cur === "1" ? onReset(f.token) : onSet(f.token, "1")}
+            />
             <span class="text-[9px] font-mono text-slate-700 dark:text-slate-300 w-24 shrink-0">{f.label}</span>
             <span class="text-[9px] text-slate-400 dark:text-slate-600 flex-1">{f.note}</span>
             {#if f.token in overrides}

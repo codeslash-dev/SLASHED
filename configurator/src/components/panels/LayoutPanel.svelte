@@ -2,6 +2,8 @@
   import type { SlashedToken } from '../../types';
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import AspectRatioInput from '../inputs/AspectRatioInput.svelte';
+  import RawTokenRow from '../inputs/RawTokenRow.svelte';
   import { themeState } from '../../lib/theme.svelte';
   import { SPACE_SCALE, CONTAINER_SCALE } from '../../lib/variableScales';
 
@@ -556,18 +558,11 @@
         <section class="space-y-2">
           <div class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Frame ratio</div>
           <p class="text-[9px] text-slate-400 dark:text-slate-600">--sf-frame-ratio — aspect ratio for .sf-frame</p>
-          <div class="grid grid-cols-5 gap-1">
-            {#each FRAME_PRESETS as r (r)}
-              <button
-                onclick={() => r === "16 / 9" ? onReset("--sf-frame-ratio") : onSet("--sf-frame-ratio", r)}
-                class={`py-1 rounded-lg text-[9px] border transition-all cursor-pointer font-mono ${
-                  frameRatio.replace(/\s/g, "") === r.replace(/\s/g, "")
-                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                    : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
-                }`}
-              >{r}</button>
-            {/each}
-          </div>
+          <AspectRatioInput
+            token="--sf-frame-ratio" value={frameRatio} defaultValue="16 / 9"
+            presets={FRAME_PRESETS} columns={5} dense
+            {onSet} {onReset}
+          />
         </section>
 
         <!-- Reel -->
@@ -690,22 +685,13 @@
           { label: "Cinema",   token: "--sf-ratio-cinema",   def: "21 / 9"  },
           { label: "Golden",   token: "--sf-ratio-golden",   def: "1.618 / 1" },
         ] as r (r.token)}
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-16 shrink-0">{r.label}</span>
-            <input
-              type="text"
-              value={overrides[r.token] ?? ""}
-              placeholder={r.def}
-              oninput={(e) => {
-                const v = (e.target as HTMLInputElement).value.trim();
-                v ? onSet(r.token, v) : onReset(r.token);
-              }}
-              class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
-            />
-            {#if r.token in overrides}
-              <button onclick={() => onReset(r.token)} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-            {/if}
-          </div>
+          <RawTokenRow
+            label={r.label} labelWidth="w-16"
+            value={overrides[r.token] ?? ""} placeholder={r.def}
+            overridden={r.token in overrides}
+            onSet={(v) => onSet(r.token, v)}
+            onReset={() => onReset(r.token)}
+          />
         {/each}
       </div>
     {/if}

@@ -3,6 +3,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import Toggle from '../inputs/Toggle.svelte';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
@@ -97,20 +98,11 @@
           <div class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">Shadow glow</div>
           <div class="text-[9px] text-slate-500 mt-0.5">Ambient glow on elevated surfaces</div>
         </div>
-        <button
-          aria-label={glowDisabled ? "Enable shadow glow" : "Disable shadow glow"}
-          onclick={() => {
-            if (glowDisabled) onReset("--sf-shadow-glow");
-            else onSet("--sf-shadow-glow", "none");
-          }}
-          class={`w-9 h-5 rounded-full transition-colors relative cursor-pointer ${
-            !glowDisabled ? "bg-indigo-600" : "bg-black/10 dark:bg-white/10"
-          }`}
-        >
-          <div class={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
-            !glowDisabled ? "translate-x-4" : "translate-x-0.5"
-          }`}></div>
-        </button>
+        <Toggle
+          checked={!glowDisabled}
+          ariaLabel={glowDisabled ? "Enable shadow glow" : "Disable shadow glow"}
+          onToggle={() => glowDisabled ? onReset("--sf-shadow-glow") : onSet("--sf-shadow-glow", "none")}
+        />
       </div>
 
       {#if !glowDisabled}

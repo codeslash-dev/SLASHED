@@ -2,6 +2,7 @@
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
+  import Toggle from '../inputs/Toggle.svelte';
   import { themeState } from '../../lib/theme.svelte';
 
   // <option> only reliably accepts a background via inline style (no dark:
@@ -104,20 +105,11 @@
       <div class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">Disable motion</div>
       <div class="text-[9px] text-slate-500 mt-0.5">Respects prefers-reduced-motion</div>
     </div>
-    <button
+    <Toggle
+      checked={motionDisabled}
       title={motionDisabled ? "Enable motion" : "Disable motion"}
-      onclick={() => {
-        if (motionDisabled) onReset("--sf-motion-scale");
-        else onSet("--sf-motion-scale", "0");
-      }}
-      class={`w-9 h-5 rounded-full transition-colors relative cursor-pointer ${
-        motionDisabled ? "bg-indigo-600" : "bg-black/10 dark:bg-white/10"
-      }`}
-    >
-      <div class={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
-        motionDisabled ? "translate-x-4" : "translate-x-0.5"
-      }`}></div>
-    </button>
+      onToggle={() => motionDisabled ? onReset("--sf-motion-scale") : onSet("--sf-motion-scale", "0")}
+    />
   </div>
 
   {#if motionDisabled}

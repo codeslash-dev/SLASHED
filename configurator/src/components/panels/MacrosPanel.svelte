@@ -1,6 +1,8 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import AspectRatioInput from '../inputs/AspectRatioInput.svelte';
+  import RawTokenRow from '../inputs/RawTokenRow.svelte';
   import { SPACE_SCALE, RADIUS_SCALE } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
@@ -193,24 +195,11 @@
     </button>
     {#if showAspect}
       <p class="text-[9px] text-slate-400 dark:text-slate-600">--sf-aspect — default ratio for .sf-aspect / .sf-frame</p>
-      <div class="grid grid-cols-3 gap-1.5">
-        {#each ASPECT_PRESETS as p (p.value)}
-          <button
-            onclick={() => p.value === "16 / 9" ? onReset("--sf-aspect") : onSet("--sf-aspect", p.value)}
-            class={`py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
-              aspectVal.replace(/\s/g, "") === p.value.replace(/\s/g, "")
-                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
-            }`}
-          >{p.label}</button>
-        {/each}
-      </div>
-      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 flex justify-center">
-        <div
-          class="bg-indigo-500/30 border border-indigo-500/30 rounded-lg flex items-center justify-center text-[9px] font-mono text-indigo-800 dark:text-indigo-200"
-          style={`aspect-ratio:${aspectVal};max-height:120px;max-width:100%;width:auto;height:120px`}
-        >{aspectVal}</div>
-      </div>
+      <AspectRatioInput
+        token="--sf-aspect" value={aspectVal} defaultValue="16 / 9"
+        presets={ASPECT_PRESETS} columns={3} showPreview
+        {onSet} {onReset}
+      />
     {/if}
   </section>
 
@@ -290,22 +279,14 @@
         <div class="absolute inset-0" style={`background:linear-gradient(${scrimDir}, ${scrimColor}, transparent)`}></div>
         <span class="relative text-[11px] font-bold text-white">Caption over scrim</span>
       </div>
-      <div class="flex items-center gap-2">
-        <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-20 shrink-0">Text shadow</div>
-        <input
-          type="text"
-          value={overrides["--sf-scrim-text-shadow"] ?? ""}
-          placeholder="0 1px 3px oklch(0 0 0 / 0.6)"
-          oninput={(e) => {
-            const v = (e.target as HTMLInputElement).value.trim();
-            v ? onSet("--sf-scrim-text-shadow", v) : onReset("--sf-scrim-text-shadow");
-          }}
-          class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
-        />
-        {#if "--sf-scrim-text-shadow" in overrides}
-          <button onclick={() => onReset("--sf-scrim-text-shadow")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-        {/if}
-      </div>
+      <RawTokenRow
+        label="Text shadow"
+        value={overrides["--sf-scrim-text-shadow"] ?? ""}
+        placeholder="0 1px 3px oklch(0 0 0 / 0.6)"
+        overridden={"--sf-scrim-text-shadow" in overrides}
+        onSet={(v) => onSet("--sf-scrim-text-shadow", v)}
+        onReset={() => onReset("--sf-scrim-text-shadow")}
+      />
     {/if}
   </section>
 
@@ -431,19 +412,14 @@
               />
             </div>
           {:else}
-            <input
-              type="text"
-              value={overrides[t.token] ?? ""}
-              placeholder={t.placeholder}
-              oninput={(e) => {
-                const v = (e.target as HTMLInputElement).value;
-                v.trim() ? onSet(t.token, v) : onReset(t.token);
-              }}
-              class="flex-1 min-w-0 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
-            />
-            {#if t.token in overrides}
-              <button onclick={() => onReset(t.token)} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-            {/if}
+            <div class="flex-1 min-w-0">
+              <RawTokenRow
+                value={overrides[t.token] ?? ""} placeholder={t.placeholder}
+                overridden={t.token in overrides}
+                onSet={(v) => onSet(t.token, v)}
+                onReset={() => onReset(t.token)}
+              />
+            </div>
           {/if}
         </div>
       {/each}
