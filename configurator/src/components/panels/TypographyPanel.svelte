@@ -420,9 +420,8 @@
     />
 
     <!-- TEXT generator -->
-    <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 pt-1">Text</div>
     <ClampField
-      title="Base size &amp; ratio"
+      title="Text base size &amp; ratio"
       minValue={baseMin} maxValue={baseMax}
       min={0.7} max={2} step={0.01} unit="rem"
       minLabel="Mobile" maxLabel="Desktop"
@@ -438,7 +437,7 @@
       onRatioMaxChange={(v) => onSet("--sf-text-ratio-max", String(v))}
     />
     <SliderRow
-      label="Scale multiplier" value={textScale} min={0.75} max={1.5} step={0.01}
+      label="Text scale multiplier" value={textScale} min={0.75} max={1.5} step={0.01}
       help="--sf-text-scale — multiplies every text size at once."
       overridden={"--sf-text-scale" in overrides}
       onChange={(v) => onSet("--sf-text-scale", String(v))}
@@ -448,9 +447,8 @@
     <!-- DISPLAY generator — identical controls; the ratio block edits the SAME
          shared --sf-text-ratio-* tokens (the framework derives display sizes
          from the text ratio), so the two generators stay in lockstep. -->
-    <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 pt-1">Display</div>
     <ClampField
-      title="Base size &amp; ratio (ratio shared with text)"
+      title="Display base size &amp; ratio"
       minValue={dispMin} maxValue={dispMax}
       min={1.5} max={6} step={0.05} unit="rem"
       minLabel="Mobile" maxLabel="Desktop"
@@ -466,7 +464,7 @@
       onRatioMaxChange={(v) => onSet("--sf-text-ratio-max", String(v))}
     />
     <SliderRow
-      label="Scale multiplier" value={displayScale} min={0.75} max={1.5} step={0.01}
+      label="Display scale multiplier" value={displayScale} min={0.75} max={1.5} step={0.01}
       help="--sf-text-display-scale — multiplies every display size at once."
       overridden={"--sf-text-display-scale" in overrides}
       onChange={(v) => onSet("--sf-text-display-scale", String(v))}
