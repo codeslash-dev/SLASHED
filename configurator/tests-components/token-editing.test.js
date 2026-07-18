@@ -106,13 +106,13 @@ describe('TokenRow', () => {
     render(TokenRow, { props: { token, onSet: () => {}, onReset: () => {} } });
     expect(screen.getByText('space-m')).toBeTruthy();
     expect(screen.getByText('1rem')).toBeTruthy();
-    expect(screen.queryByText('✕')).toBeNull();
+    expect(screen.queryByText('reset')).toBeNull();
   });
 
   test('bind: renders the override value and reset affordance when overridden', () => {
     render(TokenRow, { props: { token, overrideValue: '2rem', onSet: () => {}, onReset: () => {} } });
     expect(screen.getByText('2rem')).toBeTruthy();
-    expect(screen.getByText('✕')).toBeTruthy();
+    expect(screen.getByText('reset')).toBeTruthy();
   });
 
   test('override-set: editing the value and blurring with a new value calls onSet', async () => {
@@ -143,10 +143,10 @@ describe('TokenRow', () => {
     expect(onSet).not.toHaveBeenCalled();
   });
 
-  test('reset: clicking the ✕ button calls onReset directly', async () => {
+  test('reset: clicking the reset button calls onReset directly', async () => {
     const onReset = vi.fn();
     render(TokenRow, { props: { token, overrideValue: '2rem', onSet: () => {}, onReset } });
-    await fireEvent.click(screen.getByText('✕'));
+    await fireEvent.click(screen.getByText('reset'));
     expect(onReset).toHaveBeenCalledOnce();
   });
 });

@@ -131,7 +131,7 @@
         currentRaw={overrides["--sf-flow-space"]}
         onRawSet={(v) => onSet("--sf-flow-space", v)}
       />
-      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3" style={`display:flex;flex-direction:column;gap:${flowSpace}rem`}>
+      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3" style={`display:flex;flex-direction:column;gap:var(--sf-flow-space, 0.5rem)`}>
         {#each [0, 1, 2] as i (i)}
           <div class="h-2.5 rounded bg-indigo-500/40" style={`width:${90 - i * 12}%`}></div>
         {/each}
@@ -228,7 +228,7 @@
       </div>
       <div class="relative h-24 rounded-xl border border-black/8 dark:border-white/8 overflow-hidden flex items-end p-2"
         style="background:repeating-linear-gradient(45deg,#475569,#475569 8px,#334155 8px,#334155 16px)">
-        <div class="absolute inset-0" style={`background:linear-gradient(${scrimDir}, ${scrimColor}, transparent)`}></div>
+        <div class="absolute inset-0" style={`background:linear-gradient(var(--sf-scrim-direction, to top), var(--sf-scrim-color, oklch(0 0 0 / 0.55)), transparent)`}></div>
         <span class="relative text-[11px] font-bold text-white">Caption over scrim</span>
       </div>
       <RawTokenRow
@@ -366,7 +366,7 @@
 
       <div
         class="h-24 rounded-xl border border-black/8 dark:border-white/8 overflow-hidden flex items-end p-2"
-        style={`background-color:${surfaceBgColor};background-image:${surfaceBgOverlay}, ${surfaceBgImage};background-size:${surfaceBgSize};background-position:${surfaceBgPosition};background-repeat:${surfaceBgRepeat};background-attachment:${surfaceBgAttachment};animation:${surfaceBgAnimation}`}
+        style={`background-color:var(--sf-surface-bg-color, transparent);background-image:var(--sf-surface-bg-overlay, none), var(--sf-surface-bg-image, none);background-size:var(--sf-surface-bg-size, cover);background-position:var(--sf-surface-bg-position, center);background-repeat:var(--sf-surface-bg-repeat, no-repeat);background-attachment:var(--sf-surface-bg-attachment, scroll);animation:var(--sf-surface-bg-animation, none)`}
       >
         <span class="text-[11px] font-bold text-white mix-blend-difference">.sf-surface-bg preview</span>
       </div>

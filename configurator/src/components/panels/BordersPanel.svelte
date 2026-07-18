@@ -14,7 +14,6 @@
 
   const BORDER_STYLES = ["solid", "dashed", "dotted"];
   const RADIUS_STEPS = ["xs", "s", "m", "l", "xl", "2xl", "full"];
-  const BASE_RADII: Record<string, number> = { xs: 2, s: 4, m: 8, l: 12, xl: 16, "2xl": 24, full: 9999 };
 
   const RADIUS_FINE: Array<{ step: string; name: string; default: number; max: number; step_size: number; rawDefault: string }> = [
     { step: "xs",  name: "--sf-radius-xs",  default: 2,  max: 16, step_size: 0.5, rawDefault: "calc(2px * var(--sf-radius-scale))"  },
@@ -50,7 +49,6 @@
     return isNaN(v) ? fallback : v;
   }
 
-  let radiusScale  = $derived(parseNum(overrides["--sf-radius-scale"], 1));
   let borderScale  = $derived(parseNum(overrides["--sf-border-scale"], 1));
   let focusWidth   = $derived(parseNum(overrides["--sf-focus-ring-width"], 2, "px"));
   let focusOffset  = $derived(parseNum(overrides["--sf-focus-ring-offset"], 2, "px"));
@@ -130,14 +128,11 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 space-y-2">
         {#each [1, 2, 3, 4] as base (base)}
           <div class="flex items-center gap-3">
-            <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-10">{base}px →</span>
+            <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-14">width-{base}</span>
             <div
               class="flex-1 bg-indigo-400/50 rounded"
-              style={`height: ${Math.max(base * borderScale, 0.5)}px`}
+              style={`height: max(var(--sf-border-width-${base}, ${base}px), 0.5px)`}
             ></div>
-            <span class="text-[9px] font-mono text-slate-500 w-10 text-right">
-              {(base * borderScale).toFixed(1)}px
-            </span>
           </div>
         {/each}
       </div>
@@ -178,11 +173,11 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center gap-3">
         <div
           class="px-4 py-2 rounded-lg text-[11px] text-slate-700 dark:text-slate-300 bg-black/4 dark:bg-white/4"
-          style={`border: ${Math.max(borderScale, 0.5)}px ${borderStyle} ${borderColor || "var(--sf-color-border, #64748b)"}`}
+          style={`border: var(--sf-border-width-1, 1px) ${borderStyle} ${borderColor || "var(--sf-color-border, #64748b)"}`}
         >
           Border sample
         </div>
-        <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600">{(1 * borderScale).toFixed(1)}px · {borderStyle}</span>
+        <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600">width-1 · {borderStyle}</span>
       </div>
   </Section>
 
@@ -258,7 +253,7 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center">
         <div
           class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-800 dark:text-indigo-200"
-          style={`outline: ${focusWidth}px solid ${focusRingColor || "oklch(0.7 0.2 235)"}; outline-offset: ${focusOffset}px`}
+          style={`outline: var(--sf-focus-ring-width, 2px) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color, oklch(0.7 0.2 235)); outline-offset: var(--sf-focus-ring-offset, 2px)`}
         >
           Focus preview
         </div>
@@ -316,12 +311,10 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4">
         <div class="flex gap-3 flex-wrap">
           {#each RADIUS_STEPS as step (step)}
-            {@const base = BASE_RADII[step] ?? 6}
-            {@const computed = step === "full" ? 9999 : base * radiusScale}
             <div class="flex flex-col items-center gap-1">
               <div
                 class="w-10 h-10 bg-indigo-500/40 border border-indigo-500/30"
-                style={`border-radius: ${Math.min(computed, 9999)}px`}
+                style={`border-radius: var(--sf-radius-${step})`}
               ></div>
               <span class="text-[8px] font-mono text-slate-400 dark:text-slate-600">{step}</span>
             </div>
@@ -345,7 +338,7 @@
         overridden={"--sf-media-radius" in overrides}
         onChange={(v) => onSet("--sf-media-radius", `${v}rem`)}
         onReset={() => onReset("--sf-media-radius")}
-        rawDefault="var(--sf-radius-m)"
+        rawDefault="0"
         variableOptions={RADIUS_SCALE}
         currentRaw={overrides["--sf-media-radius"]}
         onRawSet={(v) => onSet("--sf-media-radius", v)}
@@ -353,7 +346,7 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center">
         <div
           class="w-16 h-16 bg-indigo-500/40 border border-indigo-500/30"
-          style={`border-radius: ${mediaRadius}rem`}
+          style={`border-radius: var(--sf-media-radius, 0)`}
         ></div>
       </div>
   </Section>
