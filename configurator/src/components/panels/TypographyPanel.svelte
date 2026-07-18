@@ -813,18 +813,18 @@
     {@const midBase = (baseMin + baseMax) / 2}
     {@const midDisp = (dispMin + dispMax) / 2}
     {@const midRatio = (ratioMin + ratioMax) / 2}
-    <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 space-y-1 overflow-hidden">
+    <!-- Each "Aa" renders at its real midpoint rem size — no cap. The box
+         scrolls if the largest steps are tall so nothing is distorted. -->
+    <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 space-y-1 max-h-96 overflow-y-auto">
       <div class="text-[9px] font-semibold text-slate-500 mb-1">Text</div>
       {#each [...TEXT_STEPS].reverse() as { label, factor } (label)}
         {@const size = midBase * factor * textScale}
         <div class="flex items-baseline gap-2">
           <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-6 shrink-0 text-right">{label}</span>
           <span
-            class="text-slate-900/80 dark:text-white/80 font-medium leading-none truncate"
-            style={`font-size: ${Math.min(size, 2.5)}rem; font-family: ${currentBodyFont || "inherit"}`}
-          >
-            Aa
-          </span>
+            class="text-slate-900/80 dark:text-white/80 font-medium leading-none"
+            style={`font-size: ${size.toFixed(3)}rem; font-family: ${currentBodyFont || "inherit"}`}
+          >Aa</span>
           <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 ml-auto shrink-0">{size.toFixed(2)}rem</span>
         </div>
       {/each}
@@ -839,11 +839,9 @@
         <div class="flex items-baseline gap-2">
           <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-6 shrink-0 text-right">{label}</span>
           <span
-            class="text-slate-900/80 dark:text-white/80 font-medium leading-none truncate"
-            style={`font-size: ${Math.min(size, 2.5)}rem; font-family: ${currentHeadingFont || currentBodyFont || "inherit"}`}
-          >
-            Aa
-          </span>
+            class="text-slate-900/80 dark:text-white/80 font-medium leading-none"
+            style={`font-size: ${size.toFixed(3)}rem; font-family: ${currentHeadingFont || currentBodyFont || "inherit"}`}
+          >Aa</span>
           <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 ml-auto shrink-0">{size.toFixed(2)}rem</span>
         </div>
       {/each}
