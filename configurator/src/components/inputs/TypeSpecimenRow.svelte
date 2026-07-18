@@ -14,11 +14,15 @@
 
   let el = $state<HTMLElement | null>(null);
   let px = $state(0);
+  let rootPx = $state(16);
 
   $effect(() => {
     if (!el) return;
     const node = el;
-    const measure = () => { px = parseFloat(getComputedStyle(node).fontSize) || 0; };
+    const measure = () => {
+      px = parseFloat(getComputedStyle(node).fontSize) || 0;
+      rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    };
     measure();
     // A font-size change resizes the span, so ResizeObserver re-measures on
     // every token/override change and on viewport-driven fluid changes alike.
@@ -35,5 +39,5 @@
     class="text-slate-900/80 dark:text-white/80 font-medium leading-none"
     style={`font-size: var(${varName}); font-family: var(${family})`}
   >Aa</span>
-  <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 ml-auto shrink-0">{px ? `${(px / 16).toFixed(2)}rem` : ""}</span>
+  <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 ml-auto shrink-0">{px ? `${(px / rootPx).toFixed(2)}rem` : ""}</span>
 </div>

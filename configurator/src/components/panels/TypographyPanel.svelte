@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { SlashedToken } from '../../types';
   import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
@@ -14,7 +13,6 @@
   let optionBg = $derived(themeState.value === 'dark' ? '#16161e' : '#ffffff');
 
   let { overrides, onSet, onReset, onBulkChange }: {
-    tokens: SlashedToken[];
     overrides: Record<string, string>;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
@@ -148,6 +146,7 @@
 
   let activeLevelId = $state<string>("h1");
   let activeLevel = $derived(TYPE_LEVELS.find((l) => l.id === activeLevelId)!);
+  let activeMw = $derived(levelMaxWidthToken(activeLevelId));
 
   const knobs = KNOBS_BY_DOMAIN["typography"] ?? [];
 
@@ -224,6 +223,11 @@
   function setLevel(token: string | null, value: string, dflt: string) {
     if (!token) return;
     if (value === dflt) onReset(token); else onSet(token, value);
+  }
+  // Heading levels also own a --sf-h{n}-max-width token; the tab dot and the
+  // bulk reset must track it alongside size/lh/weight/tracking.
+  function levelMaxWidthToken(id: string): string | null {
+    return id.startsWith("h") ? `--sf-${id}-max-width` : null;
   }
 </script>
 
@@ -315,6 +319,7 @@
       </div>
       <input
         type="text"
+        aria-label="Google font name"
         placeholder="…or type any Google font name"
         oninput={(e) => { googleFontChoice = (e.target as HTMLInputElement).value; }}
         value={googleFontChoice}
@@ -368,6 +373,7 @@
         <input
           type="text"
           value={overrides["--sf-font-features"] ?? ""}
+          aria-label="Font features"
           placeholder="normal"
           oninput={(e) => {
             const v = (e.target as HTMLInputElement).value.trim();
@@ -384,6 +390,7 @@
         <input
           type="text"
           value={overrides["--sf-font-variation"] ?? ""}
+          aria-label="Font variation settings"
           placeholder="normal"
           oninput={(e) => {
             const v = (e.target as HTMLInputElement).value.trim();
@@ -605,7 +612,8 @@
     <!-- Level selector -->
     <div class="flex bg-black/5 dark:bg-white/5 border border-black/8 dark:border-white/8 rounded-lg p-0.5 gap-0.5">
       {#each TYPE_LEVELS as lvl (lvl.id)}
-        {@const isOv = (lvl.size in overrides) || (lvl.lh in overrides) || (lvl.wt in overrides) || (!!lvl.ls && lvl.ls in overrides)}
+        {@const lvlMw = levelMaxWidthToken(lvl.id)}
+        {@const isOv = (lvl.size in overrides) || (lvl.lh in overrides) || (lvl.wt in overrides) || (!!lvl.ls && lvl.ls in overrides) || (!!lvlMw && lvlMw in overrides)}
         <button
           onclick={() => { activeLevelId = lvl.id; }}
           class={`relative flex-1 py-1 rounded-md text-[10px] font-bold transition-all cursor-pointer ${
@@ -707,6 +715,7 @@
         <input
           type="text"
           value={overrides[maxWidthToken] ?? ""}
+          aria-label={`${activeLevel.label} max width`}
           placeholder="none"
           oninput={(e) => {
             const v = (e.target as HTMLInputElement).value.trim();
@@ -721,11 +730,12 @@
     {/if}
 
     <div class="flex justify-end">
-      {#if (activeLevel.size in overrides) || (activeLevel.lh in overrides) || (activeLevel.wt in overrides) || (!!activeLevel.ls && activeLevel.ls in overrides)}
+      {#if (activeLevel.size in overrides) || (activeLevel.lh in overrides) || (activeLevel.wt in overrides) || (!!activeLevel.ls && activeLevel.ls in overrides) || (!!activeMw && activeMw in overrides)}
         <button
           onclick={() => {
             const patch: Record<string, null> = { [activeLevel.size]: null, [activeLevel.lh]: null, [activeLevel.wt]: null };
             if (activeLevel.ls) patch[activeLevel.ls] = null;
+            if (activeMw) patch[activeMw] = null;
             onBulkChange(patch);
           }}
           class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer"
@@ -793,6 +803,7 @@
         <input
           type="text"
           value={overrides["--sf-link-external-marker"] ?? ""}
+          aria-label="External link marker"
           placeholder={'" ↗"'}
           oninput={(e) => {
             const v = (e.target as HTMLInputElement).value;
@@ -811,6 +822,7 @@
         <input
           type="text"
           value={overrides["--sf-link-external-label"] ?? ""}
+          aria-label="External link label"
           placeholder={'"opens in a new window or external site"'}
           oninput={(e) => {
             const v = (e.target as HTMLInputElement).value;
@@ -849,6 +861,7 @@
             <input
               type="text"
               value={overrides[row.token] ?? ""}
+              aria-label={`${row.label} max width`}
               placeholder={row.def}
               oninput={(e) => {
                 const v = (e.target as HTMLInputElement).value.trim();

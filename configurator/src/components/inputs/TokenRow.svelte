@@ -64,6 +64,7 @@
     {#if isOverridden}
       <button
         onclick={onReset}
+        aria-label={`Reset ${shortName}`}
         class="text-[9px] text-slate-400 dark:text-slate-600 hover:text-rose-600 dark:hover:text-rose-400 transition-colors cursor-pointer shrink-0"
       >
         reset
