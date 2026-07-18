@@ -454,21 +454,19 @@
           />
           <div class="flex items-center gap-2">
             <span class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-20 shrink-0">Rule style</span>
-            <select
-              value={overrides["--sf-equal-rule-style"] ?? "solid"}
-              onchange={(e) => {
-                const v = (e.target as HTMLSelectElement).value;
-                v === "solid" ? onReset("--sf-equal-rule-style") : onSet("--sf-equal-rule-style", v);
-              }}
-              class="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[9px] font-mono text-slate-700 dark:text-slate-300 focus:outline-none focus:border-indigo-500 cursor-pointer"
-            >
+            <div class="flex-1 grid grid-cols-3 gap-1">
               {#each COLUMN_RULE_STYLES as s (s)}
-                <option value={s} style={`background:${optionBg};`}>{s}</option>
+                {@const cur = overrides["--sf-equal-rule-style"] ?? "solid"}
+                <button
+                  onclick={() => s === "solid" ? onReset("--sf-equal-rule-style") : onSet("--sf-equal-rule-style", s)}
+                  class={`py-1 rounded-lg text-[9px] border transition-all cursor-pointer ${
+                    cur === s
+                      ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
+                      : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
+                  }`}
+                >{s}</button>
               {/each}
-            </select>
-            {#if "--sf-equal-rule-style" in overrides}
-              <button onclick={() => onReset("--sf-equal-rule-style")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
-            {/if}
+            </div>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-20 shrink-0">Rule color</span>
