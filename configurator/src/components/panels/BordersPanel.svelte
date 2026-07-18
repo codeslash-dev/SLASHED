@@ -249,6 +249,24 @@
           onReset={() => onReset("--sf-focus-ring-color")}
         />
       </div>
+      <div>
+        <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Ring style</div>
+        <div class="flex gap-2">
+          {#each BORDER_STYLES as style (style)}
+            {@const current = overrides["--sf-focus-ring-style"] ?? "solid"}
+            <button
+              onclick={() => style === "solid" ? onReset("--sf-focus-ring-style") : onSet("--sf-focus-ring-style", style)}
+              class={`flex-1 py-2 rounded-lg text-[10px] border transition-all cursor-pointer capitalize ${
+                current === style
+                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
+                  : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
+              }`}
+            >
+              {style}
+            </button>
+          {/each}
+        </div>
+      </div>
       <!-- Focus ring preview -->
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center">
         <div

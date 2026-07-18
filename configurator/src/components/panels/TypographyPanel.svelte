@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { KNOBS_BY_DOMAIN } from '../../lib/powerKnobs';
-  import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
   import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
   import ClampField from '../inputs/ClampField.svelte';
   import Section from '../inputs/Section.svelte';
   import TypeSpecimenRow from '../inputs/TypeSpecimenRow.svelte';
   import { themeState } from '../../lib/theme.svelte';
+  import GOOGLE_FONTS_ALL from '../../data/google-fonts.generated.json';
 
   // <option> only reliably accepts a background via inline style (no dark:
   // variant support), so it's derived from the chrome theme directly.
@@ -56,14 +55,11 @@
     { label: "Source Code Pro", value: "'Source Code Pro', 'Courier New', monospace" },
   ];
 
-  // Curated Google Fonts for the dropdown loader.
-  const GOOGLE_FONTS = [
-    "Inter", "Roboto", "Open Sans", "Lato", "Montserrat", "Poppins",
-    "Source Sans 3", "Raleway", "Nunito", "Work Sans", "Manrope", "DM Sans",
-    "Outfit", "Plus Jakarta Sans", "Geist", "Space Grotesk", "Figtree",
-    "Merriweather", "Playfair Display", "Lora", "Source Serif 4", "Roboto Slab",
-    "IBM Plex Sans", "IBM Plex Mono", "JetBrains Mono", "Fira Code", "Space Mono",
-  ];
+  // Full Google Fonts catalogue (family + category), generated from
+  // fonts.google.com/metadata/fonts and sorted by popularity — powers the
+  // autocomplete datalist below. Any of the ~1900 families can be loaded.
+  type GoogleFont = { f: string; c: string };
+  const GOOGLE_FONTS: GoogleFont[] = GOOGLE_FONTS_ALL as GoogleFont[];
 
   const WRAP_OPTIONS = [
     { label: "balance", value: "balance" },
@@ -148,8 +144,6 @@
   let activeLevel = $derived(TYPE_LEVELS.find((l) => l.id === activeLevelId)!);
   let activeMw = $derived(levelMaxWidthToken(activeLevelId));
 
-  const knobs = KNOBS_BY_DOMAIN["typography"] ?? [];
-
   function num(name: string, fallback: number) {
     const v = parseFloat(overrides[name] ?? "");
     return isNaN(v) ? fallback : v;
@@ -177,14 +171,13 @@
   let showWeights     = $state(false);
   let showElements    = $state(false);
   let showLineLengths = $state(false);
-  let showScaleAdvanced = $state(false);
 
   let currentBodyFont    = $derived(overrides["--sf-font-body"] ?? "");
   let currentHeadingFont = $derived(overrides["--sf-font-heading"] ?? "");
   let currentMonoFont    = $derived(overrides["--sf-font-mono"] ?? "ui-monospace, monospace");
 
   let googleFontChoice = $state("");
-  let customFontTarget = $state<"body" | "heading">("body");
+  let customFontTarget = $state<"body" | "heading" | "mono">("body");
 
   function getTrackingVal(t: typeof TRACKING_TOKENS[0]): number {
     const raw = overrides[t.token];
@@ -208,11 +201,17 @@
     }
   }
 
-  function applyCustomFont(fontName: string, target: "body" | "heading") {
+  const FONT_TARGETS = [
+    { id: "body",    label: "Body",    token: "--sf-font-body",    fallback: "sans-serif" },
+    { id: "heading", label: "Heading", token: "--sf-font-heading", fallback: "sans-serif" },
+    { id: "mono",    label: "Mono",    token: "--sf-font-mono",    fallback: "monospace" },
+  ] as const;
+
+  function applyCustomFont(fontName: string, target: "body" | "heading" | "mono") {
     if (!fontName.trim()) return;
     injectGoogleFont(fontName);
-    const token = target === "body" ? "--sf-font-body" : "--sf-font-heading";
-    onSet(token, `'${fontName}', sans-serif`);
+    const t = FONT_TARGETS.find((x) => x.id === target)!;
+    onSet(t.token, `'${fontName}', ${t.fallback}`);
   }
 
   // Per-element helpers
@@ -292,39 +291,36 @@
       </div>
     {/each}
 
-    <!-- Google font loader (dropdown + custom) -->
+    <!-- Google font loader — one autocomplete over the full catalogue
+         (~1900 families, native datalist filtering), applied to body,
+         heading or mono. -->
     <div class="rounded-xl bg-black/4 dark:bg-white/4 border border-black/8 dark:border-white/8 p-3 space-y-2">
-      <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400">Google Font</div>
-      <div class="flex gap-2">
-        <select
-          value={googleFontChoice}
-          onchange={(e) => { googleFontChoice = (e.target as HTMLSelectElement).value; }}
-          class="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
-        >
-          <option value="" style={`background:${optionBg};`}>Pick a font…</option>
-          {#each GOOGLE_FONTS as g (g)}
-            <option value={g} style={`background:${optionBg};`}>{g}</option>
-          {/each}
-        </select>
-        <div class="flex gap-1 shrink-0">
-          <button
-            onclick={() => { customFontTarget = "body"; }}
-            class={`px-2 rounded text-[10px] border transition-all cursor-pointer ${customFontTarget === "body" ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200" : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400"}`}
-          >Body</button>
-          <button
-            onclick={() => { customFontTarget = "heading"; }}
-            class={`px-2 rounded text-[10px] border transition-all cursor-pointer ${customFontTarget === "heading" ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200" : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400"}`}
-          >Heading</button>
-        </div>
+      <div class="flex items-baseline justify-between">
+        <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400">Google Font</div>
+        <div class="text-[9px] text-slate-400 dark:text-slate-600">{GOOGLE_FONTS.length} fonts</div>
       </div>
       <input
         type="text"
+        list="sf-google-fonts"
         aria-label="Google font name"
-        placeholder="…or type any Google font name"
+        placeholder="Type to search all Google Fonts…"
         oninput={(e) => { googleFontChoice = (e.target as HTMLInputElement).value; }}
         value={googleFontChoice}
         class="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[11px] text-slate-800 dark:text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500"
       />
+      <datalist id="sf-google-fonts">
+        {#each GOOGLE_FONTS as g (g.f)}
+          <option value={g.f}>{g.c}</option>
+        {/each}
+      </datalist>
+      <div class="flex gap-1">
+        {#each FONT_TARGETS as t (t.id)}
+          <button
+            onclick={() => { customFontTarget = t.id; }}
+            class={`flex-1 py-1.5 rounded text-[10px] border transition-all cursor-pointer ${customFontTarget === t.id ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200" : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400"}`}
+          >{t.label}</button>
+        {/each}
+      </div>
       <button
         onclick={() => applyCustomFont(googleFontChoice, customFontTarget)}
         class="w-full py-1.5 rounded-lg bg-indigo-600/20 border border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[11px] font-bold cursor-pointer hover:bg-indigo-600/30 transition-all"
@@ -444,7 +440,7 @@
       onRatioMaxChange={(v) => onSet("--sf-text-ratio-max", String(v))}
     />
     <SliderRow
-      label="Text scale multiplier" value={textScale} min={0.75} max={1.5} step={0.01}
+      label="Text scale multiplier" value={textScale} min={0.5} max={2} step={0.05}
       help="--sf-text-scale — multiplies every text size at once."
       overridden={"--sf-text-scale" in overrides}
       onChange={(v) => onSet("--sf-text-scale", String(v))}
@@ -471,7 +467,7 @@
       onRatioMaxChange={(v) => onSet("--sf-text-ratio-max", String(v))}
     />
     <SliderRow
-      label="Display scale multiplier" value={displayScale} min={0.75} max={1.5} step={0.01}
+      label="Display scale multiplier" value={displayScale} min={0.5} max={2} step={0.05}
       help="--sf-text-display-scale — multiplies every display size at once."
       overridden={"--sf-text-display-scale" in overrides}
       onChange={(v) => onSet("--sf-text-display-scale", String(v))}
@@ -489,29 +485,6 @@
       {#each ["l", "m", "s"] as label (label)}
         <TypeSpecimenRow {label} varName={`--sf-text-display-${label}`} family="--sf-font-heading" />
       {/each}
-    </div>
-
-    <!-- Advanced power knobs — de-emphasised, at end of the scale group -->
-    <div class="pt-1">
-      <button
-        onclick={() => { showScaleAdvanced = !showScaleAdvanced; }}
-        aria-expanded={showScaleAdvanced}
-        class="w-full flex items-center justify-between text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400 transition-colors cursor-pointer"
-      >
-        <div class="text-[10px] font-semibold uppercase tracking-widest">Advanced</div>
-        <span class="text-[10px]">{showScaleAdvanced ? "▲" : "▼"}</span>
-      </button>
-      {#if showScaleAdvanced}
-        <div class="mt-3 space-y-4">
-          {#each knobs as k (k.name)}
-            <PowerKnobRow
-              knob={k}
-              {overrides}
-              onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
-            />
-          {/each}
-        </div>
-      {/if}
     </div>
   </Section>
 
