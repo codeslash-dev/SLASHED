@@ -3,6 +3,7 @@
   import ColorInput from '../inputs/ColorInput.svelte';
   import AspectRatioInput from '../inputs/AspectRatioInput.svelte';
   import RawTokenRow from '../inputs/RawTokenRow.svelte';
+  import Section from '../inputs/Section.svelte';
   import { SPACE_SCALE, RADIUS_SCALE } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
@@ -118,16 +119,7 @@
   </p>
 
   <!-- FLOW -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showFlow = !showFlow; }}
-      aria-expanded={showFlow}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Flow rhythm</div>
-      <span class="text-[10px] text-slate-500">{showFlow ? "▲" : "▼"}</span>
-    </button>
-    {#if showFlow}
+  <Section title="Flow rhythm" bind:open={showFlow}>
       <SliderRow
         label="Flow space" value={flowSpace} min={0} max={4} step={0.0625} unit="rem"
         help="--sf-flow-space — vertical gap between adjacent children of .sf-flow"
@@ -144,22 +136,12 @@
           <div class="h-2.5 rounded bg-indigo-500/40" style={`width:${90 - i * 12}%`}></div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- LINE CLAMP -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showLineClamp = !showLineClamp; }}
-      aria-expanded={showLineClamp}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line clamp</div>
-      <span class="text-[10px] text-slate-500">{showLineClamp ? "▲" : "▼"}</span>
-    </button>
-    {#if showLineClamp}
+  <Section title="Line clamp" bind:open={showLineClamp}>
       <SliderRow
         label="Default lines" value={lineClamp} min={1} max={8} step={1}
         help="--sf-line-clamp — default line count for .sf-line-clamp (override per element)"
@@ -178,44 +160,24 @@
           Extra filler text keeps the block taller than the clamp at every setting.
         </p>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- ASPECT -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showAspect = !showAspect; }}
-      aria-expanded={showAspect}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Aspect ratio</div>
-      <span class="text-[10px] text-slate-500">{showAspect ? "▲" : "▼"}</span>
-    </button>
-    {#if showAspect}
+  <Section title="Aspect ratio" bind:open={showAspect}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600">--sf-aspect — default ratio for .sf-aspect / .sf-frame</p>
       <AspectRatioInput
         token="--sf-aspect" value={aspectVal} defaultValue="16 / 9"
         presets={ASPECT_PRESETS} columns={3} showPreview
         {onSet} {onReset}
       />
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- SCROLL SHADOW -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showScrollShadow = !showScrollShadow; }}
-      aria-expanded={showScrollShadow}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scroll shadow</div>
-      <span class="text-[10px] text-slate-500">{showScrollShadow ? "▲" : "▼"}</span>
-    </button>
-    {#if showScrollShadow}
+  <Section title="Scroll shadow" bind:open={showScrollShadow}>
       <SliderRow
         label="Fade size" value={scrollSize} min={0} max={6} step={0.25} unit="rem"
         help="--sf-scroll-shadow-size — size of the edge fade mask on .sf-scroll-shadow / .sf-overflow-fade"
@@ -229,22 +191,12 @@
           style={`mask:linear-gradient(to right, transparent, #000 ${scrollSize}rem, #000 calc(100% - ${scrollSize}rem), transparent)`}
         ></div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- SCRIM -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showScrim = !showScrim; }}
-      aria-expanded={showScrim}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrim overlay</div>
-      <span class="text-[10px] text-slate-500">{showScrim ? "▲" : "▼"}</span>
-    </button>
-    {#if showScrim}
+  <Section title="Scrim overlay" bind:open={showScrim}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600">--sf-scrim-color / --sf-scrim-direction — darkening gradient for .sf-scrim</p>
       <div class="flex items-center gap-2">
         <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 w-20 shrink-0">Color</div>
@@ -287,22 +239,12 @@
         onSet={(v) => onSet("--sf-scrim-text-shadow", v)}
         onReset={() => onReset("--sf-scrim-text-shadow")}
       />
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- PROSE -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showProse = !showProse; }}
-      aria-expanded={showProse}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Prose rhythm</div>
-      <span class="text-[10px] text-slate-500">{showProse ? "▲" : "▼"}</span>
-    </button>
-    {#if showProse}
+  <Section title="Prose rhythm" bind:open={showProse}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600">Spacing tokens for .sf-prose. Defaults track the space scale; sliders write rem overrides.</p>
       <div class="space-y-2">
         {#each PROSE_SPACE as t (t.token)}
@@ -343,20 +285,10 @@
           </div>
         </div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <!-- CONTENT VISIBILITY -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showContentIntrinsic = !showContentIntrinsic; }}
-      aria-expanded={showContentIntrinsic}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Content visibility</div>
-      <span class="text-[10px] text-slate-500">{showContentIntrinsic ? "▲" : "▼"}</span>
-    </button>
-    {#if showContentIntrinsic}
+  <Section title="Content visibility" bind:open={showContentIntrinsic}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600 leading-relaxed">
         --sf-content-intrinsic-size — placeholder size used with <span class="font-mono text-slate-600 dark:text-slate-400">content-visibility: auto</span> to improve scroll performance on tall pages.
       </p>
@@ -376,22 +308,12 @@
           <button onclick={() => onReset("--sf-content-intrinsic-size")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
         {/if}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- BACKGROUND SURFACE -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showSurfaceBg = !showSurfaceBg; }}
-      aria-expanded={showSurfaceBg}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Background surface</div>
-      <span class="text-[10px] text-slate-500">{showSurfaceBg ? "▲" : "▼"}</span>
-    </button>
-    {#if showSurfaceBg}
+  <Section title="Background surface" bind:open={showSurfaceBg}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600 leading-relaxed">
         --sf-surface-bg-* — input set composed by the <span class="font-mono text-slate-600 dark:text-slate-400">.sf-surface-bg</span>
         macro into a single reusable background (color, image, overlay, sizing and animation).
@@ -448,8 +370,7 @@
       >
         <span class="text-[11px] font-bold text-white mix-blend-difference">.sf-surface-bg preview</span>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="rounded-lg bg-black/3 dark:bg-white/3 border border-black/6 dark:border-white/6 p-3">
     <p class="text-[10px] text-slate-500 leading-relaxed">

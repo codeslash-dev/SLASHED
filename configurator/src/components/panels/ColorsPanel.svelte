@@ -9,6 +9,7 @@
   import SliderRow from '../inputs/SliderRow.svelte';
   import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import Section from '../inputs/Section.svelte';
 
   let { tokens, overrides, onSet, onReset, onBulkChange, onSelectDomain }: {
     tokens: SlashedToken[];
@@ -520,16 +521,7 @@
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- BRAND SOURCES -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showBrandSources = !showBrandSources; }}
-      aria-expanded={showBrandSources}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Brand color sources</div>
-      <span class="text-[10px] text-slate-500">{showBrandSources ? "▲" : "▼"}</span>
-    </button>
-    {#if showBrandSources}
+  <Section title="Brand color sources" bind:open={showBrandSources}>
     <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
       OKLCH source values — all 200+ derived color steps are computed automatically. Tints (50–400) mix toward Base
       (the "Surface" color) and shades (600–950) mix toward Text (driven by Neutral) — so editing Base or Neutral below
@@ -639,22 +631,12 @@
         </div>
       {/each}
     </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- LUMLOCKER -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showLumlocker = !showLumlocker; }}
-      aria-expanded={showLumlocker}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">LumLocker</div>
-      <span class="text-[10px] text-slate-500">{showLumlocker ? "▲" : "▼"}</span>
-    </button>
-    {#if showLumlocker}
+  <Section title="LumLocker" bind:open={showLumlocker}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Pins brand colors (primary, secondary, tertiary, action) to a fixed OKLCH
         lightness — useful for always-stable sections. Enable on canvas to preview.
@@ -697,22 +679,12 @@
             : "border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
         }`}
       >{lumlockerPreview.value ? "✓ LumLocker active on canvas — click to disable" : "Preview LumLocker on live canvas"}</button>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- STATUS SOURCES -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showStatus = !showStatus; }}
-      aria-expanded={showStatus}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status colors</div>
-      <span class="text-[10px] text-slate-500">{showStatus ? "▲" : "▼"}</span>
-    </button>
-    {#if showStatus}
+  <Section title="Status colors" bind:open={showStatus}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Dark mode is auto-derived from each light source by default. Switch to
         Manual dark to set a bespoke dark value.
@@ -797,22 +769,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- TEXT CONTRAST -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showTextContrast = !showTextContrast; }}
-      aria-expanded={showTextContrast}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text contrast</div>
-      <span class="text-[10px] text-slate-500">{showTextContrast ? "▲" : "▼"}</span>
-    </button>
-    {#if showTextContrast}
+  <Section title="Text contrast" spacing="space-y-4" bind:open={showTextContrast}>
     <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
       Controls whether text on brand-coloured surfaces is light or dark.
     </p>
@@ -858,22 +820,12 @@
         onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
       />
     {/each}
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- SHADE CURVE -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showShadeCurve = !showShadeCurve; }}
-      aria-expanded={showShadeCurve}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Palette ramp</div>
-      <span class="text-[10px] text-slate-500">{showShadeCurve ? "▲" : "▼"}</span>
-    </button>
-    {#if showShadeCurve}
+  <Section title="Palette ramp" spacing="space-y-4" bind:open={showShadeCurve}>
     {@const _curvePrimLightSrc = overrides["--sf-color-primary-source-light"] ?? BRAND_SOURCES.find(s => s.name === "--sf-color-primary-source-light")?.default ?? "oklch(0.47 0.27 264)"}
     {@const _curvePrimDarkOv = overrides["--sf-color-primary-source-dark"]}
     {@const _curvePrimDarkSrc = _curvePrimDarkOv ?? (!autoDarkSet.has("primary") || _curvePrimDarkOv
@@ -988,22 +940,12 @@
         </div>
       {/each}
     </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- GRADIENTS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showGradients = !showGradients; }}
-      aria-expanded={showGradients}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Gradients</div>
-      <span class="text-[10px] text-slate-500">{showGradients ? "▲" : "▼"}</span>
-    </button>
-    {#if showGradients}
+  <Section title="Gradients" bind:open={showGradients}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Auto-derived from your brand colors. Use the angle/direction and stop
         controls, or edit the raw value for full control.
@@ -1085,22 +1027,12 @@
           {/each}
         </div>
       {/each}
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- COLOR SCHEME -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showColorScheme = !showColorScheme; }}
-      aria-expanded={showColorScheme}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Color scheme</div>
-      <span class="text-[10px] text-slate-500">{showColorScheme ? "▲" : "▼"}</span>
-    </button>
-    {#if showColorScheme}
+  <Section title="Color scheme" bind:open={showColorScheme}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600 leading-relaxed">
         --sf-color-scheme — sets the CSS <span class="font-mono text-slate-600 dark:text-slate-400">color-scheme</span> property on the root, controlling browser UI (scrollbars, inputs) and default background.
       </p>
@@ -1117,22 +1049,12 @@
           >{label}</button>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- SEMANTIC OVERRIDES -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showSemanticOverrides = !showSemanticOverrides; }}
-      aria-expanded={showSemanticOverrides}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Semantic overrides</div>
-      <span class="text-[10px] text-slate-500">{showSemanticOverrides ? "▲" : "▼"}</span>
-    </button>
-    {#if showSemanticOverrides}
+  <Section title="Semantic overrides" bind:open={showSemanticOverrides}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Direct color overrides for tokens the framework auto-derives. Use for edge cases.
       </p>
@@ -1152,8 +1074,7 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="rounded-lg bg-black/3 dark:bg-white/3 border border-black/6 dark:border-white/6 p-3">
     <p class="text-[10px] text-slate-500 leading-relaxed">

@@ -5,6 +5,7 @@
   import SliderRow from '../inputs/SliderRow.svelte';
   import RangeWithNumber from '../inputs/RangeWithNumber.svelte';
   import ClampField from '../inputs/ClampField.svelte';
+  import Section from '../inputs/Section.svelte';
   import { themeState } from '../../lib/theme.svelte';
 
   // <option> only reliably accepts a background via inline style (no dark:
@@ -283,16 +284,7 @@
 <div class="p-4 space-y-6">
 
   <!-- FONT FAMILIES (compact dropdowns) -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showFontFamilies = !showFontFamilies; }}
-      aria-expanded={showFontFamilies}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Font families</div>
-      <span class="text-[10px] text-slate-500">{showFontFamilies ? "▲" : "▼"}</span>
-    </button>
-    {#if showFontFamilies}
+  <Section title="Font families" bind:open={showFontFamilies}>
     {#each [
       { label: "Body", token: "--sf-font-body", current: currentBodyFont, opts: BODY_STACKS },
       { label: "Heading", token: "--sf-font-heading", current: currentHeadingFont, opts: HEADING_STACKS },
@@ -361,22 +353,12 @@
         Load &amp; apply to {customFontTarget}
       </button>
     </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- PER-TYPE (body + h1–h6) -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showPerType = !showPerType; }}
-      aria-expanded={showPerType}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Per-type styles</div>
-      <span class="text-[10px] text-slate-500">{showPerType ? "▲" : "▼"}</span>
-    </button>
-    {#if showPerType}
+  <Section title="Per-type styles" bind:open={showPerType}>
 
     <!-- Level selector -->
     <div class="flex bg-black/5 dark:bg-white/5 border border-black/8 dark:border-white/8 rounded-lg p-0.5 gap-0.5">
@@ -506,22 +488,12 @@
         >reset {activeLevel.label}</button>
       {/if}
     </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- BODY TEXT -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showBodyText = !showBodyText; }}
-      aria-expanded={showBodyText}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Body text</div>
-      <span class="text-[10px] text-slate-500">{showBodyText ? "▲" : "▼"}</span>
-    </button>
-    {#if showBodyText}
+  <Section title="Body text" spacing="space-y-4" bind:open={showBodyText}>
 
     <!-- Font weights -->
     {@render weightGrid("Body strong", "--sf-font-weight-strong", WEIGHT_DEFAULTS["--sf-font-weight-strong"] ?? "600")}
@@ -612,22 +584,12 @@
         <button onclick={() => onReset("--sf-link-external-label")} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
       {/if}
     </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- FONT WEIGHT SCALE -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showFontWeights = !showFontWeights; }}
-      aria-expanded={showFontWeights}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Font weight scale</div>
-      <span class="text-[10px] text-slate-500">{showFontWeights ? "▲" : "▼"}</span>
-    </button>
-    {#if showFontWeights}
+  <Section title="Font weight scale" bind:open={showFontWeights}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600 leading-relaxed">Named weight tokens. Override if your font uses non-standard axis values.</p>
       {#each [
         { label: "Light",    token: "--sf-font-weight-light",    def: 300 },
@@ -659,22 +621,12 @@
           </div>
         </div>
       {/each}
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- DISPLAY TYPE -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showDisplayType = !showDisplayType; }}
-      aria-expanded={showDisplayType}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Display type</div>
-      <span class="text-[10px] text-slate-500">{showDisplayType ? "▲" : "▼"}</span>
-    </button>
-    {#if showDisplayType}
+  <Section title="Display type" spacing="space-y-4" bind:open={showDisplayType}>
 
     <ClampField
       title="Display base size"
@@ -723,22 +675,12 @@
     <!-- Display weight -->
     {@render weightGrid("Display", "--sf-font-weight-display", WEIGHT_DEFAULTS["--sf-font-weight-display"] ?? "700")}
     {@render weightGrid("Heading", "--sf-font-weight-heading", WEIGHT_DEFAULTS["--sf-font-weight-heading"] ?? "700")}
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- FINE-TUNE (type ramp clamp + rhythm + tracking) -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showModularScale = !showModularScale; }}
-      aria-expanded={showModularScale}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
-      <span class="text-[10px] text-slate-500">{showModularScale ? "▲" : "▼"}</span>
-    </button>
-    {#if showModularScale}
+  <Section title="Modular scale (Mobile → Desktop)" spacing="space-y-4" bind:open={showModularScale}>
     <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
       Utopia-style fluid scale. Each endpoint has three values — viewport width,
       base size, and modular ratio. Sizes interpolate fluidly between mobile and desktop.
@@ -853,8 +795,7 @@
         </div>
       {/if}
     </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
@@ -913,16 +854,7 @@
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- LINE LENGTHS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showLineLengths = !showLineLengths; }}
-      aria-expanded={showLineLengths}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Line lengths (max-width)</div>
-      <span class="text-[10px] text-slate-500">{showLineLengths ? "▲" : "▼"}</span>
-    </button>
-    {#if showLineLengths}
+  <Section title="Line lengths (max-width)" bind:open={showLineLengths}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Per-text-size max-width caps on <span class="font-mono text-slate-600 dark:text-slate-400">.sf-text-*</span> elements. Set to <span class="font-mono text-slate-600 dark:text-slate-400">none</span> to remove the constraint; use <span class="font-mono text-slate-600 dark:text-slate-400">ch</span> units for character-based measures.
       </p>
@@ -956,22 +888,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- ADVANCED TYPOGRAPHY -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showAdvancedType = !showAdvancedType; }}
-      aria-expanded={showAdvancedType}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Advanced typography</div>
-      <span class="text-[10px] text-slate-500">{showAdvancedType ? "▲" : "▼"}</span>
-    </button>
-    {#if showAdvancedType}
+  <Section title="Advanced typography" bind:open={showAdvancedType}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600 leading-relaxed">Advanced OpenType and variable-font axes. Leave as <span class="font-mono text-slate-600 dark:text-slate-400">normal</span> unless your font supports these features.</p>
 
       <!-- font-numeric -->
@@ -1045,6 +967,5 @@
           <button onclick={() => onReset("--sf-font-variation")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
         {/if}
       </div>
-    {/if}
-  </section>
+  </Section>
 </div>

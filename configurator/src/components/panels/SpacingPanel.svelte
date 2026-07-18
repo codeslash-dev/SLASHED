@@ -4,6 +4,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
   import ClampField from '../inputs/ClampField.svelte';
+  import Section from '../inputs/Section.svelte';
   import { SPACE_SCALE } from '../../lib/variableScales';
 
   let { overrides, onSet, onReset }: {
@@ -72,16 +73,7 @@
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- GAP TOKENS — most used, at the top -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showLayoutGap = !showLayoutGap; }}
-      aria-expanded={showLayoutGap}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Layout gap</div>
-      <span class="text-[10px] text-slate-500">{showLayoutGap ? "▲" : "▼"}</span>
-    </button>
-    {#if showLayoutGap}
+  <Section title="Layout gap" bind:open={showLayoutGap}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         The two most-referenced spacing tokens. Referenced by every layout primitive (cluster, grid, stack, bento…).
       </p>
@@ -118,22 +110,12 @@
         currentRaw={overrides["--sf-gutter"]}
         onRawSet={(v) => onSet("--sf-gutter", v)}
       />
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- FLUID SCALE -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showModularScale = !showModularScale; }}
-      aria-expanded={showModularScale}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Modular scale (Mobile → Desktop)</div>
-      <span class="text-[10px] text-slate-500">{showModularScale ? "▲" : "▼"}</span>
-    </button>
-    {#if showModularScale}
+  <Section title="Modular scale (Mobile → Desktop)" spacing="space-y-4" bind:open={showModularScale}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Utopia-style fluid scale — viewport width, base unit and ratio per endpoint.
         The viewport range is shared with the type scale.
@@ -166,22 +148,12 @@
         onRatioMinChange={(v) => onSet("--sf-space-ratio-min", String(v))}
         onRatioMaxChange={(v) => onSet("--sf-space-ratio-max", String(v))}
       />
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- ADVANCED (power knobs, de-emphasised, at end) -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showAdvanced = !showAdvanced; }}
-      aria-expanded={showAdvanced}
-      class="w-full flex items-center justify-between text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400 transition-colors cursor-pointer"
-    >
-      <div class="text-[10px] font-semibold uppercase tracking-widest">Advanced</div>
-      <span class="text-[10px]">{showAdvanced ? "▲" : "▼"}</span>
-    </button>
-    {#if showAdvanced}
+  <Section title="Advanced" variant="advanced" bind:open={showAdvanced}>
       <div class="space-y-4">
         {#each knobs as k (k.name)}
           <PowerKnobRow
@@ -191,6 +163,5 @@
           />
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 </div>

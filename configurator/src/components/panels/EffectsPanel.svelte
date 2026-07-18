@@ -1,6 +1,7 @@
 <script lang="ts">
   import SliderRow from '../inputs/SliderRow.svelte';
   import ColorInput from '../inputs/ColorInput.svelte';
+  import Section from '../inputs/Section.svelte';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
@@ -41,16 +42,7 @@
 <div class="p-4 space-y-6">
 
   <!-- BLUR -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showBlur = !showBlur; }}
-      aria-expanded={showBlur}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Blur</div>
-      <span class="text-[10px] text-slate-500">{showBlur ? "▲" : "▼"}</span>
-    </button>
-    {#if showBlur}
+  <Section title="Blur" bind:open={showBlur}>
       <SliderRow
         label="Blur radius" value={blur} min={0} max={48} step={1} unit="px"
         help="--sf-blur — used for frosted glass, modals, tooltips"
@@ -72,22 +64,12 @@
           <span class="text-[9px] font-mono text-slate-900/70 dark:text-white/70">{blur}px</span>
         </div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- OPACITY -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showOpacity = !showOpacity; }}
-      aria-expanded={showOpacity}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Opacity</div>
-      <span class="text-[10px] text-slate-500">{showOpacity ? "▲" : "▼"}</span>
-    </button>
-    {#if showOpacity}
+  <Section title="Opacity" spacing="space-y-4" bind:open={showOpacity}>
       <SliderRow
         label="Muted opacity" value={opacityMuted} min={0} max={1} step={0.05}
         help="--sf-opacity-muted — secondary text, icons, and placeholder content"
@@ -123,22 +105,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- SCROLLBAR -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showScrollbar = !showScrollbar; }}
-      aria-expanded={showScrollbar}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Scrollbar</div>
-      <span class="text-[10px] text-slate-500">{showScrollbar ? "▲" : "▼"}</span>
-    </button>
-    {#if showScrollbar}
+  <Section title="Scrollbar" bind:open={showScrollbar}>
       {#each [
         { label: "Thumb color", token: "--sf-scrollbar-thumb", val: scrollbarThumb },
         { label: "Track color", token: "--sf-scrollbar-track", val: scrollbarTrack },
@@ -162,22 +134,12 @@
         </div>
         <span class="text-[9px] text-slate-400 dark:text-slate-600">Scrollbar preview</span>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- TEXT SHADOW PRESETS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showTextShadow = !showTextShadow; }}
-      aria-expanded={showTextShadow}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Text shadow</div>
-      <span class="text-[10px] text-slate-500">{showTextShadow ? "▲" : "▼"}</span>
-    </button>
-    {#if showTextShadow}
+  <Section title="Text shadow" bind:open={showTextShadow}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Controls text legibility over images. Applied via <code class="text-slate-600 dark:text-slate-400">text-shadow: var(--sf-text-shadow-m)</code>.
         Edit each token directly — use <code class="text-slate-600 dark:text-slate-400">none</code> to disable.
@@ -202,22 +164,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- DROP SHADOW PRESETS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showDropShadow = !showDropShadow; }}
-      aria-expanded={showDropShadow}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Drop shadow</div>
-      <span class="text-[10px] text-slate-500">{showDropShadow ? "▲" : "▼"}</span>
-    </button>
-    {#if showDropShadow}
+  <Section title="Drop shadow" bind:open={showDropShadow}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         <code class="text-slate-600 dark:text-slate-400">filter: drop-shadow(…)</code> — unlike box-shadow, follows the
         element's actual alpha shape (SVG icons, PNG cutouts, transparent logos). Edit each token directly —
@@ -261,6 +213,5 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 </div>

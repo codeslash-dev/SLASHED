@@ -3,6 +3,7 @@
   import PowerKnobRow from '../inputs/PowerKnobRow.svelte';
   import SliderRow from '../inputs/SliderRow.svelte';
   import Toggle from '../inputs/Toggle.svelte';
+  import Section from '../inputs/Section.svelte';
   import { themeState } from '../../lib/theme.svelte';
 
   // <option> only reliably accepts a background via inline style (no dark:
@@ -162,16 +163,7 @@
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- DURATIONS (with inline preview) -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showDurations = !showDurations; }}
-      aria-expanded={showDurations}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Durations</div>
-      <span class="text-[10px] text-slate-500">{showDurations ? "▲" : "▼"}</span>
-    </button>
-    {#if showDurations}
+  <Section title="Durations" bind:open={showDurations}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Named duration tokens. Drag to set an absolute ms value, overriding the global scale.
         {#if motionDisabled}<span class="text-amber-600 dark:text-amber-400"> (No effect while motion is disabled.)</span>{/if}
@@ -203,22 +195,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- EASING — editable -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showEasing = !showEasing; }}
-      aria-expanded={showEasing}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Easing curves</div>
-      <span class="text-[10px] text-slate-500">{showEasing ? "▲" : "▼"}</span>
-    </button>
-    {#if showEasing}
+  <Section title="Easing curves" bind:open={showEasing}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Edit the named easing tokens. Accepts any CSS timing function —
         <span class="font-mono text-slate-600 dark:text-slate-400">cubic-bezier(…)</span> or
@@ -262,22 +244,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- STAGGER -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showStagger = !showStagger; }}
-      aria-expanded={showStagger}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Stagger</div>
-      <span class="text-[10px] text-slate-500">{showStagger ? "▲" : "▼"}</span>
-    </button>
-    {#if showStagger}
+  <Section title="Stagger" bind:open={showStagger}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         One slider sets all five stagger delays (delay-1 through delay-5 are multiples of this base).
       </p>
@@ -308,22 +280,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- ADVANCED — global scale power knob, theme transition, scroll timeline -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showAdvanced = !showAdvanced; }}
-      aria-expanded={showAdvanced}
-      class="w-full flex items-center justify-between text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400 transition-colors cursor-pointer"
-    >
-      <div class="text-[10px] font-semibold uppercase tracking-widest">Advanced</div>
-      <span class="text-[10px]">{showAdvanced ? "▲" : "▼"}</span>
-    </button>
-    {#if showAdvanced}
+  <Section title="Advanced" spacing="space-y-4" variant="advanced" bind:open={showAdvanced}>
       <!-- Global motion scale (power knob) -->
       <div class="space-y-4">
         {#each knobs as k (k.name)}
@@ -375,6 +337,5 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 </div>

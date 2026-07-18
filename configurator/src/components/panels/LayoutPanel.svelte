@@ -4,6 +4,7 @@
   import ColorInput from '../inputs/ColorInput.svelte';
   import AspectRatioInput from '../inputs/AspectRatioInput.svelte';
   import RawTokenRow from '../inputs/RawTokenRow.svelte';
+  import Section from '../inputs/Section.svelte';
   import { themeState } from '../../lib/theme.svelte';
   import { SPACE_SCALE, CONTAINER_SCALE } from '../../lib/variableScales';
 
@@ -91,16 +92,7 @@
 <div class="p-4 space-y-6">
 
   <!-- CONTAINERS -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showContainerWidths = !showContainerWidths; }}
-      aria-expanded={showContainerWidths}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Container widths</div>
-      <span class="text-[10px] text-slate-500">{showContainerWidths ? "▲" : "▼"}</span>
-    </button>
-    {#if showContainerWidths}
+  <Section title="Container widths" spacing="space-y-4" bind:open={showContainerWidths}>
       <!-- Compact pairs -->
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -161,22 +153,12 @@
           </div>
         {/each}
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- CENTER WRAPPER -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showCenterWrapper = !showCenterWrapper; }}
-      aria-expanded={showCenterWrapper}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Center wrapper</div>
-      <span class="text-[10px] text-slate-500">{showCenterWrapper ? "▲" : "▼"}</span>
-    </button>
-    {#if showCenterWrapper}
+  <Section title="Center wrapper" bind:open={showCenterWrapper}>
       <SliderRow
         label="Max width" value={centerMax} min={30} max={160} step={1} unit="rem"
         help="--sf-center-max — max-width of the .sf-center centering wrapper"
@@ -199,22 +181,12 @@
         currentRaw={overrides["--sf-center-gutter"]}
         onRawSet={(v) => onSet("--sf-center-gutter", v)}
       />
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- AUTO GRID -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showAutoGrid = !showAutoGrid; }}
-      aria-expanded={showAutoGrid}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Auto grid</div>
-      <span class="text-[10px] text-slate-500">{showAutoGrid ? "▲" : "▼"}</span>
-    </button>
-    {#if showAutoGrid}
+  <Section title="Auto grid" spacing="space-y-4" bind:open={showAutoGrid}>
       <!-- step 0.0625rem (1px) intentionally matches the gap-token sliders in
            SpacingPanel (--sf-gap / --sf-content-gap / --sf-gutter), which
            --sf-grid-gap defaults to — finer than the size controls elsewhere
@@ -270,22 +242,12 @@
           {/each}
         </div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- HEADER -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showHeaderHeight = !showHeaderHeight; }}
-      aria-expanded={showHeaderHeight}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Header height</div>
-      <span class="text-[10px] text-slate-500">{showHeaderHeight ? "▲" : "▼"}</span>
-    </button>
-    {#if showHeaderHeight}
+  <Section title="Header height" spacing="space-y-4" bind:open={showHeaderHeight}>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <div class="text-[9px] text-slate-400 dark:text-slate-600 mb-1">Mobile</div>
@@ -320,22 +282,12 @@
         </div>
         <div class="p-2 text-[9px] text-slate-400 dark:text-slate-600 font-mono">{headerMobile}rem mobile · {headerDesktop}rem desktop</div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- STICKY OFFSETS -->
-  <section class="space-y-3">
-    <button
-      onclick={() => { showStickyOffset = !showStickyOffset; }}
-      aria-expanded={showStickyOffset}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sticky offset</div>
-      <span class="text-[10px] text-slate-500">{showStickyOffset ? "▲" : "▼"}</span>
-    </button>
-    {#if showStickyOffset}
+  <Section title="Sticky offset" bind:open={showStickyOffset}>
       <p class="text-[9px] text-slate-400 dark:text-slate-600">Offsets position:sticky elements below a fixed header. Defaults to header heights.</p>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -363,22 +315,12 @@
           />
         </div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
   <!-- SIDEBAR -->
-  <section class="space-y-4">
-    <button
-      onclick={() => { showSidebar = !showSidebar; }}
-      aria-expanded={showSidebar}
-      class="w-full flex items-center justify-between cursor-pointer"
-    >
-      <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sidebar</div>
-      <span class="text-[10px] text-slate-500">{showSidebar ? "▲" : "▼"}</span>
-    </button>
-    {#if showSidebar}
+  <Section title="Sidebar" spacing="space-y-4" bind:open={showSidebar}>
       <SliderRow
         label="Sidebar width" value={sidebarWidth} min={10} max={32} step={0.5} unit="rem"
         help="--sf-sidebar-width — default sidebar / drawer width"
@@ -395,8 +337,7 @@
         </div>
         <div class="flex-1 bg-black/4 dark:bg-white/4 rounded"></div>
       </div>
-    {/if}
-  </section>
+  </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
