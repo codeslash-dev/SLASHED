@@ -49,13 +49,11 @@
   let caretColor = $derived(overrides["--sf-caret-color"] ?? "");
   let underlineOffset = $derived(parseNum(overrides["--sf-link-underline-offset"]?.replace("em",""), 0.15));
   let underlineThickness = $derived(overrides["--sf-link-underline-thickness"] ?? "auto");
-  let focusRingStyle = $derived(overrides["--sf-focus-ring-style"] ?? "solid");
 
   let showTouchTarget = $state(false);
   let showScrollBehavior = $state(false);
   let showZIndex = $state(false);
   let showTextSelection = $state(false);
-  let showFocusRingStyle = $state(false);
   let showComponentSizes = $state(false);
   let showCaretLinks = $state(false);
   let showIconSizes = $state(false);
@@ -211,36 +209,6 @@
           >
             Select this text to preview the alt selection color.
           </p>
-        </div>
-      </div>
-  </Section>
-
-  <div class="h-px bg-black/6 dark:bg-white/6"></div>
-
-  <!-- FOCUS RING STYLE -->
-  <Section title="Focus ring style" bind:open={showFocusRingStyle}>
-      <div class="flex gap-2">
-        {#each ["solid", "dashed", "dotted"] as style (style)}
-          {@const current = overrides["--sf-focus-ring-style"] ?? "solid"}
-          <button
-            onclick={() => style === "solid" ? onReset("--sf-focus-ring-style") : onSet("--sf-focus-ring-style", style)}
-            class={`flex-1 py-2 rounded-lg text-[10px] border transition-all cursor-pointer capitalize ${
-              current === style
-                ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
-            }`}
-          >
-            {style}
-          </button>
-        {/each}
-      </div>
-      <!-- Focus ring style preview -->
-      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center">
-        <div
-          class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-800 dark:text-indigo-200"
-          style={`outline: var(--sf-focus-ring-width, 2px) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color, oklch(0.7 0.2 235)); outline-offset: var(--sf-focus-ring-offset, 2px)`}
-        >
-          Focus ring · {focusRingStyle}
         </div>
       </div>
   </Section>

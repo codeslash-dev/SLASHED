@@ -568,22 +568,6 @@
           </div>
         </div>
 
-        <div>
-          <div class="text-[9px] text-slate-500 mb-1">Media object-fit — --sf-object-fit (global, affects all img/video)</div>
-          <div class="flex flex-wrap gap-1">
-            {#each ["cover", "contain"] as fit (fit)}
-              {@const cur = overrides["--sf-object-fit"] ?? "cover"}
-              <button
-                onclick={() => fit === "cover" ? onReset("--sf-object-fit") : onSet("--sf-object-fit", fit)}
-                class={`px-2 py-1 rounded-lg text-[10px] border transition-all cursor-pointer ${
-                  cur === fit
-                    ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                    : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5"
-                }`}
-              >{fit}</button>
-            {/each}
-          </div>
-        </div>
       </div>
   </Section>
 </div>

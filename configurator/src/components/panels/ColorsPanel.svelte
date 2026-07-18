@@ -221,9 +221,6 @@
   const contrastKnobs = (KNOBS_BY_DOMAIN["colors"] ?? []).filter(
     (k) => k.name === "--sf-contrast-bias" || k.name === "--sf-contrast-threshold"
   );
-  const focusKnobs = (KNOBS_BY_DOMAIN["colors"] ?? []).filter(
-    (k) => k.name === "--sf-focus-ring-width"
-  );
 
   let showBrandSources = $state(false);
   let showTextContrast = $state(false);
@@ -817,15 +814,6 @@
         >Open contrast tool →</button>
       {/if}
     </div>
-
-    <!-- Focus ring width — logically belongs with contrast/accessibility -->
-    {#each focusKnobs as k (k.name)}
-      <PowerKnobRow
-        knob={k}
-        {overrides}
-        onChange={(name, val) => val === null ? onReset(name) : onSet(name, val)}
-      />
-    {/each}
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
