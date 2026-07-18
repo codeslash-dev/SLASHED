@@ -273,7 +273,7 @@
           class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-800 dark:text-indigo-200"
           style={`outline: var(--sf-focus-ring-width, 2px) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color, oklch(0.7 0.2 235)); outline-offset: var(--sf-focus-ring-offset, 2px)`}
         >
-          Focus preview
+          Focus ring · {overrides["--sf-focus-ring-style"] ?? "solid"}
         </div>
       </div>
   </Section>
