@@ -160,8 +160,9 @@
   let baseMax   = $derived(num("--sf-text-base-max", 1.25));
   let dispMin   = $derived(num("--sf-text-display-base-min", 2.4));
   let dispMax   = $derived(num("--sf-text-display-base-max", 3));
-  let taper     = $derived(num("--sf-leading-taper", 0));
-  let textScale = $derived(num("--sf-text-scale", 1));
+  let taper        = $derived(num("--sf-leading-taper", 0));
+  let textScale    = $derived(num("--sf-text-scale", 1));
+  let displayScale = $derived(num("--sf-text-display-scale", 1));
   // Shared fluid viewport endpoints (rem, unitless). Min = mobile, max = desktop.
   let vwMin     = $derived(num("--sf-fluid-min-vw", 22.5));
   let vwMax     = $derived(num("--sf-fluid-max-vw", 90));
@@ -250,6 +251,34 @@
     return isNaN(parsed) ? 1.3 : parsed;
   });
 </script>
+
+<!-- Shared weight button-grid — one markup for every role-weight token
+     (body-strong, interactive, display, heading). Clicking the default resets. -->
+{#snippet weightGrid(label: string, tokenName: string, defaultVal: string)}
+  {@const current = overrides[tokenName] ?? defaultVal}
+  {@const isOverridden = tokenName in overrides}
+  <div class="group">
+    <div class="flex items-center justify-between mb-1.5">
+      <span class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">{label} weight</span>
+      {#if isOverridden}
+        <button onclick={() => onReset(tokenName)} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 focus:opacity-100 transition-colors">reset</button>
+      {/if}
+    </div>
+    <div class="flex gap-1">
+      {#each WEIGHT_OPTIONS as w (w)}
+        <button
+          onclick={() => w === defaultVal ? onReset(tokenName) : onSet(tokenName, w)}
+          style={`font-weight: ${parseInt(w)}`}
+          class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
+            current === w
+              ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
+              : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >{w}</button>
+      {/each}
+    </div>
+  </div>
+{/snippet}
 
 <div class="p-4 space-y-6">
 
@@ -495,35 +524,8 @@
     {#if showBodyText}
 
     <!-- Font weights -->
-    {#each [
-      { label: "Body strong", tokenName: "--sf-font-weight-strong" },
-      { label: "Interactive", tokenName: "--sf-font-weight-interactive" },
-    ] as row (row.tokenName)}
-      {@const defaultVal = WEIGHT_DEFAULTS[row.tokenName] ?? "600"}
-      {@const current = overrides[row.tokenName] ?? defaultVal}
-      {@const isOverridden = row.tokenName in overrides}
-      <div class="group">
-        <div class="flex items-center justify-between mb-1.5">
-          <span class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">{row.label} weight</span>
-          {#if isOverridden}
-            <button onclick={() => onReset(row.tokenName)} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 focus:opacity-100 transition-colors">reset</button>
-          {/if}
-        </div>
-        <div class="flex gap-1">
-          {#each WEIGHT_OPTIONS as w (w)}
-            <button
-              onclick={() => w === defaultVal && !isOverridden ? undefined : (w === defaultVal ? onReset(row.tokenName) : onSet(row.tokenName, w))}
-              style={`font-weight: ${parseInt(w)}`}
-              class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
-                current === w
-                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                  : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
-              }`}
-            >{w}</button>
-          {/each}
-        </div>
-      </div>
-    {/each}
+    {@render weightGrid("Body strong", "--sf-font-weight-strong", WEIGHT_DEFAULTS["--sf-font-weight-strong"] ?? "600")}
+    {@render weightGrid("Interactive", "--sf-font-weight-interactive", WEIGHT_DEFAULTS["--sf-font-weight-interactive"] ?? "600")}
 
     <!-- Em style toggle -->
     <div>
@@ -685,14 +687,29 @@
       onMaxChange={(v) => onSet("--sf-text-display-base-max", String(v))}
     />
 
-    <!-- Display line heights -->
-    <div class="grid grid-cols-2 gap-3">
+    <!-- Display scale multiplier — mirrors the text scale's "Scale multiplier"
+         so both fluid scales expose the same set of adjustments. -->
+    <SliderRow
+      label="Scale multiplier" value={displayScale} min={0.75} max={1.5} step={0.01}
+      help="--sf-text-display-scale — multiplies every display size at once."
+      overridden={"--sf-text-display-scale" in overrides}
+      onChange={(v) => onSet("--sf-text-display-scale", String(v))}
+      onReset={() => onReset("--sf-text-display-scale")}
+    />
+
+    <p class="text-[9px] text-slate-400 dark:text-slate-600 leading-relaxed">
+      Modular ratio is shared with the text scale (Mobile {ratioMin} → Desktop {ratioMax}) — edit it under “Modular scale”.
+    </p>
+
+    <!-- Display line heights (s / m / l) -->
+    <div class="grid grid-cols-3 gap-3">
       {#each [
-        { label: "Display L line-height", token: "--sf-display-l-line-height", def: 1 },
-        { label: "Display M line-height", token: "--sf-display-m-line-height", def: 1.05 },
+        { label: "Display S", token: "--sf-display-s-line-height", def: 1.1 },
+        { label: "Display M", token: "--sf-display-m-line-height", def: 1.05 },
+        { label: "Display L", token: "--sf-display-l-line-height", def: 1 },
       ] as row (row.token)}
         <div>
-          <div class="text-[9px] text-slate-400 dark:text-slate-600 mb-1">{row.label}</div>
+          <div class="text-[9px] text-slate-400 dark:text-slate-600 mb-1">{row.label} line-height</div>
           <SliderRow
             label="" value={num(row.token, row.def)} min={0.8} max={1.5} step={0.025}
             overridden={row.token in overrides}
@@ -704,35 +721,8 @@
     </div>
 
     <!-- Display weight -->
-    {#each [
-      { label: "Display",  tokenName: "--sf-font-weight-display" },
-      { label: "Heading",  tokenName: "--sf-font-weight-heading" },
-    ] as row (row.tokenName)}
-      {@const defaultVal = WEIGHT_DEFAULTS[row.tokenName] ?? "700"}
-      {@const current = overrides[row.tokenName] ?? defaultVal}
-      {@const isOverridden = row.tokenName in overrides}
-      <div class="group">
-        <div class="flex items-center justify-between mb-1.5">
-          <span class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">{row.label} weight</span>
-          {#if isOverridden}
-            <button onclick={() => onReset(row.tokenName)} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 focus:opacity-100 transition-colors">reset</button>
-          {/if}
-        </div>
-        <div class="flex gap-1">
-          {#each WEIGHT_OPTIONS as w (w)}
-            <button
-              onclick={() => w === defaultVal && !isOverridden ? undefined : (w === defaultVal ? onReset(row.tokenName) : onSet(row.tokenName, w))}
-              style={`font-weight: ${parseInt(w)}`}
-              class={`flex-1 py-1.5 rounded-lg text-[10px] border transition-all cursor-pointer font-mono ${
-                current === w
-                  ? "bg-indigo-500/15 border-indigo-500/40 text-indigo-800 dark:text-indigo-200"
-                  : "border-black/8 dark:border-white/8 text-slate-600 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-slate-800 dark:hover:text-slate-200"
-              }`}
-            >{w}</button>
-          {/each}
-        </div>
-      </div>
-    {/each}
+    {@render weightGrid("Display", "--sf-font-weight-display", WEIGHT_DEFAULTS["--sf-font-weight-display"] ?? "700")}
+    {@render weightGrid("Heading", "--sf-font-weight-heading", WEIGHT_DEFAULTS["--sf-font-weight-heading"] ?? "700")}
     {/if}
   </section>
 
@@ -781,6 +771,15 @@
       ratioMin_bound={1.05} ratioMax_bound={1.8}
       onRatioMinChange={(v) => onSet("--sf-text-ratio-min", String(v))}
       onRatioMaxChange={(v) => onSet("--sf-text-ratio-max", String(v))}
+    />
+
+    <!-- Text scale multiplier — mirrors the display scale's "Scale multiplier". -->
+    <SliderRow
+      label="Scale multiplier" value={textScale} min={0.75} max={1.5} step={0.01}
+      help="--sf-text-scale — multiplies every text size at once."
+      overridden={"--sf-text-scale" in overrides}
+      onChange={(v) => onSet("--sf-text-scale", String(v))}
+      onReset={() => onReset("--sf-text-scale")}
     />
 
     <!-- Line height scale -->
@@ -870,15 +869,37 @@
       <span class="text-[10px] text-slate-500">{showScalePreview ? "▲" : "▼"}</span>
     </button>
     {#if showScalePreview}
+    {@const midBase = (baseMin + baseMax) / 2}
+    {@const midDisp = (dispMin + dispMax) / 2}
+    {@const midRatio = (ratioMin + ratioMax) / 2}
     <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 space-y-1 overflow-hidden">
+      <div class="text-[9px] font-semibold text-slate-500 mb-1">Text</div>
       {#each [...TEXT_STEPS].reverse() as { label, factor } (label)}
-        {@const midBase = (baseMin + baseMax) / 2}
         {@const size = midBase * factor * textScale}
         <div class="flex items-baseline gap-2">
           <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-6 shrink-0 text-right">{label}</span>
           <span
             class="text-slate-900/80 dark:text-white/80 font-medium leading-none truncate"
             style={`font-size: ${Math.min(size, 2.5)}rem; font-family: ${currentBodyFont || "inherit"}`}
+          >
+            Aa
+          </span>
+          <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 ml-auto shrink-0">{size.toFixed(2)}rem</span>
+        </div>
+      {/each}
+
+      <div class="text-[9px] font-semibold text-slate-500 mt-3 mb-1">Display</div>
+      {#each [
+        { label: "l", factor: midRatio * midRatio },
+        { label: "m", factor: midRatio },
+        { label: "s", factor: 1 },
+      ] as { label, factor } (label)}
+        {@const size = midDisp * factor * displayScale}
+        <div class="flex items-baseline gap-2">
+          <span class="text-[9px] font-mono text-slate-400 dark:text-slate-600 w-6 shrink-0 text-right">{label}</span>
+          <span
+            class="text-slate-900/80 dark:text-white/80 font-medium leading-none truncate"
+            style={`font-size: ${Math.min(size, 2.5)}rem; font-family: ${currentHeadingFont || currentBodyFont || "inherit"}`}
           >
             Aa
           </span>
