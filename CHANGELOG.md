@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.22] - 2026-07-18
+
+### Bug Fixes
+- **configurator:** drop tokens from the TypographyPanel call site
+- **configurator:** address PR review comments
+- **configurator:** reset buttons always visible when a token is overridden
+- **configurator:** stack TokenRow layout — name, description, full-width value
+- **configurator:** unique, self-describing labels in the fluid scale section
+- **configurator:** live var() previews everywhere; unified per-type tabs incl. display
+
 ## [0.7.21] - 2026-07-18
 
 ### Features
