@@ -88,10 +88,8 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 flex items-center gap-3">
         <div
           class="bg-indigo-500/30 border border-indigo-500/30 rounded flex items-center justify-center text-[9px] font-mono text-indigo-600/70 dark:text-indigo-400/70 shrink-0"
-          style={`width: ${touchTarget}px; height: ${touchTarget}px`}
-        >
-          {touchTarget}px
-        </div>
+          style={`width: var(--sf-touch-target, 2.75rem); height: var(--sf-touch-target, 2.75rem)`}
+        ></div>
         <p class="text-[9px] text-slate-400 dark:text-slate-600">Minimum interactive area — ensures accessibility on touch devices.</p>
       </div>
   </Section>
@@ -240,7 +238,7 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-center justify-center">
         <div
           class="px-4 py-2 bg-indigo-600/30 rounded-lg text-[11px] text-indigo-800 dark:text-indigo-200"
-          style={`outline: 2px ${focusRingStyle} ${overrides["--sf-focus-ring-color"] || "oklch(0.7 0.2 235)"}; outline-offset: 2px`}
+          style={`outline: var(--sf-focus-ring-width, 2px) var(--sf-focus-ring-style, solid) var(--sf-focus-ring-color, oklch(0.7 0.2 235)); outline-offset: var(--sf-focus-ring-offset, 2px)`}
         >
           Focus ring · {focusRingStyle}
         </div>

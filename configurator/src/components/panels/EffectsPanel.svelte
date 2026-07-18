@@ -59,7 +59,7 @@
         </div>
         <div
           class="relative z-10 w-20 h-12 rounded-lg border border-black/20 dark:border-white/20 bg-black/10 dark:bg-white/10 flex items-center justify-center"
-          style={`backdrop-filter: blur(${blur}px)`}
+          style={`backdrop-filter: blur(var(--sf-blur, 12px))`}
         >
           <span class="text-[9px] font-mono text-slate-900/70 dark:text-white/70">{blur}px</span>
         </div>
@@ -94,13 +94,13 @@
       <!-- Opacity preview -->
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 space-y-2">
         {#each [
-          { label: "muted", val: opacityMuted },
-          { label: "disabled", val: opacityDisabled },
-          { label: "pending", val: pendingOpacity },
+          { label: "muted", token: "--sf-opacity-muted", val: opacityMuted },
+          { label: "disabled", token: "--sf-opacity-disabled", val: opacityDisabled },
+          { label: "pending", token: "--sf-state-pending-opacity", val: pendingOpacity },
         ] as row (row.label)}
           <div class="flex items-center gap-3">
             <span class="text-[9px] text-slate-400 dark:text-slate-600 w-14">{row.label}</span>
-            <div class="flex-1 h-4 bg-indigo-400 rounded" style={`opacity: ${row.val}`}></div>
+            <div class="flex-1 h-4 bg-indigo-400 rounded" style={`opacity: var(${row.token}, ${row.val})`}></div>
             <span class="text-[9px] font-mono text-slate-500 w-8">{row.val}</span>
           </div>
         {/each}
@@ -129,8 +129,8 @@
       {/each}
       <!-- Scrollbar strip preview -->
       <div class="flex items-center gap-2 p-2 rounded-lg bg-black/4 dark:bg-white/4 border border-black/8 dark:border-white/8">
-        <div class="w-16 h-3 rounded-full" style:background={scrollbarTrack || "rgba(255,255,255,0.08)"}>
-          <div class="w-6 h-3 rounded-full" style:background={scrollbarThumb || "oklch(0.52 0.025 260)"}></div>
+        <div class="w-16 h-3 rounded-full" style:background={"var(--sf-scrollbar-track, rgba(255,255,255,0.08))"}>
+          <div class="w-6 h-3 rounded-full" style:background={"var(--sf-scrollbar-thumb, oklch(0.52 0.025 260))"}></div>
         </div>
         <span class="text-[9px] text-slate-400 dark:text-slate-600">Scrollbar preview</span>
       </div>
