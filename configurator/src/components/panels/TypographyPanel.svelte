@@ -236,7 +236,7 @@
     <div class="flex items-center justify-between mb-1.5">
       <span class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">{label}</span>
       {#if isOverridden}
-        <button onclick={() => onReset(tokenName)} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 focus:opacity-100 transition-colors">reset</button>
+        <button onclick={() => onReset(tokenName)} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer transition-colors">reset</button>
       {/if}
     </div>
     <div class="flex gap-1">
@@ -564,7 +564,7 @@
             <div class="flex items-center justify-between mb-1">
               <span class="text-[10px] font-semibold text-slate-800 dark:text-slate-200">{t.label}</span>
               {#if t.token in overrides}
-                <button onclick={() => onReset(t.token)} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 focus:opacity-100">reset</button>
+                <button onclick={() => onReset(t.token)} class="text-[9px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer ">reset</button>
               {/if}
             </div>
             <RangeWithNumber
