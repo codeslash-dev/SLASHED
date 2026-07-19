@@ -1,7 +1,7 @@
 <script lang="ts">
   import { tick } from 'svelte';
   import { resolveColor, previewVersion } from '../../lib/previewResolver.svelte';
-  import { colorSpaceOf, normalizeColorInput, type ColorSpace } from '../../lib/colorConvert';
+  import { colorSpaceOf, normalizeColorInput, previewHex, type ColorSpace } from '../../lib/colorConvert';
 
   let {
     token,
@@ -55,6 +55,9 @@
   }
 
   let swatchColor = $derived(paint(value || `var(${token})`));
+  // Always-visible hex reference so a pasted hex stays recognisable after it is
+  // normalised to the token's canonical space.
+  let hex = $derived.by(() => { void previewVersion.value; return previewHex(value || `var(${token})`); });
 
   // Detect if the current value is a CSS variable reference (can't use native picker)
   let isVar = $derived(value.trim().startsWith("var(") || value.trim().startsWith("--"));
@@ -115,6 +118,7 @@
       {:else}
         {placeholder ?? "default"}
       {/if}
+      {#if hex && !isVar}<span class="text-slate-400 dark:text-slate-600"> · {hex}</span>{/if}
     </button>
   {/if}
 

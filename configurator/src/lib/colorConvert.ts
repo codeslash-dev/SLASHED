@@ -12,7 +12,8 @@
  * library and no drift from what the browser will actually paint.
  */
 
-import { resolveColor } from './previewResolver.svelte';
+import { resolveColor, resolveRgb } from './previewResolver.svelte';
+import { rgbToHex } from './colorUtils';
 
 export type ColorSpace = 'oklch' | 'oklab';
 
@@ -97,4 +98,21 @@ export function normalizeColorInput(input: string, target: ColorSpace): string {
   const space = colorSpaceOf(v);
   if (space === 'other') return convertColor(v, target) ?? v;
   return v;
+}
+
+/**
+ * The sRGB hex a colour actually paints as, for an always-visible reference
+ * next to the canonical (OKLCH/OKLAB) value — so a designer who pasted a hex
+ * still recognises their colour after it's normalised. Resolved through the
+ * preview iframe and read back off a canvas, so it's the real gamut-mapped
+ * pixel (out-of-sRGB colours are clamped, same as the browser paints them).
+ * Accepts a `--token` / `var()` reference too. Returns null when unavailable.
+ */
+export function previewHex(value: string): string | null {
+  const v = value.trim();
+  if (!v) return null;
+  const expr = v.startsWith('--') && !v.startsWith('var(') ? `var(${v})` : v;
+  const rgb = resolveRgb(expr);
+  if (!rgb) return null;
+  return rgbToHex(rgb[0], rgb[1], rgb[2]);
 }

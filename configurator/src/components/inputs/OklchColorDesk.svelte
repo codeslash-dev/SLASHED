@@ -1,6 +1,7 @@
 <script lang="ts">
   import RangeWithNumber from './RangeWithNumber.svelte';
-  import { normalizeColorInput } from '../../lib/colorConvert';
+  import { normalizeColorInput, previewHex } from '../../lib/colorConvert';
+  import { previewVersion } from '../../lib/previewResolver.svelte';
 
   let { label, tokenName, value, overridden, onChange, onReset }: {
     label: string;
@@ -45,6 +46,9 @@
 
   let swatchColor = $derived(oklchToRgbApprox(parsed.l, parsed.c, parsed.h));
   let shortName = $derived(tokenName.replace("--sf-", ""));
+  // Always-visible hex reference so a pasted hex stays recognisable after it's
+  // normalised to oklch(). Reactive via previewVersion (the probe recomputes).
+  let hex = $derived.by(() => { void previewVersion.value; return previewHex(value); });
 
   function update(l: number, c: number, h: number) {
     onChange(oklchToCSS(l, c, h));
@@ -73,7 +77,9 @@
     <div class="flex-1 text-left min-w-0">
       <div class="text-[11px] font-semibold text-slate-800 dark:text-slate-200">{label}</div>
       <div class="text-[9px] font-mono text-slate-500">{shortName}</div>
-      <div class="text-[9px] font-mono text-slate-400 dark:text-slate-600">{value}</div>
+      <div class="text-[9px] font-mono text-slate-400 dark:text-slate-600 truncate">
+        {value}{#if hex}<span class="text-slate-500 dark:text-slate-500"> · {hex}</span>{/if}
+      </div>
     </div>
     {#if overridden}
       <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0"></div>
