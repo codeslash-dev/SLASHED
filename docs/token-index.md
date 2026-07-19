@@ -8,12 +8,12 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**746 tokens** (deduplicated by name across the 4 token source files).
+**747 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
 | PUBLIC | 693 | Everyday knobs. SemVer-stable. |
-| PUBLIC-ADVANCED | 52 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC-ADVANCED | 53 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
 Every token also carries a **role** — an orthogonal, SemVer-neutral hint about
@@ -22,7 +22,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 257 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| knob | 258 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
 | consumption | 489 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
@@ -49,6 +49,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 - `--sf-is-pressed`
 - `--sf-leading-taper`
 - `--sf-lumlocker`
+- `--sf-lumlocker-dark`
 - `--sf-mask-scrim-end`
 - `--sf-mask-scrim-start`
 - `--sf-motion-scale`
@@ -615,6 +616,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-link-underline-offset` | PUBLIC | knob | Core | `0.15em` |
 | `--sf-link-underline-thickness` | PUBLIC | knob | Core | `auto` |
 | `--sf-lumlocker` | PUBLIC-ADVANCED | knob | Core | `0.65` |
+| `--sf-lumlocker-dark` | PUBLIC-ADVANCED | knob | Core | `clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)` |
 | `--sf-mask-scrim-end` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
 | `--sf-media-radius` | PUBLIC | knob | Core | `0` |

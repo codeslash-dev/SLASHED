@@ -526,6 +526,7 @@
   "--sf-link-underline-offset",
   "--sf-link-underline-thickness",
   "--sf-lumlocker",
+  "--sf-lumlocker-dark",
   "--sf-mask-scrim-end",
   "--sf-mask-scrim-start",
   "--sf-media-radius",

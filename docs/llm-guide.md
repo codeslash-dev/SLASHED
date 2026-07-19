@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.23** · Tokens: **746** · Prefix: `--sf-`
+> Version: **0.8.0** · Tokens: **747** · Prefix: `--sf-`
 
 ---
 
@@ -1266,10 +1266,13 @@ floor); without it, contents fall back to the viewport-based scale.
 
 ### 11.2 LumLocker
 
-Aligns the luminance (L) of all 4 brand colors to a single shared value. Preserves each color's hue and chroma. Useful when a brand palette has colors with wildly different L values.
+Aligns the luminance (L) of all 4 brand colors to a fixed value. Preserves each color's hue and chroma. Useful when a brand palette has colors with wildly different L values.
+
+Light and dark mode each get their own target L. `--sf-lumlocker-dark` defaults to the mirror of the light L around 0.59 — the midpoint between the light and dark page backgrounds — so the lock keeps equivalent contrast against the surface in both themes. (Mirroring around the background midpoint, not 0.5, is what makes the dark lock readable; a naive `1 - L` would leave it too dark.) Set `--sf-lumlocker-dark` explicitly to break the mirror.
 
 ```css
---sf-lumlocker: 0.65    /* target lightness */
+--sf-lumlocker:      0.65    /* target lightness — light mode */
+--sf-lumlocker-dark: clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)  /* dark mode; default mirror */
 ```
 
 Activation: add `data-lumlocker` attribute to `<html>`.
