@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "bd89be9ddd65",
+    "tokensHash": "2d7e174d5d83",
     "bundles": [
       "full",
       "optimal"
@@ -11047,7 +11047,7 @@
     {
       "name": "--sf-lumlocker-dark",
       "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "lumlocker",
       "category": "Core tokens",
       "group": "LumLocker",

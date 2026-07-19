@@ -111,6 +111,11 @@ const FORCED_KNOB = new Set([
   // auto-boosts opacity. Users set the base scalar; the calc is the delivery
   // vehicle, not the consumed output.
   '--sf-shadow-strength',
+  // Default mirrors the light lock around the background midpoint
+  // (clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)) so dark mode adapts
+  // automatically. Still a user-settable input — set it to break the mirror,
+  // exactly like its light-mode sibling --sf-lumlocker.
+  '--sf-lumlocker-dark',
 ]);
 
 /**

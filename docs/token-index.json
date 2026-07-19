@@ -15,8 +15,8 @@
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 257,
-        "consumption": 490
+        "knob": 258,
+        "consumption": 489
       }
     }
   },
@@ -4239,7 +4239,7 @@
     },
     "--sf-lumlocker-dark": {
       "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],

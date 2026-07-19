@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 257 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 490 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 258 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 489 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -616,7 +616,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-link-underline-offset` | PUBLIC | knob | Core | `0.15em` |
 | `--sf-link-underline-thickness` | PUBLIC | knob | Core | `auto` |
 | `--sf-lumlocker` | PUBLIC-ADVANCED | knob | Core | `0.65` |
-| `--sf-lumlocker-dark` | PUBLIC-ADVANCED | consumption | Core | `clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)` |
+| `--sf-lumlocker-dark` | PUBLIC-ADVANCED | knob | Core | `clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)` |
 | `--sf-mask-scrim-end` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
 | `--sf-media-radius` | PUBLIC | knob | Core | `0` |

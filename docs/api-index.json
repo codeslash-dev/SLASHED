@@ -36,8 +36,8 @@
         "PUBLIC-ADVANCED": 53
       },
       "by_role": {
-        "consumption": 490,
-        "knob": 257
+        "consumption": 489,
+        "knob": 258
       },
       "tokens": 747,
       "classes": 323,
@@ -13749,7 +13749,7 @@
       "name": "--sf-lumlocker-dark",
       "type": "token",
       "tier": "PUBLIC-ADVANCED",
-      "role": "consumption",
+      "role": "knob",
       "namespace": "lumlocker",
       "category": "Core tokens",
       "area": "core",
