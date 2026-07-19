@@ -84,7 +84,8 @@
       <input
         type="color"
         value={toHex(swatchColor)}
-        oninput={(e) => commit((e.target as HTMLInputElement).value)}
+        oninput={(e) => onSet((e.target as HTMLInputElement).value)}
+        onchange={(e) => commit((e.target as HTMLInputElement).value)}
         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         tabindex="-1"
       />

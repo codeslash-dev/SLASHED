@@ -48,13 +48,18 @@ function round(n: number, dp: number): string {
  * other channels keep three. Alpha is preserved only when below 1.
  */
 function format(resolved: string, space: ColorSpace): string | null {
-  const m = /^okl(?:ch|ab)\(\s*([-\d.eE+]+)\s+([-\d.eE+]+)\s+([-\d.eE+]+)\s*(?:\/\s*([-\d.eE+%]+))?\s*\)$/i.exec(
-    resolved.trim(),
-  );
+  // CSS Color 4 allows the `none` keyword for a missing/powerless channel
+  // (e.g. an achromatic colour's hue). Accept it and treat it as 0 for storage.
+  const CH = '(?:none|[-\\d.eE+]+)';
+  const m = new RegExp(
+    `^okl(?:ch|ab)\\(\\s*(${CH})\\s+(${CH})\\s+(${CH})\\s*(?:\\/\\s*(none|[-\\d.eE+%]+))?\\s*\\)$`,
+    'i',
+  ).exec(resolved.trim());
   if (!m) return null;
-  const c1 = parseFloat(m[1]);
-  const c2 = parseFloat(m[2]);
-  const c3 = parseFloat(m[3]);
+  const ch = (s: string) => (s.toLowerCase() === 'none' ? 0 : parseFloat(s));
+  const c1 = ch(m[1]);
+  const c2 = ch(m[2]);
+  const c3 = ch(m[3]);
   if (!Number.isFinite(c1) || !Number.isFinite(c2) || !Number.isFinite(c3)) return null;
   // oklch: L C H (hue in degrees → 1dp). oklab: L A B (all → 3dp).
   const body =
@@ -96,8 +101,12 @@ export function convertColor(input: string, target: ColorSpace): string | null {
 export function normalizeColorInput(input: string, target: ColorSpace): string {
   const v = input.trim();
   const space = colorSpaceOf(v);
-  if (space === 'other') return convertColor(v, target) ?? v;
-  return v;
+  // Leave references/expressions (null) and already-in-target values untouched;
+  // convert everything else — foreign colours AND the other canonical space
+  // (e.g. a pasted oklab() into an oklch field, which would otherwise be stored
+  // verbatim and leave the desk's L/C/H sliders stuck on their defaults).
+  if (space === null || space === target) return v;
+  return convertColor(v, target) ?? v;
 }
 
 /**
