@@ -1,5 +1,6 @@
 <script lang="ts">
   import RangeWithNumber from './RangeWithNumber.svelte';
+  import { normalizeColorInput } from '../../lib/colorConvert';
 
   let { label, tokenName, value, overridden, onChange, onReset }: {
     label: string;
@@ -47,6 +48,16 @@
 
   function update(l: number, c: number, h: number) {
     onChange(oklchToCSS(l, c, h));
+  }
+
+  // Commit the Raw value field. A pasted hex / rgb() / hsl() / named colour is
+  // converted to OKLCH (this desk's canonical space) so the L/C/H sliders stay
+  // in sync; oklch() input and var() references pass through unchanged.
+  function commitRaw() {
+    const raw = localRaw.trim();
+    if (!raw) return;
+    onChange(normalizeColorInput(raw, 'oklch'));
+    localRaw = "";
   }
 </script>
 
@@ -134,23 +145,15 @@
             type="text"
             value={localRaw || value}
             oninput={(e) => { localRaw = (e.target as HTMLInputElement).value; }}
-            onblur={() => {
-              if (localRaw.trim()) {
-                onChange(localRaw.trim());
-                localRaw = "";
-              }
-            }}
+            onblur={commitRaw}
             onkeydown={(e) => {
               if (e.key === "Enter") {
-                if (localRaw.trim()) {
-                  onChange(localRaw.trim());
-                  localRaw = "";
-                }
+                commitRaw();
                 (e.currentTarget as HTMLInputElement).blur();
               }
             }}
             class="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1.5 text-[10px] font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
-            placeholder="oklch(0.6 0.15 264)"
+            placeholder="oklch(…) · paste #hex, rgb(), hsl()…"
           />
           {#if overridden}
             <button

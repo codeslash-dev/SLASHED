@@ -1,6 +1,7 @@
 <script lang="ts">
   import { tick } from 'svelte';
   import { resolveColor, previewVersion } from '../../lib/previewResolver.svelte';
+  import { colorSpaceOf, normalizeColorInput, type ColorSpace } from '../../lib/colorConvert';
 
   let {
     token,
@@ -32,6 +33,19 @@
   function normalize(v: string): string {
     const t = v.trim();
     return t.startsWith("--") && !t.startsWith("var(") ? `var(${t})` : t;
+  }
+
+  // Target colour space for this field — match whatever the current value is
+  // authored in (oklch/oklab), else default to oklch. A pasted hex/rgb/hsl/named
+  // colour is converted into this space so the stored token stays canonical.
+  let targetSpace = $derived<ColorSpace>(colorSpaceOf(value) === 'oklab' ? 'oklab' : 'oklch');
+
+  // Commit a value: expand the var() shorthand, then convert a foreign concrete
+  // colour into the target space (var() refs and same-space values pass through).
+  function commit(raw: string): void {
+    const norm = normalize(raw);
+    if (!norm) { onReset(); return; }
+    onSet(normalizeColorInput(norm, targetSpace));
   }
 
   function paint(expr: string): string {
@@ -67,7 +81,7 @@
       <input
         type="color"
         value={toHex(swatchColor)}
-        oninput={(e) => onSet((e.target as HTMLInputElement).value)}
+        oninput={(e) => commit((e.target as HTMLInputElement).value)}
         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         tabindex="-1"
       />
@@ -81,9 +95,7 @@
       value={value}
       onblur={(e) => {
         if (cancelBlur) { cancelBlur = false; editing = false; return; }
-        const v = normalize((e.target as HTMLInputElement).value);
-        if (!v) onReset();
-        else onSet(v);
+        commit((e.target as HTMLInputElement).value);
         editing = false;
       }}
       onkeydown={(e) => {
