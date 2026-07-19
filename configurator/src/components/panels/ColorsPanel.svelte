@@ -234,7 +234,10 @@
   // Per-gradient structured editors, seeded lazily from the defaults above.
   let gradientEdits = $state<Record<string, { space: string; kind: string; angle: number; dir: string; stop1: string; stop2: string }>>({});
 
-  let lumlockerL = $derived(parseFloat(overrides["--sf-lumlocker"] ?? "0.65"));
+  let lumlockerL = $derived.by(() => {
+    const v = parseFloat(overrides["--sf-lumlocker"] ?? "0.65");
+    return Number.isFinite(v) ? v : 0.65;
+  });
 
   function parseLinearGradient(css: string): { space: string; kind: string; angle: number; dir: string; stop1: string; stop2: string } | null {
     const m = css.match(/^linear-gradient\(\s*in\s+(\S+)\s+(to\s+\w+|\d+deg)\s*,(.+)\)$/i);
@@ -280,13 +283,16 @@
     onSet(g.name, composeGradient(g));
   }
 
-  // LumLocker swatch preview: mirrors the framework's oklch(from <source> L c h).
-  // Works for any valid CSS color input, not just oklch() literals.
+  // LumLocker swatch preview — mirrors the framework's lock formula in
+  // core/themes.css EXACTLY, referencing the live source tokens (so overrides,
+  // the auto-derived dark sources and the dark→light fallback all flow through
+  // instead of re-deriving from panel-side defaults, which showed the stock
+  // blue for auto-dark brands). Resolved per-theme via the preview iframe.
   function lockedColor(colorKey: string, side: "light" | "dark"): string {
-    const srcName = `--sf-color-${colorKey}-source-${side}`;
-    const src = overrides[srcName] ?? BRAND_SOURCES.find(s => s.name === srcName)?.default ?? "";
-    if (!src) return "";
-    return `oklch(from ${src} ${lumlockerL} c h)`;
+    const srcVar = side === "dark"
+      ? `var(--sf-color-${colorKey}-source-dark, var(--sf-color-${colorKey}-source-light))`
+      : `var(--sf-color-${colorKey}-source-light)`;
+    return `oklch(from ${srcVar} ${lumlockerL} c h)`;
   }
 
   // Track which color rows are in Auto dark mode.
@@ -667,7 +673,7 @@
               <span class="text-[9px] text-slate-500 w-16 shrink-0">{lk.label} <span class="text-slate-400 dark:text-slate-600">{side === "light" ? "L" : "D"}</span></span>
               <span class="flex-1 h-5 rounded border border-black/10 dark:border-white/10" style={`background:${cur || `var(--sf-color-${lk.key})`}`}></span>
               <span class="text-slate-400 dark:text-slate-600 text-[10px] px-1">→</span>
-              <span class="flex-1 h-5 rounded border border-black/10 dark:border-white/10" style={`background:${paint(locked, locked)}`} title={locked}></span>
+              <span class="flex-1 h-5 rounded border border-black/10 dark:border-white/10" style={`background:${paintTheme(locked, side as "light" | "dark", locked)}`} title={locked}></span>
             </div>
           {/each}
         {/each}
