@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Features
+- **colors:** LumLocker now takes a separate dark-mode lightness (`--sf-lumlocker-dark`). It defaults to the light L mirrored around the light/dark background midpoint (`clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)`), so a lock keeps equivalent contrast against the surface in both themes instead of reusing one shared L that read poorly in dark mode. Override it to break the mirror.
+- **configurator:** LumLocker panel gains a second "L · dark" slider and the locked-swatch preview resolves dark rows against the dark L.
+
 ## [0.7.23] - 2026-07-18
 
 ### Bug Fixes

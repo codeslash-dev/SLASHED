@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1069 elements** — 746 tokens, 323 classes.
+**1070 elements** — 747 tokens, 323 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
 | PUBLIC | 1016 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 52 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC-ADVANCED | 53 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (746)
+## Tokens (747)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (615)
+### Core tokens (616)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -508,7 +508,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-link-external-marker` | PUBLIC | knob | link | `" \\2197"` | CSS content value appended to external links (e.g. " ↗"). Used by the .external-link pseudo-element pattern. |
 | `--sf-link-underline-offset` | PUBLIC | knob | link | `0.15em` | Vertical offset of the link underline from the text baseline. |
 | `--sf-link-underline-thickness` | PUBLIC | knob | link | `auto` | Stroke width of the link underline. |
-| `--sf-lumlocker` | PUBLIC-ADVANCED | knob | lumlocker | `0.65` | OKLCH lightness lock value. When :root has [data-lumlocker], brand colors (primary, secondary, action, base) are remapped to this L so their contrast remains constant as hues shift. |
+| `--sf-lumlocker` | PUBLIC-ADVANCED | knob | lumlocker | `0.65` | OKLCH lightness lock value for light mode. When :root has [data-lumlocker], the 4 brand colors (primary, secondary, tertiary, action) are remapped to this L so their contrast remains constant as hues shift. Dark mode uses --sf-lumlocker-dark. |
+| `--sf-lumlocker-dark` | PUBLIC-ADVANCED | consumption | lumlocker | `clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)` | OKLCH lightness lock value for dark mode under [data-lumlocker]. Defaults to clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92) — the mirror of the light L around the light/dark background midpoint — so the lock keeps equivalent contrast against the surface in both themes. Set explicitly to break the mirror. |
 | `--sf-mask-scrim-end` | PUBLIC-ADVANCED | consumption | mask | `var(--sf-space-l)` | End stop for edge-fade mask gradients. Mirrors --sf-mask-scrim-start for the trailing edge of a scroll container. |
 | `--sf-mask-scrim-start` | PUBLIC-ADVANCED | consumption | mask | `var(--sf-space-l)` | Start stop for edge-fade mask gradients on scroll reels / overflow containers. Use in mask-image: linear-gradient(..., transparent var(--sf-mask-scrim-start)) to fade content near the leading edge. |
 | `--sf-media-radius` | PUBLIC | knob | media | `0` | Radius + space: <length> syntax enables CSS transitions on layout values — border-radius/padding/gap etc. now interpolate instead of snapping. Shadow: syntax:"*" (no <shadow> type in spec); inherits:true so :root values cascade normally; registers the properties formally for… |

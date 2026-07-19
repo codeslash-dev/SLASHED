@@ -39,7 +39,7 @@ const INTERNAL = new Set([
 ]);
 
 const ADVANCED = new Set([
-  '--sf-lumlocker',
+  '--sf-lumlocker', '--sf-lumlocker-dark',
   '--sf-contrast-bias', '--sf-contrast-threshold',
   '--sf-shadow-strength', '--sf-shadow-color', '--sf-shadow-glow-color',
   '--sf-font-features', '--sf-font-variation', '--sf-optical-sizing',

@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 746,
+      "tokens": 747,
       "by_tier": {
         "PUBLIC": 693,
-        "PUBLIC-ADVANCED": 52,
+        "PUBLIC-ADVANCED": 53,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 257,
-        "consumption": 489
+        "consumption": 490
       }
     }
   },
@@ -4236,6 +4236,14 @@
         "core/tokens.css"
       ],
       "value": "0.65"
+    },
+    "--sf-lumlocker-dark": {
+      "tier": "PUBLIC-ADVANCED",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)"
     },
     "--sf-mask-scrim-end": {
       "tier": "PUBLIC-ADVANCED",

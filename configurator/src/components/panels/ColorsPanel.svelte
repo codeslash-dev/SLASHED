@@ -239,6 +239,20 @@
     return Number.isFinite(v) ? v : 0.65;
   });
 
+  // Dark-mode lock defaults to the mirror of the light L around 0.59 — the
+  // midpoint between the light/dark page backgrounds — clamped to a visible
+  // band, so the lock keeps equal contrast against the surface in both themes
+  // (a naive 1 - L would leave the dark lock too dark to read). Matches the CSS
+  // default in core/tokens.css. Users can pin --sf-lumlocker-dark to break it.
+  let lumlockerLDark = $derived.by(() => {
+    const raw = overrides["--sf-lumlocker-dark"];
+    if (raw !== undefined) {
+      const v = parseFloat(raw);
+      if (Number.isFinite(v)) return v;
+    }
+    return Math.min(Math.max(1.18 - lumlockerL, 0.5), 0.92);
+  });
+
   function parseLinearGradient(css: string): { space: string; kind: string; angle: number; dir: string; stop1: string; stop2: string } | null {
     const m = css.match(/^linear-gradient\(\s*in\s+(\S+)\s+(to\s+\w+|\d+deg)\s*,(.+)\)$/i);
     if (!m) return null;
@@ -292,7 +306,8 @@
     const srcVar = side === "dark"
       ? `var(--sf-color-${colorKey}-source-dark, var(--sf-color-${colorKey}-source-light))`
       : `var(--sf-color-${colorKey}-source-light)`;
-    return `oklch(from ${srcVar} ${lumlockerL} c h)`;
+    const l = side === "dark" ? lumlockerLDark : lumlockerL;
+    return `oklch(from ${srcVar} ${l} c h)`;
   }
 
   // Track which color rows are in Auto dark mode.
@@ -648,14 +663,23 @@
   <Section title="LumLocker" bind:open={showLumlocker}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
         Pins brand colors (primary, secondary, tertiary, action) to a fixed OKLCH
-        lightness — useful for always-stable sections. Enable on canvas to preview.
+        lightness — useful for always-stable sections. Light and dark each get
+        their own L: dark defaults to the mirror around the background midpoint
+        so contrast holds in both themes. Enable on canvas to preview.
       </p>
       <SliderRow
-        label="LumLocker lightness (L)" value={lumlockerL} min={0} max={1} step={0.01}
-        help="--sf-lumlocker — fixed OKLCH L applied to lockable brand colors under [data-lumlocker]"
+        label="LumLocker L · light" value={lumlockerL} min={0} max={1} step={0.01}
+        help="--sf-lumlocker — fixed OKLCH L applied to lockable brand colors in light mode under [data-lumlocker]"
         overridden={"--sf-lumlocker" in overrides}
         onChange={(v) => onSet("--sf-lumlocker", String(v))}
         onReset={() => onReset("--sf-lumlocker")}
+      />
+      <SliderRow
+        label="LumLocker L · dark" value={lumlockerLDark} min={0} max={1} step={0.01}
+        help="--sf-lumlocker-dark — fixed OKLCH L in dark mode. Defaults to the light L mirrored around the background midpoint (≈1.18 − L, clamped); set it to break the mirror."
+        overridden={"--sf-lumlocker-dark" in overrides}
+        onChange={(v) => onSet("--sf-lumlocker-dark", String(v))}
+        onReset={() => onReset("--sf-lumlocker-dark")}
       />
 
       <!-- Before / after preview for every lockable color -->

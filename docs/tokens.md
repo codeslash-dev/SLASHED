@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**746 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**747 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-615 tokens.
+616 tokens.
 
 | Token | Default |
 |---|---|
@@ -451,6 +451,7 @@ rebrand workflow.
 | `--sf-link-underline-offset` | `0.15em` |
 | `--sf-link-underline-thickness` | `auto` |
 | `--sf-lumlocker` | `0.65` |
+| `--sf-lumlocker-dark` | `clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)` |
 | `--sf-mask-scrim-end` | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | `var(--sf-space-l)` |
 | `--sf-media-radius` | `0` |
