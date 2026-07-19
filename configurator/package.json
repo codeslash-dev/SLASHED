@@ -1,7 +1,7 @@
 {
   "name": "slashed-configurator",
   "private": true,
-  "version": "0.8.0",
+  "version": "0.7.24",
   "description": "Standalone Svelte 5 + Tailwind panel to configure every SLASHED token/knob and generate override CSS. Auto-synced from the framework's generated docs/api-index.json.",
   "type": "module",
   "scripts": {
