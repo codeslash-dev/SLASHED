@@ -438,31 +438,31 @@
      "Resolved color tokens" block — keep them in sync if the formulas change. */
   @supports (color: oklch(from red l c h)) {
     @container style(--sf-surface-active: 1) {
-     .sf-card {
+      .sf-card {
 
-      --sf-color-heading: light-dark(
-        oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
-        oklch(from var(--sf-color-neutral)              clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h));
-      --sf-color-text: var(--sf-color-heading);
-      --sf-color-text--secondary: light-dark(
-        oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
-        oklch(from var(--sf-color-neutral)              clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h));
-      --sf-color-border: light-dark(
-        oklch(from var(--sf-color-neutral-source-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),
-        oklch(from var(--sf-color-neutral)              clamp(0.25, calc(l - 0.3),  0.55) 0.005 h));
-      --sf-color-border--subtle: light-dark(
-        oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4),  0.97) 0.005 h),
-        oklch(from var(--sf-color-neutral)              clamp(0.20, calc(l - 0.38), 0.45) 0.005 h));
+        --sf-color-heading: light-dark(
+          oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h),
+          oklch(from var(--sf-color-neutral)              clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1)    c h));
+        --sf-color-text: var(--sf-color-heading);
+        --sf-color-text--secondary: light-dark(
+          oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h),
+          oklch(from var(--sf-color-neutral)              clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h));
+        --sf-color-border: light-dark(
+          oklch(from var(--sf-color-neutral-source-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h),
+          oklch(from var(--sf-color-neutral)              clamp(0.25, calc(l - 0.3),  0.55) 0.005 h));
+        --sf-color-border--subtle: light-dark(
+          oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4),  0.97) 0.005 h),
+          oklch(from var(--sf-color-neutral)              clamp(0.20, calc(l - 0.38), 0.45) 0.005 h));
 
-      /* Re-seal the :root aliases against the card's restored tokens. */
-      --sf-heading-color:     var(--sf-color-heading);
-      --sf-body-color:        var(--sf-color-text);
-      --sf-card-border-color: var(--sf-color-border);
+        /* Re-seal the :root aliases against the card's restored tokens. */
+        --sf-heading-color:     var(--sf-color-heading);
+        --sf-body-color:        var(--sf-color-text);
+        --sf-card-border-color: var(--sf-color-border);
 
-      /* Body text inherits the `color` property (not a token) from the surface,
-         so re-establish it from the card's restored --sf-color-text. */
-      color: var(--sf-body-color, var(--sf-color-text));
-     }
+        /* Body text inherits the `color` property (not a token) from the surface,
+           so re-establish it from the card's restored --sf-color-text. */
+        color: var(--sf-body-color, var(--sf-color-text));
+      }
     }
   }
 
