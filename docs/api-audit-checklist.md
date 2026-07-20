@@ -86,8 +86,8 @@ Bez tego framework nie istnieje. Domyślnie wszystko `ZOSTAJE`; checkbox = potwi
 
 ## 1G. Klasy fundamentu
 
-- [ ] `.sf-sr-only` `opt`
-- [ ] `.sf-sr-only-focusable` `opt`
+- [ ] `.sr-only` `opt`
+- [ ] `.sr-only-focusable` `opt`
 - [ ] `.skip-link` `opt`
 - [ ] `.no-motion` `opt`
 - [ ] `.sf-focus-parent` `opt`
@@ -137,7 +137,7 @@ Realna wartość; rozważ okrojenie liczby wariantów lub przeniesienie do `full
 - [ ] `.sf-cover` (6) `opt`
 - [ ] `.sf-container` (5) `opt`
 - [ ] `.sf-equal` (5) `opt`
-- [ ] `.sf-header` (5) `opt`
+- [ ] `.sf-header--m` (rodzina `--xs…--xl`, 5) `opt`
 - [ ] `.sf-sidebar` (4) `opt`
 - [ ] `.sf-switcher` (3) `opt`
 - [ ] `.sf-center` (2) `opt`

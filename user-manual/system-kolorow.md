@@ -139,8 +139,8 @@ Co się dzieje z kolorami:
   automatycznie z reguł bazowych. Nie pisz `color:` ręcznie.
 - Pomarańczowy akcent w nagłówku: `.sf-text-gradient` (gradient marki na tekście)
   albo, jeśli chcesz płaski kolor, `<span style="color: var(--sf-color-primary)">`.
-- Podtytuł „ściszony”: klasa rozmiaru + token `--sf-color-text--secondary`
-  (np. własna klasa: `.lead { color: var(--sf-color-text--secondary); }`).
+- Podtytuł „ściszony”: klasa rozmiaru + token `--sf-color-text--subtle`
+  (np. własna klasa: `.lead { color: var(--sf-color-text--subtle); }`).
 - Przycisk CTA: `.sf-btn .sf-btn--action`. Tło, kolor napisu (`--on-action`),
   hover i focus-ring — wszystko gotowe.
 - Pływająca karta/widget po prawej: `.sf-card` — dostaje `--sf-color-surface` jako
@@ -202,14 +202,14 @@ Wracamy na neutralne tło. Wszystko na tokenach semantycznych:
 
 Znów `data-theme="dark"` na sekcji + `.sf-card` na cytatach. Gwiazdki oceny mogą
 użyć `--sf-color-warning` (klasyczny „złoty” akcent ocen), logotypy klientów —
-`--sf-color-text--secondary`, żeby były obecne, ale nie krzyczały.
+`--sf-color-text--subtle`, żeby były obecne, ale nie krzyczały.
 
 ### 4.5. Jasny pas — proces „A 5-phase process” (stepper)
 
 Aktywny krok = interakcja/stan → `--sf-color-action` i stan `.sf-is-active`:
 
 ```css
-.step                { color: var(--sf-color-text--secondary); }  /* krok nieaktywny */
+.step                { color: var(--sf-color-text--subtle); }  /* krok nieaktywny */
 .step.sf-is-active   { color: var(--sf-color-action); }           /* krok bieżący    */
 .step__dot           { background: var(--sf-color-border); }
 .step.sf-is-active .step__dot { background: var(--sf-color-action); }
@@ -292,7 +292,7 @@ To są role, których używasz na neutralnym tle strony (poza kolorowymi płytam
 | Token | Na czym |
 |---|---|
 | `--sf-color-text` | tekst akapitów, treść |
-| `--sf-color-text--secondary` | podtytuły, metadane, „ściszony” tekst |
+| `--sf-color-text--subtle` | podtytuły, metadane, „ściszony” tekst |
 | `--sf-color-heading` | nagłówki (h1–h6 biorą go automatycznie) |
 | `--sf-color-link` | linki (śledzi hue `action`, ale z bezpiecznym kontrastem) |
 | `--sf-color-border` | obramowania, dividery |

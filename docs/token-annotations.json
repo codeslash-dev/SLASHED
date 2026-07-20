@@ -127,7 +127,7 @@
     "--sf-color-surface": "Default component surface color. Alias of --sf-color-base; use --sf-color-raised for an elevated card/background level.",
     "--sf-color-text": "Primary text color. Contrasts against --sf-color-bg for body copy.",
     "--sf-color-heading": "Heading text color. Slightly stronger contrast than body text for visual hierarchy.",
-    "--sf-color-text--secondary": "De-emphasised secondary text (captions, labels, supporting copy).",
+    "--sf-color-text--subtle": "De-emphasised, lower-emphasis text (captions, labels, supporting copy). Second tier below --sf-color-text; sits between it and --sf-color-text--muted.",
     "--sf-color-text--muted": "Muted text for metadata, timestamps, and low-priority annotations.",
     "--sf-color-text--disabled": "Text color for disabled UI elements. Intentionally low contrast.",
     "--sf-color-text--placeholder": "Placeholder text color for inputs and textareas.",

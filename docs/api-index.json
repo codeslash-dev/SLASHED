@@ -9147,7 +9147,7 @@
       ]
     },
     {
-      "name": "--sf-color-text--secondary",
+      "name": "--sf-color-text--subtle",
       "type": "token",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -9155,7 +9155,7 @@
       "category": "Core tokens",
       "area": "core",
       "group": "Text",
-      "description": "De-emphasised secondary text (captions, labels, supporting copy).",
+      "description": "De-emphasised, lower-emphasis text (captions, labels, supporting copy). Second tier below --sf-color-text; sits between it and --sf-color-text--muted.",
       "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )",
       "aliasOf": null,
       "registered": false,

@@ -349,7 +349,7 @@
   "--sf-color-text--on-tertiary",
   "--sf-color-text--on-warning",
   "--sf-color-text--placeholder",
-  "--sf-color-text--secondary",
+  "--sf-color-text--subtle",
   "--sf-color-warning",
   "--sf-color-warning-muted",
   "--sf-color-warning-source-dark",

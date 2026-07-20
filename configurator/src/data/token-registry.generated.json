@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 801
+    "nextId": 802
   },
   "tokens": [
     {
@@ -1289,7 +1289,8 @@
     },
     {
       "id": 314,
-      "name": "--sf-color-text--secondary"
+      "name": "--sf-color-text--secondary",
+      "removed": true
     },
     {
       "id": 315,
@@ -3261,6 +3262,10 @@
     {
       "id": 800,
       "name": "--sf-lumlocker-dark"
+    },
+    {
+      "id": 801,
+      "name": "--sf-color-text--subtle"
     }
   ]
 }

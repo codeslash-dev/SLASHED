@@ -2821,7 +2821,7 @@
       ],
       "value": "light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )"
     },
-    "--sf-color-text--secondary": {
+    "--sf-color-text--subtle": {
       "tier": "PUBLIC",
       "role": "consumption",
       "files": [

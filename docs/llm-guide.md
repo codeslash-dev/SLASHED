@@ -218,7 +218,7 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 ```css
 --sf-color-text             /* Primary body text */
 --sf-color-text--muted      /* Captions, metadata, helper labels */
---sf-color-text--secondary  /* Between muted and primary */
+--sf-color-text--subtle  /* Between muted and primary */
 --sf-color-text--placeholder /* Form field placeholders */
 --sf-color-text--disabled   /* Disabled text */
 --sf-color-text--inverse    /* Light text on dark bg, and vice versa */

@@ -30,7 +30,7 @@ dark mode) stay consistent across hues. Hex/hsl inputs are converted internally.
 | You set | Framework derives |
 |---|---|
 | `--sf-color-*-source-light` (6) | dark equivalents, hover/active variants, ghost/subtle/muted alpha variants (core), numeric tints/shades (optional palette), status mixes |
-| `--sf-color-neutral-source-light` | `--sf-color-text`, `--sf-color-text--secondary`, `--sf-color-heading`, borders |
+| `--sf-color-neutral-source-light` | `--sf-color-text`, `--sf-color-text--subtle`, `--sf-color-heading`, borders |
 | `--sf-color-base-source-light` | `--sf-color-bg`, `--sf-color-inset`, `--sf-color-raised`, `--sf-color-overlay`, `--sf-color-inverse` |
 | any brand colour | `--sf-color-text--on-*` (auto black/white for WCAG AA) |
 
