@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.25] - 2026-07-20
+
 ### Features
 - **configurator:** colour fields now accept any CSS colour format — paste a hex, `rgb()`, `hsl()`, a named colour, `lab()`/`lch()`, `color()`, etc. and it is converted automatically into the token's canonical space (OKLCH, or OKLAB where that is the field's default). Conversion uses the browser's own colour engine, so it matches exactly what gets painted; `var()` references and already-canonical values pass through untouched.
 
