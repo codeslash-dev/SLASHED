@@ -16,9 +16,12 @@ const DIST = path.resolve(import.meta.dirname, '..', 'dist');
 // --row-compact/--row-tall (disambiguates from the child modifier
 // .sf-bento-tall) — full.min.css was already at the 22kB edge, and the few
 // extra bytes tipped it over.
+// full.min.css bumped 22.1 → 22.2 for the #496 coloured-surface card reset:
+// the .sf-card foreground re-derivation duplicates the light-dark() heading/
+// text/border formulas, tipping the already-edge bundle a few bytes over.
 const BUDGETS = {
   'slashed.optimal.min.css': 22,
-  'slashed.full.min.css': 22.1,
+  'slashed.full.min.css': 22.2,
 };
 
 for (const [file, budgetKb] of Object.entries(BUDGETS)) {
