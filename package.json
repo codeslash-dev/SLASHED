@@ -73,7 +73,7 @@
     "culori": "^4.0.2",
     "fast-check": "^4.9.0",
     "release-it": "^20.2.1",
-    "stylelint": "^17.14.0",
+    "stylelint": "^17.14.1",
     "stylelint-config-standard": "^40.0.0"
   },
   "optionalDependencies": {
