@@ -82,6 +82,57 @@ test.describe('Generic surface (.sf-surface)', () => {
     expect(borderOnSurface).not.toBe(borderOnRoot);
   });
 
+  // Named variant .sf-surface--secondary is dark in BOTH light and dark mode.
+  // Regression guard for #496 (alias footgun): a heading reads --sf-heading-color
+  // and a card reads --sf-card-bg / --sf-color-heading; :root-only aliases used
+  // to seal the page value and ignore the surface's auto-contrast re-mapping,
+  // leaving the heading dark-on-dark and the card's title/body light-on-light.
+  // Self-contained WCAG luminance-contrast probe (shared canvas technique).
+  function probeSurfaceHeadingCard() {
+    const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+    const ctx = cv.getContext('2d', { willReadFrequently: true });
+    const toLum = (color) => {
+      ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = color; ctx.fillRect(0, 0, 1, 1);
+      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+      const lin = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+      return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+    };
+    const ratio = (a, b) => { const x = toLum(a), y = toLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+
+    const section = document.createElement('section');
+    section.className = 'sf-surface--secondary';
+    const h2 = document.createElement('h2'); h2.textContent = 'heading';
+    const card = document.createElement('div'); card.className = 'sf-card';
+    const title = document.createElement('h4'); title.className = 'sf-card__title'; title.textContent = 'title';
+    const body = document.createElement('p'); body.textContent = 'body';
+    card.append(title, body);
+    section.append(h2, card);
+    document.body.appendChild(section);
+
+    const surfBg  = getComputedStyle(section).backgroundColor;
+    const cardBg  = getComputedStyle(card).backgroundColor;
+    const out = {
+      headingVsSurface: ratio(getComputedStyle(h2).color, surfBg),
+      titleVsCard:      ratio(getComputedStyle(title).color, cardBg),
+      bodyVsCard:       ratio(getComputedStyle(body).color, cardBg),
+    };
+    section.remove();
+    return out;
+  }
+
+  test('direct heading auto-flips on a coloured surface (#496)', async ({ page }) => {
+    await page.goto(FIXTURE);
+    const { headingVsSurface } = await page.evaluate(probeSurfaceHeadingCard);
+    expect(headingVsSurface).toBeGreaterThanOrEqual(3);
+  });
+
+  test('a .sf-card on a coloured surface keeps its title/body legible against its own bg (#496)', async ({ page }) => {
+    await page.goto(FIXTURE);
+    const { titleVsCard, bodyVsCard } = await page.evaluate(probeSurfaceHeadingCard);
+    expect(titleVsCard).toBeGreaterThanOrEqual(3);
+    expect(bodyVsCard).toBeGreaterThanOrEqual(3);
+  });
+
   test('default surface color is the base surface', async ({ page }) => {
     await page.goto(FIXTURE);
     const { bg, baseBg } = await page.evaluate(() => {

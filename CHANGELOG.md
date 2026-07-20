@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Features
 - **configurator:** colour fields now accept any CSS colour format — paste a hex, `rgb()`, `hsl()`, a named colour, `lab()`/`lch()`, `color()`, etc. and it is converted automatically into the token's canonical space (OKLCH, or OKLAB where that is the field's default). Conversion uses the browser's own colour engine, so it matches exactly what gets painted; `var()` references and already-canonical values pass through untouched.
 
+### Bug Fixes
+- **themes:** headings, body text and cards now auto-flip their foreground on coloured surfaces (`.sf-surface--*`) and in `[data-theme]` sections (#496). The `:root`-only alias overrides (`--sf-heading-color`, `--sf-body-color`, `--sf-card-border-color`) previously sealed the page value at `:root` — so a heading stayed dark on a dark surface, and a `.sf-card` on a coloured surface rendered its title/body/border for the wrong background. A `.sf-card` keeps the page surface as its own (non-adapting) background and now restores surface-appropriate, legible foreground for it; a consumer's own `--sf-color-heading` override on a non-surface ancestor is still inherited.
+
 ## [0.7.24] - 2026-07-19
 
 ### Features
