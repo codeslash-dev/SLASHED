@@ -75,7 +75,7 @@ test.describe('Container queries', () => {
 });
 
 test.describe('State classes', () => {
-  test('.sf-is-hidden / .sf-is-disabled apply their effects', async ({ page }) => {
+  test('.sf-is-disabled applies its effects', async ({ page }) => {
     await page.goto(DEMO_URL);
     const probe = await page.evaluate(() => {
       const mk = (cls, css = '') => {
@@ -87,11 +87,9 @@ test.describe('State classes', () => {
         return getComputedStyle(el);
       };
       return {
-        hidden: mk('sf-is-hidden').display,
         disabledPE: mk('sf-is-disabled').pointerEvents,
       };
     });
-    expect(probe.hidden).toBe('none');
     expect(probe.disabledPE).toBe('none');
   });
 });

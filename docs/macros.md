@@ -230,7 +230,7 @@ target a specific edge or axis:
 
 Suppresses the WebKit/Android grey tap-highlight overlay on
 interactive elements where it conflicts with the framework's own
-`.sf-is-active` / hover treatment.
+`:active` / hover treatment.
 
 ```html
 <a class="sf-no-tap-highlight" href="…">…</a>
@@ -379,7 +379,7 @@ contract (shown here seeded from a custom foreground/background pair):
     --sf-color-link:              oklch(from var(--my-fg) l calc(c + 0.08) h);
     --sf-color-link--hover:       var(--my-fg);
     --sf-color-link--underline:   oklch(from var(--my-fg) l c h / 0.5);
-    --sf-color-text--secondary:   oklch(from var(--my-fg) l c h / 0.70);
+    --sf-color-text--subtle:      oklch(from var(--my-fg) l c h / 0.70);
     --sf-color-text--placeholder: oklch(from var(--my-fg) l c h / 0.45);
     --sf-color-text--disabled:    oklch(from var(--my-fg) l c h / 0.30);
     --sf-color-border:            oklch(from var(--my-fg) l c h / 0.20);

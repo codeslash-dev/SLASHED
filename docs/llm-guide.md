@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.25** · Tokens: **747** · Prefix: `--sf-`
+> Version: **0.7.25** · Tokens: **741** · Prefix: `--sf-`
 
 ---
 
@@ -53,7 +53,7 @@ slashed/
 │   ├── base.css             # HTML typography, links, img/video
 │   ├── layout.css           # Primitive classes: stack, cluster, grid, sidebar…
 │   ├── macros.css           # Recipe classes: prose, surface, flow, scrim…
-│   ├── states.css           # State classes: .sf-is-active, .sf-is-current…
+│   ├── states.css           # State classes: .sf-is-disabled, .sf-is-loading…
 │   ├── accessibility.css    # Focus, skip links, screen-reader utilities
 │   ├── motion.css           # @keyframes for animations + view-transition
 │   └── print.css            # Print styles
@@ -218,7 +218,7 @@ Auto-switch between light and dark modes. These are the tokens you reference in 
 ```css
 --sf-color-text             /* Primary body text */
 --sf-color-text--muted      /* Captions, metadata, helper labels */
---sf-color-text--secondary  /* Between muted and primary */
+--sf-color-text--subtle     /* Between muted and primary */
 --sf-color-text--placeholder /* Form field placeholders */
 --sf-color-text--disabled   /* Disabled text */
 --sf-color-text--inverse    /* Light text on dark bg, and vice versa */
@@ -469,9 +469,6 @@ Status families (success/warning/info/danger) have **no numeric scale** — use 
 --sf-font-weight-display:     var(--sf-font-weight-bold)      /* hero */
 --sf-font-weight-interactive: var(--sf-font-weight-semibold)  /* buttons, nav */
 --sf-font-weight-strong:      var(--sf-font-weight-bold)      /* <strong> */
-
-/* State token */
---sf-current-font-weight: var(--sf-font-weight-bold)  /* .sf-is-current in nav */
 ```
 
 ### 6.4 Text sizes (fluid, generative)
@@ -1071,30 +1068,18 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 --sf-caret-color:           var(--sf-color-action)
 --sf-touch-target:          2.75rem            /* 44px — WCAG 2.5.5, fixed independent of --sf-size-* */
 --sf-opacity-disabled:      0.45
---sf-state-pending-opacity: 0.7                  /* async operations */
 --sf-opacity-muted:         0.5
 --sf-blur:                  12px                 /* frosted glass backdrop-filter */
 ```
 
-### 9.9 State flags (PUBLIC-ADVANCED — Style Queries)
-
-Used by `.sf-is-active`, `.sf-is-current`, etc. in `core/states.css`. Allow components to react to ancestor states via CSS Style Queries.
-
-```css
---sf-is-active:  0   /* 1 = active element (.sf-is-active) */
---sf-is-current: 0   /* 1 = current page (.sf-is-current in nav) */
---sf-is-pressed: 0   /* 1 = pressed */
---sf-is-open:    0   /* 1 = open (accordion, dropdown) */
-```
-
-### 9.10 Form field tokens
+### 9.9 Form field tokens
 
 ```css
 --sf-field-required-marker: " *"               /* required field marker */
 --sf-link-external-marker:  " ↗"              /* marker for .sf-link-external */
 
 /* Scoped override hooks — set per-field/form to override global borders/text */
---sf-field-border-color     /* set by validation states (error/success/warning/info/danger); also set natively by :user-invalid/:user-valid within .sf-live-validate (opt-in — see below) */
+--sf-field-border-color     /* set by validation states (error/success/warning/info); also set natively by :user-invalid/:user-valid within .sf-live-validate (opt-in — see below) */
 --sf-field-text-color       /* set by validation states for text color feedback */
 ```
 

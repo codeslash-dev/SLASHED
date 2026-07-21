@@ -61,7 +61,6 @@ const ADVANCED = new Set([
   // whole --xs…xl size ladder to one value. Everyday sizing goes through the
   // proportional --sf-btn-font-scale multiplier and the per-size knobs instead.
   '--sf-btn-font-size', '--sf-btn-padding-block', '--sf-btn-padding-inline', '--sf-btn-min-height',
-  '--sf-is-active', '--sf-is-current', '--sf-is-pressed', '--sf-is-open',
   '--sf-focus-ring-shadow',
   '--sf-print-page-margin', '--sf-print-page-size', '--sf-print-base-size',
 ]);

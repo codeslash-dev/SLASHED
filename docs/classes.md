@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**287 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
+**289 .sf-classes, 15 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -218,37 +218,24 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## State classes (`core/states.css`)
 
-28 classes.
+15 classes.
 
 | Class |
 |---|
-| `.sf-is-active` |
-| `.sf-is-busy` |
-| `.sf-is-collapsed` |
-| `.sf-is-current` |
-| `.sf-is-danger` |
 | `.sf-is-disabled` |
 | `.sf-is-draggable` |
 | `.sf-is-dragging` |
 | `.sf-is-drop-target` |
 | `.sf-is-empty` |
 | `.sf-is-error` |
-| `.sf-is-expanded` |
-| `.sf-is-hidden` |
 | `.sf-is-highlighted` |
 | `.sf-is-info` |
 | `.sf-is-invalid` |
-| `.sf-is-invisible` |
 | `.sf-is-loading` |
-| `.sf-is-open` |
-| `.sf-is-pending` |
-| `.sf-is-pressed` |
-| `.sf-is-readonly` |
 | `.sf-is-selected` |
 | `.sf-is-skeleton` |
 | `.sf-is-success` |
 | `.sf-is-valid` |
-| `.sf-is-visible` |
 | `.sf-is-warning` |
 
 ## Accessibility (`core/accessibility.css`)
@@ -360,7 +347,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Utilities (`optional/utilities.css`)
 
-32 classes.
+34 classes.
 
 | Class |
 |---|
@@ -376,6 +363,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-hover-sink` |
 | `.sf-hover-slide-end` |
 | `.sf-hover-slide-start` |
+| `.sf-invisible` |
 | `.sf-list-none` |
 | `.sf-marker--action` |
 | `.sf-marker--primary` |
@@ -396,4 +384,5 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-text-s` |
 | `.sf-text-xl` |
 | `.sf-text-xs` |
+| `.sf-visible` |
 

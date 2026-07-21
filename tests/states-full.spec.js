@@ -1,22 +1,26 @@
 // @ts-check
-// Full coverage of every .sf-is-* class in core/states.css.
+// Full coverage of every .sf-is-* class in core/states.css, plus the two
+// visibility helpers (.sf-invisible/.sf-visible, optional/utilities.css)
+// that used to live here before docs/states.md's "Prefer native state" pass.
+import path from 'node:path';
 import { test, expect } from '@playwright/test';
 import { renderWithBundle, NO_TRANSITIONS_STYLE } from './render-helpers.js';
 
-async function setup(page, html) {
+// optional/utilities.css isn't in the optimal bundle (see bundle.config.json),
+// so the two visibility helpers below need the full bundle — same pattern as
+// button.spec.js/card.spec.js's COMPONENTS_BUNDLE.
+const FULL_BUNDLE = path.join(process.cwd(), 'dist', 'slashed.full.css');
+
+async function setup(page, html, options = {}) {
   // Disable transitions so computed property reads are stable (no mid-animation values).
-  await renderWithBundle(page, html, { width: 800, height: 600, extraStyle: NO_TRANSITIONS_STYLE });
+  await renderWithBundle(page, html, { width: 800, height: 600, extraStyle: NO_TRANSITIONS_STYLE, ...options });
 }
 
-// ── Visibility ──────────────────────────────────────────────────
-test('.sf-is-hidden: display:none (important)', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-hidden">x</div>`);
-  const d = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
-  expect(d).toBe('none');
-});
+// ── Visibility (optional/utilities.css) ──────────────────────────
+// No .sf-is-hidden test: the class was removed (duplicated [hidden]).
 
-test('.sf-is-invisible: visibility:hidden (stays in flow)', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-invisible">x</div>`);
+test('.sf-invisible: visibility:hidden (stays in flow)', async ({ page }) => {
+  await setup(page, `<div id="t" class="sf-invisible">x</div>`, { bundle: FULL_BUNDLE });
   const cs = await page.locator('#t').evaluate(el => ({
     vis: getComputedStyle(el).visibility,
     dis: getComputedStyle(el).display,
@@ -25,12 +29,12 @@ test('.sf-is-invisible: visibility:hidden (stays in flow)', async ({ page }) => 
   expect(cs.dis).not.toBe('none');
 });
 
-test('.sf-is-visible: overrides inherited visibility:hidden', async ({ page }) => {
+test('.sf-visible: overrides inherited visibility:hidden', async ({ page }) => {
   await setup(page, `
     <div style="visibility:hidden">
-      <div id="t" class="sf-is-visible">x</div>
+      <div id="t" class="sf-visible">x</div>
     </div>
-  `);
+  `, { bundle: FULL_BUNDLE });
   const vis = await page.locator('#t').evaluate(el => getComputedStyle(el).visibility);
   expect(vis).toBe('visible');
 });
@@ -51,16 +55,7 @@ test('.sf-is-disabled: opacity 0.45, pointer-events none, cursor not-allowed', a
   if (browserName !== 'webkit') expect(cs.us).toBe('none');
 });
 
-test('.sf-is-readonly: pointer-events none, user-select none', async ({ page, browserName }) => {
-  await setup(page, `<div id="t" class="sf-is-readonly">Read only</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    pe: getComputedStyle(el).pointerEvents,
-    us: getComputedStyle(el).userSelect ?? getComputedStyle(el).webkitUserSelect,
-  }));
-  expect(cs.pe).toBe('none');
-  // WebKit requires -webkit-user-select; the framework only sets user-select (no prefix).
-  if (browserName !== 'webkit') expect(cs.us).toBe('none');
-});
+// No .sf-is-readonly test: the class was removed (duplicated :read-only).
 
 // ── Loading / async ─────────────────────────────────────────────
 test('.sf-is-loading: colour transparent, position relative, pointer-events none', async ({ page }) => {
@@ -75,21 +70,8 @@ test('.sf-is-loading: colour transparent, position relative, pointer-events none
   expect(cs.pos).toBe('relative');
 });
 
-test('.sf-is-busy: cursor progress', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-busy">Loading…</div>`);
-  const cursor = await page.locator('#t').evaluate(el => getComputedStyle(el).cursor);
-  expect(cursor).toBe('progress');
-});
-
-test('.sf-is-pending: opacity < 1, cursor progress', async ({ page }) => {
-  await setup(page, `<button id="t" class="sf-is-pending">Save</button>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    opacity: parseFloat(getComputedStyle(el).opacity),
-    cursor:  getComputedStyle(el).cursor,
-  }));
-  expect(cs.opacity).toBeLessThan(1);
-  expect(cs.cursor).toBe('progress');
-});
+// No .sf-is-busy / .sf-is-pending tests: both classes were removed
+// (no distinct consumer, trivial to hand-roll — see core/states.css).
 
 test('.sf-is-skeleton: transparent text, shimmer gradient, no pointer-events', async ({ page }) => {
   await setup(page, `<div id="t" class="sf-is-skeleton">Placeholder text</div>`);
@@ -103,14 +85,10 @@ test('.sf-is-skeleton: transparent text, shimmer gradient, no pointer-events', a
   expect(cs.pe).toBe('none');
 });
 
-// ── Active / selected ───────────────────────────────────────────
-test('.sf-is-active: sets --sf-is-active CSS variable to 1', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-active">Active</div>`);
-  const v = await page.locator('#t').evaluate(el =>
-    getComputedStyle(el).getPropertyValue('--sf-is-active').trim()
-  );
-  expect(v).toBe('1');
-});
+// ── Selected / highlighted ────────────────────────────────────────
+// No .sf-is-active / .sf-is-current / .sf-is-pressed / .sf-is-open /
+// .sf-is-collapsed tests: all five were removed (speculative --sf-is-*
+// custom-property flags with zero consumers — see core/states.css).
 
 test('.sf-is-selected: has a non-transparent background', async ({ page }) => {
   await setup(page, `<li id="t" class="sf-is-selected">Selected</li>`);
@@ -119,48 +97,15 @@ test('.sf-is-selected: has a non-transparent background', async ({ page }) => {
   expect(bg).not.toBe('transparent');
 });
 
-test('.sf-is-current: bold font-weight (≥ 700)', async ({ page }) => {
-  await setup(page, `<a id="t" href="#" class="sf-is-current">Current</a>`);
-  const fw = await page.locator('#t').evaluate(el =>
-    parseInt(getComputedStyle(el).fontWeight, 10)
-  );
-  expect(fw).toBeGreaterThanOrEqual(700);
-});
-
 test('.sf-is-highlighted: has a non-transparent background', async ({ page }) => {
   await setup(page, `<div id="t" class="sf-is-highlighted">Highlighted</div>`);
   const bg = await page.locator('#t').evaluate(el => getComputedStyle(el).backgroundColor);
   expect(bg).not.toBe('rgba(0, 0, 0, 0)');
 });
 
-test('.sf-is-pressed: sets --sf-is-pressed to 1 and non-transparent background', async ({ page }) => {
-  await setup(page, `<button id="t" class="sf-is-pressed">Toggle</button>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    flag: getComputedStyle(el).getPropertyValue('--sf-is-pressed').trim(),
-    bg:   getComputedStyle(el).backgroundColor,
-  }));
-  expect(cs.flag).toBe('1');
-  expect(cs.bg).not.toBe('rgba(0, 0, 0, 0)');
-});
-
-// ── Open / collapsed ────────────────────────────────────────────
-test('.sf-is-open: sets --sf-is-open to 1', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-open">open</div>`);
-  const v = await page.locator('#t').evaluate(el =>
-    getComputedStyle(el).getPropertyValue('--sf-is-open').trim()
-  );
-  expect(v).toBe('1');
-});
-
-test('.sf-is-collapsed: sets --sf-is-open to 0', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-collapsed">closed</div>`);
-  const v = await page.locator('#t').evaluate(el =>
-    getComputedStyle(el).getPropertyValue('--sf-is-open').trim()
-  );
-  expect(v).toBe('0');
-});
-
 // ── Validation ──────────────────────────────────────────────────
+// No .sf-is-danger case: removed (identical implementation to
+// .sf-is-invalid/.sf-is-error — see core/states.css).
 for (const [cls, status] of [
   ['sf-is-valid',   'success'],
   ['sf-is-invalid', 'error'],
@@ -168,7 +113,6 @@ for (const [cls, status] of [
   ['sf-is-success', 'success'],
   ['sf-is-error',   'error'],
   ['sf-is-info',    'info'],
-  ['sf-is-danger',  'danger'],
 ]) {
   test(`.${cls}: sets --sf-field-border-color token`, async ({ page }) => {
     await setup(page, `<input id="t" class="${cls}" type="text">`);

@@ -26,7 +26,7 @@ const TIER1_TOKENS = [
   '--sf-color-success', '--sf-color-warning',
   '--sf-color-info', '--sf-color-danger',
   '--sf-color-bg', '--sf-color-inset', '--sf-color-raised',
-  '--sf-color-text', '--sf-color-text--secondary', '--sf-color-heading',
+  '--sf-color-text', '--sf-color-text--subtle', '--sf-color-heading',
   '--sf-color-border', '--sf-color-border--subtle', '--sf-color-border--strong',
   '--sf-color-link', '--sf-color-selection-bg',
   '--sf-color-success-strong', '--sf-color-warning-strong',
