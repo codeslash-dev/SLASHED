@@ -379,7 +379,7 @@ contract (shown here seeded from a custom foreground/background pair):
     --sf-color-link:              oklch(from var(--my-fg) l calc(c + 0.08) h);
     --sf-color-link--hover:       var(--my-fg);
     --sf-color-link--underline:   oklch(from var(--my-fg) l c h / 0.5);
-    --sf-color-text--subtle:   oklch(from var(--my-fg) l c h / 0.70);
+    --sf-color-text--subtle:      oklch(from var(--my-fg) l c h / 0.70);
     --sf-color-text--placeholder: oklch(from var(--my-fg) l c h / 0.45);
     --sf-color-text--disabled:    oklch(from var(--my-fg) l c h / 0.30);
     --sf-color-border:            oklch(from var(--my-fg) l c h / 0.20);
