@@ -15,18 +15,12 @@
 
 @layer slashed.states {
 
-  /* -- VISIBILITY --
-     No .sf-is-hidden here: it duplicated [hidden] (core/reset.css hardens
-     that attribute with the same `display: none !important`), so the class
-     added a second name for something the platform already gives you. */
-
-  .sf-is-invisible {
-    visibility: hidden;
-  }
-
-  .sf-is-visible {
-    visibility: visible;
-  }
+  /* No visibility classes here: .sf-is-hidden duplicated [hidden] (removed —
+     core/reset.css hardens that attribute identically). .sf-invisible /
+     .sf-visible moved to optional/utilities.css as single-property helpers
+     (same call as Bulma's is-hidden/is-invisible living under "helpers",
+     not component/state docs) — still the hook docs/roadmap.md's
+     reveal-on-scroll pattern targets, just renamed and relocated. */
 
   /* -- INTERACTIVITY --
      No .sf-is-readonly here: it duplicated :read-only for real form controls,
@@ -72,17 +66,11 @@
     animation: var(--sf-animation-spin);
   }
 
-  /* No .sf-is-busy here: it was a single cursor:progress declaration with no
-     visual distinction of its own — [aria-busy="true"], which you need to set
-     for assistive tech anyway, is sufficient as the sole hook. Use
-     .sf-is-pending below for a state that also needs its own visual (dimmed,
-     still usable — optimistic UI), or .sf-is-loading for a full spinner. */
-
-  .sf-is-pending {
-
-    opacity: var(--sf-state-pending-opacity);
-    cursor:  progress;
-  }
+  /* No .sf-is-busy / .sf-is-pending here: both were a couple of
+     property-value declarations (cursor:progress, plus opacity for
+     pending's "optimistic UI" dimming) with no consumer and no native gap
+     they filled — [aria-busy="true"] covers the semantic, and the visual
+     is two lines to hand-roll in your own component CSS if you want it. */
 
   img.sf-is-skeleton,
   .sf-is-skeleton img {
@@ -104,48 +92,32 @@
     user-select:     none;
   }
 
-  /* -- ACTIVE / SELECTED / CURRENT -- */
-
-  .sf-is-active {
-
-    --sf-is-active: 1;
-  }
+  /* -- SELECTED / HIGHLIGHTED --
+     No .sf-is-active / .sf-is-open / .sf-is-collapsed / .sf-is-expanded /
+     .sf-is-current / .sf-is-pressed here: these only ever set an
+     inheritable --sf-is-* custom property for a hypothetical consumer
+     calc() to branch on, with zero consumer anywhere in this codebase or
+     its demo. Speculative "might be useful one day" surface, removed —
+     see docs/states.md § "Prefer native state". Reach for [aria-current],
+     [aria-expanded], [aria-pressed] as the styling hook instead; .sf-is-
+     selected / .sf-is-highlighted below cover the two cases (selection,
+     transient emphasis) that still need their own visual. */
 
   .sf-is-selected {
     background-color: var(--sf-color-bg--selected);
-  }
-
-  .sf-is-current {
-
-    --sf-is-current: 1;
-    font-weight: var(--sf-current-font-weight, var(--sf-font-weight-bold));
   }
 
   .sf-is-highlighted {
     background-color: var(--sf-color-bg--focus);
   }
 
-  .sf-is-pressed {
-
-    --sf-is-pressed: 1;
-    background-color: var(--sf-color-bg--selected);
-  }
-
-  /* -- OPEN / CLOSED -- */
-
-  .sf-is-open {
-    --sf-is-open: 1;
-  }
-
-  .sf-is-collapsed {
-    --sf-is-open: 0;
-  }
-
-  .sf-is-expanded {
-    --sf-is-open: 1;
-  }
-
-  /* -- VALIDATION / FEEDBACK -- */
+  /* -- VALIDATION / FEEDBACK --
+     No .sf-is-danger here: identical implementation to .sf-is-invalid/
+     .sf-is-error (both only ever wrote --sf-field-*, so it never worked as
+     the "destructive-action context" its own docs described outside a form
+     field) and, per docs/migration.md, visual variants belong in your own
+     component CSS anyway. Use .sf-is-invalid/.sf-is-error, or your own
+     `--danger` variant class, instead. */
 
   .sf-is-valid,
   .sf-is-success {
@@ -167,11 +139,6 @@
   .sf-is-info {
     --sf-field-border-color: var(--sf-color-info);
     --sf-field-text-color:   var(--sf-color-info-strong);
-  }
-
-  .sf-is-danger {
-    --sf-field-border-color: var(--sf-color-danger);
-    --sf-field-text-color:   var(--sf-color-danger-strong);
   }
 
   /* -- DRAG & DROP -- */

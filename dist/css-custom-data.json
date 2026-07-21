@@ -1862,11 +1862,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-current-font-weight",
-      "description": "Inherits the current font-weight from context. Useful as a reset.\n\nDefault: `var(--sf-font-weight-bold)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-density",
       "description": "Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it).\n\nDefault: `1`\n\n(advanced token)",
       "syntax": "*"
@@ -2557,26 +2552,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-is-active",
-      "description": "Integer state flag for the active state. Set to 1 (via JS or .sf-is-active) to drive branching calc() expressions. 0 = default (inactive).\n\nDefault: `0`\n\n(advanced token)",
-      "syntax": "<integer>"
-    },
-    {
-      "name": "--sf-is-current",
-      "description": "Integer state flag for the current/selected state. Set to 1 (via .sf-is-current) to drive branching calc() expressions. 0 = default.\n\nDefault: `0`\n\n(advanced token)",
-      "syntax": "<integer>"
-    },
-    {
-      "name": "--sf-is-open",
-      "description": "Integer state flag for the open/expanded state. Set to 1 (via .sf-is-open) to drive branching calc() expressions. 0 = default (closed).\n\nDefault: `0`\n\n(advanced token)",
-      "syntax": "<integer>"
-    },
-    {
-      "name": "--sf-is-pressed",
-      "description": "Integer state flag for the pressed state. Set to 1 (via .sf-is-pressed) to drive branching calc() expressions. 0 = default.\n\nDefault: `0`\n\n(advanced token)",
-      "syntax": "<integer>"
-    },
-    {
       "name": "--sf-leading-normal",
       "description": "Normal line height (~1.5). Default for body text.\n\nDefault: `1.5`",
       "syntax": "*"
@@ -3209,11 +3184,6 @@
     {
       "name": "--sf-stagger-step",
       "description": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.\n\nDefault: `75ms`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-state-pending-opacity",
-      "description": "Opacity for pending / loading state elements.\n\nDefault: `0.7`",
       "syntax": "*"
     },
     {

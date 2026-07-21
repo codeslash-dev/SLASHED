@@ -25,30 +25,30 @@
       "optimal"
     ],
     "counts": {
-      "total": 1067,
+      "total": 1053,
       "by_type": {
-        "class": 320,
-        "token": 747
+        "class": 312,
+        "token": 741
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1013,
-        "PUBLIC-ADVANCED": 53
+        "PUBLIC": 1003,
+        "PUBLIC-ADVANCED": 49
       },
       "by_role": {
-        "consumption": 489,
-        "knob": 258
+        "consumption": 488,
+        "knob": 253
       },
-      "tokens": 747,
-      "classes": 320,
-      "sf_classes": 287,
-      "is_classes": 25,
+      "tokens": 741,
+      "classes": 312,
+      "sf_classes": 289,
+      "is_classes": 15,
       "unprefixed_classes": 8,
       "by_category": {
         "Accessibility": 8,
         "Component tokens": 46,
         "Components": 30,
-        "Core tokens": 616,
+        "Core tokens": 610,
         "Forms": 1,
         "Layout primitives": 145,
         "Layout tokens": 53,
@@ -56,9 +56,9 @@
         "Macro tokens": 32,
         "Motion / animation": 22,
         "Print": 4,
-        "State classes": 25,
+        "State classes": 15,
         "Theme utilities": 3,
-        "Utilities": 31
+        "Utilities": 33
       }
     },
     "schema": {
@@ -9719,32 +9719,6 @@
       ]
     },
     {
-      "name": "--sf-current-font-weight",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "current",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Font weights",
-      "description": "Inherits the current font-weight from context. Useful as a reset.",
-      "value": "var(--sf-font-weight-bold)",
-      "aliasOf": "--sf-font-weight-bold",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
       "name": "--sf-density",
       "type": "token",
       "tier": "PUBLIC-ADVANCED",
@@ -13330,58 +13304,6 @@
       ]
     },
     {
-      "name": "--sf-is-active",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "is",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the active state. Set to 1 (via JS or .sf-is-active) to drive branching calc() expressions. 0 = default (inactive).",
-      "value": "0",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<integer>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-is-current",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "is",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the current/selected state. Set to 1 (via .sf-is-current) to drive branching calc() expressions. 0 = default.",
-      "value": "0",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<integer>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
       "name": "--sf-is-dark",
       "type": "token",
       "tier": "INTERNAL",
@@ -13391,58 +13313,6 @@
       "area": "core",
       "group": "DARK SOURCE TOKENS (-dark, animatable)",
       "description": "Mode flag — 0 in light mode, 1 in dark mode. Set automatically by [data-theme='dark'] and prefers-color-scheme. Drives dark-mode formula branches in calc().",
-      "value": "0",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<integer>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-is-open",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "is",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the open/expanded state. Set to 1 (via .sf-is-open) to drive branching calc() expressions. 0 = default (closed).",
-      "value": "0",
-      "aliasOf": null,
-      "registered": true,
-      "animatable": true,
-      "syntax": "<integer>",
-      "inherits": true,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-is-pressed",
-      "type": "token",
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "namespace": "is",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "INTERACTION STATE FLAGS",
-      "description": "Integer state flag for the pressed state. Set to 1 (via .sf-is-pressed) to drive branching calc() expressions. 0 = default.",
       "value": "0",
       "aliasOf": null,
       "registered": true,
@@ -16746,32 +16616,6 @@
       "group": "Animation presets",
       "description": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.",
       "value": "75ms",
-      "aliasOf": null,
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "--sf-state-pending-opacity",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "knob",
-      "namespace": "state",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Opacity",
-      "description": "Opacity for pending / loading state elements.",
-      "value": "0.7",
       "aliasOf": null,
       "registered": false,
       "animatable": false,
@@ -23748,95 +23592,25 @@
       ]
     },
     {
-      "name": "sf-is-active",
+      "name": "sf-invisible",
       "type": "class",
       "tier": "PUBLIC",
-      "selector": ".sf-is-active",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching.",
+      "selector": ".sf-invisible",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "VISIBILITY HELPERS (.sf-invisible / .sf-visible)",
+      "description": "Visibility helper (optional/utilities.css) — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). Not a runtime state: no JS/ARIA condition of its own.",
       "isVariant": false,
       "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
+      "optional": true,
+      "layer": "slashed.utilities",
       "sourceFiles": [
-        "core/states.css"
+        "optional/utilities.css"
       ],
       "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-is-collapsed",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-collapsed",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OPEN / CLOSED",
-      "description": "Collapsed state for disclosure widgets — hides the expandable region. Pair with sf-is-expanded or sf-is-open. Components add transitions.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-is-current",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-current",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-is-danger",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-danger",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VALIDATION / FEEDBACK",
-      "description": "Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
+        "full"
       ]
     },
     {
@@ -23965,30 +23739,7 @@
       "category": "State classes",
       "area": "states",
       "group": "VALIDATION / FEEDBACK",
-      "description": "Error state — alias for sf-is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-is-expanded",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-expanded",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OPEN / CLOSED",
-      "description": "Expanded state for disclosure widgets — shows the expandable region. Inverse of sf-is-collapsed. Components add transitions.",
+      "description": "Error state — general (not form-field-specific) negative feedback. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -24010,7 +23761,7 @@
       "kind": "state",
       "category": "State classes",
       "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
+      "group": "SELECTED / HIGHLIGHTED",
       "description": "Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists.",
       "isVariant": false,
       "baseClass": null,
@@ -24071,29 +23822,6 @@
       ]
     },
     {
-      "name": "sf-is-invisible",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-invisible",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VISIBILITY",
-      "description": "Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
       "name": "sf-is-loading",
       "type": "class",
       "tier": "PUBLIC",
@@ -24119,75 +23847,6 @@
       ]
     },
     {
-      "name": "sf-is-open",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-open",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "OPEN / CLOSED",
-      "description": "Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed. Sets --sf-is-open to 1 for calc() branching.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-is-pending",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-pending",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "LOADING / ASYNC FEEDBACK",
-      "description": "Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from sf-is-loading (which hides content entirely).",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-is-pressed",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-pressed",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
-      "description": "Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
       "name": "sf-is-selected",
       "type": "class",
       "tier": "PUBLIC",
@@ -24196,7 +23855,7 @@
       "kind": "state",
       "category": "State classes",
       "area": "states",
-      "group": "ACTIVE / SELECTED / CURRENT",
+      "group": "SELECTED / HIGHLIGHTED",
       "description": "Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles.",
       "isVariant": false,
       "baseClass": null,
@@ -24267,29 +23926,6 @@
       "area": "states",
       "group": "VALIDATION / FEEDBACK",
       "description": "Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.states",
-      "sourceFiles": [
-        "core/states.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
-      "name": "sf-is-visible",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-is-visible",
-      "prefix": "sf-is",
-      "kind": "state",
-      "category": "State classes",
-      "area": "states",
-      "group": "VISIBILITY",
-      "description": "Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent.",
       "isVariant": false,
       "baseClass": null,
       "optional": false,
@@ -26699,6 +26335,28 @@
       "bundles": [
         "full",
         "optimal"
+      ]
+    },
+    {
+      "name": "sf-visible",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-visible",
+      "prefix": "sf",
+      "kind": "utility",
+      "category": "Utilities",
+      "area": "utilities",
+      "group": "VISIBILITY HELPERS (.sf-invisible / .sf-visible)",
+      "description": "Visibility helper (optional/utilities.css) — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": true,
+      "layer": "slashed.utilities",
+      "sourceFiles": [
+        "optional/utilities.css"
+      ],
+      "bundles": [
+        "full"
       ]
     },
     {

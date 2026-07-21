@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**747 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**741 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-616 tokens.
+610 tokens.
 
 | Token | Default |
 |---|---|
@@ -320,7 +320,6 @@ rebrand workflow.
 | `--sf-content-gap` | `var(--sf-space-s)` |
 | `--sf-contrast-bias` | `0` |
 | `--sf-contrast-threshold` | `0.6` |
-| `--sf-current-font-weight` | `var(--sf-font-weight-bold)` |
 | `--sf-density` | `1` |
 | `--sf-display-l-line-height` | `1` |
 | `--sf-display-m-line-height` | `1.05` |
@@ -436,11 +435,7 @@ rebrand workflow.
 | `--sf-icon-s` | `1em` |
 | `--sf-icon-xl` | `3em` |
 | `--sf-icon-xs` | `0.875em` |
-| `--sf-is-active` | `0 *(registered)*` |
-| `--sf-is-current` | `0 *(registered)*` |
 | `--sf-is-dark` | `0 *(registered)*` |
-| `--sf-is-open` | `0 *(registered)*` |
-| `--sf-is-pressed` | `0 *(registered)*` |
 | `--sf-leading-normal` | `1.5` |
 | `--sf-leading-relaxed` | `1.625` |
 | `--sf-leading-snug` | `1.3` |
@@ -540,7 +535,6 @@ rebrand workflow.
 | `--sf-space-xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-stagger-step` | `75ms` |
-| `--sf-state-pending-opacity` | `0.7` |
 | `--sf-sticky-offset` | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | `var(--sf-header-height-desktop)` |
 | `--sf-sticky-offset-mobile` | `var(--sf-header-height-mobile)` |

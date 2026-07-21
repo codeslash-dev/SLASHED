@@ -180,10 +180,14 @@ not carry a broad component library. Every value goes through `var()`. Requires
 `.sf-overflow-fade`, `.sf-no-tap-highlight`. Tokens for these classes
 live in `core/tokens.macros.css`.
 
-**slashed.utilities** — single-purpose helpers. SLASHED ships no
-utility classes in 0.x; the layer slot is reserved for the future.
+**slashed.utilities** — single-purpose helpers. SLASHED is BEM-first and
+ships only a curated subset in 0.x (heading, text-size, hover-transform,
+list-reset, marker-colour, alternate-selection, sticky, and visibility —
+see `optional/utilities.css`'s header comment for the current active set);
+most definitions in the file are staged (commented out) behind that same
+curation call.
 
-**slashed.states** — `.sf-is-*` markers. Exclusive prefix — utilities never use it. `.sf-is-current` exposes `--sf-current-font-weight` (defaults to `--sf-font-weight-bold`) for consumers to override without specificity battles.
+**slashed.states** — `.sf-is-*` markers. Exclusive prefix — utilities never use it (visibility helpers that don't encode a runtime condition, like `.sf-invisible`/`.sf-visible`, live in `slashed.utilities` instead — see [states.md](states.md) § "Prefer native state").
 
 **slashed.themes** — token reassignments only. Lives in `core/themes.css`. Holds `@media (prefers-color-scheme: dark)` and the `[data-theme="light|dark"]` selectors that flip `color-scheme` and `--sf-is-dark`. Sits above `slashed.{states, utilities, components}` so theme overrides cannot be beaten by an equal-specificity component or utility rule. Consumers can extend this layer with `forced-colors` swaps, brand-palette scopes, or any other token-only reassignment (see `optional/customize-example.css`).
 
@@ -202,7 +206,7 @@ utility classes in 0.x; the layer slot is reserved for the future.
 ## Tokens
 
 - Colors: `oklch()` with relative color syntax for derived values; `oklch(from …)` for semantic alpha variants (ghost/subtle/muted) in core; `color-mix(in oklab)` for numeric tints/shades in the optional palette; the optional palette's numeric alpha variants (-a5/-a10/-a30/-a50/-a80) are gated behind `@supports (color: oklch(from red l c h))`
-- `@property` registration for 20 source colours (10 `-source-light` + 10 `-source-dark`, 6 brand + 4 status) and 5 interaction-state integers (`--sf-is-dark`, `--sf-is-active`, `--sf-is-current`, `--sf-is-pressed`, `--sf-is-open`) — enables animation and typed `initial` reset
+- `@property` registration for 20 source colours (10 `-source-light` + 10 `-source-dark`, 6 brand + 4 status) and the `--sf-is-dark` mode-flag integer — enables animation and typed `initial` reset
 - Sizing: `clamp(min, preferred, max)` — no bare viewport units in tokens
 - Aliases: semantic tokens always reference palette tokens via `var()` — never literals
 - Component tokens: always `var(--sf-*)` — never literals

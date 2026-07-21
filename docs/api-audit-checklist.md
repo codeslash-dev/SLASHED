@@ -165,38 +165,62 @@ Realna wartość; rozważ okrojenie liczby wariantów lub przeniesienie do `full
 
 ## 2E. State classes (`.sf-is-*`) — per element
 
-> **RESOLVED (2026-07-21)** — full audit against internal consumers, configurator
-> exposure (`MiscPanel.svelte`), tier classification (`token-tiers.js`), and
-> `docs/states.md`'s own "Disambiguating the overlaps" section, plus a
-> comparison against Open Props / Pico.css / Bulma / Automatic.css. Verdicts below.
+> **RESOLVED — ROUND 1 (2026-07-21)** — full audit against internal consumers,
+> configurator exposure (`MiscPanel.svelte`), tier classification
+> (`token-tiers.js`), and `docs/states.md`'s own "Disambiguating the overlaps"
+> section, plus a comparison against Open Props / Pico.css / Bulma /
+> Automatic.css. Result: only 3 classes had zero design defense anywhere
+> (`hidden`, `readonly`, `busy`) — removed. The rest (`active`, `open`,
+> `collapsed`, `expanded`, `danger`, `pending`) had a written, deliberate
+> rationale — kept, pending a stricter pass.
+>
+> **RESOLVED — ROUND 2 (2026-07-21)** — re-ran the survivors through a
+> stricter bar: *documented and intentional* is not the same question as
+> *needed at this stage of a pre-1.0, lean framework*. None of the six
+> cleared "most consumers need this today" — every comparable framework
+> surveyed ships nothing like the `--sf-is-*` custom-property flag
+> mechanism, `.sf-is-expanded` was pure vocabulary duplication of
+> `.sf-is-open`, `.sf-is-danger` had a live bug (only worked on form
+> fields) and contradicted the framework's own component-variant guidance,
+> and `.sf-is-pending` was two lines cheap to hand-roll. All six removed.
+> `.sf-is-pressed`/`.sf-is-current` were swept in too, for consistency —
+> once their inert `--sf-is-*` flag is gone they're either a functional
+> duplicate of `.sf-is-selected` (`pressed`) or a single trivial declaration
+> no more justified than what was just cut (`current`). `.sf-is-invisible`/
+> `.sf-is-visible` were *relocated*, not cut: single-property helpers with
+> no runtime condition of their own, moved to `optional/utilities.css` as
+> `.sf-invisible`/`.sf-visible` (Bulma precedent: visibility is a helper,
+> not a state). Cascading removal: the `--sf-current-font-weight` and
+> `--sf-state-pending-opacity` tokens lost their only consumer and were
+> removed too, along with the 4 now-orphaned `@property` flag registrations.
 
-- [x] `.sf-is-active` — ZOSTAJE (PUBLIC-ADVANCED consumer-API flag, configurator-exposed, tested) `opt`
-- [x] `.sf-is-selected` — ZOSTAJE `opt`
-- [x] `.sf-is-current` — ZOSTAJE (consumer-API flag + real font-weight effect) `opt`
 - [x] `.sf-is-disabled` — ZOSTAJE, scope note added: for elements that can't take native `disabled` (e.g. `<a class="sf-btn">`) `opt`
 - [x] `.sf-is-loading` — ZOSTAJE (no native equivalent; validated by Bulma precedent) `opt`
-- [x] `.sf-is-open` — ZOSTAJE (consumer-API flag, configurator-exposed) `opt`
-- [x] `.sf-is-collapsed` — ZOSTAJE (documented pair with `.sf-is-open`) `opt`
-- [x] `.sf-is-expanded` — ZOSTAJE — states.md explicitly disambiguates from `.sf-is-open` (disclosure trigger vs. shown/hidden surface), not an accidental duplicate `opt`
-- [x] `.sf-is-hidden` — **USUNIĘTO** — duplikat `[hidden]` (`core/reset.css` już to hartuje identycznie) ~~`opt`~~
-- [x] `.sf-is-visible` — ZOSTAJE — `docs/roadmap.md` broni jako zaplanowany hak dla „reveal on scroll" `opt`
-- [x] `.sf-is-invisible` — ZOSTAJE (para do `-visible`) `opt`
+- [x] `.sf-is-hidden` — **USUNIĘTO (round 1)** — duplikat `[hidden]` (`core/reset.css` już to hartuje identycznie) ~~`opt`~~
+- [x] `.sf-invisible` — ZOSTAJE, **przeniesione do `optional/utilities.css`** (`docs/roadmap.md` broni jako zaplanowany hak dla „reveal on scroll") `utilities`
+- [x] `.sf-visible` — ZOSTAJE, **przeniesione do `optional/utilities.css`** `utilities`
 - [x] `.sf-is-invalid` — ZOSTAJE (setter tokenów, konsumowany przez `forms.css`) `opt`
 - [x] `.sf-is-valid` — ZOSTAJE `opt`
 - [x] `.sf-is-error` — ZOSTAJE `opt`
 - [x] `.sf-is-success` — ZOSTAJE `opt`
 - [x] `.sf-is-warning` — ZOSTAJE `opt`
 - [x] `.sf-is-info` — ZOSTAJE `opt`
-- [x] `.sf-is-danger` — ZOSTAJE — states.md broni jako odrębny koncept (destructive-action context, nie wynik walidacji); implementacja dziś działa tylko na polach formularzy (`--sf-field-*`) — znana luka, poza zakresem tej rundy `opt`
-- [x] `.sf-is-pending` — ZOSTAJE — states.md explicitly disambiguates from `.sf-is-loading` (optimistic UI vs. spinner mask) `opt`
-- [x] `.sf-is-busy` — **USUNIĘTO** — pojedyncza deklaracja `cursor: progress`, `[aria-busy]` samo wystarcza ~~`opt`~~
-- [x] `.sf-is-readonly` — **USUNIĘTO** — duplikat `:read-only`, błędnie blokował zaznaczanie tekstu ~~`opt`~~
-- [x] `.sf-is-pressed` — ZOSTAJE (consumer-API flag + real background effect) `opt`
+- [x] `.sf-is-danger` — **USUNIĘTO (round 2)** — identyczna implementacja co `-invalid`/`-error` (nigdy nie działała jako "destructive-action context" poza polem formularza); sprzeczna z `migration.md` ("visual variants belong in your own component CSS") ~~`opt`~~
+- [x] `.sf-is-pending` — **USUNIĘTO (round 2)** — dwie linie taniej do odtworzenia niż do utrzymania; `.sf-is-loading` pokrywa częstszy przypadek ~~`opt`~~
+- [x] `.sf-is-busy` — **USUNIĘTO (round 1)** — pojedyncza deklaracja `cursor: progress`, `[aria-busy]` samo wystarcza ~~`opt`~~
+- [x] `.sf-is-readonly` — **USUNIĘTO (round 1)** — duplikat `:read-only`, błędnie blokował zaznaczanie tekstu ~~`opt`~~
+- [x] `.sf-is-active` — **USUNIĘTO (round 2)** — czysta flaga `calc()`, zero konsumentów, zero odpowiednika w żadnym z 4 zbadanych frameworków ~~`opt`~~
+- [x] `.sf-is-open` — **USUNIĘTO (round 2)** — j.w. ~~`opt`~~
+- [x] `.sf-is-collapsed` — **USUNIĘTO (round 2)** — j.w. ~~`opt`~~
+- [x] `.sf-is-expanded` — **USUNIĘTO (round 2)** — czysty duplikat wygody nazewniczej nad `.sf-is-open` ~~`opt`~~
+- [x] `.sf-is-pressed` — **USUNIĘTO (round 2)** — bez flagi staje się dosłownym duplikatem `.sf-is-selected` (ten sam token tła) ~~`opt`~~
+- [x] `.sf-is-current` — **USUNIĘTO (round 2)** — dla spójności z resztą: trywialna, niepotwierdzona realnym zapotrzebowaniem ~~`opt`~~
+- [x] `.sf-is-selected` — ZOSTAJE `opt`
+- [x] `.sf-is-highlighted` — ZOSTAJE `opt`
+- [x] `.sf-is-empty` — ZOSTAJE (bez zmian tej rundy) `opt`
+- [x] `.sf-is-skeleton` — ZOSTAJE (świadoma decyzja usera — brak natywnego odpowiednika) `opt`
 
-**Bilans:** 28 → 25 klas. Usunięto 3 (`hidden`, `readonly`, `busy`) — wszystkie bez wsparcia w configuratorze/tierach/architekturze i z jasnym natywnym zamiennikiem. Reszta pierwotnej listy „do usunięcia" (active/open/collapsed/expanded/danger/pending) została **cofnięta** po znalezieniu: żywego panelu w `configurator/src/components/panels/MiscPanel.svelte`, klasyfikacji tier w `scripts/token-tiers.js`, wyjątku w `scripts/check-macro-catalog.js`, i jawnej obrony w `docs/states.md` § „Disambiguating the overlaps" oraz `docs/roadmap.md`. Dodano `docs/states.md` § „Prefer native state" z tabelą zamienników natywnych.
-- [ ] `.sf-is-highlighted` `opt`
-- [ ] `.sf-is-empty` `opt`
-- [ ] `.sf-is-skeleton` `opt`
+**Bilans końcowy:** 28 → **15** w `states.css` + **2** przeniesione do `utilities.css` (17 łącznie zostaje, 11 usuniętych). Kaskadowo usunięte też: tokeny `--sf-current-font-weight`, `--sf-state-pending-opacity`, i 4 rejestracje `@property` (`--sf-is-active/-current/-pressed/-open`) — wszystkie osierocone przez usunięcie jedynego konsumenta.
 
 ## 2F. Motion classes — per element
 

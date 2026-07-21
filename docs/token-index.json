@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 747,
+      "tokens": 741,
       "by_tier": {
-        "PUBLIC": 693,
-        "PUBLIC-ADVANCED": 53,
+        "PUBLIC": 691,
+        "PUBLIC-ADVANCED": 49,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 258,
-        "consumption": 489
+        "knob": 253,
+        "consumption": 488
       }
     }
   },
@@ -2997,14 +2997,6 @@
       ],
       "value": "var(--sf-section-pad)"
     },
-    "--sf-current-font-weight": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-font-weight-bold)"
-    },
     "--sf-density": {
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
@@ -4109,40 +4101,8 @@
       ],
       "value": "var(--sf-space-m)"
     },
-    "--sf-is-active": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0 (registered)"
-    },
-    "--sf-is-current": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0 (registered)"
-    },
     "--sf-is-dark": {
       "tier": "INTERNAL",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0 (registered)"
-    },
-    "--sf-is-open": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0 (registered)"
-    },
-    "--sf-is-pressed": {
-      "tier": "PUBLIC-ADVANCED",
       "role": "knob",
       "files": [
         "core/tokens.css"
@@ -5164,14 +5124,6 @@
         "core/tokens.css"
       ],
       "value": "75ms"
-    },
-    "--sf-state-pending-opacity": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "0.7"
     },
     "--sf-sticky-offset": {
       "tier": "PUBLIC",

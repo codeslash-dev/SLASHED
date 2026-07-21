@@ -1374,7 +1374,8 @@
     },
     {
       "id": 335,
-      "name": "--sf-current-font-weight"
+      "name": "--sf-current-font-weight",
+      "removed": true
     },
     {
       "id": 336,
@@ -1902,11 +1903,13 @@
     },
     {
       "id": 466,
-      "name": "--sf-is-active"
+      "name": "--sf-is-active",
+      "removed": true
     },
     {
       "id": 467,
-      "name": "--sf-is-current"
+      "name": "--sf-is-current",
+      "removed": true
     },
     {
       "id": 468,
@@ -1914,11 +1917,13 @@
     },
     {
       "id": 469,
-      "name": "--sf-is-open"
+      "name": "--sf-is-open",
+      "removed": true
     },
     {
       "id": 470,
-      "name": "--sf-is-pressed"
+      "name": "--sf-is-pressed",
+      "removed": true
     },
     {
       "id": 471,
@@ -2444,7 +2449,8 @@
     },
     {
       "id": 599,
-      "name": "--sf-state-pending-opacity"
+      "name": "--sf-state-pending-opacity",
+      "removed": true
     },
     {
       "id": 600,

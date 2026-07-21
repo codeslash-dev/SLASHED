@@ -8,12 +8,12 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**747 tokens** (deduplicated by name across the 4 token source files).
+**741 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 693 | Everyday knobs. SemVer-stable. |
-| PUBLIC-ADVANCED | 53 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 691 | Everyday knobs. SemVer-stable. |
+| PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
 Every token also carries a **role** — an orthogonal, SemVer-neutral hint about
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 258 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 489 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 253 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 488 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -43,10 +43,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 - `--sf-focus-ring-shadow`
 - `--sf-font-features`
 - `--sf-font-variation`
-- `--sf-is-active`
-- `--sf-is-current`
-- `--sf-is-open`
-- `--sf-is-pressed`
 - `--sf-leading-taper`
 - `--sf-lumlocker`
 - `--sf-lumlocker-dark`
@@ -461,7 +457,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | Core | `0.6` |
 | `--sf-cover-min-height` | PUBLIC | knob | Layout | `100dvh` |
 | `--sf-cover-padding` | PUBLIC | consumption | Layout | `var(--sf-section-pad)` |
-| `--sf-current-font-weight` | PUBLIC | consumption | Core | `var(--sf-font-weight-bold)` |
 | `--sf-density` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-display-l-line-height` | PUBLIC | knob | Core | `1` |
 | `--sf-display-m-line-height` | PUBLIC | knob | Core | `1.05` |
@@ -600,11 +595,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-icon-xl` | PUBLIC | knob | Core | `3em` |
 | `--sf-icon-xs` | PUBLIC | knob | Core | `0.875em` |
 | `--sf-imposter-margin` | PUBLIC | consumption | Layout | `var(--sf-space-m)` |
-| `--sf-is-active` | PUBLIC-ADVANCED | knob | Core | `0 (registered)` |
-| `--sf-is-current` | PUBLIC-ADVANCED | knob | Core | `0 (registered)` |
 | `--sf-is-dark` | INTERNAL | knob | Core | `0 (registered)` |
-| `--sf-is-open` | PUBLIC-ADVANCED | knob | Core | `0 (registered)` |
-| `--sf-is-pressed` | PUBLIC-ADVANCED | knob | Core | `0 (registered)` |
 | `--sf-leading-normal` | PUBLIC | knob | Core | `1.5` |
 | `--sf-leading-relaxed` | PUBLIC | knob | Core | `1.625` |
 | `--sf-leading-snug` | PUBLIC | knob | Core | `1.3` |
@@ -732,7 +723,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-space-xs` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-stack-gap` | PUBLIC | consumption | Layout | `var(--sf-content-gap)` |
 | `--sf-stagger-step` | PUBLIC | knob | Core | `75ms` |
-| `--sf-state-pending-opacity` | PUBLIC | knob | Core | `0.7` |
 | `--sf-sticky-offset` | PUBLIC | consumption | Core | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` |
 | `--sf-sticky-offset-desktop` | PUBLIC | consumption | Core | `var(--sf-header-height-desktop)` |
 | `--sf-sticky-offset-mobile` | PUBLIC | consumption | Core | `var(--sf-header-height-mobile)` |

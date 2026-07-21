@@ -5,9 +5,9 @@
 
    Most definitions below are STAGED (commented out) — SLASHED is BEM-first
    by design and ships only a curated subset of utility classes; uncomment
-   a block to activate it. The heading, text-size, hover-transform,
-   list-reset, marker-colour, alternate-selection, and sticky blocks
-   are active. */
+   a block to activate it. The visibility, heading, text-size,
+   hover-transform, list-reset, marker-colour, alternate-selection, and
+   sticky blocks are active. */
 
 @layer slashed.utilities {
 
@@ -24,6 +24,18 @@
   /* .sf-object-top    { object-position: top; } */
   /* .sf-object-center { object-position: center; } */
   /* .sf-object-bottom { object-position: bottom; } */
+
+  /* ============================================================
+   * VISIBILITY HELPERS (.sf-invisible / .sf-visible)
+   * Single-property visibility overrides — not a "state" (core/states.css)
+   * since neither reacts to anything on its own; toggle from JS to hide
+   * something without pulling it out of layout (.sf-invisible), or to
+   * force-show an element that inherited visibility:hidden from a parent
+   * (.sf-visible). This is the hook docs/roadmap.md's "reveal on scroll"
+   * pattern targets — pair with an IntersectionObserver in your own code.
+   * ============================================================ */
+  .sf-invisible { visibility: hidden; }
+  .sf-visible   { visibility: visible; }
 
   /* ============================================================
    * HEADING HELPER CLASSES (.sf-h1 – .sf-h6)

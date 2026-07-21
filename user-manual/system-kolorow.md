@@ -206,17 +206,20 @@ użyć `--sf-color-warning` (klasyczny „złoty” akcent ocen), logotypy klien
 
 ### 4.5. Jasny pas — proces „A 5-phase process” (stepper)
 
-Aktywny krok = interakcja/stan → `--sf-color-action` i stan `.sf-is-active`:
+Aktywny krok = interakcja/stan → `--sf-color-action` i własny modyfikator BEM
+(SLASHED dostarcza tokeny, nie generyczną klasę "aktywności" — zobacz
+[`docs/states.md`](../docs/states.md) § „Prefer native state"):
 
 ```css
 .step                { color: var(--sf-color-text--subtle); }  /* krok nieaktywny */
-.step.sf-is-active   { color: var(--sf-color-action); }           /* krok bieżący    */
+.step.is-active      { color: var(--sf-color-action); }           /* krok bieżący    */
 .step__dot           { background: var(--sf-color-border); }
-.step.sf-is-active .step__dot { background: var(--sf-color-action); }
+.step.is-active .step__dot { background: var(--sf-color-action); }
 ```
 
-`.sf-is-*` to klasy stanu (patrz [`docs/states.md`](../docs/states.md)) — sygnalizują
-stan JS-em, a kolory zostają w tokenach.
+`.is-active` to Twoja własna klasa komponentu (albo `aria-current="step"`,
+jeśli stepper jest nawigacyjny) — kolory zostają w tokenach SLASHED, stan
+zarządzasz sam.
 
 ### 4.6. Ciemny pas CTA — „Ready to build something that actually performs”
 

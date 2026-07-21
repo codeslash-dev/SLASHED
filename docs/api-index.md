@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1067 elements** — 747 tokens, 320 classes.
+**1053 elements** — 741 tokens, 312 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1013 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 53 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 1003 | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (747)
+## Tokens (741)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (616)
+### Core tokens (610)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -378,7 +378,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-content-gap` | PUBLIC | consumption | content | `var(--sf-space-s)` | Tight gap within related content (stack, flow, prose). Override globally to retune all tight primitives at once. |
 | `--sf-contrast-bias` | PUBLIC-ADVANCED | knob | contrast | `0` | Global text-contrast nudge. Positive values push derived reading-text colors toward the extremes (darker in light mode, lighter in dark). Default 0 (neutral). |
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | contrast | `0.6` | OKLCH lightness crossover for auto-contrast on colored surfaces. Colors with L above this get dark text; below get light text. Default 0.6. |
-| `--sf-current-font-weight` | PUBLIC | consumption | current | `var(--sf-font-weight-bold)` | Inherits the current font-weight from context. Useful as a reset. |
 | `--sf-density` | PUBLIC-ADVANCED | knob | density | `1` | Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it). |
 | `--sf-display-l-line-height` | PUBLIC | knob | display | `1` | Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes. |
 | `--sf-display-m-line-height` | PUBLIC | knob | display | `1.05` | Line height for medium display text (--sf-text-display-m). |
@@ -494,11 +493,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-icon-s` | PUBLIC | knob | icon | `1em` | Small icon size (~16px). Dense UI chrome. |
 | `--sf-icon-xl` | PUBLIC | knob | icon | `3em` | Extra-large icon size (~32px). Feature icons. |
 | `--sf-icon-xs` | PUBLIC | knob | icon | `0.875em` | Extra-small icon size (~12px). Inline indicators. |
-| `--sf-is-active` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the active state. Set to 1 (via JS or .sf-is-active) to drive branching calc() expressions. 0 = default (inactive). |
-| `--sf-is-current` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the current/selected state. Set to 1 (via .sf-is-current) to drive branching calc() expressions. 0 = default. |
 | `--sf-is-dark` | INTERNAL | knob | is | `0` | Mode flag — 0 in light mode, 1 in dark mode. Set automatically by [data-theme='dark'] and prefers-color-scheme. Drives dark-mode formula branches in calc(). |
-| `--sf-is-open` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the open/expanded state. Set to 1 (via .sf-is-open) to drive branching calc() expressions. 0 = default (closed). |
-| `--sf-is-pressed` | PUBLIC-ADVANCED | knob | is | `0` | Integer state flag for the pressed state. Set to 1 (via .sf-is-pressed) to drive branching calc() expressions. 0 = default. |
 | `--sf-leading-normal` | PUBLIC | knob | leading | `1.5` | Normal line height (~1.5). Default for body text. |
 | `--sf-leading-relaxed` | PUBLIC | knob | leading | `1.625` | Relaxed line height (~1.65). Long-form reading text. |
 | `--sf-leading-snug` | PUBLIC | knob | leading | `1.3` | Snug line height (~1.35). Use for sub-headings. |
@@ -598,7 +593,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-space-xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))` | 32px-equivalent spacing. Feature row gaps, generous section padding. |
 | `--sf-space-xs` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))` | 8px-equivalent spacing. Compact list rows, tab padding. |
 | `--sf-stagger-step` | PUBLIC | knob | stagger | `75ms` | Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale. |
-| `--sf-state-pending-opacity` | PUBLIC | knob | state | `0.7` | Opacity for pending / loading state elements. |
 | `--sf-sticky-offset` | PUBLIC | consumption | sticky | `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))` | top offset for position: sticky elements, accounting for the header height. |
 | `--sf-sticky-offset-desktop` | PUBLIC | consumption | sticky | `var(--sf-header-height-desktop)` | Sticky offset at desktop breakpoints. |
 | `--sf-sticky-offset-mobile` | PUBLIC | consumption | sticky | `var(--sf-header-height-mobile)` | Sticky offset at mobile breakpoints. |
@@ -787,7 +781,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (320)
+## Classes (312)
 
 ### Accessibility (8)
 
@@ -1085,34 +1079,24 @@ and a short description. The machine-readable companion (with all columns) is
 | `.print-no-color` | PUBLIC | print | — | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
 | `.print-only` | PUBLIC | print | — | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
 
-### State classes (25)
+### State classes (15)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-is-active` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching. |
-| `.sf-is-collapsed` | PUBLIC | state | OPEN / CLOSED | Collapsed state for disclosure widgets — hides the expandable region. Pair with sf-is-expanded or sf-is-open. Components add transitions. |
-| `.sf-is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
-| `.sf-is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
 | `.sf-is-disabled` | PUBLIC | state | INTERACTIVITY | Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events. |
 | `.sf-is-draggable` | PUBLIC | state | DRAG & DROP | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
 | `.sf-is-dragging` | PUBLIC | state | DRAG & DROP | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
 | `.sf-is-drop-target` | PUBLIC | state | DRAG & DROP | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
 | `.sf-is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
-| `.sf-is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — alias for sf-is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid. |
-| `.sf-is-expanded` | PUBLIC | state | OPEN / CLOSED | Expanded state for disclosure widgets — shows the expandable region. Inverse of sf-is-collapsed. Components add transitions. |
-| `.sf-is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
+| `.sf-is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — general (not form-field-specific) negative feedback. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid. |
+| `.sf-is-highlighted` | PUBLIC | state | SELECTED / HIGHLIGHTED | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
 | `.sf-is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
 | `.sf-is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to sf-is-error; the name signals form-field context. |
-| `.sf-is-invisible` | PUBLIC | state | VISIBILITY | Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). |
 | `.sf-is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
-| `.sf-is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed. Sets --sf-is-open to 1 for calc() branching. |
-| `.sf-is-pending` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from sf-is-loading (which hides content entirely). |
-| `.sf-is-pressed` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components. |
-| `.sf-is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
+| `.sf-is-selected` | PUBLIC | state | SELECTED / HIGHLIGHTED | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
 | `.sf-is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
 | `.sf-is-success` | PUBLIC | state | VALIDATION / FEEDBACK | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |
 | `.sf-is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context. |
-| `.sf-is-visible` | PUBLIC | state | VISIBILITY | Visible state — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
 | `.sf-is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
 
 ### Theme utilities (3)
@@ -1123,7 +1107,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-theme-light` | PUBLIC | theme | — | Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]). |
 | `.sf-theme-transition` | PUBLIC | theme | — | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
-### Utilities (31)
+### Utilities (33)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1139,6 +1123,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-hover-sink` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element down slightly on hover. |
 | `.sf-hover-slide-end` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-end on hover. |
 | `.sf-hover-slide-start` | PUBLIC | utility | HOVER-TRANSFORM UTILITIES (.sf-hover-*) | Hover-triggered transform: translates the element toward the inline-start on hover. |
+| `.sf-invisible` | PUBLIC | utility | VISIBILITY HELPERS (.sf-invisible / .sf-visible) | Visibility helper (optional/utilities.css) — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). Not a runtime state: no JS/ARIA condition of its own. |
 | `.sf-list-none` | PUBLIC | utility | LIST RESET (.sf-list-none) | Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied). |
 | `.sf-marker--action` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colours list ::markers with the action colour. |
 | `.sf-marker--primary` | PUBLIC | utility | LIST MARKER COLOUR (.sf-marker--*) | Colours list ::markers with the primary brand colour. |
@@ -1158,4 +1143,5 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-text-s` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the s text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
+| `.sf-visible` | PUBLIC | utility | VISIBILITY HELPERS (.sf-invisible / .sf-visible) | Visibility helper (optional/utilities.css) — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
 

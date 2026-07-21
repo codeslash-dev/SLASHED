@@ -29,11 +29,34 @@
   "docs/states.md": {
     "sf-is-hidden": "Removed — duplicated [hidden] (core/reset.css already hardens it identically). Named in the 'Prefer native state' section as the precedent for the guidance.",
     "sf-is-readonly": "Removed — duplicated :read-only and incorrectly blocked text selection. Named in the 'Prefer native state' section as a removed example.",
-    "sf-is-busy": "Removed — a single cursor:progress declaration with no distinct visual; [aria-busy=\"true\"] alone covers it. Named in the 'Prefer native state' section as a removed example."
+    "sf-is-busy": "Removed — a single cursor:progress declaration with no distinct visual; [aria-busy=\"true\"] alone covers it. Named in the 'Prefer native state' section as a removed example.",
+    "sf-is-active": "Removed — speculative --sf-is-* custom-property flag with zero consumers. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-open": "Removed — same speculative-flag rationale as sf-is-active. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-collapsed": "Removed — same speculative-flag rationale as sf-is-active. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-expanded": "Removed — pure vocabulary duplicate of sf-is-open. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-pressed": "Removed — became a functional duplicate of sf-is-selected once its inert flag was cut. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-current": "Removed — for consistency with the other speculative-flag removals. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-danger": "Removed — identical implementation to sf-is-invalid/sf-is-error, never worked outside a form field. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-pending": "Removed — two lines cheap to hand-roll, sf-is-loading covers the common case. Named in the 'Prefer native state' section's removal rationale.",
+    "sf-is-invisible": "Renamed and relocated to optional/utilities.css as .sf-invisible. Named in the 'Prefer native state' section's removal rationale (historical name, pre-relocation).",
+    "sf-is-visible": "Renamed and relocated to optional/utilities.css as .sf-visible. Named in the 'Prefer native state' section's removal rationale (historical name, pre-relocation)."
   },
   "docs/api-audit-checklist.md": {
-    "sf-is-hidden": "Removed 2026-07-21 — recorded in the audit checklist as the resolved verdict for this class.",
-    "sf-is-readonly": "Removed 2026-07-21 — recorded in the audit checklist as the resolved verdict for this class.",
-    "sf-is-busy": "Removed 2026-07-21 — recorded in the audit checklist as the resolved verdict for this class."
+    "sf-is-hidden": "Removed 2026-07-21 (round 1) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-readonly": "Removed 2026-07-21 (round 1) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-busy": "Removed 2026-07-21 (round 1) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-active": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-open": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-collapsed": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-expanded": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-pressed": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-current": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-danger": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-pending": "Removed 2026-07-21 (round 2) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-invisible": "Historical name — recorded in the audit checklist before its rename/relocation to .sf-invisible.",
+    "sf-is-visible": "Historical name — recorded in the audit checklist before its rename/relocation to .sf-visible.",
+    "--sf-current-font-weight": "Removed 2026-07-21 (round 2) — orphaned when its only consumer (.sf-is-current) was removed. Recorded in the audit checklist.",
+    "--sf-state-pending-opacity": "Removed 2026-07-21 (round 2) — orphaned when its only consumer (.sf-is-pending) was removed. Recorded in the audit checklist.",
+    "--sf-is-active": "Removed 2026-07-21 (round 2) — @property registration for the removed .sf-is-active flag mechanism. Recorded in the audit checklist."
   }
 }

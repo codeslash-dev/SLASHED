@@ -224,7 +224,7 @@ not backlog. They should not be re-proposed or picked up by accident:
 - **Runtime JavaScript in the framework core** — the core ships zero runtime JS and
   will keep doing so. Viewport-triggered "reveal on scroll / on-visible" behaviour
   that depends on an `IntersectionObserver` is out of scope for `core/`; the supported
-  surfaces are the CSS-only `.sf-is-visible` state hook and scroll-timeline `view()`
+  surfaces are the CSS-only `.sf-visible` utility hook (optional/utilities.css) and scroll-timeline `view()`
   entrance animations. Any observer-driven JS belongs to host/integration layers,
   never to the framework bundle.
 - **A consumer-facing preprocessor layer (mixins / functions)** — SLASHED is authored

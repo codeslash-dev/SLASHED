@@ -22,27 +22,57 @@ native pseudo-class, attribute, or ARIA state already gets you there:
 | an empty-state class | `:empty` | native, zero JS, reacts to DOM content automatically |
 | a validation-state class | `:user-invalid` / `:invalid` / `[aria-invalid]` | native for client-side constraint validation (see [forms.css](/optional/forms.css) and `.sf-live-validate`) |
 | a busy-cursor-only class | `[aria-busy="true"]` | you set this for assistive tech anyway, so it's sufficient as the sole hook — no parallel class needed |
-| an active/expanded/selected/pressed/current class | `[aria-current]`, `[aria-expanded]`, `[aria-selected]`, `[aria-pressed]` | required for accessible custom widgets regardless of framework, so styling off the attribute you must already set avoids toggling two things for one state |
+| a selected class | `[aria-selected]` (custom widgets) | required for accessible custom widgets regardless of framework, so styling off the attribute you must already set avoids toggling two things for one state |
 
 `.sf-is-*` earns its place only when **no native mechanism reaches the same
 condition** (`.sf-is-loading`'s spinner, `.sf-is-skeleton`'s shimmer, the
 drag-and-drop trio — CSS has no native drag state at all) or when the class
 is a **token setter** consumed elsewhere in the framework (the validation
-family writing `--sf-field-*`, the `active`/`current`/`open`/`pressed` flags
-writing their `--sf-is-*` custom property for your own `calc()` branching —
-see [architecture.md § BEM consumer-API tokens](architecture.md)). Where a
-class and a native attribute can coexist for different purposes — e.g. an
-element carrying both `.sf-is-invalid` (a manual/server-side override) and
+family writing `--sf-field-*`, read by `optional/forms.css`). Where a class
+and a native attribute can coexist for different purposes — e.g. an element
+carrying both `.sf-is-invalid` (a manual/server-side override) and
 `:user-invalid` (the browser's own opinion) — cascade layer order lets the
 manual class win regardless of specificity; see "Wiring validation text
 colour" below.
 
-`.sf-is-hidden`, `.sf-is-readonly`, and `.sf-is-busy` were removed for exactly
-this reason: `.sf-is-hidden` duplicated `[hidden]` byte-for-byte (both this
-framework's own `core/reset.css` and the browser already give you that), `.sf-is-readonly`
-duplicated `:read-only` while also blocking text selection a real read-only
-field should allow, and `.sf-is-busy` was a single `cursor: progress` with no
-distinct visual — `[aria-busy="true"]` alone covers the same ground.
+Two rounds of removals came out of holding every class to this bar:
+
+- `.sf-is-hidden`, `.sf-is-readonly`, and `.sf-is-busy` duplicated a native
+  mechanism outright: `.sf-is-hidden` duplicated `[hidden]` byte-for-byte
+  (both this framework's own `core/reset.css` and the browser already give
+  you that), `.sf-is-readonly` duplicated `:read-only` while also blocking
+  text selection a real read-only field should allow, and `.sf-is-busy` was
+  a single `cursor: progress` with no distinct visual — `[aria-busy="true"]`
+  alone covers the same ground.
+- `.sf-is-active`, `.sf-is-open`, `.sf-is-collapsed`, `.sf-is-expanded`,
+  `.sf-is-pressed`, and `.sf-is-current` only ever set an inheritable
+  `--sf-is-*` custom property for a hypothetical consumer's own `calc()` to
+  branch on — a speculative "might be useful one day" mechanism with zero
+  consumers anywhere in this codebase, its demo, or in any comparable
+  framework surveyed (Open Props, Pico.css, Bulma, Automatic.css ship
+  nothing like it). `.sf-is-danger` was dropped alongside them: identical
+  CSS to `.sf-is-invalid`/`.sf-is-error`, so it never actually worked as the
+  "destructive-action context" its own docs described outside a form field,
+  and `docs/migration.md` already tells you visual variants belong in your
+  own component CSS. `.sf-is-pending` went too — two lines
+  (`opacity`, `cursor: progress`) cheap enough to hand-roll, with
+  `.sf-is-loading` already covering the more common "mask with a spinner"
+  case. `.sf-is-invisible`/`.sf-is-visible` weren't dropped, but *relocated*:
+  they're single-property helpers with no runtime behaviour of their own
+  (unlike `.sf-is-selected`, which paints something), so they moved to
+  `optional/utilities.css` as `.sf-invisible`/`.sf-visible`.
+
+None of this was "these are accidental duplicates" — several had a written,
+deliberate rationale (see the git history of this file for the "shown vs
+hidden surface" vs "disclosure trigger" distinction `.sf-is-open` vs
+`.sf-is-expanded` used to carry, or the optimistic-UI case for
+`.sf-is-pending`). But *intentional* and *needed at this stage* are
+different bars. A pre-1.0, lean CSS framework should carry what most
+consumers need today, not infrastructure justified only by "someone might
+want to build X on top of it" — that's cheap to add back once a real
+consumer pattern actually asks for it, and expensive to carry speculatively
+in the meantime (tests, docs, configurator preview panels, and the
+"why does this exist" question every future contributor has to re-answer).
 
 ## Reference
 
@@ -53,24 +83,17 @@ distinct visual — `[aria-busy="true"]` alone covers the same ground.
 
 | Class | Use when | ARIA / pairing | Layer |
 |---|---|---|---|
-| `.sf-is-invisible` / `.sf-is-visible` | hidden but keeps its box | `visibility` | states |
 | `.sf-is-disabled` | non-interactive, dimmed — for elements that can't take the native `disabled` attribute (e.g. `<a class="sf-btn">`) | `aria-disabled="true"` | states |
 | `.sf-is-loading` | content replaced by a spinner | `aria-busy="true"` | states |
-| `.sf-is-pending` | request in flight, content still usable (optimistic UI) | `aria-busy="true"` | states |
 | `.sf-is-skeleton` | placeholder shimmer | — | states |
-| `.sf-is-active` | generic active item (sets `--sf-is-active`) | — | states |
 | `.sf-is-selected` | selected in a set | `aria-selected` | states |
-| `.sf-is-current` | current page/step in navigation | `aria-current` | states |
-| `.sf-is-pressed` | toggle button in the on state | `aria-pressed="true"` | states |
 | `.sf-is-highlighted` | transient emphasis | — | states |
-| `.sf-is-open` / `.sf-is-collapsed` | a thing is shown vs hidden (modal, drawer) | — | states |
-| `.sf-is-expanded` | disclosure/accordion trigger expanded | `aria-expanded="true"` | states |
 | `.sf-is-valid` / `.sf-is-invalid` | **form-field** validation result | `aria-invalid` | states |
 | `.sf-is-success` / `.sf-is-error` | **general** positive/negative feedback (a save, a step) | `role="status"` / `role="alert"` | states |
 | `.sf-is-warning` / `.sf-is-info` | cautionary / informational feedback | — | states |
-| `.sf-is-danger` | destructive-action context (a delete button) | — | states |
 | `.sf-is-dragging` / `.sf-is-drop-target` / `.sf-is-draggable` | drag & drop | — | states |
 | `.sf-is-empty:empty` | hide when empty | — | states |
+| `.sf-invisible` / `.sf-visible` | hidden but keeps its box | `visibility` | utilities |
 | `.sr-only-focusable` | hidden until focused (skip-link pattern) | — | accessibility |
 | `.no-motion` | kill all animation/transition on this subtree | `prefers-reduced-motion` equivalent | accessibility |
 
@@ -92,22 +115,16 @@ These pairs look similar but signal different intent — pick by **context**:
   widget).
 - **`.sf-is-valid` vs `.sf-is-success`** — same split on the positive side: field
   validation passed vs a general positive outcome.
-- **`.sf-is-danger` vs `.sf-is-error`** — `.sf-is-danger` marks a **destructive-action
-  context** (a delete button, a "this cannot be undone" zone). It is *not* a
-  validation/error result. An error message uses `.sf-is-error`; the delete button
-  that triggered the risky flow uses `.sf-is-danger`.
-- **`.sf-is-open` vs `.sf-is-expanded`** — both set `--sf-is-open: 1`. Use
-  `.sf-is-open`/`.sf-is-collapsed` for *shown vs hidden* surfaces (modal, dropdown,
-  drawer); use `.sf-is-expanded` for a *disclosure trigger* (maps to
-  `aria-expanded` on the button that toggles a panel).
-- **`.sf-is-loading` vs `.sf-is-pending`** — `.sf-is-loading` masks content with a
-  spinner (content not yet available); `.sf-is-pending` keeps content visible and
-  usable while a background request settles (optimistic UI).
+
+For a destructive-action button (delete, "this cannot be undone"), or a
+disclosure trigger's expanded/collapsed state, use your own component
+modifier (`.c-button--danger`) and/or the matching ARIA attribute
+(`aria-expanded`) — see "Prefer native state" above.
 
 ## Consumer responsibility (CSS can't do it for you)
 
 State classes are visual. Always pair them with the matching ARIA attribute so
-assistive tech is informed — e.g. `class="sf-is-expanded" aria-expanded="true"`.
+assistive tech is informed — e.g. `class="sf-is-selected" aria-selected="true"`.
 Live updates (a toast appearing, a validation message) need an ARIA live region
 (`aria-live`, `role="status"`/`"alert"`); CSS cannot announce changes.
 
