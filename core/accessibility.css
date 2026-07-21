@@ -90,33 +90,38 @@
     }
   }
 
-  /* Minimum touch targets.
-     .sf-btn is excluded on purpose: it owns a deliberate XS–XL size ladder
-     (--sf-btn-min-height / --sf-size-* rungs) whose default already clears the
-     WCAG 2.2 AA 24px target, and a blanket floor here would silently override
-     that ladder on every touch device — collapsing the whole size scale to
-     44px. Consumers who want the AAA 44px target on buttons opt in explicitly
-     with `--sf-btn-min-height: var(--sf-touch-target)`. Bare <button>s (no
-     .sf-btn) and native form controls keep the floor.
+  /* Minimum touch targets — a backstop for genuinely bare, unstyled controls.
+     The floor targets only controls that carry NO class at all. The moment a
+     control has any class it is considered *owned* — by SLASHED itself (.sf-btn
+     owns a deliberate XS–XL size ladder via --sf-btn-min-height / --sf-size-*
+     rungs), by the author, or by a third-party widget (a page-builder hamburger
+     toggle, a plugin control) — and its sizing belongs to whoever put that class
+     there, not to this blanket rule.
 
-     The exclusion is written as [class~="sf-btn"] rather than :not(.sf-btn) on
-     purpose: the class-catalogue tooling masks quoted string literals, so this
-     keeps .sf-btn filed under its home `components` layer instead of being
-     re-attributed to `accessibility`. It is exactly equivalent to :not(.sf-btn)
-     in behaviour and specificity. */
+     Why so conservative: a blanket floor on *every* button/control silently
+     overrode its owners. It collapsed .sf-btn's whole size ladder to one height
+     on touch, and it stretched narrow custom widgets (e.g. a hamburger icon
+     button) to 44px on BOTH axes — at a specificity higher than a single class,
+     so the owner couldn't even override it without !important. Element-level
+     selectors that reach for someone else's markup are the "too aggressive base
+     style" trap; scoping the floor to classless controls keeps it from ever
+     touching markup the framework doesn't own. (`:not([class])` matches the
+     same "un-styled element" idiom already used for `a:not([class])` in base.)
+
+     Bare `<button>text</button>` and un-classed native controls — almost always
+     the author's own quick markup — keep the WCAG 2.5.5 44px floor on both axes.
+     To opt a control OUT, give it any class. To put the floor back ON an owned
+     control, set its own min-block/inline-size, or on .sf-btn use
+     `--sf-btn-min-height: var(--sf-touch-target)`. */
   @media (pointer: coarse) {
-    button:not([class~="sf-btn"]),
-    input[type="button"],
-    input[type="submit"],
-    input[type="reset"],
-    select,
-    summary {
-      min-block-size:  var(--sf-touch-target);
-      min-inline-size: var(--sf-touch-target);
-    }
-
-    input[type="checkbox"],
-    input[type="radio"] {
+    button:not([class]),
+    input[type="button"]:not([class]),
+    input[type="submit"]:not([class]),
+    input[type="reset"]:not([class]),
+    select:not([class]),
+    summary:not([class]),
+    input[type="checkbox"]:not([class]),
+    input[type="radio"]:not([class]) {
       min-block-size:  var(--sf-touch-target);
       min-inline-size: var(--sf-touch-target);
     }

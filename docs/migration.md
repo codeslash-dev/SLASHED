@@ -79,6 +79,37 @@ you're on a bundle that includes `optional/utilities.css` (the `full` bundle,
 or your own custom build — the `optimal` bundle does not include it). Full
 rationale for every class: [states.md § "Prefer native state"](states.md).
 
+### Coarse-pointer touch-target floor scoped to class-less controls (breaking)
+
+The `@media (pointer: coarse)` minimum-touch-target floor in
+`core/accessibility.css` used to target **every** bare `<button>` and native
+control (only `.sf-btn` was carved out). Because it set both `min-block-size`
+and `min-inline-size` to `var(--sf-touch-target)` (44px) at a specificity
+higher than a single class, it reached into markup the framework doesn't own —
+most visibly third-party page-builder and plugin controls. A narrow custom
+control such as a hamburger toggle (`<button class="…-menu-toggle">`) was
+stretched to 44px on both axes and could not be resized without `!important`.
+
+The floor is now scoped to **class-less controls only**
+(`button:not([class])`, `input[type="…"]:not([class])`, `select:not([class])`,
+`summary:not([class])`, `input[type="checkbox"]:not([class])`,
+`input[type="radio"]:not([class])`). Any control that carries a class is treated
+as *owned* — by SLASHED (`.sf-btn`), by you, or by a third-party widget — and
+keeps whatever size its owner gives it. Genuinely bare, un-classed controls
+(the author's own quick markup) keep the WCAG 2.5.5 44px floor on both axes.
+This generalises the earlier `.sf-btn` carve-out (see 0.7.8 → 0.8.0 below) into
+a single rule: *the framework never re-sizes a control someone else has styled.*
+
+**What changed for you:**
+- A bare, class-less `<button>` / native control is unaffected — it still gets
+  the 44px floor on touch.
+- A control that carries **any** class no longer gets the automatic floor on
+  touch. If you were relying on it for a class-bearing control, restore it
+  explicitly — set `min-block-size`/`min-inline-size` on that control, or on a
+  `.sf-btn` use `:root { --sf-btn-min-height: var(--sf-touch-target); }`.
+- To opt a control **out** of the floor (e.g. a custom icon button that was
+  being stretched), give it any class — no `!important` needed.
+
 ## SLASHED 0.7.8 → 0.8.0
 
 ### `.sf-btn` size scale honoured on touch; blanket 44px floor no longer applies to buttons (breaking)

@@ -2125,7 +2125,7 @@
         </div>
 
         <h3>Touch Targets (pointer: coarse)</h3>
-        <p style="font-size: var(--sf-text-s)">On touch devices, <code>a</code>, <code>button</code>, <code>input</code>, <code>select</code>, <code>summary</code> automatically get <code>min-height: var(--sf-touch-target)</code> = <code>var(--sf-size-l)</code> = 2.75rem (≈44px). No extra classes needed.</p>
+        <p style="font-size: var(--sf-text-s)">On touch devices, <em>class-less</em> <code>button</code>, form <code>input</code>s, <code>select</code>, and <code>summary</code> automatically get <code>min-block-size</code>/<code>min-inline-size: var(--sf-touch-target)</code> = 2.75rem (≈44px). Give a control any class (e.g. <code>.sf-btn</code>, or a third-party widget class) and it owns its own sizing — the floor never overrides styled or third-party markup.</p>
 
         <h3>High Contrast &amp; Reduced Transparency</h3>
         <p style="font-size: var(--sf-text-s)">
