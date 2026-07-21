@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.24** · Tokens: **741** · Prefix: `--sf-`
+> Version: **0.7.25** · Tokens: **741** · Prefix: `--sf-`
 
 ---
 
