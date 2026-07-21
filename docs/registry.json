@@ -21,7 +21,7 @@
     "counts": {
       "tokens": 747,
       "sf_classes": 287,
-      "is_classes": 28
+      "is_classes": 25
     }
   },
   "tokens": [
@@ -1064,7 +1064,6 @@
   ],
   "is_classes": [
     "sf-is-active",
-    "sf-is-busy",
     "sf-is-collapsed",
     "sf-is-current",
     "sf-is-danger",
@@ -1075,7 +1074,6 @@
     "sf-is-empty",
     "sf-is-error",
     "sf-is-expanded",
-    "sf-is-hidden",
     "sf-is-highlighted",
     "sf-is-info",
     "sf-is-invalid",
@@ -1084,7 +1082,6 @@
     "sf-is-open",
     "sf-is-pending",
     "sf-is-pressed",
-    "sf-is-readonly",
     "sf-is-selected",
     "sf-is-skeleton",
     "sf-is-success",

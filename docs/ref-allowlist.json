@@ -25,5 +25,15 @@
     "sf-alert": "Example of a component SLASHED deliberately does NOT ship.",
     "sf-avatar": "Example of a component SLASHED deliberately does NOT ship.",
     "sf-modal": "Example of a component SLASHED deliberately does NOT ship."
+  },
+  "docs/states.md": {
+    "sf-is-hidden": "Removed — duplicated [hidden] (core/reset.css already hardens it identically). Named in the 'Prefer native state' section as the precedent for the guidance.",
+    "sf-is-readonly": "Removed — duplicated :read-only and incorrectly blocked text selection. Named in the 'Prefer native state' section as a removed example.",
+    "sf-is-busy": "Removed — a single cursor:progress declaration with no distinct visual; [aria-busy=\"true\"] alone covers it. Named in the 'Prefer native state' section as a removed example."
+  },
+  "docs/api-audit-checklist.md": {
+    "sf-is-hidden": "Removed 2026-07-21 — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-readonly": "Removed 2026-07-21 — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-is-busy": "Removed 2026-07-21 — recorded in the audit checklist as the resolved verdict for this class."
   }
 }

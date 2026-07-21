@@ -1895,16 +1895,6 @@
       "layer": "slashed.states"
     },
     {
-      "name": "sf-is-busy",
-      "selector": ".sf-is-busy",
-      "kind": "state",
-      "category": "State classes",
-      "group": "LOADING / ASYNC FEEDBACK",
-      "description": "Busy state — shows a progress cursor to indicate background processing. Does not mask content; use sf-is-loading when content should be hidden during loading.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
       "name": "sf-is-collapsed",
       "selector": ".sf-is-collapsed",
       "kind": "state",
@@ -2005,16 +1995,6 @@
       "layer": "slashed.states"
     },
     {
-      "name": "sf-is-hidden",
-      "selector": ".sf-is-hidden",
-      "kind": "state",
-      "category": "State classes",
-      "group": "VISIBILITY",
-      "description": "Hidden state — removes the element from layout and accessibility tree (display: none !important).",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
       "name": "sf-is-highlighted",
       "selector": ".sf-is-highlighted",
       "kind": "state",
@@ -2070,7 +2050,7 @@
       "kind": "state",
       "category": "State classes",
       "group": "OPEN / CLOSED",
-      "description": "Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed/sf-is-hidden. Sets --sf-is-open to 1 for calc() branching.",
+      "description": "Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed. Sets --sf-is-open to 1 for calc() branching.",
       "optional": false,
       "layer": "slashed.states"
     },
@@ -2091,16 +2071,6 @@
       "category": "State classes",
       "group": "ACTIVE / SELECTED / CURRENT",
       "description": "Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
-      "name": "sf-is-readonly",
-      "selector": ".sf-is-readonly",
-      "kind": "state",
-      "category": "State classes",
-      "group": "INTERACTIVITY",
-      "description": "Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited.",
       "optional": false,
       "layer": "slashed.states"
     },

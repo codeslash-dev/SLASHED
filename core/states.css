@@ -1,15 +1,24 @@
 /* SLASHED — core/states.css
    @layer slashed.states
    Generic runtime states toggled by JS or ARIA: visibility, interactivity, selection, busy/current.
-   Prefix: .sf-is-*; not utilities or component-specific variants. */
+   Prefix: .sf-is-*; not utilities or component-specific variants.
+
+   Reach for a native mechanism first — a pseudo-class (:disabled, :read-only,
+   :empty, :user-invalid), a boolean/enumerated attribute ([hidden], [disabled],
+   [readonly]), or an ARIA state ([aria-busy], [aria-current], [aria-expanded],
+   [aria-selected], [aria-pressed]) — since the browser (and assistive tech)
+   already understands it for free. Add a .sf-is-* class only for states with
+   no native equivalent, or ones this file's own tokens/consumers need as a
+   hook (see docs/states.md). See docs/states.md § "Prefer native state" for
+   the full rationale and the [hidden] precedent that got .sf-is-hidden
+   removed in favour of the attribute it duplicated. */
 
 @layer slashed.states {
 
-  /* -- VISIBILITY -- */
-
-  .sf-is-hidden {
-    display: none !important;
-  }
+  /* -- VISIBILITY --
+     No .sf-is-hidden here: it duplicated [hidden] (core/reset.css hardens
+     that attribute with the same `display: none !important`), so the class
+     added a second name for something the platform already gives you. */
 
   .sf-is-invisible {
     visibility: hidden;
@@ -19,7 +28,11 @@
     visibility: visible;
   }
 
-  /* -- INTERACTIVITY -- */
+  /* -- INTERACTIVITY --
+     No .sf-is-readonly here: it duplicated :read-only for real form controls,
+     and its pointer-events:none blocked text selection that a genuinely
+     read-only field should still allow — reach for :read-only, or
+     [aria-readonly] on a non-native widget, instead. */
 
   /* cursor: not-allowed inherits to children with pointer-events: auto —
      intentional, part of the .sf-is-disabled API surface. */
@@ -28,11 +41,6 @@
     pointer-events: none;
 
     cursor:         not-allowed;
-    user-select:    none;
-  }
-
-  .sf-is-readonly {
-    pointer-events: none;
     user-select:    none;
   }
 
@@ -64,9 +72,11 @@
     animation: var(--sf-animation-spin);
   }
 
-  .sf-is-busy {
-    cursor: progress;
-  }
+  /* No .sf-is-busy here: it was a single cursor:progress declaration with no
+     visual distinction of its own — [aria-busy="true"], which you need to set
+     for assistive tech anyway, is sufficient as the sole hook. Use
+     .sf-is-pending below for a state that also needs its own visual (dimmed,
+     still usable — optimistic UI), or .sf-is-loading for a full spinner. */
 
   .sf-is-pending {
 

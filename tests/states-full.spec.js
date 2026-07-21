@@ -9,11 +9,7 @@ async function setup(page, html) {
 }
 
 // ── Visibility ──────────────────────────────────────────────────
-test('.sf-is-hidden: display:none (important)', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-hidden">x</div>`);
-  const d = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
-  expect(d).toBe('none');
-});
+// No .sf-is-hidden test: the class was removed (duplicated [hidden]).
 
 test('.sf-is-invisible: visibility:hidden (stays in flow)', async ({ page }) => {
   await setup(page, `<div id="t" class="sf-is-invisible">x</div>`);
@@ -51,16 +47,7 @@ test('.sf-is-disabled: opacity 0.45, pointer-events none, cursor not-allowed', a
   if (browserName !== 'webkit') expect(cs.us).toBe('none');
 });
 
-test('.sf-is-readonly: pointer-events none, user-select none', async ({ page, browserName }) => {
-  await setup(page, `<div id="t" class="sf-is-readonly">Read only</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    pe: getComputedStyle(el).pointerEvents,
-    us: getComputedStyle(el).userSelect ?? getComputedStyle(el).webkitUserSelect,
-  }));
-  expect(cs.pe).toBe('none');
-  // WebKit requires -webkit-user-select; the framework only sets user-select (no prefix).
-  if (browserName !== 'webkit') expect(cs.us).toBe('none');
-});
+// No .sf-is-readonly test: the class was removed (duplicated :read-only).
 
 // ── Loading / async ─────────────────────────────────────────────
 test('.sf-is-loading: colour transparent, position relative, pointer-events none', async ({ page }) => {
@@ -75,11 +62,7 @@ test('.sf-is-loading: colour transparent, position relative, pointer-events none
   expect(cs.pos).toBe('relative');
 });
 
-test('.sf-is-busy: cursor progress', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-busy">Loading…</div>`);
-  const cursor = await page.locator('#t').evaluate(el => getComputedStyle(el).cursor);
-  expect(cursor).toBe('progress');
-});
+// No .sf-is-busy test: the class was removed (aria-busy alone is sufficient).
 
 test('.sf-is-pending: opacity < 1, cursor progress', async ({ page }) => {
   await setup(page, `<button id="t" class="sf-is-pending">Save</button>`);

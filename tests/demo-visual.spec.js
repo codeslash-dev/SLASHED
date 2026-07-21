@@ -291,14 +291,6 @@ test.describe('Motion & States', () => {
     const pe = await getStyle(disabled, 'pointerEvents');
     expect(pe).toBe('none');
   });
-
-
-  test('.sf-is-hidden removes element from layout', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const hidden = page.locator('#motion .sf-is-hidden').first();
-    const display = await getStyle(hidden, 'display');
-    expect(display).toBe('none');
-  });
 });
 
 

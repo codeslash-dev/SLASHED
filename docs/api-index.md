@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1070 elements** — 747 tokens, 323 classes.
+**1067 elements** — 747 tokens, 320 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1016 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1013 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 53 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -787,7 +787,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (323)
+## Classes (320)
 
 ### Accessibility (8)
 
@@ -1085,12 +1085,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `.print-no-color` | PUBLIC | print | — | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
 | `.print-only` | PUBLIC | print | — | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
 
-### State classes (28)
+### State classes (25)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-is-active` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Active state — applied to the currently interacted-with element (e.g. pressed button, active menu item). Sets --sf-is-active to 1 for calc() branching. |
-| `.sf-is-busy` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Busy state — shows a progress cursor to indicate background processing. Does not mask content; use sf-is-loading when content should be hidden during loading. |
 | `.sf-is-collapsed` | PUBLIC | state | OPEN / CLOSED | Collapsed state for disclosure widgets — hides the expandable region. Pair with sf-is-expanded or sf-is-open. Components add transitions. |
 | `.sf-is-current` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Current/selected state — marks the active page in navigation or the selected item in a list. Sets --sf-is-current to 1 for calc() branching. |
 | `.sf-is-danger` | PUBLIC | state | VALIDATION / FEEDBACK | Danger status state — applies danger color tokens for destructive actions (e.g. a delete confirmation dialog) and form validation errors. |
@@ -1101,16 +1100,14 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
 | `.sf-is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — alias for sf-is-danger. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid. |
 | `.sf-is-expanded` | PUBLIC | state | OPEN / CLOSED | Expanded state for disclosure widgets — shows the expandable region. Inverse of sf-is-collapsed. Components add transitions. |
-| `.sf-is-hidden` | PUBLIC | state | VISIBILITY | Hidden state — removes the element from layout and accessibility tree (display: none !important). |
 | `.sf-is-highlighted` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
 | `.sf-is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
 | `.sf-is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to sf-is-error; the name signals form-field context. |
 | `.sf-is-invisible` | PUBLIC | state | VISIBILITY | Invisible state — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). |
 | `.sf-is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
-| `.sf-is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed/sf-is-hidden. Sets --sf-is-open to 1 for calc() branching. |
+| `.sf-is-open` | PUBLIC | state | OPEN / CLOSED | Open/shown state for modals, dropdowns, and drawers — counterpart to sf-is-collapsed. Sets --sf-is-open to 1 for calc() branching. |
 | `.sf-is-pending` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Pending state for optimistic UI — content remains visible but dimmed while an async request is in flight. Differs from sf-is-loading (which hides content entirely). |
 | `.sf-is-pressed` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Pressed/toggled-on state for toggle buttons. Sets --sf-is-pressed to 1 for calc() branching and signals the selected state to components. |
-| `.sf-is-readonly` | PUBLIC | state | INTERACTIVITY | Readonly state — removes pointer events and text selection. Use for fields that display data but cannot be edited. |
 | `.sf-is-selected` | PUBLIC | state | ACTIVE / SELECTED / CURRENT | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
 | `.sf-is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
 | `.sf-is-success` | PUBLIC | state | VALIDATION / FEEDBACK | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |

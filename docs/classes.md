@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**287 .sf-classes, 28 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
+**287 .sf-classes, 25 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
@@ -218,12 +218,11 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## State classes (`core/states.css`)
 
-28 classes.
+25 classes.
 
 | Class |
 |---|
 | `.sf-is-active` |
-| `.sf-is-busy` |
 | `.sf-is-collapsed` |
 | `.sf-is-current` |
 | `.sf-is-danger` |
@@ -234,7 +233,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-is-empty` |
 | `.sf-is-error` |
 | `.sf-is-expanded` |
-| `.sf-is-hidden` |
 | `.sf-is-highlighted` |
 | `.sf-is-info` |
 | `.sf-is-invalid` |
@@ -243,7 +241,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-is-open` |
 | `.sf-is-pending` |
 | `.sf-is-pressed` |
-| `.sf-is-readonly` |
 | `.sf-is-selected` |
 | `.sf-is-skeleton` |
 | `.sf-is-success` |

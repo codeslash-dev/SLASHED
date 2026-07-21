@@ -8,6 +8,42 @@ visuals on top.
 
 All states are exercised live in the [demo](/demo/).
 
+## Prefer native state
+
+A `.sf-is-*` class is a fallback for when the platform has no state mechanism
+of its own — not the default reach. Before reaching for one, check whether a
+native pseudo-class, attribute, or ARIA state already gets you there:
+
+| Instead of | Reach for | Why |
+|---|---|---|
+| a hidden-state class | `[hidden]` | native, and already hardened to `display: none !important` in `core/reset.css` |
+| a disabled-state class | `:disabled` / `[disabled]` | native on every real form control and `<button>` |
+| a readonly-state class | `:read-only` | native on real inputs/textareas; doesn't block text selection the way a hand-rolled `pointer-events: none` does |
+| an empty-state class | `:empty` | native, zero JS, reacts to DOM content automatically |
+| a validation-state class | `:user-invalid` / `:invalid` / `[aria-invalid]` | native for client-side constraint validation (see [forms.css](/optional/forms.css) and `.sf-live-validate`) |
+| a busy-cursor-only class | `[aria-busy="true"]` | you set this for assistive tech anyway, so it's sufficient as the sole hook — no parallel class needed |
+| an active/expanded/selected/pressed/current class | `[aria-current]`, `[aria-expanded]`, `[aria-selected]`, `[aria-pressed]` | required for accessible custom widgets regardless of framework, so styling off the attribute you must already set avoids toggling two things for one state |
+
+`.sf-is-*` earns its place only when **no native mechanism reaches the same
+condition** (`.sf-is-loading`'s spinner, `.sf-is-skeleton`'s shimmer, the
+drag-and-drop trio — CSS has no native drag state at all) or when the class
+is a **token setter** consumed elsewhere in the framework (the validation
+family writing `--sf-field-*`, the `active`/`current`/`open`/`pressed` flags
+writing their `--sf-is-*` custom property for your own `calc()` branching —
+see [architecture.md § BEM consumer-API tokens](architecture.md)). Where a
+class and a native attribute can coexist for different purposes — e.g. an
+element carrying both `.sf-is-invalid` (a manual/server-side override) and
+`:user-invalid` (the browser's own opinion) — cascade layer order lets the
+manual class win regardless of specificity; see "Wiring validation text
+colour" below.
+
+`.sf-is-hidden`, `.sf-is-readonly`, and `.sf-is-busy` were removed for exactly
+this reason: `.sf-is-hidden` duplicated `[hidden]` byte-for-byte (both this
+framework's own `core/reset.css` and the browser already give you that), `.sf-is-readonly`
+duplicated `:read-only` while also blocking text selection a real read-only
+field should allow, and `.sf-is-busy` was a single `cursor: progress` with no
+distinct visual — `[aria-busy="true"]` alone covers the same ground.
+
 ## Reference
 
 > **Layer note:** Most state classes live in `core/states.css` (layer
@@ -17,13 +53,10 @@ All states are exercised live in the [demo](/demo/).
 
 | Class | Use when | ARIA / pairing | Layer |
 |---|---|---|---|
-| `.sf-is-hidden` | element removed from layout | `hidden` attr equivalent | states |
 | `.sf-is-invisible` / `.sf-is-visible` | hidden but keeps its box | `visibility` | states |
-| `.sf-is-disabled` | non-interactive, dimmed | `aria-disabled="true"` | states |
-| `.sf-is-readonly` | viewable, not editable | `aria-readonly` | states |
+| `.sf-is-disabled` | non-interactive, dimmed — for elements that can't take the native `disabled` attribute (e.g. `<a class="sf-btn">`) | `aria-disabled="true"` | states |
 | `.sf-is-loading` | content replaced by a spinner | `aria-busy="true"` | states |
 | `.sf-is-pending` | request in flight, content still usable (optimistic UI) | `aria-busy="true"` | states |
-| `.sf-is-busy` | cursor-only busy hint | `aria-busy` | states |
 | `.sf-is-skeleton` | placeholder shimmer | — | states |
 | `.sf-is-active` | generic active item (sets `--sf-is-active`) | — | states |
 | `.sf-is-selected` | selected in a set | `aria-selected` | states |
