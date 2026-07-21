@@ -3,6 +3,82 @@
 Mapping concepts from popular CSS frameworks to SLASHED, plus intra-project
 upgrade notes.
 
+## SLASHED 0.7.25 → Unreleased
+
+### `--sf-color-text--secondary` renamed to `--sf-color-text--subtle` (breaking)
+
+The name collided conceptually with the brand-palette `secondary` role
+(`--sf-color-secondary`) and with the token's own `--sf-color-text--on-secondary`
+sibling, reading as "text in the secondary brand colour" when it actually means
+de-emphasised, lower-emphasis body text (captions, labels, supporting copy).
+`--subtle` pairs cleanly with the existing `--muted` tier and carries no
+brand-role ambiguity. Value, derivation, and role are unchanged — only the name
+moved.
+
+**What changed for you:** replace `var(--sf-color-text--secondary)` with
+`var(--sf-color-text--subtle)` anywhere you reference it directly. No
+compatibility alias is provided — see "State-class API reduction" below for
+why: for a pre-1.0 framework, an alias here would have perpetuated the exact
+naming collision that motivated the rename.
+
+### State-class API reduction (breaking)
+
+A full audit of every `.sf-is-*` class held each one to the bar "does a native
+CSS mechanism already cover this, and is there a real consumer" instead of
+"was this class documented." Eleven classes and six tokens didn't clear it and
+are removed; two classes were relocated, not cut.
+
+**Removed — duplicated a native mechanism, no distinct behaviour of their own:**
+
+| Removed class | Native replacement |
+|---|---|
+| `.sf-is-hidden` | `[hidden]` (`core/reset.css` already hardens it to the same `display: none !important`) |
+| `.sf-is-readonly` | `:read-only` (the class also incorrectly blocked text selection a real read-only field should allow) |
+| `.sf-is-busy` | `[aria-busy="true"]` (a single `cursor: progress` with no distinct visual) |
+
+**Removed — speculative `--sf-is-*` custom-property flags with zero consumers**
+anywhere in this codebase or in any of the comparable frameworks surveyed
+(Open Props, Pico.css, Bulma, Automatic.css ship nothing equivalent):
+`.sf-is-active`, `.sf-is-open`, `.sf-is-collapsed`, `.sf-is-expanded`,
+`.sf-is-pressed`, `.sf-is-current`. Style off the ARIA state you already need
+to set for accessibility instead: `[aria-current]`, `[aria-expanded]`,
+`[aria-selected]`, `[aria-pressed]`.
+
+**Removed — for other reasons:**
+- `.sf-is-danger` — identical implementation to `.sf-is-invalid`/`.sf-is-error`
+  (both only ever wrote `--sf-field-*`), so it never actually worked as the
+  "destructive-action button" case its own docs described, and visual variants
+  belong in your own component CSS per this same guide's "component/modifier
+  framework" section below.
+- `.sf-is-pending` — two lines (`opacity`, `cursor: progress`) cheap to
+  hand-roll, with `.sf-is-loading` already covering the common "mask with a
+  spinner" case.
+
+**Relocated, not cut** — single-property helpers with no runtime condition of
+their own (unlike `.sf-is-selected`, which paints something), matching
+Bulma's precedent of treating visibility as a helper, not a state:
+
+| Old name | New name | New location |
+|---|---|---|
+| `.sf-is-invisible` | `.sf-invisible` | `optional/utilities.css` |
+| `.sf-is-visible` | `.sf-visible` | `optional/utilities.css` |
+
+**Tokens removed as a consequence** — each lost its only consumer:
+`--sf-current-font-weight` (`.sf-is-current`'s font-weight hook),
+`--sf-state-pending-opacity` (`.sf-is-pending`'s dimming), and the
+`--sf-is-active`/`--sf-is-current`/`--sf-is-pressed`/`--sf-is-open`
+`@property` registrations (the removed flag mechanism above).
+
+**What changed for you:** if you toggle any of the eleven removed classes from
+your own JS, they're now inert — no CSS reacts to them. Swap to the native
+replacement in the first table, or to the matching ARIA attribute for the
+speculative-flag group, or hand-roll the one-line effect yourself for
+`.sf-is-danger`/`.sf-is-pending`. If you use `.sf-is-invisible`/`.sf-is-visible`,
+rename the class in your markup to `.sf-invisible`/`.sf-visible` and make sure
+you're on a bundle that includes `optional/utilities.css` (the `full` bundle,
+or your own custom build — the `optimal` bundle does not include it). Full
+rationale for every class: [states.md § "Prefer native state"](states.md).
+
 ## SLASHED 0.7.8 → 0.8.0
 
 ### `.sf-btn` size scale honoured on touch; blanket 44px floor no longer applies to buttons (breaking)
