@@ -26324,7 +26324,7 @@
       "category": "Accessibility",
       "area": "accessibility",
       "group": "",
-      "description": ".sf-touch-target — the explicit opt-IN counterpart to the class-less floor above. Because the automatic floor deliberately never touches a control that carries a class, put this class on any control you own (a button with your own class, a link, a third-party widget you can add…",
+      "description": ".sf-touch-target — the explicit opt-IN counterpart to the class-less floor above. Because the automatic floor deliberately never touches a control that carries a class, put this class on any control you own (a button with your own class, a third-party widget you can add a class…",
       "isVariant": false,
       "baseClass": null,
       "optional": false,

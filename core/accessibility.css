@@ -105,23 +105,31 @@
      so the owner couldn't even override it without !important. Element-level
      selectors that reach for someone else's markup are the "too aggressive base
      style" trap; scoping the floor to classless controls keeps it from ever
-     touching markup the framework doesn't own. (`:not([class])` matches the
-     same "un-styled element" idiom already used for `a:not([class])` in base.)
+     touching markup the framework doesn't own. It extends the "un-styled
+     element" idiom already used for `a:not([class])` in base.
+
+     "Un-styled" here means *no effective class* — no class attribute at all, OR
+     an empty one (`class=""`), which templating/component renderers routinely
+     emit for a control the author never styled. Both keep the floor. The test
+     is written `:not([class]:not([class=""]))` — read it as "not (has a
+     non-empty class)": it excludes only controls carrying a real class token.
+     (A whitespace-only `class=" "` is treated as owned; that pathological case
+     isn't worth widening the selector for.) `:where()` keeps the element list
+     at zero specificity so the whole rule stays a low, easily-reasoned weight.
 
      Bare `<button>text</button>` and un-classed native controls — almost always
      the author's own quick markup — keep the WCAG 2.5.5 44px floor on both axes.
      To opt a control OUT, give it any class. To put the floor back ON an owned
-     control, set its own min-block/inline-size, or on .sf-btn use
+     control, add the .sf-touch-target opt-in class below, set its own
+     min-block/inline-size, or on .sf-btn use
      `--sf-btn-min-height: var(--sf-touch-target)`. */
   @media (pointer: coarse) {
-    button:not([class]),
-    input[type="button"]:not([class]),
-    input[type="submit"]:not([class]),
-    input[type="reset"]:not([class]),
-    select:not([class]),
-    summary:not([class]),
-    input[type="checkbox"]:not([class]),
-    input[type="radio"]:not([class]) {
+    :where(
+      button,
+      input[type="button"], input[type="submit"], input[type="reset"],
+      select, summary,
+      input[type="checkbox"], input[type="radio"]
+    ):not([class]:not([class=""])) {
       min-block-size:  var(--sf-touch-target);
       min-inline-size: var(--sf-touch-target);
     }
@@ -130,22 +138,25 @@
   /* .sf-touch-target — the explicit opt-IN counterpart to the class-less floor
      above. Because the automatic floor deliberately never touches a control
      that carries a class, put this class on any control you own (a button with
-     your own class, a link, a third-party widget you can add a class to) to
-     guarantee the WCAG 2.5.5 44px minimum hit area on both axes. Unlike the
-     automatic floor it is NOT gated to a coarse pointer — an explicit opt-in
-     is predictable everywhere. Size follows --sf-touch-target, so a wrapper (or
-     the element itself) can retune it locally; the flex centring keeps a short
-     label centred inside the enlarged box instead of pinned top-left.
+     your own class, a third-party widget you can add a class to) to guarantee
+     the WCAG 2.5.5 44px minimum hit area on both axes. Unlike the automatic
+     floor it is NOT gated to a coarse pointer — an explicit opt-in is
+     predictable everywhere. Size follows --sf-touch-target, so a wrapper (or
+     the element itself) can retune it locally.
 
        <button class="my-menu-toggle sf-touch-target" aria-label="Menu">…</button>
+
+     It sets ONLY the two min-size properties — deliberately no `display` — so it
+     never strips a native affordance (e.g. a <summary>'s list-item marker, a
+     control's baseline alignment). It therefore expects a target whose display
+     already honours min-inline-size: buttons and native form controls
+     (inline-block/flex) do. On a purely inline element (a bare <a>) add your own
+     `display: inline-flex` (or inline-block) alongside it.
 
      No !important: it's a single class (specificity 0,1,0), so your own
      component rule can still override it when a specific control needs to opt
      back out. */
   .sf-touch-target {
-    display:         inline-flex;
-    align-items:     center;
-    justify-content: center;
     min-block-size:  var(--sf-touch-target);
     min-inline-size: var(--sf-touch-target);
   }

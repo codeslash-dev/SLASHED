@@ -227,6 +227,15 @@ test.describe('a11y: touch target token', () => {
     expect(box.h).toBeLessThan(44);
   });
 
+  // .sf-touch-target sets only min-sizes (no display), so it must not strip a
+  // native affordance — e.g. a <summary>'s list-item display / disclosure
+  // marker. Guards the review finding about replacing native display modes.
+  test('.sf-touch-target does not override a native control display (summary stays list-item)', async ({ page }) => {
+    await setup(page, `<details><summary id="t" class="sf-touch-target">More</summary>body</details>`);
+    const display = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
+    expect(display).toBe('list-item');
+  });
+
   // #582: the WCAG floor must NOT track the configurable --sf-size-* scale.
   // Shrinking a size rung must not drag the touch target below spec.
   test('--sf-touch-target is independent of the --sf-size-* scale', async ({ page }) => {

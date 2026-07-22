@@ -90,10 +90,10 @@ most visibly third-party page-builder and plugin controls. A narrow custom
 control such as a hamburger toggle (`<button class="…-menu-toggle">`) was
 stretched to 44px on both axes and could not be resized without `!important`.
 
-The floor is now scoped to **class-less controls only**
-(`button:not([class])`, `input[type="…"]:not([class])`, `select:not([class])`,
-`summary:not([class])`, `input[type="checkbox"]:not([class])`,
-`input[type="radio"]:not([class])`). Any control that carries a class is treated
+The floor is now scoped to **controls with no effective class**
+(`:where(button, input[type="button"], …, summary):not([class]:not([class=""]))`)
+— no class attribute at all, or an empty `class=""` (which renderers often emit
+for an unstyled control). Any control that carries a real class token is treated
 as *owned* — by SLASHED (`.sf-btn`), by you, or by a third-party widget — and
 keeps whatever size its owner gives it. Genuinely bare, un-classed controls
 (the author's own quick markup) keep the WCAG 2.5.5 44px floor on both axes.
@@ -107,8 +107,10 @@ mechanism is the new opt-in class:
 **`.sf-touch-target` (new)** — the explicit counterpart to the class-less
 floor. Put it on any control you own to guarantee the WCAG 2.5.5 44px hit
 area on both axes; it lives in `core/accessibility.css` so it's in every
-bundle. Unlike the automatic floor it is not gated to a coarse pointer, and it
-centres a short label inside the enlarged box:
+bundle. Unlike the automatic floor it is not gated to a coarse pointer. It sets
+only the two min-size properties (no `display`), so it never strips a native
+affordance such as a `<summary>` marker; on a purely inline element (a bare
+`<a>`) pair it with your own `display: inline-flex`/`inline-block`:
 
 ```html
 <button class="my-menu-toggle sf-touch-target" aria-label="Menu">☰</button>
