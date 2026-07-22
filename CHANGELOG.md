@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.26] - 2026-07-22
+
+### Breaking Changes
+- **states:** remove speculative interaction-state flags, relocate visibility helpers
+- **tokens:** rename --sf-color-text--secondary to --sf-color-text--subtle
+
+### Features
+- **a11y:** add .sf-touch-target opt-in class for the WCAG 44px hit area
+
+### Bug Fixes
+- **a11y:** address PR review — empty class="", native display, docs, gallery
+- **a11y:** scope coarse-pointer touch-target floor to class-less controls
+
 ## [0.7.25] - 2026-07-20
 
 ### Features
