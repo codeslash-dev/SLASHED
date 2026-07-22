@@ -20,7 +20,7 @@
     ],
     "counts": {
       "tokens": 741,
-      "sf_classes": 289,
+      "sf_classes": 290,
       "is_classes": 15
     }
   },
@@ -1055,6 +1055,7 @@
     "sf-theme-dark",
     "sf-theme-light",
     "sf-theme-transition",
+    "sf-touch-target",
     "sf-truncate",
     "sf-visible"
   ],

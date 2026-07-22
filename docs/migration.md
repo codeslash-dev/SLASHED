@@ -79,6 +79,53 @@ you're on a bundle that includes `optional/utilities.css` (the `full` bundle,
 or your own custom build — the `optimal` bundle does not include it). Full
 rationale for every class: [states.md § "Prefer native state"](states.md).
 
+### Coarse-pointer touch-target floor scoped to class-less controls (breaking)
+
+The `@media (pointer: coarse)` minimum-touch-target floor in
+`core/accessibility.css` used to target **every** bare `<button>` and native
+control (only `.sf-btn` was carved out). Because it set both `min-block-size`
+and `min-inline-size` to `var(--sf-touch-target)` (44px) at a specificity
+higher than a single class, it reached into markup the framework doesn't own —
+most visibly third-party page-builder and plugin controls. A narrow custom
+control such as a hamburger toggle (`<button class="…-menu-toggle">`) was
+stretched to 44px on both axes and could not be resized without `!important`.
+
+The floor is now scoped to **controls with no effective class**
+(`:where(button, input[type="button"], …, summary):not([class]:not([class=""]))`)
+— no class attribute at all, or an empty `class=""` (which renderers often emit
+for an unstyled control). Any control that carries a real class token is treated
+as *owned* — by SLASHED (`.sf-btn`), by you, or by a third-party widget — and
+keeps whatever size its owner gives it. Genuinely bare, un-classed controls
+(the author's own quick markup) keep the WCAG 2.5.5 44px floor on both axes.
+This generalises the earlier `.sf-btn` carve-out (see 0.7.8 → 0.8.0 below) into
+a single rule: *the framework never re-sizes a control someone else has styled.*
+
+Because most real controls carry a class, the automatic floor is now a
+**safety net for bare markup**, not the everyday mechanism. The everyday
+mechanism is the new opt-in class:
+
+**`.sf-touch-target` (new)** — the explicit counterpart to the class-less
+floor. Put it on any control you own to guarantee the WCAG 2.5.5 44px hit
+area on both axes; it lives in `core/accessibility.css` so it's in every
+bundle. Unlike the automatic floor it is not gated to a coarse pointer. It sets
+only the two min-size properties (no `display`), so it never strips a native
+affordance such as a `<summary>` marker; on a purely inline element (a bare
+`<a>`) pair it with your own `display: inline-flex`/`inline-block`:
+
+```html
+<button class="my-menu-toggle sf-touch-target" aria-label="Menu">☰</button>
+```
+
+**What changed for you:**
+- A bare, class-less `<button>` / native control is unaffected — it still gets
+  the 44px floor on touch.
+- A control that carries **any** class no longer gets the automatic floor. If
+  you want the 44px hit area on a class-bearing control, add `.sf-touch-target`
+  (or set `min-block-size`/`min-inline-size` yourself, or on a `.sf-btn` use
+  `:root { --sf-btn-min-height: var(--sf-touch-target); }`).
+- To opt a control **out** of the floor (e.g. a custom icon button that was
+  being stretched), give it any class — no `!important` needed.
+
 ## SLASHED 0.7.8 → 0.8.0
 
 ### `.sf-btn` size scale honoured on touch; blanket 44px floor no longer applies to buttons (breaking)
