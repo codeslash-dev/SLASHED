@@ -100,13 +100,27 @@ keeps whatever size its owner gives it. Genuinely bare, un-classed controls
 This generalises the earlier `.sf-btn` carve-out (see 0.7.8 → 0.8.0 below) into
 a single rule: *the framework never re-sizes a control someone else has styled.*
 
+Because most real controls carry a class, the automatic floor is now a
+**safety net for bare markup**, not the everyday mechanism. The everyday
+mechanism is the new opt-in class:
+
+**`.sf-touch-target` (new)** — the explicit counterpart to the class-less
+floor. Put it on any control you own to guarantee the WCAG 2.5.5 44px hit
+area on both axes; it lives in `core/accessibility.css` so it's in every
+bundle. Unlike the automatic floor it is not gated to a coarse pointer, and it
+centres a short label inside the enlarged box:
+
+```html
+<button class="my-menu-toggle sf-touch-target" aria-label="Menu">☰</button>
+```
+
 **What changed for you:**
 - A bare, class-less `<button>` / native control is unaffected — it still gets
   the 44px floor on touch.
-- A control that carries **any** class no longer gets the automatic floor on
-  touch. If you were relying on it for a class-bearing control, restore it
-  explicitly — set `min-block-size`/`min-inline-size` on that control, or on a
-  `.sf-btn` use `:root { --sf-btn-min-height: var(--sf-touch-target); }`.
+- A control that carries **any** class no longer gets the automatic floor. If
+  you want the 44px hit area on a class-bearing control, add `.sf-touch-target`
+  (or set `min-block-size`/`min-inline-size` yourself, or on a `.sf-btn` use
+  `:root { --sf-btn-min-height: var(--sf-touch-target); }`).
 - To opt a control **out** of the floor (e.g. a custom icon button that was
   being stretched), give it any class — no `!important` needed.
 

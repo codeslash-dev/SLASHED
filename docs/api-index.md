@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1053 elements** — 741 tokens, 312 classes.
+**1054 elements** — 741 tokens, 313 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1003 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1004 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -781,9 +781,9 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (312)
+## Classes (313)
 
-### Accessibility (8)
+### Accessibility (9)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -792,6 +792,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-clickable-parent__overlay` | PUBLIC | accessibility | — | The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks. |
 | `.sf-focus-parent` | PUBLIC | accessibility | — | Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>. |
 | `.sf-focus-shadow` | PUBLIC | accessibility | — | Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly. |
+| `.sf-touch-target` | PUBLIC | accessibility | — | .sf-touch-target — the explicit opt-IN counterpart to the class-less floor above. Because the automatic floor deliberately never touches a control that carries a class, put this class on any control you own (a button with your own class, a link, a third-party widget you can add… |
 | `.skip-link` | PUBLIC | accessibility | — | Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>. |
 | `.sr-only` | PUBLIC | accessibility | — | Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs. |
 | `.sr-only-focusable` | PUBLIC | accessibility | — | Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets. |

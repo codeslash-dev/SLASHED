@@ -127,6 +127,29 @@
     }
   }
 
+  /* .sf-touch-target — the explicit opt-IN counterpart to the class-less floor
+     above. Because the automatic floor deliberately never touches a control
+     that carries a class, put this class on any control you own (a button with
+     your own class, a link, a third-party widget you can add a class to) to
+     guarantee the WCAG 2.5.5 44px minimum hit area on both axes. Unlike the
+     automatic floor it is NOT gated to a coarse pointer — an explicit opt-in
+     is predictable everywhere. Size follows --sf-touch-target, so a wrapper (or
+     the element itself) can retune it locally; the flex centring keeps a short
+     label centred inside the enlarged box instead of pinned top-left.
+
+       <button class="my-menu-toggle sf-touch-target" aria-label="Menu">…</button>
+
+     No !important: it's a single class (specificity 0,1,0), so your own
+     component rule can still override it when a specific control needs to opt
+     back out. */
+  .sf-touch-target {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    min-block-size:  var(--sf-touch-target);
+    min-inline-size: var(--sf-touch-target);
+  }
+
   /* Disabled states */
   [disabled],
   [aria-disabled="true"] {
