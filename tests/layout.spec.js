@@ -824,6 +824,47 @@ test.describe('layout: .sf-content-grid', () => {
     const col = await page.locator('#f').evaluate(el => getComputedStyle(el).gridColumn);
     expect(col).toMatch(/full/);
   });
+
+  // .sf-content-grid establishes its own inline-size query container, at parity
+  // with .sf-container. Before this, switching a section wrapper from
+  // .sf-container to .sf-content-grid (to get breakout/full-bleed) silently
+  // removed the CQ scope that .sf-grid-cols-* / .sf-bento depend on, leaving
+  // them stuck at their 1-column fallback at every width.
+  test('establishes an inline-size query container', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-content-grid">x</div>`);
+    const ct = await page.locator('#t').evaluate(el => getComputedStyle(el).containerType);
+    expect(ct).toContain('inline-size');
+  });
+
+  test('a .sf-grid-cols-* child responds to the content grid as its CQ ancestor', async ({ page }) => {
+    await setup(page, `
+      <div class="sf-content-grid" style="width:1200px">
+        <div id="g" class="sf-grid-cols-3"><div>1</div><div>2</div><div>3</div></div>
+      </div>
+    `);
+    const cols = await page.locator('#g').evaluate(el =>
+      getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/).length
+    );
+    expect(cols).toBe(3);
+  });
+
+  test('becoming a CQ container does not shrink full-bleed reach', async ({ page }) => {
+    await setup(page, `
+      <div id="cg" class="sf-content-grid" style="width:1200px">
+        <div id="f" class="sf-full-bleed">full</div>
+        <div id="c">content</div>
+      </div>
+    `);
+    const res = await page.evaluate(() => {
+      const cg = document.getElementById('cg').getBoundingClientRect();
+      const f  = document.getElementById('f').getBoundingClientRect();
+      const c  = document.getElementById('c').getBoundingClientRect();
+      return { cgW: cg.width, fW: f.width, cW: c.width };
+    });
+    // full-bleed still spans the whole grid; the content track stays narrower.
+    expect(Math.abs(res.fW - res.cgW)).toBeLessThan(1);
+    expect(res.cW).toBeLessThan(res.fW);
+  });
 });
 
 // ── .sf-subgrid ─────────────────────────────────────────────────
