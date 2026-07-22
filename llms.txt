@@ -1,0 +1,583 @@
+# SLASHED v0.7.25
+
+> SLASHED is a pure-CSS, token-driven styling framework — BEM-first, cascade-layered, zero runtime JS. This file is a distilled, machine-generated reference of SLASHED’s complete token and class vocabulary for this exact version, so an AI coding assistant can use real `--sf-*` token and `.sf-*` class names instead of guessing or hallucinating them.
+
+Generated from source by `npm run docs` — do not edit by hand. Full prose guide: https://github.com/codeslash-dev/SLASHED/blob/main/docs/llm-guide.md · Machine-readable index: https://github.com/codeslash-dev/SLASHED/blob/main/docs/api-index.json
+
+## Conventions
+
+- **Tokens** are `--sf-*` CSS custom properties: set the *knob* tokens (literal inputs), read the *consumption* tokens (derived via `var(--sf-…)`).
+- **Classes** are `.sf-*` (structural, BEM `block__element--modifier`) and `.sf-is-*` (runtime states toggled by JS/ARIA). Unprefixed helpers (`sr-only`, `skip-link`, …) also ship.
+- **Stability tiers:** PUBLIC (stable), PUBLIC-ADVANCED (stable but low-level / niche), INTERNAL (no guarantees, omitted here).
+- **Cascade layers**, lowest→highest precedence: `tokens` → `reset` → `base` → `forms` → `components` → `layout` → `macros` → `utilities` → `states` → `themes` → `motion` → `accessibility` → `print` → `legacy` → `overrides`. Author overrides belong in `slashed.overrides` (or any unlayered rule) and always win.
+- Prefer tokens over raw values, and BEM classes / macros over utility classes. Utilities and most component families ship from `optional/` (opt-in).
+
+## Tokens
+
+740 tokens (PUBLIC + PUBLIC-ADVANCED), grouped by area. Names are self-descriptive; defaults, derivations and per-token notes live in the full guide and api-index.json.
+
+### Layout tokens (53)
+
+```
+--sf-alternate-gap --sf-alternate-inner-gap --sf-bento-cols-default --sf-bento-gap
+--sf-bento-row-compact --sf-bento-row-default --sf-bento-row-tall --sf-bg-layer-fit
+--sf-bg-layer-inset --sf-bg-layer-position --sf-bg-layer-radius --sf-bg-layer-z
+--sf-box-border-color --sf-box-border-width --sf-box-padding --sf-breakout-width
+--sf-center-gutter --sf-center-max --sf-cluster-align --sf-cluster-gap --sf-cluster-justify
+--sf-content-width --sf-cover-min-height --sf-cover-padding --sf-equal-gap --sf-equal-min-col
+--sf-equal-rule-color --sf-equal-rule-style --sf-equal-rule-width --sf-frame-ratio --sf-grid-gap
+--sf-grid-min --sf-grid-min-2xl --sf-grid-min-l --sf-grid-min-m --sf-grid-min-s --sf-grid-min-xl
+--sf-grid-min-xs --sf-icon-box-bg --sf-icon-box-border --sf-icon-box-pad --sf-icon-box-radius
+--sf-imposter-margin --sf-prose-paragraph --sf-reel-gap --sf-reel-height --sf-reel-item-width
+--sf-sidebar-gap --sf-sidebar-min-width --sf-sidebar-width --sf-stack-gap --sf-switcher-gap
+--sf-switcher-threshold
+```
+
+### Core tokens (609)
+
+```
+--sf-animation-blink --sf-animation-color-pulse --sf-animation-fade-in --sf-animation-fade-out
+--sf-animation-float --sf-animation-ping --sf-animation-scale-down --sf-animation-scale-up
+--sf-animation-shimmer --sf-animation-slide-in-down --sf-animation-slide-in-left
+--sf-animation-slide-in-right --sf-animation-slide-in-up --sf-animation-slide-out-down
+--sf-animation-slide-out-left --sf-animation-slide-out-right --sf-animation-slide-out-up
+--sf-animation-spin --sf-blur --sf-body-color --sf-body-em-style --sf-body-font-family
+--sf-body-font-size --sf-body-font-weight --sf-body-line-height --sf-body-strong-weight
+--sf-body-text-wrap --sf-border --sf-border-scale --sf-border-strong --sf-border-style
+--sf-border-subtle --sf-border-width-1 --sf-border-width-2 --sf-border-width-3
+--sf-border-width-4 --sf-border-width-hairline --sf-caret-color --sf-code-font-size
+--sf-color-action --sf-color-action--active --sf-color-action--hover --sf-color-action-100
+--sf-color-action-200 --sf-color-action-300 --sf-color-action-400 --sf-color-action-50
+--sf-color-action-500 --sf-color-action-600 --sf-color-action-700 --sf-color-action-800
+--sf-color-action-900 --sf-color-action-950 --sf-color-action-a10 --sf-color-action-a30
+--sf-color-action-a5 --sf-color-action-a50 --sf-color-action-a80 --sf-color-action-darker
+--sf-color-action-lighter --sf-color-action-muted --sf-color-action-source-dark
+--sf-color-action-source-light --sf-color-action-subtle --sf-color-action-superdark
+--sf-color-action-superlight --sf-color-action-tint --sf-color-action-xdark
+--sf-color-action-xlight --sf-color-base --sf-color-base--active --sf-color-base--hover
+--sf-color-base-100 --sf-color-base-200 --sf-color-base-300 --sf-color-base-400
+--sf-color-base-50 --sf-color-base-500 --sf-color-base-600 --sf-color-base-700
+--sf-color-base-800 --sf-color-base-900 --sf-color-base-950 --sf-color-base-a10
+--sf-color-base-a30 --sf-color-base-a5 --sf-color-base-a50 --sf-color-base-a80
+--sf-color-base-muted --sf-color-base-source-dark --sf-color-base-source-light
+--sf-color-base-subtle --sf-color-base-tint --sf-color-bg --sf-color-bg--active
+--sf-color-bg--disabled --sf-color-bg--focus --sf-color-bg--hover --sf-color-bg--selected
+--sf-color-black --sf-color-border --sf-color-border--disabled --sf-color-border--focus
+--sf-color-border--strong --sf-color-border--subtle --sf-color-border--translucent
+--sf-color-code-bg --sf-color-code-text --sf-color-danger --sf-color-danger-muted
+--sf-color-danger-source-dark --sf-color-danger-source-light --sf-color-danger-strong
+--sf-color-danger-subtle --sf-color-danger-tint --sf-color-dim --sf-color-heading
+--sf-color-info --sf-color-info-muted --sf-color-info-source-dark --sf-color-info-source-light
+--sf-color-info-strong --sf-color-info-subtle --sf-color-info-tint --sf-color-inset
+--sf-color-inverse --sf-color-link --sf-color-link--active --sf-color-link--disabled
+--sf-color-link--hover --sf-color-link--underline --sf-color-link--visited --sf-color-mark-bg
+--sf-color-mark-text --sf-color-neutral --sf-color-neutral--active --sf-color-neutral--hover
+--sf-color-neutral-100 --sf-color-neutral-200 --sf-color-neutral-300 --sf-color-neutral-400
+--sf-color-neutral-50 --sf-color-neutral-500 --sf-color-neutral-600 --sf-color-neutral-700
+--sf-color-neutral-800 --sf-color-neutral-900 --sf-color-neutral-950 --sf-color-neutral-a10
+--sf-color-neutral-a30 --sf-color-neutral-a5 --sf-color-neutral-a50 --sf-color-neutral-a80
+--sf-color-neutral-darker --sf-color-neutral-lighter --sf-color-neutral-muted
+--sf-color-neutral-source-dark --sf-color-neutral-source-light --sf-color-neutral-subtle
+--sf-color-neutral-superdark --sf-color-neutral-superlight --sf-color-neutral-tint
+--sf-color-neutral-xdark --sf-color-neutral-xlight --sf-color-overlay --sf-color-primary
+--sf-color-primary--active --sf-color-primary--hover --sf-color-primary-100
+--sf-color-primary-200 --sf-color-primary-300 --sf-color-primary-400 --sf-color-primary-50
+--sf-color-primary-500 --sf-color-primary-600 --sf-color-primary-700 --sf-color-primary-800
+--sf-color-primary-900 --sf-color-primary-950 --sf-color-primary-a10 --sf-color-primary-a30
+--sf-color-primary-a5 --sf-color-primary-a50 --sf-color-primary-a80 --sf-color-primary-darker
+--sf-color-primary-lighter --sf-color-primary-muted --sf-color-primary-source-dark
+--sf-color-primary-source-light --sf-color-primary-subtle --sf-color-primary-superdark
+--sf-color-primary-superlight --sf-color-primary-tint --sf-color-primary-xdark
+--sf-color-primary-xlight --sf-color-raised --sf-color-scheme --sf-color-secondary
+--sf-color-secondary--active --sf-color-secondary--hover --sf-color-secondary-100
+--sf-color-secondary-200 --sf-color-secondary-300 --sf-color-secondary-400
+--sf-color-secondary-50 --sf-color-secondary-500 --sf-color-secondary-600
+--sf-color-secondary-700 --sf-color-secondary-800 --sf-color-secondary-900
+--sf-color-secondary-950 --sf-color-secondary-a10 --sf-color-secondary-a30
+--sf-color-secondary-a5 --sf-color-secondary-a50 --sf-color-secondary-a80
+--sf-color-secondary-darker --sf-color-secondary-lighter --sf-color-secondary-muted
+--sf-color-secondary-source-dark --sf-color-secondary-source-light --sf-color-secondary-subtle
+--sf-color-secondary-superdark --sf-color-secondary-superlight --sf-color-secondary-tint
+--sf-color-secondary-xdark --sf-color-secondary-xlight --sf-color-selection-bg
+--sf-color-selection-bg--alt --sf-color-selection-text --sf-color-selection-text--alt
+--sf-color-success --sf-color-success-muted --sf-color-success-source-dark
+--sf-color-success-source-light --sf-color-success-strong --sf-color-success-subtle
+--sf-color-success-tint --sf-color-surface --sf-color-tertiary --sf-color-tertiary--active
+--sf-color-tertiary--hover --sf-color-tertiary-100 --sf-color-tertiary-200
+--sf-color-tertiary-300 --sf-color-tertiary-400 --sf-color-tertiary-50 --sf-color-tertiary-500
+--sf-color-tertiary-600 --sf-color-tertiary-700 --sf-color-tertiary-800 --sf-color-tertiary-900
+--sf-color-tertiary-950 --sf-color-tertiary-a10 --sf-color-tertiary-a30 --sf-color-tertiary-a5
+--sf-color-tertiary-a50 --sf-color-tertiary-a80 --sf-color-tertiary-darker
+--sf-color-tertiary-lighter --sf-color-tertiary-muted --sf-color-tertiary-source-dark
+--sf-color-tertiary-source-light --sf-color-tertiary-subtle --sf-color-tertiary-superdark
+--sf-color-tertiary-superlight --sf-color-tertiary-tint --sf-color-tertiary-xdark
+--sf-color-tertiary-xlight --sf-color-text --sf-color-text--disabled --sf-color-text--inverse
+--sf-color-text--muted --sf-color-text--on-action --sf-color-text--on-base
+--sf-color-text--on-danger --sf-color-text--on-info --sf-color-text--on-inverse
+--sf-color-text--on-neutral --sf-color-text--on-primary --sf-color-text--on-secondary
+--sf-color-text--on-success --sf-color-text--on-tertiary --sf-color-text--on-warning
+--sf-color-text--placeholder --sf-color-text--subtle --sf-color-warning --sf-color-warning-muted
+--sf-color-warning-source-dark --sf-color-warning-source-light --sf-color-warning-strong
+--sf-color-warning-subtle --sf-color-warning-tint --sf-color-white --sf-component-pad
+--sf-container-default --sf-container-full --sf-container-narrow --sf-container-prose
+--sf-container-wide --sf-content-gap --sf-contrast-bias --sf-contrast-threshold --sf-density
+--sf-display-l-line-height --sf-display-m-line-height --sf-display-s-line-height
+--sf-divider-color --sf-divider-gap --sf-divider-style --sf-divider-width --sf-drop-shadow-l
+--sf-drop-shadow-m --sf-drop-shadow-s --sf-drop-shadow-xl --sf-drop-shadow-xs --sf-duration-fast
+--sf-duration-instant --sf-duration-none --sf-duration-normal --sf-duration-slow
+--sf-duration-slower --sf-ease-bounce --sf-ease-elastic --sf-ease-in --sf-ease-in-out
+--sf-ease-linear --sf-ease-out --sf-ease-overshoot --sf-ease-spring --sf-field-block
+--sf-field-required-marker --sf-fluid-max-vw --sf-fluid-min-vw --sf-fluid-width
+--sf-focus-ring-color --sf-focus-ring-offset --sf-focus-ring-shadow --sf-focus-ring-style
+--sf-focus-ring-width --sf-font-body --sf-font-display --sf-font-features --sf-font-geometric
+--sf-font-heading --sf-font-humanist --sf-font-mono --sf-font-numeric --sf-font-slab
+--sf-font-variation --sf-font-weight-body --sf-font-weight-bold --sf-font-weight-display
+--sf-font-weight-heading --sf-font-weight-interactive --sf-font-weight-light
+--sf-font-weight-medium --sf-font-weight-normal --sf-font-weight-semibold
+--sf-font-weight-strong --sf-gap --sf-gradient-action --sf-gradient-brand --sf-gradient-fade--b
+--sf-gradient-fade--l --sf-gradient-fade--r --sf-gradient-fade--t --sf-gradient-primary
+--sf-gradient-secondary --sf-gradient-surface --sf-gradient-tertiary --sf-gutter
+--sf-h1-font-weight --sf-h1-letter-spacing --sf-h1-line-height --sf-h1-max-width --sf-h1-size
+--sf-h2-font-weight --sf-h2-letter-spacing --sf-h2-line-height --sf-h2-max-width --sf-h2-size
+--sf-h3-font-weight --sf-h3-letter-spacing --sf-h3-line-height --sf-h3-max-width --sf-h3-size
+--sf-h4-font-weight --sf-h4-letter-spacing --sf-h4-line-height --sf-h4-max-width --sf-h4-size
+--sf-h5-font-weight --sf-h5-letter-spacing --sf-h5-line-height --sf-h5-max-width --sf-h5-size
+--sf-h6-font-weight --sf-h6-letter-spacing --sf-h6-line-height --sf-h6-max-width --sf-h6-size
+--sf-header-height --sf-header-height-desktop --sf-header-height-mobile --sf-heading-color
+--sf-heading-font-family --sf-heading-text-wrap --sf-hover-grow-scale --sf-hover-lift
+--sf-hover-shrink-scale --sf-hover-slide --sf-icon-2xl --sf-icon-l --sf-icon-m --sf-icon-s
+--sf-icon-xl --sf-icon-xs --sf-leading-normal --sf-leading-relaxed --sf-leading-snug
+--sf-leading-taper --sf-leading-tight --sf-link-external-label --sf-link-external-marker
+--sf-link-underline-offset --sf-link-underline-thickness --sf-lumlocker --sf-lumlocker-dark
+--sf-mask-scrim-end --sf-mask-scrim-start --sf-media-radius --sf-motion-scale --sf-object-fit
+--sf-object-position --sf-opacity-disabled --sf-opacity-muted --sf-optical-sizing
+--sf-palette-shade-l --sf-palette-tint-l --sf-print-base-size --sf-print-page-margin
+--sf-print-page-size --sf-radius-2xl --sf-radius-2xs --sf-radius-3xl --sf-radius-4xl
+--sf-radius-full --sf-radius-l --sf-radius-m --sf-radius-none --sf-radius-outer --sf-radius-pill
+--sf-radius-s --sf-radius-scale --sf-radius-xl --sf-radius-xs --sf-ratio-3-2 --sf-ratio-4-3
+--sf-ratio-cinema --sf-ratio-golden --sf-ratio-portrait --sf-ratio-square --sf-ratio-video
+--sf-safe-bottom --sf-safe-left --sf-safe-right --sf-safe-top --sf-scroll-timeline-range-end
+--sf-scroll-timeline-range-exit-end --sf-scroll-timeline-range-exit-start
+--sf-scroll-timeline-range-start --sf-scrollbar-thumb --sf-scrollbar-track --sf-section-pad
+--sf-section-pad--2xl --sf-section-pad--l --sf-section-pad--m --sf-section-pad--s
+--sf-section-pad--xl --sf-section-pad--xs --sf-section-scale --sf-shadow-2xl --sf-shadow-color
+--sf-shadow-glow --sf-shadow-glow-color --sf-shadow-inner --sf-shadow-l --sf-shadow-lightness
+--sf-shadow-m --sf-shadow-none --sf-shadow-s --sf-shadow-strength --sf-shadow-xl --sf-shadow-xs
+--sf-size-l --sf-size-m --sf-size-s --sf-size-xl --sf-size-xs --sf-space-2xl --sf-space-2xs
+--sf-space-3xl --sf-space-4xl --sf-space-base-max --sf-space-base-min --sf-space-l --sf-space-m
+--sf-space-none --sf-space-px --sf-space-ratio-max --sf-space-ratio-min --sf-space-s
+--sf-space-scale --sf-space-xl --sf-space-xs --sf-stagger-step --sf-sticky-offset
+--sf-sticky-offset-desktop --sf-sticky-offset-mobile --sf-text-2xl --sf-text-2xl-font-weight
+--sf-text-2xl-letter-spacing --sf-text-2xl-line-height --sf-text-2xl-max-width --sf-text-2xs
+--sf-text-2xs-font-weight --sf-text-2xs-letter-spacing --sf-text-2xs-line-height
+--sf-text-2xs-max-width --sf-text-3xl --sf-text-3xl-font-weight --sf-text-3xl-letter-spacing
+--sf-text-3xl-line-height --sf-text-3xl-max-width --sf-text-4xl --sf-text-4xl-font-weight
+--sf-text-4xl-letter-spacing --sf-text-4xl-line-height --sf-text-4xl-max-width
+--sf-text-base-max --sf-text-base-min --sf-text-display-base-max --sf-text-display-base-min
+--sf-text-display-l --sf-text-display-m --sf-text-display-s --sf-text-display-scale --sf-text-l
+--sf-text-l-font-weight --sf-text-l-letter-spacing --sf-text-l-line-height --sf-text-l-max-width
+--sf-text-m --sf-text-m-font-weight --sf-text-m-letter-spacing --sf-text-m-line-height
+--sf-text-m-max-width --sf-text-ratio-max --sf-text-ratio-min --sf-text-s
+--sf-text-s-font-weight --sf-text-s-letter-spacing --sf-text-s-line-height --sf-text-s-max-width
+--sf-text-scale --sf-text-shadow-l --sf-text-shadow-m --sf-text-shadow-none --sf-text-shadow-s
+--sf-text-shadow-xl --sf-text-shadow-xs --sf-text-xl --sf-text-xl-font-weight
+--sf-text-xl-letter-spacing --sf-text-xl-line-height --sf-text-xl-max-width --sf-text-xs
+--sf-text-xs-font-weight --sf-text-xs-letter-spacing --sf-text-xs-line-height
+--sf-text-xs-max-width --sf-theme-transition-duration --sf-touch-target --sf-tracking-normal
+--sf-tracking-tight --sf-tracking-wide --sf-tracking-wider --sf-tracking-widest
+--sf-transition-colors --sf-transition-enter --sf-transition-exit --sf-transition-fast
+--sf-transition-form-field --sf-transition-opacity --sf-transition-overlay
+--sf-transition-shadow --sf-transition-slow --sf-transition-transform --sf-z-base --sf-z-below
+--sf-z-dropdown --sf-z-fixed --sf-z-modal --sf-z-overlay --sf-z-raised --sf-z-sticky
+--sf-z-toast --sf-z-tooltip
+```
+
+### Macro tokens (32)
+
+```
+--sf-aspect --sf-content-intrinsic-size --sf-flow-space --sf-line-clamp --sf-overlap-pull
+--sf-prose-block-margin --sf-prose-blockquote-border --sf-prose-blockquote-padding
+--sf-prose-figcaption-size --sf-prose-figure-margin --sf-prose-heading-gap --sf-prose-hr-margin
+--sf-prose-list-gap --sf-prose-marker-color --sf-prose-media-margin --sf-prose-media-radius
+--sf-prose-nested-list-gap --sf-prose-table-pad --sf-scrim-color --sf-scrim-direction
+--sf-scrim-gradient --sf-scrim-text-shadow --sf-scroll-shadow-size --sf-surface-bg-animation
+--sf-surface-bg-attachment --sf-surface-bg-color --sf-surface-bg-image --sf-surface-bg-overlay
+--sf-surface-bg-position --sf-surface-bg-repeat --sf-surface-bg-size --sf-surface-color
+```
+
+### Component tokens (46)
+
+```
+--sf-btn-border-width --sf-btn-font-scale --sf-btn-font-size --sf-btn-font-weight --sf-btn-gap
+--sf-btn-l-font-size --sf-btn-l-min-height --sf-btn-l-padding-block --sf-btn-l-padding-inline
+--sf-btn-m-font-size --sf-btn-m-min-height --sf-btn-m-padding-block --sf-btn-m-padding-inline
+--sf-btn-min-height --sf-btn-padding-block --sf-btn-padding-inline --sf-btn-radius
+--sf-btn-s-font-size --sf-btn-s-min-height --sf-btn-s-padding-block --sf-btn-s-padding-inline
+--sf-btn-xl-font-size --sf-btn-xl-min-height --sf-btn-xl-padding-block
+--sf-btn-xl-padding-inline --sf-btn-xs-font-size --sf-btn-xs-min-height
+--sf-btn-xs-padding-block --sf-btn-xs-padding-inline --sf-card-avatar-size --sf-card-bg
+--sf-card-border-color --sf-card-border-width --sf-card-gap --sf-card-heading-size
+--sf-card-media-radius --sf-card-media-ratio --sf-card-padding --sf-card-radius
+--sf-card-radius-outer --sf-card-shadow --sf-card-shadow--elevated --sf-card-shadow--hover
+--sf-field-padding-block --sf-field-padding-inline --sf-field-radius
+```
+
+## Classes
+
+326 classes, grouped by area, each with a one-line purpose. `--variant` names are BEM modifiers of the base class above them.
+
+### Accessibility (8)
+
+- `.no-motion` — Suppresses all animations and transitions within the subtree. Apply to a container to create a reduced-motion zone without relying on the system preference.
+- `.sf-clickable-parent` — Makes the entire card or list-item clickable via an absolutely-positioned child overlay link. Apply to the container; place sf-clickable-parent__overlay on the <a>.
+- `.sf-clickable-parent__overlay` — The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks.
+- `.sf-focus-parent` — Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>.
+- `.sf-focus-shadow` — Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly.
+- `.skip-link` — Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>.
+- `.sr-only` — Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs.
+- `.sr-only-focusable` — Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets.
+
+### Print (4)
+
+- `.no-print` — Hides the element in @media print. Use on sidebars, navigation bars, and decorative elements that should not appear on paper.
+- `.print-color-exact` — Forces exact color rendering in print (print-color-adjust: exact). Use on charts and colored badges that must preserve their fill colors in print.
+- `.print-no-color` — Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills.
+- `.print-only` — Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen.
+
+### Layout primitives (145)
+
+- `.sf-alternate` — Zigzag / alternating two-column layout. Even children align image-left/text-right; odd children flip. Collapses to a single column below the breakpoint.
+- `.sf-bento` — Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid.
+- `.sf-bento--2` — Bento grid variant with a 2-column base layout.
+- `.sf-bento--3` — Bento grid variant with a 3-column base layout.
+- `.sf-bento--6` — Bento grid variant with a 6-column base layout.
+- `.sf-bento--row-compact` — Bento grid variant with shorter default row height.
+- `.sf-bento--row-tall` — Bento grid variant with taller default row height.
+- `.sf-bento-featured` — Span modifier for a bento item: takes up 2×2 cells (featured hero placement).
+- `.sf-bento-full` — Span modifier for a bento item: stretches across all columns (full-width banner).
+- `.sf-bento-tall` — Span modifier for a bento item: doubles the row height (tall card).
+- `.sf-bento-wide` — Span modifier for a bento item: spans 2 columns (wide card).
+- `.sf-bg-layer` — Background layer — absolutely-positioned cover media that sits behind a parent's content. The parent is auto-promoted to a positioned, isolated stacking context via :has(), so .sf-bg-layer composes natively under .sf-scrim (background → scrim gradient → content). Works as a bare <img class="sf-bg-layer"> or as a wrapper with a nested > img / > video / > picture.
+- `.sf-box` — Minimal padding container that applies --sf-component-pad on all sides. The simplest layout primitive for adding breathing room.
+- `.sf-breakout` — Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose.
+- `.sf-center` — Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content.
+- `.sf-center--intrinsic` — Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space).
+- `.sf-cluster` — Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows.
+- `.sf-cluster--2xl` — Cluster variant with 2xl gap between items.
+- `.sf-cluster--between` — Cluster variant that distributes items with space-between alignment.
+- `.sf-cluster--center` — Cluster variant that centers the item row horizontally.
+- `.sf-cluster--end` — Cluster variant that aligns items to the inline end (right in LTR).
+- `.sf-cluster--l` — Cluster variant with large (l) gap between items.
+- `.sf-cluster--m` — Cluster variant with medium (m) gap between items.
+- `.sf-cluster--no-wrap` — Cluster variant that prevents item wrapping (single-line row).
+- `.sf-cluster--s` — Cluster variant with small (s) gap between items.
+- `.sf-cluster--xl` — Cluster variant with xl gap between items.
+- `.sf-cluster--xs` — Cluster variant with xs gap between items.
+- `.sf-container` — Max-width page container, centered with auto side gutters. Establishes a named inline-size container (cq-container) for container queries. Default width is --sf-container-m.
+- `.sf-container--full` — Container variant that spans the full viewport width (no max-width cap).
+- `.sf-container--narrow` — Container variant with a narrower max-width (--sf-container-s). Use for single-column prose and forms.
+- `.sf-container--prose` — Container variant with a prose-optimised max-width (--sf-container-prose). Ideal for long-form reading content.
+- `.sf-container--wide` — Container variant with a wider max-width (--sf-container-l). Use for dashboards and wide media.
+- `.sf-content-grid` — Holy-grail content grid with named areas: full-bleed, popout, and content columns. Use sf-breakout on children to escape the content column.
+- `.sf-cover` — Vertically stretches to at least a viewport height with a centered element (sf-cover__center). Typical use: hero sections.
+- `.sf-cover__center` — The centered focal element inside an sf-cover. Stays vertically centered even when the cover content is shorter than the viewport.
+- `.sf-cover--max` — Cover variant that uses a max-height instead of min-height for the viewport constraint.
+- `.sf-cover--min` — Cover variant that reduces the minimum height to half a viewport.
+- `.sf-cover--padding-l` — Cover variant with large vertical padding above and below the centered content.
+- `.sf-cover--padding-s` — Cover variant with small vertical padding above and below the centered content.
+- `.sf-cq` — Assigns an inline-size container context to any element. Children can then use @container rules or container-query-aware tokens.
+- `.sf-divide` — Rules between direct children (a border on each child after the first), reusing .sf-divider's tokens — no per-gap markup needed.
+- `.sf-divide--vertical` — Vertical rules between direct children (inline-start borders), for row/horizontal layouts.
+- `.sf-divider` — Horizontal rule (divider line). Uses --sf-divider-* tokens for color, width, and style. Modifiers change dash style or orientation.
+- `.sf-divider--dashed` — Divider variant with a dashed stroke.
+- `.sf-divider--dotted` — Divider variant with a dotted stroke.
+- `.sf-divider--gradient` — Divider variant rendered as a gradient that fades to transparent at both ends.
+- `.sf-divider--soft` — Divider variant with reduced opacity (subtle separator).
+- `.sf-divider--strong` — Divider variant with stronger/darker color for a more prominent separator.
+- `.sf-divider--vertical` — Divider variant rendered as a vertical line. Use inside flex or grid containers.
+- `.sf-equal` — Flowing CSS multi-column layout (not a grid) — content distributes across columns like a newspaper instead of sitting in fixed cells. Reach for .sf-grid/.sf-grid--fit for discrete grid cells instead.
+- `.sf-equal--2` — Equal-columns variant locked to column-count: 2.
+- `.sf-equal--3` — Equal-columns variant locked to column-count: 3.
+- `.sf-equal--4` — Equal-columns variant locked to column-count: 4.
+- `.sf-equal--6` — Equal-columns variant locked to column-count: 6.
+- `.sf-fluid-cq` — .sf-fluid-cq: opt a subtree into a CONTAINER-relative fluid scale (issue #497). By default --sf-text-* / --sf-space-* interpolate against 100vw (the viewport); inside .sf-fluid-cq they interpolate against 100cqi (this box's inline size), so type + spacing track the container…
+- `.sf-frame` — Aspect-ratio container for media (images, video, maps). Children fill and cover the fixed-ratio box. Default ratio is 16:9.
+- `.sf-frame--3-2` — Frame variant locked to a 3:2 aspect ratio.
+- `.sf-frame--4-3` — Frame variant locked to a 4:3 aspect ratio.
+- `.sf-frame--cinema` — Frame variant locked to a cinematic 21:9 aspect ratio.
+- `.sf-frame--golden` — Frame variant locked to the golden ratio (1.618:1).
+- `.sf-frame--portrait` — Frame variant locked to a portrait 2:3 aspect ratio.
+- `.sf-frame--square` — Frame variant locked to a square 1:1 aspect ratio.
+- `.sf-frame--video` — Frame variant locked to the standard 16:9 video aspect ratio.
+- `.sf-full-bleed` — Forces an element to span the full viewport width, breaking out of any centered container. Use for full-bleed images and section backgrounds.
+- `.sf-gap` — Injects the default --sf-gap into an existing flex or grid container without imposing display:flex itself. Use when the parent is already a flex or grid.
+- `.sf-gap--2xl` — Gap injection variant with 2xl gap value.
+- `.sf-gap--l` — Gap injection variant with large (l) gap value.
+- `.sf-gap--m` — Gap injection variant with medium (m) gap value.
+- `.sf-gap--s` — Gap injection variant with small (s) gap value.
+- `.sf-gap--xl` — Gap injection variant with xl gap value.
+- `.sf-gap--xs` — Gap injection variant with xs gap value.
+- `.sf-grid` — Auto-fill CSS grid. Columns are sized with RAM pattern (Repeat, Auto-fill, Minmax) and wrap automatically. Default column min-width is --sf-grid-min-col.
+- `.sf-grid--2xl` — Grid variant with a 2xl minimum column width.
+- `.sf-grid--dense` — Grid variant with grid-auto-flow: dense, allowing the grid to fill holes created by span modifiers.
+- `.sf-grid--fit` — Grid variant that switches from auto-fill to auto-fit, collapsing empty columns.
+- `.sf-grid--l` — Grid variant with a large (l) minimum column width.
+- `.sf-grid--m` — Grid variant with a medium (m) minimum column width.
+- `.sf-grid--s` — Grid variant with a small (s) minimum column width.
+- `.sf-grid--xl` — Grid variant with an xl minimum column width.
+- `.sf-grid--xs` — Grid variant with an xs minimum column width.
+- `.sf-grid-cols-1` — Single-column layout (forces all children to one column).
+- `.sf-grid-cols-1-2` — Two-column ratio grid: first child takes 1fr, second takes 2fr. Container-query responsive.
+- `.sf-grid-cols-1-3` — Two-column ratio grid: first child takes 1fr, second takes 3fr. Container-query responsive.
+- `.sf-grid-cols-2` — Responsive 2-column fixed grid. Uses container queries to collapse to one column on narrow containers.
+- `.sf-grid-cols-2-1` — Two-column ratio grid: first child takes 2fr, second takes 1fr. Container-query responsive.
+- `.sf-grid-cols-3` — Responsive 3-column fixed grid. Collapses progressively on narrow containers.
+- `.sf-grid-cols-3-1` — Two-column ratio grid: first child takes 3fr, second takes 1fr. Container-query responsive.
+- `.sf-grid-cols-4` — Responsive 4-column fixed grid. Collapses progressively on narrow containers.
+- `.sf-grid-cols-6` — Responsive 6-column fixed grid. Collapses progressively on narrow containers.
+- `.sf-grid-flex` — Flexbox alternative to .sf-grid for item counts that don't divide evenly: leftover last-row items stretch to fill the row by default, or stay fixed-width and centered with --center.
+- `.sf-grid-flex--2xl` — Grid-flex variant with a 2xl minimum item width.
+- `.sf-grid-flex--center` — Grid-flex variant that keeps last-row leftover items fixed-width and centered instead of stretching.
+- `.sf-grid-flex--l` — Grid-flex variant with a large (l) minimum item width.
+- `.sf-grid-flex--m` — Grid-flex variant with a medium (m) minimum item width.
+- `.sf-grid-flex--s` — Grid-flex variant with a small (s) minimum item width.
+- `.sf-grid-flex--xl` — Grid-flex variant with an xl minimum item width.
+- `.sf-grid-flex--xs` — Grid-flex variant with an xs minimum item width.
+- `.sf-header--l` — Header block padding at the l step (--sf-space-l).
+- `.sf-header--m` — Header block padding at the m step (--sf-space-m).
+- `.sf-header--s` — Header block padding at the s step (--sf-space-s).
+- `.sf-header--xl` — Header block padding at the xl step (--sf-space-xl).
+- `.sf-header--xs` — Header block padding at the xs step (--sf-space-xs).
+- `.sf-icon` — Inline icon sizing primitive. Sets width and height to --sf-icon-m via em-based tokens so the icon scales with the surrounding text.
+- `.sf-icon--2xl` — Icon variant sized to --sf-icon-2xl (extra-extra-large).
+- `.sf-icon--boxed` — Icon variant with a square bordered box background. Useful for standalone icon buttons and feature icons.
+- `.sf-icon--l` — Icon variant sized to --sf-icon-l (large).
+- `.sf-icon--m` — Icon variant sized to --sf-icon-m (medium, same as base sf-icon).
+- `.sf-icon--s` — Icon variant sized to --sf-icon-s (small).
+- `.sf-icon--xl` — Icon variant sized to --sf-icon-xl (extra-large).
+- `.sf-icon--xs` — Icon variant sized to --sf-icon-xs (extra-small).
+- `.sf-imposter` — Absolutely positions an element at the center of its nearest positioned ancestor. Use for overlays, badges, and floating labels.
+- `.sf-imposter--contain` — Imposter variant that clamps the element within the bounds of its parent using overflow:hidden on the parent.
+- `.sf-imposter--fixed` — Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals.
+- `.sf-overlay` — Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims.
+- `.sf-pancake` — Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports.
+- `.sf-reel` — Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect.
+- `.sf-section` — Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands.
+- `.sf-section--2xl` — Section variant with 2xl vertical padding.
+- `.sf-section--collapse` — Section variant that removes vertical padding (zero-padding section for adjacent same-color blocks).
+- `.sf-section--guttered` — Adds horizontal page gutters directly to a section — use when you want to skip a separate .sf-container wrapper (gutterless layout inside section). Neutralises container gutter to prevent double padding.
+- `.sf-section--l` — Section variant with large (l) vertical padding.
+- `.sf-section--m` — Section variant with medium (m) vertical padding.
+- `.sf-section--s` — Section variant with small (s) vertical padding.
+- `.sf-section--xl` — Section variant with xl vertical padding.
+- `.sf-section--xs` — Section variant with xs vertical padding.
+- `.sf-section-group` — Groups adjacent sf-section elements so their combined padding collapses correctly at the top and bottom edges.
+- `.sf-sidebar` — Two-column sidebar layout: first child is the sidebar, second child is main content. The sidebar collapses below the breakpoint (--sf-sidebar-min-width). Default sidebar on the left.
+- `.sf-sidebar--narrow` — Sidebar variant with a narrower sidebar column.
+- `.sf-sidebar--right` — Sidebar variant with the sidebar on the right (second child becomes the sidebar).
+- `.sf-sidebar--wide` — Sidebar variant with a wider sidebar column.
+- `.sf-stack` — Flex column with even vertical spacing between children (--sf-stack-gap). Stacking context for vertical rhythm.
+- `.sf-stack--2xl` — Stack variant with 2xl gap between children.
+- `.sf-stack--center` — Stack variant that centers children on the cross axis.
+- `.sf-stack--end` — Stack variant that aligns children to the cross-axis end (right in LTR).
+- `.sf-stack--l` — Stack variant with large (l) gap between children.
+- `.sf-stack--m` — Stack variant with medium (m) gap between children.
+- `.sf-stack--s` — Stack variant with small (s) gap between children.
+- `.sf-stack--stretch` — Stack variant that stretches children to fill the full available width.
+- `.sf-stack--xl` — Stack variant with xl gap between children.
+- `.sf-stack--xs` — Stack variant with xs gap between children.
+- `.sf-subgrid` — Passes the parent grid columns through to children via subgrid. Place on a grid item that should align its own children to the outer grid columns.
+- `.sf-subgrid-rows` — Passes the parent grid rows through to children via subgrid. Place on a grid item that should align its own children to the outer grid rows.
+- `.sf-switcher` — Flex layout that switches from a horizontal row to a vertical column when the container is narrower than --sf-switcher-threshold.
+- `.sf-switcher--no-wrap` — Switcher variant that stays horizontal and never wraps (single-line regardless of container width).
+- `.sf-switcher--vertical` — Switcher variant that starts in the vertical (stacked) direction on all sizes.
+
+### Macro classes (51)
+
+- `.sf-aspect` — Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class.
+- `.sf-content-auto` — Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages.
+- `.sf-drop-shadow-l` — Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l).
+- `.sf-drop-shadow-m` — Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m).
+- `.sf-drop-shadow-s` — Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s).
+- `.sf-drop-shadow-xl` — Extra-large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xl).
+- `.sf-drop-shadow-xs` — Extra-small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-xs).
+- `.sf-equal-height` — Forces all flex children to equal height (align-items: stretch). Use on a flex row to make cards in a grid share the tallest card's height.
+- `.sf-flow` — Applies --sf-flow-space as margin-block-start to all direct children except the first. Establishes consistent vertical rhythm in prose-like containers.
+- `.sf-line-clamp-2` — Clamps text to 2 lines with an ellipsis. Applies -webkit-line-clamp: 2.
+- `.sf-line-clamp-3` — Clamps text to 3 lines with an ellipsis. Applies -webkit-line-clamp: 3.
+- `.sf-line-clamp-N` — Clamps text to a custom N lines. Set --sf-line-clamp on the element to control the number of visible lines.
+- `.sf-link--reverse` — Link color modifier: reverses the default link color to work on dark/inverted backgrounds. Sets color to --sf-color-text--inverse.
+- `.sf-link--subtle` — Link color modifier: renders the link in the body text color instead of the default action color. Underline still indicates the link on hover.
+- `.sf-link-external` — Automatically appends an external-link icon (via ::after content) to indicate the link opens in a new tab or goes to an external domain.
+- `.sf-no-tap-highlight` — Removes the mobile tap highlight color (-webkit-tap-highlight-color: transparent). Use on interactive elements with a custom active state.
+- `.sf-not-prose` — Opt-out of sf-prose typography styles within a prose block. Apply to an element that should keep default browser or component styles.
+- `.sf-overflow-fade` — Adds a gradient fade at the inline-end of an overflowing element to hint at hidden content. Use inside sf-reel or any scroll container.
+- `.sf-overflow-fade--block` — Overflow fade variant: fades both the top and bottom edges simultaneously (block axis).
+- `.sf-overflow-fade--bottom` — Overflow fade variant: fades the bottom (block-end) edge.
+- `.sf-overflow-fade--inline` — Overflow fade variant: fades both the left and right edges simultaneously (inline axis).
+- `.sf-overflow-fade--left` — Overflow fade variant: fades the left (inline-start) edge.
+- `.sf-overflow-fade--right` — Overflow fade variant: fades the right (inline-end) edge. Explicit alias for the default sf-overflow-fade behaviour.
+- `.sf-overflow-fade--top` — Overflow fade variant: fades the top (block-start) edge.
+- `.sf-overlap` — Overlap recipe — pulls the element upward (negative block-start margin) so it overlaps the previous sibling by --sf-overlap-pull.
+- `.sf-overlap--down` — Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it.
+- `.sf-overlap-host` — Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both.
+- `.sf-prose` — Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose.
+- `.sf-scrim` — Overlay container with a gradient darkening scrim behind text placed on an image or colored background.
+- `.sf-scrim__content` — Content area inside an sf-scrim. Positioned above the gradient overlay layer.
+- `.sf-scrim--bottom` — Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade).
+- `.sf-scrim--full` — Scrim variant that covers the entire surface with a uniform translucent overlay.
+- `.sf-scrim--top` — Scrim variant with the gradient emanating from the top edge (top-to-bottom fade).
+- `.sf-scroll-shadow` — Adds inset box-shadows at the top and bottom of a scrollable container to indicate hidden overflow above or below.
+- `.sf-scroll-snap` — Enables CSS scroll-snap-type: x mandatory on a horizontal scroll container. Children should have scroll-snap-align.
+- `.sf-surface` — Generic semantic surface: applies --sf-surface-color as the background and automatically sets a contrasting text color. Tone variants (--primary, --action, etc.) activate preset palettes.
+- `.sf-surface--action` — Surface variant using the action color palette (button/CTA primary color).
+- `.sf-surface--danger` — Surface variant using the danger status palette.
+- `.sf-surface--info` — Surface variant using the info status palette.
+- `.sf-surface--inverse` — Surface variant that inverts light/dark, creating an always-dark surface in light mode and always-light in dark mode.
+- `.sf-surface--neutral` — Surface variant using the neutral palette (muted/gray).
+- `.sf-surface--primary` — Surface variant using the primary brand color palette.
+- `.sf-surface--secondary` — Surface variant using the secondary brand color palette.
+- `.sf-surface--success` — Surface variant using the success status palette.
+- `.sf-surface--tertiary` — Surface variant using the tertiary brand color palette.
+- `.sf-surface--warning` — Surface variant using the warning status palette.
+- `.sf-surface-bg` — Named background surface preset (issue #523). Composes the --sf-surface-bg-* token set (see tokens.macros.css) into one reusable, named background: base colour + image/gradient/pattern, sizing, an optional overlay layered above the image, and an optional animation. Inert until…
+- `.sf-tabular-nums` — Forces tabular (monospaced) number rendering. Use on price tables, counters, and anywhere numbers need to align vertically across rows.
+- `.sf-text-gradient` — Applies a brand gradient to inline text. Sets the background to the gradient, clips it to the text, and makes the text color transparent.
+- `.sf-text-protect` — Wraps text in a translucent dark gradient overlay to ensure legibility when placed over a light or variable background image.
+- `.sf-truncate` — Single-line text overflow with ellipsis. Equivalent to the classic text-overflow: ellipsis trio (white-space nowrap, overflow hidden, text-overflow ellipsis).
+
+### Components (30)
+
+- `.sf-btn` — Interactive call-to-action button. Apply to <button> or <a>. Intrinsic width by default; owns its own styling (excluded from the classless <button> look). Three orthogonal axes — colour family, style treatment (fill/--soft/--outline), gradient — plus a size modifier.
+- `.sf-btn--action` — Button in the action colour family (same as the unmodified default, named explicitly).
+- `.sf-btn--base` — Button in the base (surface-neutral) colour family.
+- `.sf-btn--block` — Full-width button (100% inline size) everywhere.
+- `.sf-btn--block-cq` — Full-width button only inside a query container narrower than 20rem; intrinsic otherwise.
+- `.sf-btn--danger` — Button in the danger (destructive) colour family.
+- `.sf-btn--gradient` — Gradient axis: paints the fill (or, with --outline, the border ring) with the family's --sf-gradient-* token. Core-4 brand families (primary/secondary/tertiary/action); solid no-op for other families. Composes with any colour family.
+- `.sf-btn--info` — Button in the info colour family.
+- `.sf-btn--l` — Large button size.
+- `.sf-btn--neutral` — Button in the neutral colour family.
+- `.sf-btn--outline` — Outlined button (coloured border/text, transparent fill) that fills with the family colour on hover. Composes with any colour family.
+- `.sf-btn--primary` — Button in the primary brand colour family.
+- `.sf-btn--s` — Small button size.
+- `.sf-btn--secondary` — Button in the secondary brand colour family.
+- `.sf-btn--soft` — Soft tonal-fill button: a light wash of the family colour (subtle at rest, muted on hover), coloured text, no border. Lower-emphasis than the solid fill. Composes with any colour family.
+- `.sf-btn--success` — Button in the success (positive) colour family.
+- `.sf-btn--tertiary` — Button in the tertiary brand colour family.
+- `.sf-btn--warning` — Button in the warning (caution) colour family.
+- `.sf-btn--xl` — Extra-large button size.
+- `.sf-btn--xs` — Extra-small button size.
+- `.sf-card` — Padded content container with optional __header/__body/__footer and __media/__avatar/__title subcomponents. Uses concentric radius math so inner corners stay proportional.
+- `.sf-card__avatar` — Circular avatar image inside a card, sized via --sf-card-avatar-size.
+- `.sf-card__body` — Card body slot.
+- `.sf-card__footer` — Card footer slot with a top divider.
+- `.sf-card__header` — Card header slot with a bottom divider.
+- `.sf-card__media` — Full-width cover image/video for a card, cropped to --sf-card-media-ratio (16/9 by default).
+- `.sf-card__title` — Card title heading, sized via --sf-card-heading-size.
+- `.sf-card--bordered` — Flat, outlined card: keeps the border, drops the shadow.
+- `.sf-card--elevated` — Floating card: hides the border, applies a larger shadow.
+- `.sf-card--interactive` — Adds a pointer cursor and a shadow/translate lift on hover or keyboard focus. Pair with .sf-clickable-parent for a fully clickable card. Lift is suppressed under prefers-reduced-motion.
+
+### Motion / animation (22)
+
+- `.sf-color-pulse` — Applies a gentle color-pulse animation to draw attention to a dynamic value change (e.g. a counter updating). Scoped to users who have not requested reduced motion.
+- `.sf-entrance--fade` — Scroll-driven entrance: element fades in as it enters the viewport. Animation tied to scroll progress via animation-timeline.
+- `.sf-entrance--fade-down` — Scroll-driven entrance: element fades in while moving downward into position.
+- `.sf-entrance--fade-left` — Scroll-driven entrance: element fades in while moving from the right toward the left.
+- `.sf-entrance--fade-right` — Scroll-driven entrance: element fades in while moving from the left toward the right.
+- `.sf-entrance--fade-up` — Scroll-driven entrance: element fades in while moving upward into position.
+- `.sf-entrance--scale-up` — Scroll-driven entrance: element fades in while scaling up from a slightly smaller size.
+- `.sf-exit--fade` — Scroll-out exit animation: fades the element out in place (sf-fade-out).
+- `.sf-exit--fade-down` — Scroll-out exit animation: fades out while sliding downward (sf-slide-out-down).
+- `.sf-exit--fade-left` — Scroll-out exit animation: fades out while sliding to the left (sf-slide-out-left).
+- `.sf-exit--fade-right` — Scroll-out exit animation: fades out while sliding to the right (sf-slide-out-right).
+- `.sf-exit--fade-up` — Scroll-out exit animation: fades out while sliding upward (sf-slide-out-up).
+- `.sf-exit--scale-down` — Scroll-out exit animation: fades out while shrinking (sf-scale-down).
+- `.sf-fade-in` — One-shot fade-in animation (opacity 0 → 1). Scoped to no-preference so it stops automatically for reduced-motion users.
+- `.sf-fade-out` — One-shot fade-out animation (opacity 1 → 0). Scoped to no-preference.
+- `.sf-scale-down` — One-shot scale-down animation (element shrinks from full size). Scoped to no-preference.
+- `.sf-scale-up` — One-shot scale-up animation (element grows from smaller size). Scoped to no-preference.
+- `.sf-slide-in-down` — One-shot slide-in-from-above animation. Scoped to no-preference.
+- `.sf-slide-in-left` — One-shot slide-in-from-right animation (slides to the left). Scoped to no-preference.
+- `.sf-slide-in-right` — One-shot slide-in-from-left animation (slides to the right). Scoped to no-preference.
+- `.sf-slide-in-up` — One-shot slide-in-from-below animation. Scoped to no-preference.
+- `.sf-stagger` — Stagger — choreography, not the animation itself. Put .sf-stagger on a PARENT; every direct child gets an incrementing animation-delay so a time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence. Children WITHOUT an animation just carry an inert delay (no-op), so…
+
+### Utilities (47)
+
+- `.sf-h1` — Applies h1-level typography (size, line-height, weight, tracking, max-width) to any element without changing its semantic level.
+- `.sf-h2` — Applies h2-level typography to any element without changing its semantic level.
+- `.sf-h3` — Applies h3-level typography to any element without changing its semantic level.
+- `.sf-h4` — Applies h4-level typography to any element without changing its semantic level.
+- `.sf-h5` — Applies h5-level typography to any element without changing its semantic level.
+- `.sf-h6` — Applies h6-level typography to any element without changing its semantic level.
+- `.sf-hover-float` — Hover-triggered transform: translates the element up slightly on hover.
+- `.sf-hover-grow` — Hover-triggered transform: scales the element up slightly on hover.
+- `.sf-hover-shrink` — Hover-triggered transform: scales the element down slightly on hover.
+- `.sf-hover-sink` — Hover-triggered transform: translates the element down slightly on hover.
+- `.sf-hover-slide-end` — Hover-triggered transform: translates the element toward the inline-end on hover.
+- `.sf-hover-slide-start` — Hover-triggered transform: translates the element toward the inline-start on hover.
+- `.sf-invisible` — Visibility helper (optional/utilities.css) — hides the element visually but keeps it in the layout and accessibility tree (visibility: hidden). Not a runtime state: no JS/ARIA condition of its own.
+- `.sf-list-none` — Drops marker + inline start-padding in one class, on any <ul>/<ol> (or element with list-style applied).
+- `.sf-marker--action` — Colours list ::markers with the action colour.
+- `.sf-marker--primary` — Colours list ::markers with the primary brand colour.
+- `.sf-marker--secondary` — Colours list ::markers with the secondary brand colour.
+- `.sf-marker--tertiary` — Colours list ::markers with the tertiary brand colour.
+- `.sf-selection--alt` — Overrides the ::selection custom properties (core/base.css) on the element and its descendants, for surfaces where the default selection colours land with poor contrast (e.g. a dark card on a light page). Backed by --sf-color-selection-*--alt (core/tokens.css).
+- `.sf-sticky` — position: sticky pinned at the header-aware --sf-sticky-offset.
+- `.sf-sticky--l` — Sticky positioning with an extra large gap (--sf-space-l) above the header-aware offset.
+- `.sf-sticky--m` — Sticky positioning with an extra medium gap (--sf-space-m) above the header-aware offset.
+- `.sf-sticky--s` — Sticky positioning with an extra small gap (--sf-space-s) above the header-aware offset.
+- `.sf-text-2xl` — Applies the 2xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-2xs` — Applies the 2xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-3xl` — Applies the 3xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-4xl` — Applies the 4xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-l` — Applies the l text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-m` — Applies the m (body) text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-s` — Applies the s text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-xl` — Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-text-xs` — Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class.
+- `.sf-visible` — Visibility helper (optional/utilities.css) — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent.
+- `.sf-width-10` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-20` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-30` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-40` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-50` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-60` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-70` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-80` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-90` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-auto` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-fit` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-full` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-max` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+- `.sf-width-min` — Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…
+
+### State classes (15)
+
+- `.sf-is-disabled` — Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events.
+- `.sf-is-draggable` — Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins.
+- `.sf-is-dragging` — Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event.
+- `.sf-is-drop-target` — Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events.
+- `.sf-is-empty` — Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty.
+- `.sf-is-error` — Error state — general (not form-field-specific) negative feedback. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid.
+- `.sf-is-highlighted` — Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists.
+- `.sf-is-info` — Info status state — applies info color tokens. Use for neutral informational messages and hints.
+- `.sf-is-invalid` — Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to sf-is-error; the name signals form-field context.
+- `.sf-is-loading` — Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results.
+- `.sf-is-selected` — Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles.
+- `.sf-is-shimmer` — Shimmer loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. (Renamed from .sf-is-skeleton so "skeleton" refers only to the planned .sf-skeleton component.)
+- `.sf-is-success` — Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback.
+- `.sf-is-valid` — Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context.
+- `.sf-is-warning` — Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts.
+
+### Forms (1)
+
+- `.sf-live-validate` — Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a <form> or <fieldset>. Off by default so a still-empty required field isn't marked invalid before a submit is attempted.
+
+### Theme utilities (3)
+
+- `.sf-theme-dark` — Forces dark colour scheme on the element and its subtree (class alias of [data-theme="dark"]).
+- `.sf-theme-light` — Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]).
+- `.sf-theme-transition` — Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration.

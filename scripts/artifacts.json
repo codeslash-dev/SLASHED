@@ -10,6 +10,7 @@
       "docs/token-index.json",
       "docs/api-index.json",
       "docs/api-index.md",
+      "llms.txt",
       "token-registry.json",
       "dist/css-custom-data.json",
       "configurator/src/data/api-index.generated.json",

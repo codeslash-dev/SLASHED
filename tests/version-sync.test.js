@@ -40,6 +40,10 @@ function buildFixture(target = '2.0.0', oldVersion = '1.2.3') {
     path.join(dir, 'docs', 'llm-guide.md'),
     `# LLM Guide\n\n> Version: **${oldVersion}** · Tokens: **1** · Prefix: \`--sf-\`\n\nMore text.\n`,
   );
+  fs.writeFileSync(
+    path.join(dir, 'llms.txt'),
+    `# SLASHED v${oldVersion}\n\n> Distilled vocabulary reference.\n`,
+  );
 
   fs.mkdirSync(path.join(dir, 'configurator'));
   fs.writeFileSync(
@@ -76,6 +80,10 @@ describe('version-sync writer', () => {
     const llmGuide = fs.readFileSync(path.join(dir, 'docs', 'llm-guide.md'), 'utf8');
     assert.match(llmGuide, /Version: \*\*2\.0\.0\*\*/, 'llm-guide.md not updated');
     assert.doesNotMatch(llmGuide, /1\.2\.3/, 'llm-guide.md still contains the old version');
+
+    const llmsTxt = fs.readFileSync(path.join(dir, 'llms.txt'), 'utf8');
+    assert.match(llmsTxt, /# SLASHED v2\.0\.0/, 'llms.txt header not updated');
+    assert.doesNotMatch(llmsTxt, /1\.2\.3/, 'llms.txt still contains the old version');
 
     assert.equal(readJson(path.join(dir, 'configurator', 'package.json')).version, '2.0.0');
 
