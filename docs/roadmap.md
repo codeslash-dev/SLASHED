@@ -53,13 +53,15 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   [#384](https://github.com/codeslash-dev/SLASHED/issues/384).
   **Naming decision (resolved,
   [#575](https://github.com/codeslash-dev/SLASHED/issues/575)):** `.sf-skeleton`
-  keeps the industry-standard component name; the shipped shimmer *state*
-  `.sf-is-skeleton` will be renamed to `.sf-is-shimmer` (a breaking rename
-  landing together with the `.sf-skeleton` implementation) so "skeleton" means
-  exactly one thing — the component, which composes with `.sf-is-shimmer` for
-  the shimmer effect. Shape modifiers must not reuse component names: the
-  card-like placeholder shape is `--rect` (geometric), never `--card`, to avoid
-  implying parity with `.sf-card`'s token set.
+  keeps the industry-standard component name. The shimmer *state* was renamed
+  `.sf-is-skeleton` → `.sf-is-shimmer` **ahead of** the component (shipped
+  standalone in Unreleased — see `docs/migration.md`), decoupling that one
+  breaking rename from the component work so `.sf-skeleton` can land purely
+  additively. "skeleton" now means exactly one thing — the component, which
+  will compose with `.sf-is-shimmer` for the shimmer effect. Shape modifiers
+  must not reuse component names: the card-like placeholder shape is `--rect`
+  (geometric), never `--card`, to avoid implying parity with `.sf-card`'s token
+  set.
 - **Z-index utilities** — expose the named z-index scale as `.sf-z-*` classes
   (for example `.sf-z-modal` and `.sf-z-tooltip`) in `optional/utilities.css`.
 - **First component tranche** — `.sf-btn` and `.sf-card` shipped in v0.7.0

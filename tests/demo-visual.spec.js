@@ -276,9 +276,9 @@ test.describe('Motion & States', () => {
     expect(pe).toBe('none');
   });
 
-  test('.sf-is-skeleton has shimmer animation', async ({ page }) => {
+  test('.sf-is-shimmer has shimmer animation', async ({ page }) => {
     await page.goto(DEMO_URL);
-    const skeleton = page.locator('#motion .sf-is-skeleton').first();
+    const skeleton = page.locator('#motion .sf-is-shimmer').first();
     const anim = await getStyle(skeleton, 'animationName');
     expect(anim).toContain('sf-shimmer');
   });

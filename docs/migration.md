@@ -21,6 +21,27 @@ compatibility alias is provided — see "State-class API reduction" below for
 why: for a pre-1.0 framework, an alias here would have perpetuated the exact
 naming collision that motivated the rename.
 
+### `.sf-is-skeleton` renamed to `.sf-is-shimmer` (breaking)
+
+"Skeleton" was about to name two different things at once: the shipped shimmer
+*state* (`.sf-is-skeleton`, applicable to any element) and the planned
+`.sf-skeleton` *component* with shape modifiers (roadmap / [#384](https://github.com/codeslash-dev/SLASHED/issues/384)
+item 8). Two independently-named "skeleton" concepts stackable on one element is
+the same word-on-two-axes trap that motivated the `--secondary` → `--subtle`
+rename above ([#575](https://github.com/codeslash-dev/SLASHED/issues/575)).
+
+The state moves to `.sf-is-shimmer`, which also makes the class name mirror its
+driving token, `--sf-animation-shimmer`. "skeleton" is now reserved for the
+future component alone, and the state/component axis separation the framework
+uses elsewhere (`.sf-is-*` = state, `.sf-*` = structural) is preserved. Doing
+the rename now — ahead of the component — keeps this one breaking change out of
+the otherwise purely additive `.sf-skeleton` release. Behaviour, tokens, and
+markup support (works on `img` and non-media elements alike) are unchanged.
+
+**What changed for you:** replace `class="sf-is-skeleton"` with
+`class="sf-is-shimmer"` anywhere you use it. No compatibility alias is provided,
+consistent with the pre-1.0 no-alias stance in the notes above and below.
+
 ### State-class API reduction (breaking)
 
 A full audit of every `.sf-is-*` class held each one to the bar "does a native

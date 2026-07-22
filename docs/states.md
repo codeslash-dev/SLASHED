@@ -25,7 +25,7 @@ native pseudo-class, attribute, or ARIA state already gets you there:
 | a selected class | `[aria-selected]` (custom widgets) | required for accessible custom widgets regardless of framework, so styling off the attribute you must already set avoids toggling two things for one state |
 
 `.sf-is-*` earns its place only when **no native mechanism reaches the same
-condition** (`.sf-is-loading`'s spinner, `.sf-is-skeleton`'s shimmer, the
+condition** (`.sf-is-loading`'s spinner, `.sf-is-shimmer`'s shimmer, the
 drag-and-drop trio — CSS has no native drag state at all) or when the class
 is a **token setter** consumed elsewhere in the framework (the validation
 family writing `--sf-field-*`, read by `optional/forms.css`). Where a class
@@ -85,7 +85,7 @@ in the meantime (tests, docs, configurator preview panels, and the
 |---|---|---|---|
 | `.sf-is-disabled` | non-interactive, dimmed — for elements that can't take the native `disabled` attribute (e.g. `<a class="sf-btn">`) | `aria-disabled="true"` | states |
 | `.sf-is-loading` | content replaced by a spinner | `aria-busy="true"` | states |
-| `.sf-is-skeleton` | placeholder shimmer | — | states |
+| `.sf-is-shimmer` | placeholder shimmer | — | states |
 | `.sf-is-selected` | selected in a set | `aria-selected` | states |
 | `.sf-is-highlighted` | transient emphasis | — | states |
 | `.sf-is-valid` / `.sf-is-invalid` | **form-field** validation result | `aria-invalid` | states |

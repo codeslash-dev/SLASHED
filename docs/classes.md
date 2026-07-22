@@ -233,7 +233,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-is-invalid` |
 | `.sf-is-loading` |
 | `.sf-is-selected` |
-| `.sf-is-skeleton` |
+| `.sf-is-shimmer` |
 | `.sf-is-success` |
 | `.sf-is-valid` |
 | `.sf-is-warning` |
