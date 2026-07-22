@@ -20,7 +20,7 @@
     ],
     "counts": {
       "tokens": 741,
-      "sf_classes": 289,
+      "sf_classes": 303,
       "is_classes": 15
     }
   },
@@ -1056,7 +1056,21 @@
     "sf-theme-light",
     "sf-theme-transition",
     "sf-truncate",
-    "sf-visible"
+    "sf-visible",
+    "sf-width-10",
+    "sf-width-20",
+    "sf-width-30",
+    "sf-width-40",
+    "sf-width-50",
+    "sf-width-60",
+    "sf-width-70",
+    "sf-width-80",
+    "sf-width-90",
+    "sf-width-auto",
+    "sf-width-fit",
+    "sf-width-full",
+    "sf-width-max",
+    "sf-width-min"
   ],
   "is_classes": [
     "sf-is-disabled",

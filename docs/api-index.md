@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1053 elements** — 741 tokens, 312 classes.
+**1067 elements** — 741 tokens, 326 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1003 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1017 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -781,7 +781,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (312)
+## Classes (326)
 
 ### Accessibility (8)
 
@@ -1107,7 +1107,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-theme-light` | PUBLIC | theme | — | Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]). |
 | `.sf-theme-transition` | PUBLIC | theme | — | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
-### Utilities (33)
+### Utilities (47)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1144,4 +1144,18 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-text-xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-visible` | PUBLIC | utility | VISIBILITY HELPERS (.sf-invisible / .sf-visible) | Visibility helper (optional/utilities.css) — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
+| `.sf-width-10` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-20` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-30` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-40` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-50` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-60` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-70` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-80` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-90` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-auto` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-fit` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-full` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-max` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-min` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
 
