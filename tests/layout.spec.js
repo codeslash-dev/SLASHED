@@ -868,6 +868,36 @@ test.describe('layout: .sf-content-grid', () => {
     expect(Math.abs(res.fW - res.cgW)).toBeLessThan(1);
     expect(res.cW).toBeLessThan(res.fW);
   });
+
+  // Inside a .sf-section--guttered, the section owns the inline gutter. A
+  // content grid carries its gutter in its edge tracks, so without a reset the
+  // section's padding boxes it in — double-guttering content and stopping
+  // full-bleed one gutter short of the section edge. The :has() reset drops the
+  // section padding so full-bleed reaches the true edge.
+  test('reaches the section edge inside a guttered section (no double gutter)', async ({ page }) => {
+    await setup(page, `
+      <section id="s" class="sf-section sf-section--guttered" style="width:1000px">
+        <div id="probe" style="width:var(--sf-gutter)"></div>
+        <div class="sf-content-grid">
+          <div id="f" class="sf-full-bleed">full</div>
+          <div id="c">content</div>
+        </div>
+      </section>
+    `);
+    const res = await page.evaluate(() => {
+      const s = document.getElementById('s').getBoundingClientRect();
+      const f = document.getElementById('f').getBoundingClientRect();
+      const c = document.getElementById('c').getBoundingClientRect();
+      // The section's own padding is now 0 (reset), so read one gutter off a probe.
+      const gutter = document.getElementById('probe').getBoundingClientRect().width;
+      return { fullInset: f.left - s.left, contentInset: c.left - s.left, gutter, sW: s.width, fW: f.width };
+    });
+    // full-bleed reaches the section edge; content sits at exactly one gutter.
+    expect(res.fullInset).toBeLessThan(1);
+    expect(Math.abs(res.fW - res.sW)).toBeLessThan(1);
+    expect(res.contentInset).toBeGreaterThan(res.gutter - 1);
+    expect(res.contentInset).toBeLessThan(res.gutter + 2);
+  });
 });
 
 // ── .sf-subgrid ─────────────────────────────────────────────────

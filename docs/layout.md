@@ -144,3 +144,23 @@ requirement as `.sf-grid-cols-*`. The gap steps at the breakpoint rather than
 interpolating across it; for a gap that single step is imperceptible in normal use.
 The same pattern works for any scoped gap token (`--sf-gap`, `--sf-content-gap`,
 `--sf-gutter`, `--sf-cluster-gap`, …).
+
+## Container-query scope
+
+The container-responsive primitives (`.sf-grid-cols-*`, `.sf-bento`, and any
+`@container`-scoped token override like the one above) resolve against the
+nearest ancestor that establishes an inline-size query container. Two wrappers
+establish one for you: `.sf-container` and `.sf-content-grid` — so either can
+host those primitives directly.
+
+`.sf-center` deliberately does **not**. It's a minimal centring primitive with
+no side effects (it doesn't become a containing block for `position: fixed`
+descendants or a new stacking context), so it stays composable. When you need a
+container-responsive child inside a centred wrapper, add the query scope
+explicitly by composing `.sf-cq`:
+
+```html
+<div class="sf-center sf-cq">
+  <div class="sf-grid-cols-3">…</div>
+</div>
+```

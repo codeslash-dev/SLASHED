@@ -45,6 +45,16 @@
 
   .sf-section--guttered { padding-inline: var(--sf-gutter); }
   .sf-section--guttered .sf-container { padding-inline: 0; }
+  /* .sf-content-grid carries the gutter in its own edge tracks
+     (minmax(gutter,1fr)), not in padding — so unlike .sf-container it can't be
+     de-duplicated by zeroing its padding (it has none). Left alone, the
+     section's padding boxes the grid in: content ends up double-guttered and
+     .sf-full-bleed stops at the padding edge instead of the section edge.
+     Drop the section's own padding when a content grid is its direct child so
+     the grid spans edge-to-edge and its tracks provide the single gutter;
+     full-bleed then reaches the true section edge. Scoped to a direct child so
+     a nested content grid deeper in the section doesn't strip the gutter. */
+  .sf-section--guttered:has(> .sf-content-grid) { padding-inline: 0; }
 
   .sf-section-group > .sf-section + .sf-section { padding-block-start: 0; }
 
