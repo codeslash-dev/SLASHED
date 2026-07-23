@@ -91,7 +91,9 @@ if (configLockSelf !== undefined && configLockSelf !== version) {
 
 // 6. llms.txt "# SLASHED vX.Y.Z" header must match package.json.
 const llmsTxt = read('llms.txt');
-const llmsMatch = llmsTxt.match(/#\s*SLASHED\s+v([0-9][^\s]*)/);
+// Line-anchored (multiline) so only the heading counts — a `# SLASHED v…`
+// string appearing inline in prose must not satisfy the check.
+const llmsMatch = llmsTxt.match(/^#\s*SLASHED\s+v([0-9][^\s]*)/m);
 if (!llmsMatch) {
   errors.push('llms.txt: "# SLASHED vX.Y.Z" header not found');
 } else if (llmsMatch[1].trim() !== version) {

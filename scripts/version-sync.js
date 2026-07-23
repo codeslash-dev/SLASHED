@@ -93,7 +93,10 @@ changed += sync(
 syncedPaths.push('llms.txt');
 changed += sync(
   'llms.txt',
-  new RegExp(`(# SLASHED v)${SEMVER_RE.source}`),
+  // Anchored to the start of a line (multiline) so only the `# SLASHED vX.Y.Z`
+  // heading is re-stamped — never a `# SLASHED v…` string that happens to
+  // appear inline in prose.
+  new RegExp(`^(# SLASHED v)${SEMVER_RE.source}`, 'm'),
   `$1${version}`,
   `llms.txt version = ${version}`
 ) ? 1 : 0;

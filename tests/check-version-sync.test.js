@@ -132,6 +132,19 @@ describe('check-version-sync failure cases', () => {
     assert.ok(r.stderr.includes('llms.txt'), r.stderr);
   });
 
+  test('rejects an llms.txt where the version appears only inline in prose, not as the heading', () => {
+    const dir = buildFixture();
+    // Correct version, but only mid-line in prose — the line-anchored check must
+    // not accept it as the heading (would otherwise mask a missing header).
+    fs.writeFileSync(
+      path.join(dir, 'llms.txt'),
+      '# SLASHED\n\nSee # SLASHED v1.2.3 in the changelog for details.\n',
+    );
+    const r = runChecker(dir);
+    assert.equal(r.status, 1, 'expected exit 1 when the version is only inline prose');
+    assert.ok(r.stderr.includes('llms.txt'), r.stderr);
+  });
+
   test('fails when configurator/package.json version differs', () => {
     const dir = buildFixture();
     fs.writeFileSync(
