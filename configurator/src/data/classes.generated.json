@@ -3075,6 +3075,16 @@
       "layer": "slashed.themes"
     },
     {
+      "name": "sf-touch-target",
+      "selector": ".sf-touch-target",
+      "kind": "accessibility",
+      "category": "Accessibility",
+      "group": "",
+      "description": ".sf-touch-target — the explicit opt-IN counterpart to the class-less floor above. Because the automatic floor deliberately never touches a control that carries a class, put this class on any control you own (a button with your own class, a third-party widget you can add a class…",
+      "optional": false,
+      "layer": "slashed.accessibility"
+    },
+    {
       "name": "sf-truncate",
       "selector": ".sf-truncate",
       "kind": "macro",

@@ -199,6 +199,43 @@ test.describe('a11y: touch target token', () => {
     expect(px).toBeGreaterThanOrEqual(44);
   });
 
+  // .sf-touch-target — explicit opt-in for a classed control the automatic
+  // class-less floor no longer reaches. Not gated to a coarse pointer, so it
+  // enforces the 44px hit area here on a normal (fine) pointer too.
+  test('.sf-touch-target enforces a ≥44px hit area on both axes on a classed control', async ({ page }) => {
+    await setup(page, `<button id="t" class="my-toggle sf-touch-target"
+                               style="inline-size:20px;block-size:20px;padding:0">x</button>`);
+    const box = await page.locator('#t').evaluate(el => {
+      const r = el.getBoundingClientRect();
+      return { w: r.width, h: r.height };
+    });
+    expect(box.w).toBeGreaterThanOrEqual(44);
+    expect(box.h).toBeGreaterThanOrEqual(44);
+  });
+
+  // A single class (0,1,0) — a component rule can still override it without
+  // !important, so a specific control can opt back out.
+  test('.sf-touch-target is overridable by a plain class rule (no !important)', async ({ page }) => {
+    await setup(page, `<style>.small{min-block-size:20px;min-inline-size:20px}</style>
+                       <button id="t" class="sf-touch-target small"
+                               style="inline-size:20px;block-size:20px;padding:0">x</button>`);
+    const box = await page.locator('#t').evaluate(el => {
+      const r = el.getBoundingClientRect();
+      return { w: r.width, h: r.height };
+    });
+    expect(box.w).toBeLessThan(44);
+    expect(box.h).toBeLessThan(44);
+  });
+
+  // .sf-touch-target sets only min-sizes (no display), so it must not strip a
+  // native affordance — e.g. a <summary>'s list-item display / disclosure
+  // marker. Guards the review finding about replacing native display modes.
+  test('.sf-touch-target does not override a native control display (summary stays list-item)', async ({ page }) => {
+    await setup(page, `<details><summary id="t" class="sf-touch-target">More</summary>body</details>`);
+    const display = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
+    expect(display).toBe('list-item');
+  });
+
   // #582: the WCAG floor must NOT track the configurable --sf-size-* scale.
   // Shrinking a size rung must not drag the touch target below spec.
   test('--sf-touch-target is independent of the --sf-size-* scale', async ({ page }) => {

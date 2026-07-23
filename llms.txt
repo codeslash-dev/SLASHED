@@ -1,4 +1,4 @@
-# SLASHED v0.7.25
+# SLASHED v0.7.26
 
 > SLASHED is a pure-CSS, token-driven styling framework — BEM-first, cascade-layered, zero runtime JS. This file is a distilled, machine-generated reference of SLASHED’s complete token and class vocabulary for this exact version, so an AI coding assistant can use real `--sf-*` token and `.sf-*` class names instead of guessing or hallucinating them.
 
@@ -224,15 +224,16 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 
 ## Classes
 
-326 classes, grouped by area, each with a one-line purpose. `--variant` names are BEM modifiers of the base class above them.
+327 classes, grouped by area, each with a one-line purpose. `--variant` names are BEM modifiers of the base class above them.
 
-### Accessibility (8)
+### Accessibility (9)
 
 - `.no-motion` — Suppresses all animations and transitions within the subtree. Apply to a container to create a reduced-motion zone without relying on the system preference.
 - `.sf-clickable-parent` — Makes the entire card or list-item clickable via an absolutely-positioned child overlay link. Apply to the container; place sf-clickable-parent__overlay on the <a>.
 - `.sf-clickable-parent__overlay` — The full-bleed overlay link inside an sf-clickable-parent. Stretches to cover the parent and uses pointer-events to let interactive children keep their own clicks.
 - `.sf-focus-parent` — Forwards focus-visible styling to this container when any descendant is keyboard-focused. Useful for custom controls that wrap a visually-hidden <input>.
 - `.sf-focus-shadow` — Applies the standard focus ring as a box-shadow to any element. Use on custom controls where the native :focus-visible ring doesn't render correctly.
+- `.sf-touch-target` — .sf-touch-target — the explicit opt-IN counterpart to the class-less floor above. Because the automatic floor deliberately never touches a control that carries a class, put this class on any control you own (a button with your own class, a third-party widget you can add a class…
 - `.skip-link` — Accessible skip-navigation link. Hidden until focused; jumps keyboard users past repeated navigation blocks. Place as the very first element in <body>.
 - `.sr-only` — Visually hides content while keeping it accessible to screen readers. Use for labels, descriptions, and off-screen text that assistive technology needs.
 - `.sr-only-focusable` — Extends sr-only — also reveals the element when it receives keyboard focus. Typical use: skip links and visually-hidden focus targets.

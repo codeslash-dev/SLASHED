@@ -1,13 +1,16 @@
 // @ts-check
 // Touch-device (pointer: coarse) behaviour for .sf-btn.
 //
-// The blanket WCAG 44px touch-target floor in core/accessibility.css
-// deliberately EXCLUDES .sf-btn (`button:not(.sf-btn)`), so the XS–XL size
-// ladder stays visible on phones/tablets instead of every rung collapsing to
-// 44px. This is the regression guard for the "all button sizes look identical
-// on mobile" report: the ladder rendered correctly with a mouse but flattened
-// under a coarse pointer. Bare <button>s and native controls keep the floor;
-// consumers opt back into 44px on .sf-btn with
+// The WCAG 44px touch-target floor in core/accessibility.css is scoped to
+// controls with no effective class (no class attribute, or an empty class="";
+// `:not([class]:not([class=""]))`), so it never touches styled or third-party
+// markup but still backstops unstyled markup. .sf-btn carries a class and is
+// therefore exempt: its
+// XS–XL size ladder stays visible on phones/tablets instead of every rung
+// collapsing to 44px. This is the regression guard for the "all button sizes
+// look identical on mobile" report: the ladder rendered correctly with a mouse
+// but flattened under a coarse pointer. Only bare, class-less <button>s keep the
+// floor; consumers opt back into 44px on .sf-btn with
 // `--sf-btn-min-height: var(--sf-touch-target)`.
 //
 // Chromium-only: coarse-pointer / isMobile emulation is Chromium-specific in
@@ -85,10 +88,39 @@ test.describe('.sf-btn on a coarse (touch) pointer', () => {
     });
   });
 
-  test('a bare <button> (no .sf-btn) keeps the 44px floor on touch', async ({ browser }) => {
+  test('a bare, class-less <button> keeps the 44px floor on touch', async ({ browser }) => {
     await withTouch(browser, { html: `<button id="b">x</button>` }, async (page) => {
       const h = await heights(page, ['b']);
       expect(h[0]).toBeGreaterThanOrEqual(44);
+    });
+  });
+
+  // Renderers routinely emit an empty class="" for a control the author never
+  // styled. That is still an unstyled control, so it must keep the floor —
+  // hence :not([class]:not([class=""])) rather than a plain :not([class]).
+  test('a <button class=""> (empty class, unstyled) keeps the 44px floor on touch', async ({ browser }) => {
+    await withTouch(browser, { html: `<button id="b" class="">x</button>` }, async (page) => {
+      const h = await heights(page, ['b']);
+      expect(h[0]).toBeGreaterThanOrEqual(44);
+    });
+  });
+
+  // Regression guard: the blanket floor must not reach into markup the framework
+  // does not own. Any class marks a control as owned/styled (a third-party
+  // page-builder hamburger toggle, a plugin control), so the floor is scoped to
+  // classless controls only — a classed button escapes it on both axes without
+  // needing !important. See core/accessibility.css "Minimum touch targets".
+  test('a classed <button> (e.g. a third-party hamburger toggle) is exempt from the floor', async ({ browser }) => {
+    const html = `<button id="t" class="bricks-mobile-menu-toggle"
+                          style="inline-size:32px;block-size:32px;padding:0">x</button>`;
+    await withTouch(browser, { html }, async (page) => {
+      const box = await page.evaluate(() => {
+        const r = document.getElementById('t').getBoundingClientRect();
+        return { w: r.width, h: r.height };
+      });
+      // Neither axis is stretched to the 44px floor — the author's 32px wins.
+      expect(box.w).toBeLessThan(44);
+      expect(box.h).toBeLessThan(44);
     });
   });
 });

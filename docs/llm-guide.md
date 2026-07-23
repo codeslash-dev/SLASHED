@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.25** · Tokens: **741** · Prefix: `--sf-`
+> Version: **0.7.26** · Tokens: **741** · Prefix: `--sf-`
 
 ---
 
@@ -1072,6 +1072,17 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 --sf-opacity-muted:         0.5
 --sf-blur:                  12px                 /* frosted glass backdrop-filter */
 ```
+
+On a coarse (touch) pointer the framework auto-applies a `--sf-touch-target`
+(44px) minimum on both axes — but **only to controls with no effective class**
+(no `class` attribute, or an empty `class=""`). Any control carrying a real
+class is treated as *owned* (by `.sf-btn`, by you, or by a third-party widget)
+and keeps its own sizing, so the floor never re-sizes styled or third-party
+markup. To request the 44px hit area on a control you own, add the **`.sf-touch-target`**
+opt-in class (`core/accessibility.css`, every bundle) — it sets only the two
+min-sizes (no `display`, so it never strips a native affordance) and, unlike the
+automatic floor, applies regardless of pointer type. On `.sf-btn` the size ladder
+governs instead; opt a button into 44px with `--sf-btn-min-height: var(--sf-touch-target)`.
 
 ### 9.9 Form field tokens
 

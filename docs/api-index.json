@@ -25,14 +25,14 @@
       "optimal"
     ],
     "counts": {
-      "total": 1067,
+      "total": 1068,
       "by_type": {
-        "class": 326,
+        "class": 327,
         "token": 741
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1017,
+        "PUBLIC": 1018,
         "PUBLIC-ADVANCED": 49
       },
       "by_role": {
@@ -40,12 +40,12 @@
         "knob": 253
       },
       "tokens": 741,
-      "classes": 326,
-      "sf_classes": 303,
+      "classes": 327,
+      "sf_classes": 304,
       "is_classes": 15,
       "unprefixed_classes": 8,
       "by_category": {
-        "Accessibility": 8,
+        "Accessibility": 9,
         "Component tokens": 46,
         "Components": 30,
         "Core tokens": 610,
@@ -26308,6 +26308,29 @@
       "layer": "slashed.themes",
       "sourceFiles": [
         "core/themes.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "sf-touch-target",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-touch-target",
+      "prefix": "sf",
+      "kind": "accessibility",
+      "category": "Accessibility",
+      "area": "accessibility",
+      "group": "",
+      "description": ".sf-touch-target — the explicit opt-IN counterpart to the class-less floor above. Because the automatic floor deliberately never touches a control that carries a class, put this class on any control you own (a button with your own class, a third-party widget you can add a class…",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.accessibility",
+      "sourceFiles": [
+        "core/accessibility.css"
       ],
       "bundles": [
         "full",
