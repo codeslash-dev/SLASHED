@@ -842,8 +842,11 @@ test.describe('layout: .sf-content-grid', () => {
         <div id="g" class="sf-grid-cols-3"><div>1</div><div>2</div><div>3</div></div>
       </div>
     `);
+    // The 48rem breakpoint resolves against .sf-content-grid's full 1200px
+    // (the CQ ancestor), not #g's narrower content-column width — same as it
+    // would against .sf-container. That's why 3 columns fire here.
     const cols = await page.locator('#g').evaluate(el =>
-      getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/).length
+      getComputedStyle(el).gridTemplateColumns.split(' ').length
     );
     expect(cols).toBe(3);
   });
