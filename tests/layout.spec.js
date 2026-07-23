@@ -830,10 +830,32 @@ test.describe('layout: .sf-content-grid', () => {
   // .sf-container to .sf-content-grid (to get breakout/full-bleed) silently
   // removed the CQ scope that .sf-grid-cols-* / .sf-bento depend on, leaving
   // them stuck at their 1-column fallback at every width.
-  test('establishes an inline-size query container', async ({ page }) => {
+  test('establishes the named sf-layout inline-size query container', async ({ page }) => {
     await setup(page, `<div id="t" class="sf-content-grid">x</div>`);
-    const ct = await page.locator('#t').evaluate(el => getComputedStyle(el).containerType);
-    expect(ct).toContain('inline-size');
+    const cs = await page.locator('#t').evaluate(el => ({
+      type: getComputedStyle(el).containerType,
+      name: getComputedStyle(el).containerName,
+    }));
+    expect(cs.type).toContain('inline-size');
+    // Same name as .sf-container so a user's `@container sf-layout (…)` rule
+    // keeps matching when the wrapper is swapped for breakout/full-bleed.
+    expect(cs.name).toContain('sf-layout');
+  });
+
+  test('a name-targeted @container sf-layout rule matches under the content grid', async ({ page }) => {
+    await setup(page, `
+      <div class="sf-content-grid" style="width:1200px">
+        <div id="probe">x</div>
+      </div>
+    `);
+    await page.addStyleTag({ content: `
+      #probe { --matched: 0; }
+      @container sf-layout (min-width: 40rem) { #probe { --matched: 1; } }
+    ` });
+    const matched = await page.locator('#probe').evaluate(el =>
+      getComputedStyle(el).getPropertyValue('--matched').trim()
+    );
+    expect(matched).toBe('1');
   });
 
   test('a .sf-grid-cols-* child responds to the content grid as its CQ ancestor', async ({ page }) => {
@@ -872,12 +894,15 @@ test.describe('layout: .sf-content-grid', () => {
   // Inside a .sf-section--guttered, the section owns the inline gutter. A
   // content grid carries its gutter in its edge tracks, so without a reset the
   // section's padding boxes it in — double-guttering content and stopping
-  // full-bleed one gutter short of the section edge. The :has() reset drops the
-  // section padding so full-bleed reaches the true edge.
+  // full-bleed one gutter short of the section edge. The reset drops the
+  // section padding so full-bleed reaches the true edge — but only when the
+  // grid is the section's sole direct child (see the sibling test below). The
+  // gutter probe therefore lives OUTSIDE the section so it doesn't disqualify
+  // the sole-child guard.
   test('reaches the section edge inside a guttered section (no double gutter)', async ({ page }) => {
     await setup(page, `
+      <div id="probe" style="width:var(--sf-gutter)"></div>
       <section id="s" class="sf-section sf-section--guttered" style="width:1000px">
-        <div id="probe" style="width:var(--sf-gutter)"></div>
         <div class="sf-content-grid">
           <div id="f" class="sf-full-bleed">full</div>
           <div id="c">content</div>
@@ -897,6 +922,28 @@ test.describe('layout: .sf-content-grid', () => {
     expect(Math.abs(res.fW - res.sW)).toBeLessThan(1);
     expect(res.contentInset).toBeGreaterThan(res.gutter - 1);
     expect(res.contentInset).toBeLessThan(res.gutter + 2);
+  });
+
+  // The reset is scoped to a sole-child content grid. A guttered section that
+  // also holds a non-grid sibling keeps its padding, so that sibling keeps its
+  // gutter (stripping it to satisfy the grid's full-bleed would be wrong — the
+  // two wants are irreconcilable, so the mixed case is left untouched).
+  test('a non-grid sibling keeps its gutter when the grid is not the sole child', async ({ page }) => {
+    await setup(page, `
+      <section id="s" class="sf-section sf-section--guttered" style="width:1000px">
+        <h2 id="sib">Heading</h2>
+        <div class="sf-content-grid"><div>content</div></div>
+      </section>
+    `);
+    const res = await page.evaluate(() => {
+      const s   = document.getElementById('s').getBoundingClientRect();
+      const sib = document.getElementById('sib').getBoundingClientRect();
+      const pad = parseFloat(getComputedStyle(document.getElementById('s')).paddingLeft);
+      return { sibInset: sib.left - s.left, pad };
+    });
+    // Section keeps a positive gutter and the sibling is inset by it.
+    expect(res.pad).toBeGreaterThan(1);
+    expect(res.sibInset).toBeGreaterThan(res.pad - 1);
   });
 });
 
