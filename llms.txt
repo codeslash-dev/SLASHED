@@ -1,4 +1,4 @@
-# SLASHED v0.7.26
+# SLASHED v0.7.27
 
 > SLASHED is a pure-CSS, token-driven styling framework — BEM-first, cascade-layered, zero runtime JS. This file is a distilled, machine-generated reference of SLASHED’s complete token and class vocabulary for this exact version, so an AI coding assistant can use real `--sf-*` token and `.sf-*` class names instead of guessing or hallucinating them.
 

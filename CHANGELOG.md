@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.27] - 2026-07-23
+
+### Breaking Changes
+- **states:** rename .sf-is-skeleton to .sf-is-shimmer (#575)
+
+### Features
+- **layout:** give .sf-content-grid an inline-size CQ scope, at parity with .sf-container
+- **docs:** generate distilled llms.txt AI-assistant context file (#472)
+- **utilities:** add fractional content-width utilities .sf-width-* (#531)
+
+### Bug Fixes
+- **layout:** address review — name the content-grid container, guard the guttered reset
+- **layout:** full-bleed reaches section edge in a guttered content grid; doc center CQ scope
+- address PR review — correct demo migration note + anchor llms.txt version regex
+
 ## [0.7.26] - 2026-07-22
 
 ### Breaking Changes
