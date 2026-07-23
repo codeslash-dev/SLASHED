@@ -164,3 +164,35 @@ explicitly by composing `.sf-cq`:
   <div class="sf-grid-cols-3">…</div>
 </div>
 ```
+
+## Centring: pick the primitive, not a `.center` utility
+
+Coming from a utility framework, `.sf-center` is a false friend. There a
+`.center` class usually *centres the content inside it* (flex `place-items`,
+`margin: auto`, `text-align`). SLASHED is BEM-first and layout-primitive-driven,
+so it ships **no** generic centring utility. `.sf-center` is the Every-Layout
+**Center primitive**: a `max-width`, guttered wrapper that centres **itself** in
+its parent — it does not centre its own children (unless you add `--intrinsic`).
+
+Centring is always expressed as intent on the right primitive:
+
+| To centre… | Use | Mechanism |
+|---|---|---|
+| a block wrapper horizontally | `.sf-center` (prose measure) or `.sf-container` (app wrapper, adds CQ) | `margin-inline: auto` |
+| children in a row | `.sf-cluster--center` | `justify-content` |
+| children in a column | `.sf-stack--center` | `align-items` |
+| leftover grid items | `.sf-grid-flex--center` | `justify-content` |
+| an element on both axes (overlay) | `.sf-imposter` | absolute + translate |
+| content in a full-height region | `.sf-cover__center` | `margin-block: auto` |
+| a wrapper's children by their intrinsic width | `.sf-center--intrinsic` | flex column + `align-items` |
+
+Two things to remember about `.sf-center` specifically:
+
+- **It centres itself, not its content.** For content-centring reach for the
+  modifiers above.
+- **It needs a block-level element in normal flow.** `margin-inline: auto`
+  doesn't centre an inline element, and a flex/grid item is sized by its parent
+  instead. `.sf-center` is `content-box`, so `--sf-center-max` bounds the
+  *content* and the gutter sits outside it — pick it over `.sf-container` when
+  you want a typographic measure; pick `.sf-container` when you want an
+  app-level wrapper that also establishes a container-query scope.
