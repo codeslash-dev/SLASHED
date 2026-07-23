@@ -1004,6 +1004,7 @@ Small opt-in helpers (all `optional/utilities.css`):
 - `.sf-marker--{family}` — colour `::marker` on an arbitrary list, `family` = `primary` / `secondary` / `tertiary` / `action` (brand/action only; set `::marker { color }` yourself for anything else). A `:not(.sf-prose *)` guard leaves `.sf-prose` markers to `--sf-prose-marker-color`. Works on the `<ul>`/`<ol>` or an `<li>`.
 - `.sf-selection--alt` — swap `::selection` colours to `--sf-color-selection-*--alt` on an element and its descendants, for surfaces where the default selection lands with poor contrast.
 - `.sf-sticky` — `position: sticky` at `--sf-sticky-offset` (the header-aware fluid offset) with `--sf-z-sticky`; `--s` / `--m` / `--l` add an extra `--sf-space-*` gap on top. This is the sticky mechanism — `position: sticky` is conditional by nature, so there is no separate runtime-toggled state class.
+- `.sf-width-{10..90}` — cap an element at that fraction of the content column (`max-inline-size: calc(var(--sf-content-width) * fraction)`) with `inline-size: 100%` and `margin-inline: auto`, so it shrinks on narrow parents and centres in normal flow. Keyword variants: `.sf-width-full` (100%, uncapped), `.sf-width-auto`, `.sf-width-fit` (`fit-content`), `.sf-width-min` (`min-content`), `.sf-width-max` (`max-content`). Logical properties throughout; centring assumes normal flow (a flex/grid parent governs alignment instead).
 
 ### 9.4 Animation presets
 

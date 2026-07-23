@@ -35,6 +35,7 @@ function buildFixture(version = '1.2.3') {
   fs.mkdirSync(path.join(dir, 'docs'));
   fs.writeFileSync(path.join(dir, 'docs', 'roadmap.md'), `Current version: **${version}**\n`);
   fs.writeFileSync(path.join(dir, 'docs', 'llm-guide.md'), `> Version: **${version}** · Tokens: **1**\n`);
+  fs.writeFileSync(path.join(dir, 'llms.txt'), `# SLASHED v${version}\n`);
 
   fs.mkdirSync(path.join(dir, 'configurator'));
   fs.writeFileSync(path.join(dir, 'configurator', 'package.json'), JSON.stringify({ version }));
@@ -113,6 +114,35 @@ describe('check-version-sync failure cases', () => {
     const r = runChecker(dir);
     assert.equal(r.status, 1, 'expected exit 1 for missing llm-guide version line');
     assert.ok(r.stderr.includes('"Version"'), r.stderr);
+  });
+
+  test('fails when llms.txt version differs', () => {
+    const dir = buildFixture();
+    fs.writeFileSync(path.join(dir, 'llms.txt'), '# SLASHED v9.9.9\n');
+    const r = runChecker(dir);
+    assert.equal(r.status, 1, 'expected exit 1 for mismatched llms.txt');
+    assert.ok(r.stderr.includes('llms.txt version'), r.stderr);
+  });
+
+  test('fails when llms.txt has no "# SLASHED vX.Y.Z" header', () => {
+    const dir = buildFixture();
+    fs.writeFileSync(path.join(dir, 'llms.txt'), '# SLASHED\n\nNo version here.\n');
+    const r = runChecker(dir);
+    assert.equal(r.status, 1, 'expected exit 1 for missing llms.txt header');
+    assert.ok(r.stderr.includes('llms.txt'), r.stderr);
+  });
+
+  test('rejects an llms.txt where the version appears only inline in prose, not as the heading', () => {
+    const dir = buildFixture();
+    // Correct version, but only mid-line in prose — the line-anchored check must
+    // not accept it as the heading (would otherwise mask a missing header).
+    fs.writeFileSync(
+      path.join(dir, 'llms.txt'),
+      '# SLASHED\n\nSee # SLASHED v1.2.3 in the changelog for details.\n',
+    );
+    const r = runChecker(dir);
+    assert.equal(r.status, 1, 'expected exit 1 when the version is only inline prose');
+    assert.ok(r.stderr.includes('llms.txt'), r.stderr);
   });
 
   test('fails when configurator/package.json version differs', () => {

@@ -89,6 +89,19 @@ if (configLockSelf !== undefined && configLockSelf !== version) {
   );
 }
 
+// 6. llms.txt "# SLASHED vX.Y.Z" header must match package.json.
+const llmsTxt = read('llms.txt');
+// Line-anchored (multiline) so only the heading counts — a `# SLASHED v…`
+// string appearing inline in prose must not satisfy the check.
+const llmsMatch = llmsTxt.match(/^#\s*SLASHED\s+v([0-9][^\s]*)/m);
+if (!llmsMatch) {
+  errors.push('llms.txt: "# SLASHED vX.Y.Z" header not found');
+} else if (llmsMatch[1].trim() !== version) {
+  errors.push(
+    `llms.txt version "${llmsMatch[1].trim()}" != package.json "${version}"`,
+  );
+}
+
 if (errors.length) {
   console.error('version-sync check FAILED:');
   for (const e of errors) console.error(`  - ${e}`);

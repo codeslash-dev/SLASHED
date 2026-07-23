@@ -218,7 +218,7 @@ Realna wartość; rozważ okrojenie liczby wariantów lub przeniesienie do `full
 - [x] `.sf-is-selected` — ZOSTAJE `opt`
 - [x] `.sf-is-highlighted` — ZOSTAJE `opt`
 - [x] `.sf-is-empty` — ZOSTAJE (bez zmian tej rundy) `opt`
-- [x] `.sf-is-skeleton` — ZOSTAJE (świadoma decyzja usera — brak natywnego odpowiednika) `opt`
+- [x] `.sf-is-shimmer` (renamed from the former skeleton state, #575) — ZOSTAJE (świadoma decyzja usera — brak natywnego odpowiednika) `opt`
 
 **Bilans końcowy:** 28 → **15** w `states.css` + **2** przeniesione do `utilities.css` (17 łącznie zostaje, 11 usuniętych). Kaskadowo usunięte też: tokeny `--sf-current-font-weight`, `--sf-state-pending-opacity`, i 4 rejestracje `@property` (`--sf-is-active/-current/-pressed/-open`) — wszystkie osierocone przez usunięcie jedynego konsumenta.
 

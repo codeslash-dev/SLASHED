@@ -21,6 +21,7 @@
 export const VERSION_SYNCED_FILES = [
   'docs/roadmap.md',
   'docs/llm-guide.md',
+  'llms.txt',
   'configurator/package.json',
   'configurator/package-lock.json',
 ];

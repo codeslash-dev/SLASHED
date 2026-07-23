@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1054 elements** — 741 tokens, 313 classes.
+**1068 elements** — 741 tokens, 327 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1004 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1018 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -781,7 +781,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (313)
+## Classes (327)
 
 ### Accessibility (9)
 
@@ -1095,7 +1095,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to sf-is-error; the name signals form-field context. |
 | `.sf-is-loading` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Loading state — hides the element's text (color: transparent), removes pointer events, and renders a spinner via ::after. Use for buttons and containers awaiting async results. |
 | `.sf-is-selected` | PUBLIC | state | SELECTED / HIGHLIGHTED | Selected state — marks an item as selected in a list, table row, or grid cell. Visual specifics (background, border) are applied by component styles. |
-| `.sf-is-skeleton` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Skeleton loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. |
+| `.sf-is-shimmer` | PUBLIC | state | LOADING / ASYNC FEEDBACK | Shimmer loading placeholder state. Applies a shimmer animation over the element to indicate that content is loading. Works on both img and non-media elements. (Renamed from .sf-is-skeleton so "skeleton" refers only to the planned .sf-skeleton component.) |
 | `.sf-is-success` | PUBLIC | state | VALIDATION / FEEDBACK | Success status state — applies success color tokens. Use for confirmation messages, completed form steps, and positive feedback. |
 | `.sf-is-valid` | PUBLIC | state | VALIDATION / FEEDBACK | Valid state — applies success color tokens to form fields that have passed validation. Visual styling is identical to sf-is-success; the name signals form-field context. |
 | `.sf-is-warning` | PUBLIC | state | VALIDATION / FEEDBACK | Warning status state — applies warning color tokens. Use for cautionary messages and non-critical alerts. |
@@ -1108,7 +1108,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-theme-light` | PUBLIC | theme | — | Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]). |
 | `.sf-theme-transition` | PUBLIC | theme | — | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
-### Utilities (33)
+### Utilities (47)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1145,4 +1145,18 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-text-xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-visible` | PUBLIC | utility | VISIBILITY HELPERS (.sf-invisible / .sf-visible) | Visibility helper (optional/utilities.css) — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
+| `.sf-width-10` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-20` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-30` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-40` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-50` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-60` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-70` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-80` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-90` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-auto` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-fit` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-full` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-max` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-min` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
 

@@ -72,12 +72,16 @@
      they filled — [aria-busy="true"] covers the semantic, and the visual
      is two lines to hand-roll in your own component CSS if you want it. */
 
-  img.sf-is-skeleton,
-  .sf-is-skeleton img {
+  /* Shimmer loading placeholder (was .sf-is-skeleton pre-Unreleased; renamed so
+     "skeleton" names only the planned .sf-skeleton component, not a state —
+     see docs/migration.md and roadmap.md #575). The class name now mirrors its
+     driving token, --sf-animation-shimmer. */
+  img.sf-is-shimmer,
+  .sf-is-shimmer img {
     opacity: 0 !important;
   }
 
-  .sf-is-skeleton {
+  .sf-is-shimmer {
     color:           transparent !important;
     background:      linear-gradient(
                        90deg,

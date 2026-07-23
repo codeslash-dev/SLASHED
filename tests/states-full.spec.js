@@ -73,8 +73,8 @@ test('.sf-is-loading: colour transparent, position relative, pointer-events none
 // No .sf-is-busy / .sf-is-pending tests: both classes were removed
 // (no distinct consumer, trivial to hand-roll — see core/states.css).
 
-test('.sf-is-skeleton: transparent text, shimmer gradient, no pointer-events', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-skeleton">Placeholder text</div>`);
+test('.sf-is-shimmer: transparent text, shimmer gradient, no pointer-events', async ({ page }) => {
+  await setup(page, `<div id="t" class="sf-is-shimmer">Placeholder text</div>`);
   const cs = await page.locator('#t').evaluate(el => ({
     color:   getComputedStyle(el).color,
     bgImage: getComputedStyle(el).backgroundImage,
