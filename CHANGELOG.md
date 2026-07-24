@@ -4,6 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.28] - 2026-07-24
+
 ### Features
 - **layout:** add `.sf-place-center` — box-neutral centring primitive (`grid` + `place-items:center`) that centres content on both axes without adopting cluster/stack/imposter semantics
 
