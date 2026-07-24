@@ -907,6 +907,7 @@
     "sf-breakout": "Breaks a child element out of a parent sf-content-grid, spanning full bleed (or a named grid area) regardless of the parent column. Useful for full-width sections inside constrained prose.",
     "sf-center": "Centers children both horizontally and vertically using flexbox. Optionally add sf-center--intrinsic to size the container to its content.",
     "sf-center--intrinsic": "Modifier for sf-center: constrains the container to the natural width of its children (no stretching to fill available space).",
+    "sf-place-center": "Box-neutral centring primitive: display:grid + place-items:center centres an element's content on both axes without adopting cluster/stack/imposter semantics. Unlike sf-center (which centres itself), this centres the content; give the box a height for block-axis centring. The named form of the display:grid; place-items:center idiom.",
     "sf-cluster": "Flex-wrap row of variable-width items with automatic gap. Children wrap when the container is too narrow. Use for tag lists, button groups, and icon rows.",
     "sf-cluster--2xl": "Cluster variant with 2xl gap between items.",
     "sf-cluster--between": "Cluster variant that distributes items with space-between alignment.",

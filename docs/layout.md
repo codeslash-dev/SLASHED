@@ -16,6 +16,7 @@ All primitives are exercised live in the [demo](/demo/).
 | `.sf-container` | centered max-width wrapper; declares the named `sf-layout` container; `--narrow` | `--sf-container-*`, `--sf-gutter` |
 | `.sf-box` | isolated unit with padding and optional border outline | `--sf-box-padding`, `--sf-box-border-width`, `--sf-box-border-color` |
 | `.sf-center` | intrinsic centering with max-width and gutters; `--intrinsic` | `--sf-center-max`, `--sf-center-gutter` |
+| `.sf-place-center` | box-neutral centring: centres content on both axes (`grid` + `place-items:center`) in a plain element | — |
 | `.sf-stack` | vertical flow with consistent gap (the "owl") | `--sf-stack-gap` |
 | `.sf-cluster` | wrapping inline group; `--no-wrap` | `--sf-cluster-gap/-align/-justify` |
 | `.sf-sidebar` | content + fixed-ish side panel that wraps when narrow | `--sf-sidebar-*` |
@@ -169,15 +170,29 @@ explicitly by composing `.sf-cq`:
 
 Coming from a utility framework, `.sf-center` is a false friend. There, a
 `.center` class usually *centres the content inside it* (flex `place-items`,
-`margin: auto`, `text-align`). SLASHED is BEM-first and layout-primitive-driven,
-so it ships **no** generic centring utility. `.sf-center` is the Every-Layout
-**Center primitive**: a `max-width`, guttered wrapper that centres **itself** in
-its parent — it does not centre its own children (unless you add `--intrinsic`).
+`margin: auto`, `text-align`). In SLASHED that job belongs to
+**`.sf-place-center`**; `.sf-center` is the Every-Layout **Center primitive**: a
+`max-width`, guttered wrapper that centres **itself** in its parent — it does not
+centre its own children (unless you add `--intrinsic`). The two are a pair:
+`.sf-center` centres *itself*, `.sf-place-center` centres *its content*.
 
-Centring is always expressed as intent on the right primitive:
+`.sf-place-center` is the box-neutral centring primitive — `display: grid;
+place-items: center` — the named form of the community
+`display:grid; place-items:center` idiom. Reach for it when you have a plain
+element and just want its content centred on both axes, without adopting a
+row/column/wrap primitive:
+
+```html
+<div class="sf-place-center" style="min-block-size: 12rem">
+  <p>centred on both axes</p>
+</div>
+```
+
+Otherwise centring is expressed as intent on the right primitive:
 
 | To centre… | Use | Mechanism |
 |---|---|---|
+| content in a plain box, both axes | `.sf-place-center` | `grid` + `place-items` |
 | a block wrapper horizontally | `.sf-center` (prose measure) or `.sf-container` (app wrapper, adds CQ) | `margin-inline: auto` |
 | children in a row | `.sf-cluster--center` | `justify-content` |
 | children in a column | `.sf-stack--center` | `align-items` |

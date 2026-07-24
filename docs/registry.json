@@ -20,7 +20,7 @@
     ],
     "counts": {
       "tokens": 741,
-      "sf_classes": 304,
+      "sf_classes": 305,
       "is_classes": 15
     }
   },
@@ -978,6 +978,7 @@
     "sf-overlap-host",
     "sf-overlay",
     "sf-pancake",
+    "sf-place-center",
     "sf-prose",
     "sf-reel",
     "sf-scale-down",
