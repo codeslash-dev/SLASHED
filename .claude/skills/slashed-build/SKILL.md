@@ -54,16 +54,16 @@ names, you are in scope.
 
 1. **Load the framework.** Confirm a bundle is present (or add one). Optimal is
    the default; the full bundle adds `.sf-btn` / `.sf-card` + utilities. See
-   [getting-started.md](../../../docs/getting-started.md).
+   [getting-started.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/getting-started.md).
 2. **Lay out with primitives, not custom CSS.** Reach for `.sf-container`,
    `.sf-stack`, `.sf-grid`, `.sf-cluster`, `.sf-sidebar`, `.sf-cover`, and
-   friends before writing flexbox/grid by hand. → [layout.md](../../../docs/layout.md)
+   friends before writing flexbox/grid by hand. → [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md)
 3. **Style with macros + tokens.** Panels → `.sf-surface`; articles →
-   `.sf-prose`; spacing/typography → tokens. → [macros.md](../../../docs/macros.md)
+   `.sf-prose`; spacing/typography → tokens. → [macros.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/macros.md)
 4. **Wire state through `.sf-is-*` classes + ARIA**, toggled from JS — not
-   inline styles. → [states.md](../../../docs/states.md)
+   inline styles. → [states.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/states.md)
 5. **Brand via the six source colours** in the overrides space; add
-   `data-theme` for forced modes. → [theming.md](../../../docs/theming.md)
+   `data-theme` for forced modes. → [theming.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/theming.md)
 6. **Verify token-first.** Before finishing, scan your CSS for hardcoded
    colours/px/rem and replace them with tokens.
 
@@ -71,34 +71,37 @@ names, you are in scope.
 
 | Goal | Reach for | Reference |
 | --- | --- | --- |
-| Constrain / centre page content | `.sf-container` (+ `--narrow`/`--wide`/`--prose`) | [layout.md](../../../docs/layout.md) |
-| Space stacked children | `.sf-stack` | [layout.md](../../../docs/layout.md) |
-| Responsive card grid (no media queries) | `.sf-grid .sf-grid--fit` + `--sf-grid-min` | [layout.md](../../../docs/layout.md) |
-| Row that wraps (buttons, tags) | `.sf-cluster` | [layout.md](../../../docs/layout.md) |
-| Content + collapsing sidebar | `.sf-sidebar` | [layout.md](../../../docs/layout.md) |
-| A padded, elevated panel | `.sf-surface` (any bundle) / `.sf-card` (full) | [macros.md](../../../docs/macros.md) |
-| Rich article typography | `.sf-prose` | [macros.md](../../../docs/macros.md) |
-| Buttons | `.sf-btn` + variant (full bundle) | [classes.md](../../../docs/classes.md) |
-| Loading / selected / disabled state | `.sf-is-*` + matching ARIA | [states.md](../../../docs/states.md) |
-| A specific spacing / colour / radius value | a `--sf-*` token | [llm-guide.md](../../../docs/llm-guide.md) · [tokens.md](../../../docs/tokens.md) |
-| Rebrand the whole site | six `--sf-color-*-source-light` tokens | [theming.md](../../../docs/theming.md) |
-| Dark mode | `data-theme="dark"` on `<html>` or a section | [theming.md](../../../docs/theming.md) |
-| Look a name up programmatically | `api-index.json` / `token-index.json` | [docs/](../../../docs/) |
+| Constrain / centre page content | `.sf-container` (+ `--narrow`/`--wide`/`--prose`) | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
+| Space stacked children | `.sf-stack` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
+| Responsive card grid (no media queries) | `.sf-grid .sf-grid--fit` + `--sf-grid-min` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
+| Row that wraps (buttons, tags) | `.sf-cluster` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
+| Content + collapsing sidebar | `.sf-sidebar` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
+| A padded, elevated panel | `.sf-surface` (any bundle) / `.sf-card` (full) | [macros.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/macros.md) |
+| Rich article typography | `.sf-prose` | [macros.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/macros.md) |
+| Buttons | `.sf-btn` + variant (full bundle) | [classes.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/classes.md) |
+| Loading / selected / disabled state | `.sf-is-*` + matching ARIA | [states.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/states.md) |
+| A specific spacing / colour / radius value | a `--sf-*` token | [llm-guide.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/llm-guide.md) · [tokens.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/tokens.md) |
+| Rebrand the whole site | six `--sf-color-*-source-light` tokens | [theming.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/theming.md) |
+| Dark mode | `data-theme="dark"` on `<html>` or a section | [theming.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/theming.md) |
+| Look a name up programmatically | `api-index.json` / `token-index.json` | [docs/](https://github.com/codeslash-dev/SLASHED/tree/main/docs) |
 
 ## Reference map (authoritative, CI-gated)
 
-- **[getting-started.md](../../../docs/getting-started.md)** — install, bundle
+Links point at GitHub so this skill works when copied into any project. Inside
+the SLASHED repo itself, the same files live under `docs/` — read them locally.
+
+- **[getting-started.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/getting-started.md)** — install, bundle
   choice, boilerplate, first rebrand.
-- **[cookbook.md](../../../docs/cookbook.md)** — copy-paste recipes for common
+- **[cookbook.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/cookbook.md)** — copy-paste recipes for common
   builds (page shell, card grid, hero, sidebar, form states, rebrand).
-- **[llm-guide.md](../../../docs/llm-guide.md)** — the deep token reference:
+- **[llm-guide.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/llm-guide.md)** — the deep token reference:
   colour/type/space/layout/motion systems, tiers, best practices.
-- **[layout.md](../../../docs/layout.md)** / **[macros.md](../../../docs/macros.md)**
-  / **[states.md](../../../docs/states.md)** — every layout primitive, macro,
+- **[layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md)** / **[macros.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/macros.md)**
+  / **[states.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/states.md)** — every layout primitive, macro,
   and state class.
-- **[theming.md](../../../docs/theming.md)** — rebrand, dark mode, multi-brand,
+- **[theming.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/theming.md)** — rebrand, dark mode, multi-brand,
   contrast.
-- **[classes.md](../../../docs/classes.md)** / **[tokens.md](../../../docs/tokens.md)**
+- **[classes.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/classes.md)** / **[tokens.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/tokens.md)**
   — the complete generated inventories.
 - **`api-index.json`** / **`token-index.json`** — machine-readable indexes for
   programmatic lookup.
