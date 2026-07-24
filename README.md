@@ -156,6 +156,8 @@ Pre-built bundles ship with every [release](https://github.com/codeslash-dev/SLA
 
 | Guide | What's inside |
 | --- | --- |
+| [Getting started](docs/getting-started.md) | install, bundle choice, boilerplate, first rebrand — start here |
+| [Cookbook](docs/cookbook.md) | copy-paste recipes for common builds (page shell, card grid, hero, sidebar, states) |
 | [Architecture](docs/architecture.md) | layers, file structure, class taxonomy, bundles, token contract, performance |
 | [Theming](docs/theming.md) | rebrand in 6 tokens, dark mode, multi-brand, contrast |
 | [Layout primitives](docs/layout.md) | every `.sf-*` layout class + tokens |
@@ -167,6 +169,10 @@ Pre-built bundles ship with every [release](https://github.com/codeslash-dev/SLA
 | [Token reference](docs/tokens.md) | all `--sf-*` tokens + defaults (generated) |
 | [LLM guide](docs/llm-guide.md) | compact API reference for AI-assisted development |
 | [Migration](docs/migration.md) | upgrading SLASHED + migrating from other frameworks |
+
+Building with an AI assistant? The **`slashed-build` skill**
+(`.claude/skills/slashed-build/`) turns this documentation set into a guided
+build workflow — mental model, decision tree, and routing into the docs above.
 
 ## Editor integration
 

@@ -2,6 +2,14 @@
 
 > Version: **0.7.27** · Tokens: **741** · Prefix: `--sf-`
 
+> **New to SLASHED?** Start with [getting-started.md](getting-started.md)
+> (install, bundles, boilerplate) and the [cookbook.md](cookbook.md)
+> (copy-paste build recipes). This guide is the deep **token** reference; the
+> **class-based** API lives in [layout.md](layout.md), [macros.md](macros.md),
+> [states.md](states.md), and the generated [classes.md](classes.md). Building
+> with an AI assistant? See the `slashed-build` skill in
+> `.claude/skills/slashed-build/`.
+
 ---
 
 ## Table of Contents
