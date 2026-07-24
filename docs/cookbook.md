@@ -83,6 +83,9 @@ A responsive grid that fits as many columns as will fit — no media queries.
 `.sf-cover` vertically centres a headline block within a minimum-height region;
 `.sf-section` adds generous top/bottom padding.
 
+*(The `.sf-btn` buttons below need the **full** bundle; the layout itself works
+on optimal.)*
+
 ```html
 <section class="sf-section sf-cover">
   <div class="sf-container sf-stack">
@@ -176,12 +179,22 @@ tokens, so it stays legible in both themes for free.
 ## Interactive states
 
 State classes map to ARIA and drive visuals — toggle them from your JS instead
-of editing inline styles.
+of editing inline styles. *(The `.sf-btn` / `.sf-card` examples need the
+**full** bundle.)*
+
+Pair each state class with the matching semantics: `aria-selected` needs a
+`role="option"` inside a `role="listbox"` (a bare `<li>` does not support it),
+and a disabled `<button>` needs the native `disabled` attribute — `aria-disabled`
+only exposes the state, it does not block activation.
 
 ```html
 <button class="sf-btn sf-btn--primary sf-is-loading" aria-busy="true">Saving…</button>
-<li class="sf-card sf-is-selected" aria-selected="true">Chosen</li>
-<button class="sf-btn sf-is-disabled" aria-disabled="true">Unavailable</button>
+
+<ul role="listbox" aria-label="Choices">
+  <li role="option" class="sf-card sf-is-selected" aria-selected="true">Chosen</li>
+</ul>
+
+<button class="sf-btn sf-is-disabled" disabled>Unavailable</button>
 ```
 
 The full catalogue and its ARIA mapping is in [states.md](states.md). Prefer a

@@ -71,7 +71,7 @@ names, you are in scope.
 
 | Goal | Reach for | Reference |
 | --- | --- | --- |
-| Constrain / centre page content | `.sf-container` (+ `--narrow`/`--wide`/`--prose`) | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
+| Constrain / centre page content | `.sf-container`, `.sf-container--narrow`, `.sf-container--wide`, `.sf-container--prose` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
 | Space stacked children | `.sf-stack` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
 | Responsive card grid (no media queries) | `.sf-grid .sf-grid--fit` + `--sf-grid-min` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |
 | Row that wraps (buttons, tags) | `.sf-cluster` | [layout.md](https://github.com/codeslash-dev/SLASHED/blob/main/docs/layout.md) |

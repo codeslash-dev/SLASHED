@@ -10,7 +10,9 @@ do first.** For the exhaustive API, follow the links in
 
 ## 1. Add one stylesheet
 
-SLASHED is one CSS file. No build step, no Node, no runtime dependency.
+SLASHED ships as plain CSS with no runtime dependency and nothing to compile.
+Via the CDN it needs no Node or build step at all; the npm path below installs
+the same stylesheet through your package manager and resolves it with a bundler.
 
 ### CDN (fastest)
 
