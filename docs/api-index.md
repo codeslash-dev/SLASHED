@@ -10,11 +10,11 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1068 elements** — 741 tokens, 327 classes.
+**1069 elements** — 741 tokens, 328 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1018 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1019 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -781,7 +781,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (327)
+## Classes (328)
 
 ### Accessibility (9)
 
@@ -838,7 +838,7 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.sf-live-validate` | PUBLIC | form | — | Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a <form> or <fieldset>. Off by default so a still-empty required field isn't marked invalid before a submit is attempted. |
 
-### Layout primitives (145)
+### Layout primitives (146)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -957,6 +957,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-imposter--fixed` | PUBLIC | layout | — | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
 | `.sf-overlay` | PUBLIC | layout | — | Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims. |
 | `.sf-pancake` | PUBLIC | layout | — | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
+| `.sf-place-center` | PUBLIC | layout | — | Box-neutral centring primitive: display:grid + place-items:center centres an element's content on both axes without adopting cluster/stack/imposter semantics. Unlike sf-center (which centres itself), this centres the content; give the box a height for block-axis centring. The named form of the display:grid; place-items:center idiom. |
 | `.sf-reel` | PUBLIC | layout | — | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
 | `.sf-section` | PUBLIC | layout | — | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
 | `.sf-section--2xl` | PUBLIC | layout | — | Section variant with 2xl vertical padding. |

@@ -224,7 +224,7 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 
 ## Classes
 
-327 classes, grouped by area, each with a one-line purpose. `--variant` names are BEM modifiers of the base class above them.
+328 classes, grouped by area, each with a one-line purpose. `--variant` names are BEM modifiers of the base class above them.
 
 ### Accessibility (9)
 
@@ -245,7 +245,7 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 - `.print-no-color` — Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills.
 - `.print-only` — Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen.
 
-### Layout primitives (145)
+### Layout primitives (146)
 
 - `.sf-alternate` — Zigzag / alternating two-column layout. Even children align image-left/text-right; odd children flip. Collapses to a single column below the breakpoint.
 - `.sf-bento` — Auto-fill bento grid for card dashboards. Children span 1 column by default; use span modifiers (sf-bento-wide, sf-bento-tall, sf-bento-full, sf-bento-featured) to break the grid.
@@ -362,6 +362,7 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 - `.sf-imposter--fixed` — Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals.
 - `.sf-overlay` — Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims.
 - `.sf-pancake` — Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports.
+- `.sf-place-center` — Box-neutral centring primitive: display:grid + place-items:center centres an element's content on both axes without adopting cluster/stack/imposter semantics. Unlike sf-center (which centres itself), this centres the content; give the box a height for block-axis centring. The named form of the display:grid; place-items:center idiom.
 - `.sf-reel` — Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect.
 - `.sf-section` — Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands.
 - `.sf-section--2xl` — Section variant with 2xl vertical padding.

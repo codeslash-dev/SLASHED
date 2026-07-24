@@ -506,6 +506,40 @@ test.describe('layout: .sf-center', () => {
   });
 });
 
+// ── .sf-place-center ────────────────────────────────────────────
+test.describe('layout: .sf-place-center', () => {
+  test('is a grid with place-items: center', async ({ page }) => {
+    await setup(page, `<div id="t" class="sf-place-center"><p>x</p></div>`);
+    const cs = await page.locator('#t').evaluate(el => ({
+      display: getComputedStyle(el).display,
+      align:   getComputedStyle(el).alignItems,
+      justify: getComputedStyle(el).justifyItems,
+    }));
+    expect(cs.display).toBe('grid');
+    expect(cs.align).toBe('center');
+    expect(cs.justify).toBe('center');
+  });
+
+  test('centres its content on both axes when the box has a size', async ({ page }) => {
+    // margin/place resolve to pixel positions; verify centring via bounding boxes.
+    await setup(page, `
+      <div id="box" class="sf-place-center" style="width:300px; height:200px">
+        <div id="c" style="width:60px; height:40px">x</div>
+      </div>
+    `);
+    const res = await page.evaluate(() => {
+      const box = document.getElementById('box').getBoundingClientRect();
+      const c   = document.getElementById('c').getBoundingClientRect();
+      return {
+        dx: Math.abs((c.left - box.left) - (box.right - c.right)),
+        dy: Math.abs((c.top - box.top) - (box.bottom - c.bottom)),
+      };
+    });
+    expect(res.dx).toBeLessThan(2);
+    expect(res.dy).toBeLessThan(2);
+  });
+});
+
 // ── .sf-box ─────────────────────────────────────────────────────
 test.describe('layout: .sf-box', () => {
   test('has non-zero padding', async ({ page }) => {
