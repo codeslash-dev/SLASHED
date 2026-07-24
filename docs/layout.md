@@ -167,7 +167,7 @@ explicitly by composing `.sf-cq`:
 
 ## Centring: pick the primitive, not a `.center` utility
 
-Coming from a utility framework, `.sf-center` is a false friend. There a
+Coming from a utility framework, `.sf-center` is a false friend. There, a
 `.center` class usually *centres the content inside it* (flex `place-items`,
 `margin: auto`, `text-align`). SLASHED is BEM-first and layout-primitive-driven,
 so it ships **no** generic centring utility. `.sf-center` is the Every-Layout
@@ -191,8 +191,10 @@ Two things to remember about `.sf-center` specifically:
 - **It centres itself, not its content.** For content-centring reach for the
   modifiers above.
 - **It needs a block-level element in normal flow.** `margin-inline: auto`
-  doesn't centre an inline element, and a flex/grid item is sized by its parent
-  instead. `.sf-center` is `content-box`, so `--sf-center-max` bounds the
+  doesn't centre an inline element, and inside a flex or grid container the
+  parent's layout takes over the item's sizing and alignment, so the primitive's
+  own `width`/`margin` model no longer drives the result. `.sf-center` is
+  `content-box`, so `--sf-center-max` bounds the
   *content* and the gutter sits outside it — pick it over `.sf-container` when
   you want a typographic measure; pick `.sf-container` when you want an
   app-level wrapper that also establishes a container-query scope.
