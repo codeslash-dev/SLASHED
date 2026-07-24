@@ -59,7 +59,7 @@ const EXCLUDED_DOCS = new Map([
 
 function discoverDocs() {
   const docs = [];
-  for (const dir of ['docs', 'user-manual']) {
+  for (const dir of ['docs', 'user-manual', '.claude/skills/slashed-build']) {
     const abs = path.join(ROOT, dir);
     if (!fs.existsSync(abs)) continue;
     for (const f of fs.readdirSync(abs).filter((f) => f.endsWith('.md'))) {
