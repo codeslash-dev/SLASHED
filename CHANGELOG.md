@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.29] - 2026-07-25
+
+### Bug Fixes
+- **configurator:** resync panels with the live token API
+
 ## [0.7.28] - 2026-07-24
 
 ### Features
