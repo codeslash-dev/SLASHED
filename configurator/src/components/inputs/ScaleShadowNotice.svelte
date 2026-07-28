@@ -14,6 +14,9 @@
 
   let expanded = $state(false);
   let one = $derived(tokens.length === 1);
+  // aria-controls needs a stable id, and two notices (spacing + type) can be
+  // mounted at once, so it must be unique per instance rather than a constant.
+  const listId = `sf-shadowed-tokens-${crypto.randomUUID()}`;
 </script>
 
 {#if tokens.length}
@@ -22,7 +25,7 @@
       {tokens.length}
       {one ? 'token holds a fixed value that overrides' : 'tokens hold fixed values that override'}
       the generated {scaleLabel} scale, so the controls below
-      {one ? 'do not affect that step' : 'have no effect'}.
+      {one ? 'do not affect that step' : 'do not affect those steps'}.
       Fixed values win over the scale that would generate them.
     </p>
     <div class="flex items-center gap-2">
@@ -34,13 +37,16 @@
       </button>
       <button
         onclick={() => { expanded = !expanded; }}
+        aria-expanded={expanded}
+        aria-controls={listId}
+        aria-label={expanded ? `Hide the ${scaleLabel} tokens holding fixed values` : `Show the ${scaleLabel} tokens holding fixed values`}
         class="text-[10px] text-amber-700/80 dark:text-amber-300/80 hover:underline cursor-pointer"
       >
         {expanded ? 'hide' : 'show'}
       </button>
     </div>
     {#if expanded}
-      <ul class="space-y-0.5 pt-0.5">
+      <ul id={listId} class="space-y-0.5 pt-0.5">
         {#each tokens as token (token)}
           <li class="text-[9px] font-mono text-amber-700/80 dark:text-amber-300/80">{token}</li>
         {/each}
