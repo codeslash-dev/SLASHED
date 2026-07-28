@@ -141,14 +141,23 @@
         onMaxChange={(v) => onSet("--sf-fluid-max-vw", String(v))}
       />
 
+      <!-- This card owns the ratio block as well as the base pair, so its
+           overridden state and reset must cover the ratio tokens too. Tracking
+           only the base pair left a ratio-only change with no override marker
+           and no reset affordance at all, and made the card's reset silently
+           keep the ratio override while presenting itself as pristine. -->
       <ClampField
         title="Base unit &amp; ratio"
         minValue={baseMin} maxValue={baseMax}
         min={0.5} max={4} step={0.05} unit="rem"
         minLabel="Mobile" maxLabel="Desktop"
         previewKind="space"
-        overridden={"--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides}
-        onReset={() => { onReset("--sf-space-base-min"); onReset("--sf-space-base-max"); }}
+        overridden={"--sf-space-base-min" in overrides || "--sf-space-base-max" in overrides
+          || "--sf-space-ratio-min" in overrides || "--sf-space-ratio-max" in overrides}
+        onReset={() => {
+          onReset("--sf-space-base-min"); onReset("--sf-space-base-max");
+          onReset("--sf-space-ratio-min"); onReset("--sf-space-ratio-max");
+        }}
         onMinChange={(v) => onSet("--sf-space-base-min", String(v))}
         onMaxChange={(v) => onSet("--sf-space-base-max", String(v))}
         ratioPresets={RATIO_PRESETS}

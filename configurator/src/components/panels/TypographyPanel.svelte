@@ -422,15 +422,25 @@
       onMaxChange={(v) => onSet("--sf-fluid-max-vw", String(v))}
     />
 
-    <!-- TEXT generator -->
+    <!-- TEXT generator. The card owns the ratio block as well as the base pair,
+         so its overridden state and reset cover the ratio tokens too — tracking
+         only the base pair left a ratio-only change with no override marker and
+         no reset affordance, and made reset silently keep the ratio override.
+         --sf-text-ratio-* is shared with the display generator below (see its
+         comment), so resetting from either card clears it for both, exactly as
+         editing from either card sets it for both. -->
     <ClampField
       title="Text base size &amp; ratio"
       minValue={baseMin} maxValue={baseMax}
       min={0.7} max={2} step={0.01} unit="rem"
       minLabel="Mobile" maxLabel="Desktop"
       previewKind="type"
-      overridden={"--sf-text-base-min" in overrides || "--sf-text-base-max" in overrides}
-      onReset={() => { onReset("--sf-text-base-min"); onReset("--sf-text-base-max"); }}
+      overridden={"--sf-text-base-min" in overrides || "--sf-text-base-max" in overrides
+        || "--sf-text-ratio-min" in overrides || "--sf-text-ratio-max" in overrides}
+      onReset={() => {
+        onReset("--sf-text-base-min"); onReset("--sf-text-base-max");
+        onReset("--sf-text-ratio-min"); onReset("--sf-text-ratio-max");
+      }}
       onMinChange={(v) => onSet("--sf-text-base-min", String(v))}
       onMaxChange={(v) => onSet("--sf-text-base-max", String(v))}
       ratioPresets={RATIO_PRESETS}
@@ -456,8 +466,12 @@
       min={1.5} max={6} step={0.05} unit="rem"
       minLabel="Mobile" maxLabel="Desktop"
       previewKind="type"
-      overridden={"--sf-text-display-base-min" in overrides || "--sf-text-display-base-max" in overrides}
-      onReset={() => { onReset("--sf-text-display-base-min"); onReset("--sf-text-display-base-max"); }}
+      overridden={"--sf-text-display-base-min" in overrides || "--sf-text-display-base-max" in overrides
+        || "--sf-text-ratio-min" in overrides || "--sf-text-ratio-max" in overrides}
+      onReset={() => {
+        onReset("--sf-text-display-base-min"); onReset("--sf-text-display-base-max");
+        onReset("--sf-text-ratio-min"); onReset("--sf-text-ratio-max");
+      }}
       onMinChange={(v) => onSet("--sf-text-display-base-min", String(v))}
       onMaxChange={(v) => onSet("--sf-text-display-base-max", String(v))}
       ratioPresets={RATIO_PRESETS}
