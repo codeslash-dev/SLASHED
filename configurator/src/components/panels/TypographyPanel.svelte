@@ -4,6 +4,8 @@
   import ClampField from '../inputs/ClampField.svelte';
   import Section from '../inputs/Section.svelte';
   import TypeSpecimenRow from '../inputs/TypeSpecimenRow.svelte';
+  import ScaleShadowNotice from '../inputs/ScaleShadowNotice.svelte';
+  import { TEXT_STEP_TOKENS, DISPLAY_STEP_TOKENS, shadowingSteps } from '../../lib/scaleShadow';
   import { themeState } from '../../lib/theme.svelte';
   import GOOGLE_FONTS_ALL from '../../data/google-fonts.generated.json';
 
@@ -164,6 +166,14 @@
 
   // Sorted section toggles — fonts → scale → rhythm → tracking → weights →
   // elements → measures. Every control lives in exactly one of these.
+  // Concrete per-step values stored in the override map silently outrank the
+  // whole Fluid scale section (see lib/scaleShadow.ts). Text and display are
+  // reported together: both generators live in that one section.
+  let shadowedTypeSteps = $derived([
+    ...shadowingSteps(overrides, TEXT_STEP_TOKENS),
+    ...shadowingSteps(overrides, DISPLAY_STEP_TOKENS),
+  ]);
+
   let showFonts       = $state(false);
   let showScale       = $state(false);
   let showLineHeights = $state(false);
@@ -259,6 +269,15 @@
 {/snippet}
 
 <div class="p-4 space-y-6">
+
+  <!-- Shadowing warning stays above the collapsed sections: it contradicts every
+       control in "Fluid scale", which the user would otherwise have to open to
+       find the notice explaining why those controls do nothing. -->
+  <ScaleShadowNotice
+    tokens={shadowedTypeSteps}
+    scaleLabel="type"
+    onClear={() => shadowedTypeSteps.forEach((t) => onReset(t))}
+  />
 
   <!-- ═══ 1. FONTS — families, loader, OpenType ═══ -->
   <Section title="Fonts" spacing="space-y-4" bind:open={showFonts}>

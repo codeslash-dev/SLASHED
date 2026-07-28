@@ -5,7 +5,9 @@
   import SliderRow from '../inputs/SliderRow.svelte';
   import ClampField from '../inputs/ClampField.svelte';
   import Section from '../inputs/Section.svelte';
+  import ScaleShadowNotice from '../inputs/ScaleShadowNotice.svelte';
   import { SPACE_SCALE } from '../../lib/variableScales';
+  import { SPACE_STEP_TOKENS, shadowingSteps } from '../../lib/scaleShadow';
 
   let { overrides, onSet, onReset }: {
     tokens: SlashedToken[];
@@ -52,12 +54,26 @@
     return midBase * Math.pow(ratio, 5) * spaceScale;
   });
 
+  // Concrete per-step values stored in the override map silently outrank every
+  // control in the Modular scale section (see lib/scaleShadow.ts).
+  let shadowedSpaceSteps = $derived(shadowingSteps(overrides, SPACE_STEP_TOKENS));
+
   let showLayoutGap = $state(false);
   let showModularScale = $state(false);
   let showAdvanced = $state(false);
 </script>
 
 <div class="p-4 space-y-6">
+
+  <!-- Shadowing warning sits ABOVE the fold, not inside the collapsed Modular
+       scale section: the preview below and every control in that section are
+       what the stored step values contradict, so a notice the user has to
+       expand a section to find would not be seen at all. -->
+  <ScaleShadowNotice
+    tokens={shadowedSpaceSteps}
+    scaleLabel="spacing"
+    onClear={() => shadowedSpaceSteps.forEach((t) => onReset(t))}
+  />
 
   <!-- SPACE SCALE PREVIEW — category-wide, at the top -->
   <section>
