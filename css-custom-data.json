@@ -1,0 +1,3705 @@
+{
+  "version": 1.1,
+  "properties": [
+    {
+      "name": "--sf-alternate-gap",
+      "description": "Gap between items in the alternating zigzag layout.\n\nDefault: `var(--sf-content-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-alternate-inner-gap",
+      "description": "Gap between content and media within each zigzag item.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-blink",
+      "description": "Blinking visibility loop. Use for cursor indicators or critical attention cues. Respect prefers-reduced-motion.\n\nDefault: `sf-blink calc(1s * var(--sf-motion-scale)) steps(1, end) infinite`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-color-pulse",
+      "description": "Pulsing color loop. Use for live-status badges (recording, live). Respect prefers-reduced-motion.\n\nDefault: `sf-color-pulse var(--sf-duration-slow) var(--sf-ease-in-out) infinite`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-fade-in",
+      "description": "Fade-in entrance animation shorthand. Use directly as animation property value.\n\nDefault: `sf-fade-in var(--sf-duration-normal) var(--sf-ease-out) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-fade-out",
+      "description": "Fade-out exit animation shorthand.\n\nDefault: `sf-fade-out var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-float",
+      "description": "Gentle floating / levitating loop. Use for hero illustrations or floating UI elements. Decorative — disable for prefers-reduced-motion.\n\nDefault: `sf-float calc(3s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-ping",
+      "description": "Expanding ping / ripple loop. Use for notification badges and live-indicator dots.\n\nDefault: `sf-ping var(--sf-duration-slow) var(--sf-ease-out) infinite`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-scale-down",
+      "description": "Scale-down exit animation. Pairs with --sf-animation-scale-up for enter/leave transitions.\n\nDefault: `sf-scale-down var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-scale-up",
+      "description": "Scale-up entrance animation. Use for modals, popovers, and tooltips appearing.\n\nDefault: `sf-scale-up var(--sf-duration-normal) var(--sf-ease-overshoot) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-shimmer",
+      "description": "Shimmer / skeleton-loading sweep. Apply on placeholder elements while content loads.\n\nDefault: `sf-shimmer calc(1.5s * var(--sf-motion-scale)) var(--sf-ease-in-out) infinite`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-in-down",
+      "description": "Slide-in from above. Use for dropdown menus and top-attached sheets.\n\nDefault: `sf-slide-in-down var(--sf-duration-normal) var(--sf-ease-out) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-in-left",
+      "description": "Slide-in from the left. Use for left-side drawers and navigation panels.\n\nDefault: `sf-slide-in-left var(--sf-duration-normal) var(--sf-ease-out) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-in-right",
+      "description": "Slide-in from the right. Use for right-side drawers and detail panels.\n\nDefault: `sf-slide-in-right var(--sf-duration-normal) var(--sf-ease-out) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-in-up",
+      "description": "Slide-in from below. Use for bottom sheets, toasts, and floating action buttons.\n\nDefault: `sf-slide-in-up var(--sf-duration-normal) var(--sf-ease-out) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-out-down",
+      "description": "Ready-made animation shorthand: slides the element out downward (sf-slide-out-down) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-down var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-out-left",
+      "description": "Ready-made animation shorthand: slides the element out to the left (sf-slide-out-left) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-left var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-out-right",
+      "description": "Ready-made animation shorthand: slides the element out to the right (sf-slide-out-right) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-slide-out-up",
+      "description": "Ready-made animation shorthand: slides the element out upward (sf-slide-out-up) at the normal duration with ease-in.\n\nDefault: `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-animation-spin",
+      "description": "Continuous rotation loop. Use for loading spinners and progress indicators.\n\nDefault: `sf-spin var(--sf-duration-slower) linear infinite`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-aspect",
+      "description": "Aspect ratio value for the .aspect-ratio macro.\n\nDefault: `16 / 9`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bento-cols-default",
+      "description": "Default column count for the bento grid.\n\nDefault: `4`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bento-gap",
+      "description": "Gap between bento grid cells.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bento-row-compact",
+      "description": "Row height for compact-variant bento items.\n\nDefault: `6rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bento-row-default",
+      "description": "Default row height for standard bento grid cells.\n\nDefault: `10rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bento-row-tall",
+      "description": "Tall row height for visually prominent or hero bento cells.\n\nDefault: `16rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bg-layer-fit",
+      "description": "object-fit applied to .sf-bg-layer when used as a bare media element, and to .sf-bg-layer > img / video / picture children. Defaults to cover.\n\nDefault: `cover`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bg-layer-inset",
+      "description": "Inset from every edge of the parent. A single length applied uniformly; the layer size is derived from it so a non-zero inset still fills correctly.\n\nDefault: `0px`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bg-layer-position",
+      "description": "object-position controlling where the media is anchored within the layer. Defaults to center (50% 50%).\n\nDefault: `50% 50%`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bg-layer-radius",
+      "description": "border-radius applied to the .sf-bg-layer layer and its img/video/picture children. Defaults to 0; set to match the parent's radius when clipping is needed.\n\nDefault: `0`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-bg-layer-z",
+      "description": "z-index of the background layer. Defaults to -2 so it sits behind sibling content but above the parent's own background.\n\nDefault: `-2`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-blur",
+      "description": "Backdrop-filter blur amount for frosted-glass surfaces (navbars, overlays, dialogs). Default 12px. Pair with a semi-transparent background.\n\nDefault: `12px`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-color",
+      "description": "Text color for body copy. Alias of --sf-color-text. Override here to deviate body text from the global text color.\n\nDefault: `var(--sf-color-text)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-em-style",
+      "description": "font-style for <em> inside body text (italic by default). Override to suppress italics if your typeface has no italic variant.\n\nDefault: `italic`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-font-family",
+      "description": "Font family for body text. Alias of --sf-font-body.\n\nDefault: `var(--sf-font-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-font-size",
+      "description": "Base font size for body paragraphs. Alias of --sf-text-m.\n\nDefault: `var(--sf-text-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-font-weight",
+      "description": "Font weight for body text. Alias of --sf-font-weight-body.\n\nDefault: `var(--sf-font-weight-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-line-height",
+      "description": "Line height for body paragraphs. Alias of --sf-leading-normal.\n\nDefault: `var(--sf-leading-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-strong-weight",
+      "description": "Font weight for <strong> inside body text. Override to choose a specific weight instead of inheriting bold.\n\nDefault: `var(--sf-font-weight-strong)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-body-text-wrap",
+      "description": "text-wrap mode for body paragraphs. 'pretty' prevents orphaned last words; 'balance' equalises line lengths.\n\nDefault: `pretty`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border",
+      "description": "Default border shorthand (width + solid + color). Apply directly to border property.\n\nDefault: `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-scale",
+      "description": "Global border-width multiplier. Set to 0 for borderless UI; 0.5 for hairline-only; 2 to double all border widths across the system.\n\nDefault: `1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-strong",
+      "description": "Strong-emphasis border shorthand.\n\nDefault: `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--strong)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-style",
+      "description": "Global border-style default applied across all border tokens.\n\nDefault: `solid`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-subtle",
+      "description": "Low-contrast subtle border shorthand.\n\nDefault: `var(--sf-border-width-1) var(--sf-border-style) var(--sf-color-border--subtle)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-width-1",
+      "description": "Standard 1px border width.\n\nDefault: `calc(1px * var(--sf-border-scale, 1))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-width-2",
+      "description": "Medium 2px border width. Common for focus outlines.\n\nDefault: `calc(2px * var(--sf-border-scale, 1))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-width-3",
+      "description": "Thick 3px border width.\n\nDefault: `calc(3px * var(--sf-border-scale, 1))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-width-4",
+      "description": "Extra-thick 4px border width for decorative borders.\n\nDefault: `calc(4px * var(--sf-border-scale, 1))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-border-width-hairline",
+      "description": "1px border width (hairline).\n\nDefault: `0.5px`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-box-border-color",
+      "description": "Border color for the box layout primitive.\n\nDefault: `var(--sf-color-border)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-box-border-width",
+      "description": "Border width for the box layout primitive.\n\nDefault: `0`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-box-padding",
+      "description": "Inner padding for the box layout primitive.\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-breakout-width",
+      "description": "Width of full-bleed breakout elements inside a content grid.\n\nDefault: `var(--sf-container-wide)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-border-width",
+      "description": "Border thickness for .sf-btn (used by all fill, outline, and secondary treatments).\n\nDefault: `var(--sf-border-width-1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-font-scale",
+      "description": "Uniform label-size multiplier for .sf-btn — scales every size's font-size by one factor while keeping the xs…xl ladder intact. The everyday 'bigger/smaller button text' knob.\n\nDefault: `1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-font-size",
+      "description": "Flatten-all label font-size for .sf-btn — once set it overrides every size (--xs/--s/--l/--xl) to the same value. For proportional sizing use --sf-btn-font-scale; to retune a single rung use --sf-btn-{size}-font-size.\n\nDefault: `initial`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-font-weight",
+      "description": "Label font-weight for .sf-btn. Defaults to the interactive weight.\n\nDefault: `var(--sf-font-weight-interactive)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-gap",
+      "description": "Gap between an icon and the label inside .sf-btn.\n\nDefault: `var(--sf-space-2xs)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-l-font-size",
+      "description": "Label font-size for the large button (.sf-btn--l). Unset, falls through to --sf-text-l; set to retune this rung without touching the others.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-l-min-height",
+      "description": "Minimum target height for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-l-padding-block",
+      "description": "Vertical (block) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-l-padding-inline",
+      "description": "Horizontal (inline) padding for the large button (.sf-btn--l). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-m-font-size",
+      "description": "Label font-size for the default (medium) button (.sf-btn). Unset, falls through to --sf-text-m; set to retune this rung without touching the others.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-m-min-height",
+      "description": "Minimum target height for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-m-padding-block",
+      "description": "Vertical (block) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-m-padding-inline",
+      "description": "Horizontal (inline) padding for the default (medium) button (.sf-btn). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-min-height",
+      "description": "Flatten-all minimum target height for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-min-height.\n\nDefault: `initial`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-padding-block",
+      "description": "Flatten-all vertical (block) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-block.\n\nDefault: `initial`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-padding-inline",
+      "description": "Flatten-all horizontal (inline) padding for .sf-btn — once set it overrides every size to the same value. For per-rung control use --sf-btn-{size}-padding-inline.\n\nDefault: `initial`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-radius",
+      "description": "Corner radius for .sf-btn. Defaults to --sf-radius-m; gives buttons a distinct radius from form fields without touching global tokens.\n\nDefault: `var(--sf-radius-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-s-font-size",
+      "description": "Label font-size for the small button (.sf-btn--s). Unset, falls through to --sf-text-s; set to retune this rung without touching the others.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-s-min-height",
+      "description": "Minimum target height for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-s-padding-block",
+      "description": "Vertical (block) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-s-padding-inline",
+      "description": "Horizontal (inline) padding for the small button (.sf-btn--s). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xl-font-size",
+      "description": "Label font-size for the extra-large button (.sf-btn--xl). Unset, falls through to --sf-text-xl; set to retune this rung without touching the others.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xl-min-height",
+      "description": "Minimum target height for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xl-padding-block",
+      "description": "Vertical (block) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xl-padding-inline",
+      "description": "Horizontal (inline) padding for the extra-large button (.sf-btn--xl). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xs-font-size",
+      "description": "Label font-size for the extra-small button (.sf-btn--xs). Unset, falls through to --sf-text-xs; set to retune this rung without touching the others.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xs-min-height",
+      "description": "Minimum target height for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xs-padding-block",
+      "description": "Vertical (block) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-btn-xs-padding-inline",
+      "description": "Horizontal (inline) padding for the extra-small button (.sf-btn--xs). Unset, falls through to that rung's scale default; set to retune this rung alone.\n\nDefault: `initial`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-avatar-size",
+      "description": "Diameter of .sf-card__avatar. Defaults to 2.5rem.\n\nDefault: `2.5rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-bg",
+      "description": "Background surface for .sf-card. Defaults to --sf-color-surface.\n\nDefault: `var(--sf-color-surface)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-border-color",
+      "description": "Border colour for .sf-card. Defaults to --sf-color-border.\n\nDefault: `var(--sf-color-border)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-border-width",
+      "description": "Border thickness for .sf-card.\n\nDefault: `var(--sf-border-width-1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-gap",
+      "description": "Divider spacing for .sf-card__header / __footer (padding + margin around the rule).\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-heading-size",
+      "description": "Font-size for .sf-card__title. Defaults to --sf-text-xl.\n\nDefault: `var(--sf-text-xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-media-radius",
+      "description": "Corner radius for .sf-card__media. Mirrors the card's inner radius by default.\n\nDefault: `var(--sf-card-radius, var(--sf-radius-m))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-media-ratio",
+      "description": "Aspect ratio for .sf-card__media. Defaults to --sf-ratio-video (16/9).\n\nDefault: `var(--sf-ratio-video)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-padding",
+      "description": "Inner padding for .sf-card. Also feeds the concentric-radius math (outer = inner radius + padding).\n\nDefault: `var(--sf-space-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-radius",
+      "description": "Inner radius for .sf-card children such as __media. Combined with padding to derive the outer radius.\n\nDefault: `var(--sf-radius-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-radius-outer",
+      "description": "Outer corner radius of .sf-card. Concentric with the inner radius: calc(--sf-card-radius + --sf-card-padding).\n\nDefault: `calc(var(--sf-card-radius) + var(--sf-card-padding))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-shadow",
+      "description": "Base drop shadow for .sf-card. Defaults to --sf-shadow-s.\n\nDefault: `var(--sf-shadow-s)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-shadow--elevated",
+      "description": "Drop shadow applied by the .sf-card--elevated modifier (border hidden, larger shadow).\n\nDefault: `var(--sf-shadow-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-card-shadow--hover",
+      "description": "Drop shadow applied on hover/focus by the .sf-card--interactive modifier.\n\nDefault: `var(--sf-shadow-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-caret-color",
+      "description": "Cursor caret color inside text inputs and contenteditable elements.\n\nDefault: `var(--sf-color-action)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-center-gutter",
+      "description": "Minimum side gutter for the center layout.\n\nDefault: `var(--sf-gutter)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-center-max",
+      "description": "Maximum width for the center layout.\n\nDefault: `var(--sf-container-default)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-cluster-align",
+      "description": "Vertical alignment of cluster items (align-items value).\n\nDefault: `center`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-cluster-gap",
+      "description": "Gap between wrapped inline items in the cluster layout.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-cluster-justify",
+      "description": "Horizontal justification of the cluster (justify-content value).\n\nDefault: `flex-start`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-code-font-size",
+      "description": "Font size for inline <code> and <pre>. Usually slightly smaller than body text so monospace doesn't feel oversized.\n\nDefault: `0.875em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action",
+      "description": "Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces.\n\nDefault: `light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-action--active",
+      "description": "Action color at pressed/active brightness.\n\nDefault: `var(--sf-color-action-xdark)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action--hover",
+      "description": "Action color at hover brightness.\n\nDefault: `var(--sf-color-action-darker)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-100",
+      "description": "Very light action shade. Hover fills on white surfaces, badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-200",
+      "description": "Light action shade. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-300",
+      "description": "Light-mid action shade. Borders on light backgrounds, low-emphasis fills.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-400",
+      "description": "Mid-light action shade. Disabled state fills, decorative accents.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-50",
+      "description": "Lightest action tint. Background fill for subtle action-tinted surfaces.\n\nDefault: `oklch(from var(--sf-color-action) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-500",
+      "description": "Mid action shade — the 'pure' hue. Accessible on both light and dark backgrounds.\n\nDefault: `var(--sf-color-action)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-600",
+      "description": "Mid-dark action shade. Text on light surfaces, icon fills.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-700",
+      "description": "Dark action shade. Strong text and icon fills on light backgrounds.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-800",
+      "description": "Very dark action shade. High-contrast text on white.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-900",
+      "description": "Near-black action shade. Extreme contrast on white surfaces.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-950",
+      "description": "Darkest action tint. Near-black for dark-theme surface accents.\n\nDefault: `oklch(from var(--sf-color-action) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-a10",
+      "description": "10% opacity action tint. Subtle hover or selected-row background.\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-a30",
+      "description": "30% opacity action tint.\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-a5",
+      "description": "5% opacity action tint. Barely-there hover highlight.\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-a50",
+      "description": "50% opacity action tint. Mid-transparency badge or overlay.\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-a80",
+      "description": "80% opacity action tint.\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.80)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-darker",
+      "description": "Deep action shade for high-contrast contexts.\n\nDefault: `var(--sf-color-action-600)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-lighter",
+      "description": "Light action shade for soft accents.\n\nDefault: `var(--sf-color-action-400)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-muted",
+      "description": "Medium action fill — outlined button hover backgrounds.\n\nDefault: `var(--sf-color-action-a30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%.\n\nDefault: `oklch(0.70 0.198 235)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-action-source-light",
+      "description": "OKLCH lightness source for the action color. Animate this to smoothly transition between light and dark brand themes.\n\nDefault: `oklch(0.50 0.22 235)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-action-subtle",
+      "description": "Lightest action tint — selected rows, active nav, chips.\n\nDefault: `var(--sf-color-action-a10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-superdark",
+      "description": "Near-black action shade for maximum contrast on light surfaces.\n\nDefault: `var(--sf-color-action-950)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-superlight",
+      "description": "Near-white action shade for maximum contrast on dark surfaces.\n\nDefault: `var(--sf-color-action-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-tint",
+      "description": "Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-action-a5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-xdark",
+      "description": "Extra-dark action shade.\n\nDefault: `var(--sf-color-action-800)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-action-xlight",
+      "description": "Extra-light action shade.\n\nDefault: `var(--sf-color-action-200)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base",
+      "description": "Mode-adaptive base surface color. Drives the page canvas and the surface elevation family; not an interactive/brand role.\n\nDefault: `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-base--active",
+      "description": "Pressed/active surface derived from --sf-color-base for subtle background interactions.\n\nDefault: `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base--hover",
+      "description": "Hover-state surface derived from --sf-color-base for subtle background interactions.\n\nDefault: `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-100",
+      "description": "Very light base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.94 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-200",
+      "description": "Light base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.88 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-300",
+      "description": "Light-mid base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.78 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-400",
+      "description": "Mid-light base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.65 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-50",
+      "description": "Lightest base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.97 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-500",
+      "description": "Mid base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.50 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-600",
+      "description": "Mid-dark base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.37 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-700",
+      "description": "Dark base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.27 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-800",
+      "description": "Very dark base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.17 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-900",
+      "description": "Near-black base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.11 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-950",
+      "description": "Darkest base-surface level.\n\nDefault: `oklch(from var(--sf-color-base) 0.06 c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-a10",
+      "description": "10% opacity base-surface tint.\n\nDefault: `oklch(from var(--sf-color-base) l c h / 0.10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-a30",
+      "description": "30% opacity base-surface tint.\n\nDefault: `oklch(from var(--sf-color-base) l c h / 0.30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-a5",
+      "description": "5% opacity base-surface tint.\n\nDefault: `oklch(from var(--sf-color-base) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-a50",
+      "description": "50% opacity base-surface tint.\n\nDefault: `oklch(from var(--sf-color-base) l c h / 0.50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-a80",
+      "description": "80% opacity base-surface tint.\n\nDefault: `oklch(from var(--sf-color-base) l c h / 0.80)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-muted",
+      "description": "Medium base-surface fill for muted containers or overlays.\n\nDefault: `var(--sf-color-base-a30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-base. Keep near-black for dark-mode surfaces and elevation offsets.\n\nDefault: `oklch(0.22 0.003 250)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-base-source-light",
+      "description": "OKLCH source color for the light-mode base surface. Keep near-white so --sf-color-bg, --sf-color-surface, and raised/inset levels have room to separate.\n\nDefault: `oklch(0.96 0.006 250)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-base-subtle",
+      "description": "Subtle base-surface tint for low-emphasis backgrounds.\n\nDefault: `var(--sf-color-base-a10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-base-tint",
+      "description": "Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-base-a5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-bg",
+      "description": "Base page / component background. The canvas all other surfaces layer on top of.\n\nDefault: `oklch(from var(--sf-color-base) calc(l + 0.02) c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-bg--active",
+      "description": "Background tint for pressed/active interactive elements.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.12)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-bg--disabled",
+      "description": "Background for disabled interactive elements.\n\nDefault: `var(--sf-color-inset)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-bg--focus",
+      "description": "Background tint for focused interactive elements.\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.06)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-bg--hover",
+      "description": "Background tint for hovered interactive elements (rows, list items, etc.).\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.08)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-bg--selected",
+      "description": "Background for selected items (checked rows, active nav links).\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-black",
+      "description": "Absolute black reference value.\n\nDefault: `oklch(0% 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-border",
+      "description": "Default border for dividers and component edges.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.70, calc(l + 0.35), 0.95) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.3), 0.55) 0.005 h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-border--disabled",
+      "description": "Semi-transparent border for disabled element edges.\n\nDefault: `oklch(from var(--sf-color-border--subtle) l 0 h / 0.5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-border--focus",
+      "description": "Focus indicator border, used alongside --sf-focus-ring-color.\n\nDefault: `var(--sf-color-action)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-border--strong",
+      "description": "Stronger border for visually prominent edges and active outlines.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-border--subtle",
+      "description": "Low-contrast border for subtle separation without strong visual weight.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-border--translucent",
+      "description": "Translucent border for glass-morphism and frosted surfaces.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.15)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-code-bg",
+      "description": "Background for inline <code> elements. Usually a subtle tint of the inset surface.\n\nDefault: `var(--sf-color-inset)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-code-text",
+      "description": "Text color for inline code and monospace preformatted text.\n\nDefault: `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-danger",
+      "description": "Destructive / danger state color. Used for delete actions, error alerts, and critical warnings.\n\nDefault: `light-dark(var(--sf-color-danger-source-light), var(--sf-color-danger-source-dark, oklch(from var(--sf-color-danger-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-danger-muted",
+      "description": "Medium danger fill for icon backgrounds and badge fills.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.3)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-danger-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-danger.\n\nDefault: `oklch(0.71 0.198 12)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-danger-source-light",
+      "description": "OKLCH lightness source for the danger status color (covers destructive actions and form validation errors).\n\nDefault: `oklch(0.48 0.22 12)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-danger-strong",
+      "description": "High-contrast danger color for alert body text and icons.\n\nDefault: `light-dark( oklch(from var(--sf-color-danger-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-danger) clamp(0.70, calc(l + 0.15), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-danger-subtle",
+      "description": "Light danger tint for error row backgrounds and alert container fills.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.12)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-danger-tint",
+      "description": "Near-transparent danger tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-danger) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-dim",
+      "description": "Backdrop overlay color for modals, drawers, and lightboxes.\n\nDefault: `oklch(0 0 0 / 0.5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-heading",
+      "description": "Heading text color. Slightly stronger contrast than body text for visual hierarchy.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-info",
+      "description": "Informational color for neutral tips, hints, and non-urgent notices.\n\nDefault: `light-dark(var(--sf-color-info-source-light), var(--sf-color-info-source-dark, oklch(from var(--sf-color-info-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-info-muted",
+      "description": "Medium info fill for info icons and hint chips.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.3)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-info-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-info.\n\nDefault: `oklch(0.71 0.162 235)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-info-source-light",
+      "description": "OKLCH lightness source for the info status color.\n\nDefault: `oklch(0.48 0.18 235)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-info-strong",
+      "description": "High-contrast info color for hint body text.\n\nDefault: `light-dark( oklch(from var(--sf-color-info-source-light) calc(l - 0.1) c h), oklch(from var(--sf-color-info) clamp(0.70, calc(l + 0.15), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-info-subtle",
+      "description": "Light info tint for informational note backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.12)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-info-tint",
+      "description": "Near-transparent info tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-inset",
+      "description": "Slightly inset surface for nested areas — inputs, code blocks, sidebar panels.\n\nDefault: `oklch(from var(--sf-color-base) calc(l - 0.02) c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-inverse",
+      "description": "Inverted (dark-on-light / light-on-dark) surface for high-contrast banners or tooltips.\n\nDefault: `oklch(from var(--sf-color-base) calc(1 - l) c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-link",
+      "description": "Default hyperlink color.\n\nDefault: `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c h), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-link--active",
+      "description": "Link color when actively pressed.\n\nDefault: `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.21, 0.34), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.15, 0.74), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-link--disabled",
+      "description": "Disabled link color (low contrast, no interaction).\n\nDefault: `var(--sf-color-text--disabled)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-link--hover",
+      "description": "Link color on hover.\n\nDefault: `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.15, 0.40), 1) c h), oklch(from var(--sf-color-action) clamp(0, max(l + 0.10, 0.68), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-link--underline",
+      "description": "Color of the link underline decoration. Defaults to a semi-transparent variant of the link color.\n\nDefault: `oklch(from var(--sf-color-action) l c h / 0.3)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-link--visited",
+      "description": "Visited link color.\n\nDefault: `light-dark( oklch(from var(--sf-color-action) clamp(0, min(l - 0.07, 0.48), 1) c calc(h + 60)), oklch(from var(--sf-color-action) clamp(0.68, l, 1) c calc(h + 60)) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-mark-bg",
+      "description": "Background color for highlighted <mark> elements.\n\nDefault: `oklch(from var(--sf-color-warning) l c h / 0.25)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-mark-text",
+      "description": "Text color inside highlighted <mark> elements.\n\nDefault: `inherit`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral",
+      "description": "Neutral interactive color for low-emphasis actions and tertiary buttons.\n\nDefault: `light-dark(var(--sf-color-neutral-source-light), var(--sf-color-neutral-source-dark, oklch(from var(--sf-color-neutral-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-neutral--active",
+      "description": "Neutral color at pressed/active brightness.\n\nDefault: `var(--sf-color-neutral-xdark)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral--hover",
+      "description": "Neutral color at hover brightness.\n\nDefault: `var(--sf-color-neutral-darker)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-100",
+      "description": "Very light neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-200",
+      "description": "Light neutral shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-300",
+      "description": "Light-mid neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-400",
+      "description": "Mid-light neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-50",
+      "description": "Lightest neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-500",
+      "description": "Mid neutral shade — the 'pure' hue.\n\nDefault: `var(--sf-color-neutral)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-600",
+      "description": "Mid-dark neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-700",
+      "description": "Dark neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-800",
+      "description": "Very dark neutral shade.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-900",
+      "description": "Near-black neutral shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-950",
+      "description": "Darkest neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-a10",
+      "description": "10% opacity neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-a30",
+      "description": "30% opacity neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-a5",
+      "description": "5% opacity neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-a50",
+      "description": "50% opacity neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-a80",
+      "description": "80% opacity neutral tint.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.80)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-darker",
+      "description": "Deep neutral shade for high-contrast contexts.\n\nDefault: `var(--sf-color-neutral-600)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-lighter",
+      "description": "Light neutral shade for soft accents — alias of --sf-color-neutral-400.\n\nDefault: `var(--sf-color-neutral-400)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-muted",
+      "description": "Muted neutral fill for low-emphasis contexts.\n\nDefault: `var(--sf-color-neutral-a30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-neutral.\n\nDefault: `oklch(0.69 0.0225 260)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-neutral-source-light",
+      "description": "OKLCH lightness source for the neutral color.\n\nDefault: `oklch(0.52 0.025 260)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-neutral-subtle",
+      "description": "Lightest neutral semantic tint.\n\nDefault: `var(--sf-color-neutral-a10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-superdark",
+      "description": "Near-black neutral shade for maximum contrast on light surfaces — alias of --sf-color-neutral-950.\n\nDefault: `var(--sf-color-neutral-950)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-superlight",
+      "description": "Near-white neutral shade.\n\nDefault: `var(--sf-color-neutral-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-tint",
+      "description": "Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-neutral-a5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-xdark",
+      "description": "Extra-dark neutral shade.\n\nDefault: `var(--sf-color-neutral-800)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-neutral-xlight",
+      "description": "Extra-light neutral shade.\n\nDefault: `var(--sf-color-neutral-200)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-overlay",
+      "description": "Overlay surface for floating panels, sheets, and modals.\n\nDefault: `oklch(from var(--sf-color-base) l c h / 0.9)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary",
+      "description": "Primary brand palette color. Independent from --sf-color-action by default; override either source token to couple or separate brand and action roles.\n\nDefault: `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-primary--active",
+      "description": "Primary color at pressed/active brightness.\n\nDefault: `var(--sf-color-primary-xdark)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary--hover",
+      "description": "Primary color at hover brightness.\n\nDefault: `var(--sf-color-primary-darker)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-100",
+      "description": "Very light primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-200",
+      "description": "Light primary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-300",
+      "description": "Light-mid primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-400",
+      "description": "Mid-light primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-50",
+      "description": "Lightest primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-500",
+      "description": "Mid primary shade — the 'pure' hue.\n\nDefault: `var(--sf-color-primary)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-600",
+      "description": "Mid-dark primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-700",
+      "description": "Dark primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-800",
+      "description": "Very dark primary shade.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-900",
+      "description": "Near-black primary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-950",
+      "description": "Darkest primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-a10",
+      "description": "10% opacity primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) l c h / 0.10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-a30",
+      "description": "30% opacity primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) l c h / 0.30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-a5",
+      "description": "5% opacity primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-a50",
+      "description": "50% opacity primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) l c h / 0.50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-a80",
+      "description": "80% opacity primary tint.\n\nDefault: `oklch(from var(--sf-color-primary) l c h / 0.80)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-darker",
+      "description": "Deep primary shade.\n\nDefault: `var(--sf-color-primary-600)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-lighter",
+      "description": "Light primary shade for soft accents — alias of --sf-color-primary-400.\n\nDefault: `var(--sf-color-primary-400)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-muted",
+      "description": "Muted primary fill.\n\nDefault: `var(--sf-color-primary-a30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-primary.\n\nDefault: `oklch(0.715 0.243 264)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-primary-source-light",
+      "description": "OKLCH lightness source for the primary color.\n\nDefault: `oklch(0.47 0.27 264)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-primary-subtle",
+      "description": "Lightest primary semantic tint.\n\nDefault: `var(--sf-color-primary-a10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-superdark",
+      "description": "Near-black primary shade for maximum contrast on light surfaces — alias of --sf-color-primary-950.\n\nDefault: `var(--sf-color-primary-950)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-superlight",
+      "description": "Near-white primary shade.\n\nDefault: `var(--sf-color-primary-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-tint",
+      "description": "Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-primary-a5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-xdark",
+      "description": "Extra-dark primary shade.\n\nDefault: `var(--sf-color-primary-800)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-primary-xlight",
+      "description": "Extra-light primary shade.\n\nDefault: `var(--sf-color-primary-200)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-raised",
+      "description": "Elevated card surface that floats above the page background.\n\nDefault: `oklch(from var(--sf-color-base) calc(l + 0.04) c h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-scheme",
+      "description": "Preferred color scheme hint (light / dark / normal). Sent to the browser to influence UA chrome styling.\n\nDefault: `light dark`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary",
+      "description": "Raw secondary palette token for the secondary brand color.\n\nDefault: `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-secondary--active",
+      "description": "Secondary color at pressed/active brightness.\n\nDefault: `var(--sf-color-secondary-xdark)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary--hover",
+      "description": "Secondary color at hover brightness.\n\nDefault: `var(--sf-color-secondary-darker)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-100",
+      "description": "Very light secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-200",
+      "description": "Light secondary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-300",
+      "description": "Light-mid secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-400",
+      "description": "Mid-light secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-50",
+      "description": "Lightest secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-500",
+      "description": "Mid secondary shade — the 'pure' hue.\n\nDefault: `var(--sf-color-secondary)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-600",
+      "description": "Mid-dark secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-700",
+      "description": "Dark secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-800",
+      "description": "Very dark secondary shade.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-900",
+      "description": "Near-black secondary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-950",
+      "description": "Darkest secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-a10",
+      "description": "10% opacity secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) l c h / 0.10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-a30",
+      "description": "30% opacity secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) l c h / 0.30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-a5",
+      "description": "5% opacity secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-a50",
+      "description": "50% opacity secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) l c h / 0.50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-a80",
+      "description": "80% opacity secondary tint.\n\nDefault: `oklch(from var(--sf-color-secondary) l c h / 0.80)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-darker",
+      "description": "Deep secondary shade.\n\nDefault: `var(--sf-color-secondary-600)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-lighter",
+      "description": "Light secondary shade for soft accents — alias of --sf-color-secondary-400.\n\nDefault: `var(--sf-color-secondary-400)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-muted",
+      "description": "Muted secondary fill.\n\nDefault: `var(--sf-color-secondary-a30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-secondary.\n\nDefault: `oklch(0.84 0.036 264)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-secondary-source-light",
+      "description": "OKLCH lightness source for the secondary color.\n\nDefault: `oklch(0.22 0.04 264)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-secondary-subtle",
+      "description": "Lightest secondary semantic tint.\n\nDefault: `var(--sf-color-secondary-a10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-superdark",
+      "description": "Near-black secondary shade for maximum contrast on light surfaces — alias of --sf-color-secondary-950.\n\nDefault: `var(--sf-color-secondary-950)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-superlight",
+      "description": "Near-white secondary shade.\n\nDefault: `var(--sf-color-secondary-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-tint",
+      "description": "Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-secondary-a5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-xdark",
+      "description": "Extra-dark secondary shade.\n\nDefault: `var(--sf-color-secondary-800)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-secondary-xlight",
+      "description": "Extra-light secondary shade.\n\nDefault: `var(--sf-color-secondary-200)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-selection-bg",
+      "description": "Background color applied to browser text selections.\n\nDefault: `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-selection-bg--alt",
+      "description": "Alt selection background — the inverse-scheme highlight fill for surfaces that deliberately flip colour scheme (e.g. a dark hero in light mode).\n\nDefault: `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-selection-text",
+      "description": "Text color inside browser text selections.\n\nDefault: `inherit`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-selection-text--alt",
+      "description": "Alt selection text colour paired with --sf-color-selection-bg--alt; inherits by default so the underlying text colour shows through.\n\nDefault: `inherit`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-success",
+      "description": "Positive / success color for confirmation messages and completed-state indicators.\n\nDefault: `light-dark(var(--sf-color-success-source-light), var(--sf-color-success-source-dark, oklch(from var(--sf-color-success-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-success-muted",
+      "description": "Medium success fill for success icons and status chips.\n\nDefault: `oklch(from var(--sf-color-success) l c h / 0.3)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-success-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-success.\n\nDefault: `oklch(0.70 0.144 145)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-success-source-light",
+      "description": "OKLCH lightness source for the success status color.\n\nDefault: `oklch(0.50 0.16 145)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-success-strong",
+      "description": "High-contrast success color for confirmation message text.\n\nDefault: `light-dark( oklch(from var(--sf-color-success-source-light) calc(l - 0.15) c h), oklch(from var(--sf-color-success) clamp(0.70, calc(l + 0.15), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-success-subtle",
+      "description": "Light success tint for confirmation backgrounds.\n\nDefault: `oklch(from var(--sf-color-success) l c h / 0.12)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-success-tint",
+      "description": "Near-transparent success tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-success) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-surface",
+      "description": "Default component surface color. Alias of --sf-color-base; use --sf-color-raised for an elevated card/background level.\n\nDefault: `var(--sf-color-base)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary",
+      "description": "Raw tertiary palette token for the third brand color.\n\nDefault: `light-dark(var(--sf-color-tertiary-source-light), var(--sf-color-tertiary-source-dark, oklch(from var(--sf-color-tertiary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-tertiary--active",
+      "description": "Tertiary color at pressed/active brightness.\n\nDefault: `var(--sf-color-tertiary-xdark)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary--hover",
+      "description": "Tertiary color at hover brightness.\n\nDefault: `var(--sf-color-tertiary-darker)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-100",
+      "description": "Very light tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.88)) calc(c * 0.3) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-200",
+      "description": "Light tertiary shade at step 200 on the numeric scale. Subtle fills and outlined badge backgrounds.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.72)) calc(c * 0.5) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-300",
+      "description": "Light-mid tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.52)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-400",
+      "description": "Mid-light tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.3)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-50",
+      "description": "Lightest tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) max(l, calc(l + (var(--sf-palette-tint-l) - l) * 0.95)) calc(c * 0.2) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-500",
+      "description": "Mid tertiary shade — the 'pure' hue.\n\nDefault: `var(--sf-color-tertiary)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-600",
+      "description": "Mid-dark tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.16)) calc(c * 0.96) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-700",
+      "description": "Dark tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.36)) calc(c * 0.88) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-800",
+      "description": "Very dark tertiary shade.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.58)) calc(c * 0.72) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-900",
+      "description": "Near-black tertiary shade at step 900 on the numeric scale. Extreme contrast on light surfaces.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.78)) calc(c * 0.52) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-950",
+      "description": "Darkest tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) min(l, calc(l + (var(--sf-palette-shade-l) - l) * 0.9)) calc(c * 0.38) h)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-a10",
+      "description": "10% opacity tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) l c h / 0.10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-a30",
+      "description": "30% opacity tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) l c h / 0.30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-a5",
+      "description": "5% opacity tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-a50",
+      "description": "50% opacity tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) l c h / 0.50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-a80",
+      "description": "80% opacity tertiary tint.\n\nDefault: `oklch(from var(--sf-color-tertiary) l c h / 0.80)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-darker",
+      "description": "Deep tertiary shade.\n\nDefault: `var(--sf-color-tertiary-600)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-lighter",
+      "description": "Light tertiary shade for soft accents — alias of --sf-color-tertiary-400.\n\nDefault: `var(--sf-color-tertiary-400)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-muted",
+      "description": "Muted tertiary fill.\n\nDefault: `var(--sf-color-tertiary-a30)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-tertiary.\n\nDefault: `oklch(0.74 0.198 295)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-tertiary-source-light",
+      "description": "OKLCH lightness source for the tertiary color.\n\nDefault: `oklch(0.42 0.22 295)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-tertiary-subtle",
+      "description": "Lightest tertiary semantic tint.\n\nDefault: `var(--sf-color-tertiary-a10)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-superdark",
+      "description": "Near-black tertiary shade for maximum contrast on light surfaces — alias of --sf-color-tertiary-950.\n\nDefault: `var(--sf-color-tertiary-950)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-superlight",
+      "description": "Near-white tertiary shade.\n\nDefault: `var(--sf-color-tertiary-50)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-tint",
+      "description": "Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-tertiary-a5)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-xdark",
+      "description": "Extra-dark tertiary shade.\n\nDefault: `var(--sf-color-tertiary-800)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-tertiary-xlight",
+      "description": "Extra-light tertiary shade.\n\nDefault: `var(--sf-color-tertiary-200)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text",
+      "description": "Primary text color. Contrasts against --sf-color-bg for body copy.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--disabled",
+      "description": "Text color for disabled UI elements. Intentionally low contrast.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--inverse",
+      "description": "Text color for use on dark/inverted backgrounds.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--muted",
+      "description": "Muted text for metadata, timestamps, and low-priority annotations.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.35, calc(l - var(--sf-contrast-bias)), 0.62) c h), oklch(from var(--sf-color-neutral) clamp(0.48, calc(l + var(--sf-contrast-bias)), 0.74) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-action",
+      "description": "Accessible foreground color for text on action-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-action) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-base",
+      "description": "Accessible foreground for text on base-colored backgrounds.\n\nDefault: `var(--sf-color-text)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-danger",
+      "description": "Accessible foreground for text on danger-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-danger) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-info",
+      "description": "Accessible foreground for text on info-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-info) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-inverse",
+      "description": "Accessible foreground for text on inverted (dark-on-light / light-on-dark) backgrounds.\n\nDefault: `oklch(from var(--sf-color-inverse) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-neutral",
+      "description": "Accessible foreground for text placed on neutral-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-neutral) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-primary",
+      "description": "Accessible foreground for text placed on primary-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-primary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-secondary",
+      "description": "Accessible foreground for text placed on secondary-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-secondary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-success",
+      "description": "Accessible foreground for text on success-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-success) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-tertiary",
+      "description": "Accessible foreground for text placed on tertiary-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-tertiary) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--on-warning",
+      "description": "Accessible foreground for text on warning-colored backgrounds.\n\nDefault: `oklch(from var(--sf-color-warning) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--placeholder",
+      "description": "Placeholder text color for inputs and textareas.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.45, calc(l + 0.15), 0.75) c h), oklch(from var(--sf-color-neutral) clamp(0.35, calc(l - 0.1), 0.65) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-text--subtle",
+      "description": "De-emphasised, lower-emphasis text (captions, labels, supporting copy). Second tier below --sf-color-text; sits between it and --sf-color-text--muted.\n\nDefault: `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.15, calc(l - 0.25 - var(--sf-contrast-bias)), 0.45) c h), oklch(from var(--sf-color-neutral) clamp(0.55, calc(l + 0.1 + var(--sf-contrast-bias)), 0.90) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-warning",
+      "description": "Warning / caution color for non-critical alerts and degraded-state indicators.\n\nDefault: `light-dark(var(--sf-color-warning-source-light), var(--sf-color-warning-source-dark, oklch(from var(--sf-color-warning-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-warning-muted",
+      "description": "Medium warning fill for icons and caution chips.\n\nDefault: `oklch(from var(--sf-color-warning) l c h / 0.3)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-warning-source-dark",
+      "description": "Registered <color> dark counterpart of --sf-color-warning.\n\nDefault: `oklch(0.65 0.153 80)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-warning-source-light",
+      "description": "OKLCH lightness source for the warning status color.\n\nDefault: `oklch(0.75 0.17 80)`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sf-color-warning-strong",
+      "description": "High-contrast warning color for caution text.\n\nDefault: `light-dark( oklch(from var(--sf-color-warning-source-light) calc(l - 0.25) c h), oklch(from var(--sf-color-warning) clamp(0.70, calc(l + 0.05), 1) c h) )`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-warning-subtle",
+      "description": "Light warning tint for warning notification backgrounds.\n\nDefault: `oklch(from var(--sf-color-warning) l c h / 0.12)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-warning-tint",
+      "description": "Near-transparent warning tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `oklch(from var(--sf-color-warning) l c h / 0.05)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-white",
+      "description": "Absolute white reference value.\n\nDefault: `oklch(100% 0 0)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-component-pad",
+      "description": "Standard inner padding for interactive components (buttons, form inputs, chips).\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-container-default",
+      "description": "Default content container max-width (~1200px).\n\nDefault: `75rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-container-full",
+      "description": "Full-width container — removes the max-width constraint.\n\nDefault: `100%`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-container-narrow",
+      "description": "Narrow content max-width — ideal for article body and blog posts (~65ch).\n\nDefault: `38rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-container-prose",
+      "description": "Prose max-width — optimised for readability (~75ch).\n\nDefault: `65ch`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-container-wide",
+      "description": "Wide container for marketing / dashboard layouts (~1440px).\n\nDefault: `90rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-content-gap",
+      "description": "Tight gap within related content (stack, flow, prose). Override globally to retune all tight primitives at once.\n\nDefault: `var(--sf-space-s)`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-content-intrinsic-size",
+      "description": "Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal).\n\nDefault: `500px`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-content-width",
+      "description": "Max-width of the main content column in a content grid.\n\nDefault: `var(--sf-container-default)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-contrast-bias",
+      "description": "Global text-contrast nudge. Positive values push derived reading-text colors toward the extremes (darker in light mode, lighter in dark). Default 0 (neutral).\n\nDefault: `0`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-contrast-threshold",
+      "description": "OKLCH lightness crossover for auto-contrast on colored surfaces. Colors with L above this get dark text; below get light text. Default 0.6.\n\nDefault: `0.6`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-cover-min-height",
+      "description": "Minimum height of the cover layout (typically 100svh).\n\nDefault: `100dvh`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-cover-padding",
+      "description": "Inner padding for the cover layout.\n\nDefault: `var(--sf-section-pad)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-density",
+      "description": "Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it).\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-display-l-line-height",
+      "description": "Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes.\n\nDefault: `1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-display-m-line-height",
+      "description": "Line height for medium display text (--sf-text-display-m).\n\nDefault: `1.05`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-display-s-line-height",
+      "description": "Line height for small display text (--sf-text-display-s).\n\nDefault: `var(--sf-leading-tight)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-divider-color",
+      "description": "Color of horizontal/vertical divider rules.\n\nDefault: `var(--sf-color-border)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-divider-gap",
+      "description": "Spacing (margin) around divider elements.\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-divider-style",
+      "description": "Border style of dividers.\n\nDefault: `solid`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-divider-width",
+      "description": "Stroke width of horizontal and vertical divider rules.\n\nDefault: `var(--sf-border-width-1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-drop-shadow-l",
+      "description": "Large CSS filter: drop-shadow for prominent illustrated or cut-out elements.\n\nDefault: `drop-shadow(0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7)))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-drop-shadow-m",
+      "description": "Medium CSS filter: drop-shadow for elevated icons and card thumbnails.\n\nDefault: `drop-shadow(0 4px 6px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7)))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-drop-shadow-s",
+      "description": "Small CSS filter: drop-shadow. Use filter (not box-shadow) for elements with transparent areas — SVGs, PNGs, cutout images.\n\nDefault: `drop-shadow(0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7)))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-drop-shadow-xl",
+      "description": "Extra-large CSS filter: drop-shadow for hero-scale illustrated or cut-out elements.\n\nDefault: `drop-shadow(0 16px 32px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-drop-shadow-xs",
+      "description": "Extra-small CSS filter: drop-shadow, for the subtlest depth on small icons and cutout images.\n\nDefault: `drop-shadow(0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7)))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-duration-fast",
+      "description": "Fast duration (~150ms). Hover transitions, tooltip appear.\n\nDefault: `calc(150ms * var(--sf-motion-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-duration-instant",
+      "description": "Near-instant duration (~100ms). Micro-interactions and cursor-follow effects.\n\nDefault: `calc(100ms * var(--sf-motion-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-duration-none",
+      "description": "0ms duration. Disables transitions (respects prefers-reduced-motion).\n\nDefault: `0ms`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-duration-normal",
+      "description": "Normal duration (~250ms). Default for most transitions.\n\nDefault: `calc(250ms * var(--sf-motion-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-duration-slow",
+      "description": "Slow duration (~400ms). Emphasis transitions, drawers.\n\nDefault: `calc(400ms * var(--sf-motion-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-duration-slower",
+      "description": "Extra-slow duration (~600ms). Page-level enter/exit transitions.\n\nDefault: `calc(600ms * var(--sf-motion-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-bounce",
+      "description": "Bounce easing. Playful overshooting effect.\n\nDefault: `linear(0, 0.35 18%, 1 32%, 0.86 42%, 1.02 56%, 0.98 72%, 1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-elastic",
+      "description": "Elastic easing. Spring-like overshooting effect.\n\nDefault: `linear(0, 0.3, 1.2, 0.9, 1.05, 1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-in",
+      "description": "Accelerating easing. Use for elements leaving the viewport.\n\nDefault: `cubic-bezier(0.5, 0, 0.75, 0.25)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-in-out",
+      "description": "Symmetric easing. Use for elements that move within the viewport.\n\nDefault: `cubic-bezier(0.4, 0, 0.2, 1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-linear",
+      "description": "Linear easing. Use for progress indicators and spinner rotations.\n\nDefault: `linear`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-out",
+      "description": "Decelerating easing. Use for elements entering the viewport.\n\nDefault: `cubic-bezier(0.25, 0, 0.15, 1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-overshoot",
+      "description": "Subtle overshoot easing. Softer spring effect.\n\nDefault: `linear(0, 0.6 30%, 1.08 55%, 0.98 75%, 1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ease-spring",
+      "description": "Spring easing. Natural physics-based motion.\n\nDefault: `linear(0, 0.5, 1.1, 0.95, 1.02, 1)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-equal-gap",
+      "description": "Gap between equal columns.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-equal-min-col",
+      "description": "column-width floor for .sf-equal's flowing CSS multi-column layout (not a grid) — the browser won't go narrower than this.\n\nDefault: `16rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-equal-rule-color",
+      "description": "column-rule color between .sf-equal's flowing columns.\n\nDefault: `var(--sf-color-border)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-equal-rule-style",
+      "description": "column-rule style between .sf-equal's flowing columns.\n\nDefault: `solid`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-equal-rule-width",
+      "description": "column-rule width between .sf-equal's flowing columns. 0 (default) means no rule.\n\nDefault: `0`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-field-block",
+      "description": "Vertical (block) padding inside form fields.\n\nDefault: `var(--sf-space-xs)`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-field-padding-block",
+      "description": "Vertical (block) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.\n\nDefault: `var(--sf-space-xs)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-field-padding-inline",
+      "description": "Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.\n\nDefault: `var(--sf-space-s)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-field-radius",
+      "description": "Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule.\n\nDefault: `var(--sf-radius-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-field-required-marker",
+      "description": "CSS content value for required-field markers (e.g. \" *\"). Used by pseudo-elements in the .required utility pattern.\n\nDefault: `\" *\"`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-flow-space",
+      "description": "Margin-block-start applied to all flow children except the first.\n\nDefault: `var(--sf-content-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-fluid-max-vw",
+      "description": "Maximum viewport width (in rem) at which the fluid scale clamps to its largest values. Default 90rem (~1440px). Part of the fluid scale engine.\n\nDefault: `90`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-fluid-min-vw",
+      "description": "Minimum viewport width (in rem) at which the fluid scale clamps to its smallest values. Default 22.5rem (~360px). Part of the fluid scale engine.\n\nDefault: `22.5`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-fluid-width",
+      "description": "Fluid interpolation driver — the length term every fluid clamp() below measures against. Universal syntax (\"*\") not \"<length>\": a registered <length> requires a computationally-independent initial-value, and 100vw (viewport-dependent) is not one. The real default lives on…\n\nDefault: `100vw`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-focus-ring-color",
+      "description": "Color of the keyboard focus ring. Ensure sufficient contrast against all background surfaces.\n\nDefault: `var(--sf-color-action)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-focus-ring-offset",
+      "description": "Gap between the element edge and the focus ring.\n\nDefault: `2px`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-focus-ring-shadow",
+      "description": "Computed box-shadow value for the focus ring — two-layer technique: offset shadow in bg color, then ring shadow in focus-ring color. Tune via --sf-focus-ring-width and --sf-focus-ring-color instead of overriding this directly.\n\nDefault: `0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-source-light, #fff)), 0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-focus-ring-style",
+      "description": "Border style of the focus ring (solid, dashed, dotted).\n\nDefault: `solid`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-focus-ring-width",
+      "description": "Stroke width of the focus ring outline.\n\nDefault: `2px`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-body",
+      "description": "Font family stack for body text. Override to set your primary typeface.\n\nDefault: `system-ui, -apple-system, sans-serif`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-display",
+      "description": "Font family for display/marketing text. Override for large headline typefaces.\n\nDefault: `var(--sf-font-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-features",
+      "description": "OpenType feature-settings string for body text (e.g. 'ss01', 'cv11'). Default 'normal'. Override on :root or a subtree to enable ligatures, alternate glyphs, etc.\n\nDefault: `normal`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-geometric",
+      "description": "Geometric sans-serif slot — circular letterforms for brand alternates.\n\nDefault: `\"Avenir\", \"Montserrat\", \"Corbel\", \"URW Gothic\", source-sans-pro, sans-serif`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-heading",
+      "description": "Font family for headings. Defaults to display if not overridden separately.\n\nDefault: `var(--sf-font-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-humanist",
+      "description": "Humanist sans-serif slot — warm, readable alternate typeface.\n\nDefault: `\"Seravek\", \"Gill Sans Nova\", \"Ubuntu\", \"Calibri\", \"DejaVu Sans\", source-sans-pro, sans-serif`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-mono",
+      "description": "Monospace font family for code, pre, and kbd elements.\n\nDefault: `ui-monospace, monospace`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-numeric",
+      "description": "font-variant-numeric shorthand (e.g. tabular-nums) for aligned numeric data.\n\nDefault: `tabular-nums`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-slab",
+      "description": "Slab-serif slot for editorial or display headings.\n\nDefault: `\"Rockwell\", \"Rockwell Nova\", \"Roboto Slab\", \"DejaVu Serif\", \"Sitka Small\", serif`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-variation",
+      "description": "Variable-font axis settings for body text (e.g. \"wght\" 450). Default 'normal'. Override on :root or a subtree to activate variable-font axes.\n\nDefault: `normal`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-body",
+      "description": "Font weight for body text (typically 400 / normal).\n\nDefault: `var(--sf-font-weight-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-bold",
+      "description": "Strong emphasis weight (700).\n\nDefault: `700`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-display",
+      "description": "Font weight for display-size text.\n\nDefault: `var(--sf-font-weight-bold)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-heading",
+      "description": "Font weight for headings (typically 600–700).\n\nDefault: `var(--sf-font-weight-semibold)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-interactive",
+      "description": "Font weight for interactive role text — buttons, badges, and navigation labels. Defaults to semibold.\n\nDefault: `var(--sf-font-weight-semibold)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-light",
+      "description": "Light weight (300). Use sparingly — check contrast at small sizes.\n\nDefault: `300`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-medium",
+      "description": "Medium weight (500). Subtle emphasis without full bold.\n\nDefault: `500`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-normal",
+      "description": "Normal / regular weight (400).\n\nDefault: `400`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-semibold",
+      "description": "Semibold weight (600). Common for labels and subheadings.\n\nDefault: `600`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-font-weight-strong",
+      "description": "Font weight for strong/emphasis inline role. Defaults to bold.\n\nDefault: `var(--sf-font-weight-bold)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-frame-ratio",
+      "description": "Aspect ratio for the frame (media container) layout.\n\nDefault: `16 / 9`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gap",
+      "description": "Default gap between components (the loose rhythm). Layout primitives like cluster/grid/sidebar default to it. Override globally to retune them all at once, or set a primitive token (e.g. --sf-cluster-gap) for one element.\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-gradient-action",
+      "description": "Gradient using action palette colors (light to saturated). Core-4 parity with the primary/secondary/tertiary gradients; drives the default .sf-btn--gradient fill.\n\nDefault: `linear-gradient(in oklch 135deg, var(--sf-color-action), oklch(from var(--sf-color-action) calc(l - 0.08) c h))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-brand",
+      "description": "Multi-stop brand gradient spanning primary and secondary palette colors. Use for hero backgrounds and brand accents.\n\nDefault: `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) l c calc(h + 30)))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-fade--b",
+      "description": "Fade-to-bottom gradient (transparent → surface). Use to fade content into a background below (infinite scroll fade, content cutoff).\n\nDefault: `linear-gradient(in oklch to bottom, transparent, var(--sf-color-bg))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-fade--l",
+      "description": "Fade-to-left gradient. Use to indicate left-side scrollable overflow.\n\nDefault: `linear-gradient(in oklch to left, transparent, var(--sf-color-bg))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-fade--r",
+      "description": "Fade-to-right gradient. Use to indicate right-side scrollable overflow.\n\nDefault: `linear-gradient(in oklch to right, transparent, var(--sf-color-bg))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-fade--t",
+      "description": "Fade-to-top gradient (transparent → surface). Use to fade content into a background above.\n\nDefault: `linear-gradient(in oklch to top, transparent, var(--sf-color-bg))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-primary",
+      "description": "Gradient using primary palette colors (light to saturated).\n\nDefault: `linear-gradient(in oklch 135deg, var(--sf-color-primary), oklch(from var(--sf-color-primary) calc(l - 0.08) c h))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-secondary",
+      "description": "Gradient using secondary palette colors.\n\nDefault: `linear-gradient(in oklch 135deg, var(--sf-color-secondary), oklch(from var(--sf-color-secondary) calc(l - 0.08) c h))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-surface",
+      "description": "Subtle surface-color gradient for depth layering and glass effects.\n\nDefault: `linear-gradient(in oklab 180deg, var(--sf-color-surface), var(--sf-color-bg))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gradient-tertiary",
+      "description": "Gradient using tertiary palette colors.\n\nDefault: `linear-gradient(in oklch 135deg, var(--sf-color-tertiary), oklch(from var(--sf-color-tertiary) calc(l - 0.08) c h))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-gap",
+      "description": "Gap between auto-fill grid cells.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-min",
+      "description": "Minimum column width for the auto-fill grid.\n\nDefault: `16rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-min-2xl",
+      "description": "Minimum column width at the 2× breakpoint.\n\nDefault: `28rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-min-l",
+      "description": "Large minimum column width for the auto-fill grid.\n\nDefault: `20rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-min-m",
+      "description": "Medium minimum column width for the auto-fill grid.\n\nDefault: `16rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-min-s",
+      "description": "Small minimum column width for the auto-fill grid.\n\nDefault: `13rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-min-xl",
+      "description": "Extra-large minimum column width for the auto-fill grid. Use for wide content cards.\n\nDefault: `24rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-grid-min-xs",
+      "description": "Extra-small minimum column width for the auto-fill grid. Use for very compact tile layouts (icon grids).\n\nDefault: `10rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-gutter",
+      "description": "Wide page/section-edge gutter (used by center/container). Override to set the page-edge breathing room across breakpoints.\n\nDefault: `var(--sf-space-l)`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-h1-font-weight",
+      "description": "Font weight for <h1>.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h1-letter-spacing",
+      "description": "Letter-spacing for <h1>. Typically slightly negative at large sizes.\n\nDefault: `var(--sf-tracking-tight)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h1-line-height",
+      "description": "Line height for <h1>. Tighter than body to avoid excessive whitespace at large sizes.\n\nDefault: `var(--sf-leading-tight)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h1-max-width",
+      "description": "Max-inline-size cap for <h1>. Default none (unconstrained). Set to a ch value (e.g. 20ch) to prevent wide headings from spanning the full column on large screens.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h1-size",
+      "description": "Font size for <h1>.\n\nDefault: `var(--sf-text-4xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h2-font-weight",
+      "description": "Font weight for <h2>.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h2-letter-spacing",
+      "description": "Letter-spacing for <h2>.\n\nDefault: `var(--sf-tracking-tight)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h2-line-height",
+      "description": "Line height for <h2>.\n\nDefault: `var(--sf-leading-tight)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h2-max-width",
+      "description": "Max-inline-size cap for <h2>. Default none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h2-size",
+      "description": "Font size for <h2>.\n\nDefault: `var(--sf-text-3xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h3-font-weight",
+      "description": "Font weight for <h3>.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h3-letter-spacing",
+      "description": "Letter-spacing for <h3>.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h3-line-height",
+      "description": "Line height for <h3>.\n\nDefault: `var(--sf-leading-snug)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h3-max-width",
+      "description": "Max-inline-size cap for <h3>. Default none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h3-size",
+      "description": "Font size for <h3>.\n\nDefault: `var(--sf-text-2xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h4-font-weight",
+      "description": "Font weight for <h4>.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h4-letter-spacing",
+      "description": "Letter-spacing for <h4>.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h4-line-height",
+      "description": "Line height for <h4>.\n\nDefault: `var(--sf-leading-snug)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h4-max-width",
+      "description": "Max-inline-size cap for <h4>. Default none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h4-size",
+      "description": "Font size for <h4>.\n\nDefault: `var(--sf-text-xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h5-font-weight",
+      "description": "Font weight for <h5>.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h5-letter-spacing",
+      "description": "Letter-spacing for <h5>.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h5-line-height",
+      "description": "Line height for <h5>.\n\nDefault: `var(--sf-leading-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h5-max-width",
+      "description": "Max-inline-size cap for <h5>. Default none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h5-size",
+      "description": "Font size for <h5>.\n\nDefault: `var(--sf-text-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h6-font-weight",
+      "description": "Font weight for <h6>.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h6-letter-spacing",
+      "description": "Letter-spacing for <h6>.\n\nDefault: `var(--sf-tracking-wide)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h6-line-height",
+      "description": "Line height for <h6>.\n\nDefault: `var(--sf-leading-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h6-max-width",
+      "description": "Max-inline-size cap for <h6>. Default none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-h6-size",
+      "description": "Font size for <h6>.\n\nDefault: `var(--sf-text-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-header-height",
+      "description": "Total height of the sticky page header. Used by --sf-sticky-offset to prevent content from hiding under it.\n\nDefault: `clamp( var(--sf-header-height-mobile), calc((var(--sf-header-height-desktop) - var(--sf-header-height-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-header-height-mobile)), var(--sf-header-height-desktop))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-header-height-desktop",
+      "description": "Header height at desktop breakpoints.\n\nDefault: `5rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-header-height-mobile",
+      "description": "Header height at mobile breakpoints.\n\nDefault: `3.5rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-heading-color",
+      "description": "Text color for all headings (h1–h6). Alias of --sf-color-heading.\n\nDefault: `var(--sf-color-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-heading-font-family",
+      "description": "Font family for all headings. Alias of --sf-font-heading.\n\nDefault: `var(--sf-font-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-heading-text-wrap",
+      "description": "text-wrap for headings. 'balance' prevents orphaned short last lines in multi-line headings.\n\nDefault: `balance`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-grow-scale",
+      "description": "Scale factor applied by .sf-hover-grow on hover (>1 grows).\n\nDefault: `1.05`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-lift",
+      "description": "Translate distance for .sf-hover-float (up) and .sf-hover-sink (down) on hover.\n\nDefault: `0.25em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-shrink-scale",
+      "description": "Scale factor applied by .sf-hover-shrink on hover (<1 shrinks).\n\nDefault: `0.95`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-hover-slide",
+      "description": "Translate distance for .sf-hover-slide-start / .sf-hover-slide-end on hover.\n\nDefault: `0.5em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-2xl",
+      "description": "2× large icon size (~40px+). Hero or onboarding icons.\n\nDefault: `4em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-box-bg",
+      "description": "Background color for boxed icon containers.\n\nDefault: `var(--sf-color-inset)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-box-border",
+      "description": "Border for boxed icon containers.\n\nDefault: `var(--sf-border-width-1) solid var(--sf-color-border)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-box-pad",
+      "description": "Padding inside boxed icon containers.\n\nDefault: `0.5em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-box-radius",
+      "description": "Border radius for boxed icon containers.\n\nDefault: `var(--sf-radius-s)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-l",
+      "description": "Large icon size (~24px). Standalone icon buttons.\n\nDefault: `2em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-m",
+      "description": "Medium icon size (~20px). Default for inline and button icons.\n\nDefault: `1.5em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-s",
+      "description": "Small icon size (~16px). Dense UI chrome.\n\nDefault: `1em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-xl",
+      "description": "Extra-large icon size (~32px). Feature icons.\n\nDefault: `3em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-icon-xs",
+      "description": "Extra-small icon size (~12px). Inline indicators.\n\nDefault: `0.875em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-imposter-margin",
+      "description": "Margin between the imposter overlay and the viewport edges.\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-leading-normal",
+      "description": "Normal line height (~1.5). Default for body text.\n\nDefault: `1.5`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-leading-relaxed",
+      "description": "Relaxed line height (~1.65). Long-form reading text.\n\nDefault: `1.625`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-leading-snug",
+      "description": "Snug line height (~1.35). Use for sub-headings.\n\nDefault: `1.3`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-leading-taper",
+      "description": "Progressive leading tightener: each step up the type scale subtracts step-index × taper from its per-size line-height token. Default 0 keeps the curated defaults.\n\nDefault: `0`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-leading-tight",
+      "description": "Tight line height (~1.2). Use for large display headings.\n\nDefault: `1.1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-line-clamp",
+      "description": "Number of visible lines before text is clipped with an ellipsis.\n\nDefault: `3`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-link-external-label",
+      "description": "Accessible name for the .sf-link-external marker glyph, read by screen readers via the CSS content alt-text syntax. Localise or clear alongside --sf-link-external-marker.\n\nDefault: `\"opens in a new window or external site\"`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-link-external-marker",
+      "description": "CSS content value appended to external links (e.g. \" ↗\"). Used by the .external-link pseudo-element pattern.\n\nDefault: `\" \\2197\"`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-link-underline-offset",
+      "description": "Vertical offset of the link underline from the text baseline.\n\nDefault: `0.15em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-link-underline-thickness",
+      "description": "Stroke width of the link underline.\n\nDefault: `auto`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-lumlocker",
+      "description": "OKLCH lightness lock value for light mode. When :root has [data-lumlocker], the 4 brand colors (primary, secondary, tertiary, action) are remapped to this L so their contrast remains constant as hues shift. Dark mode uses --sf-lumlocker-dark.\n\nDefault: `0.65`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-lumlocker-dark",
+      "description": "OKLCH lightness lock value for dark mode under [data-lumlocker]. Defaults to clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92) — the mirror of the light L around the light/dark background midpoint — so the lock keeps equivalent contrast against the surface in both themes. Set explicitly to break the mirror.\n\nDefault: `clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-mask-scrim-end",
+      "description": "End stop for edge-fade mask gradients. Mirrors --sf-mask-scrim-start for the trailing edge of a scroll container.\n\nDefault: `var(--sf-space-l)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-mask-scrim-start",
+      "description": "Start stop for edge-fade mask gradients on scroll reels / overflow containers. Use in mask-image: linear-gradient(..., transparent var(--sf-mask-scrim-start)) to fade content near the leading edge.\n\nDefault: `var(--sf-space-l)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-media-radius",
+      "description": "Radius + space: <length> syntax enables CSS transitions on layout values — border-radius/padding/gap etc. now interpolate instead of snapping. Shadow: syntax:\"*\" (no <shadow> type in spec); inherits:true so :root values cascade normally; registers the properties formally for…\n\nDefault: `0`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-motion-scale",
+      "description": "Global motion multiplier. All transition and animation durations multiply by this factor. Set to 0 to disable all motion; reduce below 1 for snappier feel.\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-object-fit",
+      "description": "Default object-fit value for replaced elements (img, video).\n\nDefault: `cover`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-object-position",
+      "description": "Default object-position for replaced elements.\n\nDefault: `50% 50%`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-opacity-disabled",
+      "description": "Opacity for disabled UI elements (typically 0.4–0.5).\n\nDefault: `0.45`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-opacity-muted",
+      "description": "General de-emphasis opacity for secondary content, ghost elements, or non-primary layers. Default 0.5.\n\nDefault: `0.5`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-optical-sizing",
+      "description": "CSS font-optical-sizing value. 'auto' lets the browser optimize letterforms for the rendered size. Set 'none' to disable optical sizing.\n\nDefault: `auto`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-overlap-pull",
+      "description": "how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set…\n\nDefault: `var(--sf-space-xl)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-palette-shade-l",
+      "description": "Absolute OKLCH lightness the shade steps (600-950) pull toward; sets how dark the darkest palette step can reach. Default 0.1.\n\nDefault: `0.1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-palette-tint-l",
+      "description": "Absolute OKLCH lightness the tint steps (50-400) pull toward; sets how light the lightest palette step can reach. Default 0.97.\n\nDefault: `0.97`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-print-base-size",
+      "description": "Base font size for @media print stylesheets. Default 11pt. Override on :root to adjust printed body text size.\n\nDefault: `11pt`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-print-page-margin",
+      "description": "Page margin for printed output. Default 2cm. Maps to @page margin.\n\nDefault: `2cm`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-print-page-size",
+      "description": "Target paper size for printing. Default 'a4'. Maps to @page size. Common values: a4, letter, legal.\n\nDefault: `a4`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-block-margin",
+      "description": "Block margin between prose elements (h2, p, ul, etc.).\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-blockquote-border",
+      "description": "Left border style for blockquotes inside prose.\n\nDefault: `var(--sf-border-width-2) solid var(--sf-color-border--subtle)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-blockquote-padding",
+      "description": "Inner padding for blockquotes inside prose.\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-figcaption-size",
+      "description": "Font size for figure captions inside .prose. Typically smaller than body text.\n\nDefault: `var(--sf-text-s)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-figure-margin",
+      "description": "Block margin around <figure> elements inside .prose.\n\nDefault: `var(--sf-space-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-heading-gap",
+      "description": "Space between a heading and the content that follows it inside .prose.\n\nDefault: `var(--sf-space-s)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-hr-margin",
+      "description": "Block margin around <hr> rules inside .prose.\n\nDefault: `var(--sf-space-l)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-list-gap",
+      "description": "Gap between list items inside .prose.\n\nDefault: `var(--sf-space-xs)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-marker-color",
+      "description": "Color of list bullets and ordered-list numbers inside .prose.\n\nDefault: `var(--sf-color-primary)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-media-margin",
+      "description": "Block margin around images, video, and figures inside .prose.\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-media-radius",
+      "description": "Border radius applied to images and media inside .prose.\n\nDefault: `var(--sf-radius-m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-nested-list-gap",
+      "description": "Gap between items in nested lists inside .prose.\n\nDefault: `var(--sf-space-2xs)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-paragraph",
+      "description": "Max width of prose paragraphs (layout token for the prose layout).\n\nDefault: `var(--sf-content-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-prose-table-pad",
+      "description": "Cell padding for tables inside .prose.\n\nDefault: `var(--sf-space-xs)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-radius-2xl",
+      "description": "2× large radius (~20px). Rounded card variants.\n\nDefault: `calc(24px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-2xs",
+      "description": "Extra-extra-small radius (~1px). Minimal rounding for very tight UI elements.\n\nDefault: `calc(1px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-3xl",
+      "description": "3× large radius (~24px). Large rounded surfaces.\n\nDefault: `calc(32px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-4xl",
+      "description": "4× large radius (~32px). Near-pill rounding.\n\nDefault: `calc(48px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-full",
+      "description": "Full rounding (50%). For circular elements like avatars.\n\nDefault: `9999px`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-l",
+      "description": "Large radius (~12px). Modals, popovers, panels.\n\nDefault: `calc(12px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-m",
+      "description": "Medium radius (~6–8px). Default — inputs, standard buttons, cards.\n\nDefault: `calc(8px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-none",
+      "description": "Zero border radius — square corners.\n\nDefault: `0`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-outer",
+      "description": "Concentric corner helper: outer radius for a container that wraps content with inner radius of --sf-radius-m. Computed as --sf-radius-m + --sf-component-pad so corners align visually.\n\nDefault: `calc(var(--sf-radius-m) + var(--sf-component-pad))`\n\n(advanced token)",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-pill",
+      "description": "Pill rounding (9999px). Tags, toggle pills, status badges.\n\nDefault: `var(--sf-radius-full)`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-s",
+      "description": "Small radius (~4px). Badges, chips, small buttons.\n\nDefault: `calc(4px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-scale",
+      "description": "Global border-radius multiplier. Scales the entire radius ramp up (>1) or down (<1) from one knob. Set to 0 for sharp corners everywhere.\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-radius-xl",
+      "description": "Extra-large radius (~16px). Prominent cards and feature blocks.\n\nDefault: `calc(16px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-radius-xs",
+      "description": "Hairline radius (~2px). Subtle rounding for tight components.\n\nDefault: `calc(2px * var(--sf-radius-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-ratio-3-2",
+      "description": "3:2 aspect ratio. Common for landscape photography.\n\nDefault: `3 / 2`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ratio-4-3",
+      "description": "4:3 aspect ratio. Classic screen ratio.\n\nDefault: `4 / 3`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ratio-cinema",
+      "description": "2.39:1 cinematic widescreen aspect ratio.\n\nDefault: `21 / 9`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ratio-golden",
+      "description": "1.618:1 golden ratio. Harmonious proportions.\n\nDefault: `1.618 / 1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ratio-portrait",
+      "description": "2:3 portrait aspect ratio.\n\nDefault: `3 / 4`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ratio-square",
+      "description": "1:1 square aspect ratio. Use for avatars, icon containers, and square thumbnails.\n\nDefault: `1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-ratio-video",
+      "description": "16:9 widescreen video aspect ratio. Use for video embeds and video-thumbnail containers.\n\nDefault: `16 / 9`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-reel-gap",
+      "description": "Gap between items in the horizontal reel.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-reel-height",
+      "description": "Fixed height of the reel container.\n\nDefault: `auto`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-reel-item-width",
+      "description": "Width of each item in the reel.\n\nDefault: `max-content`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-safe-bottom",
+      "description": "Device safe-area inset at the bottom edge (home indicator, gesture bar). Resolves to env(safe-area-inset-bottom, 0px). Use for fixed footers.\n\nDefault: `env(safe-area-inset-bottom, 0px)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-safe-left",
+      "description": "Device safe-area inset at the left edge. Resolves to env(safe-area-inset-left, 0px).\n\nDefault: `env(safe-area-inset-left, 0px)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-safe-right",
+      "description": "Device safe-area inset at the right edge (rounded corners, home indicator). Resolves to env(safe-area-inset-right, 0px).\n\nDefault: `env(safe-area-inset-right, 0px)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-safe-top",
+      "description": "Device safe-area inset at the top edge (notch, Dynamic Island). Resolves to env(safe-area-inset-top, 0px). Use for fixed headers on notched devices.\n\nDefault: `env(safe-area-inset-top, 0px)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scrim-color",
+      "description": "Base color of the gradient scrim overlay.\n\nDefault: `oklch(0 0 0 / 0.55)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scrim-direction",
+      "description": "Direction of the scrim gradient (to bottom, to top, etc.).\n\nDefault: `to top`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scrim-gradient",
+      "description": "Full gradient shorthand for the scrim. Override to customise the fade.\n\nDefault: `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scrim-text-shadow",
+      "description": "Text-shadow layered over the scrim gradient to ensure legibility for text placed directly on image backgrounds.\n\nDefault: `0 1px 3px oklch(0 0 0 / 0.6)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scroll-shadow-size",
+      "description": "Size of the scroll-shadow fade effect on overflowing containers.\n\nDefault: `2rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scroll-timeline-range-end",
+      "description": "animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes.\n\nDefault: `cover 30%`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-end",
+      "description": "Scroll-timeline range at which a scroll-out exit animation finishes. Default: exit 100%.\n\nDefault: `exit 100%`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scroll-timeline-range-exit-start",
+      "description": "Scroll-timeline range at which a scroll-out exit animation begins. Default: cover 70%.\n\nDefault: `cover 70%`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scroll-timeline-range-start",
+      "description": "animation-range start value for scroll-driven entrance effects. Default 'entry 0%'. Override on an element to control when its entrance animation begins.\n\nDefault: `entry 0%`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scrollbar-thumb",
+      "description": "Color of the custom scrollbar thumb.\n\nDefault: `var(--sf-color-neutral)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-scrollbar-track",
+      "description": "Color of the custom scrollbar track.\n\nDefault: `transparent`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-section-pad",
+      "description": "Default vertical padding for full-width page sections.\n\nDefault: `var(--sf-section-pad--m)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-section-pad--2xl",
+      "description": "2× large section vertical padding for hero areas.\n\nDefault: `calc(var(--sf-space-4xl) * 2 * var(--sf-section-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-section-pad--l",
+      "description": "Large section vertical padding.\n\nDefault: `calc(var(--sf-space-4xl) * var(--sf-section-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-section-pad--m",
+      "description": "Medium section vertical padding.\n\nDefault: `calc(var(--sf-space-3xl) * var(--sf-section-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-section-pad--s",
+      "description": "Small section vertical padding.\n\nDefault: `calc(var(--sf-space-2xl) * var(--sf-section-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-section-pad--xl",
+      "description": "Extra-large vertical section padding for hero and feature sections.\n\nDefault: `calc(var(--sf-space-4xl) * 1.5 * var(--sf-section-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-section-pad--xs",
+      "description": "Extra-small vertical section padding for compact in-page modules.\n\nDefault: `calc(var(--sf-space-xl) * var(--sf-section-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-section-scale",
+      "description": "Global multiplier applied to every --sf-section-pad--* size — one dial re-rhythms all section padding (default 1).\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-2xl",
+      "description": "Largest shadow for hero cards, feature highlights, and marketing surfaces.\n\nDefault: `0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.6), 0.7)), 0 20px 60px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 4), 0.7)), 0 40px 100px -8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 5), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-color",
+      "description": "Near-black shadow tint derived from the neutral palette. Inherits the neutral's chroma and hue so colorless neutrals produce colorless shadows.\n\nDefault: `oklch(from var(--sf-color-neutral) var(--sf-shadow-lightness) c h)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-glow",
+      "description": "Glow box-shadow shorthand for decorative glow effects.\n\nDefault: `0 0 15px 2px oklch(from var(--sf-shadow-glow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-glow-color",
+      "description": "Ambient glow tint used by --sf-shadow-glow. Override to retint all glow shadows; opacity and dark-mode boost are controlled by --sf-shadow-strength.\n\nDefault: `var(--sf-color-primary)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-inner",
+      "description": "Inset shadow for pressed states, inset inputs, and recessed surfaces.\n\nDefault: `inset 0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-l",
+      "description": "Large shadow for drawers, sidebars, and prominent elevated surfaces.\n\nDefault: `0 2px 4px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 8px 24px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7)), 0 16px 48px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-lightness",
+      "description": "OKLCH lightness component of the shadow color. Lower = denser-looking shadows. Tune this independently of --sf-shadow-strength to control tonal weight without affecting opacity.\n\nDefault: `0.15`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-m",
+      "description": "Medium shadow for cards and content panels.\n\nDefault: `0 1px 3px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 4px 12px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-none",
+      "description": "No box-shadow (resets inherited shadows). Use to explicitly remove elevation.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-s",
+      "description": "Small shadow for chips, tags, and inline elevated surfaces.\n\nDefault: `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 2px 6px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, var(--sf-shadow-strength), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-strength",
+      "description": "Base opacity for the entire shadow ramp. Auto-boosted in dark mode via --sf-is-dark. Override with calc() to preserve the adaptation: e.g. calc(0.12 + var(--sf-is-dark) * 0.17).\n\nDefault: `calc(0.08 + var(--sf-is-dark) * 0.17)`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-xl",
+      "description": "Extra-large shadow for modals, dialogs, and high-elevation sheets.\n\nDefault: `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-shadow-xs",
+      "description": "Extra-small shadow for barely-elevated elements (focused inputs, small chips).\n\nDefault: `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-sidebar-gap",
+      "description": "Gap between sidebar and main content column.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-sidebar-min-width",
+      "description": "Minimum sidebar width before the layout collapses to stacking.\n\nDefault: `50%`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-sidebar-width",
+      "description": "Preferred width of the sidebar column.\n\nDefault: `18rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-size-l",
+      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `calc(3rem * var(--sf-density))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-size-m",
+      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `calc(2.5rem * var(--sf-density))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-size-s",
+      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `calc(2rem * var(--sf-density))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-size-xl",
+      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `calc(3.5rem * var(--sf-density))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-size-xs",
+      "description": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.\n\nDefault: `calc(1.5rem * var(--sf-density))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-space-2xl",
+      "description": "48px-equivalent spacing. Large section spacing.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-2xs",
+      "description": "4px-equivalent spacing. Tight inline gaps, icon-to-text padding.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-3xl",
+      "description": "64px-equivalent spacing. Extra-large layout gaps.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-4xl",
+      "description": "96px-equivalent spacing. Hero / page-level section padding.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 5) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 5) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-base-max",
+      "description": "Maximum base spacing unit (rem) at the widest viewport. Drives the top of the fluid spacing ramp. Part of the fluid scale engine.\n\nDefault: `2`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-space-base-min",
+      "description": "Minimum base spacing unit (rem) at the narrowest viewport. Drives the bottom of the fluid spacing ramp. Part of the fluid scale engine.\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-space-l",
+      "description": "24px-equivalent spacing. Card padding, section dividers.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 1) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-m",
+      "description": "16px-equivalent spacing. Default unit, widely applicable.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * 1rem), calc((var(--sf-space-base-max) - var(--sf-space-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * 1rem), calc(var(--sf-space-base-max) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-none",
+      "description": "Zero spacing. Explicit alias for clarity in utility classes.\n\nDefault: `0`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-px",
+      "description": "1px spacing. Hairline offset for fine adjustments.\n\nDefault: `1px`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-ratio-max",
+      "description": "Modular spacing ratio at the widest viewport. Controls step-to-step growth in the spacing ramp. Default 1.333 (perfect fourth). Part of the fluid scale engine.\n\nDefault: `1.333`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-space-ratio-min",
+      "description": "Modular spacing ratio at the narrowest viewport. Controls step-to-step growth in the spacing ramp. Default 1.25 (major third). Part of the fluid scale engine.\n\nDefault: `1.25`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-space-s",
+      "description": "12px-equivalent spacing. Form field inner padding, narrow gaps.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -1) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -1) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-scale",
+      "description": "Global spacing multiplier. Scales the fluid spacing ramp. Increase above 1 for airier layouts; reduce below 1 for compact UIs.\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-space-xl",
+      "description": "32px-equivalent spacing. Feature row gaps, generous section padding.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 2) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-space-xs",
+      "description": "8px-equivalent spacing. Compact list rows, tab padding.\n\nDefault: `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -2) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -2) * 1rem)) * var(--sf-space-scale))`",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sf-stack-gap",
+      "description": "Vertical gap between stacked block-level elements in the stack layout.\n\nDefault: `var(--sf-content-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-stagger-step",
+      "description": "Per-item delay increment for the .sf-stagger utility. One knob retunes the whole staggered sequence; the class multiplies it by each child's index and by --sf-motion-scale.\n\nDefault: `75ms`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-sticky-offset",
+      "description": "top offset for position: sticky elements, accounting for the header height.\n\nDefault: `clamp( var(--sf-sticky-offset-mobile), calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)), var(--sf-sticky-offset-desktop))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-sticky-offset-desktop",
+      "description": "Sticky offset at desktop breakpoints.\n\nDefault: `var(--sf-header-height-desktop)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-sticky-offset-mobile",
+      "description": "Sticky offset at mobile breakpoints.\n\nDefault: `var(--sf-header-height-mobile)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-animation",
+      "description": "animation shorthand applied to the .sf-surface-bg layer, e.g. a slow pan. Default: none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-attachment",
+      "description": "background-attachment for the .sf-surface-bg image (scroll vs fixed). Default: scroll.\n\nDefault: `scroll`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-color",
+      "description": "Background colour slot for the .sf-surface-bg macro. Default: transparent.\n\nDefault: `transparent`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-image",
+      "description": "Background image slot for the .sf-surface-bg macro (e.g. url(…)). Default: none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-overlay",
+      "description": "Overlay layer composited above the image in .sf-surface-bg — e.g. a scrim gradient. Default: none.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-position",
+      "description": "background-position for the .sf-surface-bg image. Default: center.\n\nDefault: `center`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-repeat",
+      "description": "background-repeat for the .sf-surface-bg image. Default: no-repeat.\n\nDefault: `no-repeat`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-bg-size",
+      "description": "background-size for the .sf-surface-bg image. Default: cover.\n\nDefault: `cover`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-surface-color",
+      "description": "Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it.\n\nDefault: `var(--sf-color-base)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-switcher-gap",
+      "description": "Gap between switcher columns / rows.\n\nDefault: `var(--sf-gap)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-switcher-threshold",
+      "description": "Inline-size threshold below which the switcher flips from horizontal to vertical.\n\nDefault: `30rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xl",
+      "description": "2× large font size (~24px). Section headings.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 3) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xl-font-weight",
+      "description": "Font weight for 2×-large text.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xl-letter-spacing",
+      "description": "Letter-spacing for 2×-large text.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xl-line-height",
+      "description": "Line height for 2×-large text.\n\nDefault: `calc(var(--sf-leading-snug) - 6 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xl-max-width",
+      "description": "Optimal line length for 2×-large text.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xs",
+      "description": "Extra-extra-small font size (~11px). Fine print, badges.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -3) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -3) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xs-font-weight",
+      "description": "Font weight for 2×-extra-small text. Override to deviate from the global weight at this size.\n\nDefault: `var(--sf-font-weight-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xs-letter-spacing",
+      "description": "Letter-spacing for 2×-extra-small text.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xs-line-height",
+      "description": "Line height for 2×-extra-small text.\n\nDefault: `var(--sf-leading-relaxed)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-2xs-max-width",
+      "description": "Optimal line length (max-width in ch) for 2×-extra-small text.\n\nDefault: `55ch`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-3xl",
+      "description": "3× large font size (~30px). Major headings.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 4) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 4) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-3xl-font-weight",
+      "description": "Font weight for 3×-large text.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-3xl-letter-spacing",
+      "description": "Letter-spacing for 3×-large text. Typically negative to tighten large headings.\n\nDefault: `var(--sf-tracking-tight)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-3xl-line-height",
+      "description": "Line height for 3×-large text.\n\nDefault: `calc(var(--sf-leading-tight) - 7 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-3xl-max-width",
+      "description": "Optimal line length for 3×-large text.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-4xl",
+      "description": "4× large font size (~36px). Display-level headings.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 5) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 5) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-4xl-font-weight",
+      "description": "Font weight for 4×-large text.\n\nDefault: `var(--sf-font-weight-heading)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-4xl-letter-spacing",
+      "description": "Letter-spacing for 4×-large text.\n\nDefault: `var(--sf-tracking-tight)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-4xl-line-height",
+      "description": "Line height for 4×-large text.\n\nDefault: `calc(var(--sf-leading-tight) - 8 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-4xl-max-width",
+      "description": "Optimal line length for 4×-large text.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-base-max",
+      "description": "Maximum base font size (rem) at the widest viewport. End point for the fluid type scale at wide screens. Part of the fluid scale engine.\n\nDefault: `1.25`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-text-base-min",
+      "description": "Minimum base font size (rem) at the narrowest viewport. Starting point for the fluid type scale at narrow screens. Part of the fluid scale engine.\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-text-display-base-max",
+      "description": "Maximum display/hero font size (rem) at the widest viewport. Drives the ceiling of the fluid display type scale. Part of the fluid scale engine.\n\nDefault: `3`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-text-display-base-min",
+      "description": "Minimum display/hero font size (rem) at the narrowest viewport. Drives the floor of the fluid display type scale. Part of the fluid scale engine.\n\nDefault: `2.4`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-text-display-l",
+      "description": "Large display font size (~68px+). Oversized hero text.\n\nDefault: `calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-display-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-display-m",
+      "description": "Medium display font size (~54px). Hero headings.\n\nDefault: `calc(clamp(calc(var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-display-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-display-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-display-s",
+      "description": "Small display font size (~42px). Hero sub-headings.\n\nDefault: `calc(clamp(calc(var(--sf-text-display-base-min) * 1rem), calc((var(--sf-text-display-base-max) - var(--sf-text-display-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-display-base-min) * 1rem), calc(var(--sf-text-display-base-max) * 1rem)) * var(--sf-text-display-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-display-scale",
+      "description": "Multiplier applied only to the display/hero type scale (--sf-text-display-*). Tune headline impact independently of body text.\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-l",
+      "description": "Large font size (~18px). Lead paragraphs, prominent labels.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 1) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-l-font-weight",
+      "description": "Font weight for large text.\n\nDefault: `var(--sf-font-weight-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-l-letter-spacing",
+      "description": "Letter-spacing for large text.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-l-line-height",
+      "description": "Line height for large text.\n\nDefault: `calc(var(--sf-leading-normal) - 4 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-l-max-width",
+      "description": "Optimal line length for large text.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-m",
+      "description": "Medium / base font size (~16px). Typical body text.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * 1rem), calc((var(--sf-text-base-max) - var(--sf-text-base-min)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * 1rem), calc(var(--sf-text-base-max) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-m-font-weight",
+      "description": "Font weight for medium (body) text.\n\nDefault: `var(--sf-font-weight-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-m-letter-spacing",
+      "description": "Letter-spacing for medium text.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-m-line-height",
+      "description": "Line height for medium text.\n\nDefault: `calc(var(--sf-leading-normal) - 3 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-m-max-width",
+      "description": "Optimal reading line length for medium text (~65–75ch).\n\nDefault: `65ch`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-ratio-max",
+      "description": "Modular type scale ratio at the widest viewport. Controls step-to-step size growth. Default 1.333. Part of the fluid scale engine.\n\nDefault: `1.333`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-text-ratio-min",
+      "description": "Modular type scale ratio at the narrowest viewport. Controls step-to-step size growth in the fluid type ramp. Default 1.25. Part of the fluid scale engine.\n\nDefault: `1.25`\n\n(advanced token)",
+      "syntax": "<number>"
+    },
+    {
+      "name": "--sf-text-s",
+      "description": "Small font size (~14px). Secondary content, UI annotations.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -1) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -1) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-s-font-weight",
+      "description": "Font weight for small text.\n\nDefault: `var(--sf-font-weight-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-s-letter-spacing",
+      "description": "Letter-spacing for small text.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-s-line-height",
+      "description": "Line height for small text.\n\nDefault: `calc(var(--sf-leading-relaxed) - 2 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-s-max-width",
+      "description": "Optimal line length for small text.\n\nDefault: `65ch`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-scale",
+      "description": "Global type-size multiplier. Scales the entire fluid type scale. 1.08 gives noticeably larger body text without breaking layout.\n\nDefault: `1`\n\n(advanced token)",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-shadow-l",
+      "description": "Large text-shadow for high-contrast text over busy or dark image backgrounds.\n\nDefault: `0 4px 8px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-shadow-m",
+      "description": "Medium text-shadow. Use for text overlaid on images to improve legibility.\n\nDefault: `0 2px 4px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-shadow-none",
+      "description": "Removes text-shadow (use to explicitly reset inherited shadows).\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-shadow-s",
+      "description": "Small text-shadow for subtle depth on display headings.\n\nDefault: `0 1px 2px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1.5), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-shadow-xl",
+      "description": "Extra-large text-shadow for maximum legibility over busy or high-contrast image backgrounds.\n\nDefault: `0 8px 16px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-shadow-xs",
+      "description": "Extra-small text-shadow for the subtlest depth on body text.\n\nDefault: `0 0.5px 1px oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 1), 0.7))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xl",
+      "description": "Extra-large font size (~20px). Sub-headings, callout text.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), 2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), 2) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xl-font-weight",
+      "description": "Font weight for extra-large text.\n\nDefault: `var(--sf-font-weight-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xl-letter-spacing",
+      "description": "Letter-spacing for extra-large text.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xl-line-height",
+      "description": "Line height for extra-large text.\n\nDefault: `calc(var(--sf-leading-snug) - 5 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xl-max-width",
+      "description": "Optimal line length for extra-large text.\n\nDefault: `none`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xs",
+      "description": "Extra-small font size (~12px). Labels, captions, metadata.\n\nDefault: `calc(clamp(calc(var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc((var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) - var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-text-base-min) * pow(var(--sf-text-ratio-min), -2) * 1rem), calc(var(--sf-text-base-max) * pow(var(--sf-text-ratio-max), -2) * 1rem)) * var(--sf-text-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xs-font-weight",
+      "description": "Font weight for extra-small text.\n\nDefault: `var(--sf-font-weight-body)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xs-letter-spacing",
+      "description": "Letter-spacing for extra-small text.\n\nDefault: `var(--sf-tracking-normal)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xs-line-height",
+      "description": "Line height for extra-small text.\n\nDefault: `calc(var(--sf-leading-relaxed) - 1 * var(--sf-leading-taper))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-text-xs-max-width",
+      "description": "Optimal line length for extra-small text.\n\nDefault: `60ch`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-theme-transition-duration",
+      "description": "Duration of the .sf-theme-transition animated color-scheme crossfade. Scales with --sf-motion-scale so reduced-motion preferences are respected. Default 300ms.\n\nDefault: `calc(300ms * var(--sf-motion-scale))`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-touch-target",
+      "description": "Minimum touch-target size for interactive elements per WCAG 2.5.5. Fixed 44px anchor, independent of the --sf-size-* scale.\n\nDefault: `2.75rem`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-tracking-normal",
+      "description": "Normal letter-spacing (0). Default for body text.\n\nDefault: `0`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-tracking-tight",
+      "description": "Tight letter-spacing (slightly negative). Suitable for large headings.\n\nDefault: `-0.025em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-tracking-wide",
+      "description": "Wide letter-spacing. Use for small-caps labels.\n\nDefault: `0.025em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-tracking-wider",
+      "description": "Wider letter-spacing for strongly spaced labels.\n\nDefault: `0.05em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-tracking-widest",
+      "description": "Widest letter-spacing for all-caps microcopy.\n\nDefault: `0.1em`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-colors",
+      "description": "Transition shorthand for color-related properties (color, background, border-color).\n\nDefault: `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-enter",
+      "description": "Enter-phase transition (ease-out). Use on elements appearing in the viewport.\n\nDefault: `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-normal) var(--sf-ease-out), box-shadow var(--sf-duration-normal) var(--sf-ease-out), opacity var(--sf-duration-normal) var(--sf-ease-out), transform var(--sf-duration-normal) var(--sf-ease-out), filter var(--sf-duration-normal) var(--sf-ease-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-exit",
+      "description": "Exit-phase transition (ease-in). Use on elements leaving the viewport.\n\nDefault: `color var(--sf-duration-fast) var(--sf-ease-in), background-color var(--sf-duration-fast) var(--sf-ease-in), border-color var(--sf-duration-fast) var(--sf-ease-in), box-shadow var(--sf-duration-fast) var(--sf-ease-in), opacity var(--sf-duration-fast) var(--sf-ease-in), transform var(--sf-duration-fast) var(--sf-ease-in), filter var(--sf-duration-fast) var(--sf-ease-in)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-fast",
+      "description": "Fast-duration transition shorthand.\n\nDefault: `color var(--sf-duration-fast) var(--sf-ease-out), background-color var(--sf-duration-fast) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out), transform var(--sf-duration-fast) var(--sf-ease-out), filter var(--sf-duration-fast) var(--sf-ease-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-form-field",
+      "description": "Transition shorthand optimised for form fields: color and background at normal pace so label color shifts feel natural; border, shadow, and opacity at fast pace so focus rings appear crisply.\n\nDefault: `color var(--sf-duration-normal) var(--sf-ease-out), background-color var(--sf-duration-normal) var(--sf-ease-out), text-decoration-color var(--sf-duration-normal) var(--sf-ease-out), fill var(--sf-duration-normal) var(--sf-ease-out), stroke var(--sf-duration-normal) var(--sf-ease-out), border-color var(--sf-duration-fast) var(--sf-ease-out), box-shadow var(--sf-duration-fast) var(--sf-ease-out), opacity var(--sf-duration-fast) var(--sf-ease-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-opacity",
+      "description": "Transition shorthand for opacity.\n\nDefault: `opacity var(--sf-duration-normal) var(--sf-ease-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-overlay",
+      "description": "Transition shorthand for overlay fades (opacity + visibility).\n\nDefault: `overlay var(--sf-duration-normal) allow-discrete, display var(--sf-duration-normal) allow-discrete`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-shadow",
+      "description": "Transition shorthand for box-shadow.\n\nDefault: `box-shadow var(--sf-duration-normal) var(--sf-ease-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-slow",
+      "description": "Slow-duration transition shorthand.\n\nDefault: `color var(--sf-duration-slow) var(--sf-ease-in-out), background-color var(--sf-duration-slow) var(--sf-ease-in-out), border-color var(--sf-duration-slow) var(--sf-ease-in-out), box-shadow var(--sf-duration-slow) var(--sf-ease-in-out), opacity var(--sf-duration-slow) var(--sf-ease-in-out), transform var(--sf-duration-slow) var(--sf-ease-in-out), filter var(--sf-duration-slow) var(--sf-ease-in-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-transition-transform",
+      "description": "Transition shorthand for transform.\n\nDefault: `transform var(--sf-duration-normal) var(--sf-ease-out)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-base",
+      "description": "Base stacking level (1). Establishes a stacking context without elevation.\n\nDefault: `0`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-below",
+      "description": "Z-index below stacking context base. For decorative pseudo-elements.\n\nDefault: `-1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-dropdown",
+      "description": "Z-index for dropdown menus and select popups.\n\nDefault: `1020`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-fixed",
+      "description": "Z-index for position: fixed elements.\n\nDefault: `1010`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-modal",
+      "description": "Z-index for modal dialogs and their non-top-layer backdrop scrims. Sits above overlays and dropdowns. Default 1040.\n\nDefault: `1040`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-overlay",
+      "description": "Z-index for modal / dialog backdrops.\n\nDefault: `1030`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-raised",
+      "description": "Raised elevation (50). Cards, sticky headers.\n\nDefault: `1`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-sticky",
+      "description": "Z-index for position: sticky elements (navbars, table headers).\n\nDefault: `1000`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-toast",
+      "description": "Z-index for toast / snackbar notifications.\n\nDefault: `1050`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-z-tooltip",
+      "description": "Z-index for tooltips and transient floating notifications. Highest named layer in the z-index stack. Default 1060.\n\nDefault: `1060`",
+      "syntax": "*"
+    }
+  ]
+}
