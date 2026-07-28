@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.30] - 2026-07-28
+
+### Features
+- **configurator:** warn when fixed step values shadow a generated scale
+
+### Bug Fixes
+- **configurator:** correct shadow-notice wording and label its disclosure
+- **configurator:** track ratio tokens in the scale cards' override state
+
 ## [0.7.29] - 2026-07-25
 
 ### Bug Fixes
