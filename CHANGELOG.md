@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.31] - 2026-08-09
+
+### Bug Fixes
+- **deps:** resolve high-severity advisories via npm audit fix
+- **configurator:** isolate the embedded admin mount in a shadow dom
+- **configurator:** note the "Link visited" override cannot preview live
+
 ## [0.7.30] - 2026-07-28
 
 ### Features
