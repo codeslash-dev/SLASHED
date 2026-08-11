@@ -658,7 +658,7 @@
     },
     {
       "name": "--sf-color-action-tint",
-      "description": "Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-action-a5)`",
+      "description": "Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-action-a5.\n\nDefault: `var(--sf-color-action-a5)`",
       "syntax": "*"
     },
     {
@@ -788,7 +788,7 @@
     },
     {
       "name": "--sf-color-base-tint",
-      "description": "Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-base-a5)`",
+      "description": "Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-base-a5.\n\nDefault: `var(--sf-color-base-a5)`",
       "syntax": "*"
     },
     {
@@ -1133,7 +1133,7 @@
     },
     {
       "name": "--sf-color-neutral-tint",
-      "description": "Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-neutral-a5)`",
+      "description": "Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-neutral-a5.\n\nDefault: `var(--sf-color-neutral-a5)`",
       "syntax": "*"
     },
     {
@@ -1288,7 +1288,7 @@
     },
     {
       "name": "--sf-color-primary-tint",
-      "description": "Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-primary-a5)`",
+      "description": "Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-primary-a5.\n\nDefault: `var(--sf-color-primary-a5)`",
       "syntax": "*"
     },
     {
@@ -1448,7 +1448,7 @@
     },
     {
       "name": "--sf-color-secondary-tint",
-      "description": "Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-secondary-a5)`",
+      "description": "Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-secondary-a5.\n\nDefault: `var(--sf-color-secondary-a5)`",
       "syntax": "*"
     },
     {
@@ -1658,7 +1658,7 @@
     },
     {
       "name": "--sf-color-tertiary-tint",
-      "description": "Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds.\n\nDefault: `var(--sf-color-tertiary-a5)`",
+      "description": "Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-tertiary-a5.\n\nDefault: `var(--sf-color-tertiary-a5)`",
       "syntax": "*"
     },
     {

@@ -141,7 +141,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-subtle` | PUBLIC | consumption | color | `var(--sf-color-action-a10)` | Lightest action tint — selected rows, active nav, chips. |
 | `--sf-color-action-superdark` | PUBLIC | consumption | color | `var(--sf-color-action-950)` | Near-black action shade for maximum contrast on light surfaces — alias of --sf-color-action-950. |
 | `--sf-color-action-superlight` | PUBLIC | consumption | color | `var(--sf-color-action-50)` | Near-white action shade — alias of --sf-color-action-50. |
-| `--sf-color-action-tint` | PUBLIC | consumption | color | `var(--sf-color-action-a5)` | Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
+| `--sf-color-action-tint` | PUBLIC | consumption | color | `var(--sf-color-action-a5)` | Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-action-a5. |
 | `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade — alias of --sf-color-action-800. |
 | `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade — alias of --sf-color-action-200. |
 | `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Mode-adaptive base surface color. Drives the page canvas and the surface elevation family; not an interactive/brand role. |
@@ -167,7 +167,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. Keep near-black for dark-mode surfaces and elevation offsets. |
 | `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH source color for the light-mode base surface. Keep near-white so --sf-color-bg, --sf-color-surface, and raised/inset levels have room to separate. |
 | `--sf-color-base-subtle` | PUBLIC | consumption | color | `var(--sf-color-base-a10)` | Subtle base-surface tint for low-emphasis backgrounds. |
-| `--sf-color-base-tint` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
+| `--sf-color-base-tint` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-base-a5. |
 | `--sf-color-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | Base page / component background. The canvas all other surfaces layer on top of. |
 | `--sf-color-bg--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | Background tint for pressed/active interactive elements. |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | color | `var(--sf-color-inset)` | Background for disabled interactive elements. |
@@ -236,7 +236,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-subtle` | PUBLIC | consumption | color | `var(--sf-color-neutral-a10)` | Lightest neutral semantic tint. |
 | `--sf-color-neutral-superdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-950)` | Near-black neutral shade for maximum contrast on light surfaces — alias of --sf-color-neutral-950. |
 | `--sf-color-neutral-superlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-50)` | Near-white neutral shade — alias of --sf-color-neutral-50. |
-| `--sf-color-neutral-tint` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
+| `--sf-color-neutral-tint` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-neutral-a5. |
 | `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | Extra-dark neutral shade — alias of --sf-color-neutral-800. |
 | `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | Extra-light neutral shade — alias of --sf-color-neutral-200. |
 | `--sf-color-overlay` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | Overlay surface for floating panels, sheets, and modals. |
@@ -267,7 +267,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-subtle` | PUBLIC | consumption | color | `var(--sf-color-primary-a10)` | Lightest primary semantic tint. |
 | `--sf-color-primary-superdark` | PUBLIC | consumption | color | `var(--sf-color-primary-950)` | Near-black primary shade for maximum contrast on light surfaces — alias of --sf-color-primary-950. |
 | `--sf-color-primary-superlight` | PUBLIC | consumption | color | `var(--sf-color-primary-50)` | Near-white primary shade — alias of --sf-color-primary-50. |
-| `--sf-color-primary-tint` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
+| `--sf-color-primary-tint` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-primary-a5. |
 | `--sf-color-primary-xdark` | PUBLIC | consumption | color | `var(--sf-color-primary-800)` | Extra-dark primary shade — alias of --sf-color-primary-800. |
 | `--sf-color-primary-xlight` | PUBLIC | consumption | color | `var(--sf-color-primary-200)` | Extra-light primary shade — alias of --sf-color-primary-200. |
 | `--sf-color-raised` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | Elevated card surface that floats above the page background. |
@@ -299,7 +299,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-subtle` | PUBLIC | consumption | color | `var(--sf-color-secondary-a10)` | Lightest secondary semantic tint. |
 | `--sf-color-secondary-superdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-950)` | Near-black secondary shade for maximum contrast on light surfaces — alias of --sf-color-secondary-950. |
 | `--sf-color-secondary-superlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-50)` | Near-white secondary shade — alias of --sf-color-secondary-50. |
-| `--sf-color-secondary-tint` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
+| `--sf-color-secondary-tint` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-secondary-a5. |
 | `--sf-color-secondary-xdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-800)` | Extra-dark secondary shade — alias of --sf-color-secondary-800. |
 | `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | Extra-light secondary shade — alias of --sf-color-secondary-200. |
 | `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Background color applied to browser text selections. |
@@ -341,7 +341,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-subtle` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a10)` | Lightest tertiary semantic tint. |
 | `--sf-color-tertiary-superdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-950)` | Near-black tertiary shade for maximum contrast on light surfaces — alias of --sf-color-tertiary-950. |
 | `--sf-color-tertiary-superlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-50)` | Near-white tertiary shade — alias of --sf-color-tertiary-50. |
-| `--sf-color-tertiary-tint` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
+| `--sf-color-tertiary-tint` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-tertiary-a5. |
 | `--sf-color-tertiary-xdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-800)` | Extra-dark tertiary shade — alias of --sf-color-tertiary-800. |
 | `--sf-color-tertiary-xlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-200)` | Extra-light tertiary shade — alias of --sf-color-tertiary-200. |
 | `--sf-color-text` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Primary text color. Contrasts against --sf-color-bg for body copy. |
