@@ -618,12 +618,12 @@
     },
     {
       "name": "--sf-color-action-darker",
-      "description": "Deep action shade for high-contrast contexts.\n\nDefault: `var(--sf-color-action-600)`",
+      "description": "Deep action shade — alias of --sf-color-action-600.\n\nDefault: `var(--sf-color-action-600)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-lighter",
-      "description": "Light action shade for soft accents.\n\nDefault: `var(--sf-color-action-400)`",
+      "description": "Light action shade for soft accents — alias of --sf-color-action-400.\n\nDefault: `var(--sf-color-action-400)`",
       "syntax": "*"
     },
     {
@@ -648,12 +648,12 @@
     },
     {
       "name": "--sf-color-action-superdark",
-      "description": "Near-black action shade for maximum contrast on light surfaces.\n\nDefault: `var(--sf-color-action-950)`",
+      "description": "Near-black action shade for maximum contrast on light surfaces — alias of --sf-color-action-950.\n\nDefault: `var(--sf-color-action-950)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-superlight",
-      "description": "Near-white action shade for maximum contrast on dark surfaces.\n\nDefault: `var(--sf-color-action-50)`",
+      "description": "Near-white action shade — alias of --sf-color-action-50.\n\nDefault: `var(--sf-color-action-50)`",
       "syntax": "*"
     },
     {
@@ -663,12 +663,12 @@
     },
     {
       "name": "--sf-color-action-xdark",
-      "description": "Extra-dark action shade.\n\nDefault: `var(--sf-color-action-800)`",
+      "description": "Extra-dark action shade — alias of --sf-color-action-800.\n\nDefault: `var(--sf-color-action-800)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-action-xlight",
-      "description": "Extra-light action shade.\n\nDefault: `var(--sf-color-action-200)`",
+      "description": "Extra-light action shade — alias of --sf-color-action-200.\n\nDefault: `var(--sf-color-action-200)`",
       "syntax": "*"
     },
     {
@@ -1093,7 +1093,7 @@
     },
     {
       "name": "--sf-color-neutral-darker",
-      "description": "Deep neutral shade for high-contrast contexts.\n\nDefault: `var(--sf-color-neutral-600)`",
+      "description": "Deep neutral shade — alias of --sf-color-neutral-600.\n\nDefault: `var(--sf-color-neutral-600)`",
       "syntax": "*"
     },
     {
@@ -1128,7 +1128,7 @@
     },
     {
       "name": "--sf-color-neutral-superlight",
-      "description": "Near-white neutral shade.\n\nDefault: `var(--sf-color-neutral-50)`",
+      "description": "Near-white neutral shade — alias of --sf-color-neutral-50.\n\nDefault: `var(--sf-color-neutral-50)`",
       "syntax": "*"
     },
     {
@@ -1138,12 +1138,12 @@
     },
     {
       "name": "--sf-color-neutral-xdark",
-      "description": "Extra-dark neutral shade.\n\nDefault: `var(--sf-color-neutral-800)`",
+      "description": "Extra-dark neutral shade — alias of --sf-color-neutral-800.\n\nDefault: `var(--sf-color-neutral-800)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-neutral-xlight",
-      "description": "Extra-light neutral shade.\n\nDefault: `var(--sf-color-neutral-200)`",
+      "description": "Extra-light neutral shade — alias of --sf-color-neutral-200.\n\nDefault: `var(--sf-color-neutral-200)`",
       "syntax": "*"
     },
     {
@@ -1248,7 +1248,7 @@
     },
     {
       "name": "--sf-color-primary-darker",
-      "description": "Deep primary shade.\n\nDefault: `var(--sf-color-primary-600)`",
+      "description": "Deep primary shade — alias of --sf-color-primary-600.\n\nDefault: `var(--sf-color-primary-600)`",
       "syntax": "*"
     },
     {
@@ -1283,7 +1283,7 @@
     },
     {
       "name": "--sf-color-primary-superlight",
-      "description": "Near-white primary shade.\n\nDefault: `var(--sf-color-primary-50)`",
+      "description": "Near-white primary shade — alias of --sf-color-primary-50.\n\nDefault: `var(--sf-color-primary-50)`",
       "syntax": "*"
     },
     {
@@ -1293,12 +1293,12 @@
     },
     {
       "name": "--sf-color-primary-xdark",
-      "description": "Extra-dark primary shade.\n\nDefault: `var(--sf-color-primary-800)`",
+      "description": "Extra-dark primary shade — alias of --sf-color-primary-800.\n\nDefault: `var(--sf-color-primary-800)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-primary-xlight",
-      "description": "Extra-light primary shade.\n\nDefault: `var(--sf-color-primary-200)`",
+      "description": "Extra-light primary shade — alias of --sf-color-primary-200.\n\nDefault: `var(--sf-color-primary-200)`",
       "syntax": "*"
     },
     {
@@ -1408,7 +1408,7 @@
     },
     {
       "name": "--sf-color-secondary-darker",
-      "description": "Deep secondary shade.\n\nDefault: `var(--sf-color-secondary-600)`",
+      "description": "Deep secondary shade — alias of --sf-color-secondary-600.\n\nDefault: `var(--sf-color-secondary-600)`",
       "syntax": "*"
     },
     {
@@ -1443,7 +1443,7 @@
     },
     {
       "name": "--sf-color-secondary-superlight",
-      "description": "Near-white secondary shade.\n\nDefault: `var(--sf-color-secondary-50)`",
+      "description": "Near-white secondary shade — alias of --sf-color-secondary-50.\n\nDefault: `var(--sf-color-secondary-50)`",
       "syntax": "*"
     },
     {
@@ -1453,12 +1453,12 @@
     },
     {
       "name": "--sf-color-secondary-xdark",
-      "description": "Extra-dark secondary shade.\n\nDefault: `var(--sf-color-secondary-800)`",
+      "description": "Extra-dark secondary shade — alias of --sf-color-secondary-800.\n\nDefault: `var(--sf-color-secondary-800)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-secondary-xlight",
-      "description": "Extra-light secondary shade.\n\nDefault: `var(--sf-color-secondary-200)`",
+      "description": "Extra-light secondary shade — alias of --sf-color-secondary-200.\n\nDefault: `var(--sf-color-secondary-200)`",
       "syntax": "*"
     },
     {
@@ -1618,7 +1618,7 @@
     },
     {
       "name": "--sf-color-tertiary-darker",
-      "description": "Deep tertiary shade.\n\nDefault: `var(--sf-color-tertiary-600)`",
+      "description": "Deep tertiary shade — alias of --sf-color-tertiary-600.\n\nDefault: `var(--sf-color-tertiary-600)`",
       "syntax": "*"
     },
     {
@@ -1653,7 +1653,7 @@
     },
     {
       "name": "--sf-color-tertiary-superlight",
-      "description": "Near-white tertiary shade.\n\nDefault: `var(--sf-color-tertiary-50)`",
+      "description": "Near-white tertiary shade — alias of --sf-color-tertiary-50.\n\nDefault: `var(--sf-color-tertiary-50)`",
       "syntax": "*"
     },
     {
@@ -1663,12 +1663,12 @@
     },
     {
       "name": "--sf-color-tertiary-xdark",
-      "description": "Extra-dark tertiary shade.\n\nDefault: `var(--sf-color-tertiary-800)`",
+      "description": "Extra-dark tertiary shade — alias of --sf-color-tertiary-800.\n\nDefault: `var(--sf-color-tertiary-800)`",
       "syntax": "*"
     },
     {
       "name": "--sf-color-tertiary-xlight",
-      "description": "Extra-light tertiary shade.\n\nDefault: `var(--sf-color-tertiary-200)`",
+      "description": "Extra-light tertiary shade — alias of --sf-color-tertiary-200.\n\nDefault: `var(--sf-color-tertiary-200)`",
       "syntax": "*"
     },
     {
