@@ -133,17 +133,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-action-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.05)` | 5% opacity action tint. Barely-there hover highlight. |
 | `--sf-color-action-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.50)` | 50% opacity action tint. Mid-transparency badge or overlay. |
 | `--sf-color-action-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-action) l c h / 0.80)` | 80% opacity action tint. |
-| `--sf-color-action-darker` | PUBLIC | consumption | color | `var(--sf-color-action-600)` | Deep action shade for high-contrast contexts. |
-| `--sf-color-action-lighter` | PUBLIC | consumption | color | `var(--sf-color-action-400)` | Light action shade for soft accents. |
+| `--sf-color-action-darker` | PUBLIC | consumption | color | `var(--sf-color-action-600)` | Deep action shade — alias of --sf-color-action-600. |
+| `--sf-color-action-lighter` | PUBLIC | consumption | color | `var(--sf-color-action-400)` | Light action shade for soft accents — alias of --sf-color-action-400. |
 | `--sf-color-action-muted` | PUBLIC | consumption | color | `var(--sf-color-action-a30)` | Medium action fill — outlined button hover backgrounds. |
 | `--sf-color-action-source-dark` | PUBLIC | knob | color | `oklch(0.70 0.198 235)` | Registered <color> dark counterpart of --sf-color-action. Enables smooth CSS transitions when toggling between light and dark mode; without <color> registration the browser cannot interpolate and transitions snap at 50%. |
 | `--sf-color-action-source-light` | PUBLIC | knob | color | `oklch(0.50 0.22 235)` | OKLCH lightness source for the action color. Animate this to smoothly transition between light and dark brand themes. |
 | `--sf-color-action-subtle` | PUBLIC | consumption | color | `var(--sf-color-action-a10)` | Lightest action tint — selected rows, active nav, chips. |
-| `--sf-color-action-superdark` | PUBLIC | consumption | color | `var(--sf-color-action-950)` | Near-black action shade for maximum contrast on light surfaces. |
-| `--sf-color-action-superlight` | PUBLIC | consumption | color | `var(--sf-color-action-50)` | Near-white action shade for maximum contrast on dark surfaces. |
-| `--sf-color-action-tint` | PUBLIC | consumption | color | `var(--sf-color-action-a5)` | Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
-| `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade. |
-| `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade. |
+| `--sf-color-action-superdark` | PUBLIC | consumption | color | `var(--sf-color-action-950)` | Near-black action shade for maximum contrast on light surfaces — alias of --sf-color-action-950. |
+| `--sf-color-action-superlight` | PUBLIC | consumption | color | `var(--sf-color-action-50)` | Near-white action shade — alias of --sf-color-action-50. |
+| `--sf-color-action-tint` | PUBLIC | consumption | color | `var(--sf-color-action-a5)` | Near-transparent action tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-action-a5. |
+| `--sf-color-action-xdark` | PUBLIC | consumption | color | `var(--sf-color-action-800)` | Extra-dark action shade — alias of --sf-color-action-800. |
+| `--sf-color-action-xlight` | PUBLIC | consumption | color | `var(--sf-color-action-200)` | Extra-light action shade — alias of --sf-color-action-200. |
 | `--sf-color-base` | PUBLIC | consumption | color | `light-dark(var(--sf-color-base-source-light), var(--sf-color-base-source-dark, oklch(from var(--sf-color-base-source-light) clamp(0.16, calc(1.18 - l), 0.24) calc(c * 0.5) h)))` | Mode-adaptive base surface color. Drives the page canvas and the surface elevation family; not an interactive/brand role. |
 | `--sf-color-base--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.08 + var(--sf-is-dark) * 0.16), 0.99) c h)` | Pressed/active surface derived from --sf-color-base for subtle background interactions. |
 | `--sf-color-base--hover` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) clamp(0.01, calc(l - 0.04 + var(--sf-is-dark) * 0.08), 0.99) c h)` | Hover-state surface derived from --sf-color-base for subtle background interactions. |
@@ -167,7 +167,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-base-source-dark` | PUBLIC | knob | color | `oklch(0.22 0.003 250)` | Registered <color> dark counterpart of --sf-color-base. Keep near-black for dark-mode surfaces and elevation offsets. |
 | `--sf-color-base-source-light` | PUBLIC | knob | color | `oklch(0.96 0.006 250)` | OKLCH source color for the light-mode base surface. Keep near-white so --sf-color-bg, --sf-color-surface, and raised/inset levels have room to separate. |
 | `--sf-color-base-subtle` | PUBLIC | consumption | color | `var(--sf-color-base-a10)` | Subtle base-surface tint for low-emphasis backgrounds. |
-| `--sf-color-base-tint` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
+| `--sf-color-base-tint` | PUBLIC | consumption | color | `var(--sf-color-base-a5)` | Near-transparent base-surface tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-base-a5. |
 | `--sf-color-bg` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.02) c h)` | Base page / component background. The canvas all other surfaces layer on top of. |
 | `--sf-color-bg--active` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.12)` | Background tint for pressed/active interactive elements. |
 | `--sf-color-bg--disabled` | PUBLIC | consumption | color | `var(--sf-color-inset)` | Background for disabled interactive elements. |
@@ -228,17 +228,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-neutral-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.05)` | 5% opacity neutral tint. |
 | `--sf-color-neutral-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.50)` | 50% opacity neutral tint. |
 | `--sf-color-neutral-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-neutral) l c h / 0.80)` | 80% opacity neutral tint. |
-| `--sf-color-neutral-darker` | PUBLIC | consumption | color | `var(--sf-color-neutral-600)` | Deep neutral shade for high-contrast contexts. |
+| `--sf-color-neutral-darker` | PUBLIC | consumption | color | `var(--sf-color-neutral-600)` | Deep neutral shade — alias of --sf-color-neutral-600. |
 | `--sf-color-neutral-lighter` | PUBLIC | consumption | color | `var(--sf-color-neutral-400)` | Light neutral shade for soft accents — alias of --sf-color-neutral-400. |
 | `--sf-color-neutral-muted` | PUBLIC | consumption | color | `var(--sf-color-neutral-a30)` | Muted neutral fill for low-emphasis contexts. |
 | `--sf-color-neutral-source-dark` | PUBLIC | knob | color | `oklch(0.69 0.0225 260)` | Registered <color> dark counterpart of --sf-color-neutral. |
 | `--sf-color-neutral-source-light` | PUBLIC | knob | color | `oklch(0.52 0.025 260)` | OKLCH lightness source for the neutral color. |
 | `--sf-color-neutral-subtle` | PUBLIC | consumption | color | `var(--sf-color-neutral-a10)` | Lightest neutral semantic tint. |
 | `--sf-color-neutral-superdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-950)` | Near-black neutral shade for maximum contrast on light surfaces — alias of --sf-color-neutral-950. |
-| `--sf-color-neutral-superlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-50)` | Near-white neutral shade. |
-| `--sf-color-neutral-tint` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
-| `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | Extra-dark neutral shade. |
-| `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | Extra-light neutral shade. |
+| `--sf-color-neutral-superlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-50)` | Near-white neutral shade — alias of --sf-color-neutral-50. |
+| `--sf-color-neutral-tint` | PUBLIC | consumption | color | `var(--sf-color-neutral-a5)` | Near-transparent neutral tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-neutral-a5. |
+| `--sf-color-neutral-xdark` | PUBLIC | consumption | color | `var(--sf-color-neutral-800)` | Extra-dark neutral shade — alias of --sf-color-neutral-800. |
+| `--sf-color-neutral-xlight` | PUBLIC | consumption | color | `var(--sf-color-neutral-200)` | Extra-light neutral shade — alias of --sf-color-neutral-200. |
 | `--sf-color-overlay` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) l c h / 0.9)` | Overlay surface for floating panels, sheets, and modals. |
 | `--sf-color-primary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-primary-source-light), var(--sf-color-primary-source-dark, oklch(from var(--sf-color-primary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary brand palette color. Independent from --sf-color-action by default; override either source token to couple or separate brand and action roles. |
 | `--sf-color-primary--active` | PUBLIC | consumption | color | `var(--sf-color-primary-xdark)` | Primary color at pressed/active brightness. |
@@ -259,17 +259,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-primary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.05)` | 5% opacity primary tint. |
 | `--sf-color-primary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.50)` | 50% opacity primary tint. |
 | `--sf-color-primary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-primary) l c h / 0.80)` | 80% opacity primary tint. |
-| `--sf-color-primary-darker` | PUBLIC | consumption | color | `var(--sf-color-primary-600)` | Deep primary shade. |
+| `--sf-color-primary-darker` | PUBLIC | consumption | color | `var(--sf-color-primary-600)` | Deep primary shade — alias of --sf-color-primary-600. |
 | `--sf-color-primary-lighter` | PUBLIC | consumption | color | `var(--sf-color-primary-400)` | Light primary shade for soft accents — alias of --sf-color-primary-400. |
 | `--sf-color-primary-muted` | PUBLIC | consumption | color | `var(--sf-color-primary-a30)` | Muted primary fill. |
 | `--sf-color-primary-source-dark` | PUBLIC | knob | color | `oklch(0.715 0.243 264)` | Registered <color> dark counterpart of --sf-color-primary. |
 | `--sf-color-primary-source-light` | PUBLIC | knob | color | `oklch(0.47 0.27 264)` | OKLCH lightness source for the primary color. |
 | `--sf-color-primary-subtle` | PUBLIC | consumption | color | `var(--sf-color-primary-a10)` | Lightest primary semantic tint. |
 | `--sf-color-primary-superdark` | PUBLIC | consumption | color | `var(--sf-color-primary-950)` | Near-black primary shade for maximum contrast on light surfaces — alias of --sf-color-primary-950. |
-| `--sf-color-primary-superlight` | PUBLIC | consumption | color | `var(--sf-color-primary-50)` | Near-white primary shade. |
-| `--sf-color-primary-tint` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
-| `--sf-color-primary-xdark` | PUBLIC | consumption | color | `var(--sf-color-primary-800)` | Extra-dark primary shade. |
-| `--sf-color-primary-xlight` | PUBLIC | consumption | color | `var(--sf-color-primary-200)` | Extra-light primary shade. |
+| `--sf-color-primary-superlight` | PUBLIC | consumption | color | `var(--sf-color-primary-50)` | Near-white primary shade — alias of --sf-color-primary-50. |
+| `--sf-color-primary-tint` | PUBLIC | consumption | color | `var(--sf-color-primary-a5)` | Near-transparent primary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-primary-a5. |
+| `--sf-color-primary-xdark` | PUBLIC | consumption | color | `var(--sf-color-primary-800)` | Extra-dark primary shade — alias of --sf-color-primary-800. |
+| `--sf-color-primary-xlight` | PUBLIC | consumption | color | `var(--sf-color-primary-200)` | Extra-light primary shade — alias of --sf-color-primary-200. |
 | `--sf-color-raised` | PUBLIC | consumption | color | `oklch(from var(--sf-color-base) calc(l + 0.04) c h)` | Elevated card surface that floats above the page background. |
 | `--sf-color-scheme` | PUBLIC | knob | color | `light dark` | Preferred color scheme hint (light / dark / normal). Sent to the browser to influence UA chrome styling. |
 | `--sf-color-secondary` | PUBLIC | consumption | color | `light-dark(var(--sf-color-secondary-source-light), var(--sf-color-secondary-source-dark, oklch(from var(--sf-color-secondary-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Raw secondary palette token for the secondary brand color. |
@@ -291,17 +291,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-secondary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.05)` | 5% opacity secondary tint. |
 | `--sf-color-secondary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.50)` | 50% opacity secondary tint. |
 | `--sf-color-secondary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-secondary) l c h / 0.80)` | 80% opacity secondary tint. |
-| `--sf-color-secondary-darker` | PUBLIC | consumption | color | `var(--sf-color-secondary-600)` | Deep secondary shade. |
+| `--sf-color-secondary-darker` | PUBLIC | consumption | color | `var(--sf-color-secondary-600)` | Deep secondary shade — alias of --sf-color-secondary-600. |
 | `--sf-color-secondary-lighter` | PUBLIC | consumption | color | `var(--sf-color-secondary-400)` | Light secondary shade for soft accents — alias of --sf-color-secondary-400. |
 | `--sf-color-secondary-muted` | PUBLIC | consumption | color | `var(--sf-color-secondary-a30)` | Muted secondary fill. |
 | `--sf-color-secondary-source-dark` | PUBLIC | knob | color | `oklch(0.84 0.036 264)` | Registered <color> dark counterpart of --sf-color-secondary. |
 | `--sf-color-secondary-source-light` | PUBLIC | knob | color | `oklch(0.22 0.04 264)` | OKLCH lightness source for the secondary color. |
 | `--sf-color-secondary-subtle` | PUBLIC | consumption | color | `var(--sf-color-secondary-a10)` | Lightest secondary semantic tint. |
 | `--sf-color-secondary-superdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-950)` | Near-black secondary shade for maximum contrast on light surfaces — alias of --sf-color-secondary-950. |
-| `--sf-color-secondary-superlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-50)` | Near-white secondary shade. |
-| `--sf-color-secondary-tint` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
-| `--sf-color-secondary-xdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-800)` | Extra-dark secondary shade. |
-| `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | Extra-light secondary shade. |
+| `--sf-color-secondary-superlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-50)` | Near-white secondary shade — alias of --sf-color-secondary-50. |
+| `--sf-color-secondary-tint` | PUBLIC | consumption | color | `var(--sf-color-secondary-a5)` | Near-transparent secondary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-secondary-a5. |
+| `--sf-color-secondary-xdark` | PUBLIC | consumption | color | `var(--sf-color-secondary-800)` | Extra-dark secondary shade — alias of --sf-color-secondary-800. |
+| `--sf-color-secondary-xlight` | PUBLIC | consumption | color | `var(--sf-color-secondary-200)` | Extra-light secondary shade — alias of --sf-color-secondary-200. |
 | `--sf-color-selection-bg` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-light) l c h / 0.28), oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55) )` | Background color applied to browser text selections. |
 | `--sf-color-selection-bg--alt` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-action-source-dark) clamp(0.62, calc(0.93 - l * 0.4), 0.78) c h / 0.55), oklch(from var(--sf-color-action-source-light) l c h / 0.28) )` | Alt selection background — the inverse-scheme highlight fill for surfaces that deliberately flip colour scheme (e.g. a dark hero in light mode). |
 | `--sf-color-selection-text` | PUBLIC | knob | color | `inherit` | Text color inside browser text selections. |
@@ -333,17 +333,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-color-tertiary-a5` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.05)` | 5% opacity tertiary tint. |
 | `--sf-color-tertiary-a50` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.50)` | 50% opacity tertiary tint. |
 | `--sf-color-tertiary-a80` | PUBLIC | consumption | color | `oklch(from var(--sf-color-tertiary) l c h / 0.80)` | 80% opacity tertiary tint. |
-| `--sf-color-tertiary-darker` | PUBLIC | consumption | color | `var(--sf-color-tertiary-600)` | Deep tertiary shade. |
+| `--sf-color-tertiary-darker` | PUBLIC | consumption | color | `var(--sf-color-tertiary-600)` | Deep tertiary shade — alias of --sf-color-tertiary-600. |
 | `--sf-color-tertiary-lighter` | PUBLIC | consumption | color | `var(--sf-color-tertiary-400)` | Light tertiary shade for soft accents — alias of --sf-color-tertiary-400. |
 | `--sf-color-tertiary-muted` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a30)` | Muted tertiary fill. |
 | `--sf-color-tertiary-source-dark` | PUBLIC | knob | color | `oklch(0.74 0.198 295)` | Registered <color> dark counterpart of --sf-color-tertiary. |
 | `--sf-color-tertiary-source-light` | PUBLIC | knob | color | `oklch(0.42 0.22 295)` | OKLCH lightness source for the tertiary color. |
 | `--sf-color-tertiary-subtle` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a10)` | Lightest tertiary semantic tint. |
 | `--sf-color-tertiary-superdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-950)` | Near-black tertiary shade for maximum contrast on light surfaces — alias of --sf-color-tertiary-950. |
-| `--sf-color-tertiary-superlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-50)` | Near-white tertiary shade. |
-| `--sf-color-tertiary-tint` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds. |
-| `--sf-color-tertiary-xdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-800)` | Extra-dark tertiary shade. |
-| `--sf-color-tertiary-xlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-200)` | Extra-light tertiary shade. |
+| `--sf-color-tertiary-superlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-50)` | Near-white tertiary shade — alias of --sf-color-tertiary-50. |
+| `--sf-color-tertiary-tint` | PUBLIC | consumption | color | `var(--sf-color-tertiary-a5)` | Near-transparent tertiary tint (5% alpha) for hover-state washes and the most subtle backgrounds — alias of --sf-color-tertiary-a5. |
+| `--sf-color-tertiary-xdark` | PUBLIC | consumption | color | `var(--sf-color-tertiary-800)` | Extra-dark tertiary shade — alias of --sf-color-tertiary-800. |
+| `--sf-color-tertiary-xlight` | PUBLIC | consumption | color | `var(--sf-color-tertiary-200)` | Extra-light tertiary shade — alias of --sf-color-tertiary-200. |
 | `--sf-color-text` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.05, calc(l - 0.4 - var(--sf-contrast-bias)), 0.35) c h), oklch(from var(--sf-color-neutral) clamp(0.70, calc(l + 0.25 + var(--sf-contrast-bias)), 1) c h) )` | Primary text color. Contrasts against --sf-color-bg for body copy. |
 | `--sf-color-text--disabled` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.25), 0.82) c h), oklch(from var(--sf-color-neutral) clamp(0.25, calc(l - 0.2), 0.55) c h) )` | Text color for disabled UI elements. Intentionally low contrast. |
 | `--sf-color-text--inverse` | PUBLIC | consumption | color | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.85, calc(l + 0.4), 0.98) c h), oklch(from var(--sf-color-neutral) clamp(0.05, calc(l - 0.4), 0.35) c h) )` | Text color for use on dark/inverted backgrounds. |
@@ -1146,18 +1146,18 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-text-xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-visible` | PUBLIC | utility | VISIBILITY HELPERS (.sf-invisible / .sf-visible) | Visibility helper (optional/utilities.css) — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
-| `.sf-width-10` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-20` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-30` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-40` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-50` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-60` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-70` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-80` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-90` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-auto` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-fit` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-full` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-max` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
-| `.sf-width-min` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width… |
+| `.sf-width-10` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 10% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-20` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 20% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-30` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 30% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-40` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 40% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-50` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 50% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-60` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 60% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-70` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 70% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-80` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 80% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-90` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 90% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
+| `.sf-width-auto` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Intrinsic auto width (inline-size:auto) — sizes to the box’s normal layout. |
+| `.sf-width-fit` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Width sized to its own content (fit-content). |
+| `.sf-width-full` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Full width, uncapped (inline-size:100%, max-inline-size:none). |
+| `.sf-width-max` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Widest content-driven width (max-content) — grows to full intrinsic width, no wrapping. |
+| `.sf-width-min` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Narrowest content-driven width (min-content) — shrinks to the longest unbreakable content. |
 

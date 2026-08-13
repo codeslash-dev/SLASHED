@@ -3120,7 +3120,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 10% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3130,7 +3130,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 20% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3140,7 +3140,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 30% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3150,7 +3150,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 40% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3160,7 +3160,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 50% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3170,7 +3170,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 60% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3180,7 +3180,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 70% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3190,7 +3190,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 80% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3200,7 +3200,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Caps width at 90% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3210,7 +3210,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Intrinsic auto width (inline-size:auto) — sizes to the box’s normal layout.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3220,7 +3220,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Width sized to its own content (fit-content).",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3230,7 +3230,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Full width, uncapped (inline-size:100%, max-inline-size:none).",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3240,7 +3240,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Widest content-driven width (max-content) — grows to full intrinsic width, no wrapping.",
       "optional": true,
       "layer": "slashed.utilities"
     },
@@ -3250,7 +3250,7 @@
       "kind": "utility",
       "category": "Utilities",
       "group": "CONTENT-WIDTH UTILITIES (.sf-width-*)",
-      "description": "Constrain an element to a fraction of the content column (--sf-content-width) and centre it in normal flow. inline-size:100% lets it shrink below the cap on a narrower parent; margin-inline:auto absorbs the leftover space to centre it. The keyword variants map to CSS width…",
+      "description": "Narrowest content-driven width (min-content) — shrinks to the longest unbreakable content.",
       "optional": true,
       "layer": "slashed.utilities"
     },
