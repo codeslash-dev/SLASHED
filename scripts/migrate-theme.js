@@ -45,7 +45,18 @@ function readRenameMap() {
   const file = path.join(ROOT, 'docs', 'token-renames.json');
   try {
     const parsed = JSON.parse(fs.readFileSync(file, 'utf8'));
-    return { renames: parsed.renames ?? {}, removals: parsed.removals ?? {} };
+    // Mirror check-token-renames.js: an array here would yield no entries and
+    // silently migrate nothing, which is worse than refusing to run.
+    const section = (name) => {
+      const value = parsed?.[name];
+      if (value === undefined) return {};
+      if (!value || typeof value !== 'object' || Array.isArray(value)) {
+        console.error(`migrate-theme: docs/token-renames.json \`${name}\` must be an object.`);
+        process.exit(1);
+      }
+      return value;
+    };
+    return { renames: section('renames'), removals: section('removals') };
   } catch (err) {
     console.error(`migrate-theme: cannot read docs/token-renames.json (${err.message}).`);
     process.exit(1);
@@ -59,6 +70,21 @@ function frameworkVersion() {
   } catch {
     return null;
   }
+}
+
+/**
+ * Escape anything non-printable before echoing a file-supplied value to the
+ * terminal. validateThemeFile() already rejects control characters, so nothing
+ * should reach here — this is the second layer, because migrateOverrides() is
+ * exported and a future caller could feed it unvalidated input, and a terminal
+ * is a control-sequence interpreter, not a text sink.
+ * @param {string} value
+ */
+function forTerminal(value) {
+  return String(value).replace(
+    /[\u0000-\u001f\u007f]/g,
+    (ch) => `\\x${ch.charCodeAt(0).toString(16).padStart(2, '0')}`,
+  );
 }
 
 const { renames, removals } = readRenameMap();
@@ -91,7 +117,7 @@ for (const rel of files) {
   const result = migrateOverrides(theme.overrides, { renames, removals, live });
   const changed = result.renamed.length + result.removed.length + result.collisions.length;
 
-  console.log(`${label}${theme.name ? ` (“${theme.name}”)` : ''}`);
+  console.log(`${label}${theme.name ? ` (“${forTerminal(theme.name)}”)` : ''}`);
   console.log(
     `  ${Object.keys(theme.overrides).length} override(s)` +
       `${theme.slashedVersion ? `, authored against SLASHED ${theme.slashedVersion}` : ''}.`,
@@ -99,7 +125,7 @@ for (const rel of files) {
 
   for (const { from, to } of result.renamed) console.log(`  renamed  ${from} → ${to}`);
   for (const { from, to, kept } of result.collisions) {
-    console.log(`  dropped  ${from} (already set as ${to}; kept the current name's value "${kept}")`);
+    console.log(`  dropped  ${from} (already set as ${to}; kept the current name's value "${forTerminal(kept)}")`);
   }
   for (const { name, reason } of result.removed) console.log(`  removed  ${name}\n             ${reason}`);
   for (const name of result.unknown) {

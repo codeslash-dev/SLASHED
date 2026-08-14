@@ -55,6 +55,21 @@ const FIXTURES: Array<{ label: string; raw: unknown }> = [
     raw: { schemaVersion: 1, overrides: { "--sf-color-primary": "red; background: url(x)" } },
   },
   { label: "non-string value", raw: { schemaVersion: 1, overrides: { "--sf-radius-m": 10 } } },
+  // PR #671 review regressions — both implementations must agree on these.
+  { label: "empty value", raw: { schemaVersion: 1, overrides: { "--sf-radius-m": "" } } },
+  { label: "whitespace-only value", raw: { schemaVersion: 1, overrides: { "--sf-radius-m": "   " } } },
+  {
+    label: "control chars in value",
+    raw: { schemaVersion: 1, overrides: { "--sf-radius-m": "10px\u001b[2J" } },
+  },
+  {
+    label: "control chars in name",
+    raw: { schemaVersion: 1, name: "Acme\u001b[31m", overrides: { "--sf-radius-m": "10px" } },
+  },
+  {
+    label: "multi-line value normalises rather than failing",
+    raw: { schemaVersion: 1, overrides: { "--sf-shadow-m": "0 1px 2px #0001,\n  0 2px 4px #0002" } },
+  },
 ];
 
 describe("parity with scripts/lib/theme-file.js", () => {
@@ -85,6 +100,38 @@ describe("parity with scripts/lib/theme-file.js", () => {
       slashedVersion: "0.7.31",
     };
     expect(serializeThemeFile(args)).toBe(node.serializeThemeFile(args));
+  });
+});
+
+describe("value hygiene", () => {
+  test("an empty or whitespace-only value is refused, not imported as an empty override", () => {
+    // Would otherwise reach generateCSS() and emit `--sf-x: ;`.
+    for (const bad of ["", "   "]) {
+      const { theme, errors } = validateThemeFile({
+        schemaVersion: 1,
+        overrides: { "--sf-radius-m": bad },
+      });
+      expect(theme).toBeNull();
+      expect(errors.join(" ")).toMatch(/value is empty/);
+    }
+  });
+
+  test("control characters are refused", () => {
+    const { theme, errors } = validateThemeFile({
+      schemaVersion: 1,
+      overrides: { "--sf-radius-m": "10px\u001b[2J" },
+    });
+    expect(theme).toBeNull();
+    expect(errors.join(" ")).toMatch(/control characters/);
+  });
+
+  test("a multi-line value is normalised, not rejected", () => {
+    const { theme, errors } = validateThemeFile({
+      schemaVersion: 1,
+      overrides: { "--sf-shadow-m": "0 1px 2px #0001,\n  0 2px 4px #0002" },
+    });
+    expect(errors).toEqual([]);
+    expect(theme?.overrides["--sf-shadow-m"]).toBe("0 1px 2px #0001, 0 2px 4px #0002");
   });
 });
 
@@ -122,6 +169,17 @@ describe("migration on import", () => {
     const r = migrateOverrides({ "--sf-mystery": "1rem" }, { live: new Set(["--sf-radius-m"]) });
     expect(r.overrides).toEqual({ "--sf-mystery": "1rem" });
     expect(r.unknown).toEqual(["--sf-mystery"]);
+  });
+
+  test("reports a collision when two old names resolve to one target", () => {
+    // Real pair in the shipped map: both land on --sf-color-danger-source-light.
+    const r = migrateOverrides({
+      "--sf-color-danger-light": "#aaa",
+      "--sf-color-error-source-light": "#bbb",
+    });
+    expect(r.overrides).toEqual({ "--sf-color-danger-source-light": "#aaa" });
+    expect(r.collisions).toHaveLength(1);
+    expect(r.collisions[0].kept).toBe("#aaa");
   });
 
   test("is idempotent", () => {

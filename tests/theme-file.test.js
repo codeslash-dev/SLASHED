@@ -91,6 +91,39 @@ describe('validateThemeFile', () => {
     }
   });
 
+  test('rejects an empty or whitespace-only value', () => {
+    // Regression (PR #671 review): these used to trim to "" and be accepted as
+    // an active override, so generateCSS() emitted `--sf-x: ;` — a broken
+    // declaration shadowing the real token with nothing.
+    for (const bad of ['', '   ', '\t\n']) {
+      const { theme, errors } = validateThemeFile({
+        schemaVersion: 1,
+        overrides: { '--sf-color-primary': bad },
+      });
+      assert.equal(theme, null, `expected rejection of ${JSON.stringify(bad)}`);
+      assert.match(errors[0], /value is empty/);
+    }
+  });
+
+  test('rejects control characters in a value', () => {
+    const { theme, errors } = validateThemeFile({
+      schemaVersion: 1,
+      overrides: { '--sf-color-primary': 'red\u001b[2Jwiped' },
+    });
+    assert.equal(theme, null);
+    assert.match(errors[0], /control characters/);
+  });
+
+  test('rejects control characters in the theme name', () => {
+    const { theme, errors } = validateThemeFile({
+      schemaVersion: 1,
+      name: 'Acme\u001b[31m',
+      overrides: { '--sf-radius-m': '10px' },
+    });
+    assert.equal(theme, null);
+    assert.match(errors.join(' '), /`name` contains control characters/);
+  });
+
   test('parseThemeFile reports malformed JSON without throwing', () => {
     const { theme, errors } = parseThemeFile('{ not json');
     assert.equal(theme, null);
@@ -135,6 +168,29 @@ describe('migrateOverrides', () => {
     assert.equal(r.collisions.length, 1);
     assert.equal(r.collisions[0].kept, '#new');
     assert.deepEqual(r.renamed, []);
+  });
+
+  test('reports a collision when two old names resolve to one target', () => {
+    // Reachable with the real map: --sf-color-danger-light and
+    // --sf-color-error-source-light both land on --sf-color-danger-source-light.
+    // Without a collision record the later key would silently overwrite the
+    // earlier one — the exact data loss this function promises never to do.
+    const renames = {
+      '--sf-color-danger-light': '--sf-color-danger-source-light',
+      '--sf-color-error-source-light': '--sf-color-danger-source-light',
+    };
+    const r = migrateOverrides(
+      { '--sf-color-danger-light': '#aaa', '--sf-color-error-source-light': '#bbb' },
+      { renames, removals: {} },
+    );
+    // Sorted order: --sf-color-danger-light claims the target first.
+    assert.deepEqual(r.overrides, { '--sf-color-danger-source-light': '#aaa' });
+    assert.deepEqual(r.renamed, [
+      { from: '--sf-color-danger-light', to: '--sf-color-danger-source-light' },
+    ]);
+    assert.equal(r.collisions.length, 1);
+    assert.equal(r.collisions[0].from, '--sf-color-error-source-light');
+    assert.equal(r.collisions[0].kept, '#aaa');
   });
 
   test('is idempotent — migrating an already-migrated set changes nothing', () => {
@@ -222,6 +278,21 @@ describe('migrate-theme CLI', () => {
     assert.equal(r.status, 1);
     assert.match(r.stderr, /invalid theme file/);
     assert.match(r.stderr, /newer than this SLASHED understands/);
+  });
+
+  test('refuses a file carrying terminal control sequences', () => {
+    const file = tmpFile(
+      JSON.stringify({
+        schemaVersion: 1,
+        name: 'Acme',
+        overrides: { '--sf-color-primary': 'red\u001b[2J' },
+      }),
+    );
+    const r = run([file]);
+    assert.equal(r.status, 1);
+    assert.match(r.stderr, /control characters/);
+    assert.ok(!r.stderr.includes('\u001b[2J'), 'must not echo the raw escape sequence');
+    assert.ok(!r.stdout.includes('\u001b[2J'), 'must not echo the raw escape sequence');
   });
 
   test('exits 1 when the file does not exist', () => {

@@ -80,13 +80,24 @@ const RULES = [
       'The framework promises every visual value is a named token. A literal colour ' +
       'here cannot be rebranded, cannot participate in the light-dark() / oklch() ' +
       'derivation chain, and will not follow a consumer\'s theme.',
-    // Hex literals plus the legacy colour functions. oklch()/color-mix() are
-    // absent by design: those are the derivation syntax the token layer is
-    // built on, not a hardcoded value.
-    pattern: /#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(/g,
+    // Hex literals, the legacy colour functions, and the modern ones.
+    //
+    // The modern functions need a lookahead: oklch(from …) and oklch(var(…))
+    // are the DERIVATION syntax the whole token layer is built on, not
+    // hardcoded values — flagging those would condemn the architecture. A
+    // direct oklch(0.6 0.25 30) is a literal like any other and is flagged.
+    // color-mix( is unaffected: \bcolor\( cannot match across the "-mix".
+    pattern:
+      /#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(|\b(?:hwb|lab|lch|oklab|oklch|color)\(\s*(?!from\b|var\()/gi,
     targets: ['core/', 'optional/'],
     extensions: ['.css'],
-    exclude: TOKEN_SOURCE_FILES,
+    exclude: [
+      ...TOKEN_SOURCE_FILES,
+      // A copy-and-customise starter that ships in no bundle (see its own
+      // header, and bundle.config.json). Literal brand colours are the point
+      // of the file — they are what a user replaces.
+      'optional/customize-example.css',
+    ],
     maskComments: true,
   },
   {
@@ -96,7 +107,10 @@ const RULES = [
       'A shipped bundle must never cause a network request. Any absolute URL here ' +
       'means every consumer page silently fetches from a third party — breaking the ' +
       '"standalone, no external requests" guarantee and leaking visitor IPs.',
-    pattern: /https?:\/\/[^\s"')]+/g,
+    // (?:https?:)? — a protocol-relative //host/path is a real external
+    // request too: CSS accepts @import url(//fonts.example/x.css) and the
+    // browser fetches it using the page's scheme.
+    pattern: /(?:https?:)?\/\/[^\s"')]+/gi,
     targets: ['dist/'],
     extensions: ['.css'],
     // Deliberately NOT comment-masked: a URL in a bundle banner is still a URL

@@ -109,6 +109,44 @@ describe('check-forbidden-strings', () => {
     assert.match(r.stderr, /core\/macros\.css:4/);
   });
 
+  test('flags a direct modern colour literal', () => {
+    for (const decl of [
+      'color: oklch(0.6 0.25 30)',
+      'color: oklab(0.5 0.1 0.1)',
+      'color: lch(50% 40 30)',
+      'color: lab(50% 40 30)',
+      'color: hwb(120 10% 20%)',
+      'color: color(display-p3 1 0 0)',
+    ]) {
+      const dir = buildFixture({ 'core/macros.css': `.sf-x { ${decl}; }\n` });
+      const r = runGate(dir, ['--check']);
+      assert.equal(r.status, 1, `expected ${decl} to be flagged`);
+      assert.match(r.stderr, /hardcoded-color/);
+    }
+  });
+
+  test('does not flag relative-colour derivations, which are the token architecture', () => {
+    for (const decl of [
+      'color: oklch(from var(--sf-color-primary) l c h)',
+      'color: oklch(var(--sf-l) var(--sf-c) var(--sf-h))',
+      'color: color-mix(in oklab, red, blue)',
+    ]) {
+      const dir = buildFixture({ 'core/macros.css': `.sf-x { ${decl}; }\n` });
+      const r = runGate(dir, ['--check']);
+      assert.equal(r.status, 0, `${decl} must be allowed:\n${r.stderr}`);
+    }
+  });
+
+  test('flags a protocol-relative external URL in a bundle', () => {
+    const dir = buildFixture({
+      'dist/slashed.optimal.css': '@import url(//fonts.example.com/style.css);\n',
+    });
+    const r = runGate(dir, ['--check']);
+    assert.equal(r.status, 1, 'a //host reference still causes a network request');
+    assert.match(r.stderr, /external-url/);
+    assert.match(r.stderr, /fonts\.example\.com/);
+  });
+
   test('flags an external URL in a shipped bundle', () => {
     const dir = buildFixture({
       'dist/slashed.optimal.css': "@import url(https://fonts.googleapis.com/css2?family=Inter);\n",

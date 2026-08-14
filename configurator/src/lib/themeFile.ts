@@ -26,6 +26,14 @@ export const THEME_SCHEMA_URL = "https://slashed.codeslash.dev/schema/theme/v1.j
 const TOKEN_NAME_RE = /^--sf-[a-z0-9-]+$/;
 const UNSAFE_VALUE_RE = /[;{}]|\/\*|\*\//;
 
+/**
+ * Non-whitespace control characters (C0 + DEL), checked AFTER whitespace has
+ * been collapsed — so tab/newline in a legitimately multi-line value normalise
+ * away rather than being rejected, matching codec.ts's sanitizeValue(). What
+ * remains (ESC, BEL, NUL …) is meaningless in CSS and is rejected.
+ */
+const CONTROL_CHAR_RE = /[\u0000-\u001f\u007f]/;
+
 export interface ThemeFile {
   schemaVersion: number;
   slashedVersion: string | null;
@@ -77,6 +85,9 @@ export function validateThemeFile(raw: unknown): { theme: ThemeFile | null; erro
     return fail("`overrides` is missing or not an object.");
   }
   if (name != null && typeof name !== "string") errors.push("`name` must be a string when present.");
+  if (typeof name === "string" && CONTROL_CHAR_RE.test(name)) {
+    errors.push("`name` contains control characters.");
+  }
   if (slashedVersion != null && typeof slashedVersion !== "string") {
     errors.push("`slashedVersion` must be a string when present.");
   }
@@ -95,7 +106,21 @@ export function validateThemeFile(raw: unknown): { theme: ThemeFile | null; erro
       errors.push(`overrides["${key}"]: value contains CSS-breaking characters (; { } or comment markers).`);
       continue;
     }
-    clean[key] = value.trim();
+    // Collapse whitespace exactly as codec.ts's sanitizeValue() does, so the
+    // two paths cannot disagree about what a value means.
+    const normalised = value.replace(/\s+/g, " ").trim();
+    if (CONTROL_CHAR_RE.test(normalised)) {
+      errors.push(`overrides["${key}"]: value contains control characters.`);
+      continue;
+    }
+    if (normalised === "") {
+      // An empty override is not a reset — generateCSS() would emit
+      // `--sf-x: ;`, a broken declaration that shadows the real token with
+      // nothing. codec.ts already drops empty values on encode and decode.
+      errors.push(`overrides["${key}"]: value is empty. Remove the entry to leave the token at its default.`);
+      continue;
+    }
+    clean[key] = normalised;
   }
 
   if (errors.length) return { theme: null, errors };
@@ -147,6 +172,14 @@ export function migrateOverrides(
     if (target) {
       if (Object.prototype.hasOwnProperty.call(overrides, target)) {
         collisions.push({ from: key, to: target, kept: overrides[target] });
+        continue;
+      }
+      // Two different old names can resolve to the same live token (the map
+      // contains such pairs). Without this branch the later key would silently
+      // overwrite the earlier one. Sorted iteration makes first-claim-wins
+      // deterministic.
+      if (Object.prototype.hasOwnProperty.call(out, target)) {
+        collisions.push({ from: key, to: target, kept: out[target] });
         continue;
       }
       out[target] = value;

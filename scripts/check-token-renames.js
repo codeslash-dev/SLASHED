@@ -50,9 +50,30 @@ try {
   process.exit(1);
 }
 
-const renames = map.renames ?? {};
-const removals = map.removals ?? {};
 const errors = [];
+
+/**
+ * A section must be a plain object. An array passes `typeof x === 'object'`
+ * and yields no entries, so `{"renames": []}` would sail through every
+ * downstream check and leave the CLI silently migrating nothing.
+ */
+function readSection(name) {
+  const value = map[name];
+  if (value === undefined) return {};
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    errors.push(`\`${name}\` must be an object (got ${Array.isArray(value) ? 'an array' : typeof value}).`);
+    return {};
+  }
+  return value;
+}
+
+if (!map || typeof map !== 'object' || Array.isArray(map)) {
+  console.error('check:token-renames FAILED: docs/token-renames.json must be a JSON object.');
+  process.exit(1);
+}
+
+const renames = readSection('renames');
+const removals = readSection('removals');
 
 const TOKEN_NAME_RE = /^--sf-[a-z0-9-]+$/;
 

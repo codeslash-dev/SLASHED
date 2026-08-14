@@ -131,6 +131,25 @@ describe('check-token-renames', () => {
     assert.match(r.stderr, /no reason/);
   });
 
+  test('fails when the root value is an array', () => {
+    const dir = buildFixture({ renames: {}, removals: {} });
+    fs.writeFileSync(path.join(dir, 'docs', 'token-renames.json'), '[]');
+    const r = runGate(dir);
+    assert.equal(r.status, 1);
+    assert.match(r.stderr, /must be a JSON object/);
+  });
+
+  test('fails when a section is an array rather than an object', () => {
+    // An array yields no entries, so every downstream check would pass
+    // vacuously and the CLI would silently migrate nothing.
+    for (const section of ['renames', 'removals']) {
+      const dir = buildFixture({ renames: {}, removals: {}, [section]: [] });
+      const r = runGate(dir);
+      assert.equal(r.status, 1, `expected ${section}: [] to fail`);
+      assert.match(r.stderr, new RegExp(`\\\`${section}\\\` must be an object`));
+    }
+  });
+
   test('fails on malformed JSON rather than throwing', () => {
     const dir = buildFixture({ renames: {}, removals: {} });
     fs.writeFileSync(path.join(dir, 'docs', 'token-renames.json'), '{ not json');

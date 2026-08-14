@@ -41,6 +41,19 @@ const TOKEN_NAME_RE = /^--sf-[a-z0-9-]+$/;
 const UNSAFE_VALUE_RE = /[;{}]|\/\*|\*\//;
 
 /**
+ * Non-whitespace control characters (C0 + DEL), tested AFTER whitespace has
+ * been collapsed — so tab/newline in a legitimately multi-line value (a long
+ * box-shadow, say) normalise away instead of being rejected, matching how the
+ * configurator's sanitizeValue() treats whitespace.
+ *
+ * What remains (ESC, BEL, NUL …) is meaningless in a CSS value, and echoing one
+ * into a terminal from the migration CLI would emit an ANSI/OSC sequence chosen
+ * by whoever wrote the file. This is the single choke point protecting every
+ * consumer.
+ */
+const CONTROL_CHAR_RE = /[\u0000-\u001f\u007f]/;
+
+/**
  * Validate and normalise a parsed theme file.
  *
  * @param {unknown} raw parsed JSON (not a string)
@@ -78,6 +91,9 @@ export function validateThemeFile(raw) {
     return fail('`overrides` is missing or not an object.');
   }
   if (name != null && typeof name !== 'string') errors.push('`name` must be a string when present.');
+  if (typeof name === 'string' && CONTROL_CHAR_RE.test(name)) {
+    errors.push('`name` contains control characters.');
+  }
   if (slashedVersion != null && typeof slashedVersion !== 'string') {
     errors.push('`slashedVersion` must be a string when present.');
   }
@@ -98,7 +114,24 @@ export function validateThemeFile(raw) {
       );
       continue;
     }
-    clean[key] = value.trim();
+    // Collapse whitespace exactly as the configurator's sanitizeValue() does,
+    // so the two paths cannot disagree about what a value means.
+    const normalised = value.replace(/\s+/g, ' ').trim();
+    if (CONTROL_CHAR_RE.test(normalised)) {
+      errors.push(`overrides["${key}"]: value contains control characters.`);
+      continue;
+    }
+    if (normalised === '') {
+      // An empty override is not a reset — generateCSS() would emit
+      // `--sf-x: ;`, a broken declaration that shadows the real token with
+      // nothing. The configurator's codec already drops empty values on both
+      // encode and decode; a file gets told instead of silently fixed.
+      errors.push(
+        `overrides["${key}"]: value is empty. Remove the entry to leave the token at its default.`,
+      );
+      continue;
+    }
+    clean[key] = normalised;
   }
 
   if (errors.length) return { theme: null, errors };
@@ -172,6 +205,17 @@ export function migrateOverrides(overrides, { renames = {}, removals = {}, live 
       // it is the one the author most recently meant.
       if (Object.prototype.hasOwnProperty.call(overrides, target)) {
         collisions.push({ from: key, to: target, kept: overrides[target] });
+        continue;
+      }
+      // Two different old names can resolve to the SAME live token — the map
+      // really does contain such pairs (e.g. --sf-color-danger-light and
+      // --sf-color-error-source-light both land on
+      // --sf-color-danger-source-light). Without this branch the later key
+      // would overwrite the earlier one and vanish from the report, which is
+      // precisely the silent data loss this function promises never to do.
+      // Keys are walked in sorted order, so first-claim-wins is deterministic.
+      if (Object.prototype.hasOwnProperty.call(out, target)) {
+        collisions.push({ from: key, to: target, kept: out[target] });
         continue;
       }
       out[target] = value;
