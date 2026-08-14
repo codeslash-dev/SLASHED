@@ -61,6 +61,7 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run check:layer-order` | Verify `docs/architecture.md`'s `@layer` block and specificity ladder match `core/layers.css` (CI gate) |
 | `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (CI gate) |
 | `npm run check:registry` | Verify `token-registry.json` is in sync with source (CI gate) |
+| `npm run check:forbidden-strings` | Verify no hardcoded colour literal sits outside the token source files and no shipped bundle contains an external URL (CI gate) |
 | `npm run audit:check` | Verify `docs/registry.json` matches source without writing (CI gate) |
 | `npm run lint:css` | Lint all CSS source with stylelint (CI gate) |
 | `npm run lint:css:fix` | Lint CSS source and auto-fix violations |
