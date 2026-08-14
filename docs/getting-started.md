@@ -125,6 +125,44 @@ whole dark palette derive from those six. Prefer to design visually? Open the
 [configurator](https://slashed.codeslash.dev/configurator/) and export the
 override CSS.
 
+### Keeping a theme as a file
+
+Alongside the override CSS, the configurator exports a **theme file** —
+`slashed-theme.json`, a sorted, name-keyed snapshot of your overrides:
+
+```json
+{
+  "$schema": "https://slashed.codeslash.dev/schema/theme/v1.json",
+  "schemaVersion": 1,
+  "slashedVersion": "0.7.31",
+  "name": "Acme Corp",
+  "overrides": {
+    "--sf-color-primary-source-light": "#3b5bdb"
+  }
+}
+```
+
+Unlike a share link (compressed, opaque) this is meant to be committed next to
+the CSS it themes: a `git diff` shows exactly which token changed value, so a
+rebrand is reviewable in a pull request. Import it back into the configurator at
+any time.
+
+When you upgrade SLASHED, a theme file written against an older version is
+migrated onto the current token names **on import** — just load it in the
+configurator and it is brought forward automatically. Renamed tokens are
+rewritten, removed ones are dropped with an explanation of what to use instead,
+and anything unrecognised is reported but left untouched: the migration never
+silently discards your data. The panel lists every adjustment it made.
+
+Working inside a clone of this repository, the same migration is available as a
+CLI, which is useful for migrating committed theme files in bulk or as a CI
+check (it exits non-zero when a file needs migrating):
+
+```bash
+npm run migrate:theme -- acme.slashed-theme.json          # report what would change
+npm run migrate:theme -- acme.slashed-theme.json --write  # apply
+```
+
 ---
 
 ## 6. The one rule that matters

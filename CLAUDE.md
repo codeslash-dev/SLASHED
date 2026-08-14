@@ -62,6 +62,8 @@ requires a rebuild+redeploy, not just a file edit.
 | `npm run check:macros` | Verify `.sf-*` macro classes match `docs/macros.md` (CI gate) |
 | `npm run check:registry` | Verify `token-registry.json` is in sync with source (CI gate) |
 | `npm run check:forbidden-strings` | Verify no hardcoded colour literal sits outside the token source files and no shipped bundle contains an external URL (CI gate) |
+| `npm run check:token-renames` | Verify `docs/token-renames.json` is truthful — every rename target is a live token, no old name still is (CI gate) |
+| `npm run migrate:theme -- <file> [--write]` | Migrate a `*.slashed-theme.json` theme file onto the current token API |
 | `npm run audit:check` | Verify `docs/registry.json` matches source without writing (CI gate) |
 | `npm run lint:css` | Lint all CSS source with stylelint (CI gate) |
 | `npm run lint:css:fix` | Lint CSS source and auto-fix violations |
@@ -140,6 +142,40 @@ mention is deliberately non-live (a removed name in an example, an illustrative
 instance token, an example of a component the framework does not ship) — record
 it in `docs/ref-allowlist.json` with a reason. `docs/migration.md` (historical)
 and `docs/roadmap.md` (forward-looking) are whole-doc exclusions.
+
+## Token renames — MANDATORY
+
+`docs/token-renames.json` is the machine-readable mirror of `docs/migration.md`.
+It is what lets a **theme file** (`*.slashed-theme.json` — the portable,
+name-keyed override snapshot, see `scripts/lib/theme-file.js`) survive a rename:
+`npm run migrate:theme -- <file> --write` rewrites old names, drops removed ones
+with the reason, and never discards an override it does not recognise.
+
+**Any PR that renames or removes a `--sf-*` token must add the corresponding
+entry**, in the same PR as the CSS change:
+
+- **Renamed** → add to `renames` as `"--sf-old": "--sf-new"`. Record the
+  *fully resolved* destination, never an intermediate name: rename targets must
+  be live, so a chain (`a → b → c`) fails the gate by construction.
+- **Removed with no replacement** → add to `removals` with a reason saying what
+  to use instead. A removal without a reason is rejected.
+
+This cannot be generated. `token-registry.json` keeps ids permanent, but
+`check-token-registry.js` deliberately permits renames as *in-place name
+updates on the same id* — so after a rename the old name is simply gone, with
+nothing to look it up by. That is harmless for the share-link codec (it stores
+ids) and fatal for a name-keyed theme file. A rename and a delete+add pair are
+also indistinguishable to a generator, so the map is curated by hand.
+
+```bash
+npm run check:token-renames   # must pass — CI fails if it doesn't
+```
+
+The gate holds the map to three invariants: every rename target is live, no old
+name is still live, and renames and removals are disjoint. Note that "live"
+includes tokens merely *declared* in `core/`/`optional/` CSS — so a leftover
+declaration of a supposedly-renamed token will fail this gate, which is how it
+catches a half-finished rename.
 
 ## Tests
 
