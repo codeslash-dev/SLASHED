@@ -43,12 +43,14 @@ const SOURCE =
 const ANNOTATIONS_FILE = path.join(FRAMEWORK_ROOT, 'docs', 'token-annotations.json');
 const BUNDLE_CONFIG_FILE = path.join(FRAMEWORK_ROOT, 'bundle.config.json');
 const REGISTRY_FILE = path.join(FRAMEWORK_ROOT, 'token-registry.json');
+const RENAMES_FILE = path.join(FRAMEWORK_ROOT, 'docs', 'token-renames.json');
 
 const OUT_DIR = path.join(CONFIGURATOR_ROOT, 'src', 'data');
 const OUT = path.join(OUT_DIR, 'api-index.generated.json');
 const CLASSES_OUT = path.join(OUT_DIR, 'classes.generated.json');
 const BUNDLES_OUT = path.join(OUT_DIR, 'bundles.generated.json');
 const REGISTRY_OUT = path.join(OUT_DIR, 'token-registry.generated.json');
+const RENAMES_OUT = path.join(OUT_DIR, 'token-renames.generated.json');
 
 // jsDelivr serves the published dist branch (see .github/workflows/publish-dist.yml)
 // at the repo root, so a bundle's minified file is <CDN_BASE>/slashed.<id>.min.css.
@@ -314,6 +316,10 @@ function main() {
   // verbatim so the configurator imports it the same way model.js imports the
   // api-index — and so the runtime can never drift from the committed registry.
   syncRegistry();
+
+  // Rename/removal map for theme-file import (src/lib/themeFile.ts), so an
+  // override set authored against an older SLASHED can be migrated on load.
+  syncRenames();
 }
 
 /**
@@ -345,6 +351,46 @@ function syncRegistry() {
   console.log(
     `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, REGISTRY_OUT)} ← ` +
       `token-registry.json (${tokenCount} ids)`
+  );
+}
+
+/**
+ * Copy docs/token-renames.json → src/data/token-renames.generated.json, so the
+ * configurator's theme-file import can migrate an old override set without
+ * reaching outside its own package at runtime (the @framework-css alias is
+ * remapped by the WP plugin, so cross-boundary runtime imports are not safe
+ * here — a generated data file is).
+ *
+ * The map's truthfulness is guaranteed upstream by scripts/check-token-renames.js.
+ */
+function syncRenames() {
+  if (!fs.existsSync(RENAMES_FILE)) {
+    console.error(
+      `[configurator:sync] token-renames.json not found at ${RENAMES_FILE}\n` +
+        `It is a hand-maintained mirror of docs/migration.md — it should be committed.`
+    );
+    process.exit(1);
+  }
+  let map;
+  try {
+    map = JSON.parse(fs.readFileSync(RENAMES_FILE, 'utf8'));
+  } catch (err) {
+    console.error(`[configurator:sync] ${RENAMES_FILE} is not valid JSON (${err.message}).`);
+    process.exit(1);
+  }
+  const out = {
+    _sync: {
+      generatedBy: 'configurator/scripts/sync-api.mjs',
+      source: 'docs/token-renames.json',
+    },
+    renames: map.renames ?? {},
+    removals: map.removals ?? {},
+  };
+  fs.writeFileSync(RENAMES_OUT, JSON.stringify(out, null, 2) + '\n', 'utf8');
+  console.log(
+    `[configurator:sync] ${path.relative(FRAMEWORK_ROOT, RENAMES_OUT)} ← ` +
+      `docs/token-renames.json (${Object.keys(out.renames).length} renames, ` +
+      `${Object.keys(out.removals).length} removals)`
   );
 }
 

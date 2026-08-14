@@ -16,18 +16,20 @@
       "configurator/src/data/api-index.generated.json",
       "configurator/src/data/classes.generated.json",
       "configurator/src/data/bundles.generated.json",
-      "configurator/src/data/token-registry.generated.json"
+      "configurator/src/data/token-registry.generated.json",
+      "configurator/src/data/token-renames.generated.json"
     ]
   },
   {
     "name": "configurator api sync",
-    "srcPrefixes": ["docs/token-annotations.json", "docs/api-index.json", "bundle.config.json", "token-registry.json"],
+    "srcPrefixes": ["docs/token-annotations.json", "docs/api-index.json", "bundle.config.json", "token-registry.json", "docs/token-renames.json"],
     "buildCmd": "npm run configurator:sync",
     "outputs": [
       "configurator/src/data/api-index.generated.json",
       "configurator/src/data/classes.generated.json",
       "configurator/src/data/bundles.generated.json",
-      "configurator/src/data/token-registry.generated.json"
+      "configurator/src/data/token-registry.generated.json",
+      "configurator/src/data/token-renames.generated.json"
     ]
   }
 ]

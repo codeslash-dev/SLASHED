@@ -109,6 +109,15 @@ jobs:
       - run: node scripts/check-hook-tokens.js
       - run: node scripts/check-mirrors.js
       - run: node scripts/check-bundle-defs.js
+      # Strings that must never ship: hardcoded colour literals outside the
+      # token source files, and external URLs in a built bundle. Runs after
+      # check-artifacts.js, which rebuilds dist/ — so the bundle rules have
+      # something to scan.
+      - run: npm run check:forbidden-strings
+      # docs/token-renames.json must stay truthful: every rename target live,
+      # no old name still live. A stale map migrates theme files onto dead
+      # tokens, which is worse than having no map at all.
+      - run: npm run check:token-renames
 
   dependency-audit:
     name: Dependency vulnerability audit
