@@ -25,21 +25,21 @@
       "optimal"
     ],
     "counts": {
-      "total": 1069,
+      "total": 1070,
       "by_type": {
         "class": 328,
-        "token": 741
+        "token": 742
       },
       "by_tier": {
         "INTERNAL": 1,
-        "PUBLIC": 1019,
+        "PUBLIC": 1020,
         "PUBLIC-ADVANCED": 49
       },
       "by_role": {
-        "consumption": 488,
+        "consumption": 489,
         "knob": 253
       },
-      "tokens": 741,
+      "tokens": 742,
       "classes": 328,
       "sf_classes": 305,
       "is_classes": 15,
@@ -48,7 +48,7 @@
         "Accessibility": 9,
         "Component tokens": 46,
         "Components": 30,
-        "Core tokens": 610,
+        "Core tokens": 611,
         "Forms": 1,
         "Layout primitives": 146,
         "Layout tokens": 53,
@@ -15221,6 +15221,32 @@
       "layer": "slashed.tokens",
       "sourceFiles": [
         "core/tokens.macros.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-scroll-offset-gap",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "scroll",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Layout & a11y",
+      "description": "Breathing room added below the header when scrolling to an in-page anchor (scroll-padding). Defaults to --sf-space-m so a heading lands a comfortable gap under the sticky header; set to 0 for the heading flush under the header, or any length to tune the gap without overriding the whole scroll-padding rule.",
+      "value": "var(--sf-space-m)",
+      "aliasOf": "--sf-space-m",
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
       ],
       "bundles": [
         "full",

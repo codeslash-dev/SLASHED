@@ -2917,6 +2917,11 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-scroll-offset-gap",
+      "description": "Breathing room added below the header when scrolling to an in-page anchor (scroll-padding). Defaults to --sf-space-m so a heading lands a comfortable gap under the sticky header; set to 0 for the heading flush under the header, or any length to tune the gap without overriding the whole scroll-padding rule.\n\nDefault: `var(--sf-space-m)`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-scroll-shadow-size",
       "description": "Size of the scroll-shadow fade effect on overflowing containers.\n\nDefault: `2rem`",
       "syntax": "*"

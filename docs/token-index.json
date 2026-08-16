@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 741,
+      "tokens": 742,
       "by_tier": {
-        "PUBLIC": 691,
+        "PUBLIC": 692,
         "PUBLIC-ADVANCED": 49,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 253,
-        "consumption": 488
+        "consumption": 489
       }
     }
   },
@@ -4692,6 +4692,14 @@
         "core/tokens.macros.css"
       ],
       "value": "0 1px 3px oklch(0 0 0 / 0.6)"
+    },
+    "--sf-scroll-offset-gap": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-space-m)"
     },
     "--sf-scroll-shadow-size": {
       "tier": "PUBLIC",

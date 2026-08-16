@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**741 tokens** (deduplicated by name across the 4 token source files).
+**742 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 691 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 692 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 253 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 488 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 489 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -669,6 +669,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-scrim-direction` | PUBLIC | knob | Macros | `to top` |
 | `--sf-scrim-gradient` | PUBLIC | consumption | Macros | `linear-gradient(var(--sf-scrim-direction), var(--sf-scrim-color), transparent)` |
 | `--sf-scrim-text-shadow` | PUBLIC | knob | Macros | `0 1px 3px oklch(0 0 0 / 0.6)` |
+| `--sf-scroll-offset-gap` | PUBLIC | consumption | Core | `var(--sf-space-m)` |
 | `--sf-scroll-shadow-size` | PUBLIC | knob | Macros | `2rem` |
 | `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | knob | Core | `cover 30%` |
 | `--sf-scroll-timeline-range-exit-end` | PUBLIC | knob | Core | `exit 100%` |

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 802
+    "nextId": 803
   },
   "tokens": [
     {
@@ -3272,6 +3272,10 @@
     {
       "id": 801,
       "name": "--sf-color-text--subtle"
+    },
+    {
+      "id": 802,
+      "name": "--sf-scroll-offset-gap"
     }
   ]
 }

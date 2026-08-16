@@ -14,7 +14,7 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 
 ## Tokens
 
-740 tokens (PUBLIC + PUBLIC-ADVANCED), grouped by area. Names are self-descriptive; defaults, derivations and per-token notes live in the full guide and api-index.json.
+741 tokens (PUBLIC + PUBLIC-ADVANCED), grouped by area. Names are self-descriptive; defaults, derivations and per-token notes live in the full guide and api-index.json.
 
 ### Layout tokens (53)
 
@@ -33,7 +33,7 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 --sf-switcher-threshold
 ```
 
-### Core tokens (609)
+### Core tokens (610)
 
 ```
 --sf-animation-blink --sf-animation-color-pulse --sf-animation-fade-in --sf-animation-fade-out
@@ -156,30 +156,31 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 --sf-radius-full --sf-radius-l --sf-radius-m --sf-radius-none --sf-radius-outer --sf-radius-pill
 --sf-radius-s --sf-radius-scale --sf-radius-xl --sf-radius-xs --sf-ratio-3-2 --sf-ratio-4-3
 --sf-ratio-cinema --sf-ratio-golden --sf-ratio-portrait --sf-ratio-square --sf-ratio-video
---sf-safe-bottom --sf-safe-left --sf-safe-right --sf-safe-top --sf-scroll-timeline-range-end
---sf-scroll-timeline-range-exit-end --sf-scroll-timeline-range-exit-start
---sf-scroll-timeline-range-start --sf-scrollbar-thumb --sf-scrollbar-track --sf-section-pad
---sf-section-pad--2xl --sf-section-pad--l --sf-section-pad--m --sf-section-pad--s
---sf-section-pad--xl --sf-section-pad--xs --sf-section-scale --sf-shadow-2xl --sf-shadow-color
---sf-shadow-glow --sf-shadow-glow-color --sf-shadow-inner --sf-shadow-l --sf-shadow-lightness
---sf-shadow-m --sf-shadow-none --sf-shadow-s --sf-shadow-strength --sf-shadow-xl --sf-shadow-xs
---sf-size-l --sf-size-m --sf-size-s --sf-size-xl --sf-size-xs --sf-space-2xl --sf-space-2xs
---sf-space-3xl --sf-space-4xl --sf-space-base-max --sf-space-base-min --sf-space-l --sf-space-m
---sf-space-none --sf-space-px --sf-space-ratio-max --sf-space-ratio-min --sf-space-s
---sf-space-scale --sf-space-xl --sf-space-xs --sf-stagger-step --sf-sticky-offset
---sf-sticky-offset-desktop --sf-sticky-offset-mobile --sf-text-2xl --sf-text-2xl-font-weight
---sf-text-2xl-letter-spacing --sf-text-2xl-line-height --sf-text-2xl-max-width --sf-text-2xs
---sf-text-2xs-font-weight --sf-text-2xs-letter-spacing --sf-text-2xs-line-height
---sf-text-2xs-max-width --sf-text-3xl --sf-text-3xl-font-weight --sf-text-3xl-letter-spacing
---sf-text-3xl-line-height --sf-text-3xl-max-width --sf-text-4xl --sf-text-4xl-font-weight
---sf-text-4xl-letter-spacing --sf-text-4xl-line-height --sf-text-4xl-max-width
---sf-text-base-max --sf-text-base-min --sf-text-display-base-max --sf-text-display-base-min
---sf-text-display-l --sf-text-display-m --sf-text-display-s --sf-text-display-scale --sf-text-l
---sf-text-l-font-weight --sf-text-l-letter-spacing --sf-text-l-line-height --sf-text-l-max-width
---sf-text-m --sf-text-m-font-weight --sf-text-m-letter-spacing --sf-text-m-line-height
---sf-text-m-max-width --sf-text-ratio-max --sf-text-ratio-min --sf-text-s
---sf-text-s-font-weight --sf-text-s-letter-spacing --sf-text-s-line-height --sf-text-s-max-width
---sf-text-scale --sf-text-shadow-l --sf-text-shadow-m --sf-text-shadow-none --sf-text-shadow-s
+--sf-safe-bottom --sf-safe-left --sf-safe-right --sf-safe-top --sf-scroll-offset-gap
+--sf-scroll-timeline-range-end --sf-scroll-timeline-range-exit-end
+--sf-scroll-timeline-range-exit-start --sf-scroll-timeline-range-start --sf-scrollbar-thumb
+--sf-scrollbar-track --sf-section-pad --sf-section-pad--2xl --sf-section-pad--l
+--sf-section-pad--m --sf-section-pad--s --sf-section-pad--xl --sf-section-pad--xs
+--sf-section-scale --sf-shadow-2xl --sf-shadow-color --sf-shadow-glow --sf-shadow-glow-color
+--sf-shadow-inner --sf-shadow-l --sf-shadow-lightness --sf-shadow-m --sf-shadow-none
+--sf-shadow-s --sf-shadow-strength --sf-shadow-xl --sf-shadow-xs --sf-size-l --sf-size-m
+--sf-size-s --sf-size-xl --sf-size-xs --sf-space-2xl --sf-space-2xs --sf-space-3xl
+--sf-space-4xl --sf-space-base-max --sf-space-base-min --sf-space-l --sf-space-m --sf-space-none
+--sf-space-px --sf-space-ratio-max --sf-space-ratio-min --sf-space-s --sf-space-scale
+--sf-space-xl --sf-space-xs --sf-stagger-step --sf-sticky-offset --sf-sticky-offset-desktop
+--sf-sticky-offset-mobile --sf-text-2xl --sf-text-2xl-font-weight --sf-text-2xl-letter-spacing
+--sf-text-2xl-line-height --sf-text-2xl-max-width --sf-text-2xs --sf-text-2xs-font-weight
+--sf-text-2xs-letter-spacing --sf-text-2xs-line-height --sf-text-2xs-max-width --sf-text-3xl
+--sf-text-3xl-font-weight --sf-text-3xl-letter-spacing --sf-text-3xl-line-height
+--sf-text-3xl-max-width --sf-text-4xl --sf-text-4xl-font-weight --sf-text-4xl-letter-spacing
+--sf-text-4xl-line-height --sf-text-4xl-max-width --sf-text-base-max --sf-text-base-min
+--sf-text-display-base-max --sf-text-display-base-min --sf-text-display-l --sf-text-display-m
+--sf-text-display-s --sf-text-display-scale --sf-text-l --sf-text-l-font-weight
+--sf-text-l-letter-spacing --sf-text-l-line-height --sf-text-l-max-width --sf-text-m
+--sf-text-m-font-weight --sf-text-m-letter-spacing --sf-text-m-line-height --sf-text-m-max-width
+--sf-text-ratio-max --sf-text-ratio-min --sf-text-s --sf-text-s-font-weight
+--sf-text-s-letter-spacing --sf-text-s-line-height --sf-text-s-max-width --sf-text-scale
+--sf-text-shadow-l --sf-text-shadow-m --sf-text-shadow-none --sf-text-shadow-s
 --sf-text-shadow-xl --sf-text-shadow-xs --sf-text-xl --sf-text-xl-font-weight
 --sf-text-xl-letter-spacing --sf-text-xl-line-height --sf-text-xl-max-width --sf-text-xs
 --sf-text-xs-font-weight --sf-text-xs-letter-spacing --sf-text-xs-line-height

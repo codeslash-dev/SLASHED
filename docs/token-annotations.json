@@ -218,6 +218,7 @@
     "--sf-sticky-offset": "top offset for position: sticky elements, accounting for the header height.",
     "--sf-sticky-offset-desktop": "Sticky offset at desktop breakpoints.",
     "--sf-sticky-offset-mobile": "Sticky offset at mobile breakpoints.",
+    "--sf-scroll-offset-gap": "Breathing room added below the header when scrolling to an in-page anchor (scroll-padding). Defaults to --sf-space-m so a heading lands a comfortable gap under the sticky header; set to 0 for the heading flush under the header, or any length to tune the gap without overriding the whole scroll-padding rule.",
     "--sf-space-none": "Zero spacing. Explicit alias for clarity in utility classes.",
     "--sf-space-px": "1px spacing. Hairline offset for fine adjustments.",
     "--sf-space-2xs": "4px-equivalent spacing. Tight inline gaps, icon-to-text padding.",

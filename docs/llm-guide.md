@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.31** · Tokens: **741** · Prefix: `--sf-`
+> Version: **0.7.31** · Tokens: **742** · Prefix: `--sf-`
 
 > **New to SLASHED?** Start with [getting-started.md](getting-started.md)
 > (install, bundles, boilerplate) and the [cookbook.md](cookbook.md)
@@ -920,6 +920,11 @@ it isn't part of the token registry.
 --sf-sticky-offset-mobile:  var(--sf-header-height-mobile)
 --sf-sticky-offset-desktop: var(--sf-header-height-desktop)
 --sf-sticky-offset:         clamp(…)    /* fluid offset for top: var(--sf-sticky-offset) */
+
+/* Scroll-to-anchor breathing room */
+--sf-scroll-offset-gap:     var(--sf-space-m)
+      /* gap below the header when scrolling to an in-page anchor;
+         0 = heading flush under the header */
 
 /* Safe area (notches, home indicators) */
 --sf-safe-top / --sf-safe-bottom / --sf-safe-left / --sf-safe-right

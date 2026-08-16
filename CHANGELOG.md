@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Features
+- **tokens:** add `--sf-scroll-offset-gap` — tunable breathing room below the header when scrolling to an in-page anchor (default `var(--sf-space-m)`; set to `0` for a heading flush under the header) (#678)
+
 ## [0.7.31] - 2026-08-09
 
 ### Bug Fixes

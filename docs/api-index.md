@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1069 elements** — 741 tokens, 328 classes.
+**1070 elements** — 742 tokens, 328 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1019 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1020 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (741)
+## Tokens (742)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (610)
+### Core tokens (611)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -544,6 +544,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-safe-left` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-left, 0px)` | Device safe-area inset at the left edge. Resolves to env(safe-area-inset-left, 0px). |
 | `--sf-safe-right` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-right, 0px)` | Device safe-area inset at the right edge (rounded corners, home indicator). Resolves to env(safe-area-inset-right, 0px). |
 | `--sf-safe-top` | PUBLIC-ADVANCED | knob | safe | `env(safe-area-inset-top, 0px)` | Device safe-area inset at the top edge (notch, Dynamic Island). Resolves to env(safe-area-inset-top, 0px). Use for fixed headers on notched devices. |
+| `--sf-scroll-offset-gap` | PUBLIC | consumption | scroll | `var(--sf-space-m)` | Breathing room added below the header when scrolling to an in-page anchor (scroll-padding). Defaults to --sf-space-m so a heading lands a comfortable gap under the sticky header; set to 0 for the heading flush under the header, or any length to tune the gap without overriding the whole scroll-padding rule. |
 | `--sf-scroll-timeline-range-end` | PUBLIC-ADVANCED | knob | scroll | `cover 30%` | animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes. |
 | `--sf-scroll-timeline-range-exit-end` | PUBLIC | knob | scroll | `exit 100%` | Scroll-timeline range at which a scroll-out exit animation finishes. Default: exit 100%. |
 | `--sf-scroll-timeline-range-exit-start` | PUBLIC | knob | scroll | `cover 70%` | Scroll-timeline range at which a scroll-out exit animation begins. Default: cover 70%. |

@@ -1471,6 +1471,12 @@
       var(--sf-sticky-offset-mobile),
       calc((var(--sf-sticky-offset-desktop) - var(--sf-sticky-offset-mobile)) / ((var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * 1rem) * (100vw - var(--sf-fluid-min-vw) * 1rem) + var(--sf-sticky-offset-mobile)),
       var(--sf-sticky-offset-desktop));
+    /* Breathing room added below the header when scrolling to an in-page
+       anchor (:target / scroll-padding). Defaults to --sf-space-m so a heading
+       lands a comfortable gap under the sticky header rather than flush against
+       it. Set to 0 to pin the heading flush under the header; set any other
+       length to tune the gap without overriding the whole scroll-padding rule. */
+    --sf-scroll-offset-gap: var(--sf-space-m);
     /* Focus ring dimensions and minimum touch-target size. Governs keyboard
        navigation affordance and WCAG 2.5.5 pointer-target requirements.
        --sf-touch-target owns the 44px WCAG floor as a literal — it is NOT an

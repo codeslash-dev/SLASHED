@@ -2,21 +2,21 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "a6ad73802619",
+    "tokensHash": "6eba98c56d40",
     "bundles": [
       "full",
       "optimal"
     ],
     "counts": {
-      "tokens": 741,
+      "tokens": 742,
       "byTier": {
-        "PUBLIC": 691,
+        "PUBLIC": 692,
         "PUBLIC-ADVANCED": 49,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
-        "Core tokens": 610,
+        "Core tokens": 611,
         "Macro tokens": 32,
         "Component tokens": 46
       }
@@ -12231,6 +12231,27 @@
       "note": "Text-shadow layered over the scrim gradient to ensure legibility for text placed directly on image backgrounds.",
       "value": "0 1px 3px oklch(0 0 0 / 0.6)",
       "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-scroll-offset-gap",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "scroll",
+      "category": "Core tokens",
+      "group": "Layout & a11y",
+      "description": "Focus ring, header height, sticky offset, touch-target, text-contrast knobs, and device safe-area insets. These govern keyboard accessibility, scroll behaviour, and adaptive contrast globally.",
+      "note": "Breathing room added below the header when scrolling to an in-page anchor (scroll-padding). Defaults to --sf-space-m so a heading lands a comfortable gap under the sticky header; set to 0 for the heading flush under the header, or any length to tune the gap without overriding the whole scroll-padding rule.",
+      "value": "var(--sf-space-m)",
+      "aliasOf": "--sf-space-m",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,
