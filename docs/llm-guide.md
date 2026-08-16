@@ -926,6 +926,17 @@ it isn't part of the token registry.
                                     /* env(safe-area-inset-*) */
 ```
 
+**Constraint — mobile ≤ desktop.** `--sf-header-height` and `--sf-sticky-offset`
+are built as `clamp(mobile, <fluid>, desktop)`, so each `-mobile` endpoint must
+be **≤** its `-desktop` counterpart (`--sf-header-height-mobile` ≤
+`--sf-header-height-desktop`, `--sf-sticky-offset-mobile` ≤
+`--sf-sticky-offset-desktop`). CSS `clamp(MIN, V, MAX)` with `MIN > MAX` returns
+`MIN` on every viewport, so inverting the endpoints silently pins the value to
+the mobile size everywhere and the fluid interpolation quietly stops working —
+nothing errors. If you want a single flat value at all widths, don't invert the
+endpoints; override the resolved token directly instead (e.g.
+`--sf-sticky-offset: 4rem` / `--sf-header-height: 4rem`).
+
 ### 8.8 Replaced elements (img, video)
 
 ```css
