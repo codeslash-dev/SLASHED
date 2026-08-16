@@ -248,7 +248,7 @@
     },
     {
       "name": "--sf-border-width-hairline",
-      "description": "1px border width (hairline).\n\nDefault: `0.5px`",
+      "description": "~0.5px hairline border. Device-pixel-dependent: on 1x-DPR displays the browser rounds it up to 1px (visually matching --sf-border-width-1); on 2x+ DPR it renders as a true half-pixel hairline. Use for subtle separators where 1px on low-DPR is acceptable.\n\nDefault: `0.5px`",
       "syntax": "*"
     },
     {

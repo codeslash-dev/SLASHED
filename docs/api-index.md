@@ -111,7 +111,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-border-width-2` | PUBLIC | consumption | border | `calc(2px * var(--sf-border-scale, 1))` | Medium 2px border width. Common for focus outlines. |
 | `--sf-border-width-3` | PUBLIC | consumption | border | `calc(3px * var(--sf-border-scale, 1))` | Thick 3px border width. |
 | `--sf-border-width-4` | PUBLIC | consumption | border | `calc(4px * var(--sf-border-scale, 1))` | Extra-thick 4px border width for decorative borders. |
-| `--sf-border-width-hairline` | PUBLIC | knob | border | `0.5px` | 1px border width (hairline). |
+| `--sf-border-width-hairline` | PUBLIC | knob | border | `0.5px` | ~0.5px hairline border. Device-pixel-dependent: on 1x-DPR displays the browser rounds it up to 1px (visually matching --sf-border-width-1); on 2x+ DPR it renders as a true half-pixel hairline. Use for subtle separators where 1px on low-DPR is acceptable. |
 | `--sf-caret-color` | PUBLIC | consumption | caret | `var(--sf-color-action)` | Cursor caret color inside text inputs and contenteditable elements. |
 | `--sf-code-font-size` | PUBLIC | knob | code | `0.875em` | Font size for inline <code> and <pre>. Usually slightly smaller than body text so monospace doesn't feel oversized. |
 | `--sf-color-action` | PUBLIC | consumption | color | `light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` | Primary interactive color. Applied to filled buttons, active indicators, and brand accent surfaces. |

@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "db509cdc88a8",
+    "tokensHash": "a6ad73802619",
     "bundles": [
       "full",
       "optimal"
@@ -1060,7 +1060,7 @@
       "category": "Core tokens",
       "group": "Border widths",
       "description": "Raw border-width values. Use the shorthands above unless you need to override just the width.",
-      "note": "1px border width (hairline).",
+      "note": "~0.5px hairline border. Device-pixel-dependent: on 1x-DPR displays the browser rounds it up to 1px (visually matching --sf-border-width-1); on 2x+ DPR it renders as a true half-pixel hairline. Use for subtle separators where 1px on low-DPR is acceptable.",
       "value": "0.5px",
       "aliasOf": null,
       "registered": false,

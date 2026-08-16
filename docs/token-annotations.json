@@ -284,7 +284,7 @@
     "--sf-border": "Default border shorthand (width + solid + color). Apply directly to border property.",
     "--sf-border-strong": "Strong-emphasis border shorthand.",
     "--sf-border-subtle": "Low-contrast subtle border shorthand.",
-    "--sf-border-width-hairline": "1px border width (hairline).",
+    "--sf-border-width-hairline": "~0.5px hairline border. Device-pixel-dependent: on 1x-DPR displays the browser rounds it up to 1px (visually matching --sf-border-width-1); on 2x+ DPR it renders as a true half-pixel hairline. Use for subtle separators where 1px on low-DPR is acceptable.",
     "--sf-border-width-1": "Standard 1px border width.",
     "--sf-border-width-2": "Medium 2px border width. Common for focus outlines.",
     "--sf-border-width-3": "Thick 3px border width.",
