@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Configurator
+- **typography:** make the display type-scale generator readable/usable — split the Fluid scale section into labelled "Body type scale" and "Display scale" groups, drop the duplicate ratio picker from the display card (it silently edited the shared `--sf-text-ratio-*`), and show the display scale a read-only "inherited ratio" readout so the shared-ratio relationship is explicit (#672)
+
 ### Changed
 - **tokens:** scope typed `@property` registration to colour output tokens; drop it from the length tokens (radius/space/gap/padding/section-pad/media-radius). Removes the fallback footgun where a registered `<length>` with `initial-value: 0` made author fallbacks like `var(--sf-radius-m, 12px)` never fire. Token names, values, and defaults are unchanged; only the internal registration mechanism differs, and length tokens no longer interpolate in transitions (no shipped rule relied on that) (#676)
 
