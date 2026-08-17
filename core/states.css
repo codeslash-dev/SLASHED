@@ -161,9 +161,12 @@
     cursor: grab;
   }
 
-  /* -- EMPTY STATE -- */
+  /* -- HIDE-IF-EMPTY -- */
 
-  .sf-is-empty:empty {
+  /* Action-on-state, not a state assertion: hides the element when it has no
+     children. The name states the behaviour (deliberately breaking the
+     .sf-is-* "asserts a state" convention for clarity — see #674). */
+  .sf-is-hidden-if-empty:empty {
     display: none;
   }
 

@@ -1935,22 +1935,22 @@
       "layer": "slashed.states"
     },
     {
-      "name": "sf-is-empty",
-      "selector": ".sf-is-empty",
-      "kind": "state",
-      "category": "State classes",
-      "group": "EMPTY STATE",
-      "description": "Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty.",
-      "optional": false,
-      "layer": "slashed.states"
-    },
-    {
       "name": "sf-is-error",
       "selector": ".sf-is-error",
       "kind": "state",
       "category": "State classes",
       "group": "VALIDATION / FEEDBACK",
       "description": "Error state — general (not form-field-specific) negative feedback. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid.",
+      "optional": false,
+      "layer": "slashed.states"
+    },
+    {
+      "name": "sf-is-hidden-if-empty",
+      "selector": ".sf-is-hidden-if-empty",
+      "kind": "state",
+      "category": "State classes",
+      "group": "HIDE-IF-EMPTY",
+      "description": "Hides the element when it has no child nodes (:empty). An action-on-state helper (the name states the behaviour) for dynamic lists or containers that may render empty.",
       "optional": false,
       "layer": "slashed.states"
     },

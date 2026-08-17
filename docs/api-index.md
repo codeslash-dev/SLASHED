@@ -1091,8 +1091,8 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-is-draggable` | PUBLIC | state | DRAG & DROP | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
 | `.sf-is-dragging` | PUBLIC | state | DRAG & DROP | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
 | `.sf-is-drop-target` | PUBLIC | state | DRAG & DROP | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
-| `.sf-is-empty` | PUBLIC | state | EMPTY STATE | Empty state — hides the element when it has no child nodes (:empty). Used for dynamic lists or containers that may render empty. |
 | `.sf-is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — general (not form-field-specific) negative feedback. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid. |
+| `.sf-is-hidden-if-empty` | PUBLIC | state | HIDE-IF-EMPTY | Hides the element when it has no child nodes (:empty). An action-on-state helper (the name states the behaviour) for dynamic lists or containers that may render empty. |
 | `.sf-is-highlighted` | PUBLIC | state | SELECTED / HIGHLIGHTED | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
 | `.sf-is-info` | PUBLIC | state | VALIDATION / FEEDBACK | Info status state — applies info color tokens. Use for neutral informational messages and hints. |
 | `.sf-is-invalid` | PUBLIC | state | VALIDATION / FEEDBACK | Invalid state — applies danger color tokens to form fields with validation failures. Identical visual output to sf-is-error; the name signals form-field context. |

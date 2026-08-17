@@ -163,14 +163,14 @@ test('.sf-overlay: position absolute, inset 0', async ({ page }) => {
 });
 
 // ── Empty state ─────────────────────────────────────────────────
-test('.sf-is-empty:empty — hides itself when no content', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-empty"></div>`);
+test('.sf-is-hidden-if-empty:empty — hides itself when no content', async ({ page }) => {
+  await setup(page, `<div id="t" class="sf-is-hidden-if-empty"></div>`);
   const display = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
   expect(display).toBe('none');
 });
 
-test('.sf-is-empty with children stays visible', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-empty"><span>child</span></div>`);
+test('.sf-is-hidden-if-empty with children stays visible', async ({ page }) => {
+  await setup(page, `<div id="t" class="sf-is-hidden-if-empty"><span>child</span></div>`);
   const display = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
   expect(display).not.toBe('none');
 });

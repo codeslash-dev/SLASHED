@@ -227,8 +227,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-is-draggable` |
 | `.sf-is-dragging` |
 | `.sf-is-drop-target` |
-| `.sf-is-empty` |
 | `.sf-is-error` |
+| `.sf-is-hidden-if-empty` |
 | `.sf-is-highlighted` |
 | `.sf-is-info` |
 | `.sf-is-invalid` |

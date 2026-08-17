@@ -5,6 +5,19 @@ upgrade notes.
 
 ## SLASHED 0.7.25 → Unreleased
 
+### `.sf-is-empty` renamed to `.sf-is-hidden-if-empty` (breaking)
+
+`.sf-is-empty` read like a state assertion ("this element is empty"), but its
+behaviour is an action — `.sf-is-empty:empty { display: none }`, i.e. "hide this
+element when it is empty." The old name didn't convey that. `.sf-is-hidden-if-empty`
+states the behaviour directly. This deliberately breaks the `.sf-is-*` "asserts a
+state" convention (the class now names an action-on-state); accepted for clarity.
+Behaviour is unchanged.
+
+**What changed for you:** replace `class="sf-is-empty"` with
+`class="sf-is-hidden-if-empty"`. No compatibility alias is provided, consistent
+with the pre-1.0 no-alias stance in the notes below.
+
 ### `--sf-caret-color` renamed to `--sf-color-caret` (breaking)
 
 Every colour token in the framework is type-first under the `--sf-color-*`
