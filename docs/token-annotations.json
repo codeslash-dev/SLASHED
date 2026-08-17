@@ -806,6 +806,7 @@
     "--sf-print-page-margin": "Page margin for printed output. Default 2cm. Maps to @page margin.",
     "--sf-print-page-size": "Target paper size for printing. Default 'a4'. Maps to @page size. Common values: a4, letter, legal.",
     "--sf-radius-outer": "Concentric corner helper: outer radius for a container that wraps content with inner radius of --sf-radius-m. Computed as --sf-radius-m + --sf-component-pad so corners align visually.",
+    "--sf-media-radius": "Opt-in global corner radius for <img>/<figure>. 0 (off) by default; set it to a --sf-radius-* value to round media globally. Applied via :where() so it never fights .sf-bg-layer or a component's own radius.",
     "--sf-scroll-timeline-range-start": "animation-range start value for scroll-driven entrance effects. Default 'entry 0%'. Override on an element to control when its entrance animation begins.",
     "--sf-scroll-timeline-range-end": "animation-range end value for scroll-driven entrance effects. Default 'cover 30%'. Override on an element to control when its entrance animation finishes.",
     "--sf-shadow-color": "Near-black shadow tint derived from the neutral palette. Inherits the neutral's chroma and hue so colorless neutrals produce colorless shadows.",

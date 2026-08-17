@@ -172,57 +172,28 @@
   @property --sf-fluid-width           { syntax: "*"; inherits: true; }
 
   /* ── Output token @property registrations ──────────────────────────────────
-     Radius + space: <length> syntax enables CSS transitions on layout values —
-     border-radius/padding/gap etc. now interpolate instead of snapping.
-     Shadow: syntax:"*" (no <shadow> type in spec); inherits:true so :root values
-     cascade normally; registers the properties formally for DevTools inspection.
+     Scope: TYPED registration is reserved for COLOUR output tokens (see the
+     <color> block above), where registering earns its keep — it enables the
+     automatic light/dark theme cross-fade, a common and visible win.
 
-     initial-value ≠ :root default (by spec): a registered <length> requires a
-     computationally-independent initial-value, so these carry `initial-value: 0`
-     while their real defaults are the calc()-derived values set on :root below
-     (see --sf-fluid-width above for the same constraint stated at length). One
-     consequence worth flagging: once a property is registered, the initial
-     value IS a value — so a fallback like `var(--sf-radius-m, 12px)` will NEVER
-     fire; an unset --sf-radius-m resolves to the registered `0`, not to "no
-     value". Author fallbacks against the token's :root default, not this 0. */
+     Length output tokens (radius / space / gap / padding / section-pad /
+     media-radius) are deliberately NOT registered (#676). The only thing a
+     <length> registration bought was transition interpolation on those tokens
+     (border-radius/padding/gap animating instead of snapping) — rare in
+     practice, and no shipped SLASHED rule relies on it (framework transitions
+     name an explicit transform/opacity/colour property set, never `all`).
+     Against that marginal benefit sat a real footgun: a registered <length>
+     requires a computationally-independent initial-value (`0`), so an author
+     fallback like `var(--sf-radius-m, 12px)` could NEVER fire — an unset token
+     resolved to the registered `0`, not to the fallback. Leaving these tokens
+     as plain custom properties removes that trap (fallbacks now behave as
+     written) and simplifies the token layer; the DevTools-typing benefit was
+     minor and not worth the footgun on its own. To animate a specific length,
+     register it yourself in your own CSS.
 
-  @property --sf-radius-none  { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-2xs   { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-xs    { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-s     { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-m     { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-l     { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-xl    { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-2xl   { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-3xl   { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-4xl   { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-radius-full  { syntax: "<length>"; inherits: true; initial-value: 9999px; }
-  @property --sf-radius-pill  { syntax: "<length>"; inherits: true; initial-value: 9999px; }
-  @property --sf-radius-outer { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-media-radius { syntax: "<length>"; inherits: true; initial-value: 0; }
-
-  @property --sf-space-none       { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-px         { syntax: "<length>"; inherits: true; initial-value: 1px; }
-  @property --sf-space-2xs        { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-xs         { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-s          { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-m          { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-l          { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-xl         { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-2xl        { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-3xl        { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-space-4xl        { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-gap              { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-content-gap      { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-gutter           { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-component-pad    { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-field-block      { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-section-pad--xs  { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-section-pad--s   { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-section-pad--m   { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-section-pad--l   { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-section-pad--xl  { syntax: "<length>"; inherits: true; initial-value: 0; }
-  @property --sf-section-pad--2xl { syntax: "<length>"; inherits: true; initial-value: 0; }
+     Shadow tokens keep `syntax:"*"` — a universal registration has NO typed
+     initial-value, so it carries none of the fallback footgun; it just formally
+     registers the property (inherits:true so :root values cascade) for tooling.  */
 
   @property --sf-shadow-none      { syntax: "*"; inherits: true; }
   @property --sf-shadow-xs        { syntax: "*"; inherits: true; }

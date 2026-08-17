@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Changed
+- **tokens:** scope typed `@property` registration to colour output tokens; drop it from the length tokens (radius/space/gap/padding/section-pad/media-radius). Removes the fallback footgun where a registered `<length>` with `initial-value: 0` made author fallbacks like `var(--sf-radius-m, 12px)` never fire. Token names, values, and defaults are unchanged; only the internal registration mechanism differs, and length tokens no longer interpolate in transitions (no shipped rule relied on that) (#676)
+
 ### Breaking Changes
 - **macros:** rename `.sf-content-auto` to `.sf-render-lazy` — the name now states the intent (defer off-screen rendering) rather than the raw `content-visibility` property (#675)
 - **states:** rename `.sf-is-empty` to `.sf-is-hidden-if-empty` — the name now states the action (hide-when-empty) rather than asserting a state (#674)

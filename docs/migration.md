@@ -5,6 +5,27 @@ upgrade notes.
 
 ## SLASHED 0.7.25 → Unreleased
 
+### Length tokens are no longer `@property`-registered (non-breaking)
+
+Typed `@property` registration is now scoped to colour output tokens (where it
+powers the light/dark cross-fade). The length output tokens — `--sf-radius-*`,
+`--sf-space-*`, `--sf-gap`, `--sf-content-gap`, `--sf-gutter`,
+`--sf-component-pad`, `--sf-field-block`, `--sf-section-pad--*`,
+`--sf-media-radius` — are now plain custom properties. Token names, values, and
+defaults are unchanged, so no markup edits are required.
+
+Two behavioural notes:
+
+- **Fallbacks now fire.** Previously a registered `<length>` carried
+  `initial-value: 0`, so `var(--sf-radius-m, 12px)` never used its `12px`
+  fallback (an unset token resolved to the registered `0`). Fallbacks against
+  these tokens now behave as written. This only matters if you deliberately
+  *unset* one; the framework always sets them on `:root`.
+- **Length interpolation dropped.** These tokens no longer animate in CSS
+  transitions (border-radius/padding/gap snap instead of interpolating). No
+  shipped SLASHED rule relied on this. If you animate one, register it yourself:
+  `@property --sf-radius-m { syntax: "<length>"; inherits: true; initial-value: 0 }`.
+
 ### `.sf-content-auto` renamed to `.sf-render-lazy` (breaking)
 
 `.sf-content-auto` was named after the raw CSS it sets (`content-visibility:
