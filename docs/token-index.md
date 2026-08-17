@@ -8,12 +8,12 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**743 tokens** (deduplicated by name across the 4 token source files).
+**734 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 693 | Everyday knobs. SemVer-stable. |
-| PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 688 | Everyday knobs. SemVer-stable. |
+| PUBLIC-ADVANCED | 45 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
 Every token also carries a **role** — an orthogonal, SemVer-neutral hint about
@@ -22,8 +22,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 
 | Role | Count | Meaning |
 |---|---|---|
-| knob | 253 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 490 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| knob | 250 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
+| consumption | 484 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -37,7 +37,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 - `--sf-btn-padding-inline`
 - `--sf-contrast-bias`
 - `--sf-contrast-threshold`
-- `--sf-density`
 - `--sf-fluid-max-vw`
 - `--sf-fluid-min-vw`
 - `--sf-focus-ring-shadow`
@@ -52,9 +51,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 - `--sf-optical-sizing`
 - `--sf-palette-shade-l`
 - `--sf-palette-tint-l`
-- `--sf-print-base-size`
-- `--sf-print-page-margin`
-- `--sf-print-page-size`
 - `--sf-radius-outer`
 - `--sf-radius-scale`
 - `--sf-safe-bottom`
@@ -105,7 +101,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-animation-slide-out-right` | PUBLIC | consumption | Core | `sf-slide-out-right var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-slide-out-up` | PUBLIC | consumption | Core | `sf-slide-out-up var(--sf-duration-normal) var(--sf-ease-in) both` |
 | `--sf-animation-spin` | PUBLIC | consumption | Core | `sf-spin var(--sf-duration-slower) linear infinite` |
-| `--sf-aspect` | PUBLIC | knob | Macros | `16 / 9` |
 | `--sf-bento-cols-default` | PUBLIC | knob | Layout | `4` |
 | `--sf-bento-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-bento-row-compact` | PUBLIC | knob | Layout | `6rem` |
@@ -457,7 +452,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | Core | `0.6` |
 | `--sf-cover-min-height` | PUBLIC | knob | Layout | `100dvh` |
 | `--sf-cover-padding` | PUBLIC | consumption | Layout | `var(--sf-section-pad)` |
-| `--sf-density` | PUBLIC-ADVANCED | knob | Core | `1` |
 | `--sf-display-l-line-height` | PUBLIC | knob | Core | `1` |
 | `--sf-display-m-line-height` | PUBLIC | knob | Core | `1.05` |
 | `--sf-display-s-line-height` | PUBLIC | consumption | Core | `var(--sf-leading-tight)` |
@@ -506,12 +500,9 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-font-body` | PUBLIC | knob | Core | `system-ui, -apple-system, sans-serif` |
 | `--sf-font-display` | PUBLIC | consumption | Core | `var(--sf-font-heading)` |
 | `--sf-font-features` | PUBLIC-ADVANCED | knob | Core | `normal` |
-| `--sf-font-geometric` | PUBLIC | knob | Core | `"Avenir", "Montserrat", "Corbel", "URW Gothic", source-sans-pro, sans-serif` |
 | `--sf-font-heading` | PUBLIC | consumption | Core | `var(--sf-font-body)` |
-| `--sf-font-humanist` | PUBLIC | knob | Core | `"Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif` |
 | `--sf-font-mono` | PUBLIC | knob | Core | `ui-monospace, monospace` |
 | `--sf-font-numeric` | PUBLIC | knob | Core | `tabular-nums` |
-| `--sf-font-slab` | PUBLIC | knob | Core | `"Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif` |
 | `--sf-font-variation` | PUBLIC-ADVANCED | knob | Core | `normal` |
 | `--sf-font-weight-body` | PUBLIC | consumption | Core | `var(--sf-font-weight-normal)` |
 | `--sf-font-weight-bold` | PUBLIC | knob | Core | `700` |
@@ -618,12 +609,8 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-opacity-disabled` | PUBLIC | knob | Core | `0.45` |
 | `--sf-opacity-muted` | PUBLIC | knob | Core | `0.5` |
 | `--sf-optical-sizing` | PUBLIC-ADVANCED | knob | Core | `auto` |
-| `--sf-overlap-pull` | PUBLIC | consumption | Macros | `var(--sf-space-xl)` |
 | `--sf-palette-shade-l` | PUBLIC-ADVANCED | knob | Core | `0.1` |
 | `--sf-palette-tint-l` | PUBLIC-ADVANCED | knob | Core | `0.97` |
-| `--sf-print-base-size` | PUBLIC-ADVANCED | knob | Core | `11pt` |
-| `--sf-print-page-margin` | PUBLIC-ADVANCED | knob | Core | `2cm` |
-| `--sf-print-page-size` | PUBLIC-ADVANCED | knob | Core | `a4` |
 | `--sf-prose-block-margin` | PUBLIC | consumption | Macros | `var(--sf-space-m)` |
 | `--sf-prose-blockquote-border` | PUBLIC | consumption | Macros | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` |
 | `--sf-prose-blockquote-padding` | PUBLIC | consumption | Macros | `var(--sf-space-m)` |
@@ -702,11 +689,11 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-sidebar-gap` | PUBLIC | consumption | Layout | `var(--sf-gap)` |
 | `--sf-sidebar-min-width` | PUBLIC | knob | Layout | `50%` |
 | `--sf-sidebar-width` | PUBLIC | knob | Layout | `18rem` |
-| `--sf-size-l` | PUBLIC | consumption | Core | `calc(3rem * var(--sf-density))` |
-| `--sf-size-m` | PUBLIC | consumption | Core | `calc(2.5rem * var(--sf-density))` |
-| `--sf-size-s` | PUBLIC | consumption | Core | `calc(2rem * var(--sf-density))` |
-| `--sf-size-xl` | PUBLIC | consumption | Core | `calc(3.5rem * var(--sf-density))` |
-| `--sf-size-xs` | PUBLIC | consumption | Core | `calc(1.5rem * var(--sf-density))` |
+| `--sf-size-l` | PUBLIC | knob | Core | `3rem` |
+| `--sf-size-m` | PUBLIC | knob | Core | `2.5rem` |
+| `--sf-size-s` | PUBLIC | knob | Core | `2rem` |
+| `--sf-size-xl` | PUBLIC | knob | Core | `3.5rem` |
+| `--sf-size-xs` | PUBLIC | knob | Core | `1.5rem` |
 | `--sf-space-2xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-2xs` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-3xl` | PUBLIC | consumption | Core | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` |

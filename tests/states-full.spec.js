@@ -124,29 +124,6 @@ for (const [cls, status] of [
   });
 }
 
-// ── Drag & drop ─────────────────────────────────────────────────
-test('.sf-is-draggable: cursor grab', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-draggable">drag me</div>`);
-  const cursor = await page.locator('#t').evaluate(el => getComputedStyle(el).cursor);
-  expect(cursor).toBe('grab');
-});
-
-test('.sf-is-dragging: opacity 0.5, cursor grabbing', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-dragging">dragging</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    opacity: parseFloat(getComputedStyle(el).opacity),
-    cursor:  getComputedStyle(el).cursor,
-  }));
-  expect(cs.opacity).toBeCloseTo(0.5, 1);
-  expect(cs.cursor).toBe('grabbing');
-});
-
-test('.sf-is-drop-target: dashed outline', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-drop-target">drop zone</div>`);
-  const style = await page.locator('#t').evaluate(el => getComputedStyle(el).outlineStyle);
-  expect(style).toBe('dashed');
-});
-
 // ── Overlay ─────────────────────────────────────────────────────
 test('.sf-overlay: position absolute, inset 0', async ({ page }) => {
   await setup(page, `

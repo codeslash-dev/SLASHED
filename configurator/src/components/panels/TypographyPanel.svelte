@@ -32,9 +32,9 @@
 
   const BODY_STACKS = [
     { label: "System sans-serif", value: "" },
-    { label: "Geometric (Avenir, Montserrat…)", value: "var(--sf-font-geometric)" },
-    { label: "Humanist (Seravek, Gill Sans…)", value: "var(--sf-font-humanist)" },
-    { label: "Slab serif (Rockwell, Roboto Slab…)", value: "var(--sf-font-slab)" },
+    { label: "Geometric (Avenir, Montserrat…)", value: "'Avenir', 'Montserrat', 'Corbel', 'URW Gothic', source-sans-pro, sans-serif" },
+    { label: "Humanist (Seravek, Gill Sans…)", value: "'Seravek', 'Gill Sans Nova', 'Ubuntu', 'Calibri', 'DejaVu Sans', source-sans-pro, sans-serif" },
+    { label: "Slab serif (Rockwell, Roboto Slab…)", value: "'Rockwell', 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif" },
     { label: "Inter", value: "Inter, system-ui, sans-serif" },
     { label: "Georgia (serif)", value: "Georgia, 'Times New Roman', serif" },
     { label: "Merriweather (serif)", value: "'Merriweather', Georgia, serif" },
@@ -43,9 +43,9 @@
 
   const HEADING_STACKS = [
     { label: "Same as body", value: "" },
-    { label: "Geometric (Avenir, Montserrat…)", value: "var(--sf-font-geometric)" },
-    { label: "Humanist (Seravek, Gill Sans…)", value: "var(--sf-font-humanist)" },
-    { label: "Slab serif (Rockwell, Roboto Slab…)", value: "var(--sf-font-slab)" },
+    { label: "Geometric (Avenir, Montserrat…)", value: "'Avenir', 'Montserrat', 'Corbel', 'URW Gothic', source-sans-pro, sans-serif" },
+    { label: "Humanist (Seravek, Gill Sans…)", value: "'Seravek', 'Gill Sans Nova', 'Ubuntu', 'Calibri', 'DejaVu Sans', source-sans-pro, sans-serif" },
+    { label: "Slab serif (Rockwell, Roboto Slab…)", value: "'Rockwell', 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif" },
     { label: "Inter", value: "Inter, system-ui, sans-serif" },
     { label: "Georgia (serif)", value: "Georgia, 'Times New Roman', serif" },
     { label: "Impact / condensed", value: "Impact, 'Arial Narrow', sans-serif" },

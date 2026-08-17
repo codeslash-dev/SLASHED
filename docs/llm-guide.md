@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.31** · Tokens: **743** · Prefix: `--sf-`
+> Version: **0.7.31** · Tokens: **734** · Prefix: `--sf-`
 
 > **New to SLASHED?** Start with [getting-started.md](getting-started.md)
 > (install, bundles, boilerplate) and the [cookbook.md](cookbook.md)
@@ -445,11 +445,6 @@ Status families (success/warning/info/danger) have **no numeric scale** — use 
 --sf-font-heading:  var(--sf-font-body)    /* defaults to body */
 --sf-font-display:  var(--sf-font-heading) /* defaults to heading */
 --sf-font-mono:     ui-monospace, monospace
-
-/* Ready-made system-font stacks (zero-cost, no @import) */
---sf-font-humanist:  "Seravek", "Gill Sans Nova", "Ubuntu", "Calibri"…
---sf-font-geometric: "Avenir", "Montserrat", "Corbel"…
---sf-font-slab:      "Rockwell", "Roboto Slab"…
 ```
 
 ### 6.2 OpenType and variable fonts
@@ -877,7 +872,6 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 ```css
 --sf-flow-space:             var(--sf-content-gap)  /* .sf-flow > * + * gap */
 --sf-line-clamp:             3          /* default line count for .sf-line-clamp-N */
---sf-aspect:                 16 / 9    /* .sf-aspect ratio */
 --sf-scroll-shadow-size:     2rem       /* .sf-scroll-shadow */
 --sf-content-intrinsic-size: 500px      /* .sf-render-lazy placeholder size */
 --sf-surface-color:          var(--sf-color-base)  /* .sf-surface input color */
@@ -899,16 +893,7 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-surface-bg-repeat:     no-repeat
 --sf-surface-bg-attachment: scroll
 --sf-surface-bg-animation:  none         /* optional animation shorthand */
-
-/* Overlap recipe (.sf-overlap / .sf-overlap-host) */
---sf-overlap-pull: var(--sf-space-xl)
 ```
-
-`.sf-overlap-host`'s block-start padding reads `var(--sf-overlap-host-pad, var(--sf-overlap-pull))`
-directly in the CSS declaration (not a declared token) so a per-element override is picked up
-immediately, avoiding the staleness a `:root`-level alias would have if it cached the pull value.
-Set `--sf-overlap-host-pad` inline to compensate by something other than the default pull amount;
-it isn't part of the token registry.
 
 ### 8.7 Header and safe area
 
@@ -947,14 +932,6 @@ endpoints; override the resolved token directly instead (e.g.
 ```css
 --sf-object-fit:      cover   /* default fit for img and video */
 --sf-object-position: 50% 50% /* position — override: style="--sf-object-position: top" */
-```
-
-### 8.9 Print
-
-```css
---sf-print-page-margin: 2cm
---sf-print-page-size:   a4
---sf-print-base-size:   11pt
 ```
 
 ---
@@ -1213,20 +1190,14 @@ One token changes the entire design. Override on `:root`. All are PUBLIC-ADVANCE
 --sf-space-scale:        1  /* global fluid spacing multiplier */
 --sf-text-scale:         1  /* global body type scale multiplier */
 --sf-text-display-scale: 1  /* global display type scale multiplier */
---sf-density:            1  /* control-size ladder (--sf-size-*): <1 compact, >1 roomy */
 ```
 
-`--sf-density` is the compact ↔ comfortable dial for interactive control
-**geometry** (the `--sf-size-*` rung ladder). Unlike `--sf-text-*` / `--sf-space-*`
-it is intentionally **not** viewport-fluid — control height must not shrink on
-small screens where touch targets need to grow — so the size ladder is static and
-moves only by this deliberate knob (a product mode or user preference), never
-automatically. It is orthogonal to `--sf-space-scale` (whitespace) and
-`--sf-section-scale` (section rhythm); combine them for a fully compact UI. The
-`--sf-touch-target` accessibility floor is independent, so a small `--sf-density`
-cannot pull native controls under the WCAG target. Like the other multipliers in
-this section it is a `:root` dial — the `--sf-size-*` ladder is computed at `:root`
-and inherits, so a nested override does not retroactively rescale it.
+The interactive control-size ladder (`--sf-size-xs … --sf-size-xl`) is a set of
+static rungs, not a scaled multiplier — override an individual rung (or the
+per-component size tokens) to compact controls. It is intentionally not
+viewport-fluid: control height must not shrink on small screens where touch
+targets need to grow. The `--sf-touch-target` accessibility floor is independent,
+so retuning a rung cannot pull native controls under the WCAG target.
 
 ---
 
@@ -1346,22 +1317,14 @@ Each step up the type scale subtracts `step-index × taper` from that step's def
 --sf-mask-scrim-end:   var(--sf-space-l)
 ```
 
-### 11.7 Print
-
-```css
---sf-print-page-margin: 2cm
---sf-print-page-size:   a4
---sf-print-base-size:   11pt
-```
-
-### 11.8 Safe area insets
+### 11.7 Safe area insets
 
 ```css
 --sf-safe-top / --sf-safe-bottom / --sf-safe-left / --sf-safe-right
                                     /* env(safe-area-inset-*) */
 ```
 
-### 11.9 Focus ring shadow
+### 11.8 Focus ring shadow
 
 ```css
 --sf-focus-ring-shadow  /* composite box-shadow — use in CSS when you don't want outline */

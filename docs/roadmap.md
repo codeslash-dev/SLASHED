@@ -189,12 +189,12 @@ non-additive changes; the v0.6.x series focuses on the components layer.*
   color/gradient overlay with correct automatic stacking; documented in
   `docs/macros.md` instead of adding a redundant class.
   Tracked in [#489](https://github.com/codeslash-dev/SLASHED/issues/489).
-- **Concrete recipe macros** — **partially done**. Shipped: `.sf-overlap`/
-  `.sf-overlap-host` (overlap + card-container recipes). Two corner-recipe
-  macros were built and then cut before 1.0 — `.sf-corner-scoop` (mask-based
-  concave cut, tracked as #484 above) and a `.sf-corners` logical-corner
-  recipe (with a `--leaf` asymmetric variant) — both judged too niche for the
-  public API relative to their long-term maintenance cost.
+- **Concrete recipe macros** — **deprioritised**. Several recipe macros were
+  built and then cut before 1.0 as too niche for the public API relative to
+  their maintenance cost: the `.sf-overlap`/`.sf-overlap-host` overlap recipe
+  (removed in the #681 lean cut — apply a negative logical margin directly),
+  `.sf-corner-scoop` (mask-based concave cut, tracked as #484 above) and a
+  `.sf-corners` logical-corner recipe (with a `--leaf` asymmetric variant).
   Tracked in [#490](https://github.com/codeslash-dev/SLASHED/issues/490).
 - **Container-relative fluid scale** — the `--sf-text-*`/`--sf-space-*` fluid
   scales are `100vw`-driven and don't respond to `@container` width the way

@@ -132,26 +132,6 @@ Use this when working in flex contexts.
 
 ---
 
-## `.sf-aspect`
-
-Generic aspect-ratio container.
-
-```html
-<div class="sf-aspect" style="--sf-aspect: 4 / 3">…</div>
-```
-
-Tokens:
-
-| Token | Default | What it controls |
-|---|---|---|
-| `--sf-aspect` | `16 / 9` | the ratio |
-
-Distinct from the `.sf-frame` layout primitive, which is media-specific
-(includes `object-fit: cover` for child `img`/`video`). `.sf-aspect`
-is content-agnostic.
-
----
-
 ## `.sf-scroll-shadow`
 
 Top + bottom mask gradient that fades content near the edges of a
@@ -730,41 +710,3 @@ does stagger in its time-based fallback on engines without `view()`, while
 `prefers-reduced-motion: no-preference`.
 
 Lives in `core/motion.css`, layer `slashed.motion`.
-
----
-
-## `.sf-overlap` and `.sf-overlap-host`
-
-A recipe for one element intentionally overlapping the element before
-it (e.g. an avatar or image pulled up over the card below it), and the
-receiving container that reserves space for the intrusion.
-
-```html
-<img class="sf-overlap" src="badge.png" alt="">
-<article class="sf-card sf-overlap-host">
-  Content starts below the intruding image automatically.
-</article>
-```
-
-`.sf-overlap` variants (directional — standalone, not knob re-pointers,
-since each moves a different margin):
-
-| Class | Effect |
-|---|---|
-| `.sf-overlap` | pulls up over the previous element (default) |
-| `.sf-overlap--down` | pulls down over the next element |
-
-Tokens:
-
-| Token | Default | What it controls |
-|---|---|---|
-| `--sf-overlap-pull` | `var(--sf-space-xl)` | how far `.sf-overlap` pulls into the adjacent element |
-
-`.sf-overlap-host`'s block-start padding reads `var(--sf-overlap-host-pad, var(--sf-overlap-pull))`
-directly in the CSS declaration rather than through a declared token, so it isn't part of the
-token registry — set `--sf-overlap-host-pad` inline on an instance to compensate by something
-other than the default pull amount.
-
-`.sf-overlap-host` sets `isolation: isolate` so the overlapping element's
-raised `z-index` stays scoped to this container rather than fighting
-page-level stacking.

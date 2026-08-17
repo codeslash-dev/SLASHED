@@ -91,7 +91,6 @@ in the meantime (tests, docs, configurator preview panels, and the
 | `.sf-is-valid` / `.sf-is-invalid` | **form-field** validation result | `aria-invalid` | states |
 | `.sf-is-success` / `.sf-is-error` | **general** positive/negative feedback (a save, a step) | `role="status"` / `role="alert"` | states |
 | `.sf-is-warning` / `.sf-is-info` | cautionary / informational feedback | — | states |
-| `.sf-is-dragging` / `.sf-is-drop-target` / `.sf-is-draggable` | drag & drop | — | states |
 | `.sf-is-hidden-if-empty:empty` | hide when empty | — | states |
 | `.sf-invisible` / `.sf-visible` | hidden but keeps its box | `visibility` | utilities |
 | `.sr-only-focusable` | hidden until focused (skip-link pattern) | — | accessibility |

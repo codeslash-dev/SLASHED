@@ -22,12 +22,6 @@
     --sf-line-clamp: 3;
 
     /* ----------------------------------------------------------
-       Aspect ratio — default for .sf-aspect (generic ratio container,
-       distinct from layout's .sf-frame which has its own --sf-frame-ratio).
-       ---------------------------------------------------------- */
-    --sf-aspect: 16 / 9;
-
-    /* ----------------------------------------------------------
        List markers — single source of truth for ::marker colour.
        Drives both the .sf-marker--* utilities and .sf-prose markers
        (via --sf-prose-marker-color below), so one knob retunes every
@@ -127,15 +121,6 @@
     --sf-surface-bg-repeat:     no-repeat;
     --sf-surface-bg-attachment: scroll;
     --sf-surface-bg-animation:  none;
-
-    /* ----------------------------------------------------------
-       Overlap recipe — how far .sf-overlap pulls into the adjacent
-       element. .sf-overlap-host's padding compensation defaults to this
-       same value via a var() fallback in the rule itself (not aliased
-       here — see core/macros.css), so one override on the host tunes
-       both unless --sf-overlap-host-pad is set independently.
-       ---------------------------------------------------------- */
-    --sf-overlap-pull: var(--sf-space-xl);
 
   }
 }

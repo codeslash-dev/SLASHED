@@ -5,26 +5,15 @@
 
 @layer slashed.print {
 
-  
-  .print-only {
-    display: none;
-  }
-
   @media print {
 
-    /* --sf-print-page-size / -margin are read here so a :root override retunes
-       the printed page box. Each fallback equals the historical literal, so the
-       default print render is unchanged. Verified in Chromium that var() is
-       substituted inside @page descriptors; engines lacking general custom-
-       property substitution in @page fall back to the literal. */
     @page {
-
-      size:   var(--sf-print-page-size, a4) portrait;
-      margin: var(--sf-print-page-margin, 2cm);
+      size:   a4 portrait;
+      margin: 2cm;
     }
 
     body {
-      font-size: var(--sf-print-base-size, 11pt);
+      font-size: 11pt;
     }
 
     *,
@@ -87,28 +76,9 @@
       display: none !important;
     }
 
-    .print-only {
-      display: revert !important;
-    }
-
     details { display: block; }
     details > summary { display: none !important; }
     details > :not(summary) { display: block; }
-
-    
-    .print-color-exact,
-    .print-color-exact * {
-      print-color-adjust:         exact !important;
-      -webkit-print-color-adjust: exact !important;
-    }
-
-    .print-no-color,
-    .print-no-color *,
-    .print-no-color *::before,
-    .print-no-color *::after {
-      background:  transparent !important;
-      color:       CanvasText  !important;
-    }
 
   }
 

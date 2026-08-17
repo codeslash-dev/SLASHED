@@ -5,6 +5,54 @@ upgrade notes.
 
 ## SLASHED 0.7.25 → Unreleased
 
+### Lean cut — niche tokens & classes removed (breaking, #681)
+
+A manual review of the token/class surface removed a reviewed set of niche or
+trivially-reproducible items. Each is either a few lines of custom CSS or had no
+real dependents. Nothing else on the surface changed.
+
+**Removed layout / macro classes**
+
+| Removed | Replacement |
+|---|---|
+| `.sf-pancake` | Use `.sf-cover` (header / main / footer via `flex-grow`), or a 3-row grid: `display:grid; grid-template-rows:auto 1fr auto; min-block-size:100dvh`. |
+| `.sf-overlap`, `.sf-overlap--down`, `.sf-overlap-host` | Apply a negative logical margin directly on the overlapping element and `isolation:isolate` on the host. |
+| `.sf-aspect` (+ `--sf-aspect`) | Set `aspect-ratio` directly, or use a named `.sf-frame--*` ratio. Named frame ratios remain. |
+
+**Removed utilities**
+
+| Removed | Replacement |
+|---|---|
+| `.sf-width-10` … `.sf-width-90` (9 classes) | Set `max-inline-size: calc(var(--sf-content-width) * 0.5)` (etc.) yourself. The keyword variants `.sf-width-full/-auto/-fit/-min/-max` remain. |
+
+**Removed typography tokens**
+
+`--sf-font-humanist`, `--sf-font-geometric`, `--sf-font-slab` — declare the
+font-family stack directly, or point a core family token
+(`--sf-font-body`/`-heading`/`-display`) at your stack. The core
+`body`/`heading`/`display`/`mono` families remain.
+
+**Removed print helpers**
+
+`.print-color-exact`, `.print-no-color`, `.print-only`, `--sf-print-base-size`,
+`--sf-print-page-margin`, `--sf-print-page-size` — set these in your own
+`@media print` rule. `.no-print` remains, and the default print stylesheet
+(static a4 page, ink-saving resets, URL disclosure, static heading sizes) is
+unchanged.
+
+**Removed state classes**
+
+`.sf-is-draggable`, `.sf-is-dragging`, `.sf-is-drop-target` — thin drag-and-drop
+visual hooks; drag-and-drop logic is app territory. Re-add the cursor/opacity/
+outline in your own CSS if you want them.
+
+**Removed knob**
+
+`--sf-density` — its scope (the `--sf-size-*` rung ladder) was far narrower than
+the name implied. The size ladder is now a set of static rungs
+(`--sf-size-xs … --sf-size-xl` = 24/32/40/48/56px). Override an individual rung,
+or the per-component size tokens, to compact controls.
+
 ### Length tokens are no longer `@property`-registered (non-breaking)
 
 Typed `@property` registration is now scoped to colour output tokens (where it

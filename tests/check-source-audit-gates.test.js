@@ -54,15 +54,16 @@ describe('check-dead-knobs (D1)', () => {
     const dir = cloneRepo();
     assert.equal(runGate('check-dead-knobs.js', dir).status, 0);
 
-    // --sf-print-page-margin claims "Maps to @page margin"; strip its only
-    // consumer from print.css so the claim is now false.
-    const css = readCss(dir, 'core/print.css')
-      .replace('var(--sf-print-page-margin, 2cm)', '2cm');
-    writeCss(dir, 'core/print.css', css);
+    // --sf-flow-space's annotation says "Margin-block-start applied to all flow
+    // children…" — a wiring claim; strip its only consumer from macros.css so
+    // the claim is now false.
+    const css = readCss(dir, 'core/macros.css')
+      .replace('margin-block-start: var(--sf-flow-space);', 'margin-block-start: 1rem;');
+    writeCss(dir, 'core/macros.css', css);
 
     const r = runGate('check-dead-knobs.js', dir);
     assert.equal(r.status, 1, `expected failure:\n${r.stdout}${r.stderr}`);
-    assert.match(r.stderr, /--sf-print-page-margin/);
+    assert.match(r.stderr, /--sf-flow-space/);
   });
 });
 

@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1071 elements** — 743 tokens, 328 classes.
+**1042 elements** — 734 tokens, 308 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1021 | Everyday surface. SemVer-stable. |
-| PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
+| PUBLIC | 996 | Everyday surface. SemVer-stable. |
+| PUBLIC-ADVANCED | 45 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (743)
+## Tokens (734)
 
 ### Component tokens (46)
 
@@ -71,7 +71,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-field-padding-inline` | PUBLIC | consumption | field | `var(--sf-space-s)` | Horizontal (inline) inner padding for form field inputs. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 | `--sf-field-radius` | PUBLIC | consumption | field | `var(--sf-radius-m)` | Border radius for form field inputs. Defaults to --sf-radius-m; override to reshape all inputs at once. Reserved for a future .sf-field class — declared but not yet consumed by any shipped rule. |
 
-### Core tokens (611)
+### Core tokens (604)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -378,7 +378,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-content-gap` | PUBLIC | consumption | content | `var(--sf-space-s)` | Tight gap within related content (stack, flow, prose). Override globally to retune all tight primitives at once. |
 | `--sf-contrast-bias` | PUBLIC-ADVANCED | knob | contrast | `0` | Global text-contrast nudge. Positive values push derived reading-text colors toward the extremes (darker in light mode, lighter in dark). Default 0 (neutral). |
 | `--sf-contrast-threshold` | PUBLIC-ADVANCED | knob | contrast | `0.6` | OKLCH lightness crossover for auto-contrast on colored surfaces. Colors with L above this get dark text; below get light text. Default 0.6. |
-| `--sf-density` | PUBLIC-ADVANCED | knob | density | `1` | Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it). |
 | `--sf-display-l-line-height` | PUBLIC | knob | display | `1` | Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes. |
 | `--sf-display-m-line-height` | PUBLIC | knob | display | `1.05` | Line height for medium display text (--sf-text-display-m). |
 | `--sf-display-s-line-height` | PUBLIC | consumption | display | `var(--sf-leading-tight)` | Line height for small display text (--sf-text-display-s). |
@@ -418,12 +417,9 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-font-body` | PUBLIC | knob | font | `system-ui, -apple-system, sans-serif` | Font family stack for body text. Override to set your primary typeface. |
 | `--sf-font-display` | PUBLIC | consumption | font | `var(--sf-font-heading)` | Font family for display/marketing text. Override for large headline typefaces. |
 | `--sf-font-features` | PUBLIC-ADVANCED | knob | font | `normal` | OpenType feature-settings string for body text (e.g. 'ss01', 'cv11'). Default 'normal'. Override on :root or a subtree to enable ligatures, alternate glyphs, etc. |
-| `--sf-font-geometric` | PUBLIC | knob | font | `"Avenir", "Montserrat", "Corbel", "URW Gothic", source-sans-pro, sans-serif` | Geometric sans-serif slot — circular letterforms for brand alternates. |
 | `--sf-font-heading` | PUBLIC | consumption | font | `var(--sf-font-body)` | Font family for headings. Defaults to display if not overridden separately. |
-| `--sf-font-humanist` | PUBLIC | knob | font | `"Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif` | Humanist sans-serif slot — warm, readable alternate typeface. |
 | `--sf-font-mono` | PUBLIC | knob | font | `ui-monospace, monospace` | Monospace font family for code, pre, and kbd elements. |
 | `--sf-font-numeric` | PUBLIC | knob | font | `tabular-nums` | font-variant-numeric shorthand (e.g. tabular-nums) for aligned numeric data. |
-| `--sf-font-slab` | PUBLIC | knob | font | `"Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif` | Slab-serif slot for editorial or display headings. |
 | `--sf-font-variation` | PUBLIC-ADVANCED | knob | font | `normal` | Variable-font axis settings for body text (e.g. "wght" 450). Default 'normal'. Override on :root or a subtree to activate variable-font axes. |
 | `--sf-font-weight-body` | PUBLIC | consumption | font | `var(--sf-font-weight-normal)` | Font weight for body text (typically 400 / normal). |
 | `--sf-font-weight-bold` | PUBLIC | knob | font | `700` | Strong emphasis weight (700). |
@@ -516,9 +512,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-optical-sizing` | PUBLIC-ADVANCED | knob | optical | `auto` | CSS font-optical-sizing value. 'auto' lets the browser optimize letterforms for the rendered size. Set 'none' to disable optical sizing. |
 | `--sf-palette-shade-l` | PUBLIC-ADVANCED | knob | palette | `0.1` | Absolute OKLCH lightness the shade steps (600-950) pull toward; sets how dark the darkest palette step can reach. Default 0.1. |
 | `--sf-palette-tint-l` | PUBLIC-ADVANCED | knob | palette | `0.97` | Absolute OKLCH lightness the tint steps (50-400) pull toward; sets how light the lightest palette step can reach. Default 0.97. |
-| `--sf-print-base-size` | PUBLIC-ADVANCED | knob | print | `11pt` | Base font size for @media print stylesheets. Default 11pt. Override on :root to adjust printed body text size. |
-| `--sf-print-page-margin` | PUBLIC-ADVANCED | knob | print | `2cm` | Page margin for printed output. Default 2cm. Maps to @page margin. |
-| `--sf-print-page-size` | PUBLIC-ADVANCED | knob | print | `a4` | Target paper size for printing. Default 'a4'. Maps to @page size. Common values: a4, letter, legal. |
 | `--sf-radius-2xl` | PUBLIC | consumption | radius | `calc(24px * var(--sf-radius-scale))` | 2× large radius (~20px). Rounded card variants. |
 | `--sf-radius-2xs` | PUBLIC | consumption | radius | `calc(1px * var(--sf-radius-scale))` | Extra-extra-small radius (~1px). Minimal rounding for very tight UI elements. |
 | `--sf-radius-3xl` | PUBLIC | consumption | radius | `calc(32px * var(--sf-radius-scale))` | 3× large radius (~24px). Large rounded surfaces. |
@@ -572,11 +565,11 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-shadow-strength` | PUBLIC-ADVANCED | knob | shadow | `calc(0.08 + var(--sf-is-dark) * 0.17)` | Base opacity for the entire shadow ramp. Auto-boosted in dark mode via --sf-is-dark. Override with calc() to preserve the adaptation: e.g. calc(0.12 + var(--sf-is-dark) * 0.17). |
 | `--sf-shadow-xl` | PUBLIC | consumption | shadow | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` | Extra-large shadow for modals, dialogs, and high-elevation sheets. |
 | `--sf-shadow-xs` | PUBLIC | consumption | shadow | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` | Extra-small shadow for barely-elevated elements (focused inputs, small chips). |
-| `--sf-size-l` | PUBLIC | consumption | size | `calc(3rem * var(--sf-density))` | Large UI component height (~48px). Touch-friendly interactive elements. |
-| `--sf-size-m` | PUBLIC | consumption | size | `calc(2.5rem * var(--sf-density))` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
-| `--sf-size-s` | PUBLIC | consumption | size | `calc(2rem * var(--sf-density))` | Small UI component height (~32px). Compact buttons and input variants. |
-| `--sf-size-xl` | PUBLIC | consumption | size | `calc(3.5rem * var(--sf-density))` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
-| `--sf-size-xs` | PUBLIC | consumption | size | `calc(1.5rem * var(--sf-density))` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |
+| `--sf-size-l` | PUBLIC | knob | size | `3rem` | Large UI component height (~48px). Touch-friendly interactive elements. |
+| `--sf-size-m` | PUBLIC | knob | size | `2.5rem` | ~40px UI component height (scale rung `m`). The default `.sf-btn` min-height. |
+| `--sf-size-s` | PUBLIC | knob | size | `2rem` | Small UI component height (~32px). Compact buttons and input variants. |
+| `--sf-size-xl` | PUBLIC | knob | size | `3.5rem` | Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls. |
+| `--sf-size-xs` | PUBLIC | knob | size | `1.5rem` | Extra-small interactive component height (~24px). For very compact inline elements and micro-controls. |
 | `--sf-space-2xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` | 48px-equivalent spacing. Large section spacing. |
 | `--sf-space-2xs` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` | 4px-equivalent spacing. Tight inline gaps, icon-to-text padding. |
 | `--sf-space-3xl` | PUBLIC | consumption | space | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` | 64px-equivalent spacing. Extra-large layout gaps. |
@@ -745,16 +738,14 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-gap)` | Gap between switcher columns / rows. |
 | `--sf-switcher-threshold` | PUBLIC | knob | switcher | `30rem` | Inline-size threshold below which the switcher flips from horizontal to vertical. |
 
-### Macro tokens (33)
+### Macro tokens (31)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
-| `--sf-aspect` | PUBLIC | knob | aspect | `16 / 9` | Aspect ratio value for the .aspect-ratio macro. |
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
 | `--sf-marker-color` | PUBLIC | consumption | marker | `var(--sf-color-primary)` | Shared list-marker (::marker) colour — single source of truth for the .sf-marker--* utilities and .sf-prose markers alike. Defaults to the primary brand colour; set it on any list (or globally) to retune every marker at once. |
-| `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
 | `--sf-prose-block-margin` | PUBLIC | consumption | prose | `var(--sf-space-m)` | Block margin between prose elements (h2, p, ul, etc.). |
 | `--sf-prose-blockquote-border` | PUBLIC | consumption | prose | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` | Left border style for blockquotes inside prose. |
 | `--sf-prose-blockquote-padding` | PUBLIC | consumption | prose | `var(--sf-space-m)` | Inner padding for blockquotes inside prose. |
@@ -783,7 +774,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-surface-bg-size` | PUBLIC | knob | surface | `cover` | background-size for the .sf-surface-bg image. Default: cover. |
 | `--sf-surface-color` | PUBLIC | consumption | surface | `var(--sf-color-base)` | Input for the generic .sf-surface macro. Set any color (including palette shades); the macro derives background, auto-contrast foreground, and the contextual token set from it. |
 
-## Classes (328)
+## Classes (308)
 
 ### Accessibility (9)
 
@@ -840,7 +831,7 @@ and a short description. The machine-readable companion (with all columns) is
 |---|---|---|---|---|
 | `.sf-live-validate` | PUBLIC | form | — | Scopes native constraint-validation feedback to this subtree: within it, :user-invalid/:user-valid on input/select/textarea drive --sf-field-border-color (the same token .sf-is-invalid/.sf-is-valid set explicitly). Apply to a <form> or <fieldset>. Off by default so a still-empty required field isn't marked invalid before a submit is attempted. |
 
-### Layout primitives (146)
+### Layout primitives (145)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -958,7 +949,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-imposter--contain` | PUBLIC | layout | — | Imposter variant that clamps the element within the bounds of its parent using overflow:hidden on the parent. |
 | `.sf-imposter--fixed` | PUBLIC | layout | — | Imposter variant that uses position:fixed instead of absolute. Use for viewport-level overlays and modals. |
 | `.sf-overlay` | PUBLIC | layout | — | Overlay layout helper — absolutely fills its positioned parent (`position: absolute; inset: 0`) for overlays, backdrops, and media scrims. |
-| `.sf-pancake` | PUBLIC | layout | — | Three-row layout (header, main, footer) where main takes all remaining vertical space via flex-grow. The footer always sticks to the bottom on tall viewports. |
 | `.sf-place-center` | PUBLIC | layout | — | Box-neutral centring primitive: display:grid + place-items:center centres an element's content on both axes without adopting cluster/stack/imposter semantics. Unlike sf-center (which centres itself), this centres the content; give the box a height for block-axis centring. The named form of the display:grid; place-items:center idiom. |
 | `.sf-reel` | PUBLIC | layout | — | Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect. |
 | `.sf-section` | PUBLIC | layout | — | Full-width page section with vertical padding (--sf-section-pad-default). Use to create visually distinct content bands. |
@@ -991,11 +981,10 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-switcher--no-wrap` | PUBLIC | layout | — | Switcher variant that stays horizontal and never wraps (single-line regardless of container width). |
 | `.sf-switcher--vertical` | PUBLIC | layout | — | Switcher variant that starts in the vertical (stacked) direction on all sizes. |
 
-### Macro classes (51)
+### Macro classes (47)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
-| `.sf-aspect` | PUBLIC | macro | — | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s). |
@@ -1018,9 +1007,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overflow-fade--left` | PUBLIC | macro | — | Overflow fade variant: fades the left (inline-start) edge. |
 | `.sf-overflow-fade--right` | PUBLIC | macro | — | Overflow fade variant: fades the right (inline-end) edge. Explicit alias for the default sf-overflow-fade behaviour. |
 | `.sf-overflow-fade--top` | PUBLIC | macro | — | Overflow fade variant: fades the top (block-start) edge. |
-| `.sf-overlap` | PUBLIC | macro | — | Overlap recipe — pulls the element upward (negative block-start margin) so it overlaps the previous sibling by --sf-overlap-pull. |
-| `.sf-overlap--down` | PUBLIC | macro | — | Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it. |
-| `.sf-overlap-host` | PUBLIC | macro | — | Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both. |
 | `.sf-prose` | PUBLIC | macro | LIST MARKER COLOUR (.sf-marker--*) | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
 | `.sf-render-lazy` | PUBLIC | macro | — | Defers rendering of off-screen content via content-visibility: auto. The browser skips layout+paint for content outside the viewport, improving LCP for long pages. |
 | `.sf-scrim` | PUBLIC | macro | — | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
@@ -1074,23 +1060,17 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-slide-in-up` | PUBLIC | motion | — | One-shot slide-in-from-below animation. Scoped to no-preference. |
 | `.sf-stagger` | PUBLIC | motion | — | Stagger — choreography, not the animation itself. Put .sf-stagger on a PARENT; every direct child gets an incrementing animation-delay so a time-based entrance (.sf-fade-in / .sf-slide-in-*) plays in sequence. Children WITHOUT an animation just carry an inert delay (no-op), so… |
 
-### Print (4)
+### Print (1)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.no-print` | PUBLIC | print | — | Hides the element in @media print. Use on sidebars, navigation bars, and decorative elements that should not appear on paper. |
-| `.print-color-exact` | PUBLIC | print | — | Forces exact color rendering in print (print-color-adjust: exact). Use on charts and colored badges that must preserve their fill colors in print. |
-| `.print-no-color` | PUBLIC | print | — | Strips color information in print (print-color-adjust: economy). Defers to the printer's ink-saving mode for backgrounds and non-critical color fills. |
-| `.print-only` | PUBLIC | print | — | Hides the element on screen (display: none) but shows it in @media print. Use for print-only headers, footers, and supplementary content not needed on screen. |
 
-### State classes (15)
+### State classes (12)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-is-disabled` | PUBLIC | state | INTERACTIVITY | Disabled state — dims the element (--sf-opacity-disabled), removes pointer events, and sets cursor: not-allowed. Inherited by child elements that re-enable pointer events. |
-| `.sf-is-draggable` | PUBLIC | state | DRAG & DROP | Draggable state — shows a grab cursor to indicate the element can be dragged. Apply before a drag interaction begins. |
-| `.sf-is-dragging` | PUBLIC | state | DRAG & DROP | Active drag state — shows a grabbing cursor while the element is being dragged. Apply during the drag event. |
-| `.sf-is-drop-target` | PUBLIC | state | DRAG & DROP | Drop-target state — applies a visual highlight to indicate a valid drag-and-drop destination. Toggle on drag-over events. |
 | `.sf-is-error` | PUBLIC | state | VALIDATION / FEEDBACK | Error state — general (not form-field-specific) negative feedback. Applies danger color tokens to indicate a validation failure or system error. Visual styling is identical to sf-is-invalid. |
 | `.sf-is-hidden-if-empty` | PUBLIC | state | HIDE-IF-EMPTY | Hides the element when it has no child nodes (:empty). An action-on-state helper (the name states the behaviour) for dynamic lists or containers that may render empty. |
 | `.sf-is-highlighted` | PUBLIC | state | SELECTED / HIGHLIGHTED | Highlighted state — applies a highlight background. Useful for search result highlighting and keyboard-navigated lists. |
@@ -1111,7 +1091,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-theme-light` | PUBLIC | theme | — | Forces light colour scheme on the element and its subtree (class alias of [data-theme="light"]). |
 | `.sf-theme-transition` | PUBLIC | theme | — | Opt-in animated light/dark theme crossfade. Apply to <html> (or a subtree) so color tokens transition smoothly when [data-theme] changes. Duration controlled by --sf-theme-transition-duration. |
 
-### Utilities (47)
+### Utilities (38)
 
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
@@ -1148,15 +1128,6 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-text-xl` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xl text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-text-xs` | PUBLIC | utility | TEXT-SIZE UTILITIES (.sf-text-2xs | Applies the xs text-size role: font-size, line-height, font-weight, letter-spacing, and measure (max-inline-size) in one class. |
 | `.sf-visible` | PUBLIC | utility | VISIBILITY HELPERS (.sf-invisible / .sf-visible) | Visibility helper (optional/utilities.css) — forces the element to be visible (visibility: visible). Use to un-hide an element that inherited visibility: hidden from a parent. |
-| `.sf-width-10` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 10% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-20` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 20% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-30` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 30% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-40` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 40% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-50` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 50% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-60` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 60% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-70` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 70% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-80` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 80% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
-| `.sf-width-90` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Caps width at 90% of the content column (--sf-content-width), centred in normal flow; shrinks below the cap on narrower parents. |
 | `.sf-width-auto` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Intrinsic auto width (inline-size:auto) — sizes to the box’s normal layout. |
 | `.sf-width-fit` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Width sized to its own content (fit-content). |
 | `.sf-width-full` | PUBLIC | utility | CONTENT-WIDTH UTILITIES (.sf-width-*) | Full width, uncapped (inline-size:100%, max-inline-size:none). |

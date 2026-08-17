@@ -102,11 +102,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-aspect",
-      "description": "Aspect ratio value for the .aspect-ratio macro.\n\nDefault: `16 / 9`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-bento-cols-default",
       "description": "Default column count for the bento grid.\n\nDefault: `4`",
       "syntax": "*"
@@ -1862,11 +1857,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-density",
-      "description": "Compact ↔ comfortable dial for interactive control geometry (the --sf-size-* rung ladder). Default 1; below 1 packs controls tighter (dashboards, data tables), above 1 loosens them. A deliberate design/user choice, not a viewport response — orthogonal to --sf-space-scale (whitespace) and --sf-section-scale (section rhythm). The --sf-touch-target accessibility floor is independent, so a small value can't shrink native controls below the WCAG target. Like the other global multipliers it is a :root dial (the size ladder is computed at :root and inherits, so nested overrides don't retroactively rescale it).\n\nDefault: `1`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-display-l-line-height",
       "description": "Line height for large display text (--sf-text-display-l). Very tight to avoid excessive gaps at oversized sizes.\n\nDefault: `1`",
       "syntax": "*"
@@ -2107,18 +2097,8 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-font-geometric",
-      "description": "Geometric sans-serif slot — circular letterforms for brand alternates.\n\nDefault: `\"Avenir\", \"Montserrat\", \"Corbel\", \"URW Gothic\", source-sans-pro, sans-serif`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-font-heading",
       "description": "Font family for headings. Defaults to display if not overridden separately.\n\nDefault: `var(--sf-font-body)`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-font-humanist",
-      "description": "Humanist sans-serif slot — warm, readable alternate typeface.\n\nDefault: `\"Seravek\", \"Gill Sans Nova\", \"Ubuntu\", \"Calibri\", \"DejaVu Sans\", source-sans-pro, sans-serif`",
       "syntax": "*"
     },
     {
@@ -2129,11 +2109,6 @@
     {
       "name": "--sf-font-numeric",
       "description": "font-variant-numeric shorthand (e.g. tabular-nums) for aligned numeric data.\n\nDefault: `tabular-nums`",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-font-slab",
-      "description": "Slab-serif slot for editorial or display headings.\n\nDefault: `\"Rockwell\", \"Rockwell Nova\", \"Roboto Slab\", \"DejaVu Serif\", \"Sitka Small\", serif`",
       "syntax": "*"
     },
     {
@@ -2662,11 +2637,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-overlap-pull",
-      "description": "how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set…\n\nDefault: `var(--sf-space-xl)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-palette-shade-l",
       "description": "Absolute OKLCH lightness the shade steps (600-950) pull toward; sets how dark the darkest palette step can reach. Default 0.1.\n\nDefault: `0.1`\n\n(advanced token)",
       "syntax": "*"
@@ -2674,21 +2644,6 @@
     {
       "name": "--sf-palette-tint-l",
       "description": "Absolute OKLCH lightness the tint steps (50-400) pull toward; sets how light the lightest palette step can reach. Default 0.97.\n\nDefault: `0.97`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-print-base-size",
-      "description": "Base font size for @media print stylesheets. Default 11pt. Override on :root to adjust printed body text size.\n\nDefault: `11pt`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-print-page-margin",
-      "description": "Page margin for printed output. Default 2cm. Maps to @page margin.\n\nDefault: `2cm`\n\n(advanced token)",
-      "syntax": "*"
-    },
-    {
-      "name": "--sf-print-page-size",
-      "description": "Target paper size for printing. Default 'a4'. Maps to @page size. Common values: a4, letter, legal.\n\nDefault: `a4`\n\n(advanced token)",
       "syntax": "*"
     },
     {
@@ -3083,27 +3038,27 @@
     },
     {
       "name": "--sf-size-l",
-      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `calc(3rem * var(--sf-density))`",
+      "description": "Large UI component height (~48px). Touch-friendly interactive elements.\n\nDefault: `3rem`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-m",
-      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `calc(2.5rem * var(--sf-density))`",
+      "description": "~40px UI component height (scale rung `m`). The default `.sf-btn` min-height.\n\nDefault: `2.5rem`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-s",
-      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `calc(2rem * var(--sf-density))`",
+      "description": "Small UI component height (~32px). Compact buttons and input variants.\n\nDefault: `2rem`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-xl",
-      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `calc(3.5rem * var(--sf-density))`",
+      "description": "Extra-large interactive component height (~56px). For oversized or prominently touch-friendly controls.\n\nDefault: `3.5rem`",
       "syntax": "*"
     },
     {
       "name": "--sf-size-xs",
-      "description": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.\n\nDefault: `calc(1.5rem * var(--sf-density))`",
+      "description": "Extra-small interactive component height (~24px). For very compact inline elements and micro-controls.\n\nDefault: `1.5rem`",
       "syntax": "*"
     },
     {

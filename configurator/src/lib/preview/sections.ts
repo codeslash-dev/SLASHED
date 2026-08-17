@@ -495,16 +495,6 @@ export function macros(): string {
     `<div class="sf-equal-height" style="gap:var(--sf-space-s)"><div class="pv-box">Short</div><div class="pv-box">Two<br>lines</div><div class="pv-box">Three<br>lines<br>here</div></div>`,
   );
 
-  // Aspect ratio — content-agnostic, distinct from the .sf-frame primitive.
-  const aspect = well(
-    `<div class="sf-cluster sf-cluster--m">${["16 / 9", "1 / 1", "4 / 3"]
-      .map(
-        (r) =>
-          `<div class="sf-stack sf-stack--xs sf-stack--center pv-center-text"><div class="sf-aspect" style="--sf-aspect:${r};inline-size:8rem;background:var(--sf-color-primary-100);border-radius:var(--sf-radius-m)"></div>${tag(`--sf-aspect:${r}`)}</div>`,
-      )
-      .join("")}</div>`,
-  );
-
   // Tabular numbers — a real numeric column so digits visibly align.
   const tabularNums = well(`<table class="sf-tabular-nums" style="border-collapse:collapse">
     <tbody>
@@ -604,25 +594,6 @@ export function macros(): string {
   // Text gradient.
   const textGradient = well(`<h2 class="sf-text-gradient pv-strong" style="margin:0;font-size:var(--sf-text-2xl)">Gradient headline</h2>`);
 
-  // Overlap — an avatar pulled down over the card that follows it
-  // (.sf-overlap--down; the plain .sf-overlap pulls UP onto whatever
-  // precedes it instead — not what a leading avatar needs here), plus the
-  // two block-axis directional variants on their own swatches.
-  const avatar = `<div style="inline-size:3rem;block-size:3rem;border-radius:var(--sf-radius-full);background:${photo};border:var(--sf-border-width-2) solid var(--sf-color-surface)"></div>`;
-  const overlapHost = frame(`<div style="max-inline-size:14rem;margin-inline:auto">
-    <div class="sf-overlap--down">${avatar}</div>
-    <div class="sf-card sf-overlap-host"><p class="pv-secondary" style="margin:0">.sf-overlap-host reserves space so in-flow content clears the intruding avatar above.</p></div>
-  </div>`);
-  const overlapDirections = grid(
-    10,
-    ...([
-      ["", "sf-overlap (pulls up)"],
-      ["--down", "sf-overlap--down (pulls down)"],
-    ] as const).map(([m, label]) =>
-      specimen(label, `<div style="position:relative;inline-size:3rem;block-size:3rem;border-radius:var(--sf-radius-full);background:${photo}" class="sf-overlap${m}"></div>`),
-    ),
-  );
-
   // No-tap-highlight — no visual difference to show (it only suppresses the
   // mobile tap-highlight overlay); still applied to a real element for
   // coverage rather than left to a text mention.
@@ -637,7 +608,6 @@ export function macros(): string {
     section("Prose, not-prose & flow", well(stack("m", prose, flow))),
     section("Truncation (sf-truncate, sf-line-clamp-*)", truncation),
     section("Equal height (sf-equal-height)", equalHeight),
-    section("Aspect ratio (sf-aspect)", aspect),
     section("Tabular numbers (sf-tabular-nums)", tabularNums),
     section("Links (sf-link-external, sf-link--subtle, sf-link--reverse)", links),
     section("Drop shadows (sf-drop-shadow-*)", dropShadows, "Alpha-following filter: drop-shadow() — note the shadow survives the masked hole."),
@@ -649,7 +619,6 @@ export function macros(): string {
     section("Named background preset (sf-surface-bg)", surfaceBg),
     section("Text protect (sf-text-protect)", well(textProtect)),
     section("Text gradient (sf-text-gradient)", textGradient),
-    section("Overlap (sf-overlap, sf-overlap-host)", well(stack("m", overlapHost, overlapDirections))),
     section("No tap highlight (sf-no-tap-highlight)", noTapHighlight),
   );
 }

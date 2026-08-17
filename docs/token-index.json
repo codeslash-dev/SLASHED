@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 743,
+      "tokens": 734,
       "by_tier": {
-        "PUBLIC": 693,
-        "PUBLIC-ADVANCED": 49,
+        "PUBLIC": 688,
+        "PUBLIC-ADVANCED": 45,
         "INTERNAL": 1
       },
       "by_role": {
-        "knob": 253,
-        "consumption": 490
+        "knob": 250,
+        "consumption": 484
       }
     }
   },
@@ -180,14 +180,6 @@
         "core/tokens.css"
       ],
       "value": "sf-spin var(--sf-duration-slower) linear infinite"
-    },
-    "--sf-aspect": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "16 / 9"
     },
     "--sf-bento-cols-default": {
       "tier": "PUBLIC",
@@ -2997,14 +2989,6 @@
       ],
       "value": "var(--sf-section-pad)"
     },
-    "--sf-density": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "1"
-    },
     "--sf-display-l-line-height": {
       "tier": "PUBLIC",
       "role": "knob",
@@ -3389,14 +3373,6 @@
       ],
       "value": "normal"
     },
-    "--sf-font-geometric": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "\"Avenir\", \"Montserrat\", \"Corbel\", \"URW Gothic\", source-sans-pro, sans-serif"
-    },
     "--sf-font-heading": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3404,14 +3380,6 @@
         "core/tokens.css"
       ],
       "value": "var(--sf-font-body)"
-    },
-    "--sf-font-humanist": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "\"Seravek\", \"Gill Sans Nova\", \"Ubuntu\", \"Calibri\", \"DejaVu Sans\", source-sans-pro, sans-serif"
     },
     "--sf-font-mono": {
       "tier": "PUBLIC",
@@ -3428,14 +3396,6 @@
         "core/tokens.css"
       ],
       "value": "tabular-nums"
-    },
-    "--sf-font-slab": {
-      "tier": "PUBLIC",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "\"Rockwell\", \"Rockwell Nova\", \"Roboto Slab\", \"DejaVu Serif\", \"Sitka Small\", serif"
     },
     "--sf-font-variation": {
       "tier": "PUBLIC-ADVANCED",
@@ -4285,14 +4245,6 @@
       ],
       "value": "auto"
     },
-    "--sf-overlap-pull": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.macros.css"
-      ],
-      "value": "var(--sf-space-xl)"
-    },
     "--sf-palette-shade-l": {
       "tier": "PUBLIC-ADVANCED",
       "role": "knob",
@@ -4308,30 +4260,6 @@
         "core/tokens.css"
       ],
       "value": "0.97"
-    },
-    "--sf-print-base-size": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "11pt"
-    },
-    "--sf-print-page-margin": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "2cm"
-    },
-    "--sf-print-page-size": {
-      "tier": "PUBLIC-ADVANCED",
-      "role": "knob",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "a4"
     },
     "--sf-prose-block-margin": {
       "tier": "PUBLIC",
@@ -4959,43 +4887,43 @@
     },
     "--sf-size-l": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "calc(3rem * var(--sf-density))"
+      "value": "3rem"
     },
     "--sf-size-m": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "calc(2.5rem * var(--sf-density))"
+      "value": "2.5rem"
     },
     "--sf-size-s": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "calc(2rem * var(--sf-density))"
+      "value": "2rem"
     },
     "--sf-size-xl": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "calc(3.5rem * var(--sf-density))"
+      "value": "3.5rem"
     },
     "--sf-size-xs": {
       "tier": "PUBLIC",
-      "role": "consumption",
+      "role": "knob",
       "files": [
         "core/tokens.css"
       ],
-      "value": "calc(1.5rem * var(--sf-density))"
+      "value": "1.5rem"
     },
     "--sf-space-2xl": {
       "tier": "PUBLIC",

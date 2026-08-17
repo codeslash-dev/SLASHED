@@ -26,7 +26,6 @@ All primitives are exercised live in the [demo](/demo/).
 | `.sf-grid-cols-1-2 / -2-1 / -1-3 / -3-1` | ratio two-column grids | `--sf-grid-gap` |
 | `.sf-bento` | dense free-form grid; container modifiers `--2/--3/--6`, `--row-compact/--row-tall`; child span classes `.sf-bento-wide/-full/-tall/-featured` | `--sf-bento-*` |
 | `.sf-alternate` | zigzag two-column layout, reverses every other row; CQ-responsive | `--sf-content-gap`, `--sf-gap` |
-| `.sf-pancake` | sticky-footer grid: header / main(1fr) / footer | — |
 | `.sf-content-grid` | breakout layout; children `.sf-breakout`, `.sf-full-bleed`; establishes an inline-size CQ scope (like `.sf-container`) so `.sf-grid-cols-*`/`.sf-bento` still respond when it replaces a container | `--sf-content-width`, `--sf-breakout-width` |
 | `.sf-grid-flex` | flex-based grid alternative for uneven item counts; last-row leftovers stretch to fill (default) or stay fixed and centered (`--center`); `--xs … --2xl` | `--sf-grid-min`, `--sf-grid-gap` |
 | `.sf-cover` | full-height region with a centered `.sf-cover__center`; `--min/--max/--padding-*` | `--sf-cover-*` |

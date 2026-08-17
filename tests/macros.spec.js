@@ -108,29 +108,6 @@ test.describe('macro: .sf-line-clamp-*', () => {
   });
 });
 
-test.describe('macro: .sf-aspect', () => {
-  test('respects --sf-aspect override', async ({ page }) => {
-    await setup(page, `
-      <div id="t" class="sf-aspect"
-           style="width: 200px; --sf-aspect: 1 / 1"></div>
-    `);
-    const dims = await page.locator('#t').evaluate(el => ({
-      w: el.clientWidth, h: el.clientHeight,
-    }));
-    expect(dims.w).toBe(200);
-    expect(dims.h).toBe(200);
-  });
-
-  test('default ratio is 16/9', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-aspect" style="width: 320px"></div>`);
-    const dims = await page.locator('#t').evaluate(el => ({
-      w: el.clientWidth, h: el.clientHeight,
-    }));
-    expect(dims.w).toBe(320);
-    expect(dims.h).toBe(180); // 320 * 9/16
-  });
-});
-
 test.describe('macro: .sf-equal-height', () => {
   test('children stretch to tallest', async ({ page }) => {
     await setup(page, `
@@ -433,53 +410,6 @@ test.describe('macro: .sf-exit--fade', () => {
       getComputedStyle(el).animationName
     );
     expect(name).toBe('none');
-  });
-});
-
-test.describe('macro: .sf-overlap / .sf-overlap-host', () => {
-  test('pulls the element up over the previous sibling by --sf-overlap-pull', async ({ page }) => {
-    await setup(page, `
-      <div id="prev" style="height:100px;background:#eee">prev</div>
-      <div id="t" class="sf-overlap" style="height:50px;background:#333; --sf-overlap-pull: 20px">overlap</div>
-    `);
-    const box = await page.evaluate(() => {
-      const prev = document.getElementById('prev').getBoundingClientRect();
-      const t = document.getElementById('t').getBoundingClientRect();
-      return { overlapAmount: prev.bottom - t.top };
-    });
-    expect(box.overlapAmount).toBeCloseTo(20, 0);
-  });
-
-  test('is positioned and raised above normal flow', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-overlap">x</div>`);
-    const cs = await page.locator('#t').evaluate(el => ({
-      position: getComputedStyle(el).position,
-      zIndex:   getComputedStyle(el).zIndex,
-    }));
-    expect(cs.position).toBe('relative');
-    expect(Number(cs.zIndex)).toBeGreaterThan(0);
-  });
-
-  for (const [cls, prop] of [
-    ['sf-overlap--down', 'marginBottom'],
-  ]) {
-    test(`.${cls} sets a negative ${prop}`, async ({ page }) => {
-      await setup(page, `<div id="t" class="${cls}" style="--sf-overlap-pull: 20px">x</div>`);
-      const value = await page.locator('#t').evaluate((el, p) => parseFloat(getComputedStyle(el)[p]), prop);
-      expect(value).toBe(-20);
-    });
-  }
-
-  test('.sf-overlap-host reserves block-start padding matching the pull by default', async ({ page }) => {
-    await setup(page, `<div id="t" class="sf-overlap-host" style="--sf-overlap-pull: 24px">x</div>`);
-    const cs = await page.locator('#t').evaluate(el => ({
-      position:  getComputedStyle(el).position,
-      isolation: getComputedStyle(el).isolation,
-      padTop:    getComputedStyle(el).paddingTop,
-    }));
-    expect(cs.position).toBe('relative');
-    expect(cs.isolation).toBe('isolate');
-    expect(cs.padTop).toBe('24px');
   });
 });
 

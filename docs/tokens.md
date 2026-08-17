@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**743 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**734 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -13,7 +13,7 @@ rebrand workflow.
 
 ## Core tokens (`core/tokens.css`)
 
-611 tokens.
+604 tokens.
 
 | Token | Default |
 |---|---|
@@ -320,7 +320,6 @@ rebrand workflow.
 | `--sf-content-gap` | `var(--sf-space-s)` |
 | `--sf-contrast-bias` | `0` |
 | `--sf-contrast-threshold` | `0.6` |
-| `--sf-density` | `1` |
 | `--sf-display-l-line-height` | `1` |
 | `--sf-display-m-line-height` | `1.05` |
 | `--sf-display-s-line-height` | `var(--sf-leading-tight)` |
@@ -360,12 +359,9 @@ rebrand workflow.
 | `--sf-font-body` | `system-ui, -apple-system, sans-serif` |
 | `--sf-font-display` | `var(--sf-font-heading)` |
 | `--sf-font-features` | `normal` |
-| `--sf-font-geometric` | `"Avenir", "Montserrat", "Corbel", "URW Gothic", source-sans-pro, sans-serif` |
 | `--sf-font-heading` | `var(--sf-font-body)` |
-| `--sf-font-humanist` | `"Seravek", "Gill Sans Nova", "Ubuntu", "Calibri", "DejaVu Sans", source-sans-pro, sans-serif` |
 | `--sf-font-mono` | `ui-monospace, monospace` |
 | `--sf-font-numeric` | `tabular-nums` |
-| `--sf-font-slab` | `"Rockwell", "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif` |
 | `--sf-font-variation` | `normal` |
 | `--sf-font-weight-body` | `var(--sf-font-weight-normal)` |
 | `--sf-font-weight-bold` | `700` |
@@ -458,9 +454,6 @@ rebrand workflow.
 | `--sf-optical-sizing` | `auto` |
 | `--sf-palette-shade-l` | `0.1` |
 | `--sf-palette-tint-l` | `0.97` |
-| `--sf-print-base-size` | `11pt` |
-| `--sf-print-page-margin` | `2cm` |
-| `--sf-print-page-size` | `a4` |
 | `--sf-radius-2xl` | `calc(24px * var(--sf-radius-scale))` |
 | `--sf-radius-2xs` | `calc(1px * var(--sf-radius-scale))` |
 | `--sf-radius-3xl` | `calc(32px * var(--sf-radius-scale))` |
@@ -514,11 +507,11 @@ rebrand workflow.
 | `--sf-shadow-strength` | `calc(0.08 + var(--sf-is-dark) * 0.17)` |
 | `--sf-shadow-xl` | `0 2px 8px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7)), 0 12px 36px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 3.5), 0.7)), 0 24px 72px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 2.5), 0.7))` |
 | `--sf-shadow-xs` | `0 1px 2px 0 oklch(from var(--sf-shadow-color) l c h / clamp(0, calc(var(--sf-shadow-strength) * 0.5), 0.7))` |
-| `--sf-size-l` | `calc(3rem * var(--sf-density))` |
-| `--sf-size-m` | `calc(2.5rem * var(--sf-density))` |
-| `--sf-size-s` | `calc(2rem * var(--sf-density))` |
-| `--sf-size-xl` | `calc(3.5rem * var(--sf-density))` |
-| `--sf-size-xs` | `calc(1.5rem * var(--sf-density))` |
+| `--sf-size-l` | `3rem` |
+| `--sf-size-m` | `2.5rem` |
+| `--sf-size-s` | `2rem` |
+| `--sf-size-xl` | `3.5rem` |
+| `--sf-size-xs` | `1.5rem` |
 | `--sf-space-2xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-2xs` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), -3) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), -3) * 1rem)) * var(--sf-space-scale))` |
 | `--sf-space-3xl` | `calc(clamp(calc(var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc((var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) - var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4)) / (var(--sf-fluid-max-vw) - var(--sf-fluid-min-vw)) * (var(--sf-fluid-width) - var(--sf-fluid-min-vw) * 1rem) + var(--sf-space-base-min) * pow(var(--sf-space-ratio-min), 4) * 1rem), calc(var(--sf-space-base-max) * pow(var(--sf-space-ratio-max), 4) * 1rem)) * var(--sf-space-scale))` |
@@ -691,16 +684,14 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-33 tokens.
+31 tokens.
 
 | Token | Default |
 |---|---|
-| `--sf-aspect` | `16 / 9` |
 | `--sf-content-intrinsic-size` | `500px` |
 | `--sf-flow-space` | `var(--sf-content-gap)` |
 | `--sf-line-clamp` | `3` |
 | `--sf-marker-color` | `var(--sf-color-primary)` |
-| `--sf-overlap-pull` | `var(--sf-space-xl)` |
 | `--sf-prose-block-margin` | `var(--sf-space-m)` |
 | `--sf-prose-blockquote-border` | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` |
 | `--sf-prose-blockquote-padding` | `var(--sf-space-m)` |
