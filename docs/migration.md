@@ -16,7 +16,7 @@ real dependents. Nothing else on the surface changed.
 | Removed | Replacement |
 |---|---|
 | `.sf-pancake` | Use `.sf-cover` (header / main / footer via `flex-grow`), or a 3-row grid: `display:grid; grid-template-rows:auto 1fr auto; min-block-size:100dvh`. |
-| `.sf-overlap`, `.sf-overlap--down`, `.sf-overlap-host` | Apply a negative logical margin directly on the overlapping element and `isolation:isolate` on the host. |
+| `.sf-overlap`, `.sf-overlap--down`, `.sf-overlap-host` (+ `--sf-overlap-pull`) | Apply a negative logical margin directly on the overlapping element and `isolation:isolate` on the host. |
 | `.sf-aspect` (+ `--sf-aspect`) | Set `aspect-ratio` directly, or use a named `.sf-frame--*` ratio. Named frame ratios remain. |
 
 **Removed utilities**
@@ -69,9 +69,15 @@ Two behavioural notes:
   fallback (an unset token resolved to the registered `0`). Fallbacks against
   these tokens now behave as written. This only matters if you deliberately
   *unset* one; the framework always sets them on `:root`.
-- **Length interpolation dropped.** These tokens no longer animate in CSS
-  transitions (border-radius/padding/gap snap instead of interpolating). No
-  shipped SLASHED rule relied on this. If you animate one, register it yourself:
+- **Direct custom-property transitions lose length interpolation.** A
+  transition declared on the *consuming* CSS property (`transition:
+  border-radius`, `transition: padding`, `transition: gap`, …) is unaffected —
+  border-radius/padding/gap are themselves still fully interpolable, whatever
+  feeds them. What changes is a transition declared directly on the *custom
+  property* (`transition: --sf-radius-m`): that now falls back to discrete
+  interpolation (the value flips at the 50% mark) instead of a smooth length
+  tween. No shipped SLASHED rule transitions a custom property directly. If you
+  do and want it back, register it yourself:
   `@property --sf-radius-m { syntax: "<length>"; inherits: true; initial-value: 0 }`.
 
 ### `.sf-content-auto` renamed to `.sf-render-lazy` (breaking)

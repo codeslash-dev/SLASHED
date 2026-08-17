@@ -1180,12 +1180,15 @@
 
     /* ----------------------------------------------------------
        Border widths
-       --sf-border-width-hairline: device-pixel-dependent. On 1x DPR
-       displays (Windows non-Retina) the browser will round 0.5px up
-       to 1px, so it visually matches --sf-border-width-1. On 2x+
-       DPR (macOS/iOS Retina, most modern phones) it renders as a
-       true half-pixel hairline. Use it for subtle separators where
-       1px on low-DPR is acceptable.
+       --sf-border-width-hairline: browsers snap border-width to the nearest
+       device pixel (rounding up to a minimum of 1 device pixel), so the
+       rendered width is device-pixel-dependent. On 1x DPR (Windows
+       non-Retina) 0.5px rounds up to 1px, visually matching
+       --sf-border-width-1. At DPRs where 0.5px lands on a whole device-pixel
+       boundary (2x, 4x — macOS/iOS Retina, most modern phones) it renders as
+       a true 0.5px hairline; at other DPRs (e.g. 3x) the snapped result is
+       close to but not exactly 0.5px. Use it for subtle separators where
+       sub-pixel precision doesn't matter.
        ---------------------------------------------------------- */
     /* --sf-border-scale — global multiplier for border widths. Set to 0 for
        borderless, 2 for heavy borders. Hairline is intentionally excluded
