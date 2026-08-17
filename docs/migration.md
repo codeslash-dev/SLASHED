@@ -115,7 +115,10 @@ unchanged — only the name moved.
 **What changed for you:** replace `var(--sf-caret-color)` with
 `var(--sf-color-caret)` anywhere you reference or override it. A theme file
 authored against the old name migrates automatically
-(`npm run migrate:theme -- <file> --write`). No compatibility alias is provided,
+(`npm run migrate:theme -- <file> --write`), and existing configurator **share
+links keep working** — the rename reuses the token's registry id (an in-place
+name update, not a tombstone + re-mint), so a caret override saved in an older
+link rehydrates onto `--sf-color-caret`. No compatibility alias is provided,
 consistent with the pre-1.0 no-alias stance in the notes below.
 
 ### `--sf-color-text--secondary` renamed to `--sf-color-text--subtle` (breaking)

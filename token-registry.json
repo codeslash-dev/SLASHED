@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedBy": "scripts/gen-token-registry.js",
-    "nextId": 805
+    "nextId": 804
   },
   "tokens": [
     {
@@ -227,8 +227,7 @@
     },
     {
       "id": 53,
-      "name": "--sf-caret-color",
-      "removed": true
+      "name": "--sf-color-caret"
     },
     {
       "id": 54,
@@ -3289,10 +3288,6 @@
     },
     {
       "id": 803,
-      "name": "--sf-color-caret"
-    },
-    {
-      "id": 804,
       "name": "--sf-marker-color"
     }
   ]
