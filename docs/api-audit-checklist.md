@@ -158,7 +158,7 @@ Realna wartość; rozważ okrojenie liczby wariantów lub przeniesienie do `full
 - [ ] `.sf-text-protect` `opt`
 - [ ] `.sf-aspect` `opt`
 - [ ] `.sf-equal-height` `opt`
-- [ ] `.sf-content-auto` `opt`
+- [ ] `.sf-render-lazy` `opt`
 - [ ] `.sf-link--reverse` `opt`
 - [ ] `.sf-link--subtle` `opt`
 - [ ] `.sf-link-external` `opt`

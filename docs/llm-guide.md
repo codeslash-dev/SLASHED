@@ -879,7 +879,7 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-line-clamp:             3          /* default line count for .sf-line-clamp-N */
 --sf-aspect:                 16 / 9    /* .sf-aspect ratio */
 --sf-scroll-shadow-size:     2rem       /* .sf-scroll-shadow */
---sf-content-intrinsic-size: 500px      /* .sf-content-auto placeholder size */
+--sf-content-intrinsic-size: 500px      /* .sf-render-lazy placeholder size */
 --sf-surface-color:          var(--sf-color-base)  /* .sf-surface input color */
 
 /* Scrim (.sf-scrim) */

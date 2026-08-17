@@ -715,16 +715,6 @@
       "layer": "slashed.layout"
     },
     {
-      "name": "sf-content-auto",
-      "selector": ".sf-content-auto",
-      "kind": "macro",
-      "category": "Macro classes",
-      "group": "",
-      "description": "Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages.",
-      "optional": false,
-      "layer": "slashed.macros"
-    },
-    {
       "name": "sf-content-grid",
       "selector": ".sf-content-grid",
       "kind": "layout",
@@ -2333,6 +2323,16 @@
       "description": "Horizontally scrollable row of fixed-height items with snap scrolling. Children don't shrink below their intrinsic width, creating a card carousel effect.",
       "optional": false,
       "layer": "slashed.layout"
+    },
+    {
+      "name": "sf-render-lazy",
+      "selector": ".sf-render-lazy",
+      "kind": "macro",
+      "category": "Macro classes",
+      "group": "",
+      "description": "Defers rendering of off-screen content via content-visibility: auto. The browser skips layout+paint for content outside the viewport, improving LCP for long pages.",
+      "optional": false,
+      "layer": "slashed.macros"
     },
     {
       "name": "sf-scale-down",

@@ -166,7 +166,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | Class |
 |---|
 | `.sf-aspect` |
-| `.sf-content-auto` |
 | `.sf-drop-shadow-l` |
 | `.sf-drop-shadow-m` |
 | `.sf-drop-shadow-s` |
@@ -193,6 +192,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-overlap--down` |
 | `.sf-overlap-host` |
 | `.sf-prose` |
+| `.sf-render-lazy` |
 | `.sf-scrim` |
 | `.sf-scrim--bottom` |
 | `.sf-scrim--full` |

@@ -20965,29 +20965,6 @@
       ]
     },
     {
-      "name": "sf-content-auto",
-      "type": "class",
-      "tier": "PUBLIC",
-      "selector": ".sf-content-auto",
-      "prefix": "sf",
-      "kind": "macro",
-      "category": "Macro classes",
-      "area": "macros",
-      "group": "",
-      "description": "Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages.",
-      "isVariant": false,
-      "baseClass": null,
-      "optional": false,
-      "layer": "slashed.macros",
-      "sourceFiles": [
-        "core/macros.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
       "name": "sf-content-grid",
       "type": "class",
       "tier": "PUBLIC",
@@ -24671,6 +24648,29 @@
       "layer": "slashed.layout",
       "sourceFiles": [
         "core/layout.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "sf-render-lazy",
+      "type": "class",
+      "tier": "PUBLIC",
+      "selector": ".sf-render-lazy",
+      "prefix": "sf",
+      "kind": "macro",
+      "category": "Macro classes",
+      "area": "macros",
+      "group": "",
+      "description": "Defers rendering of off-screen content via content-visibility: auto. The browser skips layout+paint for content outside the viewport, improving LCP for long pages.",
+      "isVariant": false,
+      "baseClass": null,
+      "optional": false,
+      "layer": "slashed.macros",
+      "sourceFiles": [
+        "core/macros.css"
       ],
       "bundles": [
         "full",

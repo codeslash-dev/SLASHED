@@ -399,7 +399,6 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 ### Macro classes (51)
 
 - `.sf-aspect` — Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class.
-- `.sf-content-auto` — Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages.
 - `.sf-drop-shadow-l` — Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l).
 - `.sf-drop-shadow-m` — Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m).
 - `.sf-drop-shadow-s` — Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s).
@@ -426,6 +425,7 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 - `.sf-overlap--down` — Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it.
 - `.sf-overlap-host` — Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both.
 - `.sf-prose` — Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose.
+- `.sf-render-lazy` — Defers rendering of off-screen content via content-visibility: auto. The browser skips layout+paint for content outside the viewport, improving LCP for long pages.
 - `.sf-scrim` — Overlay container with a gradient darkening scrim behind text placed on an image or colored background.
 - `.sf-scrim__content` — Content area inside an sf-scrim. Positioned above the gradient overlay layer.
 - `.sf-scrim--bottom` — Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade).

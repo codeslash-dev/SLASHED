@@ -77,7 +77,7 @@
     --sf-scroll-shadow-size: 2rem;
 
     /* ----------------------------------------------------------
-       Content visibility — placeholder size for .sf-content-auto.
+       Content visibility — placeholder size for .sf-render-lazy.
        Feeds contain-intrinsic-size so offscreen sections reserve
        space before their first render, keeping the scrollbar and
        scroll position stable. Override per element:

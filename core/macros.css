@@ -367,7 +367,7 @@
     }
   }
 
-  .sf-content-auto {
+  .sf-render-lazy {
     content-visibility:     auto;
     contain-intrinsic-size: auto var(--sf-content-intrinsic-size, 500px);
   }

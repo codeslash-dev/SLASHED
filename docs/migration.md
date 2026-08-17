@@ -5,6 +5,19 @@ upgrade notes.
 
 ## SLASHED 0.7.25 → Unreleased
 
+### `.sf-content-auto` renamed to `.sf-render-lazy` (breaking)
+
+`.sf-content-auto` was named after the raw CSS it sets (`content-visibility:
+auto`) and didn't communicate what it does. `.sf-render-lazy` names the intent —
+it defers rendering of off-screen content for performance. The `content-visibility:
+auto` / `contain-intrinsic-size` behaviour and the `--sf-content-intrinsic-size`
+token (unchanged name) are identical.
+
+**What changed for you:** replace `class="sf-content-auto"` with
+`class="sf-render-lazy"`. The `--sf-content-intrinsic-size` override token is
+unchanged. No compatibility alias is provided, consistent with the pre-1.0
+no-alias stance in the notes below.
+
 ### `.sf-is-empty` renamed to `.sf-is-hidden-if-empty` (breaking)
 
 `.sf-is-empty` read like a state assertion ("this element is empty"), but its

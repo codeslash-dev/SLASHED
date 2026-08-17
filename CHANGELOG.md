@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## Unreleased
 
 ### Breaking Changes
+- **macros:** rename `.sf-content-auto` to `.sf-render-lazy` — the name now states the intent (defer off-screen rendering) rather than the raw `content-visibility` property (#675)
 - **states:** rename `.sf-is-empty` to `.sf-is-hidden-if-empty` — the name now states the action (hide-when-empty) rather than asserting a state (#674)
 - **tokens:** rename `--sf-caret-color` to `--sf-color-caret` for type-first `--sf-color-*` namespace consistency (#677)
 

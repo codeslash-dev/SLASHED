@@ -550,7 +550,7 @@ export function macros(): string {
       .join("")}</div>`,
   );
   const contentAuto = well(
-    `<section class="sf-content-auto" style="--sf-content-intrinsic-size:4rem;padding:var(--sf-space-m);background:var(--sf-color-inset);border-radius:var(--sf-radius-m)"><p class="pv-secondary" style="margin:0">content-visibility:auto — off-screen instances of this section skip layout/paint until scrolled near.</p></section>`,
+    `<section class="sf-render-lazy" style="--sf-content-intrinsic-size:4rem;padding:var(--sf-space-m);background:var(--sf-color-inset);border-radius:var(--sf-radius-m)"><p class="pv-secondary" style="margin:0">content-visibility:auto — off-screen instances of this section skip layout/paint until scrolled near.</p></section>`,
   );
 
   // Overflow fade — genuinely overflowing content in the axis each variant
@@ -643,7 +643,7 @@ export function macros(): string {
     section("Drop shadows (sf-drop-shadow-*)", dropShadows, "Alpha-following filter: drop-shadow() — note the shadow survives the masked hole."),
     section("Scroll shadow (sf-scroll-shadow)", scrollShadow),
     section("Scroll snap (sf-scroll-snap)", scrollSnap),
-    section("Content-visibility (sf-content-auto)", contentAuto),
+    section("Content-visibility (sf-render-lazy)", contentAuto),
     section("Overflow fade (sf-overflow-fade + edge/axis modifiers)", overflowFade),
     section("Scrim over media (sf-scrim, sf-scrim--*, sf-scrim__content)", scrims),
     section("Named background preset (sf-surface-bg)", surfaceBg),

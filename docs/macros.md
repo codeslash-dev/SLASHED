@@ -240,17 +240,17 @@ Just sets `-webkit-tap-highlight-color: transparent`. No tokens.
 
 ---
 
-## `.sf-content-auto`
+## `.sf-render-lazy`
 
 Skips rendering (layout + paint) for offscreen content until it scrolls
 near the viewport — a large initial-render win on long pages (product
 grids, long articles).
 
 ```html
-<section class="sf-content-auto">…repeated long-page section…</section>
+<section class="sf-render-lazy">…repeated long-page section…</section>
 
 <!-- Override the reserved placeholder size -->
-<section class="sf-content-auto" style="--sf-content-intrinsic-size: 800px">…</section>
+<section class="sf-render-lazy" style="--sf-content-intrinsic-size: 800px">…</section>
 ```
 
 Tokens:

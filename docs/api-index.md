@@ -996,7 +996,6 @@ and a short description. The machine-readable companion (with all columns) is
 | Class | Tier | Kind | Group | Description |
 |---|---|---|---|---|
 | `.sf-aspect` | PUBLIC | macro | — | Sets aspect-ratio from a --sf-aspect-ratio scoped token. Override the token inline to get any ratio without a new class. |
-| `.sf-content-auto` | PUBLIC | macro | — | Sets content-visibility: auto on the element. The browser skips rendering off-screen content, improving LCP for long pages. |
 | `.sf-drop-shadow-l` | PUBLIC | macro | — | Large filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-l). |
 | `.sf-drop-shadow-m` | PUBLIC | macro | — | Medium filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-m). |
 | `.sf-drop-shadow-s` | PUBLIC | macro | — | Small filter drop-shadow — follows the element's alpha shape (--sf-drop-shadow-s). |
@@ -1023,6 +1022,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `.sf-overlap--down` | PUBLIC | macro | — | Overlap recipe — pulls following content up (negative block-end margin) so this element overlaps the sibling below it. |
 | `.sf-overlap-host` | PUBLIC | macro | — | Card-container recipe — the receiving side of an overlap: an isolated stacking context with block-start padding compensation so in-flow content clears an element intruding from above. The padding knob defaults to the pull knob so one override tunes both. |
 | `.sf-prose` | PUBLIC | macro | LIST MARKER COLOUR (.sf-marker--*) | Opinionated typographic defaults for long-form content: heading hierarchy, paragraph spacing, blockquote, code, and list styling. Override with sf-not-prose. |
+| `.sf-render-lazy` | PUBLIC | macro | — | Defers rendering of off-screen content via content-visibility: auto. The browser skips layout+paint for content outside the viewport, improving LCP for long pages. |
 | `.sf-scrim` | PUBLIC | macro | — | Overlay container with a gradient darkening scrim behind text placed on an image or colored background. |
 | `.sf-scrim__content` | PUBLIC | macro | — | Content area inside an sf-scrim. Positioned above the gradient overlay layer. |
 | `.sf-scrim--bottom` | PUBLIC | macro | — | Scrim variant with the gradient emanating from the bottom edge (bottom-to-top fade). |

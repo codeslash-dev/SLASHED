@@ -352,9 +352,9 @@ test.describe('macro: .sf-link--subtle / .sf-link--reverse', () => {
   });
 });
 
-test.describe('macro: .sf-content-auto', () => {
+test.describe('macro: .sf-render-lazy', () => {
   test('sets content-visibility: auto', async ({ page }) => {
-    await setup(page, `<section id="t" class="sf-content-auto">content</section>`);
+    await setup(page, `<section id="t" class="sf-render-lazy">content</section>`);
     const cv = await page.locator('#t').evaluate(el =>
       getComputedStyle(el).contentVisibility
     );
