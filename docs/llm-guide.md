@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.31** · Tokens: **734** · Prefix: `--sf-`
+> Version: **0.7.32** · Tokens: **734** · Prefix: `--sf-`
 
 > **New to SLASHED?** Start with [getting-started.md](getting-started.md)
 > (install, bundles, boilerplate) and the [cookbook.md](cookbook.md)
