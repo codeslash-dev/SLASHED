@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.31** · Tokens: **741** · Prefix: `--sf-`
+> Version: **0.7.31** · Tokens: **734** · Prefix: `--sf-`
 
 > **New to SLASHED?** Start with [getting-started.md](getting-started.md)
 > (install, bundles, boilerplate) and the [cookbook.md](cookbook.md)
@@ -445,11 +445,6 @@ Status families (success/warning/info/danger) have **no numeric scale** — use 
 --sf-font-heading:  var(--sf-font-body)    /* defaults to body */
 --sf-font-display:  var(--sf-font-heading) /* defaults to heading */
 --sf-font-mono:     ui-monospace, monospace
-
-/* Ready-made system-font stacks (zero-cost, no @import) */
---sf-font-humanist:  "Seravek", "Gill Sans Nova", "Ubuntu", "Calibri"…
---sf-font-geometric: "Avenir", "Montserrat", "Corbel"…
---sf-font-slab:      "Rockwell", "Roboto Slab"…
 ```
 
 ### 6.2 OpenType and variable fonts
@@ -857,7 +852,7 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-prose-media-margin:     var(--sf-space-m)
 --sf-prose-media-radius:     var(--sf-radius-m)
 --sf-prose-figure-margin:    var(--sf-space-l)
---sf-prose-marker-color:     var(--sf-color-primary)
+--sf-prose-marker-color:     var(--sf-marker-color)   /* prose-scoped override; falls back to the shared marker colour */
 --sf-prose-figcaption-size:  var(--sf-text-s)
 /* also: -blockquote-padding, -blockquote-border, -hr-margin, -nested-list-gap, -table-pad */
 
@@ -877,9 +872,8 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 ```css
 --sf-flow-space:             var(--sf-content-gap)  /* .sf-flow > * + * gap */
 --sf-line-clamp:             3          /* default line count for .sf-line-clamp-N */
---sf-aspect:                 16 / 9    /* .sf-aspect ratio */
 --sf-scroll-shadow-size:     2rem       /* .sf-scroll-shadow */
---sf-content-intrinsic-size: 500px      /* .sf-content-auto placeholder size */
+--sf-content-intrinsic-size: 500px      /* .sf-render-lazy placeholder size */
 --sf-surface-color:          var(--sf-color-base)  /* .sf-surface input color */
 
 /* Scrim (.sf-scrim) */
@@ -899,16 +893,7 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-surface-bg-repeat:     no-repeat
 --sf-surface-bg-attachment: scroll
 --sf-surface-bg-animation:  none         /* optional animation shorthand */
-
-/* Overlap recipe (.sf-overlap / .sf-overlap-host) */
---sf-overlap-pull: var(--sf-space-xl)
 ```
-
-`.sf-overlap-host`'s block-start padding reads `var(--sf-overlap-host-pad, var(--sf-overlap-pull))`
-directly in the CSS declaration (not a declared token) so a per-element override is picked up
-immediately, avoiding the staleness a `:root`-level alias would have if it cached the pull value.
-Set `--sf-overlap-host-pad` inline to compensate by something other than the default pull amount;
-it isn't part of the token registry.
 
 ### 8.7 Header and safe area
 
@@ -921,24 +906,32 @@ it isn't part of the token registry.
 --sf-sticky-offset-desktop: var(--sf-header-height-desktop)
 --sf-sticky-offset:         clamp(…)    /* fluid offset for top: var(--sf-sticky-offset) */
 
+/* Scroll-to-anchor breathing room */
+--sf-scroll-offset-gap:     var(--sf-space-m)
+      /* gap below the header when scrolling to an in-page anchor;
+         0 = heading flush under the header */
+
 /* Safe area (notches, home indicators) */
 --sf-safe-top / --sf-safe-bottom / --sf-safe-left / --sf-safe-right
                                     /* env(safe-area-inset-*) */
 ```
+
+**Constraint — mobile ≤ desktop.** `--sf-header-height` and `--sf-sticky-offset`
+are built as `clamp(mobile, <fluid>, desktop)`, so each `-mobile` endpoint must
+be **≤** its `-desktop` counterpart (`--sf-header-height-mobile` ≤
+`--sf-header-height-desktop`, `--sf-sticky-offset-mobile` ≤
+`--sf-sticky-offset-desktop`). CSS `clamp(MIN, V, MAX)` with `MIN > MAX` returns
+`MIN` on every viewport, so inverting the endpoints silently pins the value to
+the mobile size everywhere and the fluid interpolation quietly stops working —
+nothing errors. If you want a single flat value at all widths, don't invert the
+endpoints; override the resolved token directly instead (e.g.
+`--sf-sticky-offset: 4rem` / `--sf-header-height: 4rem`).
 
 ### 8.8 Replaced elements (img, video)
 
 ```css
 --sf-object-fit:      cover   /* default fit for img and video */
 --sf-object-position: 50% 50% /* position — override: style="--sf-object-position: top" */
-```
-
-### 8.9 Print
-
-```css
---sf-print-page-margin: 2cm
---sf-print-page-size:   a4
---sf-print-base-size:   11pt
 ```
 
 ---
@@ -1009,7 +1002,7 @@ The magnitude of each effect is one global knob (override on `:root` or any scop
 Small opt-in helpers (all `optional/utilities.css`):
 
 - `.sf-list-none` — drop list marker + inline-start padding in one class.
-- `.sf-marker--{family}` — colour `::marker` on an arbitrary list, `family` = `primary` / `secondary` / `tertiary` / `action` (brand/action only; set `::marker { color }` yourself for anything else). A `:not(.sf-prose *)` guard leaves `.sf-prose` markers to `--sf-prose-marker-color`. Works on the `<ul>`/`<ol>` or an `<li>`.
+- `.sf-marker--{family}` — colour `::marker` on an arbitrary list, `family` = `primary` / `secondary` / `tertiary` / `action` (brand/action only; set `--sf-marker-color` — or `::marker { color }` — yourself for anything else). Each modifier points the shared `--sf-marker-color` at that family; `.sf-prose` reads the same token via `--sf-prose-marker-color`, so marker colour has one source of truth. A `:not(.sf-prose *)` guard leaves `.sf-prose` markers' own styling to the prose token. Works on the `<ul>`/`<ol>` or an `<li>`.
 - `.sf-selection--alt` — swap `::selection` colours to `--sf-color-selection-*--alt` on an element and its descendants, for surfaces where the default selection lands with poor contrast.
 - `.sf-sticky` — `position: sticky` at `--sf-sticky-offset` (the header-aware fluid offset) with `--sf-z-sticky`; `--s` / `--m` / `--l` add an extra `--sf-space-*` gap on top. This is the sticky mechanism — `position: sticky` is conditional by nature, so there is no separate runtime-toggled state class.
 - `.sf-width-{10..90}` — cap an element at that fraction of the content column (`max-inline-size: calc(var(--sf-content-width) * fraction)`) with `inline-size: 100%` and `margin-inline: auto`, so it shrinks on narrow parents and centres in normal flow. Keyword variants: `.sf-width-full` (100%, uncapped), `.sf-width-auto`, `.sf-width-fit` (`fit-content`), `.sf-width-min` (`min-content`), `.sf-width-max` (`max-content`). Logical properties throughout; centring assumes normal flow (a flex/grid parent governs alignment instead).
@@ -1074,7 +1067,7 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 ### 9.8 Remaining interaction states
 
 ```css
---sf-caret-color:           var(--sf-color-action)
+--sf-color-caret:           var(--sf-color-action)
 --sf-touch-target:          2.75rem            /* 44px — WCAG 2.5.5, fixed independent of --sf-size-* */
 --sf-opacity-disabled:      0.45
 --sf-opacity-muted:         0.5
@@ -1197,20 +1190,14 @@ One token changes the entire design. Override on `:root`. All are PUBLIC-ADVANCE
 --sf-space-scale:        1  /* global fluid spacing multiplier */
 --sf-text-scale:         1  /* global body type scale multiplier */
 --sf-text-display-scale: 1  /* global display type scale multiplier */
---sf-density:            1  /* control-size ladder (--sf-size-*): <1 compact, >1 roomy */
 ```
 
-`--sf-density` is the compact ↔ comfortable dial for interactive control
-**geometry** (the `--sf-size-*` rung ladder). Unlike `--sf-text-*` / `--sf-space-*`
-it is intentionally **not** viewport-fluid — control height must not shrink on
-small screens where touch targets need to grow — so the size ladder is static and
-moves only by this deliberate knob (a product mode or user preference), never
-automatically. It is orthogonal to `--sf-space-scale` (whitespace) and
-`--sf-section-scale` (section rhythm); combine them for a fully compact UI. The
-`--sf-touch-target` accessibility floor is independent, so a small `--sf-density`
-cannot pull native controls under the WCAG target. Like the other multipliers in
-this section it is a `:root` dial — the `--sf-size-*` ladder is computed at `:root`
-and inherits, so a nested override does not retroactively rescale it.
+The interactive control-size ladder (`--sf-size-xs … --sf-size-xl`) is a set of
+static rungs, not a scaled multiplier — override an individual rung (or the
+per-component size tokens) to compact controls. It is intentionally not
+viewport-fluid: control height must not shrink on small screens where touch
+targets need to grow. The `--sf-touch-target` accessibility floor is independent,
+so retuning a rung cannot pull native controls under the WCAG target.
 
 ---
 
@@ -1330,22 +1317,14 @@ Each step up the type scale subtracts `step-index × taper` from that step's def
 --sf-mask-scrim-end:   var(--sf-space-l)
 ```
 
-### 11.7 Print
-
-```css
---sf-print-page-margin: 2cm
---sf-print-page-size:   a4
---sf-print-base-size:   11pt
-```
-
-### 11.8 Safe area insets
+### 11.7 Safe area insets
 
 ```css
 --sf-safe-top / --sf-safe-bottom / --sf-safe-left / --sf-safe-right
                                     /* env(safe-area-inset-*) */
 ```
 
-### 11.9 Focus ring shadow
+### 11.8 Focus ring shadow
 
 ```css
 --sf-focus-ring-shadow  /* composite box-shadow — use in CSS when you don't want outline */

@@ -170,7 +170,7 @@
   }
 
   input, textarea {
-    caret-color: var(--sf-caret-color);
+    caret-color: var(--sf-color-caret);
   }
 
   input, progress {

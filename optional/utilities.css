@@ -175,17 +175,25 @@
   /* ============================================================
    * LIST MARKER COLOUR (.sf-marker--*)
    * Colour the ::marker of an arbitrary list. Brand/action families
-   * only — for any other colour set `::marker { color }` yourself.
-   * The :not(.sf-prose *) guard keeps this utility from reaching into
-   * a .sf-prose subtree, which owns its markers via
+   * only — for any other colour set `--sf-marker-color` (or
+   * `::marker { color }`) yourself. Each modifier points the shared
+   * --sf-marker-color knob at a brand family; the ::marker then reads
+   * that single token, so marker colour has one source of truth across
+   * the utilities and .sf-prose (which reads it via --sf-prose-marker-color).
+   * The :not(.sf-prose *) guard keeps this utility's own ::marker rule
+   * from reaching into a .sf-prose subtree, which owns its markers via
    * --sf-prose-marker-color (utilities are layered after macros, so
    * without the guard this would win). Covers the element's own marker
    * and descendant list-item markers.
    * ============================================================ */
-  .sf-marker--primary :not(.sf-prose *)::marker, .sf-marker--primary:not(.sf-prose *)::marker { color: var(--sf-color-primary); }
-  .sf-marker--secondary :not(.sf-prose *)::marker, .sf-marker--secondary:not(.sf-prose *)::marker { color: var(--sf-color-secondary); }
-  .sf-marker--tertiary :not(.sf-prose *)::marker, .sf-marker--tertiary:not(.sf-prose *)::marker { color: var(--sf-color-tertiary); }
-  .sf-marker--action :not(.sf-prose *)::marker, .sf-marker--action:not(.sf-prose *)::marker { color: var(--sf-color-action); }
+  .sf-marker--primary   { --sf-marker-color: var(--sf-color-primary); }
+  .sf-marker--secondary { --sf-marker-color: var(--sf-color-secondary); }
+  .sf-marker--tertiary  { --sf-marker-color: var(--sf-color-tertiary); }
+  .sf-marker--action    { --sf-marker-color: var(--sf-color-action); }
+  .sf-marker--primary :not(.sf-prose *)::marker,   .sf-marker--primary:not(.sf-prose *)::marker,
+  .sf-marker--secondary :not(.sf-prose *)::marker, .sf-marker--secondary:not(.sf-prose *)::marker,
+  .sf-marker--tertiary :not(.sf-prose *)::marker,  .sf-marker--tertiary:not(.sf-prose *)::marker,
+  .sf-marker--action :not(.sf-prose *)::marker,    .sf-marker--action:not(.sf-prose *)::marker { color: var(--sf-marker-color); }
 
   /* ============================================================
    * ALTERNATE SELECTION COLOUR (.sf-selection--alt)
@@ -218,31 +226,13 @@
 
   /* ============================================================
    * CONTENT-WIDTH UTILITIES (.sf-width-*)
-   * Constrain an element to a fraction of the content column
-   * (--sf-content-width) and centre it in normal flow. inline-size:100%
-   * lets it shrink below the cap on a narrower parent; margin-inline:auto
-   * absorbs the leftover space to centre it. The keyword variants map to
-   * CSS width keywords: full = 100% uncapped, plus auto / fit-content /
-   * min-content / max-content. Logical properties throughout, so they
-   * follow the writing mode. Centring assumes normal flow — inside a
-   * flex/grid parent, alignment is governed by the container instead.
-   *   <div class="sf-width-50">Half the content width, centred</div>
+   * Keyword width caps mapping to CSS width keywords: full = 100%
+   * uncapped, plus auto / fit-content / min-content / max-content.
+   * Logical properties throughout, so they follow the writing mode.
+   * For a fractional cap, set max-inline-size yourself (e.g.
+   * `style="max-inline-size: calc(var(--sf-content-width) * 0.5)"`).
+   *   <div class="sf-width-fit">Shrink-to-fit width</div>
    * ============================================================ */
-  .sf-width-10, .sf-width-20, .sf-width-30, .sf-width-40, .sf-width-50,
-  .sf-width-60, .sf-width-70, .sf-width-80, .sf-width-90 {
-    inline-size:   100%;
-    margin-inline: auto;
-  }
-  .sf-width-10 { max-inline-size: calc(var(--sf-content-width) * 0.1); }
-  .sf-width-20 { max-inline-size: calc(var(--sf-content-width) * 0.2); }
-  .sf-width-30 { max-inline-size: calc(var(--sf-content-width) * 0.3); }
-  .sf-width-40 { max-inline-size: calc(var(--sf-content-width) * 0.4); }
-  .sf-width-50 { max-inline-size: calc(var(--sf-content-width) * 0.5); }
-  .sf-width-60 { max-inline-size: calc(var(--sf-content-width) * 0.6); }
-  .sf-width-70 { max-inline-size: calc(var(--sf-content-width) * 0.7); }
-  .sf-width-80 { max-inline-size: calc(var(--sf-content-width) * 0.8); }
-  .sf-width-90 { max-inline-size: calc(var(--sf-content-width) * 0.9); }
-
   .sf-width-full { inline-size: 100%; max-inline-size: none; }
   .sf-width-auto { inline-size: auto; }
   .sf-width-fit  { inline-size: fit-content; }

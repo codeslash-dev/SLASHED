@@ -341,14 +341,14 @@ test('button per-size label knobs retune one rung; font-scale multiplies the lad
   expect(boxAfter.mh).toBeCloseTo(112, 0);
 });
 
-// ---- Density: one knob scales the whole --sf-size-* geometric ladder ------
-test('--sf-density scales the --sf-size-* ladder uniformly (default 1 = 24/32/40/48/56px)', async ({ browser }) => {
+// ---- Size ladder: static geometric rungs (24/32/40/48/56px) ---------------
+test('--sf-size-* is a static geometric ladder (24/32/40/48/56px)', async ({ browser }) => {
   const page = await browser.newPage();
   await page.goto(FIXTURE);
 
-  const measure = () => page.evaluate(() => {
-    const rungs = ['xs', 's', 'm', 'l', 'xl'];
-    const read = () => Object.fromEntries(rungs.map((r) => {
+  const rungs = await page.evaluate(() => {
+    const names = ['xs', 's', 'm', 'l', 'xl'];
+    return Object.fromEntries(names.map((r) => {
       const el = document.createElement('div');
       el.style.blockSize = `var(--sf-size-${r})`;
       document.body.appendChild(el);
@@ -356,26 +356,13 @@ test('--sf-density scales the --sf-size-* ladder uniformly (default 1 = 24/32/40
       el.remove();
       return [r, px];
     }));
-    return read();
   });
 
-  const base = await measure();
-  // Default ladder: 24 · 32 · 40 · 48 · 56 px.
-  expect(base.xs).toBeCloseTo(24, 0);
-  expect(base.m).toBeCloseTo(40, 0);
-  expect(base.xl).toBeCloseTo(56, 0);
-
-  // Compact: every rung shrinks by the same factor — ladder preserved, not flattened.
-  await page.evaluate(() => document.documentElement.style.setProperty('--sf-density', '0.8'));
-  const compact = await measure();
-  for (const r of ['xs', 's', 'm', 'l', 'xl']) {
-    expect(compact[r] / base[r], `${r} ×density`).toBeCloseTo(0.8, 2);
-  }
-
-  // Roomy: same knob loosens the ladder.
-  await page.evaluate(() => document.documentElement.style.setProperty('--sf-density', '1.25'));
-  const roomy = await measure();
-  expect(roomy.m / base.m).toBeCloseTo(1.25, 2);
+  expect(rungs.xs).toBeCloseTo(24, 0);
+  expect(rungs.s).toBeCloseTo(32, 0);
+  expect(rungs.m).toBeCloseTo(40, 0);
+  expect(rungs.l).toBeCloseTo(48, 0);
+  expect(rungs.xl).toBeCloseTo(56, 0);
 
   await page.close();
 });

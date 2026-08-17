@@ -48,7 +48,8 @@
     "--sf-z-mid": "--sf-z-fixed",
     "--sf-z-high": "--sf-z-dropdown",
     "--sf-z-top": "--sf-z-toast",
-    "--sf-avatar-size": "--sf-card-avatar-size"
+    "--sf-avatar-size": "--sf-card-avatar-size",
+    "--sf-caret-color": "--sf-color-caret"
   },
   "removals": {
     "--sf-z-max": "Ambiguous by design: 0.6.0 split the old top rung into --sf-z-overlay (1030) and --sf-z-modal (1040). Pick the one matching your element's role — this is not auto-migrated because the wrong choice silently reorders your stacking context.",
@@ -81,6 +82,15 @@
     "--sf-fluid-custom-2": "Removed in 0.6.0 — write a clamp() directly. --sf-fluid-min-vw / --sf-fluid-max-vw are unchanged.",
     "--sf-fluid-custom-3": "Removed in 0.6.0 — write a clamp() directly. --sf-fluid-min-vw / --sf-fluid-max-vw are unchanged.",
     "--sf-truncate-suffix": "Removed in 0.6.0 — it was never read. .sf-truncate uses text-overflow: ellipsis.",
-    "--sf-corner-scoop-size": "Removed before 1.0 together with the .sf-corner-scoop macro (issue #484): a single absolute size needed per-element tuning to read well at both button and hero scale, and the mask clipped box-shadow/border."
+    "--sf-corner-scoop-size": "Removed before 1.0 together with the .sf-corner-scoop macro (issue #484): a single absolute size needed per-element tuning to read well at both button and hero scale, and the mask clipped box-shadow/border.",
+    "--sf-aspect": "Removed in the lean cut (#681) with the .sf-aspect macro — set aspect-ratio directly, or use a named .sf-frame--* ratio. Named frame ratios remain.",
+    "--sf-overlap-pull": "Removed in the lean cut (#681) with the .sf-overlap recipe — apply a negative logical margin directly on the overlapping element.",
+    "--sf-density": "Removed in the lean cut (#681): its scope (the --sf-size-* rung ladder) was far narrower than the name implied. Override the individual --sf-size-* rungs, or the per-component size tokens, to compact controls.",
+    "--sf-font-humanist": "Removed in the lean cut (#681) — declare the font-family stack directly, or point a core family token (--sf-font-body/-heading/-display) at your stack.",
+    "--sf-font-geometric": "Removed in the lean cut (#681) — declare the font-family stack directly, or point a core family token (--sf-font-body/-heading/-display) at your stack.",
+    "--sf-font-slab": "Removed in the lean cut (#681) — declare the font-family stack directly, or point a core family token (--sf-font-body/-heading/-display) at your stack.",
+    "--sf-print-base-size": "Removed in the lean cut (#681) — set body font-size inside your own @media print rule.",
+    "--sf-print-page-margin": "Removed in the lean cut (#681) — set @page margin in your own @media print rule.",
+    "--sf-print-page-size": "Removed in the lean cut (#681) — set @page size in your own @media print rule."
   }
 }

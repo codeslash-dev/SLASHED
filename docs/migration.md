@@ -5,6 +5,128 @@ upgrade notes.
 
 ## SLASHED 0.7.25 → Unreleased
 
+### Lean cut — niche tokens & classes removed (breaking, #681)
+
+A manual review of the token/class surface removed a reviewed set of niche or
+trivially-reproducible items. Each is either a few lines of custom CSS or had no
+real dependents. Nothing else on the surface changed.
+
+**Removed layout / macro classes**
+
+| Removed | Replacement |
+|---|---|
+| `.sf-pancake` | Use `.sf-cover` (header / main / footer via `flex-grow`), or a 3-row grid: `display:grid; grid-template-rows:auto 1fr auto; min-block-size:100dvh`. |
+| `.sf-overlap`, `.sf-overlap--down`, `.sf-overlap-host` (+ `--sf-overlap-pull`) | Apply a negative logical margin directly on the overlapping element and `isolation:isolate` on the host. |
+| `.sf-aspect` (+ `--sf-aspect`) | Set `aspect-ratio` directly, or use a named `.sf-frame--*` ratio. Named frame ratios remain. |
+
+**Removed utilities**
+
+| Removed | Replacement |
+|---|---|
+| `.sf-width-10` … `.sf-width-90` (9 classes) | Set `max-inline-size: calc(var(--sf-content-width) * 0.5)` (etc.) yourself. The keyword variants `.sf-width-full/-auto/-fit/-min/-max` remain. |
+
+**Removed typography tokens**
+
+`--sf-font-humanist`, `--sf-font-geometric`, `--sf-font-slab` — declare the
+font-family stack directly, or point a core family token
+(`--sf-font-body`/`-heading`/`-display`) at your stack. The core
+`body`/`heading`/`display`/`mono` families remain.
+
+**Removed print helpers**
+
+`.print-color-exact`, `.print-no-color`, `.print-only`, `--sf-print-base-size`,
+`--sf-print-page-margin`, `--sf-print-page-size` — set these in your own
+`@media print` rule. `.no-print` remains, and the default print stylesheet
+(static a4 page, ink-saving resets, URL disclosure, static heading sizes) is
+unchanged.
+
+**Removed state classes**
+
+`.sf-is-draggable`, `.sf-is-dragging`, `.sf-is-drop-target` — thin drag-and-drop
+visual hooks; drag-and-drop logic is app territory. Re-add the cursor/opacity/
+outline in your own CSS if you want them.
+
+**Removed knob**
+
+`--sf-density` — its scope (the `--sf-size-*` rung ladder) was far narrower than
+the name implied. The size ladder is now a set of static rungs
+(`--sf-size-xs … --sf-size-xl` = 24/32/40/48/56px). Override an individual rung,
+or the per-component size tokens, to compact controls.
+
+### Length tokens are no longer `@property`-registered (non-breaking)
+
+Typed `@property` registration is now scoped to colour output tokens (where it
+powers the light/dark cross-fade). The length output tokens — `--sf-radius-*`,
+`--sf-space-*`, `--sf-gap`, `--sf-content-gap`, `--sf-gutter`,
+`--sf-component-pad`, `--sf-field-block`, `--sf-section-pad--*`,
+`--sf-media-radius` — are now plain custom properties. Token names, values, and
+defaults are unchanged, so no markup edits are required.
+
+Two behavioural notes:
+
+- **Fallbacks now fire.** Previously a registered `<length>` carried
+  `initial-value: 0`, so `var(--sf-radius-m, 12px)` never used its `12px`
+  fallback (an unset token resolved to the registered `0`). Fallbacks against
+  these tokens now behave as written. This only matters if you deliberately
+  *unset* one; the framework always sets them on `:root`.
+- **Direct custom-property transitions lose length interpolation.** A
+  transition declared on the *consuming* CSS property (`transition:
+  border-radius`, `transition: padding`, `transition: gap`, …) is unaffected —
+  border-radius/padding/gap are themselves still fully interpolable, whatever
+  feeds them. What changes is a transition declared directly on the *custom
+  property* (`transition: --sf-radius-m`): that now falls back to discrete
+  interpolation (the value flips at the 50% mark) instead of a smooth length
+  tween. No shipped SLASHED rule transitions a custom property directly. If you
+  do and want it back, register it yourself:
+  `@property --sf-radius-m { syntax: "<length>"; inherits: true; initial-value: 0 }`.
+
+### `.sf-content-auto` renamed to `.sf-render-lazy` (breaking)
+
+`.sf-content-auto` was named after the raw CSS it sets (`content-visibility:
+auto`) and didn't communicate what it does. `.sf-render-lazy` names the intent —
+it defers rendering of off-screen content for performance. The `content-visibility:
+auto` / `contain-intrinsic-size` behaviour and the `--sf-content-intrinsic-size`
+token (unchanged name) are identical.
+
+**What changed for you:** replace `class="sf-content-auto"` with
+`class="sf-render-lazy"`. The `--sf-content-intrinsic-size` override token is
+unchanged. No compatibility alias is provided, consistent with the pre-1.0
+no-alias stance in the notes below.
+
+### `.sf-is-empty` renamed to `.sf-is-hidden-if-empty` (breaking)
+
+`.sf-is-empty` read like a state assertion ("this element is empty"), but its
+behaviour is an action — `.sf-is-empty:empty { display: none }`, i.e. "hide this
+element when it is empty." The old name didn't convey that. `.sf-is-hidden-if-empty`
+states the behaviour directly. This deliberately breaks the `.sf-is-*` "asserts a
+state" convention (the class now names an action-on-state); accepted for clarity.
+Behaviour is unchanged.
+
+**What changed for you:** replace `class="sf-is-empty"` with
+`class="sf-is-hidden-if-empty"`. No compatibility alias is provided, consistent
+with the pre-1.0 no-alias stance in the notes below.
+
+### `--sf-caret-color` renamed to `--sf-color-caret` (breaking)
+
+Every colour token in the framework is type-first under the `--sf-color-*`
+namespace (`--sf-color-text`, `--sf-color-bg`, `--sf-color-heading`,
+`--sf-color-link`, `--sf-color-border`, `--sf-color-selection-bg`, …).
+`--sf-caret-color` was the lone property-first exception, sitting outside that
+namespace. Renaming it to `--sf-color-caret` puts every colour under one prefix,
+so theming can iterate `--sf-color-*` uniformly and the caret token is
+discoverable alongside its siblings. Value (`var(--sf-color-action)`),
+derivation, and the `caret-color` consumer on inputs/contenteditable are
+unchanged — only the name moved.
+
+**What changed for you:** replace `var(--sf-caret-color)` with
+`var(--sf-color-caret)` anywhere you reference or override it. A theme file
+authored against the old name migrates automatically
+(`npm run migrate:theme -- <file> --write`), and existing configurator **share
+links keep working** — the rename reuses the token's registry id (an in-place
+name update, not a tombstone + re-mint), so a caret override saved in an older
+link rehydrates onto `--sf-color-caret`. No compatibility alias is provided,
+consistent with the pre-1.0 no-alias stance in the notes below.
+
 ### `--sf-color-text--secondary` renamed to `--sf-color-text--subtle` (breaking)
 
 The name collided conceptually with the brand-palette `secondary` role

@@ -124,29 +124,6 @@ for (const [cls, status] of [
   });
 }
 
-// ── Drag & drop ─────────────────────────────────────────────────
-test('.sf-is-draggable: cursor grab', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-draggable">drag me</div>`);
-  const cursor = await page.locator('#t').evaluate(el => getComputedStyle(el).cursor);
-  expect(cursor).toBe('grab');
-});
-
-test('.sf-is-dragging: opacity 0.5, cursor grabbing', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-dragging">dragging</div>`);
-  const cs = await page.locator('#t').evaluate(el => ({
-    opacity: parseFloat(getComputedStyle(el).opacity),
-    cursor:  getComputedStyle(el).cursor,
-  }));
-  expect(cs.opacity).toBeCloseTo(0.5, 1);
-  expect(cs.cursor).toBe('grabbing');
-});
-
-test('.sf-is-drop-target: dashed outline', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-drop-target">drop zone</div>`);
-  const style = await page.locator('#t').evaluate(el => getComputedStyle(el).outlineStyle);
-  expect(style).toBe('dashed');
-});
-
 // ── Overlay ─────────────────────────────────────────────────────
 test('.sf-overlay: position absolute, inset 0', async ({ page }) => {
   await setup(page, `
@@ -163,14 +140,14 @@ test('.sf-overlay: position absolute, inset 0', async ({ page }) => {
 });
 
 // ── Empty state ─────────────────────────────────────────────────
-test('.sf-is-empty:empty — hides itself when no content', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-empty"></div>`);
+test('.sf-is-hidden-if-empty:empty — hides itself when no content', async ({ page }) => {
+  await setup(page, `<div id="t" class="sf-is-hidden-if-empty"></div>`);
   const display = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
   expect(display).toBe('none');
 });
 
-test('.sf-is-empty with children stays visible', async ({ page }) => {
-  await setup(page, `<div id="t" class="sf-is-empty"><span>child</span></div>`);
+test('.sf-is-hidden-if-empty with children stays visible', async ({ page }) => {
+  await setup(page, `<div id="t" class="sf-is-hidden-if-empty"><span>child</span></div>`);
   const display = await page.locator('#t').evaluate(el => getComputedStyle(el).display);
   expect(display).not.toBe('none');
 });

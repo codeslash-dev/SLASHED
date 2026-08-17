@@ -71,6 +71,29 @@ describe('forward compatibility', () => {
     };
     expect(decode(code, removedRegistry)).toEqual({});
   });
+
+  test('a renamed token keeps its id, so legacy codes rehydrate the new name', () => {
+    // A token rename must reuse the SAME registry id (an in-place name update),
+    // not tombstone the old id + mint a new one — otherwise every share code
+    // minted before the rename silently loses that override on decode. Simulate
+    // a legacy code that encoded the override under the old name at some id…
+    const OLD_ID = 53;
+    const oldRegistry = { tokens: [{ id: OLD_ID, name: '--sf-caret-color', removed: false }] };
+    const legacyCode = encode({ '--sf-caret-color': 'red' }, oldRegistry);
+    // …then decode it against the renamed registry (same id, new name): the
+    // saved value must reappear under the new token name, not vanish.
+    const renamedRegistry = { tokens: [{ id: OLD_ID, name: '--sf-color-caret', removed: false }] };
+    expect(decode(legacyCode, renamedRegistry)).toEqual({ '--sf-color-caret': 'red' });
+
+    // And the shipped registry must actually preserve that id for the real
+    // rename this guards (#677): id 53 is live as --sf-color-caret, never
+    // tombstoned + re-minted.
+    const caret = registry.tokens.find((t) => t.name === '--sf-color-caret');
+    expect(caret).toBeDefined();
+    expect(caret.id).toBe(53);
+    expect(caret.removed).toBeFalsy();
+    expect(registry.tokens.some((t) => t.name === '--sf-caret-color')).toBe(false);
+  });
 });
 
 describe('error resilience', () => {

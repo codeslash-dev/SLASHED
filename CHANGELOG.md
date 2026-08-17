@@ -4,6 +4,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Configurator
+- **typography:** make the display type-scale generator readable/usable — split the Fluid scale section into labelled "Body type scale" and "Display scale" groups, drop the duplicate ratio picker from the display card (it silently edited the shared `--sf-text-ratio-*`), and show the display scale a read-only "inherited ratio" readout so the shared-ratio relationship is explicit (#672)
+- **layout, colors:** add controls for the two new tokens introduced alongside this batch — `--sf-scroll-offset-gap` (a slider in Layout → Sticky offset) and `--sf-marker-color` (a color picker in Colors → Semantic overrides). Neither previously had a control; `check:curation` didn't catch the gap because both tokens carry `role: consumption` (their default is a `var()` reference), which the gate doesn't check
+
+### Changed
+- **tokens:** scope typed `@property` registration to colour output tokens; drop it from the length tokens (radius/space/gap/padding/section-pad/media-radius). Removes the fallback footgun where a registered `<length>` with `initial-value: 0` made author fallbacks like `var(--sf-radius-m, 12px)` never fire. Token names, values, and defaults are unchanged; only the internal registration mechanism differs, and length tokens no longer interpolate in transitions (no shipped rule relied on that) (#676)
+
+### Breaking Changes
+- **core:** lean cut — remove a reviewed set of niche/rarely-used tokens and classes (#681): layout `.sf-pancake` and the `.sf-overlap*` recipe (+ `--sf-overlap-pull`); `.sf-aspect` (+ `--sf-aspect`); the fractional `.sf-width-10…90` utilities (keyword variants kept); the alternate font tokens `--sf-font-humanist/-geometric/-slab`; the print helpers `.print-color-exact/.print-no-color/.print-only` and `--sf-print-base-size/-page-margin/-page-size` (`.no-print` kept); the drag state classes `.sf-is-draggable/-dragging/-drop-target`; and `--sf-density` (the `--sf-size-*` ladder is now static rungs). See `docs/migration.md` for replacements.
+- **macros:** rename `.sf-content-auto` to `.sf-render-lazy` — the name now states the intent (defer off-screen rendering) rather than the raw `content-visibility` property (#675)
+- **states:** rename `.sf-is-empty` to `.sf-is-hidden-if-empty` — the name now states the action (hide-when-empty) rather than asserting a state (#674)
+- **tokens:** rename `--sf-caret-color` to `--sf-color-caret` for type-first `--sf-color-*` namespace consistency (#677)
+
+### Features
+- **tokens:** add `--sf-marker-color` — shared single source of truth for `::marker` colour driving both the `.sf-marker--*` utilities and `.sf-prose` markers (via `--sf-prose-marker-color`, which now falls back to it); default unchanged (primary) (#673)
+- **tokens:** add `--sf-scroll-offset-gap` — tunable breathing room below the header when scrolling to an in-page anchor (default `var(--sf-space-m)`; set to `0` for a heading flush under the header) (#678)
+
 ## [0.7.31] - 2026-08-09
 
 ### Bug Fixes

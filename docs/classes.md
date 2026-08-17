@@ -3,12 +3,12 @@
 > **Generated** from source by `scripts/gen-class-reference.js` —
 > run `npm run docs:classes` to refresh. Do not edit by hand.
 
-**305 .sf-classes, 15 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
+**291 .sf-classes, 12 .sf-is-classes.** Every `.sf-*` layout/macro class and `.sf-is-*` state class.
 See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Layout primitives (`core/layout.css`)
 
-146 classes.
+145 classes.
 
 | Class |
 |---|
@@ -126,7 +126,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-imposter--contain` |
 | `.sf-imposter--fixed` |
 | `.sf-overlay` |
-| `.sf-pancake` |
 | `.sf-place-center` |
 | `.sf-reel` |
 | `.sf-section` |
@@ -161,12 +160,10 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Macro classes (`core/macros.css`)
 
-51 classes.
+47 classes.
 
 | Class |
 |---|
-| `.sf-aspect` |
-| `.sf-content-auto` |
 | `.sf-drop-shadow-l` |
 | `.sf-drop-shadow-m` |
 | `.sf-drop-shadow-s` |
@@ -189,10 +186,8 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-overflow-fade--left` |
 | `.sf-overflow-fade--right` |
 | `.sf-overflow-fade--top` |
-| `.sf-overlap` |
-| `.sf-overlap--down` |
-| `.sf-overlap-host` |
 | `.sf-prose` |
+| `.sf-render-lazy` |
 | `.sf-scrim` |
 | `.sf-scrim--bottom` |
 | `.sf-scrim--full` |
@@ -219,16 +214,13 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## State classes (`core/states.css`)
 
-15 classes.
+12 classes.
 
 | Class |
 |---|
 | `.sf-is-disabled` |
-| `.sf-is-draggable` |
-| `.sf-is-dragging` |
-| `.sf-is-drop-target` |
-| `.sf-is-empty` |
 | `.sf-is-error` |
+| `.sf-is-hidden-if-empty` |
 | `.sf-is-highlighted` |
 | `.sf-is-info` |
 | `.sf-is-invalid` |
@@ -349,7 +341,7 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 
 ## Utilities (`optional/utilities.css`)
 
-48 classes.
+39 classes.
 
 | Class |
 |---|
@@ -387,15 +379,6 @@ See [architecture.md](architecture.md) for layer order and naming conventions.
 | `.sf-text-xl` |
 | `.sf-text-xs` |
 | `.sf-visible` |
-| `.sf-width-10` |
-| `.sf-width-20` |
-| `.sf-width-30` |
-| `.sf-width-40` |
-| `.sf-width-50` |
-| `.sf-width-60` |
-| `.sf-width-70` |
-| `.sf-width-80` |
-| `.sf-width-90` |
 | `.sf-width-auto` |
 | `.sf-width-fit` |
 | `.sf-width-full` |

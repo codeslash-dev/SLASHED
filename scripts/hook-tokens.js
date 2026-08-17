@@ -16,10 +16,10 @@
  *   - check-hook-tokens.js verifies against source (each is consumed ONLY via
  *     fallback, is never declared, and is mentioned in the guide)
  *
- * Policy unification (#582 D5): this is the same "prose-only, not registered"
- * treatment already documented for --sf-overlap-host-pad in docs/macros.md;
- * the code-block hooks now carry it explicitly too. Adding a new hook token
- * anywhere in source means adding it here (and the check will confirm it).
+ * Policy (#582 D5): these are "prose-only, not registered" override hooks —
+ * consumed only via a var() fallback, never declared, documented in the guide.
+ * Adding a new hook token anywhere in source means adding it here (and the
+ * check will confirm it).
  */
 
 /** @typedef {{ name: string, file: string, note: string }} HookToken */
@@ -35,11 +35,6 @@ export const HOOK_TOKENS = [
     name: '--sf-color-code-block-text',
     file: 'core/base.css',
     note: 'Per-instance code-block text colour; falls back to inherit.',
-  },
-  {
-    name: '--sf-overlap-host-pad',
-    file: 'core/macros.css',
-    note: 'Per-instance .sf-overlap-host block-start padding; falls back to --sf-overlap-pull.',
   },
 ];
 

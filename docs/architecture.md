@@ -176,7 +176,7 @@ not carry a broad component library. Every value goes through `var()`. Requires
 
 **slashed.macros** — recipes / patterns: `.sf-prose`,
 `.sf-not-prose`, `.sf-flow`, `.sf-truncate`, `.sf-line-clamp-{2,3,N}`,
-`.sf-equal-height`, `.sf-aspect`, `.sf-scroll-shadow`, `.sf-scroll-snap`,
+`.sf-equal-height`, `.sf-scroll-shadow`, `.sf-scroll-snap`,
 `.sf-overflow-fade`, `.sf-no-tap-highlight`. Tokens for these classes
 live in `core/tokens.macros.css`.
 
@@ -195,7 +195,7 @@ curation call.
 
 **slashed.accessibility** — `:focus-visible`, `.sr-only`, `.skip-link`, reduced-motion resets, plus the a11y patterns `.sf-focus-parent` and `.sf-clickable-parent`. High in the stack to override motion without relying solely on `!important`. Selective `!important` used only where override is a genuine accessibility barrier (focus ring, reduced motion, sr-only). `.sr-only` uses `overflow: clip` (modern consensus — avoids creating a new scroll container unlike the legacy `overflow: hidden`).
 
-**slashed.print** — `@media print` only. Contains `@page` rule consuming `--sf-print-*` tokens. Authored colour is preserved by default; consumers opt into ink-on-paper via `.print-no-color` or force colour via `.print-color-exact`. `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`), `details > summary`, and the two opt-in colour classes.
+**slashed.print** — `@media print` only. Contains a static `@page` rule (A4 portrait, 2cm margin) and ink-saving resets (box/text shadows off, URL disclosure). `!important` is reserved for selectors whose semantics require defeating consumer CSS: the hide-list (`nav, aside, button, input, select, textarea, dialog, [popover], .no-print`) and `details > summary`.
 
 **slashed.legacy** — `@supports not (…)` fallbacks for the ~2022 baseline (first browsers with CSS cascade layers). Sits above `slashed.print` so fallbacks win, but below `slashed.overrides` so user CSS always wins.
 
@@ -261,9 +261,8 @@ itself**. They exist for your own BEM classes
 
 ### Print class naming
 
-Print helpers use the `.print-*` prefix: `.print-only` (show only on paper),
-`.no-print` (hide on paper), `.print-color-exact` (force colour), and
-`.print-no-color` (force ink-saving flatten). See the **slashed.print** layer.
+Print helpers use the `.no-print` class to hide an element on paper. See the
+**slashed.print** layer.
 
 ### Naming exceptions
 
@@ -278,9 +277,6 @@ without reducing collision risk in practice.
 | `.skip-link` | accessibility | Common a11y pattern name |
 | `.no-motion` | accessibility | Reads as a behaviour toggle |
 | `.no-print` | print | Reads as a behaviour toggle |
-| `.print-only` | print | Reads as a behaviour toggle |
-| `.print-color-exact` | print | Self-documenting intent |
-| `.print-no-color` | print | Self-documenting intent |
 
 ---
 

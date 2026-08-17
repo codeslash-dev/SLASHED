@@ -440,42 +440,6 @@ test.describe('layout: .sf-reel', () => {
   });
 });
 
-// ── .sf-pancake ─────────────────────────────────────────────────
-test.describe('layout: .sf-pancake', () => {
-  test('is grid with exactly 3 rows', async ({ page }) => {
-    // Computed gridTemplateRows resolves to pixel values ("40px 820px 40px"),
-    // so we count tokens rather than matching "auto"/"1fr" keywords.
-    await setup(page, `
-      <div id="t" class="sf-pancake" style="height:400px">
-        <header style="height:40px">H</header>
-        <main>M</main>
-        <footer style="height:40px">F</footer>
-      </div>
-    `);
-    const rowCount = await page.locator('#t').evaluate(el =>
-      getComputedStyle(el).gridTemplateRows.trim().split(/\s+/).length
-    );
-    expect(rowCount).toBe(3);
-  });
-
-  test('main row is taller than header and footer', async ({ page }) => {
-    await setup(page, `
-      <div class="sf-pancake" style="height:400px">
-        <header id="hd">H</header>
-        <main id="mn">M</main>
-        <footer id="ft">F</footer>
-      </div>
-    `);
-    const [hh, hm, hf] = await Promise.all([
-      page.locator('#hd').evaluate(el => el.clientHeight),
-      page.locator('#mn').evaluate(el => el.clientHeight),
-      page.locator('#ft').evaluate(el => el.clientHeight),
-    ]);
-    expect(hm).toBeGreaterThan(hh);
-    expect(hm).toBeGreaterThan(hf);
-  });
-});
-
 // ── .sf-center ──────────────────────────────────────────────────
 test.describe('layout: .sf-center', () => {
   test('is horizontally centered with a positive max-inline-size', async ({ page }) => {

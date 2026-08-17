@@ -42,6 +42,18 @@
     "sf-is-visible": "Renamed and relocated to optional/utilities.css as .sf-visible. Named in the 'Prefer native state' section's removal rationale (historical name, pre-relocation)."
   },
   "docs/api-audit-checklist.md": {
+    "sf-aspect": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-pancake": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-overlap": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-overlap--down": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "sf-overlap-host": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "print-only": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "print-color-exact": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "print-no-color": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this class.",
+    "--sf-density": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this token.",
+    "--sf-print-base-size": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this token.",
+    "--sf-print-page-margin": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this token.",
+    "--sf-print-page-size": "Removed in the lean cut (#681) — recorded in the audit checklist as the resolved verdict for this token.",
     "sf-is-hidden": "Removed 2026-07-21 (round 1) — recorded in the audit checklist as the resolved verdict for this class.",
     "sf-is-readonly": "Removed 2026-07-21 (round 1) — recorded in the audit checklist as the resolved verdict for this class.",
     "sf-is-busy": "Removed 2026-07-21 (round 1) — recorded in the audit checklist as the resolved verdict for this class.",

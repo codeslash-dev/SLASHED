@@ -671,35 +671,6 @@ test.describe('Layout — Content Grid', () => {
 
 
 // ═══════════════════════════════════════════════════════════════
-// LAYOUT PRIMITIVES — PANCAKE
-// ═══════════════════════════════════════════════════════════════
-test.describe('Layout — Pancake', () => {
-  test('.sf-pancake uses grid with 3 rows (auto 1fr auto)', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const pancake = page.locator('#layout-pancake .sf-pancake').first();
-    const display = await getStyle(pancake, 'display');
-    expect(display).toBe('grid');
-    const rows = await getStyle(pancake, 'gridTemplateRows');
-    // Should have 3 row tracks
-    expect(rows.split(' ').length).toBeGreaterThanOrEqual(3);
-  });
-
-  test('.sf-pancake main area takes remaining space', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const pancake = page.locator('#layout-pancake .sf-pancake').first();
-    const header = pancake.locator('> header').first();
-    const main = pancake.locator('> div').first();
-    const footer = pancake.locator('> footer').first();
-    const headerBox = await header.boundingBox();
-    const mainBox = await main.boundingBox();
-    const footerBox = await footer.boundingBox();
-    // Main should be the tallest
-    expect(mainBox.height).toBeGreaterThan(headerBox.height);
-    expect(mainBox.height).toBeGreaterThan(footerBox.height);
-  });
-});
-
-// ═══════════════════════════════════════════════════════════════
 // LAYOUT PRIMITIVES — IMPOSTER
 // ═══════════════════════════════════════════════════════════════
 test.describe('Layout — Imposter', () => {
@@ -749,18 +720,6 @@ test.describe('Print Styles', () => {
     const noPrint = page.locator('#print .no-print').first();
     const display = await getStyle(noPrint, 'display');
     expect(display).toBe('none');
-  });
-
-  test('.print-color-exact preserves colors in print', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    await page.emulateMedia({ media: 'print' });
-    const exact = page.locator('#print .print-color-exact').first();
-    const pca = await exact.evaluate(el => {
-      const cs = getComputedStyle(el);
-      return cs.getPropertyValue('print-color-adjust') ||
-             cs.getPropertyValue('-webkit-print-color-adjust');
-    });
-    expect(pca).toBe('exact');
   });
 
   test('links show href after text in print', async ({ page, browserName }) => {
@@ -960,20 +919,6 @@ test.describe('States — Full Coverage', () => {
       getComputedStyle(el).getPropertyValue('--sf-field-border-color').trim()
     );
     expect(borderColor).not.toBe(validBorderColor);
-  });
-
-  test('.sf-is-dragging has reduced opacity', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const dragging = page.locator('#states-full .sf-is-dragging').first();
-    const opacity = parseFloat(await getStyle(dragging, 'opacity'));
-    expect(opacity).toBe(0.5);
-  });
-
-  test('.sf-is-drop-target has dashed outline', async ({ page }) => {
-    await page.goto(DEMO_URL);
-    const dropTarget = page.locator('#states-full .sf-is-drop-target').first();
-    const outlineStyle = await getStyle(dropTarget, 'outlineStyle');
-    expect(outlineStyle).toBe('dashed');
   });
 
   test('.sf-overlay covers parent with absolute positioning', async ({ page }) => {

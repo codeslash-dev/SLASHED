@@ -45,7 +45,6 @@ const ADVANCED = new Set([
   '--sf-font-features', '--sf-font-variation', '--sf-optical-sizing',
   '--sf-space-scale', '--sf-text-scale', '--sf-text-display-scale',
   '--sf-radius-scale', '--sf-motion-scale', '--sf-section-scale',
-  '--sf-density',
   '--sf-leading-taper',
   '--sf-fluid-min-vw', '--sf-fluid-max-vw',
   '--sf-text-ratio-min', '--sf-text-ratio-max',
@@ -62,7 +61,6 @@ const ADVANCED = new Set([
   // proportional --sf-btn-font-scale multiplier and the per-size knobs instead.
   '--sf-btn-font-size', '--sf-btn-padding-block', '--sf-btn-padding-inline', '--sf-btn-min-height',
   '--sf-focus-ring-shadow',
-  '--sf-print-page-margin', '--sf-print-page-size', '--sf-print-base-size',
 ]);
 
 // ADVANCED name patterns — for GENERATED token families too large (and too

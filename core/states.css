@@ -145,25 +145,12 @@
     --sf-field-text-color:   var(--sf-color-info-strong);
   }
 
-  /* -- DRAG & DROP -- */
+  /* -- HIDE-IF-EMPTY -- */
 
-  .sf-is-dragging {
-    opacity: var(--sf-opacity-muted);
-    cursor:  grabbing;
-  }
-
-  .sf-is-drop-target {
-    outline:        var(--sf-focus-ring-width) dashed var(--sf-color-action);
-    outline-offset: var(--sf-focus-ring-offset);
-  }
-
-  .sf-is-draggable {
-    cursor: grab;
-  }
-
-  /* -- EMPTY STATE -- */
-
-  .sf-is-empty:empty {
+  /* Action-on-state, not a state assertion: hides the element when it has no
+     children. The name states the behaviour (deliberately breaking the
+     .sf-is-* "asserts a state" convention for clarity — see #674). */
+  .sf-is-hidden-if-empty:empty {
     display: none;
   }
 
