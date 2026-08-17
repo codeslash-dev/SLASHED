@@ -2,22 +2,22 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "73e2e93c8446",
+    "tokensHash": "c11f27a60327",
     "bundles": [
       "full",
       "optimal"
     ],
     "counts": {
-      "tokens": 742,
+      "tokens": 743,
       "byTier": {
-        "PUBLIC": 692,
+        "PUBLIC": 693,
         "PUBLIC-ADVANCED": 49,
         "INTERNAL": 1
       },
       "byCategory": {
         "Layout tokens": 53,
         "Core tokens": 611,
-        "Macro tokens": 32,
+        "Macro tokens": 33,
         "Component tokens": 46
       }
     }
@@ -10961,6 +10961,27 @@
       ]
     },
     {
+      "name": "--sf-marker-color",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "marker",
+      "category": "Macro tokens",
+      "group": "List markers",
+      "description": "Shared list-marker (::marker) colour — single source of truth for the .sf-marker--* utilities and .sf-prose markers alike. Defaults to the primary brand colour; set it on any list (or globally) to retune every marker at once.",
+      "note": "Shared list-marker (::marker) colour — single source of truth for the .sf-marker--* utilities and .sf-prose markers alike. Defaults to the primary brand colour; set it on any list (or globally) to retune every marker at once.",
+      "value": "var(--sf-color-primary)",
+      "aliasOf": "--sf-color-primary",
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
       "name": "--sf-mask-scrim-end",
       "tier": "PUBLIC-ADVANCED",
       "role": "consumption",
@@ -11451,9 +11472,9 @@
       "category": "Macro tokens",
       "group": "Prose",
       "description": "Fine-grained typography controls for the .prose macro (margins, blockquote style, link decoration, etc.).",
-      "note": "Color of list bullets and ordered-list numbers inside .prose.",
-      "value": "var(--sf-color-primary)",
-      "aliasOf": "--sf-color-primary",
+      "note": "Color of list bullets and ordered-list numbers inside .sf-prose. Defaults to the shared --sf-marker-color; override per-instance for prose-scoped marker colour.",
+      "value": "var(--sf-marker-color)",
+      "aliasOf": "--sf-marker-color",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

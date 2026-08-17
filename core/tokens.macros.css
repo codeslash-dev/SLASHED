@@ -28,6 +28,14 @@
     --sf-aspect: 16 / 9;
 
     /* ----------------------------------------------------------
+       List markers — single source of truth for ::marker colour.
+       Drives both the .sf-marker--* utilities and .sf-prose markers
+       (via --sf-prose-marker-color below), so one knob retunes every
+       list marker. Defaults to the primary brand colour.
+       ---------------------------------------------------------- */
+    --sf-marker-color:           var(--sf-color-primary);
+
+    /* ----------------------------------------------------------
        Prose — per-instance override knobs for .sf-prose.
        All values default to system spacing/color tokens so prose
        stays in sync with the global scale unless overridden.
@@ -41,7 +49,7 @@
     --sf-prose-media-margin:     var(--sf-space-m);
     --sf-prose-media-radius:     var(--sf-radius-m);
     --sf-prose-figure-margin:    var(--sf-space-l);
-    --sf-prose-marker-color:     var(--sf-color-primary);
+    --sf-prose-marker-color:     var(--sf-marker-color);
     --sf-prose-figcaption-size:  var(--sf-text-s);
     --sf-prose-blockquote-padding: var(--sf-space-m);
     --sf-prose-blockquote-border:  var(--sf-border-width-2) solid var(--sf-color-border--subtle);

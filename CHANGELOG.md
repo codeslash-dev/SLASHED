@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **tokens:** rename `--sf-caret-color` to `--sf-color-caret` for type-first `--sf-color-*` namespace consistency (#677)
 
 ### Features
+- **tokens:** add `--sf-marker-color` — shared single source of truth for `::marker` colour driving both the `.sf-marker--*` utilities and `.sf-prose` markers (via `--sf-prose-marker-color`, which now falls back to it); default unchanged (primary) (#673)
 - **tokens:** add `--sf-scroll-offset-gap` — tunable breathing room below the header when scrolling to an in-page anchor (default `var(--sf-space-m)`; set to `0` for a heading flush under the header) (#678)
 
 ## [0.7.31] - 2026-08-09

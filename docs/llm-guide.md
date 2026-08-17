@@ -1,6 +1,6 @@
 # Slashed Framework — LLM Reference Guide
 
-> Version: **0.7.31** · Tokens: **742** · Prefix: `--sf-`
+> Version: **0.7.31** · Tokens: **743** · Prefix: `--sf-`
 
 > **New to SLASHED?** Start with [getting-started.md](getting-started.md)
 > (install, bundles, boilerplate) and the [cookbook.md](cookbook.md)
@@ -857,7 +857,7 @@ Each primitive has its own knobs. Override locally (`style="--sf-cluster-gap: 2r
 --sf-prose-media-margin:     var(--sf-space-m)
 --sf-prose-media-radius:     var(--sf-radius-m)
 --sf-prose-figure-margin:    var(--sf-space-l)
---sf-prose-marker-color:     var(--sf-color-primary)
+--sf-prose-marker-color:     var(--sf-marker-color)   /* prose-scoped override; falls back to the shared marker colour */
 --sf-prose-figcaption-size:  var(--sf-text-s)
 /* also: -blockquote-padding, -blockquote-border, -hr-margin, -nested-list-gap, -table-pad */
 
@@ -1025,7 +1025,7 @@ The magnitude of each effect is one global knob (override on `:root` or any scop
 Small opt-in helpers (all `optional/utilities.css`):
 
 - `.sf-list-none` — drop list marker + inline-start padding in one class.
-- `.sf-marker--{family}` — colour `::marker` on an arbitrary list, `family` = `primary` / `secondary` / `tertiary` / `action` (brand/action only; set `::marker { color }` yourself for anything else). A `:not(.sf-prose *)` guard leaves `.sf-prose` markers to `--sf-prose-marker-color`. Works on the `<ul>`/`<ol>` or an `<li>`.
+- `.sf-marker--{family}` — colour `::marker` on an arbitrary list, `family` = `primary` / `secondary` / `tertiary` / `action` (brand/action only; set `--sf-marker-color` — or `::marker { color }` — yourself for anything else). Each modifier points the shared `--sf-marker-color` at that family; `.sf-prose` reads the same token via `--sf-prose-marker-color`, so marker colour has one source of truth. A `:not(.sf-prose *)` guard leaves `.sf-prose` markers' own styling to the prose token. Works on the `<ul>`/`<ol>` or an `<li>`.
 - `.sf-selection--alt` — swap `::selection` colours to `--sf-color-selection-*--alt` on an element and its descendants, for surfaces where the default selection lands with poor contrast.
 - `.sf-sticky` — `position: sticky` at `--sf-sticky-offset` (the header-aware fluid offset) with `--sf-z-sticky`; `--s` / `--m` / `--l` add an extra `--sf-space-*` gap on top. This is the sticky mechanism — `position: sticky` is conditional by nature, so there is no separate runtime-toggled state class.
 - `.sf-width-{10..90}` — cap an element at that fraction of the content column (`max-inline-size: calc(var(--sf-content-width) * fraction)`) with `inline-size: 100%` and `margin-inline: auto`, so it shrinks on narrow parents and centres in normal flow. Keyword variants: `.sf-width-full` (100%, uncapped), `.sf-width-auto`, `.sf-width-fit` (`fit-content`), `.sf-width-min` (`min-content`), `.sf-width-max` (`max-content`). Logical properties throughout; centring assumes normal flow (a flex/grid parent governs alignment instead).

@@ -8,11 +8,11 @@ A cross-reference of every `--sf-*` custom property by **source file** and
 for the flat name list see [registry.json](registry.json); for the tier
 contract and naming rules see [architecture.md](architecture.md).
 
-**742 tokens** (deduplicated by name across the 4 token source files).
+**743 tokens** (deduplicated by name across the 4 token source files).
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 692 | Everyday knobs. SemVer-stable. |
+| PUBLIC | 693 | Everyday knobs. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
@@ -23,7 +23,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | Role | Count | Meaning |
 |---|---|---|
 | knob | 253 | Input you **set** to configure the system (a literal primitive: length, number, colour literal, keyword, font stack, easing curve …). |
-| consumption | 489 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
+| consumption | 490 | Ready-to-use output you **read**; derived from other tokens via `var(--sf-…)` (incl. `light-dark()`/`oklch(from …)`/`color-mix()`). |
 
 ## INTERNAL tokens
 
@@ -608,6 +608,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-link-underline-thickness` | PUBLIC | knob | Core | `auto` |
 | `--sf-lumlocker` | PUBLIC-ADVANCED | knob | Core | `0.65` |
 | `--sf-lumlocker-dark` | PUBLIC-ADVANCED | knob | Core | `clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)` |
+| `--sf-marker-color` | PUBLIC | consumption | Macros | `var(--sf-color-primary)` |
 | `--sf-mask-scrim-end` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
 | `--sf-mask-scrim-start` | PUBLIC-ADVANCED | consumption | Core | `var(--sf-space-l)` |
 | `--sf-media-radius` | PUBLIC | knob | Core | `0` |
@@ -631,7 +632,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-prose-heading-gap` | PUBLIC | consumption | Macros | `var(--sf-space-s)` |
 | `--sf-prose-hr-margin` | PUBLIC | consumption | Macros | `var(--sf-space-l)` |
 | `--sf-prose-list-gap` | PUBLIC | consumption | Macros | `var(--sf-space-xs)` |
-| `--sf-prose-marker-color` | PUBLIC | consumption | Macros | `var(--sf-color-primary)` |
+| `--sf-prose-marker-color` | PUBLIC | consumption | Macros | `var(--sf-marker-color)` |
 | `--sf-prose-media-margin` | PUBLIC | consumption | Macros | `var(--sf-space-m)` |
 | `--sf-prose-media-radius` | PUBLIC | consumption | Macros | `var(--sf-radius-m)` |
 | `--sf-prose-nested-list-gap` | PUBLIC | consumption | Macros | `var(--sf-space-2xs)` |

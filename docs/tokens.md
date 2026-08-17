@@ -3,7 +3,7 @@
 > **Generated** from source by `scripts/gen-token-reference.js` —
 > run `npm run docs:tokens` to refresh. Do not edit by hand.
 
-**742 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
+**743 tokens.** Every `--sf-*` custom property and its default value, grouped by source file.
 If a token is defined in multiple files, it is listed once per section — so this
 count can be higher than `docs/registry.json` (which deduplicates by name). See
 [architecture.md](architecture.md) for the PUBLIC / PUBLIC-ADVANCED / INTERNAL
@@ -691,7 +691,7 @@ rebrand workflow.
 
 ## Macro tokens (`core/tokens.macros.css`)
 
-32 tokens.
+33 tokens.
 
 | Token | Default |
 |---|---|
@@ -699,6 +699,7 @@ rebrand workflow.
 | `--sf-content-intrinsic-size` | `500px` |
 | `--sf-flow-space` | `var(--sf-content-gap)` |
 | `--sf-line-clamp` | `3` |
+| `--sf-marker-color` | `var(--sf-color-primary)` |
 | `--sf-overlap-pull` | `var(--sf-space-xl)` |
 | `--sf-prose-block-margin` | `var(--sf-space-m)` |
 | `--sf-prose-blockquote-border` | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` |
@@ -708,7 +709,7 @@ rebrand workflow.
 | `--sf-prose-heading-gap` | `var(--sf-space-s)` |
 | `--sf-prose-hr-margin` | `var(--sf-space-l)` |
 | `--sf-prose-list-gap` | `var(--sf-space-xs)` |
-| `--sf-prose-marker-color` | `var(--sf-color-primary)` |
+| `--sf-prose-marker-color` | `var(--sf-marker-color)` |
 | `--sf-prose-media-margin` | `var(--sf-space-m)` |
 | `--sf-prose-media-radius` | `var(--sf-radius-m)` |
 | `--sf-prose-nested-list-gap` | `var(--sf-space-2xs)` |

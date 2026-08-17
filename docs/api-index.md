@@ -10,15 +10,15 @@ and a short description. The machine-readable companion (with all columns) is
 [registry.json](registry.json); for the tier contract see
 [architecture.md](architecture.md).
 
-**1070 elements** — 742 tokens, 328 classes.
+**1071 elements** — 743 tokens, 328 classes.
 
 | Tier | Count | Meaning |
 |---|---|---|
-| PUBLIC | 1020 | Everyday surface. SemVer-stable. |
+| PUBLIC | 1021 | Everyday surface. SemVer-stable. |
 | PUBLIC-ADVANCED | 49 | Same SemVer guarantee; niche/powerful. |
 | INTERNAL | 1 | Implementation detail; may change without a major bump. |
 
-## Tokens (742)
+## Tokens (743)
 
 ### Component tokens (46)
 
@@ -745,7 +745,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-switcher-gap` | PUBLIC | consumption | switcher | `var(--sf-gap)` | Gap between switcher columns / rows. |
 | `--sf-switcher-threshold` | PUBLIC | knob | switcher | `30rem` | Inline-size threshold below which the switcher flips from horizontal to vertical. |
 
-### Macro tokens (32)
+### Macro tokens (33)
 
 | Token | Tier | Role | Namespace | Default | Description |
 |---|---|---|---|---|---|
@@ -753,6 +753,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-content-intrinsic-size` | PUBLIC | knob | content | `500px` | Intrinsic-size hint for content-visibility: auto (prevents layout shift on first reveal). |
 | `--sf-flow-space` | PUBLIC | consumption | flow | `var(--sf-content-gap)` | Margin-block-start applied to all flow children except the first. |
 | `--sf-line-clamp` | PUBLIC | knob | line | `3` | Number of visible lines before text is clipped with an ellipsis. |
+| `--sf-marker-color` | PUBLIC | consumption | marker | `var(--sf-color-primary)` | Shared list-marker (::marker) colour — single source of truth for the .sf-marker--* utilities and .sf-prose markers alike. Defaults to the primary brand colour; set it on any list (or globally) to retune every marker at once. |
 | `--sf-overlap-pull` | PUBLIC | consumption | overlap | `var(--sf-space-xl)` | how far .sf-overlap pulls into the adjacent element. .sf-overlap-host's padding compensation defaults to this same value via a var() fallback in the rule itself (not aliased here — see core/macros.css), so one override on the host tunes both unless --sf-overlap-host-pad is set… |
 | `--sf-prose-block-margin` | PUBLIC | consumption | prose | `var(--sf-space-m)` | Block margin between prose elements (h2, p, ul, etc.). |
 | `--sf-prose-blockquote-border` | PUBLIC | consumption | prose | `var(--sf-border-width-2) solid var(--sf-color-border--subtle)` | Left border style for blockquotes inside prose. |
@@ -762,7 +763,7 @@ and a short description. The machine-readable companion (with all columns) is
 | `--sf-prose-heading-gap` | PUBLIC | consumption | prose | `var(--sf-space-s)` | Space between a heading and the content that follows it inside .prose. |
 | `--sf-prose-hr-margin` | PUBLIC | consumption | prose | `var(--sf-space-l)` | Block margin around <hr> rules inside .prose. |
 | `--sf-prose-list-gap` | PUBLIC | consumption | prose | `var(--sf-space-xs)` | Gap between list items inside .prose. |
-| `--sf-prose-marker-color` | PUBLIC | consumption | prose | `var(--sf-color-primary)` | Color of list bullets and ordered-list numbers inside .prose. |
+| `--sf-prose-marker-color` | PUBLIC | consumption | prose | `var(--sf-marker-color)` | Color of list bullets and ordered-list numbers inside .sf-prose. Defaults to the shared --sf-marker-color; override per-instance for prose-scoped marker colour. |
 | `--sf-prose-media-margin` | PUBLIC | consumption | prose | `var(--sf-space-m)` | Block margin around images, video, and figures inside .prose. |
 | `--sf-prose-media-radius` | PUBLIC | consumption | prose | `var(--sf-radius-m)` | Border radius applied to images and media inside .prose. |
 | `--sf-prose-nested-list-gap` | PUBLIC | consumption | prose | `var(--sf-space-2xs)` | Gap between items in nested lists inside .prose. |

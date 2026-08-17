@@ -14,7 +14,7 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 
 ## Tokens
 
-741 tokens (PUBLIC + PUBLIC-ADVANCED), grouped by area. Names are self-descriptive; defaults, derivations and per-token notes live in the full guide and api-index.json.
+742 tokens (PUBLIC + PUBLIC-ADVANCED), grouped by area. Names are self-descriptive; defaults, derivations and per-token notes live in the full guide and api-index.json.
 
 ### Layout tokens (53)
 
@@ -193,17 +193,18 @@ Generated from source by `npm run docs` — do not edit by hand. Full prose guid
 --sf-z-toast --sf-z-tooltip
 ```
 
-### Macro tokens (32)
+### Macro tokens (33)
 
 ```
---sf-aspect --sf-content-intrinsic-size --sf-flow-space --sf-line-clamp --sf-overlap-pull
---sf-prose-block-margin --sf-prose-blockquote-border --sf-prose-blockquote-padding
---sf-prose-figcaption-size --sf-prose-figure-margin --sf-prose-heading-gap --sf-prose-hr-margin
---sf-prose-list-gap --sf-prose-marker-color --sf-prose-media-margin --sf-prose-media-radius
---sf-prose-nested-list-gap --sf-prose-table-pad --sf-scrim-color --sf-scrim-direction
---sf-scrim-gradient --sf-scrim-text-shadow --sf-scroll-shadow-size --sf-surface-bg-animation
---sf-surface-bg-attachment --sf-surface-bg-color --sf-surface-bg-image --sf-surface-bg-overlay
---sf-surface-bg-position --sf-surface-bg-repeat --sf-surface-bg-size --sf-surface-color
+--sf-aspect --sf-content-intrinsic-size --sf-flow-space --sf-line-clamp --sf-marker-color
+--sf-overlap-pull --sf-prose-block-margin --sf-prose-blockquote-border
+--sf-prose-blockquote-padding --sf-prose-figcaption-size --sf-prose-figure-margin
+--sf-prose-heading-gap --sf-prose-hr-margin --sf-prose-list-gap --sf-prose-marker-color
+--sf-prose-media-margin --sf-prose-media-radius --sf-prose-nested-list-gap --sf-prose-table-pad
+--sf-scrim-color --sf-scrim-direction --sf-scrim-gradient --sf-scrim-text-shadow
+--sf-scroll-shadow-size --sf-surface-bg-animation --sf-surface-bg-attachment
+--sf-surface-bg-color --sf-surface-bg-image --sf-surface-bg-overlay --sf-surface-bg-position
+--sf-surface-bg-repeat --sf-surface-bg-size --sf-surface-color
 ```
 
 ### Component tokens (46)

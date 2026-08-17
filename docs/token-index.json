@@ -8,15 +8,15 @@
       "optional/tokens.components.css"
     ],
     "counts": {
-      "tokens": 742,
+      "tokens": 743,
       "by_tier": {
-        "PUBLIC": 692,
+        "PUBLIC": 693,
         "PUBLIC-ADVANCED": 49,
         "INTERNAL": 1
       },
       "by_role": {
         "knob": 253,
-        "consumption": 489
+        "consumption": 490
       }
     }
   },
@@ -4205,6 +4205,14 @@
       ],
       "value": "clamp(0.5, calc(1.18 - var(--sf-lumlocker)), 0.92)"
     },
+    "--sf-marker-color": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.macros.css"
+      ],
+      "value": "var(--sf-color-primary)"
+    },
     "--sf-mask-scrim-end": {
       "tier": "PUBLIC-ADVANCED",
       "role": "consumption",
@@ -4395,7 +4403,7 @@
       "files": [
         "core/tokens.macros.css"
       ],
-      "value": "var(--sf-color-primary)"
+      "value": "var(--sf-marker-color)"
     },
     "--sf-prose-media-margin": {
       "tier": "PUBLIC",

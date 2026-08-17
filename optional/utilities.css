@@ -175,17 +175,25 @@
   /* ============================================================
    * LIST MARKER COLOUR (.sf-marker--*)
    * Colour the ::marker of an arbitrary list. Brand/action families
-   * only — for any other colour set `::marker { color }` yourself.
-   * The :not(.sf-prose *) guard keeps this utility from reaching into
-   * a .sf-prose subtree, which owns its markers via
+   * only — for any other colour set `--sf-marker-color` (or
+   * `::marker { color }`) yourself. Each modifier points the shared
+   * --sf-marker-color knob at a brand family; the ::marker then reads
+   * that single token, so marker colour has one source of truth across
+   * the utilities and .sf-prose (which reads it via --sf-prose-marker-color).
+   * The :not(.sf-prose *) guard keeps this utility's own ::marker rule
+   * from reaching into a .sf-prose subtree, which owns its markers via
    * --sf-prose-marker-color (utilities are layered after macros, so
    * without the guard this would win). Covers the element's own marker
    * and descendant list-item markers.
    * ============================================================ */
-  .sf-marker--primary :not(.sf-prose *)::marker, .sf-marker--primary:not(.sf-prose *)::marker { color: var(--sf-color-primary); }
-  .sf-marker--secondary :not(.sf-prose *)::marker, .sf-marker--secondary:not(.sf-prose *)::marker { color: var(--sf-color-secondary); }
-  .sf-marker--tertiary :not(.sf-prose *)::marker, .sf-marker--tertiary:not(.sf-prose *)::marker { color: var(--sf-color-tertiary); }
-  .sf-marker--action :not(.sf-prose *)::marker, .sf-marker--action:not(.sf-prose *)::marker { color: var(--sf-color-action); }
+  .sf-marker--primary   { --sf-marker-color: var(--sf-color-primary); }
+  .sf-marker--secondary { --sf-marker-color: var(--sf-color-secondary); }
+  .sf-marker--tertiary  { --sf-marker-color: var(--sf-color-tertiary); }
+  .sf-marker--action    { --sf-marker-color: var(--sf-color-action); }
+  .sf-marker--primary :not(.sf-prose *)::marker,   .sf-marker--primary:not(.sf-prose *)::marker,
+  .sf-marker--secondary :not(.sf-prose *)::marker, .sf-marker--secondary:not(.sf-prose *)::marker,
+  .sf-marker--tertiary :not(.sf-prose *)::marker,  .sf-marker--tertiary:not(.sf-prose *)::marker,
+  .sf-marker--action :not(.sf-prose *)::marker,    .sf-marker--action:not(.sf-prose *)::marker { color: var(--sf-marker-color); }
 
   /* ============================================================
    * ALTERNATE SELECTION COLOUR (.sf-selection--alt)

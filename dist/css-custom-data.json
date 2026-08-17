@@ -2612,6 +2612,11 @@
       "syntax": "*"
     },
     {
+      "name": "--sf-marker-color",
+      "description": "Shared list-marker (::marker) colour — single source of truth for the .sf-marker--* utilities and .sf-prose markers alike. Defaults to the primary brand colour; set it on any list (or globally) to retune every marker at once.\n\nDefault: `var(--sf-color-primary)`",
+      "syntax": "*"
+    },
+    {
       "name": "--sf-mask-scrim-end",
       "description": "End stop for edge-fade mask gradients. Mirrors --sf-mask-scrim-start for the trailing edge of a scroll container.\n\nDefault: `var(--sf-space-l)`\n\n(advanced token)",
       "syntax": "*"
@@ -2728,7 +2733,7 @@
     },
     {
       "name": "--sf-prose-marker-color",
-      "description": "Color of list bullets and ordered-list numbers inside .prose.\n\nDefault: `var(--sf-color-primary)`",
+      "description": "Color of list bullets and ordered-list numbers inside .sf-prose. Defaults to the shared --sf-marker-color; override per-instance for prose-scoped marker colour.\n\nDefault: `var(--sf-marker-color)`",
       "syntax": "*"
     },
     {

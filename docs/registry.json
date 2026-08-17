@@ -19,7 +19,7 @@
       "optional/utilities.css"
     ],
     "counts": {
-      "tokens": 742,
+      "tokens": 743,
       "sf_classes": 305,
       "is_classes": 15
     }
@@ -548,6 +548,7 @@
     "--sf-link-underline-thickness",
     "--sf-lumlocker",
     "--sf-lumlocker-dark",
+    "--sf-marker-color",
     "--sf-mask-scrim-end",
     "--sf-mask-scrim-start",
     "--sf-media-radius",
