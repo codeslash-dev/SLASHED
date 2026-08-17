@@ -797,14 +797,6 @@
       ],
       "value": "var(--sf-shadow-l)"
     },
-    "--sf-caret-color": {
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "files": [
-        "core/tokens.css"
-      ],
-      "value": "var(--sf-color-action)"
-    },
     "--sf-center-gutter": {
       "tier": "PUBLIC",
       "role": "consumption",
@@ -1388,6 +1380,14 @@
         "core/tokens.css"
       ],
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.15)"
+    },
+    "--sf-color-caret": {
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "files": [
+        "core/tokens.css"
+      ],
+      "value": "var(--sf-color-action)"
     },
     "--sf-color-code-bg": {
       "tier": "PUBLIC",

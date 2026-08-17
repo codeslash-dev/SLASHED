@@ -206,7 +206,7 @@
     "--sf-color-mark-bg": "Background color for highlighted <mark> elements.",
     "--sf-color-code-text": "Text color for inline code and monospace preformatted text.",
     "--sf-color-scheme": "Preferred color scheme hint (light / dark / normal). Sent to the browser to influence UA chrome styling.",
-    "--sf-caret-color": "Cursor caret color inside text inputs and contenteditable elements.",
+    "--sf-color-caret": "Cursor caret color inside text inputs and contenteditable elements.",
     "--sf-focus-ring-color": "Color of the keyboard focus ring. Ensure sufficient contrast against all background surfaces.",
     "--sf-focus-ring-width": "Stroke width of the focus ring outline.",
     "--sf-focus-ring-offset": "Gap between the element edge and the focus ring.",

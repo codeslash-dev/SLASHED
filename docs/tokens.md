@@ -54,7 +54,6 @@ rebrand workflow.
 | `--sf-border-width-3` | `calc(3px * var(--sf-border-scale, 1))` |
 | `--sf-border-width-4` | `calc(4px * var(--sf-border-scale, 1))` |
 | `--sf-border-width-hairline` | `0.5px` |
-| `--sf-caret-color` | `var(--sf-color-action)` |
 | `--sf-code-font-size` | `0.875em` |
 | `--sf-color-action` | `light-dark(var(--sf-color-action-source-light), var(--sf-color-action-source-dark, oklch(from var(--sf-color-action-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |
 | `--sf-color-action--active` | `var(--sf-color-action-xdark)` |
@@ -123,6 +122,7 @@ rebrand workflow.
 | `--sf-color-border--strong` | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )` |
 | `--sf-color-border--subtle` | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )` |
 | `--sf-color-border--translucent` | `oklch(from var(--sf-color-neutral) l c h / 0.15)` |
+| `--sf-color-caret` | `var(--sf-color-action)` |
 | `--sf-color-code-bg` | `var(--sf-color-inset)` |
 | `--sf-color-code-text` | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-danger` | `light-dark(var(--sf-color-danger-source-light), var(--sf-color-danger-source-dark, oklch(from var(--sf-color-danger-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |

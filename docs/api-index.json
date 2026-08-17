@@ -2569,32 +2569,6 @@
       ]
     },
     {
-      "name": "--sf-caret-color",
-      "type": "token",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "caret",
-      "category": "Core tokens",
-      "area": "core",
-      "group": "Focus / form colors",
-      "description": "Cursor caret color inside text inputs and contenteditable elements.",
-      "value": "var(--sf-color-action)",
-      "aliasOf": "--sf-color-action",
-      "registered": false,
-      "animatable": false,
-      "syntax": null,
-      "inherits": null,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "sourceFiles": [
-        "core/tokens.css"
-      ],
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
       "name": "--sf-center-gutter",
       "type": "token",
       "tier": "PUBLIC",
@@ -4478,6 +4452,32 @@
       "description": "Translucent border for glass-morphism and frosted surfaces.",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.15)",
       "aliasOf": null,
+      "registered": false,
+      "animatable": false,
+      "syntax": null,
+      "inherits": null,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "sourceFiles": [
+        "core/tokens.css"
+      ],
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-color-caret",
+      "type": "token",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "area": "core",
+      "group": "Focus / form colors",
+      "description": "Cursor caret color inside text inputs and contenteditable elements.",
+      "value": "var(--sf-color-action)",
+      "aliasOf": "--sf-color-action",
       "registered": false,
       "animatable": false,
       "syntax": null,

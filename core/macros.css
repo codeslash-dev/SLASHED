@@ -283,7 +283,7 @@
       --sf-color-border--subtle:    oklch(from var(--sf-surface-contrast) l c h / 0.12);
       --sf-color-border--strong:    oklch(from var(--sf-surface-contrast) l c h / 0.35);
       --sf-focus-ring-color:        var(--sf-surface-contrast);
-      --sf-caret-color:             var(--sf-surface-contrast);
+      --sf-color-caret:             var(--sf-surface-contrast);
 
       --sf-shadow-color:            oklch(from var(--sf-surface-color) var(--sf-shadow-lightness) c h);
 

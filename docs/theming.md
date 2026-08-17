@@ -274,14 +274,14 @@ you can override any surface token in `slashed.overrides`:
     --sf-color-text:       oklch(0.10 0 0);
     --sf-color-heading:    var(--sf-color-text);
     --sf-focus-ring-color: var(--sf-color-text);
-    --sf-caret-color:      var(--sf-color-text);
+    --sf-color-caret:      var(--sf-color-text);
   }
 }
 ```
 
 On named variants (`.sf-surface--*`), every surface-derived token
 (`--sf-color-text`, `--sf-color-heading`, `--sf-color-link`,
-`--sf-color-border`, `--sf-focus-ring-color`, `--sf-caret-color`, …) follows
+`--sf-color-border`, `--sf-focus-ring-color`, `--sf-color-caret`, …) follows
 the variant's `--sf-color-text--on-*` token, so that single override fixes
 every descendant. On the generic `.sf-surface` the foreground is derived
 internally from `--sf-surface-color`; pin the public tokens shown above

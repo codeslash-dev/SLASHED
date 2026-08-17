@@ -5,6 +5,24 @@ upgrade notes.
 
 ## SLASHED 0.7.25 → Unreleased
 
+### `--sf-caret-color` renamed to `--sf-color-caret` (breaking)
+
+Every colour token in the framework is type-first under the `--sf-color-*`
+namespace (`--sf-color-text`, `--sf-color-bg`, `--sf-color-heading`,
+`--sf-color-link`, `--sf-color-border`, `--sf-color-selection-bg`, …).
+`--sf-caret-color` was the lone property-first exception, sitting outside that
+namespace. Renaming it to `--sf-color-caret` puts every colour under one prefix,
+so theming can iterate `--sf-color-*` uniformly and the caret token is
+discoverable alongside its siblings. Value (`var(--sf-color-action)`),
+derivation, and the `caret-color` consumer on inputs/contenteditable are
+unchanged — only the name moved.
+
+**What changed for you:** replace `var(--sf-caret-color)` with
+`var(--sf-color-caret)` anywhere you reference or override it. A theme file
+authored against the old name migrates automatically
+(`npm run migrate:theme -- <file> --write`). No compatibility alias is provided,
+consistent with the pre-1.0 no-alias stance in the notes below.
+
 ### `--sf-color-text--secondary` renamed to `--sf-color-text--subtle` (breaking)
 
 The name collided conceptually with the brand-palette `secondary` role

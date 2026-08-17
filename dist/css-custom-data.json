@@ -487,11 +487,6 @@
       "syntax": "*"
     },
     {
-      "name": "--sf-caret-color",
-      "description": "Cursor caret color inside text inputs and contenteditable elements.\n\nDefault: `var(--sf-color-action)`",
-      "syntax": "*"
-    },
-    {
       "name": "--sf-center-gutter",
       "description": "Minimum side gutter for the center layout.\n\nDefault: `var(--sf-gutter)`",
       "syntax": "*"
@@ -854,6 +849,11 @@
     {
       "name": "--sf-color-border--translucent",
       "description": "Translucent border for glass-morphism and frosted surfaces.\n\nDefault: `oklch(from var(--sf-color-neutral) l c h / 0.15)`",
+      "syntax": "*"
+    },
+    {
+      "name": "--sf-color-caret",
+      "description": "Cursor caret color inside text inputs and contenteditable elements.\n\nDefault: `var(--sf-color-action)`",
       "syntax": "*"
     },
     {

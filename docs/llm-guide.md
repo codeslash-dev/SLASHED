@@ -1090,7 +1090,7 @@ Ready-made `animation` values — keyframe + duration + easing + fill-mode.
 ### 9.8 Remaining interaction states
 
 ```css
---sf-caret-color:           var(--sf-color-action)
+--sf-color-caret:           var(--sf-color-action)
 --sf-touch-target:          2.75rem            /* 44px — WCAG 2.5.5, fixed independent of --sf-size-* */
 --sf-opacity-disabled:      0.45
 --sf-opacity-muted:         0.5

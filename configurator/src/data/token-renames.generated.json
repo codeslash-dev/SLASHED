@@ -48,7 +48,8 @@
     "--sf-z-mid": "--sf-z-fixed",
     "--sf-z-high": "--sf-z-dropdown",
     "--sf-z-top": "--sf-z-toast",
-    "--sf-avatar-size": "--sf-card-avatar-size"
+    "--sf-avatar-size": "--sf-card-avatar-size",
+    "--sf-caret-color": "--sf-color-caret"
   },
   "removals": {
     "--sf-z-max": "Ambiguous by design: 0.6.0 split the old top rung into --sf-z-overlay (1030) and --sf-z-modal (1040). Pick the one matching your element's role — this is not auto-migrated because the wrong choice silently reorders your stacking context.",

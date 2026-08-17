@@ -62,7 +62,9 @@
     "--sf-z-high": "--sf-z-dropdown",
     "--sf-z-top": "--sf-z-toast",
 
-    "--sf-avatar-size": "--sf-card-avatar-size"
+    "--sf-avatar-size": "--sf-card-avatar-size",
+
+    "--sf-caret-color": "--sf-color-caret"
   },
 
   "removals": {

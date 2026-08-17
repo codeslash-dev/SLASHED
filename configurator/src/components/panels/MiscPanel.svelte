@@ -39,7 +39,7 @@
 
   let touchTarget = $derived(parseNum(overrides["--sf-touch-target"], 44, "px"));
   let zBaseOffset = $derived(parseNum(overrides["--sf-z-base"], 0));
-  let caretColor = $derived(overrides["--sf-caret-color"] ?? "");
+  let caretColor = $derived(overrides["--sf-color-caret"] ?? "");
   let underlineOffset = $derived(parseNum(overrides["--sf-link-underline-offset"]?.replace("em",""), 0.15));
   let underlineThickness = $derived(overrides["--sf-link-underline-thickness"] ?? "auto");
 
@@ -227,12 +227,12 @@
       <div>
         <div class="text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Caret color</div>
         <ColorInput
-          token="--sf-caret-color"
+          token="--sf-color-caret"
           value={caretColor}
           placeholder="default (action color)"
-          isOverridden={"--sf-caret-color" in overrides}
-          onSet={(v) => onSet("--sf-caret-color", v)}
-          onReset={() => onReset("--sf-caret-color")}
+          isOverridden={"--sf-color-caret" in overrides}
+          onSet={(v) => onSet("--sf-color-caret", v)}
+          onReset={() => onReset("--sf-color-caret")}
         />
       </div>
       <SliderRow

@@ -2,7 +2,7 @@
   "_sync": {
     "generatedBy": "configurator/scripts/sync-api.mjs",
     "source": "docs/api-index.json",
-    "tokensHash": "6eba98c56d40",
+    "tokensHash": "73e2e93c8446",
     "bundles": [
       "full",
       "optimal"
@@ -2018,27 +2018,6 @@
       ]
     },
     {
-      "name": "--sf-caret-color",
-      "tier": "PUBLIC",
-      "role": "consumption",
-      "namespace": "caret",
-      "category": "Core tokens",
-      "group": "Focus / form colors",
-      "description": "Focus ring and form caret colors. Centralised here so keyboard navigation is consistently styled.",
-      "note": "Cursor caret color inside text inputs and contenteditable elements.",
-      "value": "var(--sf-color-action)",
-      "aliasOf": "--sf-color-action",
-      "registered": false,
-      "syntax": null,
-      "fallbackOnly": false,
-      "optional": false,
-      "layer": "slashed.tokens",
-      "bundles": [
-        "full",
-        "optimal"
-      ]
-    },
-    {
       "name": "--sf-center-gutter",
       "tier": "PUBLIC",
       "role": "consumption",
@@ -3561,6 +3540,27 @@
       "note": "Translucent border for glass-morphism and frosted surfaces.",
       "value": "oklch(from var(--sf-color-neutral) l c h / 0.15)",
       "aliasOf": null,
+      "registered": false,
+      "syntax": null,
+      "fallbackOnly": false,
+      "optional": false,
+      "layer": "slashed.tokens",
+      "bundles": [
+        "full",
+        "optimal"
+      ]
+    },
+    {
+      "name": "--sf-color-caret",
+      "tier": "PUBLIC",
+      "role": "consumption",
+      "namespace": "color",
+      "category": "Core tokens",
+      "group": "Focus / form colors",
+      "description": "Focus ring and form caret colors. Centralised here so keyboard navigation is consistently styled.",
+      "note": "Cursor caret color inside text inputs and contenteditable elements.",
+      "value": "var(--sf-color-action)",
+      "aliasOf": "--sf-color-action",
       "registered": false,
       "syntax": null,
       "fallbackOnly": false,

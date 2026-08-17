@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Breaking Changes
+- **tokens:** rename `--sf-caret-color` to `--sf-color-caret` for type-first `--sf-color-*` namespace consistency (#677)
+
 ### Features
 - **tokens:** add `--sf-scroll-offset-gap` — tunable breathing room below the header when scrolling to an in-page anchor (default `var(--sf-space-m)`; set to `0` for a heading flush under the header) (#678)
 

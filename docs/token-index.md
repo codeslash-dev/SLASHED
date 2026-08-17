@@ -182,7 +182,6 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-card-shadow` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-shadow-s)` |
 | `--sf-card-shadow--elevated` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-shadow-l)` |
 | `--sf-card-shadow--hover` | PUBLIC | consumption | Components (optional, incomplete) | `var(--sf-shadow-l)` |
-| `--sf-caret-color` | PUBLIC | consumption | Core | `var(--sf-color-action)` |
 | `--sf-center-gutter` | PUBLIC | consumption | Layout | `var(--sf-gutter)` |
 | `--sf-center-max` | PUBLIC | consumption | Layout | `var(--sf-container-default)` |
 | `--sf-cluster-align` | PUBLIC | knob | Layout | `center` |
@@ -256,6 +255,7 @@ declared value (a value that references `var(--sf-…)` is a derived output):
 | `--sf-color-border--strong` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.55, calc(l + 0.1), 0.85) 0.02 h), oklch(from var(--sf-color-neutral) clamp(0.38, calc(l - 0.1), 0.65) 0.02 h) )` |
 | `--sf-color-border--subtle` | PUBLIC | consumption | Core | `light-dark( oklch(from var(--sf-color-neutral-source-light) clamp(0.75, calc(l + 0.4), 0.97) 0.005 h), oklch(from var(--sf-color-neutral) clamp(0.20, calc(l - 0.38), 0.45) 0.005 h) )` |
 | `--sf-color-border--translucent` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-neutral) l c h / 0.15)` |
+| `--sf-color-caret` | PUBLIC | consumption | Core | `var(--sf-color-action)` |
 | `--sf-color-code-bg` | PUBLIC | consumption | Core | `var(--sf-color-inset)` |
 | `--sf-color-code-text` | PUBLIC | consumption | Core | `oklch(from var(--sf-color-code-bg) clamp(0.1, sign(var(--sf-contrast-threshold) - l) * 999, 0.95) 0 0)` |
 | `--sf-color-danger` | PUBLIC | consumption | Core | `light-dark(var(--sf-color-danger-source-light), var(--sf-color-danger-source-dark, oklch(from var(--sf-color-danger-source-light) clamp(0.65, calc(0.95 - l * 0.5), 0.88) calc(c * 0.9) h)))` |

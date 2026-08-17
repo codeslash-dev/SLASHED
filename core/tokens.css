@@ -396,7 +396,7 @@
     --sf-focus-ring-color:  var(--sf-color-action);
     --sf-focus-ring-shadow: 0 0 0 var(--sf-focus-ring-offset) var(--sf-color-bg, var(--sf-color-base-source-light, #fff)),
                             0 0 0 calc(var(--sf-focus-ring-offset) + var(--sf-focus-ring-width)) var(--sf-focus-ring-color);
-    --sf-caret-color:       var(--sf-color-action);
+    --sf-color-caret:       var(--sf-color-action);
 
   }
   /* ── @supports gate: light-dark() + oklch(from …) ──
