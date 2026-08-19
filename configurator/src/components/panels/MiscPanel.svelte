@@ -67,6 +67,9 @@
         overridden={"--sf-touch-target" in overrides}
         onChange={(v) => onSet("--sf-touch-target", `${v}px`)}
         onReset={() => onReset("--sf-touch-target")}
+        rawDefault="2.75rem"
+        currentRaw={overrides["--sf-touch-target"]}
+        onRawSet={(v) => onSet("--sf-touch-target", v)}
       />
       <!-- Preview -->
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 flex items-center gap-3">
@@ -83,7 +86,7 @@
   <!-- Z-INDEX -->
   <Section title="Z-index layers" bind:open={showZIndex}>
       <SliderRow
-        label="Base" value={zBaseOffset} min={-1} max={10} step={1}
+        label="Base" value={zBaseOffset} min={0} max={1000} step={10}
         help="--sf-z-base — base local-stacking rung (default 0), consumed by the .sf-z-base utility. It is NOT added to the other rungs: every ladder step below is an independent literal."
         overridden={"--sf-z-base" in overrides}
         onChange={(v) => onSet("--sf-z-base", String(v))}
