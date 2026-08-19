@@ -11,6 +11,7 @@
   import { generateCSS } from './lib/codec';
   import { loadInitialOverrides, injectLivePreview, saveOverrides, hasWpBoot } from './lib/persistence';
   import { domainOf } from './lib/domains';
+  import { changedKeys, shouldCoalesce, NO_COALESCE, type CoalesceState } from './lib/history';
   import tokensRaw from './data/api-index.generated.json';
   import CommandPalette from './components/CommandPalette.svelte';
 
@@ -97,11 +98,23 @@
     if (tab) untrack(() => { previewTemplate = tab; });
   });
 
+  // Undo coalescing: a continuous gesture on one token (a slider drag fires on
+  // every tick) merges into a single history entry instead of flooding the undo
+  // stack. Plain (non-reactive) instance state — it only gates history pushes.
+  let coalesce: CoalesceState = NO_COALESCE;
+
   function setOverrides(updater: ((prev: Record<string, string>) => Record<string, string>) | Record<string, string>) {
     const prev = overrides;
     const next = typeof updater === "function" ? updater(prev) : updater;
     if (!shallowEq(prev, next)) {
-      past = [...past.slice(-49), prev];
+      const keys = changedKeys(prev, next);
+      const now = Date.now();
+      // Only push a new undo snapshot when this isn't a continuation of the
+      // current single-token gesture.
+      if (!shouldCoalesce(coalesce, keys, now)) {
+        past = [...past.slice(-49), prev];
+      }
+      coalesce = { key: keys.length === 1 ? keys[0] : null, time: now };
       future = [];
       if (saveState === 'saved' || saveState === 'error') saveState = 'idle';
     }
@@ -177,6 +190,7 @@
     past = past.slice(0, -1);
     future = [curr, ...future];
     overrides = previous;
+    coalesce = NO_COALESCE; // end any open gesture so the next edit is its own step
   }
 
   function handleRedo() {
@@ -186,6 +200,7 @@
     future = future.slice(1);
     past = [...past, curr];
     overrides = next;
+    coalesce = NO_COALESCE;
   }
 
   function handleImport() {
