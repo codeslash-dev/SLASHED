@@ -5,9 +5,9 @@ import { test, expect } from '@playwright/test';
 import { watchErrors, gotoClean, navButton } from './helpers.js';
 
 const NAV_LABELS = [
-  'Home', 'Colors', 'Typography', 'Spacing', 'Layout',
-  'Borders', 'Shadows', 'Motion', 'Effects', 'Misc', 'Components',
-  'Themes', 'WCAG', 'Install', 'Classes',
+  'Home', 'Colors', 'Typography', 'Spacing', 'Shape',
+  'Layout', 'Shadows', 'Motion', 'Effects', 'Misc', 'Components',
+  'Changes', 'Accessibility', 'Presets', 'Install & export', 'Reference',
 ];
 
 test('loads with the SLASHED Studio branding', async ({ page }) => {
