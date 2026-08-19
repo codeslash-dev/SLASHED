@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.33] - 2026-08-19
+
+### Bug Fixes
+- **configurator:** preserve existing touch-target & z-base overrides (review)
+- **configurator:** correct token metadata drift & misleading help (#684-689)
+
 ## [0.7.32] - 2026-08-17
 
 ### Configurator
