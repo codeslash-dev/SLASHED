@@ -1,7 +1,7 @@
 <script lang="ts">
   import {
     Home, Palette, Type, Ruler, Layout, Square, Layers, Zap, Sparkles, Puzzle,
-    Blocks, Component, SwatchBook, ShieldCheck, Package, BookOpen,
+    Blocks, Component, SwatchBook, ShieldCheck, Package, BookOpen, ListChecks,
   } from '@lucide/svelte';
 
   let { activeId, onSelect, overridesByDomain = {} }: {
@@ -23,6 +23,7 @@
     { id: "macros",     icon: Blocks,      label: "Macros",     group: "tokens" },
     { id: "misc",       icon: Puzzle,      label: "Misc",       group: "tokens" },
     { id: "components", icon: Component,   label: "Components", group: "tokens" },
+    { id: "changes",    icon: ListChecks,  label: "Changes",    group: "tools" },
     { id: "themes",     icon: SwatchBook,  label: "Themes",     group: "tools" },
     { id: "wcag",       icon: ShieldCheck, label: "WCAG",       group: "tools" },
     { id: "setup",      icon: Package,     label: "Install",    group: "tools" },
@@ -31,6 +32,12 @@
 
   let tokens = $derived(NAV_ITEMS.filter((i) => i.group === "tokens"));
   let tools = $derived(NAV_ITEMS.filter((i) => i.group === "tools"));
+
+  // Every override maps to exactly one token domain, so their sum is the total
+  // override count — which is what the Changes overview badge should show.
+  let totalOverrides = $derived(Object.values(overridesByDomain).reduce((a, b) => a + b, 0));
+  const countFor = (id: string): number =>
+    id === "changes" ? totalOverrides : (overridesByDomain[id] || 0);
 </script>
 
 <nav class="w-14 bg-slate-50 dark:bg-[#0a0a0f] border-r border-black/8 dark:border-white/8 flex flex-col items-center py-3 gap-1 shrink-0 overflow-y-auto overflow-x-hidden">
@@ -64,7 +71,7 @@
   <div class="flex flex-col items-center gap-1 w-full px-2">
     {#each tools as item (item.id)}
       {@const isActive = activeId === item.id}
-      {@const count = overridesByDomain[item.id] || 0}
+      {@const count = countFor(item.id)}
       {@const Icon = item.icon}
       <button
         onclick={() => onSelect(item.id)}
