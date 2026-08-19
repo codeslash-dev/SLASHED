@@ -36,13 +36,11 @@
     return isNaN(v) ? fallback : v;
   }
 
-  let touchTarget = $derived(parseNum(overrides["--sf-touch-target"], 44, "px"));
   let zBaseOffset = $derived(parseNum(overrides["--sf-z-base"], 0));
   let caretColor = $derived(overrides["--sf-color-caret"] ?? "");
   let underlineOffset = $derived(parseNum(overrides["--sf-link-underline-offset"]?.replace("em",""), 0.15));
   let underlineThickness = $derived(overrides["--sf-link-underline-thickness"] ?? "auto");
 
-  let showTouchTarget = $state(false);
   let showZIndex = $state(false);
   let showTextSelection = $state(false);
   let showComponentSizes = $state(false);
@@ -59,29 +57,8 @@
 
 <div class="p-4 space-y-6">
 
-  <!-- TOUCH TARGET -->
-  <Section title="Touch target" bind:open={showTouchTarget}>
-      <SliderRow
-        label="Min touch size" value={touchTarget} min={32} max={64} step={1} unit="px"
-        help="--sf-touch-target — minimum tappable area for interactive elements (WCAG 2.5.5). Independent literal (2.75rem / 44px) — deliberately NOT an alias of the --sf-size-* scale, so retuning sizes never drops below the accessibility floor."
-        overridden={"--sf-touch-target" in overrides}
-        onChange={(v) => onSet("--sf-touch-target", `${v}px`)}
-        onReset={() => onReset("--sf-touch-target")}
-        rawDefault="2.75rem"
-        currentRaw={overrides["--sf-touch-target"]}
-        onRawSet={(v) => onSet("--sf-touch-target", v)}
-      />
-      <!-- Preview -->
-      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 flex items-center gap-3">
-        <div
-          class="bg-indigo-500/30 border border-indigo-500/30 rounded flex items-center justify-center text-[9px] font-mono text-indigo-600/70 dark:text-indigo-400/70 shrink-0"
-          style={`width: var(--sf-touch-target, 2.75rem); height: var(--sf-touch-target, 2.75rem)`}
-        ></div>
-        <p class="text-[9px] text-slate-400 dark:text-slate-600">Minimum interactive area — ensures accessibility on touch devices.</p>
-      </div>
-  </Section>
-
-  <div class="h-px bg-black/6 dark:bg-white/6"></div>
+  <!-- Touch target moved to the Accessibility panel (WCAG 2.5.5 control; now
+       classifies there so badge/Reset match where it's edited). -->
 
   <!-- Z-INDEX -->
   <Section title="Z-index layers" bind:open={showZIndex}>

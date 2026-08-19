@@ -50,7 +50,6 @@
     "header": "layout",
     "sticky": "layout",
     "safe": "layout",
-    "touch": "layout",
     "breakout": "layout",
     "box": "layout",
     "bg": "layout",
@@ -93,8 +92,10 @@
     "size": "misc",
     "object": "misc",
     "scrollbar": "misc",
-    "focus": "misc",
-    "is": "misc"
+    "is": "misc",
+
+    "focus": "wcag",
+    "touch": "wcag"
   },
   "exceptions": {
     "--sf-content-width": "layout",

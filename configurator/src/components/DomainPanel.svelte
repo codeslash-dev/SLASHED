@@ -19,7 +19,7 @@
   import ChangesPanel from './panels/ChangesPanel.svelte';
   import GenericTokenPanel from './panels/GenericTokenPanel.svelte';
   import AllTokensTab from './panels/AllTokensTab.svelte';
-  import WcagPanel from './panels/WcagPanel.svelte';
+  import AccessibilityPanel from './panels/AccessibilityPanel.svelte';
 
   let { domain, tokens, overrides, focusToken = null, focusNonce = 0, onSet, onReset, onBulkChange, onApplyTheme, onSelectDomain, onResetAll }: {
     domain: string;
@@ -38,7 +38,7 @@
 
 
   // Domains that skip the two-tab treatment
-  const NO_CONTROLS_TAB = new Set(["home", "changes", "themes", "wcag", "setup", "cheatsheet"]);
+  const NO_CONTROLS_TAB = new Set(["home", "changes", "themes", "setup", "cheatsheet"]);
 
   let view = $state<"controls" | "tokens">("controls");
 
@@ -71,8 +71,6 @@
     <ChangesPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} {onResetAll} {onSelectDomain} />
   {:else if domain === "themes"}
     <ThemesPanel {overrides} {onApplyTheme} {onResetAll} />
-  {:else if domain === "wcag"}
-    <WcagPanel {tokens} {overrides} {onSet} {onBulkChange} />
   {:else if domain === "setup"}
     <ExportPanel {overrides} {tokens} {onApplyTheme} />
   {:else if domain === "cheatsheet"}
@@ -104,6 +102,8 @@
             <MiscPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "components"}
             <ComponentsPanel {overrides} {onSet} {onReset} />
+          {:else if domain === "wcag"}
+            <AccessibilityPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} />
           {:else}
             <GenericTokenPanel {domain} {tokens} {overrides} {onSet} {onReset} />
           {/if}
