@@ -1,7 +1,7 @@
 <script lang="ts">
   import { SlidersHorizontal, List } from '@lucide/svelte';
   import type { SlashedToken } from '../types';
-  import { DOMAIN_PATTERNS, domainOf } from '../lib/domains';
+  import { domainOf } from '../lib/domains';
   import HomePanel from './panels/HomePanel.svelte';
   import ColorsPanel from './panels/ColorsPanel.svelte';
   import TypographyPanel from './panels/TypographyPanel.svelte';
@@ -45,12 +45,8 @@
     view = "controls";
   });
 
-  let patterns = $derived(DOMAIN_PATTERNS[domain] ?? [domain]);
-
-  // Uses domainOf() rather than the raw patterns list so this badge always
-  // agrees with App.svelte's "Reset N" count — matching against a single
-  // domain's patterns in isolation over-counts where patterns overlap (e.g.
-  // layout's "-bg-" also appears in color tokens like --sf-color-bg--active).
+  // domainOf() is the single classifier shared with the sidebar badge and the
+  // category Reset, so this count always agrees with them.
   let domainOverridesInTokenTab = $derived(
     tokens.filter((t) => domainOf(t.name) === domain && t.name in overrides).length
   );
@@ -104,7 +100,7 @@
         <AllTokensTab
           {tokens}
           {overrides}
-          {patterns}
+          {domain}
           {onSet}
           {onReset}
         />
