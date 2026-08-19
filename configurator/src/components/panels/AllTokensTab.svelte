@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SlashedToken } from '../../types';
   import TokenRow from '../inputs/TokenRow.svelte';
+  import { buildDependencyGraph } from '../../lib/tokenModel';
 
   let { tokens, overrides, patterns, onSet, onReset }: {
     tokens: SlashedToken[];
@@ -11,6 +12,10 @@
   } = $props();
 
   const TIER_ORDER: Record<string, number> = { PUBLIC: 0, "PUBLIC-ADVANCED": 1, INTERNAL: 2 };
+
+  // Whole-catalogue dependency graph (built once from the full token set, not
+  // just this domain's slice) so every row can show how many tokens read it.
+  let graph = $derived(buildDependencyGraph(tokens));
 
   let query = $state("");
   let showInternal = $state(false);
@@ -141,6 +146,7 @@
             <TokenRow
               token={t}
               overrideValue={overrides[t.name]}
+              dependentsCount={graph.usedBy[t.name]?.length ?? 0}
               onSet={(v) => onSet(t.name, v)}
               onReset={() => onReset(t.name)}
             />
