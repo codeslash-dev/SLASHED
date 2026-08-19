@@ -5,6 +5,8 @@
   import ColorInput from '../inputs/ColorInput.svelte';
   import Section from '../inputs/Section.svelte';
   import { SPACE_SCALE, RADIUS_SCALE, BORDER_WIDTH_SCALE, type VarOption } from '../../lib/variableScales';
+  import ScaleShadowNotice from '../inputs/ScaleShadowNotice.svelte';
+  import { scaleShadows } from '../../lib/tokenModel';
 
   let { overrides, onSet, onReset }: {
     overrides: Record<string, string>;
@@ -56,6 +58,13 @@
   let dividerColor = $derived(overrides["--sf-divider-color"] ?? "");
   let mediaRadius  = $derived(parseNum(overrides["--sf-media-radius"]?.replace("rem",""), 0));
 
+  // Fixed per-step overrides that shadow the radius / border-width scale knobs
+  // (the same detached-scale state the Type & Spacing panels already warn about;
+  // generalised here via tokenModel.scaleShadows).
+  let radiusShadow = $derived(scaleShadows(overrides).find((s) => s.family.id === "radius")?.shadowedSteps ?? []);
+  let borderShadow = $derived(scaleShadows(overrides).find((s) => s.family.id === "border-width")?.shadowedSteps ?? []);
+  const clearSteps = (steps: string[]) => steps.forEach(onReset);
+
   function getStyleCurrent(tokenName: string, defaultVal: string): string {
     return overrides[tokenName] ?? defaultVal;
   }
@@ -98,6 +107,7 @@
 
   <!-- BORDER SCALE -->
   <Section title="Border widths" bind:open={showBorderWidths}>
+      <ScaleShadowNotice tokens={borderShadow} scaleLabel="border-width" onClear={() => clearSteps(borderShadow)} />
       <SliderRow
         label="Border scale" value={borderScale} min={0} max={4} step={0.25}
         help="Multiplier applied to all border widths. 0 hides all borders."
@@ -223,6 +233,7 @@
 
   <!-- RADIUS -->
   <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Radius</div>
+  <ScaleShadowNotice tokens={radiusShadow} scaleLabel="radius" onClear={() => clearSteps(radiusShadow)} />
 
   <!-- Fine-tune radius steps collapsible -->
   <div>
