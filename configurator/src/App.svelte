@@ -67,6 +67,16 @@
   let previewMotion = $state<"normal" | "slow" | "none">("normal");
   let previewTemplate = $state<PreviewTemplate>("color");
 
+  // Lifecycle / reference tools have no live visual sample, so the preview used
+  // to sit there showing an irrelevant Color gallery over half the screen.
+  // For these the preview is hidden and the panel takes the full width instead.
+  // (Accessibility keeps the preview — its contrast checker reads the rendered
+  // colours from the iframe.)
+  const FULLWIDTH_DOMAINS = new Set(["changes", "themes", "setup", "cheatsheet"]);
+  let hidePreview = $derived(FULLWIDTH_DOMAINS.has(domain));
+  // A tool screen has nothing to fold to, so keep the mobile view on controls.
+  $effect(() => { if (hidePreview) untrack(() => { mobileView = "controls"; }); });
+
   // Derived
   let overridesCount = $derived(Object.keys(overrides).length);
   let domainBadges = $derived(overridesByDomain(overrides));
@@ -317,11 +327,14 @@
 
   <!-- Mobile fold toggle: switch between the controls panel and the live
        preview. Lives right under the header (not at the bottom) so it's
-       visible without scrolling and doesn't compete with the status bar. -->
-  <div class="md:hidden flex items-stretch border-b border-black/8 dark:border-white/8 bg-slate-50 dark:bg-[#0d0d14] shrink-0">
-    {@render foldToggleButton("controls", SlidersHorizontal, "Controls")}
-    {@render foldToggleButton("preview", Eye, "Preview")}
-  </div>
+       visible without scrolling and doesn't compete with the status bar.
+       Hidden on tool screens, which have no preview to fold to. -->
+  {#if !hidePreview}
+    <div class="md:hidden flex items-stretch border-b border-black/8 dark:border-white/8 bg-slate-50 dark:bg-[#0d0d14] shrink-0">
+      {@render foldToggleButton("controls", SlidersHorizontal, "Controls")}
+      {@render foldToggleButton("preview", Eye, "Preview")}
+    </div>
+  {/if}
 
   <!-- Main body: sidebar + left panel + preview -->
   <div class="flex flex-1 min-h-0">
@@ -334,10 +347,12 @@
       />
     </div>
 
-    <!-- Left domain panel — fills remaining row width on mobile (the icon
-         rail above already claims its own space, so w-full here would mean
-         100% of the whole row and overflow past it), fixed 360px on desktop -->
-    <div class={`flex-1 min-w-0 md:flex-none md:w-[360px] bg-slate-50 dark:bg-[#0c0c15] border-r border-black/8 dark:border-white/8 flex-col min-h-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
+    <!-- Left domain panel — fixed 360px alongside the preview, but full width
+         on tool screens where the preview is hidden. On mobile it fills the row
+         (the icon rail already claims its own space). -->
+    <div class={`min-w-0 bg-slate-50 dark:bg-[#0c0c15] border-r border-black/8 dark:border-white/8 flex-col min-h-0 ${
+      hidePreview ? "flex-1 flex" : `flex-1 md:flex-none md:w-[360px] ${mobileView === "preview" ? "hidden md:flex" : "flex"}`
+    }`}>
       <!-- Panel heading -->
       <div class="h-9 flex items-center px-4 border-b border-black/6 dark:border-white/6 shrink-0 gap-2">
         <span data-testid="panel-heading" class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest flex-1">
@@ -373,20 +388,24 @@
       </div>
     </div>
 
-    <!-- Right: live preview — full screen on mobile when folded open -->
-    <div class={`flex-1 flex-col min-h-0 min-w-0 ${mobileView === "controls" ? "hidden md:flex" : "flex"}`}>
-      <PreviewPanel
-        {overrides}
-        {previewTheme}
-        {previewWidth}
-        {previewMotion}
-        {previewTemplate}
-        onThemeChange={(t) => { previewTheme = t; }}
-        onWidthChange={(w) => { previewWidth = w; }}
-        onMotionChange={(m) => { previewMotion = m; }}
-        onTemplateChange={(t) => { previewTemplate = t; }}
-      />
-    </div>
+    <!-- Right: live preview — full screen on mobile when folded open. Omitted
+         entirely on tool screens (Changes / Presets / Install & export /
+         Reference), which have no live sample. -->
+    {#if !hidePreview}
+      <div class={`flex-1 flex-col min-h-0 min-w-0 ${mobileView === "controls" ? "hidden md:flex" : "flex"}`}>
+        <PreviewPanel
+          {overrides}
+          {previewTheme}
+          {previewWidth}
+          {previewMotion}
+          {previewTemplate}
+          onThemeChange={(t) => { previewTheme = t; }}
+          onWidthChange={(w) => { previewWidth = w; }}
+          onMotionChange={(m) => { previewMotion = m; }}
+          onTemplateChange={(t) => { previewTemplate = t; }}
+        />
+      </div>
+    {/if}
   </div>
 
   <!-- Status bar -->
