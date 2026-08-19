@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import { SlidersHorizontal, Eye, RotateCcw } from '@lucide/svelte';
+  import { SlidersHorizontal, Eye, RotateCcw, ChevronDown } from '@lucide/svelte';
   import type { PreviewTemplate, SlashedToken, ApiIndex } from './types';
   import { PANEL_TO_TAB } from './lib/preview';
   import StudioHeader from './components/shell/StudioHeader.svelte';
@@ -51,6 +51,8 @@
 
   let domain = $state("home");
   let showPalette = $state(false);
+  // Mobile category drawer (replaces the cramped icon rail on narrow screens).
+  let navDrawerOpen = $state(false);
   // One-shot deep-link request from search: navigate to a domain AND focus a
   // specific token's row in its All-tokens list. The nonce lets the same token
   // be re-focused (a second search for it still scrolls/highlights).
@@ -349,8 +351,10 @@
 
   <!-- Main body: sidebar + left panel + preview -->
   <div class="flex flex-1 min-h-0">
-    <!-- Icon nav rail — hidden on mobile while the preview is folded open -->
-    <div class={`shrink-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
+    <!-- Icon nav rail — desktop only. On mobile the category drawer (opened
+         from the panel heading) replaces it, so the narrow screen isn't eaten
+         by an unlabelled 56px strip. -->
+    <div class="shrink-0 hidden md:flex">
       <SidebarNav
         activeId={domain}
         onSelect={(d) => { navigateTo(d); }}
@@ -366,9 +370,18 @@
     }`}>
       <!-- Panel heading -->
       <div class="h-9 flex items-center px-4 border-b border-black/6 dark:border-white/6 shrink-0 gap-2">
-        <span data-testid="panel-heading" class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest flex-1">
-          {DOMAIN_LABELS[domain] ?? domain}
-        </span>
+        <!-- On mobile this is the category-drawer trigger (chevron); on desktop
+             it's a static label (the rail handles navigation there). -->
+        <button
+          data-testid="panel-heading"
+          onclick={() => { navDrawerOpen = true; }}
+          class="flex items-center gap-1.5 flex-1 min-w-0 text-left cursor-pointer md:cursor-default md:pointer-events-none"
+        >
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest truncate">
+            {DOMAIN_LABELS[domain] ?? domain}
+          </span>
+          <ChevronDown class="w-3 h-3 text-slate-400 shrink-0 md:hidden" />
+        </button>
         {#if domainOverridesCount > 0}
           <button
             onclick={handleResetDomain}
@@ -424,6 +437,33 @@
     {overridesCount}
     domain={DOMAIN_LABELS[domain] ?? domain}
   />
+
+  <!-- Mobile category drawer — labelled, grouped navigation (the desktop rail
+       equivalent). md:hidden so it never appears on desktop. -->
+  {#if navDrawerOpen}
+    <div
+      class="md:hidden fixed inset-0 z-40 flex"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Choose a panel"
+      tabindex="-1"
+      onkeydown={(e) => { if (e.key === "Escape") navDrawerOpen = false; }}
+    >
+      <div class="w-64 max-w-[80vw] h-full shadow-2xl overflow-y-auto">
+        <SidebarNav
+          expanded
+          activeId={domain}
+          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; }}
+          overridesByDomain={domainBadges}
+        />
+      </div>
+      <button
+        class="flex-1 h-full bg-black/50 backdrop-blur-sm cursor-pointer"
+        aria-label="Close menu"
+        onclick={() => { navDrawerOpen = false; }}
+      ></button>
+    </div>
+  {/if}
 
   <!-- Command palette -->
   {#if showPalette}
