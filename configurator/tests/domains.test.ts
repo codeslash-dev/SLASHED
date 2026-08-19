@@ -19,13 +19,14 @@ describe('domainOf', () => {
     ['--sf-font-body', 'typography'],
     ['--sf-space-m', 'spacing'],
     ['--sf-radius-l', 'borders'],
-    ['--sf-shadow-m', 'shadows'],
+    ['--sf-shadow-m', 'depth'],
     ['--sf-motion-scale', 'motion'],
     ['--sf-container-wide', 'layout'],
     ['--sf-btn-padding-block', 'components'],
-    ['--sf-blur-m', 'effects'],
-    // Namespace-driven fixes for the old substring collisions:
-    ['--sf-drop-shadow-m', 'effects'],   // was "shadows" via the "shadow" fragment
+    ['--sf-blur-m', 'depth'],
+    // Shadows + Effects are merged into the Depth panel:
+    ['--sf-drop-shadow-m', 'depth'],
+    ['--sf-opacity-muted', 'depth'],
     ['--sf-focus-ring-color', 'misc'],   // was "colors" via the "color" fragment
     ['--sf-transition-fast', 'motion'],  // was "misc" (no pattern)
     ['--sf-box-padding', 'layout'],      // was "misc"

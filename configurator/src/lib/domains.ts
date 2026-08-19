@@ -35,8 +35,8 @@ export const FALLBACK_DOMAIN = 'misc';
 
 /** All domain ids a token can classify into, in canonical panel order. */
 export const DOMAINS = [
-  'colors', 'typography', 'spacing', 'layout', 'borders', 'shadows',
-  'motion', 'effects', 'macros', 'components', 'misc',
+  'colors', 'typography', 'spacing', 'layout', 'borders', 'depth',
+  'motion', 'macros', 'components', 'misc',
 ] as const;
 
 export type Domain = (typeof DOMAINS)[number];

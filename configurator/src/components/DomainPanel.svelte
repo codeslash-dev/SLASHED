@@ -8,9 +8,8 @@
   import SpacingPanel from './panels/SpacingPanel.svelte';
   import LayoutPanel from './panels/LayoutPanel.svelte';
   import BordersPanel from './panels/BordersPanel.svelte';
-  import ShadowsPanel from './panels/ShadowsPanel.svelte';
+  import DepthPanel from './panels/DepthPanel.svelte';
   import MotionPanel from './panels/MotionPanel.svelte';
-  import EffectsPanel from './panels/EffectsPanel.svelte';
   import MacrosPanel from './panels/MacrosPanel.svelte';
   import MiscPanel from './panels/MiscPanel.svelte';
   import ComponentsPanel from './panels/ComponentsPanel.svelte';
@@ -95,12 +94,10 @@
             <LayoutPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "borders"}
             <BordersPanel {overrides} {onSet} {onReset} />
-          {:else if domain === "shadows"}
-            <ShadowsPanel {overrides} {onSet} {onReset} />
+          {:else if domain === "depth"}
+            <DepthPanel {overrides} {onSet} {onReset} />
           {:else if domain === "motion"}
             <MotionPanel {overrides} {onSet} {onReset} />
-          {:else if domain === "effects"}
-            <EffectsPanel {overrides} {onSet} {onReset} />
           {:else if domain === "macros"}
             <MacrosPanel {overrides} {onSet} {onReset} />
           {:else if domain === "misc"}

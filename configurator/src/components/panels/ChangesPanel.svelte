@@ -17,7 +17,7 @@
 
   const DOMAIN_LABEL: Record<string, string> = {
     colors: "Colors", typography: "Typography", spacing: "Spacing", layout: "Layout",
-    borders: "Borders", shadows: "Shadows", motion: "Motion", effects: "Effects",
+    borders: "Shape", depth: "Depth", motion: "Motion",
     macros: "Macros", components: "Components", misc: "Misc",
   };
 

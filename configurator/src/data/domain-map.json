@@ -62,7 +62,7 @@
     "field": "borders",
     "media": "borders",
 
-    "shadow": "shadows",
+    "shadow": "depth",
 
     "motion": "motion",
     "duration": "motion",
@@ -74,9 +74,9 @@
     "theme": "motion",
     "animation": "motion",
 
-    "blur": "effects",
-    "opacity": "effects",
-    "drop": "effects",
+    "blur": "depth",
+    "opacity": "depth",
+    "drop": "depth",
 
     "prose": "macros",
     "flow": "macros",

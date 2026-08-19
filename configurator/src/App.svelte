@@ -21,8 +21,8 @@
 
   const DOMAIN_LABELS: Record<string, string> = {
     home: "Home", colors: "Colors", typography: "Typography", spacing: "Spacing",
-    layout: "Layout", borders: "Shape", shadows: "Shadows", motion: "Motion",
-    effects: "Effects", macros: "Macros", misc: "Misc", components: "Components",
+    layout: "Layout", borders: "Shape", depth: "Depth", motion: "Motion",
+    macros: "Macros", misc: "Misc", components: "Components",
     changes: "Changes", themes: "Presets", wcag: "Accessibility",
     setup: "Install & export", cheatsheet: "Reference",
   };
