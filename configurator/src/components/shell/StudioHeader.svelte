@@ -163,7 +163,7 @@
 
     <button
       onclick={onImport}
-      title="Import CSS overrides"
+      title="Import overrides (CSS or JSON)"
       class="p-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-black/8 dark:hover:bg-white/8 transition-all cursor-pointer shrink-0"
     >
       <FolderOpen class="w-3.5 h-3.5" />

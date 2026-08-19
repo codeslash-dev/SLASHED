@@ -11,10 +11,13 @@
   import { generateCSS } from './lib/codec';
   import { loadInitialOverrides, injectLivePreview, saveOverrides, hasWpBoot } from './lib/persistence';
   import { domainOf } from './lib/domains';
+  import { changedKeys, shouldCoalesce, NO_COALESCE, type CoalesceState } from './lib/history';
+  import { parseImport, summarizeImport } from './lib/importOverrides';
   import tokensRaw from './data/api-index.generated.json';
   import CommandPalette from './components/CommandPalette.svelte';
 
   const ALL_TOKENS = ((tokensRaw as ApiIndex).tokens ?? tokensRaw) as SlashedToken[];
+  const LIVE_TOKEN_NAMES = new Set(ALL_TOKENS.map((t) => t.name));
 
   const DOMAIN_LABELS: Record<string, string> = {
     home: "Home", colors: "Colors", typography: "Typography", spacing: "Spacing",
@@ -54,17 +57,9 @@
   // be re-focused (a second search for it still scrolls/highlights).
   let focusRequest = $state<{ token: string; nonce: number } | null>(null);
   let focusNonce = 0;
-
-  function navigateTo(domainId: string, token?: string) {
-    domain = domainId;
-    if (token) {
-      focusNonce += 1;
-      focusRequest = { token, nonce: focusNonce };
-    } else {
-      focusRequest = null;
-    }
-    mobileView = "controls";
-  }
+  // Transient feedback after an import (the old flow failed silently).
+  let importStatus = $state<string | null>(null);
+  let importStatusTimer: ReturnType<typeof setTimeout> | null = null;
   // On narrow screens the controls panel and the live preview can't both fit, so
   // we show one at a time and let the user fold between them (desktop shows both).
   let mobileView = $state<"controls" | "preview">("controls");
@@ -210,6 +205,12 @@
     overrides = next;
   }
 
+  function showImportStatus(msg: string) {
+    importStatus = msg;
+    if (importStatusTimer) clearTimeout(importStatusTimer);
+    importStatusTimer = setTimeout(() => { importStatus = null; importStatusTimer = null; }, 6000);
+  }
+
   function handleImport() {
     const input = document.createElement("input");
     input.type = "file";
@@ -221,30 +222,13 @@
       reader.onload = (ev) => {
         const text = ev.target?.result as string;
         if (!text) return;
-        if (file.name.endsWith(".json")) {
-          try {
-            const data = JSON.parse(text);
-            if (data !== null && typeof data === "object" && !Array.isArray(data)) {
-              // Restrict to real token-name keys too, not just string values — an
-              // imported JSON file is untrusted input and its keys end up as
-              // object property names downstream (CodeQL: remote-property-injection).
-              const safe = Object.fromEntries(
-                Object.entries(data as Record<string, unknown>).filter(
-                  ([k, v]) => typeof v === "string" && /^--sf-[\w-]+$/.test(k)
-                )
-              ) as Record<string, string>;
-              if (Object.keys(safe).length > 0) setOverrides(safe);
-            }
-          } catch {}
-        } else {
-          const parsed: Record<string, string> = {};
-          const re = /(--sf-[\w-]+)\s*:\s*([^;]+);/g;
-          let m;
-          while ((m = re.exec(text)) !== null) {
-            parsed[m[1].trim()] = m[2].trim();
-          }
-          if (Object.keys(parsed).length > 0) setOverrides((prev) => ({ ...prev, ...parsed }));
+        // One validated pipeline for both CSS and JSON: sanitised, migrated,
+        // merged (non-destructive), and always reported — no more silent no-ops.
+        const { overrides: imported, report } = parseImport(text, file.name, LIVE_TOKEN_NAMES);
+        if (Object.keys(imported).length > 0) {
+          setOverrides((prev) => ({ ...prev, ...imported }));
         }
+        showImportStatus(summarizeImport(report));
       };
       reader.readAsText(file);
     };
@@ -321,6 +305,14 @@
     onSave={handleSave}
     onOpenSearch={() => { showPalette = true; }}
   />
+
+  <!-- Import feedback: a transient banner (the previous import flow gave none). -->
+  {#if importStatus}
+    <div class="shrink-0 flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border-b border-indigo-500/20 text-[11px] text-indigo-700 dark:text-indigo-300">
+      <span class="flex-1">{importStatus}</span>
+      <button onclick={() => { importStatus = null; }} aria-label="Dismiss" class="text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-200 cursor-pointer font-bold">×</button>
+    </div>
+  {/if}
 
   <!-- Mobile fold toggle: switch between the controls panel and the live
        preview. Lives right under the header (not at the bottom) so it's
