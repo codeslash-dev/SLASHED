@@ -50,6 +50,11 @@
 
   let domain = $state("home");
   let showPalette = $state(false);
+  // One-shot deep-link request from search: navigate to a domain AND focus a
+  // specific token's row in its All-tokens list. The nonce lets the same token
+  // be re-focused (a second search for it still scrolls/highlights).
+  let focusRequest = $state<{ token: string; nonce: number } | null>(null);
+  let focusNonce = 0;
   // On narrow screens the controls panel and the live preview can't both fit, so
   // we show one at a time and let the user fold between them (desktop shows both).
   let mobileView = $state<"controls" | "preview">("controls");
@@ -312,6 +317,7 @@
     onImport={handleImport}
     onExport={handleExport}
     onSave={handleSave}
+    onOpenSearch={() => { showPalette = true; }}
   />
 
   <!-- Mobile fold toggle: switch between the controls panel and the live
@@ -360,6 +366,8 @@
           {domain}
           tokens={ALL_TOKENS}
           {overrides}
+          focusToken={focusRequest?.token ?? null}
+          focusNonce={focusRequest?.nonce ?? 0}
           onSet={handleSet}
           onReset={handleReset}
           onBulkChange={handleBulkChange}
@@ -397,7 +405,12 @@
     <CommandPalette
       tokens={ALL_TOKENS}
       {overrides}
-      onNavigate={(d) => { domain = d; }}
+      onNavigate={(d, token) => {
+        domain = d;
+        if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
+        // On mobile, deep-linking into a token means we want the controls side.
+        mobileView = "controls";
+      }}
       onClose={() => { showPalette = false; }}
     />
   {/if}

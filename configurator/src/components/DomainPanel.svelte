@@ -22,10 +22,13 @@
   import AllTokensTab from './panels/AllTokensTab.svelte';
   import WcagPanel from './panels/WcagPanel.svelte';
 
-  let { domain, tokens, overrides, onSet, onReset, onBulkChange, onApplyTheme, onSelectDomain, onResetAll }: {
+  let { domain, tokens, overrides, focusToken = null, focusNonce = 0, onSet, onReset, onBulkChange, onApplyTheme, onSelectDomain, onResetAll }: {
     domain: string;
     tokens: SlashedToken[];
     overrides: Record<string, string>;
+    /** Deep-link target token from search; opens the All-tokens list on it. */
+    focusToken?: string | null;
+    focusNonce?: number;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
     onBulkChange: (patch: Record<string, string | null>) => void;
@@ -40,10 +43,19 @@
 
   let view = $state<"controls" | "tokens">("controls");
 
-  // Reset view to controls when domain changes
+  // A domain change resets to Controls — UNLESS it arrived with a fresh deep-link
+  // focus request, which opens the All-tokens list on the target token. Both
+  // signals are read in one effect so their order can't race.
+  let lastFocusNonce = -1;
   $effect(() => {
     const _ = domain;
-    view = "controls";
+    const nonce = focusNonce;
+    if (focusToken && nonce !== lastFocusNonce) {
+      lastFocusNonce = nonce;
+      view = "tokens";
+    } else {
+      view = "controls";
+    }
   });
 
   // domainOf() is the single classifier shared with the sidebar badge and the
@@ -104,6 +116,8 @@
           {tokens}
           {overrides}
           {domain}
+          {focusToken}
+          {focusNonce}
           {onSet}
           {onReset}
         />

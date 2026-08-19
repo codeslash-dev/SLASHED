@@ -4,13 +4,40 @@
   import { buildDependencyGraph } from '../../lib/tokenModel';
   import { domainOf } from '../../lib/domains';
 
-  let { tokens, overrides, domain, onSet, onReset }: {
+  let { tokens, overrides, domain, focusToken = null, focusNonce = 0, onSet, onReset }: {
     tokens: SlashedToken[];
     overrides: Record<string, string>;
     domain: string;
+    /** Deep-link target: filter to and highlight this token when it changes. */
+    focusToken?: string | null;
+    focusNonce?: number;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
   } = $props();
+
+  let listEl = $state<HTMLDivElement | null>(null);
+  let highlightName = $state<string | null>(null);
+  let highlightTimer: ReturnType<typeof setTimeout> | null = null;
+  let lastFocusNonce = -1;
+
+  // React to a search deep-link: pre-fill the query with the token and briefly
+  // highlight + scroll to its row so the user lands exactly on the control.
+  $effect(() => {
+    const nonce = focusNonce;
+    if (!focusToken || nonce === lastFocusNonce) return;
+    lastFocusNonce = nonce;
+    query = focusToken.replace("--sf-", "");
+    showInternal = tokens.some((t) => t.name === focusToken && t.tier === "INTERNAL") || showInternal;
+    onlyModified = false;
+    highlightName = focusToken;
+    if (highlightTimer) clearTimeout(highlightTimer);
+    highlightTimer = setTimeout(() => { highlightName = null; }, 2600);
+    // Scroll to the row after the filtered list renders.
+    requestAnimationFrame(() => {
+      const el = listEl?.querySelector(`[data-token="${CSS.escape(focusToken)}"]`);
+      el?.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+  });
 
   const TIER_ORDER: Record<string, number> = { PUBLIC: 0, "PUBLIC-ADVANCED": 1, INTERNAL: 2 };
 
@@ -113,7 +140,7 @@
   <div class="w-full h-px bg-black/6 dark:bg-white/6 shrink-0"></div>
 
   <!-- Token list -->
-  <div class="flex-1 min-h-0 overflow-y-auto py-1">
+  <div class="flex-1 min-h-0 overflow-y-auto py-1" bind:this={listEl}>
     {#if filtered().length === 0}
       <div class="text-center py-8 text-[11px] text-slate-400 dark:text-slate-600">
         {onlyModified ? "No modified tokens in this domain" : "No tokens found"}
@@ -139,7 +166,10 @@
               <div class="h-px flex-1 bg-rose-800/25"></div>
             </div>
           {/if}
-          <div class="relative">
+          <div
+            class={`relative rounded-lg transition-shadow ${highlightName === t.name ? "ring-2 ring-indigo-500/70" : ""}`}
+            data-token={t.name}
+          >
             {#if t.tier === "PUBLIC-ADVANCED"}
               <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-600/40 rounded-full"></div>
             {/if}
