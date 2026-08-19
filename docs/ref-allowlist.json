@@ -70,5 +70,28 @@
     "--sf-current-font-weight": "Removed 2026-07-21 (round 2) — orphaned when its only consumer (.sf-is-current) was removed. Recorded in the audit checklist.",
     "--sf-state-pending-opacity": "Removed 2026-07-21 (round 2) — orphaned when its only consumer (.sf-is-pending) was removed. Recorded in the audit checklist.",
     "--sf-is-active": "Removed 2026-07-21 (round 2) — @property registration for the removed .sf-is-active flag mechanism. Recorded in the audit checklist."
+  },
+  "docs/audit-slashed-vs-acss-v4.md": {
+    "--sf-surface-bg-blend-mode": "Forward-looking recommendation in the ACSS comparison; deliberately not current API.",
+    "--sf-surface-bg-backdrop-filter": "Forward-looking recommendation in the ACSS comparison; deliberately not current API.",
+    "--sf-surface-bg-inset": "Forward-looking recommendation in the ACSS comparison; deliberately not current API.",
+    "sf-columns": "Non-live illustrative name from the superseded recommendation; the audit explicitly says .sf-equal already provides CSS Multi-column.",
+    "--sf-content-width-safe": "Forward-looking recommendation derived from the ACSS Content Width Safe comparison; deliberately not current API.",
+    "sf-content-safe": "Forward-looking optional helper proposed by the audit; deliberately not current API.",
+    "sf-icon-list": "Forward-looking optional icon-list primitive proposed by the audit; deliberately not current API.",
+    "sf-icon-box": "Incorrect non-live class name currently shown by configurator help; audit records the wiring/documentation bug and points to live .sf-icon--boxed.",
+    "sf-spin": "Staged/non-live utility named to distinguish existing keyframes from classes that full.css does not ship.",
+    "sf-ping": "Staged/non-live utility named to distinguish existing keyframes from classes that full.css does not ship.",
+    "sf-blink": "Staged/non-live utility named to distinguish existing keyframes from classes that full.css does not ship.",
+    "sf-float": "Staged/non-live utility named to distinguish existing keyframes from classes that full.css does not ship.",
+    "sf-shimmer": "Staged/non-live utility named to distinguish it from the live .sf-is-shimmer state.",
+    "sf-hover-shadow": "Forward-looking optional hover utility proposed by the audit; deliberately not current API.",
+    "sf-hover-glow": "Forward-looking optional hover utility proposed by the audit; deliberately not current API.",
+    "sf-hover-brighten": "Forward-looking optional hover utility proposed by the audit; deliberately not current API.",
+    "sf-hover-fade": "Forward-looking optional hover utility proposed by the audit; deliberately not current API.",
+    "sf-auto-external-links": "Illustrative opt-in container name proposed by the audit; deliberately not current API.",
+    "sf-display-s": "Forward-looking visual display-role utility proposed for the existing display token offer API.",
+    "sf-display-m": "Forward-looking visual display-role utility proposed for the existing display token offer API.",
+    "sf-display-l": "Forward-looking visual display-role utility proposed for the existing display token offer API."
   }
 }
