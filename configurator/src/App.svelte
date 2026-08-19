@@ -21,7 +21,7 @@
   const DOMAIN_LABELS: Record<string, string> = {
     home: "Home", colors: "Colors", typography: "Typography", spacing: "Spacing",
     layout: "Layout", borders: "Shape", depth: "Depth", motion: "Motion",
-    macros: "Macros", misc: "Misc", components: "Components",
+    macros: "Macros", misc: "System", components: "Components",
     changes: "Changes", themes: "Presets", wcag: "Accessibility",
     setup: "Install & export", cheatsheet: "Reference",
   };
@@ -59,6 +59,17 @@
   // Transient feedback after an import (the old flow failed silently).
   let importStatus = $state<string | null>(null);
   let importStatusTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function navigateTo(domainId: string, token?: string) {
+    domain = domainId;
+    if (token) {
+      focusNonce += 1;
+      focusRequest = { token, nonce: focusNonce };
+    } else {
+      focusRequest = null;
+    }
+    mobileView = "controls";
+  }
   // On narrow screens the controls panel and the live preview can't both fit, so
   // we show one at a time and let the user fold between them (desktop shows both).
   let mobileView = $state<"controls" | "preview">("controls");
@@ -342,7 +353,7 @@
     <div class={`shrink-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
       <SidebarNav
         activeId={domain}
-        onSelect={(d) => { domain = d; focusRequest = null; }}
+        onSelect={(d) => { navigateTo(d); }}
         overridesByDomain={domainBadges}
       />
     </div>
@@ -382,7 +393,7 @@
           onReset={handleReset}
           onBulkChange={handleBulkChange}
           onApplyTheme={handleApplyTheme}
-          onSelectDomain={(d) => { domain = d; focusRequest = null; }}
+          onSelectDomain={(d) => { navigateTo(d); }}
           onResetAll={handleResetAll}
         />
       </div>
@@ -420,11 +431,7 @@
       tokens={ALL_TOKENS}
       {overrides}
       onNavigate={(d, token) => {
-        domain = d;
-        if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
-        else focusRequest = null;
-        // On mobile, deep-linking into a token means we want the controls side.
-        mobileView = "controls";
+        navigateTo(d, token);
       }}
       onClose={() => { showPalette = false; }}
     />

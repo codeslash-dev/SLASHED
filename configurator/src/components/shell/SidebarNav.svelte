@@ -34,7 +34,7 @@
         { id: "depth",      icon: Layers,    label: "Depth" },
         { id: "macros",     icon: Blocks,    label: "Macros" },
         { id: "components", icon: Component, label: "Components" },
-        { id: "misc",       icon: Puzzle,    label: "Misc" },
+        { id: "misc",       icon: Puzzle,    label: "System" },
       ],
     },
     {

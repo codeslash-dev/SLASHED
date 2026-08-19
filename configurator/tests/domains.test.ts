@@ -47,6 +47,11 @@ describe('domainOf', () => {
     expect(classifyKnown('--sf-z-modal')).toBe('misc');
   });
 
+  test('safe-area insets classify to the System (misc) panel, where they are edited', () => {
+    expect(domainOf('--sf-safe-top')).toBe('misc');
+    expect(domainOf('--sf-safe-bottom')).toBe('misc');
+  });
+
   test('per-token exceptions override their namespace default', () => {
     // `content` defaults to spacing, but these two are genuinely elsewhere.
     expect(domainOf('--sf-content-gap')).toBe('spacing');

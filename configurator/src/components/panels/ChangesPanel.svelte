@@ -18,7 +18,7 @@
   const DOMAIN_LABEL: Record<string, string> = {
     colors: "Colors", typography: "Typography", spacing: "Spacing", layout: "Layout",
     borders: "Shape", depth: "Depth", motion: "Motion",
-    macros: "Macros", components: "Components", misc: "Misc",
+    macros: "Macros", components: "Components", misc: "System",
   };
 
   let summary = $derived(summarizeChanges(tokens, overrides));
