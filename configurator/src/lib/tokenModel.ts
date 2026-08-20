@@ -46,6 +46,16 @@ const VAR_REF_RE = /var\(\s*(--sf-[\w-]+)/g;
 // other tokens (color-mix(), calc(), a border shorthand, …).
 const PURE_VAR_RE = /^var\(\s*(--sf-[\w-]+)\s*(?:,[\s\S]*)?\)$/;
 
+/** Reject unbalanced function syntax before classifying a value as an alias. */
+function hasBalancedParens(value: string): boolean {
+  let depth = 0;
+  for (const char of value) {
+    if (char === "(") depth += 1;
+    if (char === ")" && --depth < 0) return false;
+  }
+  return depth === 0;
+}
+
 /** Every distinct `--sf-*` token referenced (via `var()`) inside a value. */
 export function referencesIn(value: string | null | undefined): string[] {
   if (!value) return [];
@@ -58,7 +68,7 @@ export function referencesIn(value: string | null | undefined): string[] {
 
 /** The single token a pure `var(--sf-x)` value points at, else null. */
 export function pureVarTarget(value: string | null | undefined): string | null {
-  if (!value) return null;
+  if (!value || !hasBalancedParens(value)) return null;
   const m = PURE_VAR_RE.exec(value.trim());
   return m ? m[1] : null;
 }
@@ -189,7 +199,10 @@ export const SCALE_FAMILIES: ScaleFamily[] = [
     id: "radius",
     label: "Radius scale",
     sources: ["--sf-radius-scale"],
-    steps: stepTokens("radius"),
+    steps: [
+      ...stepTokens("radius"),
+      "--sf-radius-none", "--sf-radius-full", "--sf-radius-pill", "--sf-radius-outer",
+    ],
   },
   {
     id: "border-width",
@@ -239,7 +252,12 @@ export interface ScaleShadow {
 export function scaleShadows(overrides: Record<string, string>): ScaleShadow[] {
   const out: ScaleShadow[] = [];
   for (const family of SCALE_FAMILIES) {
-    const shadowedSteps = family.steps.filter((s) => s in overrides);
+    // A relink or expression that still references a scale source continues to
+    // follow that scale; only a value disconnected from all sources pins a step.
+    const shadowedSteps = family.steps.filter((step) => {
+      const value = overrides[step];
+      return value !== undefined && !referencesIn(value).some((ref) => family.sources.includes(ref));
+    });
     if (shadowedSteps.length === 0) continue;
     const overriddenSources = family.sources.filter((s) => s in overrides);
     out.push({ family, shadowedSteps, overriddenSources });
@@ -269,7 +287,10 @@ function probePropertyForSyntax(syntax: string | null | undefined): string | nul
   if (s.includes("<color>")) return "color";
   if (s.includes("<length>") || s.includes("<length-percentage>")) return "width";
   if (s.includes("<percentage>")) return "width";
-  if (s.includes("<number>") || s.includes("<integer>")) return "z-index";
+  // z-index also accepts `auto`, which is not part of CSS <integer>; reject
+  // that keyword explicitly. Opacity preserves fractional <number> support.
+  if (s.includes("<integer>")) return "z-index";
+  if (s.includes("<number>")) return "opacity";
   if (s.includes("<time>")) return "transition-duration";
   if (s.includes("<angle>")) return "rotate";
   return null;
@@ -290,6 +311,13 @@ export function validateTokenValue(token: SlashedToken, value: string): Validati
   const v = value.trim();
   if (v === "") return { valid: false, reason: "empty value" };
   if (CSS_BREAKING_RE.test(v)) return { valid: false, reason: "contains CSS-breaking characters" };
+  if (!hasBalancedParens(v)) return { valid: false, reason: "unbalanced parentheses" };
+
+  const syntax = (token.syntax ?? "").toLowerCase();
+  // `auto` is valid z-index syntax, but not a <number> or <integer> token.
+  if ((syntax.includes("<number>") || syntax.includes("<integer>")) && v.toLowerCase() === "auto") {
+    return { valid: false, reason: `not a valid ${token.syntax}` };
+  }
 
   const hasFn = /\b(?:var|calc|clamp|min|max|env)\s*\(/.test(v);
   if (!hasFn && typeof CSS !== "undefined" && typeof CSS.supports === "function") {

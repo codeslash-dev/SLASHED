@@ -59,6 +59,7 @@ describe('pureVarTarget', () => {
   test('rejects compound values that merely use a token', () => {
     expect(pureVarTarget('var(--sf-border-width-2) solid var(--sf-border)')).toBeNull();
     expect(pureVarTarget('calc(var(--sf-space-m) * 2)')).toBeNull();
+    expect(pureVarTarget('var(--sf-space-m, 1rem))')).toBeNull();
     expect(pureVarTarget('1rem')).toBeNull();
   });
 });
@@ -138,6 +139,16 @@ describe('scale families & shadowing', () => {
     expect(byId.motion.shadowedSteps).toEqual(['--sf-duration-normal']);
   });
 
+  test('does not mark scale-linked expressions as pinned', () => {
+    const shadows = scaleShadows({
+      '--sf-radius-m': 'var(--sf-radius-scale)',
+      '--sf-radius-l': 'calc(var(--sf-radius-scale) * 2)',
+      '--sf-radius-none': '0px',
+    });
+    expect(shadows).toHaveLength(1);
+    expect(shadows[0].shadowedSteps).toEqual(['--sf-radius-none']);
+  });
+
   test('no shadows reported when only sources are overridden', () => {
     expect(scaleShadows({ '--sf-space-scale': '1.2' })).toEqual([]);
   });
@@ -155,6 +166,16 @@ describe('validateTokenValue', () => {
     expect(validateTokenValue(t, '1rem').valid).toBe(true);
     expect(validateTokenValue(t, 'clamp(1rem, 2vw, 3rem)').valid).toBe(true);
     expect(validateTokenValue(t, 'var(--sf-space-m)').valid).toBe(true);
+  });
+  test('keeps numeric grammar distinct from z-index', () => {
+    const number = tok('--sf-ratio', { syntax: '<number>' });
+    const integer = tok('--sf-layer', { syntax: '<integer>' });
+    expect(validateTokenValue(number, '1.25').valid).toBe(true);
+    expect(validateTokenValue(number, 'auto').valid).toBe(false);
+    expect(validateTokenValue(integer, 'auto').valid).toBe(false);
+  });
+  test('rejects malformed expressions rather than treating them as safe', () => {
+    expect(validateTokenValue(t, 'var(--sf-space-m, 1rem))').valid).toBe(false);
   });
 });
 
@@ -184,6 +205,7 @@ describe('tokenState', () => {
   });
   test('invalid value wins over everything', () => {
     expect(tokenState(source, { '--sf-space-base-min': '1; }' })).toBe('invalid');
+    expect(tokenState(source, { '--sf-space-base-min': 'var(--sf-space-m, 1rem))' })).toBe('invalid');
   });
 });
 
