@@ -54,6 +54,17 @@
   // be re-focused (a second search for it still scrolls/highlights).
   let focusRequest = $state<{ token: string; nonce: number } | null>(null);
   let focusNonce = 0;
+
+  function navigateTo(domainId: string, token?: string) {
+    domain = domainId;
+    if (token) {
+      focusNonce += 1;
+      focusRequest = { token, nonce: focusNonce };
+    } else {
+      focusRequest = null;
+    }
+    mobileView = "controls";
+  }
   // On narrow screens the controls panel and the live preview can't both fit, so
   // we show one at a time and let the user fold between them (desktop shows both).
   let mobileView = $state<"controls" | "preview">("controls");
@@ -325,7 +336,7 @@
     <div class={`shrink-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
       <SidebarNav
         activeId={domain}
-        onSelect={(d) => { domain = d; }}
+        onSelect={(d) => { navigateTo(d); }}
         overridesByDomain={domainBadges}
       />
     </div>
@@ -363,7 +374,7 @@
           onReset={handleReset}
           onBulkChange={handleBulkChange}
           onApplyTheme={handleApplyTheme}
-          onSelectDomain={(d) => { domain = d; }}
+          onSelectDomain={(d) => { navigateTo(d); }}
           onResetAll={handleResetAll}
         />
       </div>
@@ -397,10 +408,7 @@
       tokens={ALL_TOKENS}
       {overrides}
       onNavigate={(d, token) => {
-        domain = d;
-        if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
-        // On mobile, deep-linking into a token means we want the controls side.
-        mobileView = "controls";
+        navigateTo(d, token);
       }}
       onClose={() => { showPalette = false; }}
     />
