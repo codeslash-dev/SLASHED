@@ -111,7 +111,7 @@ describe('TokenRow', () => {
 
   test('bind: renders the override value and reset affordance when overridden', () => {
     render(TokenRow, { props: { token, overrideValue: '2rem', onSet: () => {}, onReset: () => {} } });
-    expect(screen.getByText('2rem')).toBeTruthy();
+    expect(screen.getByDisplayValue('2rem')).toBeTruthy();
     expect(screen.getByText('reset')).toBeTruthy();
   });
 
@@ -120,12 +120,25 @@ describe('TokenRow', () => {
     const onReset = vi.fn();
     render(TokenRow, { props: { token, onSet, onReset } });
 
-    await fireEvent.click(screen.getByTitle('1rem'));
-    const input = screen.getByDisplayValue('1rem');
+    await fireEvent.click(screen.getByRole('button', { name: 'Value' }));
+    const input = screen.getByRole('textbox');
     await fireEvent.input(input, { target: { value: '1.5rem' } });
     await fireEvent.blur(input);
 
     expect(onSet).toHaveBeenCalledWith('1.5rem');
+    expect(onReset).not.toHaveBeenCalled();
+  });
+
+  test('cancel: Escape discards the draft instead of committing it on blur', async () => {
+    const onSet = vi.fn();
+    const onReset = vi.fn();
+    render(TokenRow, { props: { token, onSet, onReset } });
+    await fireEvent.click(screen.getByRole('button', { name: 'Value' }));
+    const input = screen.getByRole('textbox');
+    await fireEvent.focus(input);
+    await fireEvent.input(input, { target: { value: '1.5rem' } });
+    await fireEvent.keyDown(input, { key: 'Escape' });
+    expect(onSet).not.toHaveBeenCalled();
     expect(onReset).not.toHaveBeenCalled();
   });
 
@@ -134,8 +147,8 @@ describe('TokenRow', () => {
     const onReset = vi.fn();
     render(TokenRow, { props: { token, overrideValue: '2rem', onSet, onReset } });
 
-    await fireEvent.click(screen.getByTitle('2rem'));
-    const input = screen.getByDisplayValue('2rem');
+    await fireEvent.click(screen.getByRole('button', { name: 'Value' }));
+    const input = screen.getByRole('textbox');
     await fireEvent.input(input, { target: { value: '1rem' } }); // back to token.value
     await fireEvent.blur(input);
 
