@@ -61,17 +61,6 @@
   // Transient feedback after an import (the old flow failed silently).
   let importStatus = $state<string | null>(null);
   let importStatusTimer: ReturnType<typeof setTimeout> | null = null;
-
-  function navigateTo(domainId: string, token?: string) {
-    domain = domainId;
-    if (token) {
-      focusNonce += 1;
-      focusRequest = { token, nonce: focusNonce };
-    } else {
-      focusRequest = null;
-    }
-    mobileView = "controls";
-  }
   // On narrow screens the controls panel and the live preview can't both fit, so
   // we show one at a time and let the user fold between them (desktop shows both).
   let mobileView = $state<"controls" | "preview">("controls");
@@ -362,7 +351,7 @@
     <div class="shrink-0 hidden md:flex">
       <SidebarNav
         activeId={domain}
-        onSelect={(d) => { navigateTo(d); }}
+        onSelect={(d) => { domain = d; focusRequest = null; }}
         overridesByDomain={domainBadges}
       />
     </div>
@@ -411,7 +400,7 @@
           onReset={handleReset}
           onBulkChange={handleBulkChange}
           onApplyTheme={handleApplyTheme}
-          onSelectDomain={(d) => { navigateTo(d); }}
+          onSelectDomain={(d) => { domain = d; focusRequest = null; }}
           onResetAll={handleResetAll}
         />
       </div>
@@ -458,7 +447,7 @@
         <SidebarNav
           expanded
           activeId={domain}
-          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; }}
+          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; focusRequest = null; }}
           overridesByDomain={domainBadges}
         />
       </div>
@@ -476,7 +465,11 @@
       tokens={ALL_TOKENS}
       {overrides}
       onNavigate={(d, token) => {
-        navigateTo(d, token);
+        domain = d;
+        if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
+        else focusRequest = null;
+        // On mobile, deep-linking into a token means we want the controls side.
+        mobileView = "controls";
       }}
       onClose={() => { showPalette = false; }}
     />
