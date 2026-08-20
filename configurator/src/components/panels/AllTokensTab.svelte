@@ -2,11 +2,12 @@
   import type { SlashedToken } from '../../types';
   import TokenRow from '../inputs/TokenRow.svelte';
   import { buildDependencyGraph } from '../../lib/tokenModel';
+  import { domainOf } from '../../lib/domains';
 
-  let { tokens, overrides, patterns, onSet, onReset }: {
+  let { tokens, overrides, domain, onSet, onReset }: {
     tokens: SlashedToken[];
     overrides: Record<string, string>;
-    patterns: string[];
+    domain: string;
     onSet: (name: string, value: string) => void;
     onReset: (name: string) => void;
   } = $props();
@@ -21,9 +22,11 @@
   let showInternal = $state(false);
   let onlyModified = $state(false);
 
+  // Filter by the SAME classifier the sidebar badge and category Reset use, so
+  // this list can never disagree with them about what belongs to the domain.
   let domainTokens = $derived(
     tokens
-      .filter((t) => patterns.some((p) => t.name.includes(p)))
+      .filter((t) => domainOf(t.name) === domain)
       .sort((a, b) => {
         const ta = TIER_ORDER[a.tier ?? "INTERNAL"] ?? 2;
         const tb = TIER_ORDER[b.tier ?? "INTERNAL"] ?? 2;

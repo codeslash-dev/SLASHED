@@ -5,15 +5,17 @@
  * Every PUBLIC / PUBLIC-ADVANCED knob token must map to a named domain so it
  * shows up in the right panel rather than an uncategorised fallback.
  *
- * Patterns kept in sync with src/lib/domains.ts — if you update the domain
- * patterns there, update DOMAIN_PATTERNS here as well.
+ * Classification is driven by src/data/domain-map.json — the same file
+ * src/lib/domains.ts uses at runtime — so this guard and the app can never
+ * drift. If the framework adds a token in a brand-new namespace, add that
+ * namespace to domain-map.json.
  *
  * Usage:  node scripts/check-curation.mjs        # exits 1 on any orphan
  * Also asserted by tests/curation.test.js so CI catches it either way.
  */
 import { pathToFileURL } from 'url';
 import data from '../src/data/api-index.generated.json' with { type: 'json' };
-import DOMAIN_PATTERNS from '../src/data/domain-patterns.json' with { type: 'json' };
+import DOMAIN_MAP from '../src/data/domain-map.json' with { type: 'json' };
 
 /**
  * Tokens that legitimately live outside the named domains.
@@ -21,17 +23,27 @@ import DOMAIN_PATTERNS from '../src/data/domain-patterns.json' with { type: 'jso
  */
 const ALLOWLIST = new Set([]);
 
+const NAMESPACE_DOMAIN = DOMAIN_MAP.namespaces;
+const EXCEPTIONS = DOMAIN_MAP.exceptions;
+
+/** The `--sf-<namespace>-…` segment of a token name. */
+function inferNamespace(name) {
+  const m = /^--sf-([a-z0-9]+)/.exec(name || '');
+  return m ? m[1] : '';
+}
+
 /**
- * Returns true when a token name matches any domain pattern.
- * @param {{name:string}} token
+ * Returns true when a token is explicitly classified into a domain — i.e. it
+ * has a per-token exception or its (manifest-authored) namespace is mapped.
+ * Mirrors src/lib/domains.ts's classifyKnown() from the same domain-map.json.
+ * @param {{name:string, namespace?:string}} token
  * @returns {boolean}
  */
 function isExplicitlyClassified(token) {
   const name = token.name || '';
-  for (const patterns of Object.values(DOMAIN_PATTERNS)) {
-    if (patterns.some(p => name.includes(p))) return true;
-  }
-  return false;
+  if (EXCEPTIONS[name]) return true;
+  const ns = token.namespace || inferNamespace(name);
+  return Boolean(NAMESPACE_DOMAIN[ns]);
 }
 
 /**
@@ -54,7 +66,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       `[configurator:curation] ${orphans.length} knob token(s) match no domain ` +
         `pattern and would only appear in an uncategorised bucket:\n` +
         orphans.map(n => `  - ${n}`).join('\n') +
-        `\n\nAdd a name pattern to src/data/domain-patterns.json.`
+        `\n\nAdd the token's namespace to src/data/domain-map.json.`
     );
     process.exit(1);
   }
