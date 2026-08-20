@@ -3,6 +3,7 @@
   import { resolveColor, previewVersion } from '../../lib/previewResolver.svelte';
   import { scaleForValue } from '../../lib/variableScales';
   import { roleOf, aliasTargetOf, tokenState, ROLE_LABEL, type TokenRole, type TokenState } from '../../lib/tokenModel';
+  import ValueField from './ValueField.svelte';
 
   let { token, overrideValue, onSet, onReset, dependentsCount = 0 }: {
     token: SlashedToken;
@@ -29,19 +30,9 @@
   };
   let aliasShort = $derived(aliasTarget ? aliasTarget.replace("--sf-", "") : "");
 
-  const CUSTOM = "__sf_custom__";
-  let expanded = $state(false);
-
   // When a token's default is itself a scale variable (e.g. var(--sf-space-m)),
-  // offer that scale's steps as a dropdown — variable-first, with the raw text
-  // box available via "Custom…". Mirrors SliderRow's picker for the generic row.
-  let scaleOpts = $derived(scaleForValue(token.value));
-  let matchedScale = $derived(
-    !!scaleOpts && (scaleOpts.some((o) => o.value === (overrideValue ?? token.value)))
-  );
-  let showScalePicker = $derived(
-    !!scaleOpts && !expanded && (overrideValue === undefined || matchedScale)
-  );
+  // offer that scale's steps as quick "relink" targets in the value editor.
+  let scaleOpts = $derived(scaleForValue(token.value) ?? []);
 
   function guessType(t: SlashedToken): "color" | "font" | "number" | "text" {
     const n = t.name;
@@ -162,53 +153,10 @@
     </div>
   {/if}
 
+  <!-- Unified value editor: explicit Inherit / Value / Expression modes. An
+       expression override is always shown verbatim (never parsed to a fallback
+       number), and switching to a fixed value is a deliberate tab click. -->
   <div class="mt-1 pl-3.5">
-    {#if showScalePicker && scaleOpts}
-      <select
-        value={displayValue}
-        aria-label={`${shortName} value`}
-        onchange={(e) => {
-          const v = (e.target as HTMLSelectElement).value;
-          if (v === CUSTOM) { expanded = true; return; }
-          if (v === token.value) onReset(); else onSet(v);
-        }}
-        class="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[10px] font-mono text-slate-700 dark:text-slate-300 focus:outline-none focus:border-indigo-500 cursor-pointer"
-      >
-        {#if !scaleOpts.some((o) => o.value === token.value)}
-          <option value={token.value}>{token.value} (default)</option>
-        {/if}
-        {#each scaleOpts as o (o.value)}
-          <option value={o.value}>{o.label}</option>
-        {/each}
-        <option value={CUSTOM}>Custom…</option>
-      </select>
-    {:else if expanded}
-      <input
-        value={displayValue}
-        onblur={(e) => {
-          const v = (e.target as HTMLInputElement).value.trim();
-          if (v && v !== token.value) onSet(v);
-          else if (!v || v === token.value) onReset();
-          expanded = false;
-        }}
-        onkeydown={(e) => {
-          if (e.key === "Enter") (e.currentTarget as HTMLInputElement).blur();
-          if (e.key === "Escape") { expanded = false; }
-        }}
-        class="w-full bg-black/8 dark:bg-white/8 border border-indigo-500/50 rounded px-1.5 py-1 text-[10px] font-mono text-slate-800 dark:text-slate-200 focus:outline-none"
-      />
-    {:else}
-      <button
-        onclick={() => { expanded = true; }}
-        class="w-full text-left text-[10px] font-mono text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 truncate cursor-pointer transition-colors"
-        title={displayValue}
-      >
-        {#if isOverridden}
-          <span class="text-indigo-700 dark:text-indigo-300">{displayValue}</span>
-        {:else}
-          {displayValue}
-        {/if}
-      </button>
-    {/if}
+    <ValueField {token} {overrideValue} {onSet} {onReset} scaleOptions={scaleOpts} />
   </div>
 </div>

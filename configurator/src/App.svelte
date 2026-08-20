@@ -97,10 +97,16 @@
     if (tab) untrack(() => { previewTemplate = tab; });
   });
 
+  // Each user-visible edit is its own undo step. Controls currently do not
+  // expose a reliable gesture boundary, so time-based coalescing could merge
+  // two distinct actions on the same token.
+
   function setOverrides(updater: ((prev: Record<string, string>) => Record<string, string>) | Record<string, string>) {
     const prev = overrides;
     const next = typeof updater === "function" ? updater(prev) : updater;
     if (!shallowEq(prev, next)) {
+      // Keep discrete edits independently undoable. Range input events are
+      // intentionally not time-grouped until the control provides boundaries.
       past = [...past.slice(-49), prev];
       future = [];
       if (saveState === 'saved' || saveState === 'error') saveState = 'idle';
