@@ -279,6 +279,8 @@ export interface ValidationResult {
 // them here stops an invalid value from ever entering the active override map
 // (and fixes the `--sf-x: ;` empty-value export hole).
 const CSS_BREAKING_RE = /[;{}]|\/\*|\*\//;
+const CONTROL_CHAR_RE = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/;
+const MAX_CODEC_BYTES = 65_535;
 
 /** Map a token's `syntax` metadata to a real CSS property we can probe. */
 function probePropertyForSyntax(syntax: string | null | undefined): string | null {
@@ -311,6 +313,8 @@ export function validateTokenValue(token: SlashedToken, value: string): Validati
   const v = value.trim();
   if (v === "") return { valid: false, reason: "empty value" };
   if (CSS_BREAKING_RE.test(v)) return { valid: false, reason: "contains CSS-breaking characters" };
+  if (CONTROL_CHAR_RE.test(v)) return { valid: false, reason: "contains control characters" };
+  if (new TextEncoder().encode(v).byteLength > MAX_CODEC_BYTES) return { valid: false, reason: "exceeds export size limit" };
   if (!hasBalancedParens(v)) return { valid: false, reason: "unbalanced parentheses" };
 
   const syntax = (token.syntax ?? "").toLowerCase();

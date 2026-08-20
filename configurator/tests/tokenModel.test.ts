@@ -161,6 +161,8 @@ describe('validateTokenValue', () => {
     expect(validateTokenValue(t, '   ').valid).toBe(false);
     expect(validateTokenValue(t, '1rem; }').valid).toBe(false);
     expect(validateTokenValue(t, 'red /* x */').valid).toBe(false);
+    expect(validateTokenValue(t, 'red\u0000').valid).toBe(false);
+    expect(validateTokenValue(t, 'x'.repeat(65_536)).valid).toBe(false);
   });
   test('accepts plain values and expressions under Node (structural only)', () => {
     expect(validateTokenValue(t, '1rem').valid).toBe(true);
