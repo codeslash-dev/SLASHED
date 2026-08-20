@@ -24,17 +24,11 @@
 
   // Navigation destinations — makes this a real command palette (jump to any
   // panel/tool), not just a token search.
-  const NAV_ALIASES: Record<string, string[]> = {
-    borders: ["border", "radius", "shape"], shadows: ["shadow", "depth"],
-    effects: ["effect"], wcag: ["accessibility", "contrast"],
-    themes: ["theme", "preset"], setup: ["install", "export"],
-    cheatsheet: ["reference", "classes"], misc: ["system"],
-  };
   const NAV = [
     "home", "colors", "typography", "spacing", "borders", "motion",
     "layout", "depth", "macros", "components", "misc",
     "changes", "wcag", "themes", "setup", "cheatsheet",
-  ].map((id) => ({ id, label: DOMAIN_LABELS[id] ?? id, terms: [id, ...(NAV_ALIASES[id] ?? [])] }));
+  ].map((id) => ({ id, label: DOMAIN_LABELS[id] ?? id }));
 
   type Result =
     | { kind: "nav"; id: string; label: string }
@@ -44,9 +38,7 @@
     const q = query.trim().toLowerCase();
     // Navigation matches (all destinations when empty, so the palette is useful
     // before typing).
-    const nav: Result[] = (q ? NAV.filter((n) =>
-      n.label.toLowerCase().includes(q) || n.terms.some((term) => term.includes(q))
-    ) : NAV)
+    const nav: Result[] = (q ? NAV.filter((n) => n.label.toLowerCase().includes(q)) : NAV)
       .map((n) => ({ kind: "nav", id: n.id, label: n.label }));
 
     const tokenMatches: Result[] = [];
@@ -110,7 +102,7 @@
         <div class="px-4 py-8 text-center text-[11px] text-slate-400 dark:text-slate-600">No matches for "{query}"</div>
       {:else}
         {#each results as r, i (r.kind === "nav" ? `nav:${r.id}` : `tok:${r.token.name}`)}
-          {#if i === 0 && navCount > 0}
+          {#if i === 0}
             <div class="px-4 pt-2 pb-1 text-[8px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Go to</div>
           {/if}
           {#if r.kind === "token" && i === navCount}
