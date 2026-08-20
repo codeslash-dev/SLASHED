@@ -131,8 +131,8 @@
         <span class="font-mono">↳ inherits <span class="text-sky-600 dark:text-sky-400">{aliasShort}</span></span>
       {/if}
       {#if dependentsCount > 0}
-        <span title={`${dependentsCount} token${dependentsCount !== 1 ? "s" : ""} read this value`}>
-          used by {dependentsCount}
+        <span title={`${dependentsCount} token${dependentsCount !== 1 ? "s" : ""} reference this token in the framework defaults`}>
+          used by {dependentsCount} default{dependentsCount !== 1 ? "s" : ""}
         </span>
       {/if}
     </div>
