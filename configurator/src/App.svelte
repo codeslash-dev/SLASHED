@@ -271,6 +271,11 @@
 
   onMount(() => {
     const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && navDrawerOpen) {
+        e.preventDefault();
+        navDrawerOpen = false;
+        return;
+      }
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === "z") {
         e.preventDefault();
         handleUndo();
