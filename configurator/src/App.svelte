@@ -220,7 +220,7 @@
       const reader = new FileReader();
       reader.onload = (ev) => {
         const text = ev.target?.result as string;
-        if (!text) return;
+        if (!text) { showImportStatus("Nothing imported — the selected file is empty."); return; }
         // One validated pipeline for both CSS and JSON: sanitised, migrated,
         // merged (non-destructive), and always reported — no more silent no-ops.
         const { overrides: imported, report } = parseImport(text, file.name, LIVE_TOKEN_NAMES);
@@ -229,6 +229,7 @@
         }
         showImportStatus(summarizeImport(report));
       };
+      reader.onerror = () => { showImportStatus("Import failed — the selected file could not be read."); };
       reader.readAsText(file);
     };
     input.click();
@@ -268,6 +269,7 @@
     return () => {
       window.removeEventListener("keydown", handler);
       if (saveStateTimer) clearTimeout(saveStateTimer);
+      if (importStatusTimer) clearTimeout(importStatusTimer);
     };
   });
 </script>
@@ -307,7 +309,7 @@
 
   <!-- Import feedback: a transient banner (the previous import flow gave none). -->
   {#if importStatus}
-    <div class="shrink-0 flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border-b border-indigo-500/20 text-[11px] text-indigo-700 dark:text-indigo-300">
+    <div role="status" class="shrink-0 flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border-b border-indigo-500/20 text-[11px] text-indigo-700 dark:text-indigo-300">
       <span class="flex-1">{importStatus}</span>
       <button onclick={() => { importStatus = null; }} aria-label="Dismiss" class="text-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-200 cursor-pointer font-bold">×</button>
     </div>

@@ -37,6 +37,8 @@ export interface ImportReport {
   unknown: number;
   /** Keys rejected for a bad name or an unsafe/empty value. */
   invalid: string[];
+  /** Keys dropped because multiple legacy names map to one current token. */
+  collisions: number;
   /** True when the file couldn't be parsed into any tokens. */
   malformed: boolean;
 }
@@ -52,20 +54,18 @@ function looksLikeJson(text: string): boolean {
   return text.trim().startsWith("{");
 }
 
-/** Extract a raw name→value map from JSON (flat, or a theme-file `{ tokens }`). */
-function readJsonMap(text: string): { map: Record<string, string>; malformed: boolean } {
+/** Extract a raw name→value map from JSON (flat, or a theme-file wrapper). */
+function readJsonMap(text: string): { map: Record<string, unknown>; malformed: boolean } {
   try {
     const data = JSON.parse(text);
     if (!data || typeof data !== "object" || Array.isArray(data)) return { map: {}, malformed: true };
     const src =
-      "tokens" in data && data.tokens && typeof data.tokens === "object"
-        ? (data.tokens as Record<string, unknown>)
-        : (data as Record<string, unknown>);
-    const map: Record<string, string> = {};
-    for (const [k, v] of Object.entries(src)) {
-      if (typeof v === "string") map[k] = v;
-    }
-    return { map, malformed: false };
+      "overrides" in data && data.overrides && typeof data.overrides === "object" && !Array.isArray(data.overrides)
+        ? (data.overrides as Record<string, unknown>)
+        : "tokens" in data && data.tokens && typeof data.tokens === "object" && !Array.isArray(data.tokens)
+          ? (data.tokens as Record<string, unknown>)
+          : (data as Record<string, unknown>);
+    return { map: src, malformed: false };
   } catch {
     return { map: {}, malformed: true };
   }
@@ -91,7 +91,10 @@ export function parseImport(
   const cleaned: Record<string, string> = {};
   const invalid: string[] = [];
   for (const [key, value] of Object.entries(rawMap)) {
-    if (!KEY_RE.test(key)) { invalid.push(key); continue; }
+    if (!KEY_RE.test(key) || typeof value !== "string") { invalid.push(key); continue; }
+    // Preserve normal whitespace (sanitizeValue will collapse it) but reject
+    // non-printing control characters that theme files and share links reject.
+    if (/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value)) { invalid.push(key); continue; }
     const safe = sanitizeValue(value);
     if (!isStructurallySafe(safe)) { invalid.push(key); continue; }
     cleaned[key] = safe;
@@ -108,6 +111,7 @@ export function parseImport(
       removed: migrated.removed.length,
       unknown: migrated.unknown.length,
       invalid,
+      collisions: migrated.collisions.length,
       malformed: malformed && Object.keys(cleaned).length === 0,
     },
   };
@@ -122,5 +126,6 @@ export function summarizeImport(r: ImportReport): string {
   if (r.removed) parts.push(`${r.removed} removed`);
   if (r.unknown) parts.push(`${r.unknown} unknown`);
   if (r.invalid.length) parts.push(`${r.invalid.length} skipped`);
+  if (r.collisions) parts.push(`${r.collisions} migration collision${r.collisions === 1 ? "" : "s"}`);
   return parts.join(" · ") + ".";
 }
