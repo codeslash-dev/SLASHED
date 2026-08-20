@@ -342,7 +342,7 @@
     <div class={`shrink-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
       <SidebarNav
         activeId={domain}
-        onSelect={(d) => { domain = d; }}
+        onSelect={(d) => { domain = d; focusRequest = null; }}
         overridesByDomain={domainBadges}
       />
     </div>
@@ -382,7 +382,7 @@
           onReset={handleReset}
           onBulkChange={handleBulkChange}
           onApplyTheme={handleApplyTheme}
-          onSelectDomain={(d) => { domain = d; }}
+          onSelectDomain={(d) => { domain = d; focusRequest = null; }}
           onResetAll={handleResetAll}
         />
       </div>
@@ -422,6 +422,7 @@
       onNavigate={(d, token) => {
         domain = d;
         if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
+        else focusRequest = null;
         // On mobile, deep-linking into a token means we want the controls side.
         mobileView = "controls";
       }}
