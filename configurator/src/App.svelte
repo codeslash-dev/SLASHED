@@ -18,9 +18,10 @@
 
   const DOMAIN_LABELS: Record<string, string> = {
     home: "Home", colors: "Colors", typography: "Typography", spacing: "Spacing",
-    layout: "Layout", borders: "Borders", shadows: "Shadows", motion: "Motion",
+    layout: "Layout", borders: "Shape", shadows: "Shadows", motion: "Motion",
     effects: "Effects", macros: "Macros", misc: "Misc", components: "Components",
-    changes: "Changes", themes: "Themes", wcag: "WCAG", setup: "Install", cheatsheet: "Classes",
+    changes: "Changes", themes: "Presets", wcag: "Accessibility",
+    setup: "Install & export", cheatsheet: "Reference",
   };
 
   function overridesByDomain(ov: Record<string, string>): Record<string, number> {
