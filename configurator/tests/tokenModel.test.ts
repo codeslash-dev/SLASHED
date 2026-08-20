@@ -64,6 +64,14 @@ describe('pureVarTarget', () => {
     expect(pureVarTarget('var(--sf-space-m, 1rem))')).toBeNull();
     expect(pureVarTarget('1rem')).toBeNull();
   });
+  test('rejects a var() with a fallback followed by more content', () => {
+    // The fallback group is greedy; it must not span past the var()'s own `)`.
+    expect(pureVarTarget('var(--sf-a, red) var(--sf-b)')).toBeNull();
+    expect(pureVarTarget('var(--sf-a, red) solid')).toBeNull();
+  });
+  test('accepts a var() whose fallback is itself a function', () => {
+    expect(pureVarTarget('var(--sf-a, calc(1rem + 2px))')).toBe('--sf-a');
+  });
 });
 
 describe('aliasTargetOf', () => {
@@ -189,6 +197,9 @@ describe('isStructurallySafe (the export-safety gate behind tokenState invalid)'
     expect(isStructurallySafe('   ')).toBe(false);
     expect(isStructurallySafe('1rem; }')).toBe(false);
     expect(isStructurallySafe('red /* x */')).toBe(false);
+    // Control characters and oversized values are dropped/refused on export too.
+    expect(isStructurallySafe('red\u0007')).toBe(false);
+    expect(isStructurallySafe('a'.repeat(65_536))).toBe(false);
   });
   test('accepts safe values regardless of semantic oddness', () => {
     // A fractional number, an odd colour, an expression — none are *dropped*.
@@ -227,6 +238,9 @@ describe('tokenState', () => {
     // A fractional number for a <number> source remains a valid custom value.
     expect(tokenState(source, { '--sf-space-base-min': '1.1' })).toBe('custom');
     expect(tokenState(source, { '--sf-space-base-min': 'var(--sf-space-m, 1rem))' })).toBe('invalid');
+    // Control characters and oversized values are dropped/refused on export.
+    expect(tokenState(source, { '--sf-space-base-min': '1\u0007' })).toBe('invalid');
+    expect(tokenState(source, { '--sf-space-base-min': 'a'.repeat(65_536) })).toBe('invalid');
   });
 });
 

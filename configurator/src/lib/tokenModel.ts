@@ -69,8 +69,19 @@ export function referencesIn(value: string | null | undefined): string[] {
 /** The single token a pure `var(--sf-x)` value points at, else null. */
 export function pureVarTarget(value: string | null | undefined): string | null {
   if (!value || !hasBalancedParens(value)) return null;
-  const m = PURE_VAR_RE.exec(value.trim());
-  return m ? m[1] : null;
+  const v = value.trim();
+  const m = PURE_VAR_RE.exec(v);
+  if (!m) return null;
+  // PURE_VAR_RE's fallback group is greedy, so it can span past the var()'s own
+  // closing paren (e.g. `var(--sf-a, x) var(--sf-b)` matches with target --sf-a).
+  // A genuine single-var alias closes the leading `var(` at the very end of the
+  // string; if the first paren-depth-0 close is not the last char, it's compound.
+  let depth = 0;
+  for (let i = 0; i < v.length; i++) {
+    if (v[i] === "(") depth += 1;
+    else if (v[i] === ")" && --depth === 0) return i === v.length - 1 ? m[1] : null;
+  }
+  return m[1];
 }
 
 /**
@@ -295,7 +306,12 @@ export function isStructurallySafe(value: string): boolean {
   if (typeof value !== "string") return false;
   const v = value.trim();
   if (v === "") return false;
-  return !CSS_BREAKING_RE.test(v);
+  // Mirror every rejection the export path (codec.ts / themeFile.ts) enforces:
+  // CSS-breaking characters, control characters, and the share-link byte limit.
+  // Anything that would be dropped or refused on export must read as unsafe here
+  // so the Changes panel never labels it Custom/Detached/Re-linked.
+  if (CSS_BREAKING_RE.test(v) || CONTROL_CHAR_RE.test(v)) return false;
+  return new TextEncoder().encode(v).byteLength <= MAX_CODEC_BYTES;
 }
 
 /** Map a token's `syntax` metadata to a real CSS property we can probe. */
