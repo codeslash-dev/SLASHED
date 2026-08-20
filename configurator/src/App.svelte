@@ -11,7 +11,6 @@
   import { generateCSS } from './lib/codec';
   import { loadInitialOverrides, injectLivePreview, saveOverrides, hasWpBoot } from './lib/persistence';
   import { domainOf } from './lib/domains';
-  import { changedKeys, shouldCoalesce, NO_COALESCE, type CoalesceState } from './lib/history';
   import { parseImport, summarizeImport } from './lib/importOverrides';
   import tokensRaw from './data/api-index.generated.json';
   import CommandPalette from './components/CommandPalette.svelte';
