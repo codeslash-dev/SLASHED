@@ -21,6 +21,12 @@
 
   let draft = $state("");
   let editing = $state(false);
+  let cancelling = $state(false);
+  // Reset a user-selected tab when another surface changes this token.
+  $effect(() => {
+    overrideValue;
+    manualMode = null;
+  });
   // Seed the text field from the live value whenever we're not mid-edit.
   $effect(() => {
     if (!editing) draft = overrideValue ?? token.value ?? "";
@@ -94,10 +100,19 @@
       placeholder={mode === "expression" ? "var(--sf-…) / calc(…)" : token.value}
       onfocus={() => { editing = true; }}
       oninput={(e) => { draft = (e.target as HTMLInputElement).value; }}
-      onblur={(e) => { editing = false; commit((e.target as HTMLInputElement).value); }}
+      onblur={(e) => {
+        editing = false;
+        if (cancelling) { cancelling = false; return; }
+        commit((e.target as HTMLInputElement).value);
+      }}
       onkeydown={(e) => {
         if (e.key === "Enter") (e.currentTarget as HTMLInputElement).blur();
-        if (e.key === "Escape") { editing = false; draft = overrideValue ?? token.value ?? ""; (e.currentTarget as HTMLInputElement).blur(); }
+        if (e.key === "Escape") {
+          cancelling = true;
+          editing = false;
+          draft = overrideValue ?? token.value ?? "";
+          (e.currentTarget as HTMLInputElement).blur();
+        }
       }}
       class="w-full bg-black/8 dark:bg-white/8 border border-black/10 dark:border-white/10 rounded px-1.5 py-1 text-[10px] font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
     />
