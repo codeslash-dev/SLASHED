@@ -8,9 +8,8 @@
   import SpacingPanel from './panels/SpacingPanel.svelte';
   import LayoutPanel from './panels/LayoutPanel.svelte';
   import BordersPanel from './panels/BordersPanel.svelte';
-  import ShadowsPanel from './panels/ShadowsPanel.svelte';
+  import DepthPanel from './panels/DepthPanel.svelte';
   import MotionPanel from './panels/MotionPanel.svelte';
-  import EffectsPanel from './panels/EffectsPanel.svelte';
   import MacrosPanel from './panels/MacrosPanel.svelte';
   import MiscPanel from './panels/MiscPanel.svelte';
   import ComponentsPanel from './panels/ComponentsPanel.svelte';
@@ -20,7 +19,7 @@
   import ChangesPanel from './panels/ChangesPanel.svelte';
   import GenericTokenPanel from './panels/GenericTokenPanel.svelte';
   import AllTokensTab from './panels/AllTokensTab.svelte';
-  import WcagPanel from './panels/WcagPanel.svelte';
+  import AccessibilityPanel from './panels/AccessibilityPanel.svelte';
 
   let { domain, tokens, overrides, focusToken = null, focusNonce = 0, onSet, onReset, onBulkChange, onApplyTheme, onSelectDomain, onResetAll }: {
     domain: string;
@@ -39,7 +38,7 @@
 
 
   // Domains that skip the two-tab treatment
-  const NO_CONTROLS_TAB = new Set(["home", "changes", "themes", "wcag", "setup", "cheatsheet"]);
+  const NO_CONTROLS_TAB = new Set(["home", "changes", "themes", "setup", "cheatsheet"]);
 
   let view = $state<"controls" | "tokens">("controls");
 
@@ -72,8 +71,6 @@
     <ChangesPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} {onResetAll} {onSelectDomain} />
   {:else if domain === "themes"}
     <ThemesPanel {overrides} {onApplyTheme} {onResetAll} />
-  {:else if domain === "wcag"}
-    <WcagPanel {tokens} {overrides} {onSet} {onBulkChange} />
   {:else if domain === "setup"}
     <ExportPanel {overrides} {tokens} {onApplyTheme} />
   {:else if domain === "cheatsheet"}
@@ -95,18 +92,18 @@
             <LayoutPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "borders"}
             <BordersPanel {overrides} {onSet} {onReset} />
-          {:else if domain === "shadows"}
-            <ShadowsPanel {overrides} {onSet} {onReset} />
+          {:else if domain === "depth"}
+            <DepthPanel {overrides} {onSet} {onReset} />
           {:else if domain === "motion"}
             <MotionPanel {overrides} {onSet} {onReset} />
-          {:else if domain === "effects"}
-            <EffectsPanel {overrides} {onSet} {onReset} />
           {:else if domain === "macros"}
             <MacrosPanel {overrides} {onSet} {onReset} />
           {:else if domain === "misc"}
             <MiscPanel {overrides} {onSet} {onReset} {onBulkChange} />
           {:else if domain === "components"}
             <ComponentsPanel {overrides} {onSet} {onReset} />
+          {:else if domain === "wcag"}
+            <AccessibilityPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} />
           {:else}
             <GenericTokenPanel {domain} {tokens} {overrides} {onSet} {onReset} />
           {/if}

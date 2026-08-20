@@ -50,7 +50,6 @@
     "header": "layout",
     "sticky": "layout",
     "safe": "layout",
-    "touch": "layout",
     "breakout": "layout",
     "box": "layout",
     "bg": "layout",
@@ -62,7 +61,7 @@
     "field": "borders",
     "media": "borders",
 
-    "shadow": "shadows",
+    "shadow": "depth",
 
     "motion": "motion",
     "duration": "motion",
@@ -74,9 +73,9 @@
     "theme": "motion",
     "animation": "motion",
 
-    "blur": "effects",
-    "opacity": "effects",
-    "drop": "effects",
+    "blur": "depth",
+    "opacity": "depth",
+    "drop": "depth",
 
     "prose": "macros",
     "flow": "macros",
@@ -93,8 +92,10 @@
     "size": "misc",
     "object": "misc",
     "scrollbar": "misc",
-    "focus": "misc",
-    "is": "misc"
+    "is": "misc",
+
+    "focus": "wcag",
+    "touch": "wcag"
   },
   "exceptions": {
     "--sf-content-width": "layout",

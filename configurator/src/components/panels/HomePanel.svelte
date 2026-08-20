@@ -31,8 +31,7 @@
       label: "Composition",
       items: [
         { id: "layout",     icon: Layout,    label: "Layout",     desc: "Containers, grids & primitives" },
-        { id: "shadows",    icon: Layers,    label: "Shadows",    desc: "Elevation & depth control" },
-        { id: "effects",    icon: Sparkles,  label: "Effects",    desc: "Blur, opacity & scrollbars" },
+        { id: "depth",      icon: Layers,    label: "Depth",      desc: "Shadows, glow, blur & opacity" },
         { id: "macros",     icon: Blocks,    label: "Macros",     desc: "Flow, prose, aspect & scrim" },
         { id: "components", icon: Component, label: "Components", desc: "Button & card component tokens" },
         { id: "misc",       icon: Puzzle,    label: "Misc",       desc: "Z-index & remaining tokens" },
@@ -42,7 +41,7 @@
       label: "Quality",
       items: [
         { id: "changes",    icon: ListChecks,  label: "Changes",       desc: "Review every active override" },
-        { id: "wcag",       icon: ShieldCheck, label: "Accessibility", desc: "Contrast checker & fixes" },
+        { id: "wcag",       icon: ShieldCheck, label: "Accessibility", desc: "Focus ring, touch target & contrast" },
       ],
     },
     {
@@ -60,7 +59,7 @@
   // Per-destination override count — the same canonical domainOf() classifier
   // the sidebar and Reset use, so counts never disagree. `changes` shows the
   // total; non-token tools show nothing.
-  const NON_TOKEN_IDS = new Set<string>(["changes", "wcag", "themes", "setup", "cheatsheet"]);
+  const NON_TOKEN_IDS = new Set<string>(["changes", "themes", "setup", "cheatsheet"]);
   const TOKEN_DOMAIN_IDS = new Set<string>(
     GROUPS.flatMap((g) => g.items.map((i) => i.id as string)).filter((id) => !NON_TOKEN_IDS.has(id)),
   );

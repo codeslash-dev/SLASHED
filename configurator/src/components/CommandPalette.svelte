@@ -16,8 +16,8 @@
 
   const DOMAIN_LABELS: Record<string, string> = {
     home: "Home", colors: "Colors", typography: "Typography", spacing: "Spacing",
-    layout: "Layout", borders: "Shape", shadows: "Shadows", motion: "Motion",
-    effects: "Effects", macros: "Macros", misc: "Misc", components: "Components",
+    layout: "Layout", borders: "Shape", depth: "Depth", motion: "Motion",
+    macros: "Macros", misc: "Misc", components: "Components",
     changes: "Changes", wcag: "Accessibility", themes: "Presets",
     setup: "Install & export", cheatsheet: "Reference",
   };
@@ -32,7 +32,7 @@
   };
   const NAV = [
     "home", "colors", "typography", "spacing", "borders", "motion",
-    "layout", "shadows", "effects", "macros", "components", "misc",
+    "layout", "depth", "macros", "components", "misc",
     "changes", "wcag", "themes", "setup", "cheatsheet",
   ].map((id) => ({ id, label: DOMAIN_LABELS[id] ?? id, terms: [id, ...(NAV_ALIASES[id] ?? [])] }));
 
