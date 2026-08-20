@@ -23,6 +23,11 @@ describe('parseImport — JSON', () => {
     const r = parseImport('{"schemaVersion":1,"tokens":{"--sf-space-m":"3rem"}}', 't.json', LIVE);
     expect(r.overrides).toEqual({ '--sf-space-m': '3rem' });
   });
+  test('accepts exported theme-file { overrides } and reports invalid values', () => {
+    const r = parseImport('{"schemaVersion":1,"overrides":{"--sf-space-m":"3rem","--sf-radius-l":4}}', 'theme.json', LIVE);
+    expect(r.overrides).toEqual({ '--sf-space-m': '3rem' });
+    expect(r.report.invalid).toEqual(['--sf-radius-l']);
+  });
   test('repairs CSS-breaking values but rejects bad keys and empty-after-sanitise ones', () => {
     // "1rem; }" sanitises to "1rem" (kept); ";;" sanitises to "" (rejected);
     // a non --sf key is rejected.
@@ -65,14 +70,14 @@ describe('parseImport — migration & unknown', () => {
 
 describe('summarizeImport', () => {
   test('summarises a mixed result', () => {
-    const msg = summarizeImport({ format: 'json', accepted: 3, renamed: 1, removed: 0, unknown: 1, invalid: ['x'], malformed: false });
+    const msg = summarizeImport({ format: 'json', accepted: 3, renamed: 1, removed: 0, unknown: 1, invalid: ['x'], collisions: 0, malformed: false });
     expect(msg).toContain('Imported 3 tokens');
     expect(msg).toContain('1 migrated');
     expect(msg).toContain('1 unknown');
     expect(msg).toContain('1 skipped');
   });
   test('reports malformed and empty distinctly', () => {
-    expect(summarizeImport({ format: 'css', accepted: 0, renamed: 0, removed: 0, unknown: 0, invalid: [], malformed: true })).toMatch(/failed/i);
-    expect(summarizeImport({ format: 'css', accepted: 0, renamed: 0, removed: 0, unknown: 0, invalid: [], malformed: false })).toMatch(/Nothing imported/i);
+    expect(summarizeImport({ format: 'css', accepted: 0, renamed: 0, removed: 0, unknown: 0, invalid: [], collisions: 0, malformed: true })).toMatch(/failed/i);
+    expect(summarizeImport({ format: 'css', accepted: 0, renamed: 0, removed: 0, unknown: 0, invalid: [], collisions: 0, malformed: false })).toMatch(/Nothing imported/i);
   });
 });
