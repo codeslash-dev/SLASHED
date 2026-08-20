@@ -399,7 +399,7 @@
     <div class="shrink-0 hidden md:flex">
       <SidebarNav
         activeId={domain}
-        onSelect={(d) => { domain = d; focusRequest = null; }}
+        onSelect={(d) => { navigateTo(d); }}
         overridesByDomain={domainBadges}
       />
     </div>
@@ -456,7 +456,7 @@
           onReset={handleReset}
           onBulkChange={handleBulkChange}
           onApplyTheme={handleApplyTheme}
-          onSelectDomain={(d) => { domain = d; focusRequest = null; }}
+          onSelectDomain={(d) => { navigateTo(d); }}
           onResetAll={handleResetAll}
         />
       </div>
@@ -504,7 +504,7 @@
         <SidebarNav
           expanded
           activeId={domain}
-          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; focusRequest = null; }}
+          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; }}
           overridesByDomain={domainBadges}
         />
       </div>
@@ -539,6 +539,7 @@
           {#if r.removed > 0}<div class="flex justify-between"><span class="text-slate-500">Dropped (removed by framework)</span><span class="font-mono text-slate-500">{r.removed}</span></div>{/if}
           {#if r.unknown > 0}<div class="flex justify-between"><span class="text-slate-500">Unknown in this build</span><span class="font-mono text-amber-600 dark:text-amber-400">{r.unknown}</span></div>{/if}
           {#if r.invalid.length > 0}<div class="flex justify-between"><span class="text-slate-500">Skipped (invalid)</span><span class="font-mono text-rose-600 dark:text-rose-400">{r.invalid.length}</span></div>{/if}
+          {#if r.collisions > 0}<div class="flex justify-between"><span class="text-slate-500">Skipped (migration collision)</span><span class="font-mono text-amber-600 dark:text-amber-400">{r.collisions}</span></div>{/if}
           <p class="text-[10px] text-slate-400 dark:text-slate-600 pt-1.5 leading-relaxed">
             <span class="font-semibold">Merge</span> keeps your current {overridesCount} override{overridesCount !== 1 ? "s" : ""} and adds these on top.
             <span class="font-semibold">Replace</span> discards the current set first.
@@ -569,11 +570,7 @@
       tokens={ALL_TOKENS}
       {overrides}
       onNavigate={(d, token) => {
-        domain = d;
-        if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
-        else focusRequest = null;
-        // On mobile, deep-linking into a token means we want the controls side.
-        mobileView = "controls";
+        navigateTo(d, token);
       }}
       onClose={() => { showPalette = false; }}
     />
