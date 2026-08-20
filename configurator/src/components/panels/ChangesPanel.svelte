@@ -35,7 +35,7 @@
     accent: string;
   };
   const GROUPS: GroupDef[] = [
-    { key: "invalid",  label: "Invalid",  blurb: "Can't be applied safely — will be dropped on export.", icon: AlertTriangle, accent: "text-rose-600 dark:text-rose-400" },
+    { key: "invalid",  label: "Invalid",  blurb: "Contains a malformed or CSS-breaking value — fix or reset it before export.", icon: AlertTriangle, accent: "text-rose-600 dark:text-rose-400" },
     { key: "detached", label: "Detached", blurb: "Frozen — no longer follows the token that would produce it.", icon: Unlink, accent: "text-amber-600 dark:text-amber-400" },
     { key: "relinked", label: "Re-linked", blurb: "Re-pointed at another token instead of a fixed value.", icon: Link2, accent: "text-sky-600 dark:text-sky-400" },
     { key: "custom",   label: "Custom",   blurb: "A source value you set. Expected and safe.", icon: SlidersHorizontal, accent: "text-indigo-600 dark:text-indigo-400" },
@@ -116,7 +116,7 @@
               </div>
               <div class="text-[9px] text-amber-700/80 dark:text-amber-300/80 leading-snug mt-0.5">
                 These fixed values override the generated ladder, so its source
-                knob{sh.overriddenSources.length ? "" : ""} can't move them.
+                knob{sh.overriddenSources.length === 1 ? "" : "s"} can't move them.
               </div>
               <button
                 onclick={() => clearShadow(sh.shadowedSteps)}
