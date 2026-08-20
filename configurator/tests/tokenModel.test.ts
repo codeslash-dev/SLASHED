@@ -222,12 +222,11 @@ describe('tokenState', () => {
   test('concrete override on a generated scale step → detached', () => {
     expect(tokenState(step, { '--sf-radius-m': '10px' })).toBe('detached');
   });
-  test('only structurally-unsafe values are invalid (matches export drop)', () => {
+  test('only structurally-unsafe or malformed values are invalid', () => {
     expect(tokenState(source, { '--sf-space-base-min': '1; }' })).toBe('invalid');
-    // A fractional number for a <number> source is NOT invalid — it exports
-    // fine. (Regression: it was wrongly flagged when invalid was coupled to a
-    // z-index syntax probe.)
+    // A fractional number for a <number> source remains a valid custom value.
     expect(tokenState(source, { '--sf-space-base-min': '1.1' })).toBe('custom');
+    expect(tokenState(source, { '--sf-space-base-min': 'var(--sf-space-m, 1rem))' })).toBe('invalid');
   });
 });
 

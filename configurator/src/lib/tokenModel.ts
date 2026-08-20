@@ -380,9 +380,9 @@ export type TokenState = "default" | "custom" | "relinked" | "detached" | "inval
 export function tokenState(token: SlashedToken, overrides: Record<string, string>): TokenState {
   const ov = overrides[token.name];
   if (ov === undefined) return "default";
-  // "invalid" means genuinely unsafe (would be dropped on export) — structural
-  // only, not semantic. A syntactically-odd-but-safe value stays custom.
-  if (!isStructurallySafe(ov)) return "invalid";
+  const syntax = (token.syntax ?? "").toLowerCase();
+  const numericAuto = (syntax.includes("<number>") || syntax.includes("<integer>")) && ov.trim().toLowerCase() === "auto";
+  if (!isStructurallySafe(ov) || !hasBalancedParens(ov) || numericAuto) return "invalid";
   if (pureVarTarget(ov)) return "relinked";
   const role = roleOf(token);
   if (role === "output" || role === "alias" || isGeneratedScaleStep(token.name)) {
