@@ -17,6 +17,7 @@
   import ThemesPanel from './panels/ThemesPanel.svelte';
   import ExportPanel from './panels/ExportPanel.svelte';
   import CheatsheetPanel from './panels/CheatsheetPanel.svelte';
+  import ChangesPanel from './panels/ChangesPanel.svelte';
   import GenericTokenPanel from './panels/GenericTokenPanel.svelte';
   import AllTokensTab from './panels/AllTokensTab.svelte';
   import WcagPanel from './panels/WcagPanel.svelte';
@@ -35,7 +36,7 @@
 
 
   // Domains that skip the two-tab treatment
-  const NO_CONTROLS_TAB = new Set(["home", "themes", "wcag", "setup", "cheatsheet"]);
+  const NO_CONTROLS_TAB = new Set(["home", "changes", "themes", "wcag", "setup", "cheatsheet"]);
 
   let view = $state<"controls" | "tokens">("controls");
 
@@ -55,6 +56,8 @@
 {#if NO_CONTROLS_TAB.has(domain)}
   {#if domain === "home"}
     <HomePanel {overrides} onSelect={onSelectDomain} {onApplyTheme} {onResetAll} />
+  {:else if domain === "changes"}
+    <ChangesPanel {tokens} {overrides} {onSet} {onReset} {onBulkChange} {onResetAll} {onSelectDomain} />
   {:else if domain === "themes"}
     <ThemesPanel {overrides} {onApplyTheme} {onResetAll} />
   {:else if domain === "wcag"}

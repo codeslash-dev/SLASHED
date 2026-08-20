@@ -69,8 +69,19 @@ export function referencesIn(value: string | null | undefined): string[] {
 /** The single token a pure `var(--sf-x)` value points at, else null. */
 export function pureVarTarget(value: string | null | undefined): string | null {
   if (!value || !hasBalancedParens(value)) return null;
-  const m = PURE_VAR_RE.exec(value.trim());
-  return m ? m[1] : null;
+  const v = value.trim();
+  const m = PURE_VAR_RE.exec(v);
+  if (!m) return null;
+  // PURE_VAR_RE's fallback group is greedy, so it can span past the var()'s own
+  // closing paren (e.g. `var(--sf-a, x) var(--sf-b)` matches with target --sf-a).
+  // A genuine single-var alias closes the leading `var(` at the very end of the
+  // string; if the first paren-depth-0 close is not the last char, it's compound.
+  let depth = 0;
+  for (let i = 0; i < v.length; i++) {
+    if (v[i] === "(") depth += 1;
+    else if (v[i] === ")" && --depth === 0) return i === v.length - 1 ? m[1] : null;
+  }
+  return m[1];
 }
 
 /**
@@ -282,6 +293,27 @@ const CSS_BREAKING_RE = /[;{}]|\/\*|\*\//;
 const CONTROL_CHAR_RE = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/;
 const MAX_CODEC_BYTES = 65_535;
 
+/**
+ * Whether a value can be safely written into a `--token: value;` declaration
+ * and survive export. This is the authoritative "unsafe → will be dropped"
+ * gate — it mirrors exactly what codec.ts / themeFile.ts refuse (empty values
+ * and CSS-breaking characters), so a value flagged unsafe here is genuinely the
+ * value that would be stripped on export. Deliberately does NOT judge semantic
+ * correctness (e.g. "notacolor" for a colour token): that renders as nothing
+ * but is not *dropped*, so it is a softer signal handled by validateTokenValue.
+ */
+export function isStructurallySafe(value: string): boolean {
+  if (typeof value !== "string") return false;
+  const v = value.trim();
+  if (v === "") return false;
+  // Mirror every rejection the export path (codec.ts / themeFile.ts) enforces:
+  // CSS-breaking characters, control characters, and the share-link byte limit.
+  // Anything that would be dropped or refused on export must read as unsafe here
+  // so the Changes panel never labels it Custom/Detached/Re-linked.
+  if (CSS_BREAKING_RE.test(v) || CONTROL_CHAR_RE.test(v)) return false;
+  return new TextEncoder().encode(v).byteLength <= MAX_CODEC_BYTES;
+}
+
 /** Map a token's `syntax` metadata to a real CSS property we can probe. */
 function probePropertyForSyntax(syntax: string | null | undefined): string | null {
   const s = (syntax ?? "").toLowerCase();
@@ -289,8 +321,10 @@ function probePropertyForSyntax(syntax: string | null | undefined): string | nul
   if (s.includes("<color>")) return "color";
   if (s.includes("<length>") || s.includes("<length-percentage>")) return "width";
   if (s.includes("<percentage>")) return "width";
-  // z-index also accepts `auto`, which is not part of CSS <integer>; reject
-  // that keyword explicitly. Opacity preserves fractional <number> support.
+  // <integer> is integer-only, so probe z-index; <number> allows fractionals,
+  // so probe opacity (z-index would reject "1.4"). z-index also accepts `auto`,
+  // which is not valid <integer>/<number> — validateTokenValue rejects that
+  // keyword explicitly below.
   if (s.includes("<integer>")) return "z-index";
   if (s.includes("<number>")) return "opacity";
   if (s.includes("<time>")) return "transition-duration";
@@ -299,14 +333,15 @@ function probePropertyForSyntax(syntax: string | null | undefined): string | nul
 }
 
 /**
- * Best-effort validation of an override value for a token. Always applies the
- * structural checks (non-empty, no CSS-breaking characters). In a browser it
- * additionally probes `CSS.supports()` against a property matching the token's
- * declared syntax; under Node/jsdom it stops at the structural checks.
+ * Best-effort *semantic* validation of an override value for a token. Applies
+ * the structural safety check first, then — in a browser, for non-expression
+ * values — probes `CSS.supports()` against a property matching the token's
+ * declared syntax. Under Node/jsdom it stops at the structural check.
  *
- * Values containing `var()`/`calc()`/`clamp()`/`env()` are never syntax-probed
- * — they resolve at compute time and `CSS.supports` can't judge them — but they
- * still must pass the structural checks.
+ * This is a softer, advisory signal (used by the value editor to warn "this
+ * doesn't look like a valid <color>"); it is NOT what decides the `invalid`
+ * token state, which uses {@link isStructurallySafe} so the "will be dropped on
+ * export" copy stays truthful.
  */
 export function validateTokenValue(token: SlashedToken, value: string): ValidationResult {
   if (typeof value !== "string") return { valid: false, reason: "not a string" };
@@ -361,7 +396,9 @@ export type TokenState = "default" | "custom" | "relinked" | "detached" | "inval
 export function tokenState(token: SlashedToken, overrides: Record<string, string>): TokenState {
   const ov = overrides[token.name];
   if (ov === undefined) return "default";
-  if (!validateTokenValue(token, ov).valid) return "invalid";
+  const syntax = (token.syntax ?? "").toLowerCase();
+  const numericAuto = (syntax.includes("<number>") || syntax.includes("<integer>")) && ov.trim().toLowerCase() === "auto";
+  if (!isStructurallySafe(ov) || !hasBalancedParens(ov) || numericAuto) return "invalid";
   if (pureVarTarget(ov)) return "relinked";
   const role = roleOf(token);
   if (role === "output" || role === "alias" || isGeneratedScaleStep(token.name)) {
@@ -385,4 +422,74 @@ export const STATE_LABEL: Record<TokenState, string> = {
  */
 export function inheritsByDefault(token: SlashedToken): boolean {
   return aliasTargetOf(token) !== null || referencesIn(token.value).length > 0;
+}
+
+// ---------------------------------------------------------------------------
+// Change summary — the model behind the Changes panel
+// ---------------------------------------------------------------------------
+
+/** A single active override, classified by its consequence. */
+export interface ChangeEntry {
+  name: string;
+  /** The catalogue token, or null when the override key isn't a known token. */
+  token: SlashedToken | null;
+  /** The override value currently applied. */
+  value: string;
+  /** How this override relates to the framework default. */
+  state: TokenState | "unknown";
+}
+
+/**
+ * All active overrides grouped by *consequence* rather than by panel — the
+ * organising idea of the Changes panel. `detached` and `invalid` are the ones a
+ * user most needs to see (they silently disconnect a token from the system or
+ * can't be applied), so they lead; `unknown` collects override keys that aren't
+ * tokens in this framework build (e.g. imported from a newer/older version).
+ */
+export interface ChangeSummary {
+  invalid: ChangeEntry[];
+  detached: ChangeEntry[];
+  relinked: ChangeEntry[];
+  custom: ChangeEntry[];
+  unknown: ChangeEntry[];
+  total: number;
+}
+
+const EMPTY_GROUPS = (): Omit<ChangeSummary, "total"> => ({
+  invalid: [], detached: [], relinked: [], custom: [], unknown: [],
+});
+
+/**
+ * Classify every active override into consequence buckets. Entries within a
+ * bucket are sorted by name for stable, diff-friendly rendering.
+ */
+export function summarizeChanges(
+  tokens: SlashedToken[],
+  overrides: Record<string, string>,
+): ChangeSummary {
+  const byName = new Map(tokens.map((t) => [t.name, t]));
+  const groups = EMPTY_GROUPS();
+
+  for (const [name, value] of Object.entries(overrides)) {
+    const token = byName.get(name) ?? null;
+    if (!token) {
+      groups.unknown.push({ name, token: null, value, state: "unknown" });
+      continue;
+    }
+    const state = tokenState(token, overrides);
+    const entry: ChangeEntry = { name, token, value, state };
+    // A token in its default state can't be an override; guard anyway.
+    if (state === "default") continue;
+    groups[state].push(entry);
+  }
+
+  for (const key of Object.keys(groups) as (keyof typeof groups)[]) {
+    groups[key].sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  const total =
+    groups.invalid.length + groups.detached.length + groups.relinked.length +
+    groups.custom.length + groups.unknown.length;
+
+  return { ...groups, total };
 }

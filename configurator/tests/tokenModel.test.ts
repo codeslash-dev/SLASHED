@@ -20,8 +20,10 @@ import {
   scaleShadows,
   isGeneratedScaleStep,
   validateTokenValue,
+  isStructurallySafe,
   tokenState,
   inheritsByDefault,
+  summarizeChanges,
   SCALE_FAMILIES,
 } from '../src/lib/tokenModel';
 import type { SlashedToken } from '../src/types';
@@ -61,6 +63,14 @@ describe('pureVarTarget', () => {
     expect(pureVarTarget('calc(var(--sf-space-m) * 2)')).toBeNull();
     expect(pureVarTarget('var(--sf-space-m, 1rem))')).toBeNull();
     expect(pureVarTarget('1rem')).toBeNull();
+  });
+  test('rejects a var() with a fallback followed by more content', () => {
+    // The fallback group is greedy; it must not span past the var()'s own `)`.
+    expect(pureVarTarget('var(--sf-a, red) var(--sf-b)')).toBeNull();
+    expect(pureVarTarget('var(--sf-a, red) solid')).toBeNull();
+  });
+  test('accepts a var() whose fallback is itself a function', () => {
+    expect(pureVarTarget('var(--sf-a, calc(1rem + 2px))')).toBe('--sf-a');
   });
 });
 
@@ -181,6 +191,24 @@ describe('validateTokenValue', () => {
   });
 });
 
+describe('isStructurallySafe (the export-safety gate behind tokenState invalid)', () => {
+  test('rejects only what export would actually drop', () => {
+    expect(isStructurallySafe('')).toBe(false);
+    expect(isStructurallySafe('   ')).toBe(false);
+    expect(isStructurallySafe('1rem; }')).toBe(false);
+    expect(isStructurallySafe('red /* x */')).toBe(false);
+    // Control characters and oversized values are dropped/refused on export too.
+    expect(isStructurallySafe('red\u0007')).toBe(false);
+    expect(isStructurallySafe('a'.repeat(65_536))).toBe(false);
+  });
+  test('accepts safe values regardless of semantic oddness', () => {
+    // A fractional number, an odd colour, an expression — none are *dropped*.
+    expect(isStructurallySafe('1.1')).toBe(true);
+    expect(isStructurallySafe('notacolor')).toBe(true);
+    expect(isStructurallySafe('clamp(1rem, 2vw, 3rem)')).toBe(true);
+  });
+});
+
 describe('tokenState', () => {
   const source = tok('--sf-space-base-min', { value: '1', role: 'knob' });
   const alias = tok('--sf-heading-font', { value: 'var(--sf-body-font)', role: 'consumption' });
@@ -205,9 +233,14 @@ describe('tokenState', () => {
   test('concrete override on a generated scale step → detached', () => {
     expect(tokenState(step, { '--sf-radius-m': '10px' })).toBe('detached');
   });
-  test('invalid value wins over everything', () => {
+  test('only structurally-unsafe or malformed values are invalid', () => {
     expect(tokenState(source, { '--sf-space-base-min': '1; }' })).toBe('invalid');
+    // A fractional number for a <number> source remains a valid custom value.
+    expect(tokenState(source, { '--sf-space-base-min': '1.1' })).toBe('custom');
     expect(tokenState(source, { '--sf-space-base-min': 'var(--sf-space-m, 1rem))' })).toBe('invalid');
+    // Control characters and oversized values are dropped/refused on export.
+    expect(tokenState(source, { '--sf-space-base-min': '1\u0007' })).toBe('invalid');
+    expect(tokenState(source, { '--sf-space-base-min': 'a'.repeat(65_536) })).toBe('invalid');
   });
 });
 
@@ -218,6 +251,43 @@ describe('inheritsByDefault', () => {
   });
   test('false for literal sources', () => {
     expect(inheritsByDefault(tok('--sf-a', { value: '1rem' }))).toBe(false);
+  });
+});
+
+describe('summarizeChanges', () => {
+  const catalogue: SlashedToken[] = [
+    tok('--sf-space-base-min', { value: '1', role: 'knob' }),      // source
+    tok('--sf-heading-font', { value: 'var(--sf-body-font)', role: 'consumption' }), // alias
+    tok('--sf-radius-m', { value: '8px', role: 'knob' }),          // generated step
+    tok('--sf-body-font', { value: 'system-ui', role: 'knob' }),   // source
+  ];
+
+  test('buckets each override by consequence and counts the total', () => {
+    const s = summarizeChanges(catalogue, {
+      '--sf-space-base-min': '1.1',                 // custom
+      '--sf-heading-font': 'Georgia',               // detached (alias frozen)
+      '--sf-radius-m': '10px',                       // detached (scale step)
+      '--sf-body-font': 'var(--sf-heading-font)',    // relinked
+      '--sf-space-base-min-typo': '9',               // unknown (not a token)
+      '--sf-body-font-bad': '1; }',                  // unknown key, ignored-by-name
+    });
+    expect(s.custom.map((e) => e.name)).toEqual(['--sf-space-base-min']);
+    expect(s.detached.map((e) => e.name)).toEqual(['--sf-heading-font', '--sf-radius-m']);
+    expect(s.relinked.map((e) => e.name)).toEqual(['--sf-body-font']);
+    expect(s.unknown.map((e) => e.name)).toEqual(['--sf-body-font-bad', '--sf-space-base-min-typo']);
+    expect(s.total).toBe(6);
+  });
+
+  test('an invalid value lands in the invalid bucket', () => {
+    const s = summarizeChanges(catalogue, { '--sf-space-base-min': '1; }' });
+    expect(s.invalid.map((e) => e.name)).toEqual(['--sf-space-base-min']);
+    expect(s.total).toBe(1);
+  });
+
+  test('no overrides → empty summary', () => {
+    const s = summarizeChanges(catalogue, {});
+    expect(s.total).toBe(0);
+    expect(s.detached).toEqual([]);
   });
 });
 
