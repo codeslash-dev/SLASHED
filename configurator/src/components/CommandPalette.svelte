@@ -102,7 +102,7 @@
         <div class="px-4 py-8 text-center text-[11px] text-slate-400 dark:text-slate-600">No matches for "{query}"</div>
       {:else}
         {#each results as r, i (r.kind === "nav" ? `nav:${r.id}` : `tok:${r.token.name}`)}
-          {#if i === 0}
+          {#if i === 0 && navCount > 0}
             <div class="px-4 pt-2 pb-1 text-[8px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Go to</div>
           {/if}
           {#if r.kind === "token" && i === navCount}
