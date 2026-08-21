@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.36] - 2026-08-21
+
+### Bug Fixes
+- **configurator:** rem-aware drawer breakpoint + keep focus visible on close
+- **configurator:** close the mobile drawer when the shell reaches desktop width
+- **configurator:** size the shell by its container, not the viewport
+
 ## [0.7.35] - 2026-08-21
 
 ### Features
