@@ -22,10 +22,17 @@
   let draft = $state("");
   let editing = $state(false);
   let cancelling = $state(false);
-  // Reset a user-selected tab when another surface changes this token.
+  // Switching back to Inherit throws away the override. The tab sits right next
+  // to Value/Expression and reads like a harmless view switch, so a stray click
+  // used to silently wipe an edit. When there's an actual override to lose we
+  // arm this confirm step instead of resetting immediately.
+  let confirmingInherit = $state(false);
+  // Reset a user-selected tab (and any pending confirm) when another surface
+  // changes this token.
   $effect(() => {
     overrideValue;
     manualMode = null;
+    confirmingInherit = false;
   });
   // Seed the text field from the live value whenever we're not mid-edit.
   $effect(() => {
@@ -41,8 +48,22 @@
   }
 
   function setMode(m: ValueMode) {
+    if (m === "inherit") {
+      // Nothing overridden → already inheriting, so this is a no-op, not a
+      // destructive reset; just settle on auto-detect.
+      if (overrideValue === undefined) { manualMode = null; confirmingInherit = false; return; }
+      // Otherwise require an explicit confirmation before discarding the value.
+      confirmingInherit = true;
+      return;
+    }
+    confirmingInherit = false;
     manualMode = m;
-    if (m === "inherit") { onReset(); manualMode = null; }
+  }
+
+  function confirmInherit() {
+    confirmingInherit = false;
+    manualMode = null;
+    onReset();
   }
 
   const TABS: { id: ValueMode; label: string }[] = [
@@ -56,17 +77,36 @@
   <!-- Mode tabs -->
   <div class="flex items-center gap-0.5 p-0.5 rounded-md bg-black/5 dark:bg-white/5 w-fit">
     {#each TABS as t (t.id)}
+      {@const active = mode === t.id || (t.id === "inherit" && confirmingInherit)}
       <button
         onclick={() => setMode(t.id)}
-        aria-pressed={mode === t.id}
+        aria-pressed={active}
         class={`px-1.5 py-0.5 rounded text-[9px] font-bold transition-colors cursor-pointer ${
-          mode === t.id
+          active
             ? "bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-sm"
             : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
         }`}
       >{t.label}</button>
     {/each}
   </div>
+
+  <!-- Confirm step for a destructive "back to Inherit" — arms on the first
+       click, discards the override only on the explicit Reset here. -->
+  {#if confirmingInherit}
+    <div class="flex items-center gap-1.5 px-2 py-1.5 rounded-md bg-rose-500/10 border border-rose-500/20">
+      <span class="text-[9px] text-rose-700 dark:text-rose-300 leading-snug flex-1 min-w-0">
+        Discard this override and inherit <span class="font-mono">{token.value}</span>?
+      </span>
+      <button
+        onclick={() => { confirmingInherit = false; }}
+        class="shrink-0 px-1.5 py-0.5 rounded text-[9px] font-bold text-slate-600 dark:text-slate-300 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 transition-colors cursor-pointer"
+      >Cancel</button>
+      <button
+        onclick={confirmInherit}
+        class="shrink-0 px-1.5 py-0.5 rounded text-[9px] font-bold text-white bg-rose-600 hover:bg-rose-500 transition-colors cursor-pointer"
+      >Reset</button>
+    </div>
+  {/if}
 
   {#if mode === "inherit"}
     <div class="text-[10px] font-mono text-slate-500 dark:text-slate-500">

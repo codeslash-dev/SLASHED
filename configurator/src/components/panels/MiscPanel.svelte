@@ -53,6 +53,19 @@
   function getSizeValue(t: typeof SIZE_TOKENS[0]): number {
     return parseNum(overrides[t.token]?.replace("rem",""), t.default);
   }
+
+  const ICON_STEPS = ["xs", "s", "m", "l", "xl", "2xl"];
+
+  // A deliberately landscape (2:1) sample with a centered ring and a full-bleed
+  // border, so object-fit differences are unmistakable: cover crops the sides,
+  // contain letterboxes, fill distorts the circle, none overflows at native px.
+  const OBJECT_FIT_IMG = `data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60'><rect width='120' height='60' fill='#6366f1'/><circle cx='60' cy='30' r='18' fill='none' stroke='#ffffff' stroke-width='4'/><rect x='3' y='3' width='114' height='54' fill='none' stroke='#ffffff' stroke-width='3'/></svg>`,
+  )}`;
+
+  // Conceptual layering ladder (top rung = highest z). Static preview of the
+  // *order*, since the numeric values themselves have no standalone visual.
+  const Z_LADDER = [...Z_INDEX_STEPS].reverse();
 </script>
 
 <div class="p-4 space-y-6">
@@ -95,6 +108,24 @@
             onReset={() => onReset(z.token)}
           />
         {/each}
+      </div>
+
+      <!-- Layering preview — a static stack showing the rung order (higher
+           token = painted on top). The numbers set precedence; this shows what
+           that precedence means. -->
+      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
+        <div class="text-[9px] text-slate-400 dark:text-slate-600 mb-2 leading-snug">Higher rungs paint above lower ones.</div>
+        <div class="relative h-32">
+          {#each Z_LADDER as z, i (z.token)}
+            <div
+              class="absolute flex items-center gap-2 px-2 py-1 rounded-md border border-indigo-500/30 bg-indigo-500/[0.12] shadow-sm"
+              style={`top:${i * 11}px; left:${i * 9}px; right:0; z-index:${Z_LADDER.length - i}`}
+            >
+              <span class="text-[9px] font-semibold text-slate-700 dark:text-slate-300">{z.label}</span>
+              <span class="text-[8px] font-mono text-slate-400 dark:text-slate-600 ml-auto">{parseNum(overrides[z.token], z.def)}</span>
+            </div>
+          {/each}
+        </div>
       </div>
   </Section>
 
@@ -310,6 +341,19 @@
         onChange={(v) => onSet("--sf-icon-box-pad", `${v}em`)}
         onReset={() => onReset("--sf-icon-box-pad")}
       />
+
+      <!-- Icon-size preview — the same glyph at every step (sized in em, so the
+           box is pinned to 16px text to make the em scale concrete). -->
+      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-4 flex items-end justify-center gap-3 flex-wrap" style="font-size:16px">
+        {#each ICON_STEPS as s (s)}
+          <div class="flex flex-col items-center gap-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="text-indigo-500" style={`width:var(--sf-icon-${s});height:var(--sf-icon-${s})`}>
+              <path fill="currentColor" d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z" />
+            </svg>
+            <span class="text-[8px] font-mono text-slate-400 dark:text-slate-600">{s}</span>
+          </div>
+        {/each}
+      </div>
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
@@ -350,6 +394,22 @@
           <button onclick={() => onReset("--sf-object-position")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
         {/if}
       </div>
+
+      <!-- Object-fit preview — a landscape sample forced into a taller box, so
+           the current fit visibly crops / letterboxes / stretches / overflows. -->
+      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3 flex flex-col items-center gap-1.5">
+        <div class="w-24 h-20 rounded-lg overflow-hidden border border-black/10 dark:border-white/10 bg-black/10 dark:bg-white/5">
+          <img
+            src={OBJECT_FIT_IMG}
+            alt="Object-fit sample"
+            class="w-full h-full block"
+            style={`object-fit:var(--sf-object-fit, cover);object-position:var(--sf-object-position, 50% 50%)`}
+          />
+        </div>
+        <div class="text-[8px] font-mono text-slate-400 dark:text-slate-600">
+          object-fit: {overrides["--sf-object-fit"] ?? "cover"}
+        </div>
+      </div>
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
@@ -386,6 +446,9 @@
           </div>
         {/each}
       </div>
+      <p class="text-[9px] text-slate-400 dark:text-slate-600 italic leading-snug">
+        No preview — safe-area insets resolve to the physical device (notch / home indicator) at runtime and are 0 on desktop.
+      </p>
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
@@ -407,6 +470,20 @@
         {#if "--sf-field-required-marker" in overrides}
           <button onclick={() => onReset("--sf-field-required-marker")} class="text-[8px] text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer shrink-0">reset</button>
         {/if}
+      </div>
+
+      <!-- Field-marker preview — a required label with the marker appended, as
+           .sf-field renders it after a required field's label. -->
+      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
+        <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300">
+          Email address<span class="text-rose-500 dark:text-rose-400 whitespace-pre">{overrides["--sf-field-required-marker"] ?? " *"}</span>
+          <input
+            type="text"
+            disabled
+            placeholder="name@example.com"
+            class="mt-1 w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded px-2 py-1 text-[10px] font-normal text-slate-500"
+          />
+        </label>
       </div>
   </Section>
 

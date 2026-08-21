@@ -224,6 +224,14 @@
         currentRaw={overrides["--sf-divider-gap"]}
         onRawSet={(v) => onSet("--sf-divider-gap", v)}
       />
+
+      <!-- Divider preview — a real rule between two lines so colour, width,
+           style and the gap around it are all visible together. -->
+      <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
+        <p class="text-[10px] text-slate-600 dark:text-slate-400 m-0">Content above</p>
+        <hr style={`border:0;border-top:var(--sf-divider-width,1px) var(--sf-divider-style,solid) var(--sf-divider-color, var(--sf-color-border,#64748b));margin-block:var(--sf-divider-gap,1rem)`} />
+        <p class="text-[10px] text-slate-600 dark:text-slate-400 m-0">Content below</p>
+      </div>
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
@@ -348,6 +356,18 @@
             onRawSet={(v) => onSet(t.token, v)}
           />
         {/each}
+
+        <!-- Field-shape preview — a real input styled from the field tokens, so
+             radius and the block/inline padding are directly visible. -->
+        <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
+          <input
+            type="text"
+            disabled
+            placeholder="Sample field"
+            class="w-full text-[11px] text-slate-600 dark:text-slate-300 bg-white/70 dark:bg-white/5 outline-none placeholder:text-slate-500"
+            style={`border:var(--sf-border-width-1,1px) solid var(--sf-color-border,#64748b);border-radius:var(--sf-field-radius,0.5rem);padding-block:var(--sf-field-padding-block,0.375rem);padding-inline:var(--sf-field-padding-inline,0.75rem)`}
+          />
+        </div>
       </div>
     {/if}
   </div>
