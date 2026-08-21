@@ -63,9 +63,14 @@
     `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60'><rect width='120' height='60' fill='#6366f1'/><circle cx='60' cy='30' r='18' fill='none' stroke='#ffffff' stroke-width='4'/><rect x='3' y='3' width='114' height='54' fill='none' stroke='#ffffff' stroke-width='3'/></svg>`,
   )}`;
 
-  // Conceptual layering ladder (top rung = highest z). Static preview of the
-  // *order*, since the numeric values themselves have no standalone visual.
-  const Z_LADDER = [...Z_INDEX_STEPS].reverse();
+  // Layering ladder for the preview: ordered by each rung's *current* value
+  // (override or default), highest first, so reordering the numbers reorders
+  // the visual stack instead of showing a fixed hierarchy.
+  let zLadder = $derived(
+    Z_INDEX_STEPS
+      .map((z) => ({ ...z, val: parseNum(overrides[z.token], z.def) }))
+      .sort((a, b) => b.val - a.val),
+  );
 </script>
 
 <div class="p-4 space-y-6">
@@ -116,13 +121,13 @@
       <div class="bg-black/4 dark:bg-white/4 rounded-xl border border-black/8 dark:border-white/8 p-3">
         <div class="text-[9px] text-slate-400 dark:text-slate-600 mb-2 leading-snug">Higher rungs paint above lower ones.</div>
         <div class="relative h-32">
-          {#each Z_LADDER as z, i (z.token)}
+          {#each zLadder as z, i (z.token)}
             <div
               class="absolute flex items-center gap-2 px-2 py-1 rounded-md border border-indigo-500/30 bg-indigo-500/[0.12] shadow-sm"
-              style={`top:${i * 11}px; left:${i * 9}px; right:0; z-index:${Z_LADDER.length - i}`}
+              style={`top:${i * 11}px; left:${i * 9}px; right:0; z-index:${zLadder.length - i}`}
             >
               <span class="text-[9px] font-semibold text-slate-700 dark:text-slate-300">{z.label}</span>
-              <span class="text-[8px] font-mono text-slate-400 dark:text-slate-600 ml-auto">{parseNum(overrides[z.token], z.def)}</span>
+              <span class="text-[8px] font-mono text-slate-400 dark:text-slate-600 ml-auto">{z.val}</span>
             </div>
           {/each}
         </div>

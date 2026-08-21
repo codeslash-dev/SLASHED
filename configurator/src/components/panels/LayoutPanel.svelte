@@ -452,7 +452,7 @@
               {#each [1.75, 1, 2.25, 1.25] as h, i (i)}
                 <span
                   class="flex items-center justify-center text-white text-[9px] font-bold"
-                  style={`height:${h}rem;min-width:1.75rem;background:var(--sf-color-primary-400,#818cf8);border-radius:var(--sf-radius-s,4px)`}
+                  style={`min-height:${h}rem;min-width:1.75rem;background:var(--sf-color-primary-400,#818cf8);border-radius:var(--sf-radius-s,4px)`}
                 >{i + 1}</span>
               {/each}
             </div>

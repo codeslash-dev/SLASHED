@@ -77,7 +77,7 @@
   <!-- Mode tabs -->
   <div class="flex items-center gap-0.5 p-0.5 rounded-md bg-black/5 dark:bg-white/5 w-fit">
     {#each TABS as t (t.id)}
-      {@const active = mode === t.id || (t.id === "inherit" && confirmingInherit)}
+      {@const active = confirmingInherit ? t.id === "inherit" : mode === t.id}
       <button
         onclick={() => setMode(t.id)}
         aria-pressed={active}
