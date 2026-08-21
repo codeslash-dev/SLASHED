@@ -11,7 +11,7 @@
   import { generateCSS } from './lib/codec';
   import { loadInitialOverrides, injectLivePreview, saveOverrides, hasWpBoot } from './lib/persistence';
   import { domainOf } from './lib/domains';
-  import { parseImport, summarizeImport } from './lib/importOverrides';
+  import { parseImport, summarizeImport, type ImportReport } from './lib/importOverrides';
   import tokensRaw from './data/api-index.generated.json';
   import CommandPalette from './components/CommandPalette.svelte';
 
@@ -85,6 +85,19 @@
   // Transient feedback after an import (the old flow failed silently).
   let importStatus = $state<string | null>(null);
   let importStatusTimer: ReturnType<typeof setTimeout> | null = null;
+  // Parsed-but-not-yet-applied import, awaiting a Merge/Replace choice.
+  let importPreview = $state<{ overrides: Record<string, string>; report: ImportReport; filename: string } | null>(null);
+
+  function navigateTo(domainId: string, token?: string) {
+    domain = domainId;
+    if (token) {
+      focusNonce += 1;
+      focusRequest = { token, nonce: focusNonce };
+    } else {
+      focusRequest = null;
+    }
+    mobileView = "controls";
+  }
   // On narrow screens the controls panel and the live preview can't both fit, so
   // we show one at a time and let the user fold between them (desktop shows both).
   let mobileView = $state<"controls" | "preview">("controls");
@@ -246,6 +259,14 @@
     importStatusTimer = setTimeout(() => { importStatus = null; importStatusTimer = null; }, 6000);
   }
 
+  function applyImport(mode: "merge" | "replace") {
+    if (!importPreview) return;
+    const { overrides: imported, report } = importPreview;
+    setOverrides(mode === "replace" ? { ...imported } : (prev) => ({ ...prev, ...imported }));
+    showImportStatus(`${mode === "replace" ? "Replaced" : "Merged"} · ${summarizeImport(report)}`);
+    importPreview = null;
+  }
+
   function handleImport() {
     const input = document.createElement("input");
     input.type = "file";
@@ -260,10 +281,13 @@
         // One validated pipeline for both CSS and JSON: sanitised, migrated,
         // merged (non-destructive), and always reported — no more silent no-ops.
         const { overrides: imported, report } = parseImport(text, file.name, LIVE_TOKEN_NAMES);
-        if (Object.keys(imported).length > 0) {
-          setOverrides((prev) => ({ ...prev, ...imported }));
+        // Nothing usable → just report; otherwise open the Merge/Replace chooser
+        // so the user reviews what will change before it's applied.
+        if (report.malformed || Object.keys(imported).length === 0) {
+          showImportStatus(summarizeImport(report));
+          return;
         }
-        showImportStatus(summarizeImport(report));
+        importPreview = { overrides: imported, report, filename: file.name };
       };
       reader.onerror = () => { showImportStatus("Import failed — the selected file could not be read."); };
       reader.readAsText(file);
@@ -375,7 +399,7 @@
     <div class="shrink-0 hidden md:flex">
       <SidebarNav
         activeId={domain}
-        onSelect={(d) => { domain = d; focusRequest = null; }}
+        onSelect={(d) => { navigateTo(d); }}
         overridesByDomain={domainBadges}
       />
     </div>
@@ -432,7 +456,7 @@
           onReset={handleReset}
           onBulkChange={handleBulkChange}
           onApplyTheme={handleApplyTheme}
-          onSelectDomain={(d) => { domain = d; focusRequest = null; }}
+          onSelectDomain={(d) => { navigateTo(d); }}
           onResetAll={handleResetAll}
         />
       </div>
@@ -480,7 +504,7 @@
         <SidebarNav
           expanded
           activeId={domain}
-          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; focusRequest = null; }}
+          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; }}
           overridesByDomain={domainBadges}
         />
       </div>
@@ -492,17 +516,61 @@
     </div>
   {/if}
 
+  <!-- Import chooser — review the parsed report, then Merge or Replace. -->
+  {#if importPreview}
+    {@const r = importPreview.report}
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Import overrides"
+      tabindex="-1"
+      onkeydown={(e) => { if (e.key === "Escape") importPreview = null; }}
+    >
+      <div class="w-[420px] max-w-full bg-white dark:bg-[#111118] border border-black/12 dark:border-white/12 rounded-2xl shadow-2xl overflow-hidden">
+        <div class="px-4 py-3 border-b border-black/8 dark:border-white/8">
+          <h3 class="text-[13px] font-bold text-slate-800 dark:text-slate-100">Import overrides</h3>
+          <p class="text-[10px] text-slate-500 mt-0.5 font-mono truncate">{importPreview.filename}</p>
+        </div>
+
+        <div class="px-4 py-3 space-y-1.5 text-[11px]">
+          <div class="flex justify-between"><span class="text-slate-500">Tokens to import</span><span class="font-bold text-slate-800 dark:text-slate-200">{r.accepted}</span></div>
+          {#if r.renamed > 0}<div class="flex justify-between"><span class="text-slate-500">Migrated (renamed)</span><span class="font-mono text-sky-600 dark:text-sky-400">{r.renamed}</span></div>{/if}
+          {#if r.removed > 0}<div class="flex justify-between"><span class="text-slate-500">Dropped (removed by framework)</span><span class="font-mono text-slate-500">{r.removed}</span></div>{/if}
+          {#if r.unknown > 0}<div class="flex justify-between"><span class="text-slate-500">Unknown in this build</span><span class="font-mono text-amber-600 dark:text-amber-400">{r.unknown}</span></div>{/if}
+          {#if r.invalid.length > 0}<div class="flex justify-between"><span class="text-slate-500">Skipped (invalid)</span><span class="font-mono text-rose-600 dark:text-rose-400">{r.invalid.length}</span></div>{/if}
+          {#if r.collisions > 0}<div class="flex justify-between"><span class="text-slate-500">Skipped (migration collision)</span><span class="font-mono text-amber-600 dark:text-amber-400">{r.collisions}</span></div>{/if}
+          <p class="text-[10px] text-slate-400 dark:text-slate-600 pt-1.5 leading-relaxed">
+            <span class="font-semibold">Merge</span> keeps your current {overridesCount} override{overridesCount !== 1 ? "s" : ""} and adds these on top.
+            <span class="font-semibold">Replace</span> discards the current set first.
+          </p>
+        </div>
+
+        <div class="px-4 py-3 border-t border-black/8 dark:border-white/8 flex items-center justify-end gap-2">
+          <button
+            onclick={() => { importPreview = null; }}
+            class="px-3 py-1.5 text-[11px] rounded-lg bg-black/8 dark:bg-white/8 text-slate-700 dark:text-slate-300 hover:bg-black/12 dark:hover:bg-white/12 transition-colors cursor-pointer"
+          >Cancel</button>
+          <button
+            onclick={() => applyImport("replace")}
+            class="px-3 py-1.5 text-[11px] rounded-lg bg-rose-600/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 hover:bg-rose-600/20 transition-colors cursor-pointer"
+          >Replace</button>
+          <button
+            onclick={() => applyImport("merge")}
+            class="px-3 py-1.5 text-[11px] font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm shadow-indigo-600/30 transition-colors cursor-pointer"
+          >Merge</button>
+        </div>
+      </div>
+    </div>
+  {/if}
+
   <!-- Command palette -->
   {#if showPalette}
     <CommandPalette
       tokens={ALL_TOKENS}
       {overrides}
       onNavigate={(d, token) => {
-        domain = d;
-        if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
-        else focusRequest = null;
-        // On mobile, deep-linking into a token means we want the controls side.
-        mobileView = "controls";
+        navigateTo(d, token);
       }}
       onClose={() => { showPalette = false; }}
     />

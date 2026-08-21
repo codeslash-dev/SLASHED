@@ -80,6 +80,7 @@
   <button
     onclick={onOpenSearch}
     title="Search panels & tokens (Ctrl/Cmd+K)"
+    aria-label="Search panels and tokens"
     class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/8 dark:border-white/8 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-black/8 dark:hover:bg-white/8 transition-colors cursor-pointer shrink-0"
   >
     <Search class="w-3.5 h-3.5 shrink-0" />
