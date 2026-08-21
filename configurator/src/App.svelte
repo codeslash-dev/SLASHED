@@ -61,6 +61,22 @@
     node.focus();
     return { destroy() { prev?.focus?.(); } };
   }
+  // Close on Escape and trap Tab/Shift+Tab inside the modal drawer so keyboard
+  // focus can't wander to the controls behind an aria-modal dialog.
+  function onDrawerKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape") { navDrawerOpen = false; return; }
+    if (e.key !== "Tab") return;
+    const root = e.currentTarget as HTMLElement;
+    const items = [...root.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )].filter((el) => el.offsetParent !== null);
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = document.activeElement;
+    if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+  }
   // One-shot deep-link request from search: navigate to a domain AND focus a
   // specific token's row in its All-tokens list. The nonce lets the same token
   // be re-focused (a second search for it still scrolls/highlights).
@@ -374,16 +390,24 @@
       <div class="h-9 flex items-center px-4 border-b border-black/6 dark:border-white/6 shrink-0 gap-2">
         <!-- On mobile this is the category-drawer trigger (chevron); on desktop
              it's a static label (the rail handles navigation there). -->
-        <button
-          data-testid="panel-heading"
-          onclick={() => { navDrawerOpen = true; }}
-          class="flex items-center gap-1.5 flex-1 min-w-0 text-left cursor-pointer md:cursor-default md:pointer-events-none"
-        >
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest truncate">
+        <div data-testid="panel-heading" class="flex items-center gap-1.5 flex-1 min-w-0">
+          <!-- Mobile: the interactive category-drawer trigger. -->
+          <button
+            onclick={() => { navDrawerOpen = true; }}
+            aria-label="Choose a panel"
+            class="md:hidden flex items-center gap-1.5 flex-1 min-w-0 text-left cursor-pointer"
+          >
+            <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest truncate">
+              {DOMAIN_LABELS[domain] ?? domain}
+            </span>
+            <ChevronDown class="w-3 h-3 text-slate-400 shrink-0" />
+          </button>
+          <!-- Desktop: a static label (the rail handles navigation there); no
+               button, so it never enters the tab order or opens a hidden drawer. -->
+          <span class="hidden md:inline text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest truncate">
             {DOMAIN_LABELS[domain] ?? domain}
           </span>
-          <ChevronDown class="w-3 h-3 text-slate-400 shrink-0 md:hidden" />
-        </button>
+        </div>
         {#if domainOverridesCount > 0}
           <button
             onclick={handleResetDomain}
@@ -450,7 +474,7 @@
       aria-label="Choose a panel"
       tabindex="-1"
       use:drawerFocus
-      onkeydown={(e) => { if (e.key === "Escape") navDrawerOpen = false; }}
+      onkeydown={onDrawerKeydown}
     >
       <div class="w-64 max-w-[80vw] h-full shadow-2xl overflow-y-auto">
         <SidebarNav
