@@ -53,6 +53,14 @@
   let showPalette = $state(false);
   // Mobile category drawer (replaces the cramped icon rail on narrow screens).
   let navDrawerOpen = $state(false);
+  // When the drawer (a modal dialog) opens, move focus into it so keyboard users
+  // land inside the modal — the dialog's Escape handler then receives the event,
+  // and screen readers announce it. On close, focus returns to the trigger.
+  function drawerFocus(node: HTMLElement) {
+    const prev = document.activeElement as HTMLElement | null;
+    node.focus();
+    return { destroy() { prev?.focus?.(); } };
+  }
   // One-shot deep-link request from search: navigate to a domain AND focus a
   // specific token's row in its All-tokens list. The nonce lets the same token
   // be re-focused (a second search for it still scrolls/highlights).
@@ -441,6 +449,7 @@
       aria-modal="true"
       aria-label="Choose a panel"
       tabindex="-1"
+      use:drawerFocus
       onkeydown={(e) => { if (e.key === "Escape") navDrawerOpen = false; }}
     >
       <div class="w-64 max-w-[80vw] h-full shadow-2xl overflow-y-auto">
