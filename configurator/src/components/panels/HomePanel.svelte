@@ -34,7 +34,7 @@
         { id: "depth",      icon: Layers,    label: "Depth",      desc: "Shadows, glow, blur & opacity" },
         { id: "macros",     icon: Blocks,    label: "Macros",     desc: "Flow, prose, aspect & scrim" },
         { id: "components", icon: Component, label: "Components", desc: "Button & card component tokens" },
-        { id: "misc",       icon: Puzzle,    label: "Misc",       desc: "Z-index & remaining tokens" },
+        { id: "misc",       icon: Puzzle,    label: "System",     desc: "Layering, sizing, media, selection" },
       ],
     },
     {

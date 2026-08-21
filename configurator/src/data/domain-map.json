@@ -49,7 +49,7 @@
     "stack": "layout",
     "header": "layout",
     "sticky": "layout",
-    "safe": "layout",
+
     "breakout": "layout",
     "box": "layout",
     "bg": "layout",
@@ -92,6 +92,7 @@
     "size": "misc",
     "object": "misc",
     "scrollbar": "misc",
+    "safe": "misc",
     "is": "misc",
 
     "focus": "wcag",

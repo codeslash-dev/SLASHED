@@ -57,8 +57,24 @@
 
 <div class="p-4 space-y-6">
 
-  <!-- Touch target moved to the Accessibility panel (WCAG 2.5.5 control; now
-       classifies there so badge/Reset match where it's edited). -->
+  <!-- Touch target moved to the Accessibility panel; focus ring moved to
+       Accessibility; both now classify there so badge/Reset match. -->
+
+  <!-- Overview of the low-level system areas this panel groups. -->
+  <div class="rounded-lg bg-black/3 dark:bg-white/3 border border-black/6 dark:border-white/6 p-3">
+    <p class="text-[10px] text-slate-500 leading-relaxed">
+      Low-level system tokens, grouped by area:
+      <span class="font-semibold text-slate-600 dark:text-slate-400">Layering</span>,
+      <span class="font-semibold text-slate-600 dark:text-slate-400">Text &amp; selection</span>,
+      <span class="font-semibold text-slate-600 dark:text-slate-400">Sizing</span> &amp;
+      <span class="font-semibold text-slate-600 dark:text-slate-400">Icons</span>,
+      <span class="font-semibold text-slate-600 dark:text-slate-400">Media</span>, and
+      <span class="font-semibold text-slate-600 dark:text-slate-400">device / forms</span>.
+    </p>
+  </div>
+
+  <!-- LAYERING -->
+  <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Layering</div>
 
   <!-- Z-INDEX -->
   <Section title="Z-index layers" bind:open={showZIndex}>
@@ -83,6 +99,8 @@
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
+
+  <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Text &amp; selection</div>
 
   <!-- SELECTION -->
   <Section title="Text selection" bind:open={showTextSelection}>
@@ -161,6 +179,8 @@
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
+  <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Sizing</div>
+
   <!-- COMPONENT SIZES -->
   <Section title="Component size scale" bind:open={showComponentSizes}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
@@ -195,6 +215,8 @@
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
+
+  <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Links &amp; caret</div>
 
   <!-- CARET & LINKS -->
   <Section title="Caret &amp; links" bind:open={showCaretLinks}>
@@ -257,6 +279,8 @@
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
 
+  <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Icons</div>
+
   <!-- ICON SIZES -->
   <Section title="Icon sizes" bind:open={showIconSizes}>
       <p class="text-[10px] text-slate-400 dark:text-slate-600 leading-relaxed">
@@ -289,6 +313,8 @@
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
+
+  <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Media</div>
 
   <!-- OBJECT FIT / POSITION -->
   <Section title="Object fit" bind:open={showObjectFit}>
@@ -327,6 +353,8 @@
   </Section>
 
   <div class="h-px bg-black/6 dark:bg-white/6"></div>
+
+  <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600">Device &amp; forms</div>
 
   <!-- SAFE AREA INSETS -->
   <Section title="Safe area insets" bind:open={showSafeArea}>
@@ -387,7 +415,7 @@
   <!-- PREVIEW NOTE -->
   <div class="rounded-lg bg-black/3 dark:bg-white/3 border border-black/6 dark:border-white/6 p-3">
     <p class="text-[10px] text-slate-500 leading-relaxed">
-      Selection colors, caret, links, focus ring, borders and sizes all render in the
+      Selection colors, caret, links, borders and sizes all render in the
       live preview (try the <span class="text-slate-600 dark:text-slate-400 font-semibold">Components</span> template).
       <span class="text-slate-600 dark:text-slate-400 font-semibold">Scroll behavior</span> applies to the page
       itself and can't be shown in the static canvas.
