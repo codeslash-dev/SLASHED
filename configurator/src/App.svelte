@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import { SlidersHorizontal, Eye, RotateCcw } from '@lucide/svelte';
+  import { SlidersHorizontal, Eye, RotateCcw, ChevronDown } from '@lucide/svelte';
   import type { PreviewTemplate, SlashedToken, ApiIndex } from './types';
   import { PANEL_TO_TAB } from './lib/preview';
   import StudioHeader from './components/shell/StudioHeader.svelte';
@@ -51,6 +51,32 @@
 
   let domain = $state("home");
   let showPalette = $state(false);
+  // Mobile category drawer (replaces the cramped icon rail on narrow screens).
+  let navDrawerOpen = $state(false);
+  // When the drawer (a modal dialog) opens, move focus into it so keyboard users
+  // land inside the modal — the dialog's Escape handler then receives the event,
+  // and screen readers announce it. On close, focus returns to the trigger.
+  function drawerFocus(node: HTMLElement) {
+    const prev = document.activeElement as HTMLElement | null;
+    node.focus();
+    return { destroy() { prev?.focus?.(); } };
+  }
+  // Close on Escape and trap Tab/Shift+Tab inside the modal drawer so keyboard
+  // focus can't wander to the controls behind an aria-modal dialog.
+  function onDrawerKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape") { navDrawerOpen = false; return; }
+    if (e.key !== "Tab") return;
+    const root = e.currentTarget as HTMLElement;
+    const items = [...root.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )].filter((el) => el.offsetParent !== null);
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = document.activeElement;
+    if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+  }
   // One-shot deep-link request from search: navigate to a domain AND focus a
   // specific token's row in its All-tokens list. The nonce lets the same token
   // be re-focused (a second search for it still scrolls/highlights).
@@ -59,17 +85,6 @@
   // Transient feedback after an import (the old flow failed silently).
   let importStatus = $state<string | null>(null);
   let importStatusTimer: ReturnType<typeof setTimeout> | null = null;
-
-  function navigateTo(domainId: string, token?: string) {
-    domain = domainId;
-    if (token) {
-      focusNonce += 1;
-      focusRequest = { token, nonce: focusNonce };
-    } else {
-      focusRequest = null;
-    }
-    mobileView = "controls";
-  }
   // On narrow screens the controls panel and the live preview can't both fit, so
   // we show one at a time and let the user fold between them (desktop shows both).
   let mobileView = $state<"controls" | "preview">("controls");
@@ -269,6 +284,11 @@
 
   onMount(() => {
     const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && navDrawerOpen) {
+        e.preventDefault();
+        navDrawerOpen = false;
+        return;
+      }
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === "z") {
         e.preventDefault();
         handleUndo();
@@ -349,11 +369,13 @@
 
   <!-- Main body: sidebar + left panel + preview -->
   <div class="flex flex-1 min-h-0">
-    <!-- Icon nav rail — hidden on mobile while the preview is folded open -->
-    <div class={`shrink-0 ${mobileView === "preview" ? "hidden md:flex" : "flex"}`}>
+    <!-- Icon nav rail — desktop only. On mobile the category drawer (opened
+         from the panel heading) replaces it, so the narrow screen isn't eaten
+         by an unlabelled 56px strip. -->
+    <div class="shrink-0 hidden md:flex">
       <SidebarNav
         activeId={domain}
-        onSelect={(d) => { navigateTo(d); }}
+        onSelect={(d) => { domain = d; focusRequest = null; }}
         overridesByDomain={domainBadges}
       />
     </div>
@@ -366,9 +388,26 @@
     }`}>
       <!-- Panel heading -->
       <div class="h-9 flex items-center px-4 border-b border-black/6 dark:border-white/6 shrink-0 gap-2">
-        <span data-testid="panel-heading" class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest flex-1">
-          {DOMAIN_LABELS[domain] ?? domain}
-        </span>
+        <!-- On mobile this is the category-drawer trigger (chevron); on desktop
+             it's a static label (the rail handles navigation there). -->
+        <div data-testid="panel-heading" class="flex items-center gap-1.5 flex-1 min-w-0">
+          <!-- Mobile: the interactive category-drawer trigger. -->
+          <button
+            onclick={() => { navDrawerOpen = true; }}
+            aria-label="Choose a panel"
+            class="md:hidden flex items-center gap-1.5 flex-1 min-w-0 text-left cursor-pointer"
+          >
+            <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest truncate">
+              {DOMAIN_LABELS[domain] ?? domain}
+            </span>
+            <ChevronDown class="w-3 h-3 text-slate-400 shrink-0" />
+          </button>
+          <!-- Desktop: a static label (the rail handles navigation there); no
+               button, so it never enters the tab order or opens a hidden drawer. -->
+          <span class="hidden md:inline text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest truncate">
+            {DOMAIN_LABELS[domain] ?? domain}
+          </span>
+        </div>
         {#if domainOverridesCount > 0}
           <button
             onclick={handleResetDomain}
@@ -393,7 +432,7 @@
           onReset={handleReset}
           onBulkChange={handleBulkChange}
           onApplyTheme={handleApplyTheme}
-          onSelectDomain={(d) => { navigateTo(d); }}
+          onSelectDomain={(d) => { domain = d; focusRequest = null; }}
           onResetAll={handleResetAll}
         />
       </div>
@@ -425,13 +464,45 @@
     domain={DOMAIN_LABELS[domain] ?? domain}
   />
 
+  <!-- Mobile category drawer — labelled, grouped navigation (the desktop rail
+       equivalent). md:hidden so it never appears on desktop. -->
+  {#if navDrawerOpen}
+    <div
+      class="md:hidden fixed inset-0 z-40 flex"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Choose a panel"
+      tabindex="-1"
+      use:drawerFocus
+      onkeydown={onDrawerKeydown}
+    >
+      <div class="w-64 max-w-[80vw] h-full shadow-2xl overflow-y-auto">
+        <SidebarNav
+          expanded
+          activeId={domain}
+          onSelect={(d) => { domain = d; navDrawerOpen = false; mobileView = "controls"; focusRequest = null; }}
+          overridesByDomain={domainBadges}
+        />
+      </div>
+      <button
+        class="flex-1 h-full bg-black/50 backdrop-blur-sm cursor-pointer"
+        aria-label="Close menu"
+        onclick={() => { navDrawerOpen = false; }}
+      ></button>
+    </div>
+  {/if}
+
   <!-- Command palette -->
   {#if showPalette}
     <CommandPalette
       tokens={ALL_TOKENS}
       {overrides}
       onNavigate={(d, token) => {
-        navigateTo(d, token);
+        domain = d;
+        if (token) { focusNonce += 1; focusRequest = { token, nonce: focusNonce }; }
+        else focusRequest = null;
+        // On mobile, deep-linking into a token means we want the controls side.
+        mobileView = "controls";
       }}
       onClose={() => { showPalette = false; }}
     />
