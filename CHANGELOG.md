@@ -4,6 +4,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.7.34] - 2026-08-21
+
+### Features
+- **configurator:** merge-vs-replace import chooser with report preview
+- **configurator:** mobile category drawer replaces the cramped icon rail
+- **configurator:** turn the Misc grab-bag into a coherent "System" panel
+- **configurator:** inline detached-scale notices for radius, border-width & motion
+- **configurator:** hide the preview on tool screens, give them full width
+- **configurator:** fence preview-only controls in Components as "not exported"
+- **configurator:** expand Accessibility into a real panel owning focus ring + touch target
+- **configurator:** merge Shadows + Effects into one Depth panel
+- **configurator:** unified validated import + mobile preview template dropdown
+- **configurator:** unified validated import + mobile preview template dropdown
+- **configurator:** unified value editor (Inherit/Value/Expression) + grouped undo
+- **configurator:** discoverable global search with deep-link to the token's control
+- **configurator:** grouped, named navigation IA (Foundations/Composition/Quality/Project)
+- **configurator:** grouped, named navigation IA (Foundations/Composition/Quality/Project)
+- **configurator:** add Changes panel — every override grouped by consequence
+- **configurator:** metadata-driven token→domain classification (single source of truth)
+- **configurator:** add token relationship model and surface roles/state in All tokens
+
+### Bug Fixes
+- **configurator:** complete import and drawer feedback
+- **configurator:** clear stale search focus
+- **configurator:** preserve editor intent and undo steps
+- **configurator:** make drawer trigger mobile-only and trap focus in dialog
+- **configurator:** move focus into the mobile drawer on open
+- **configurator:** clear stale token focus on plain navigation
+- **configurator:** close mobile drawer on Escape
+- **configurator:** clear stale token focus on plain navigation
+- **configurator:** clear stale token focus on plain navigation
+- **configurator:** report validated import outcomes
+- **configurator:** clear stale search focus
+- **configurator:** report validated import outcomes
+- **configurator:** preserve editor intent and undo steps
+- **configurator:** report validated import outcomes
+- **configurator:** clear stale search focus
+- **configurator:** preserve editor intent and undo steps
+- **configurator:** clear stale search focus
+- **configurator:** preserve editor intent and undo steps
+- **configurator:** preserve editor intent and undo steps
+- **configurator:** align token safety gates with export rules
+- **configurator:** clarify change consequences
+- **configurator:** validate token overrides accurately
+- **configurator:** align token safety with export limits
+- **configurator:** align token safety with export limits
+- **configurator:** qualify default dependency counts
+- **configurator:** validate token overrides accurately
+- **configurator:** validate token overrides accurately
+
 ## [0.7.33] - 2026-08-19
 
 ### Bug Fixes
